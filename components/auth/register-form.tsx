@@ -21,7 +21,6 @@ import {
 import { register } from "@/actions/register";
 
 export const RegisterForm = () => {
-
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -31,8 +30,8 @@ export const RegisterForm = () => {
     defaultValues: {
       email: "",
       password: "",
-      name: "",
-    },
+      name: ""
+    }
   });
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
@@ -40,13 +39,12 @@ export const RegisterForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      register(values)
-        .then((data) => {
+      register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
       });
     });
-  }
+  };
 
   return (
     <div>
@@ -57,12 +55,9 @@ export const RegisterForm = () => {
         showSocial
       >
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-            <FormField
+              <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
@@ -118,16 +113,12 @@ export const RegisterForm = () => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button
-              disabled={isPending}
-              type="submit"
-              className="w-full"
-            >
+            <Button disabled={isPending} type="submit" className="w-full">
               Register
             </Button>
           </form>
         </Form>
       </CardWrapper>
     </div>
-  )
-}
+  );
+};

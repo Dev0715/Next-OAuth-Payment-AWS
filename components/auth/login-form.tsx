@@ -21,7 +21,6 @@ import {
 import { login } from "@/actions/login";
 
 export const LoginForm = () => {
-
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -30,8 +29,8 @@ export const LoginForm = () => {
     resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
-      password: "",
-    },
+      password: ""
+    }
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
@@ -39,13 +38,12 @@ export const LoginForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      login(values)
-        .then((data) => {
+      login(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
       });
     });
-  }
+  };
 
   return (
     <div>
@@ -56,10 +54,7 @@ export const LoginForm = () => {
         showSocial
       >
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <FormField
                 control={form.control}
@@ -100,16 +95,12 @@ export const LoginForm = () => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button
-              disabled={isPending}
-              type="submit"
-              className="w-full"
-            >
+            <Button disabled={isPending} type="submit" className="w-full">
               Login
             </Button>
           </form>
         </Form>
       </CardWrapper>
     </div>
-  )
-}
+  );
+};
