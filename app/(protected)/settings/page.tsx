@@ -30,6 +30,7 @@ import { Input } from "@/components/ui/input";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { settings } from "@/actions/settings";
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -51,7 +52,22 @@ const SettingsPage = () => {
     }
   });
 
-  const onSubmit = (values: z.infer<typeof SettingsSchema>) => {};
+  const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
+    startTransition(() => {
+      settings(values)
+        .then((data) => {
+          if (data.error) {
+            setError(data.error);
+          }
+
+          if (data.success) {
+            update();
+            setSuccess(data.success);
+          }
+        })
+        .catch(() => setError("Something went wrong!"));
+    });
+  };
 
   return (
     <Card className="w-[600px]">
