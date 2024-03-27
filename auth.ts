@@ -4,6 +4,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
 import authConfig from "@/auth.config";
 import { getUserById } from "@/data/user";
+import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 import { getAccountByUserId } from "@/data/account";
 
 export const {
@@ -35,21 +36,34 @@ export const {
       // Prevent sign in without email verification
       if (!existingUser?.emailVerified) return false;
 
+      if (existingUser.isTwoFactorEnabled) {
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+          existingUser.id
+        );
+
+        if (!twoFactorConfirmation) return false;
+
+        // Delete two factor confirmation for next sign in
+        await db.twoFactorConfirmation.delete({
+          where: { id: twoFactorConfirmation.id }
+        });
+      }
+
       return true;
     },
     async session({ token, session }) {
       if (token.sub && session.user) {
-        // session.user.id = token.sub;
+        session.user.id = token.sub;
       }
 
-      //   if (token.role && session.user) {
-      //     session.user.role = token.role as UserRole;
-      //   }
+      if (token.role && session.user) {
+        session.user.role = token.role;
+      }
 
       if (session.user) {
         session.user.name = token.name;
         session.user.email = token.email as string;
-        // session.user.isOAuth = token.isOAuth as boolean;
+        session.user.isOAuth = token.isOAuth as boolean;
       }
 
       return session;
@@ -67,6 +81,7 @@ export const {
       token.name = existingUser.name;
       token.email = existingUser.email;
       token.role = existingUser.role;
+      token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
       return token;
     }
