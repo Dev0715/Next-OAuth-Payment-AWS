@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 import { LoginSchema } from "@/schemas";
 import { CardWrapper } from "@/components/auth/card-wrapper";
@@ -103,6 +104,14 @@ export const LoginForm = () => {
                         type="password"
                       />
                     </FormControl>
+                    <Button
+                      size="sm"
+                      variant="link"
+                      asChild
+                      className="px-0 font-normal"
+                    >
+                      <Link href="/auth/reset">Forgot password?</Link>
+                    </Button>
                     <FormMessage />
                   </FormItem>
                 )}
