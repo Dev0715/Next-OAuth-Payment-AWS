@@ -20,6 +20,7 @@ export const login = async (
   values: z.infer<typeof LoginSchema>,
   callbackUrl?: string | null
 ) => {
+  console.log(values);
   const validateFields = LoginSchema.safeParse(values);
   if (!validateFields.success) {
     return { error: "Server Says Fields are Invalid!" };

@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import bcrypt from "bcryptjs";
+import { PutCommand } from "@aws-sdk/lib-dynamodb";
 
 import { db } from "@/lib/db";
 import { RegisterSchema } from "@/schemas";
@@ -17,22 +18,52 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
   const { email, password, name } = validateFields.data;
   const hashedPassword = await bcrypt.hash(password, 10);
+  console.log("hashedPassword", hashedPassword);
   const existingUser = await getUserByEmail(email);
 
-  if (existingUser) {
-    return { error: "Email already in use!" };
-  }
+  //   console.log("existingUser", existingUser);
+  //   if (existingUser) {
+  //     return { error: "Email already in use!" };
+  //   }
 
-  await db.user.create({
-    data: {
-      name,
-      email,
+  //   await db.user.create({
+  //     data: {
+  //       name,
+  //       email,
+  //       password: hashedPassword
+  //     }
+  //   });
+
+  const command = new PutCommand({
+    TableName: "tbl_users",
+    Item: {
+      key: {
+        id: "A",
+        name: "B"
+      },
+      name: name,
+      email: email,
       password: hashedPassword
     }
   });
 
-  const verificationToken = await generateVerificationToken(email);
-  await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  try {
+    const response = await db.send(command);
+    console.log("new_user", response);
+  } catch (error) {
+    console.log("new_user", error);
+  }
+
+  //   try {
+  //     const response = await db.send(command);
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   //   const verificationToken = await generateVerificationToken(email);
+  //   //   await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  //   await sendVerificationEmail(email, "AAAAAA");
 
   return { success: "Data is Valid, Message Received!" };
 };
