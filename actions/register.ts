@@ -32,7 +32,9 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
       partition: "user",
       email: email,
       name: name,
-      password: hashedPassword
+      password: hashedPassword,
+      emailVerified: true, // Temporary
+      isTwoFactorEnabled: false
     }
   });
 
