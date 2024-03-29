@@ -7,8 +7,8 @@ import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { db } from "@/lib/db";
 import { RegisterSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
-import { sendVerificationEmail } from "@/lib/mail";
-import { generateVerificationToken } from "@/lib/tokens";
+// import { sendVerificationEmail } from "@/lib/mail";
+// import { generateVerificationToken } from "@/lib/tokens";
 import { time } from "console";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
