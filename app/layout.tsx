@@ -25,6 +25,6 @@ export default async function RootLayout({
       <Toaster />
       <body className={inter.className}>{children}</body>
     </html>
-    // </SessionProvider>
+    {/* </SessionProvider> */}
   );
 }

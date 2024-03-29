@@ -1,14 +1,14 @@
 "use server";
 
 import { z } from "zod";
-// import { AuthError } from "next-auth";
+import { AuthError } from "next-auth";
 
 import { db } from "@/lib/db";
 import { signIn } from "next-auth/react";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
 import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
-// import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { sendVerificationEmail, sendTwoFactorTokenEmail } from "@/lib/mail";
 import {
   generateVerificationToken,
