@@ -2,9 +2,21 @@ import { GetCommand, db } from "@/lib/db";
 
 export const getPasswordResetTokenByToken = async (token: string) => {
   try {
-    const passwordResetToken = await db.passwordResetToken.findUnique({
-      where: { token }
+    // const passwordResetToken = await db.passwordResetToken.findUnique({
+    //   where: { token }
+    // });
+
+    // return passwordResetToken;
+    const command = new GetCommand({
+    TableName: process.env.DYNAMODB_TABLE_NAME,
+    Key: {
+        partition: "user",
+        resetToken: token
+      }
     });
+
+    const response = await db.send(command);
+    const passwordResetToken = response.Item.token;
 
     return passwordResetToken;
   } catch {
