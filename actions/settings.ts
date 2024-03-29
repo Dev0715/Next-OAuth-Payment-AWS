@@ -59,7 +59,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
 
     const hashedPassword = await bcrypt.hash(values.newPassword, 10);
     values.password = hashedPassword;
-    values.newPassword = undefined;
+    // values.newPassword = undefined;
   }
 
   const updatedUser = await db.user.update({
