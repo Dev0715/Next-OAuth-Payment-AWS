@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
-import { PrismaAdapter } from "@auth/prisma-adapter";
+// import { DynamoDBAdapter } from "@auth/dynamodb-adapter";
+import { DynamoDB, DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBAdapter } from "@next-auth/dynamodb-adapter";
 
 import { db } from "@/lib/db";
 import authConfig from "@/auth.config";
@@ -7,13 +10,23 @@ import { getUserById } from "@/data/user";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 import { getAccountByUserId } from "@/data/account";
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-  update
-} = NextAuth({
+const config: DynamoDBClientConfig = {
+  credentials: {
+    accessKeyId: process.env.NEXT_AUTH_AWS_ACCESS_KEY as string,
+    secretAccessKey: process.env.NEXT_AUTH_AWS_SECRET_KEY as string
+  },
+  region: process.env.NEXT_AUTH_AWS_REGION
+};
+
+const client = DynamoDBDocument.from(new DynamoDB(config), {
+  marshallOptions: {
+    convertEmptyValues: true,
+    removeUndefinedValues: true,
+    convertClassInstanceToMap: true
+  }
+});
+
+export const { GET, POST, auth, signIn, signOut, update } = NextAuth({
   pages: {
     signIn: "/auth/login",
     error: "/auth/error"
@@ -52,13 +65,13 @@ export const {
       return true;
     },
     async session({ token, session }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-      }
+      //   if (token.sub && session.user) {
+      //     session.user.id = token.sub;
+      //   }
 
-      if (token.role && session.user) {
-        session.user.role = token.role;
-      }
+      //   if (token.role && session.user) {
+      //     session.user.role = token.role;
+      //   }
 
       if (session.user) {
         session.user.name = token.name;
@@ -86,7 +99,7 @@ export const {
       return token;
     }
   },
-  adapter: PrismaAdapter(db),
+  adapter: DynamoDBAdapter(client),
   session: { strategy: "jwt" },
   ...authConfig
 });
