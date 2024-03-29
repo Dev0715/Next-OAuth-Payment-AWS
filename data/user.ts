@@ -1,11 +1,21 @@
-import { db } from "@/lib/db";
+import { db, GetCommand } from "@/lib/db";
 
 export const getUserByEmail = async (email: string) => {
-  try {
-    const user = await db.user.findUnique({ where: { email } });
+  const command = new GetCommand({
+    TableName: "kre8tive-scraper-apne1-20240326",
+    Key: {
+      email: email
+    }
+  });
 
-    return user;
-  } catch {
+  try {
+    console.log("DBCHECK", db);
+    // const response = await db.send(command);
+    // console.log("getUserByEmail", response);
+    // const item = response.item;
+    // return item;
+  } catch (error) {
+    console.log("getUserByEmail", error);
     return null;
   }
 };
