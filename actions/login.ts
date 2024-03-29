@@ -4,7 +4,6 @@ import { z } from "zod";
 import { AuthError } from "next-auth";
 
 import { db } from "@/lib/db";
-// import { signIn } from "@/auth";
 import { signIn } from "next-auth/react";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
@@ -21,10 +20,6 @@ export const login = async (
   values: z.infer<typeof LoginSchema>,
   callbackUrl?: string | null
 ) => {
-  console.log("VALUES", values);
-  console.log("CALLBACKURL", callbackUrl);
-  console.log("SIGNIN", signIn);
-
   const validateFields = LoginSchema.safeParse(values);
   if (!validateFields.success) {
     return { error: "Server Says Fields are Invalid!" };
