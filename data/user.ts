@@ -4,15 +4,16 @@ export const getUserByEmail = async (email: string) => {
   const command = new GetCommand({
     TableName: "kre8tive-scraper-apne1-20240326",
     Key: {
+      partition: 'user',
       email: email
     }
   });
 
   try {
-    console.log("DBCHECK", db);
-    // const response = await db.send(command);
-    // console.log("getUserByEmail", response);
-    // const item = response.item;
+    // console.log("DBCHECK", db);
+    const response = await db.send(command);
+    const item = response.Item;
+    console.log("getUserByEmail RESULT item", item);
     // return item;
   } catch (error) {
     console.log("getUserByEmail", error);
