@@ -22,6 +22,7 @@ export const login = async (
 ) => {
   console.log("VALUES", values);
   console.log("CALLBACKURL", callbackUrl);
+  console.log("SIGNIN", signIn);
 
   const validateFields = LoginSchema.safeParse(values);
   if (!validateFields.success) {

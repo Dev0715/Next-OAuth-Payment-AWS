@@ -99,7 +99,11 @@ const authOptions = {
       return token;
     }
   },
-  adapter: DynamoDBAdapter(client),
+  adapter: DynamoDBAdapter(client, {
+    tableName: process.env.DYNAMODB_TABLE_NAME,
+    partitionKey: "",
+    sortKey: ""
+  }),
   session: { strategy: "jwt" },
   ...authConfig
 };
