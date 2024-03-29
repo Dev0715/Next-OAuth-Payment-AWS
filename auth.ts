@@ -26,7 +26,11 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
   }
 });
 
-const authOptions = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  session: { strategy: "jwt" },
+  adapter: DynamoDBAdapter(client, {
+    tableName: process.env.DYNAMODB_TABLE_NAME
+  }),
   pages: {
     signIn: "/auth/login",
     error: "/auth/error"
@@ -99,14 +103,5 @@ const authOptions = {
       return token;
     }
   },
-  adapter: DynamoDBAdapter(client, {
-    tableName: process.env.DYNAMODB_TABLE_NAME,
-    partitionKey: "",
-    sortKey: ""
-  }),
-  session: { strategy: "jwt" },
   ...authConfig
-};
-
-export const { GET, POST, auth, signIn, signOut, update } =
-  NextAuth(authOptions);
+});
