@@ -32,21 +32,14 @@ export const { handlers } = NextAuth({
     tableName: process.env.DYNAMODB_TABLE_NAME,
       partitionKey: "user",
       sortKey: "user_sort",
-      // indexName: "custom-index-name",
-      // indexPartitionKey: "custom-index-pk",
-      // indexSortKey: "custom-index-sk",
   }),
   pages: {
     signIn: "/auth/login",
     error: "/auth/error"
   },
   events: {
-    async linkAccount({ user }) {
-      // await db.user.update({
-      //   where: { id: user.id },
-      //   data: { emailVerified: new Date() }
-      // });
-    }
+    // async linkAccount({ user }) {
+    // }
   },
   callbacks: {
     async signIn({ user, account }) {
