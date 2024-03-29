@@ -26,7 +26,7 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
   }
 });
 
-export const { GET, POST, auth, signIn, signOut, update } = NextAuth({
+const authOptions = {
   pages: {
     signIn: "/auth/login",
     error: "/auth/error"
@@ -102,4 +102,7 @@ export const { GET, POST, auth, signIn, signOut, update } = NextAuth({
   adapter: DynamoDBAdapter(client),
   session: { strategy: "jwt" },
   ...authConfig
-});
+};
+
+export const { GET, POST, auth, signIn, signOut, update } =
+  NextAuth(authOptions);
