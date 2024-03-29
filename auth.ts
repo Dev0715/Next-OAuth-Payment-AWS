@@ -26,7 +26,7 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
   }
 });
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const { handlers } = NextAuth({
   session: { strategy: "jwt" },
   adapter: DynamoDBAdapter(client, {
     tableName: process.env.DYNAMODB_TABLE_NAME
