@@ -29,7 +29,12 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
 export const { handlers } = NextAuth({
   session: { strategy: "jwt" },
   adapter: DynamoDBAdapter(client, {
-    tableName: process.env.DYNAMODB_TABLE_NAME
+    tableName: process.env.DYNAMODB_TABLE_NAME,
+      partitionKey: "user",
+      sortKey: "user_sort",
+      // indexName: "custom-index-name",
+      // indexPartitionKey: "custom-index-pk",
+      // indexSortKey: "custom-index-sk",
   }),
   pages: {
     signIn: "/auth/login",
