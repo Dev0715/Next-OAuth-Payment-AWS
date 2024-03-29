@@ -40,17 +40,18 @@ export const { handlers } = NextAuth({
   },
   events: {
     async linkAccount({ user }) {
-      const command = new PutCommand({
-        TableName: process.env.DYNAMODB_TABLE_NAME,
-        Item: {
-          partition: "user",
-          email: user.email,
-          name: name,
-          emailVerified: time(),
-          // isTwoFactorEnabled: false
-        }
-      });
+      // const command = new PutCommand({
+      //   TableName: process.env.DYNAMODB_TABLE_NAME,
+      //   Item: {
+      //     partition: "user",
+      //     email: user.email,
+      //     name: name,
+      //     emailVerified: time(),
+      //     // isTwoFactorEnabled: false
+      //   }
+      // });
       const response = await db.send(command);
+
     }
   },
   callbacks: {
