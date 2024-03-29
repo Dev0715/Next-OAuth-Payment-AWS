@@ -24,9 +24,20 @@ export const getTwoFactorTokenByToken = async (token: string) => {
 
 export const getTwoFactorTokenByEmail = async (email: string) => {
   try {
-    const twoFactorToken = await db.twoFactorToken.findFirst({
-      where: { email }
+    // const twoFactorToken = await db.twoFactorToken.findFirst({
+    //   where: { email }
+    // });
+
+    const command = new GetCommand({
+      TableName: process.env.DYNAMODB_TABLE_NAME,
+      Key: {
+        partition: "user",
+        email: email
+      }
     });
+
+    const response = await db.send(command);
+    const twoFactorToken = response.Item.twoFactorToken;
 
     return twoFactorToken;
   } catch {
