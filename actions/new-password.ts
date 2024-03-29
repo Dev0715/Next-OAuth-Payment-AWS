@@ -26,15 +26,15 @@ export const newPassword = async (
 
   const existingToken = await getPasswordResetTokenByToken(token);
 
-  if (!existingToken) {
-    return { error: "Invalid token!" };
-  }
+  // if (!existingToken) {
+  //   return { error: "Invalid token!" };
+  // }
 
   const hasExpired = new Date(existingToken.expires) < new Date();
 
-  if (hasExpired) {
-    return { error: "Token has expired!" };
-  }
+  // if (hasExpired) {
+  //   return { error: "Token has expired!" };
+  // }
 
   const existingUser = await getUserByEmail(existingToken.email);
 
