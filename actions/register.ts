@@ -21,18 +21,10 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   console.log("hashedPassword", hashedPassword);
   const existingUser = await getUserByEmail(email);
 
-  //   console.log("existingUser", existingUser);
-  //   if (existingUser) {
-  //     return { error: "Email already in use!" };
-  //   }
-
-  //   await db.user.create({
-  //     data: {
-  //       name,
-  //       email,
-  //       password: hashedPassword
-  //     }
-  //   });
+  console.log("existingUser", existingUser);
+  if (existingUser) {
+    return { error: "Email already in use!" };
+  }
 
   const command = new PutCommand({
     TableName: process.env.DYNAMODB_TABLE_NAME,
@@ -51,16 +43,9 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     console.log("new_user", error);
   }
 
-  //   try {
-  //     const response = await db.send(command);
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  //   //   const verificationToken = await generateVerificationToken(email);
-  //   //   await sendVerificationEmail(verificationToken.email, verificationToken.token);
-  //   await sendVerificationEmail(email, "AAAAAA");
+  // const verificationToken = await generateVerificationToken(email);
+  // await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  // await sendVerificationEmail(email, "AAAAAA");
 
   return { success: "Data is Valid, Message Received!" };
 };

@@ -4,16 +4,14 @@ export const getUserByEmail = async (email: string) => {
   const command = new GetCommand({
     TableName: process.env.DYNAMODB_TABLE_NAME,
     Key: {
-      partition: 'user',
+      partition: "user",
       email: email
     }
   });
 
   try {
-    // console.log("DBCHECK", db);
     const response = await db.send(command);
     const item = response.Item;
-    // console.log("getUserByEmail - Result", item);
     // {
     //   password: 'password',
     //   partition: 'user',
@@ -26,12 +24,12 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
-export const getUserById = async (id: string) => {
-  try {
-    const user = await db.user.findUnique({ where: { id } });
-
-    return user;
-  } catch {
-    return null;
-  }
-};
+// NEED TO BE UPDATED TO DYNAMODB
+// export const getUserById = async (id: string) => {
+//   try {
+//     const user = await db.user.findUnique({ where: { id } });
+//     return user;
+//   } catch {
+//     return null;
+//   }
+// };
