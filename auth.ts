@@ -1,14 +1,15 @@
 import NextAuth from "next-auth";
 // import { DynamoDBAdapter } from "@auth/dynamodb-adapter";
 import { DynamoDB, DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocument, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDBAdapter } from "@next-auth/dynamodb-adapter";
 
 import { db } from "@/lib/db";
 import authConfig from "@/auth.config";
-import { getUserById } from "@/data/user";
+// import { getUserById } from "@/data/user";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
-import { getAccountByUserId } from "@/data/account";
+import { time } from "console";
+// import { getAccountByUserId } from "@/data/account";
 
 const config: DynamoDBClientConfig = {
   credentials: {
@@ -38,8 +39,19 @@ export const { handlers } = NextAuth({
     error: "/auth/error"
   },
   events: {
-    // async linkAccount({ user }) {
-    // }
+    async linkAccount({ user }) {
+      const command = new PutCommand({
+        TableName: process.env.DYNAMODB_TABLE_NAME,
+        Item: {
+          partition: "user",
+          email: user.email,
+          name: name,
+          emailVerified: time(),
+          // isTwoFactorEnabled: false
+        }
+      });
+      const response = await db.send(command);
+    }
   },
   callbacks: {
     async signIn({ user, account }) {
