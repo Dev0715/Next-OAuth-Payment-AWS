@@ -27,19 +27,6 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: "Email already in use!" };
   }
 
-  const hasExpired = new Date(existingToken.expires) < new Date();
-
-  if (hasExpired) {
-    return { error: "Token has expired!" };
-  }
-
-  const existingUser = await getUserByEmail(existingToken.email);
-
-  if (!existingUser) {
-    return { error: "Email does not exist!" };
-  }
-
-
   const command = new PutCommand({
     TableName: process.env.DYNAMODB_TABLE_NAME,
     Item: {
