@@ -37,12 +37,9 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const command = new PutCommand({
     TableName: process.env.DYNAMODB_TABLE_NAME,
     Item: {
-      key: {
-        id: "A",
-        name: "B"
-      },
-      name: name,
+      partition: "user",
       email: email,
+      name: name,
       password: hashedPassword
     }
   });
