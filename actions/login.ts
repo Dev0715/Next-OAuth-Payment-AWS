@@ -4,7 +4,8 @@ import { z } from "zod";
 import { AuthError } from "next-auth";
 
 import { db } from "@/lib/db";
-import { signIn } from "@/auth";
+// import { signIn } from "@/auth";
+import { signIn } from "next-auth/react";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
 import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
@@ -100,14 +101,14 @@ export const login = async (
       redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
     });
   } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case "CredentialsSignin":
-          return { error: "Invalid credentials!" };
-        default:
-          return { error: "Something went wrong!" };
-      }
-    }
+    // if (error instanceof AuthError) {
+    //   switch (error.type) {
+    //     case "CredentialsSignin":
+    //       return { error: "Invalid credentials!" };
+    //     default:
+    //       return { error: "Something went wrong!" };
+    //   }
+    // }
 
     throw error;
   }
