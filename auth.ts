@@ -42,10 +42,10 @@ export const { handlers } = NextAuth({
   },
   events: {
     async linkAccount({ user }) {
-      await db.user.update({
-        where: { id: user.id },
-        data: { emailVerified: new Date() }
-      });
+      // await db.user.update({
+      //   where: { id: user.id },
+      //   data: { emailVerified: new Date() }
+      // });
     }
   },
   callbacks: {
