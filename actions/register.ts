@@ -9,6 +9,7 @@ import { RegisterSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
 import { sendVerificationEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
+import { time } from "console";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const validateFields = RegisterSchema.safeParse(values);
@@ -33,8 +34,9 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
       email: email,
       name: name,
       password: hashedPassword,
-      emailVerified: true, // Temporary
-      isTwoFactorEnabled: false
+      // emailVerified: true, // Temporary
+      emailVerified: time(),
+      // isTwoFactorEnabled: false
     }
   });
 
