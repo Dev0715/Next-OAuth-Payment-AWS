@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card"
 
-const DashBoard = () => {
+const Dashboard = () => {
     return (
         <div className="h-full w-full flex flex-col items-center">
             <div className="w-full flex">
@@ -12,10 +12,10 @@ const DashBoard = () => {
                 Content
             </div>
             <div className="w-full flex">
-                DashBoard
+                Footer
             </div>        
         </div>
     )
 }
 
-export default DashBoard;
+export default Dashboard;
