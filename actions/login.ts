@@ -1,14 +1,14 @@
 "use server";
 
 import { z } from "zod";
-// import { AuthError } from "next-auth";
+import { AuthError } from "next-auth";
 
 import { db } from "@/lib/db";
-import { signIn } from "next-auth/react";
+import { signIn } from "@/auth";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
 import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
-// import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { sendVerificationEmail, sendTwoFactorTokenEmail } from "@/lib/mail";
 import {
   generateVerificationToken,
@@ -93,17 +93,17 @@ export const login = async (
     await signIn("credentials", {
       email,
       password,
-      // redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
+      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
     });
   } catch (error) {
-    // if (error instanceof AuthError) {
+    if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
           return { error: "Invalid credentials!" };
         default:
           return { error: "Something went wrong!" };
       }
-    // }
+    }
 
     throw error;
   }

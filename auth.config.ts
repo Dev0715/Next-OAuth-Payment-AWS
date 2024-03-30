@@ -1,10 +1,11 @@
-import bcrypt from "bcryptjs";
-import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import Discord from "next-auth/providers/discord";
 import Apple from "next-auth/providers/apple";
+import bcrypt from "bcryptjs";
+
+import type { NextAuthConfig } from "next-auth";
 
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";

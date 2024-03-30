@@ -1,15 +1,15 @@
 import NextAuth from "next-auth";
-// import { DynamoDBAdapter } from "@auth/dynamodb-adapter";
-import { DynamoDB, DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocument, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { DynamoDBAdapter } from "@next-auth/dynamodb-adapter";
-
-import { db } from "@/lib/db";
 import authConfig from "@/auth.config";
-// import { getUserById } from "@/data/user";
+
+import { DynamoDB, DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBAdapter } from "@auth/dynamodb-adapter";
+
+import type { Adapter, AdapterUser } from "next-auth/adapters";
+
+import { getUserById } from "@/data/user";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
-import { time } from "console";
-// import { getAccountByUserId } from "@/data/account";
+import { getAccountByUserId } from "@/data/account";
 
 const config: DynamoDBClientConfig = {
   credentials: {
@@ -27,66 +27,99 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
   }
 });
 
-export const { handlers } = NextAuth({
-  session: { strategy: "jwt" },
-  adapter: DynamoDBAdapter(client, {
-    tableName: process.env.DYNAMODB_TABLE_NAME,
-      partitionKey: "user",
-      sortKey: "user_sort",
-  }),
-  pages: {
-    signIn: "/auth/login",
-    error: "/auth/error"
+const dbAdapter: Adapter = {
+  async createUser(user) {
+    return;
   },
-  events: {
-    async linkAccount({ user }) {
-      // const command = new PutCommand({
-      //   TableName: process.env.DYNAMODB_TABLE_NAME,
-      //   Item: {
-      //     partition: "user",
-      //     email: user.email,
-      //     name: name,
-      //     emailVerified: time(),
-      //     // isTwoFactorEnabled: false
-      //   }
-      // });
-      const response = await db.send(command);
+  async getUser(id) {
+    return;
+  },
+  async getUserByEmail(email) {
+    return;
+  },
+  async getUserByAccount({ providerAccountId, provider }) {
+    return;
+  },
+  async updateUser(user) {
+    return;
+  },
+  async deleteUser(userId) {
+    return;
+  },
+  async linkAccount(account) {
+    return;
+  },
+  async unlinkAccount({ providerAccountId, provider }) {
+    return;
+  },
+  async createSession({ sessionToken, userId, expires }) {
+    return;
+  },
+  async getSessionAndUser(sessionToken) {
+    return;
+  },
+  async updateSession({ sessionToken }) {
+    return;
+  },
+  async deleteSession(sessionToken) {
+    return;
+  },
+  async createVerificationToken({ identifier, expires, token }) {
+    return;
+  },
+  async useVerificationToken({ identifier, token }) {
+    return;
+  }
+};
 
-    }
-  },
+export const { handlers, auth } = NextAuth({
+  adapter: dbAdapter,
+  session: { strategy: "jwt" },
+  // pages: {
+  //   signIn: "/auth/login",
+  //   error: "/auth/error"
+  // },
+  // events: {
+  //   async linkAccount({ user }) {
+  //     // await db.user.update({
+  //     //   where: { id: user.id },
+  //     //   data: { emailVerified: new Date() }
+  //     // });
+  //   }
+  // },
   callbacks: {
     async signIn({ user, account }) {
       // Allow OAuth without email verification
       if (account?.provider !== "credentials") return true;
 
-      // const existingUser = await getUserById(user.id as string);
+      const existingUser = await getUserById(user.id as string);
 
       // Prevent sign in without email verification
-      // if (!existingUser?.emailVerified) return false;
+      if (!existingUser?.emailVerified) return false;
 
       if (existingUser.isTwoFactorEnabled) {
-        // const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
-        //   existingUser.id
-        // );
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+          existingUser.id
+        );
 
         if (!twoFactorConfirmation) return false;
 
         // Delete two factor confirmation for next sign in
-        await db.twoFactorConfirmation.delete({
-          where: { id: twoFactorConfirmation.id }
-        });
+        // await db.twoFactorConfirmation.delete({
+        //   where: { id: twoFactorConfirmation.id }
+        // });
       }
 
       return true;
     },
     async session({ token, session }) {
-      //   if (token.sub && session.user) {
-      //     session.user.id = token.sub;
-      //   }
+      if (token.sub && session.user) {
+        session.user.id = token.sub;
+      }
 
-      //   if (token.role && session.user) {
-      //     session.user.role = token.role;
-      //   }
+      if (token.role && session.user) {
+        session.user.role = token.role;
+      }
 
       if (session.user) {
         session.user.name = token.name;
@@ -99,17 +132,17 @@ export const { handlers } = NextAuth({
     async jwt({ token }) {
       if (!token.sub) return token;
 
-      // const existingUser = await getUserById(token.sub);
+      const existingUser = await getUserById(token.sub);
 
-      // if (!existingUser) return token;
+      if (!existingUser) return token;
 
-      // const existingAccount = await getAccountByUserId(existingUser.id);
+      const existingAccount = await getAccountByUserId(existingUser.id);
 
-      // token.isOAuth = !!existingAccount;
-      // token.name = existingUser.name;
-      // token.email = existingUser.email;
-      // token.role = existingUser.role;
-      // token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+      token.isOAuth = !!existingAccount;
+      token.name = existingUser.name;
+      token.email = existingUser.email;
+      token.role = existingUser.role;
+      token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
       return token;
     }
