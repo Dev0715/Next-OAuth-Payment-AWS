@@ -17,17 +17,15 @@ export default function Home() {
           <p className="text-4xl font-semibold text-white drop-shadow-md">Kre8tive Logo</p>
         </div>
       </div>
-      <div className="w-full h-full flex items-center justify-center">
-        Items Center
-      </div>
-      <div className="space-y-6 text-center">
+      <div className="w-full h-full flex justify-center pt-64">
+        <div className="space-y-6 text-center">
         <h1
           className={cn(
-            "text-6xl font-semibold text-white drop-shadow-md",
+            "text-4xl font-semibold text-white drop-shadow-md",
             font.className
           )}
         >
-          🔐 Coming Soon
+          ⌛ Coming Soon
         </h1>
         <p className="text-white text-lg">A simple authentication service</p>
         <p className="text-white text-lg">A simple authentication service</p>
@@ -38,6 +36,7 @@ export default function Home() {
             </Button>
           </SignupButton>
         </div>
+      </div>
       </div>
     </main>
   );
