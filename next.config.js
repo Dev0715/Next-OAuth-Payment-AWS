@@ -4,7 +4,7 @@
 //       // Basic redirect
 //       {
 //         source: "/",
-//         destination: "/",
+//         destination: "/dashboard",
 //         permanent: true
 //       }
 //     ];
