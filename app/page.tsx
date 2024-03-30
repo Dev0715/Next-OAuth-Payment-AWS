@@ -48,7 +48,7 @@ export default function Home() {
               </SignupButton>
             </div>
           </div>
-      </div>
+        </div>
       </div>
     </main>
   );
