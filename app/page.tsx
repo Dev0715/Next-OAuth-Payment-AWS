@@ -17,8 +17,8 @@ export default function Home() {
           <p className="text-4xl font-semibold text-black drop-shadow-md">Kre8tive Logo</p>
         </div>
       </div>
-      <div className="w-full h-full flex justify-center pt-48">
-        <div className="space-y-32 text-center">
+      <div className="w-full h-full flex justify-center pt-32">
+        <div className="space-y-24 text-center">
           <h1
             className={cn(
               "text-5xl font-semibold text-white drop-shadow-md",
@@ -27,9 +27,17 @@ export default function Home() {
           >
             This site is scheduled to launch officially on May 15th
           </h1>
-          <p>
-            Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
-          </p>
+          <div>
+            <p className="text-white text-lg">
+              Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
+            </p>
+            <p className="text-white text-lg">
+              Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
+            </p>
+                        <p className="text-white text-lg">
+              Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
+            </p>
+          </div>
           <div className="space-y-6 text-center">
             <p className="text-white text-lg">You can sign-up now as either a Seller, Affiliate or a User.</p>
             <div>
