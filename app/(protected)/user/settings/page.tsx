@@ -164,16 +164,21 @@ const SettingsPage = () => {
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
-                      <FormControl>
+                      {/* <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a role" />
                         </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
+                      </FormControl> */}
+                      <div className="flex gap-6">
+                        <div className="flex gap-2 items-center">Creator<Switch size="1" defaultChecked /></div>
+                        <div className="flex gap-2 items-center">Affiliate<Switch size="1" defaultChecked /></div>
+                        <div className="flex gap-2 items-center">User<Switch size="1" defaultChecked /></div>
+                      </div>
+                      {/* <SelectContent>
                         <SelectItem value={"CREATOR"}>Creator</SelectItem>
                         <SelectItem value={"AFFILIATE"}>Affiliate</SelectItem>
                         <SelectItem value={"CUSTOMER"}>Custormer</SelectItem>
-                      </SelectContent>
+                      </SelectContent> */}
                     </Select>
                     <FormMessage />
                   </FormItem>
