@@ -7,41 +7,24 @@ import { DynamoDBAdapter } from "@auth/dynamodb-adapter";
 
 import type { Adapter, AdapterUser } from "next-auth/adapters";
 
-import { getUserById } from "@/data/user";
-import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
-import { getAccountByUserId } from "@/data/account";
-
-const config: DynamoDBClientConfig = {
-  credentials: {
-    accessKeyId: process.env.NEXT_AUTH_AWS_ACCESS_KEY as string,
-    secretAccessKey: process.env.NEXT_AUTH_AWS_SECRET_KEY as string
-  },
-  region: process.env.NEXT_AUTH_AWS_REGION
-};
-
-const client = DynamoDBDocument.from(new DynamoDB(config), {
-  marshallOptions: {
-    convertEmptyValues: true,
-    removeUndefinedValues: true,
-    convertClassInstanceToMap: true
-  }
-});
-
 const dbAdapter: Adapter = {
-  async createUser(user): Promise<any> {
+  async createUser(user): Promise<AdapterUser> {
     return user;
   },
-  async getUser(id): Promise<any> {
-    return id;
+  async getUser(id): Promise<AdapterUser | null> {
+    return null;
   },
-  async getUserByEmail(email): Promise<any> {
-    return email;
+  async getUserByEmail(email): Promise<AdapterUser | null> {
+    return null;
   },
-  async getUserByAccount({ providerAccountId, provider }): Promise<any> {
-    return { providerAccountId, provider };
+  async getUserByAccount({
+    providerAccountId,
+    provider
+  }): Promise<AdapterUser | null> {
+    return null;
   },
-  async updateUser(user): Promise<any> {
-    return user;
+  async updateUser(user): Promise<AdapterUser> {
+    return user as AdapterUser;
   },
   async deleteUser(userId) {
     return;
@@ -75,22 +58,22 @@ const dbAdapter: Adapter = {
 export const { handlers, auth } = NextAuth({
   adapter: dbAdapter,
   session: { strategy: "jwt" },
-  // pages: {
-  //   signIn: "/auth/login",
-  //   error: "/auth/error"
-  // },
-  // events: {
-  //   async linkAccount({ user }) {
-  //     // await db.user.update({
-  //     //   where: { id: user.id },
-  //     //   data: { emailVerified: new Date() }
-  //     // });
-  //   }
-  // },
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error"
+  },
+  events: {
+    async linkAccount({ user }) {
+      // await db.user.update({
+      //   where: { id: user.id },
+      //   data: { emailVerified: new Date() }
+      // });
+    }
+  },
   callbacks: {
     async signIn({ user, account }) {
       console.log("SIGN IN CALLED");
-      // // Allow OAuth without email verification
+      // Allow OAuth without email verification
       // if (account?.provider !== "credentials") return true;
 
       // const existingUser = await getUserById(user.id as string);
