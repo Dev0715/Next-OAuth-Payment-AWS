@@ -1,10 +1,6 @@
 import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 
-import { DynamoDB, DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
-import { DynamoDBAdapter } from "@auth/dynamodb-adapter";
-
 import type { Adapter, AdapterUser } from "next-auth/adapters";
 
 const dbAdapter: Adapter = {
@@ -64,6 +60,7 @@ export const { handlers, auth } = NextAuth({
   },
   events: {
     async linkAccount({ user }) {
+      console.log(user);
       // await db.user.update({
       //   where: { id: user.id },
       //   data: { emailVerified: new Date() }
