@@ -1,19 +1,20 @@
-import type { Adapter, AdapterUser } from "next-auth/adapters";
+import type { Adapter, AdapterAccount, AdapterUser } from "next-auth/adapters";
+
+type Awaitable<T> = T | PromiseLike<T>;
 
 export default {
-  async createUser(user): Promise<AdapterUser> {
+  async createUser(user: AdapterUser): Awaitable<AdapterUser> {
     return user;
   },
-  async getUser(id): Promise<AdapterUser | null> {
+  async getUser(id: string): Awaitable<AdapterUser | null> {
     return null;
   },
-  async getUserByEmail(email): Promise<AdapterUser | null> {
+  async getUserByEmail(email: string): Awaitable<AdapterUser | null> {
     return null;
   },
-  async getUserByAccount({
-    providerAccountId,
-    provider
-  }): Promise<AdapterUser | null> {
+  async getUserByAccount(
+    providerAccountId: Pick<AdapterAccount, "provider" | "providerAccountId">
+  ): Awaitable<AdapterUser | null> {
     return null;
   },
   async updateUser(user): Promise<AdapterUser> {
