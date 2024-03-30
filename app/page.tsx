@@ -27,6 +27,9 @@ export default function Home() {
           >
             This site is scheduled to launch officially on May 15th
           </h1>
+          <p>
+            Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
+          </p>
           <div className="space-y-6 text-center">
             <p className="text-white text-lg">You can sign-up now as either a Seller, Affiliate or a User.</p>
             <div>
