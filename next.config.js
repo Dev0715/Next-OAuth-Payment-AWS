@@ -4,13 +4,7 @@ module.exports = {
       // Basic redirect
       {
         source: "/",
-        destination: "/dashboard",
-        permanent: true
-      },
-      // Wildcard path matching
-      {
-        source: "/blog/:slug",
-        destination: "/nes/:slug",
+        destination: "/",
         permanent: true
       }
     ];
