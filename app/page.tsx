@@ -34,7 +34,7 @@ export default function Home() {
             <p className="text-white text-lg">
               Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
             </p>
-                        <p className="text-white text-lg">
+            <p className="text-white text-lg">
               Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
             </p>
           </div>
