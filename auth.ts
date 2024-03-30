@@ -29,19 +29,19 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
 
 const dbAdapter: Adapter = {
   async createUser(user): Promise<any> {
-    return;
+    return user;
   },
   async getUser(id): Promise<any> {
-    return;
+    return id;
   },
   async getUserByEmail(email): Promise<any> {
-    return;
+    return email;
   },
   async getUserByAccount({ providerAccountId, provider }): Promise<any> {
-    return;
+    return { providerAccountId, provider };
   },
   async updateUser(user): Promise<any> {
-    return;
+    return user;
   },
   async deleteUser(userId) {
     return;
@@ -53,22 +53,22 @@ const dbAdapter: Adapter = {
     return;
   },
   async createSession({ sessionToken, userId, expires }): Promise<any> {
-    return;
+    return { sessionToken, userId, expires };
   },
   async getSessionAndUser(sessionToken): Promise<any> {
-    return;
+    return sessionToken;
   },
   async updateSession({ sessionToken }): Promise<any> {
-    return;
+    return sessionToken;
   },
   async deleteSession(sessionToken): Promise<any> {
-    return;
+    return sessionToken;
   },
   async createVerificationToken({ identifier, expires, token }): Promise<any> {
-    return;
+    return { identifier, expires, token };
   },
   async useVerificationToken({ identifier, token }): Promise<any> {
-    return;
+    return { identifier, token };
   }
 };
 
@@ -89,26 +89,27 @@ export const { handlers, auth } = NextAuth({
   // },
   callbacks: {
     async signIn({ user, account }) {
-      // Allow OAuth without email verification
-      if (account?.provider !== "credentials") return true;
+      console.log("SIGN IN CALLED");
+      // // Allow OAuth without email verification
+      // if (account?.provider !== "credentials") return true;
 
-      const existingUser = await getUserById(user.id as string);
+      // const existingUser = await getUserById(user.id as string);
 
-      // Prevent sign in without email verification
-      if (!existingUser?.emailVerified) return false;
+      // // Prevent sign in without email verification
+      // if (!existingUser?.emailVerified) return false;
 
-      if (existingUser.isTwoFactorEnabled) {
-        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
-          existingUser.id
-        );
+      // if (existingUser.isTwoFactorEnabled) {
+      //   const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+      //     existingUser.id
+      //   );
 
-        if (!twoFactorConfirmation) return false;
+      //   if (!twoFactorConfirmation) return false;
 
-        // Delete two factor confirmation for next sign in
-        // await db.twoFactorConfirmation.delete({
-        //   where: { id: twoFactorConfirmation.id }
-        // });
-      }
+      //   // Delete two factor confirmation for next sign in
+      //   // await db.twoFactorConfirmation.delete({
+      //   //   where: { id: twoFactorConfirmation.id }
+      //   // });
+      // }
 
       return true;
     },
@@ -130,20 +131,15 @@ export const { handlers, auth } = NextAuth({
       return session;
     },
     async jwt({ token }) {
-      if (!token.sub) return token;
-
-      const existingUser = await getUserById(token.sub);
-
-      if (!existingUser) return token;
-
-      const existingAccount = await getAccountByUserId(existingUser.id);
-
-      token.isOAuth = !!existingAccount;
-      token.name = existingUser.name;
-      token.email = existingUser.email;
-      token.role = existingUser.role;
-      token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
-
+      // if (!token.sub) return token;
+      // const existingUser = await getUserById(token.sub);
+      // if (!existingUser) return token;
+      // const existingAccount = await getAccountByUserId(existingUser.id);
+      // token.isOAuth = !!existingAccount;
+      // token.name = existingUser.name;
+      // token.email = existingUser.email;
+      // token.role = existingUser.role;
+      // token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
       return token;
     }
   },
