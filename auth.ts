@@ -28,19 +28,19 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
 });
 
 const dbAdapter: Adapter = {
-  async createUser(user) {
+  async createUser(user): Promise<any> {
     return;
   },
-  async getUser(id) {
+  async getUser(id): Promise<any> {
     return;
   },
-  async getUserByEmail(email) {
+  async getUserByEmail(email): Promise<any> {
     return;
   },
-  async getUserByAccount({ providerAccountId, provider }) {
+  async getUserByAccount({ providerAccountId, provider }): Promise<any> {
     return;
   },
-  async updateUser(user) {
+  async updateUser(user): Promise<any> {
     return;
   },
   async deleteUser(userId) {
@@ -52,22 +52,22 @@ const dbAdapter: Adapter = {
   async unlinkAccount({ providerAccountId, provider }) {
     return;
   },
-  async createSession({ sessionToken, userId, expires }) {
+  async createSession({ sessionToken, userId, expires }): Promise<any> {
     return;
   },
-  async getSessionAndUser(sessionToken) {
+  async getSessionAndUser(sessionToken): Promise<any> {
     return;
   },
-  async updateSession({ sessionToken }) {
+  async updateSession({ sessionToken }): Promise<any> {
     return;
   },
-  async deleteSession(sessionToken) {
+  async deleteSession(sessionToken): Promise<any> {
     return;
   },
-  async createVerificationToken({ identifier, expires, token }) {
+  async createVerificationToken({ identifier, expires, token }): Promise<any> {
     return;
   },
-  async useVerificationToken({ identifier, token }) {
+  async useVerificationToken({ identifier, token }): Promise<any> {
     return;
   }
 };
