@@ -12,10 +12,13 @@ export default function Home() {
   return (
     <main className="flex h-full flex-col p-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
       <div className="w-full flex">
-        <div className="w-full flex">
-          <img src="./logo.svg" size="" />
-          <p>Kre8tive</p>
+        <div className="w-full flex items-end gap-4">
+          <img src="./logo.svg" width="60" height="60" />
+          <p className="text-4xl font-semibold text-white drop-shadow-md">Kre8tive Logo</p>
         </div>
+      </div>
+      <div className="w-full h-full flex items-center justify-center">
+        Items Center
       </div>
       <div className="space-y-6 text-center">
         <h1
