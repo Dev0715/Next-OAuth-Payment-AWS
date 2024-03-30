@@ -1,4 +1,9 @@
-import type { Adapter, AdapterAccount, AdapterUser } from "next-auth/adapters";
+import type {
+  Adapter,
+  AdapterAccount,
+  AdapterUser,
+  AdapterSession
+} from "next-auth/adapters";
 
 type Awaitable<T> = T | PromiseLike<T>;
 
@@ -17,23 +22,37 @@ export default {
   ): Awaitable<AdapterUser | null> {
     return null;
   },
-  async updateUser(user): Promise<AdapterUser> {
+  async updateUser(
+    user: Partial<AdapterUser> & Pick<AdapterUser, "id">
+  ): Awaitable<AdapterUser> {
     return user as AdapterUser;
   },
-  async deleteUser(userId) {
+  async deleteUser(
+    userId: string
+  ): Promise<void> | Awaitable<AdapterUser | null | undefined> {
     return;
   },
-  async linkAccount(account) {
+  async linkAccount(
+    account: AdapterAccount
+  ): Promise<void> | Awaitable<AdapterAccount | null | undefined> {
     return;
   },
-  async unlinkAccount({ providerAccountId, provider }) {
+  async unlinkAccount(
+    providerAccountId: Pick<AdapterAccount, "provider" | "providerAccountId">
+  ): Promise<void> | Awaitable<AdapterAccount | undefined> {
     return;
   },
-  async createSession({ sessionToken, userId, expires }): Promise<any> {
-    return { sessionToken, userId, expires };
+  async createSession(session: {
+    sessionToken: string;
+    userId: string;
+    expires: Date;
+  }): Awaitable<AdapterSession> {
+    return;
   },
-  async getSessionAndUser(sessionToken): Promise<any> {
-    return sessionToken;
+  async getSessionAndUser(
+    sessionToken: string
+  ): Awaitable<{ session: AdapterSession; user: AdapterUser } | null> {
+    return;
   },
   async updateSession({ sessionToken }): Promise<any> {
     return sessionToken;
