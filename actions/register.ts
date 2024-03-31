@@ -22,7 +22,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: "Email already in use!" };
   }
 
-  createUser({
+  await createUser({
     name,
     email,
     password: hashedPassword
