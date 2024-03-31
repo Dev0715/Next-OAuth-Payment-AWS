@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 
 import { NewPasswordSchema } from "@/schemas";
 import { getPasswordResetTokenByToken } from "@/data/password-reset-token";
-import { getUserByEmail, getUserById } from "@/data/user";
+import { getUserByEmail, getUserById, updateUser } from "@/data/user";
 
 export const newPassword = async (
   values: z.infer<typeof NewPasswordSchema>,
@@ -22,7 +22,6 @@ export const newPassword = async (
   }
 
   const userId = token.slice(0, 36); // length of uuidv4
-  const tokenValue = token.slice(36); // length of uuidv4
 
   const existingUser = await getUserById(userId);
   if (!existingUser) {
@@ -31,10 +30,22 @@ export const newPassword = async (
 
   const expires = Date.parse(existingUser.expires);
   if (expires < new Date().getTime()) {
-    return { error: "Token expired!" };
+    return { error: "Token is expired!" };
+  }
+
+  if (token !== existingUser.verificationToken) {
+    return { error: "Invalid Token!" };
   }
 
   const { password } = validatedFields.data;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const updatedUser = updateUser({
+    username: userId,
+    password: hashedPassword,
+    emailVerified: new Date().toISOString()
+  });
+
+  return { success: "Password updated!" };
 
   // const existingToken = await getPasswordResetTokenByToken(token);
 
@@ -64,6 +75,4 @@ export const newPassword = async (
   // await db.passwordResetToken.delete({
   //   where: { id: existingToken.id }
   // });
-
-  return { success: "Password updated!" };
 };
