@@ -43,7 +43,7 @@ export const createUser = async (data: NewUser) => {
 
   try {
     const response = await db.send(command);
-    console.log("__createUser__PutCommand__RESPONSE", response);
+    // console.log("__createUser__PutCommand__RESPONSE", response);
     return response;
   } catch (error) {
     console.log("__createUser__PutCommand__ERROR", error);

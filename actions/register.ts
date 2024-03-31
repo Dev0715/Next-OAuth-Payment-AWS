@@ -22,7 +22,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: "Email already in use!" };
   }
 
-  await createUser({
+  const response = await createUser({
     name,
     email,
     password: hashedPassword
@@ -31,5 +31,6 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const verificationToken = await generateVerificationToken(email);
   await sendVerificationEmail(verificationToken.email, verificationToken.token);
 
-  return { success: "Data is Valid, Message Received!" };
+  if (response) return { success: "New user registered!" };
+  else return { error: "Server Error!" };
 };
