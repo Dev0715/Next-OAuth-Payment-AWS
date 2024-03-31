@@ -24,6 +24,7 @@ export const getUserByEmail = async (email: string) => {
 
   try {
     const response = await db.send(command);
+    console.log("__getUserByEmail__ScanCommand__RESPONSE", response);
     if (response.Count) return response.Items[0];
     else return null;
   } catch (error) {
