@@ -45,6 +45,7 @@ export const { handlers, auth } = NextAuth({
       return true;
     },
     async session({ token, session }) {
+      console.log("CALLBACK__session", token, session);
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
@@ -62,6 +63,7 @@ export const { handlers, auth } = NextAuth({
       return session;
     },
     async jwt({ token }) {
+      console.log("CALLBACK__jwt", token);
       // if (!token.sub) return token;
       // const existingUser = await getUserById(token.sub);
       // if (!existingUser) return token;
