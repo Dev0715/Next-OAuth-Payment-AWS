@@ -11,7 +11,7 @@ export const { handlers, auth } = NextAuth({
   },
   events: {
     async linkAccount({ user }) {
-      console.log("LINK ACCOUNT", user);
+      console.log("EVENTS__linkAccount", user);
       // await db.user.update({
       //   where: { id: user.id },
       //   data: { emailVerified: new Date() }
@@ -20,7 +20,7 @@ export const { handlers, auth } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account }) {
-      console.log("SIGN IN CALLED", user, account);
+      console.log("CALLBACK__signIn", user, account);
       // Allow OAuth without email verification
       // if (account?.provider !== "credentials") return true;
 

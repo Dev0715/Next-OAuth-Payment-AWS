@@ -11,22 +11,22 @@ export default {
   async getUserByAccount(
     providerAccountId: Pick<AdapterAccount, "provider" | "providerAccountId">
   ): Awaitable<AdapterUser | null> {
-    console.log("getUserByAccount", providerAccountId);
+    console.log("__getUserByAccount", providerAccountId);
     // { providerAccountId: '126603430', provider: 'github' }
     return null;
   },
   async getUser(id: string): Awaitable<AdapterUser | null> {
-    console.log("getUser", id);
+    console.log("__getUser", id);
     // 8876a5dc-7248-4682-a255-5412417373dd
     return null;
   },
   async getUserByEmail(email: string): Awaitable<AdapterUser | null> {
-    console.log("getUserByEmail", email);
+    console.log("__getUserByEmail", email);
     // sacreddevking@gmail.com
     return null;
   },
   async createUser(user: AdapterUser): Awaitable<AdapterUser> {
-    // console.log("createUser", user);
+    console.log("__createUser", user);
     // {
     //   id: '2e79e340-fb52-4e65-a535-a656734b5b3f',
     //   name: 'DevKing',
@@ -39,7 +39,7 @@ export default {
   async linkAccount(
     account: AdapterAccount
   ): Promise<void> | Awaitable<AdapterAccount | null | undefined> {
-    // console.log("linkAccount", account);
+    console.log("__linkAccount", account);
     // {
     //   access_token: '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',
     //   scope: 'read:user,user:email',
@@ -50,57 +50,57 @@ export default {
     //   userId: '2e79e340-fb52-4e65-a535-a656734b5b3f'
     // }
     return;
-  },
-  async updateUser(
-    user: Partial<AdapterUser> & Pick<AdapterUser, "id">
-  ): Awaitable<AdapterUser> {
-    console.log("UPDATE_USER", user);
-    return user as AdapterUser;
-  },
-  async deleteUser(
-    userId: string
-  ): Promise<void> | Awaitable<AdapterUser | null | undefined> {
-    console.log("DELETE_USER", userId);
-    return;
-  },
-  async unlinkAccount(
-    providerAccountId: Pick<AdapterAccount, "provider" | "providerAccountId">
-  ): Promise<void> | Awaitable<AdapterAccount | undefined> {
-    console.log("UNLINK_ACCOUNT", providerAccountId);
-    return;
-  },
-  async createSession(session: {
-    sessionToken: string;
-    userId: string;
-    expires: Date;
-  }): Awaitable<AdapterSession> {
-    console.log("CREATE_SESSION", session);
-    return;
-  },
-  async getSessionAndUser(
-    sessionToken: string
-  ): Awaitable<{ session: AdapterSession; user: AdapterUser } | null> {
-    console.log("GET_SESSION_AND_USER", sessionToken);
-    return;
-  },
-  async updateSession(
-    session: Partial<AdapterSession> & Pick<AdapterSession, "sessionToken">
-  ): Awaitable<AdapterSession | null | undefined> {
-    console.log("UPDATE_SESSION", session);
-    return session;
-  },
-  async deleteSession(
-    sessionToken: string
-  ): Promise<void> | Awaitable<AdapterSession | null | undefined> {
-    console.log("DELETE_SESSION", sessionToken);
-    return sessionToken;
-  },
-  async createVerificationToken({ identifier, expires, token }): Promise<any> {
-    console.log("CREATE_VERIFICATION_TOKEN");
-    return { identifier, expires, token };
-  },
-  async useVerificationToken({ identifier, token }): Promise<any> {
-    console.log("USE_VERFICATION_TOKEN");
-    return { identifier, token };
   }
+  // async updateUser(
+  //   user: Partial<AdapterUser> & Pick<AdapterUser, "id">
+  // ): Awaitable<AdapterUser> {
+  //   console.log("UPDATE_USER", user);
+  //   return user as AdapterUser;
+  // },
+  // async deleteUser(
+  //   userId: string
+  // ): Promise<void> | Awaitable<AdapterUser | null | undefined> {
+  //   console.log("DELETE_USER", userId);
+  //   return;
+  // },
+  // async unlinkAccount(
+  //   providerAccountId: Pick<AdapterAccount, "provider" | "providerAccountId">
+  // ): Promise<void> | Awaitable<AdapterAccount | undefined> {
+  //   console.log("UNLINK_ACCOUNT", providerAccountId);
+  //   return;
+  // },
+  // async createSession(session: {
+  //   sessionToken: string;
+  //   userId: string;
+  //   expires: Date;
+  // }): Awaitable<AdapterSession> {
+  //   console.log("CREATE_SESSION", session);
+  //   return;
+  // },
+  // async getSessionAndUser(
+  //   sessionToken: string
+  // ): Awaitable<{ session: AdapterSession; user: AdapterUser } | null> {
+  //   console.log("GET_SESSION_AND_USER", sessionToken);
+  //   return;
+  // },
+  // async updateSession(
+  //   session: Partial<AdapterSession> & Pick<AdapterSession, "sessionToken">
+  // ): Awaitable<AdapterSession | null | undefined> {
+  //   console.log("UPDATE_SESSION", session);
+  //   return session;
+  // },
+  // async deleteSession(
+  //   sessionToken: string
+  // ): Promise<void> | Awaitable<AdapterSession | null | undefined> {
+  //   console.log("DELETE_SESSION", sessionToken);
+  //   return sessionToken;
+  // },
+  // async createVerificationToken({ identifier, expires, token }): Promise<any> {
+  //   console.log("CREATE_VERIFICATION_TOKEN");
+  //   return { identifier, expires, token };
+  // },
+  // async useVerificationToken({ identifier, token }): Promise<any> {
+  //   console.log("USE_VERFICATION_TOKEN");
+  //   return { identifier, token };
+  // }
 } satisfies Adapter;
