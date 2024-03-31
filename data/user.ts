@@ -17,7 +17,7 @@ interface NewUser {
   emailVerified?: Date | null;
 }
 
-interface UpdateUser {
+interface UserSetToken {
   username: string;
   verificationToken: string;
   expires: Date;
@@ -84,7 +84,7 @@ export const createUser = async (data: NewUser) => {
   }
 };
 
-export const updateUser = async (data: UpdateUser) => {
+export const updateUserToken = async (data: UserSetToken) => {
   const command = new UpdateCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Key: { username: data.username },
@@ -99,10 +99,36 @@ export const updateUser = async (data: UpdateUser) => {
 
   try {
     const response = await db.send(command);
-    console.log("__updateUser__UpdateCommand__RESPONSE", response);
+    console.log("__updateUserToken__UpdateCommand__RESPONSE", response);
     return response.Attributes;
   } catch (error) {
-    console.log("__updateUser__UpdateCommand__ERROR", error);
+    console.log("__updateUserToken__UpdateCommand__ERROR", error);
+    return null;
+  }
+};
+
+export const updateUserPassword = async (data: UserSetToken) => {
+  const command = new UpdateCommand({
+    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    Key: { username: data.username },
+    UpdateExpression:
+      "SET verificationToken = :verificationToken, expires = :expires",
+    ExpressionAttributeValues: {
+      ":verificationToken": data.verificationToken,
+      ":expires": data.expires.toISOString()
+    },
+    ReturnValues: "ALL_NEW"
+  });
+
+  try {
+    const response = await db.send(command);
+    console.log(
+      "__updateUserVerificationToken__UpdateCommand__RESPONSE",
+      response
+    );
+    return response.Attributes;
+  } catch (error) {
+    console.log("__updateUserVerificationToken__UpdateCommand__ERROR", error);
     return null;
   }
 };

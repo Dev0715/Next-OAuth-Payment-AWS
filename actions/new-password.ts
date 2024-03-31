@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 
 import { NewPasswordSchema } from "@/schemas";
 import { getPasswordResetTokenByToken } from "@/data/password-reset-token";
-import { getUserByEmail, getUserById, updateUser } from "@/data/user";
+import { getUserByEmail, getUserById } from "@/data/user";
 
 export const newPassword = async (
   values: z.infer<typeof NewPasswordSchema>,
@@ -39,11 +39,11 @@ export const newPassword = async (
 
   const { password } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10);
-  const updatedUser = updateUser({
+  const updatedUser = {
     username: userId,
     password: hashedPassword,
     emailVerified: new Date().toISOString()
-  });
+  };
 
   return { success: "Password updated!" };
 

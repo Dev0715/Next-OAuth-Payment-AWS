@@ -4,7 +4,7 @@ import * as z from "zod";
 import { v4 as uuidv4 } from "uuid";
 
 import { ResetSchema } from "@/schemas";
-import { getUserByEmail, updateUser } from "@/data/user";
+import { getUserByEmail, updateUserToken } from "@/data/user";
 import { sendPasswordResetEmail } from "@/lib/mail";
 import { generatePasswordResetToken } from "@/lib/tokens";
 
@@ -23,7 +23,7 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
 
   const verificationToken = uuidv4(); // length 36
 
-  const updatedUser = await updateUser({
+  const updatedUser = await updateUserToken({
     username: existingUser.username,
     verificationToken: existingUser.username + verificationToken,
     expires: new Date(new Date().getTime() + 3600 * 1000)
