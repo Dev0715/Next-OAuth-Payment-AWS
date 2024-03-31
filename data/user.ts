@@ -77,7 +77,7 @@ export const updateUser = async (data: UpdateUser) => {
   try {
     const response = await db.send(command);
     console.log("__updateUser__UpdateCommand__RESPONSE", response);
-    return response;
+    return response.Attributes;
   } catch (error) {
     console.log("__updateUser__UpdateCommand__ERROR", error);
     return null;

@@ -25,17 +25,18 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
 
   const verificationToken = uuidv4();
 
-  await updateUser({
+  const updatedUser = await updateUser({
     username: existingUser.username,
     verificationToken,
     expires: new Date(new Date().getTime() + 3600 * 1000)
   });
 
+  if (!updatedUser) {
+    return { error: "Server Error" };
+  }
+
   // const passwordResetToken = await generatePasswordResetToken(email);
-  // await sendPasswordResetEmail(
-  //   passwordResetToken.email,
-  //   passwordResetToken.token
-  // );
+  await sendPasswordResetEmail(updatedUser.email, updatedUser.token);
 
   return { success: "Reset email sent!" };
 };
