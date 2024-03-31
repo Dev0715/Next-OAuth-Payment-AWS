@@ -4,7 +4,6 @@ import { z } from "zod";
 import { AuthError } from "next-auth";
 
 import { db } from "@/lib/db";
-import { signIn } from "@/auth";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
 import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
@@ -15,6 +14,7 @@ import {
   generateTwoFactorToken
 } from "@/lib/tokens";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
+import { signIn } from "next-auth/react";
 
 export const login = async (
   values: z.infer<typeof LoginSchema>,
