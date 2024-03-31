@@ -5,36 +5,25 @@ import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@/components/auth/user-button";
+import { Separator } from "@/components/ui/separator";
 
 export const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-secondary flex justify-between items-center p-4 rounded-xl w-[600px] shadow-sm">
-      <div className="flex gap-x-2">
-        <Button
-          asChild
-          variant={pathname === "/user/server" ? "default" : "outline"}
-        >
-          <Link href="/user/server">Server</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === "/user/client" ? "default" : "outline"}
-        >
-          <Link href="/user/client">Client</Link>
-        </Button>
-        <Button asChild variant={pathname === "/user/admin" ? "default" : "outline"}>
-          <Link href="/user/admin">Admin</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === "/user/settings" ? "default" : "outline"}
-        >
-          <Link href="/user/settings">Settings</Link>
-        </Button>
+    <nav className="bg-secondary flex flex-col gap-y-6 p-6 w-full">
+      <div className="bg-secondary flex justify-between items-center w-full">
+        <div className="flex flex-col gap-y-2">
+          <h1 className="text-3xl font-semibold text-black drop-shadow-md">
+            ⚙️ Settings
+          </h1>
+          <p className="text-xl text-gray-600">
+            Manage your account settings set preferences.
+          </p>
+        </div>
+        <UserButton />
       </div>
-      <UserButton />
+      <Separator className="h-[1px]" />
     </nav>
   );
 };
