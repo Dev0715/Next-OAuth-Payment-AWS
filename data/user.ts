@@ -5,17 +5,20 @@ export const getUserByEmail = async (email: string) => {
   console.log("__getUserByEmail__START", email);
   const command = new ScanCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
-    ProjectionExpression: "#email, emailVerified",
-    Limit: 1,
-    ExpressionAttributeNames: { "#email": email }
+    ProjectionExpression: "email, emailVerified",
+    // ProjectionExpression: "email, emailVerified, #name",
+    // ExpressionAttributeNames: { "#name": "name" }, // for reserved attr names
+    FilterExpression: "email = :email",
+    ExpressionAttributeValues: {
+      ":email": email
+    }
+    // Limit: 1 // just number of scanned items, not result
   });
 
   try {
     const response = await db.send(command);
-    console.log("__getUserByEmail_RESULT", response);
-    if (response.Items.length) {
-      return response.Items[0];
-    } else return null;
+    if (response.Count) return response.Items[0];
+    else return null;
   } catch (error) {
     console.log("__getUserByEmail__ERROR", error);
     return null;
