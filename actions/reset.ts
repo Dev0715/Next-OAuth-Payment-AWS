@@ -10,7 +10,6 @@ import { generatePasswordResetToken } from "@/lib/tokens";
 
 export const reset = async (values: z.infer<typeof ResetSchema>) => {
   const validatedFields = ResetSchema.safeParse(values);
-
   if (!validatedFields.success) {
     return { error: "Invalid email!" };
   }
@@ -18,7 +17,6 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
   const { email } = validatedFields.data;
 
   const existingUser = await getUserByEmail(email);
-
   if (!existingUser) {
     return { error: "Email not found!" };
   }
@@ -36,7 +34,13 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
   }
 
   // const passwordResetToken = await generatePasswordResetToken(email);
-  await sendPasswordResetEmail(updatedUser.email, updatedUser.token);
+  const response = await sendPasswordResetEmail(
+    updatedUser.email,
+    updatedUser.token
+  );
+  if (response.error) {
+    return { error: response.error.name };
+  }
 
   return { success: "Reset email sent!" };
 };

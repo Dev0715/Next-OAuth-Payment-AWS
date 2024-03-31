@@ -26,6 +26,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
   });
 
   console.log("__sendPasswordResetEmail__RESPONSE", response);
+  return response;
 };
 
 export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
