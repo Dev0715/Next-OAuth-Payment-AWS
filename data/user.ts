@@ -84,7 +84,7 @@ export const createUser = async (data: NewUser) => {
     Item: {
       username,
       verificationToken,
-      expires: new Date().toISOString(),
+      expires: new Date(new Date().getTime() + 3600 * 1000).toISOString(),
       ...data
     }
   });
