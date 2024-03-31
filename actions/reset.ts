@@ -25,7 +25,7 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
 
   const updatedUser = await updateUser({
     username: existingUser.username,
-    verificationToken,
+    verificationToken: existingUser.username + verificationToken,
     expires: new Date(new Date().getTime() + 3600 * 1000)
   });
 
