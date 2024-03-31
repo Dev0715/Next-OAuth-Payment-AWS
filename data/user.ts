@@ -1,11 +1,11 @@
 import { db, GetCommand } from "@/lib/db";
 
 export const getUserByEmail = async (email: string) => {
+  console.log("__getUserByEmail__START", email);
   const command = new GetCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Key: {
-      username: "user1",
-      email: email
+      username: "user1"
     }
   });
 
