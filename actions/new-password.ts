@@ -52,19 +52,16 @@ export const newPassword = async (
   return { success: "Password updated!" };
 
   // const existingToken = await getPasswordResetTokenByToken(token);
-
   // if (!existingToken) {
   //   return { error: "Invalid token!" };
   // }
 
   // const hasExpired = new Date(existingToken.expires) < new Date();
-
   // if (hasExpired) {
   //   return { error: "Token has expired!" };
   // }
 
   // const existingUser = await getUserByEmail(existingToken.email);
-
   // if (!existingUser) {
   //   return { error: "Email does not exist!" };
   // }
