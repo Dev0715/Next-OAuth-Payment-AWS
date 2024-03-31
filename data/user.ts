@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 import db from "@/lib/db";
-import { PutCommand, ScanCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { GetCommand, PutCommand, ScanCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 interface NewUser {
   name?: string | null | undefined;
@@ -17,6 +17,19 @@ interface UpdateUser {
   verificationToken: string;
   expires: Date;
 }
+
+export const getUserById = async (id: string) => {
+  const command = new GetCommand({
+    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    Key: {
+      username: id
+    },
+  });
+
+  try {
+    
+  }
+};
 
 export const getUserByEmail = async (email: string) => {
   const command = new ScanCommand({
