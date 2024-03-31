@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 
 import { RegisterSchema } from "@/schemas";
 import { createUser, getUserByEmail } from "@/data/user";
-// import { sendVerificationEmail } from "@/lib/mail";
+import { sendVerificationEmail } from "@/lib/mail";
 // import { generateVerificationToken } from "@/lib/tokens";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
@@ -22,15 +22,15 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: "Email already in use!" };
   }
 
-  const response = await createUser({
+  const userId = await createUser({
     name,
     email,
     password: hashedPassword
   });
 
   // const verificationToken = await generateVerificationToken(email);
-  // await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  await sendVerificationEmail(email, userId + );
 
-  if (response) return { success: "New user registered!" };
+  if (userId) return { success: "New user registered!" };
   else return { error: "Server Error!" };
 };

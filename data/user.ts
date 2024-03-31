@@ -75,18 +75,24 @@ export const createUser = async (data: NewUser) => {
   if (data.emailVerified && data.emailVerified instanceof Date) {
     data.emailVerified = data.emailVerified.toISOString();
   }
+
+  const username = uuidv4();
+  const verificationToken = username + uuidv4();
+
   const command = new PutCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Item: {
-      username: uuidv4(),
+      username,
+      verificationToken,
+      expires: new Date().toISOString(),
       ...data
     }
   });
 
   try {
     const response = await db.send(command);
-    // console.log("__createUser__PutCommand__RESPONSE", response);
-    return response;
+    console.log("__createUser__PutCommand__RESPONSE", response);
+    return username;
   } catch (error) {
     console.log("__createUser__PutCommand__ERROR", error);
     return null;
