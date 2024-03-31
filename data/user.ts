@@ -144,3 +144,24 @@ export const updateUserPassword = async (data: UserSetPassword) => {
     return null;
   }
 };
+
+export const updateUserVerification = async (userId: string) => {
+  const command = new UpdateCommand({
+    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    Key: { username: userId },
+    UpdateExpression: "SET emailVerified = :emailVerified",
+    ExpressionAttributeValues: {
+      ":emailVerified": new Date().toISOString()
+    },
+    ReturnValues: "ALL_NEW"
+  });
+
+  try {
+    const response = await db.send(command);
+    console.log("__updateUserVerification__UpdateCommand__RESPONSE", response);
+    return response.Attributes;
+  } catch (error) {
+    console.log("__updateUserVerification__UpdateCommand__ERROR", error);
+    return null;
+  }
+};

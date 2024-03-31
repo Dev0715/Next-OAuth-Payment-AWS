@@ -1,6 +1,6 @@
 "use server";
 
-import { getUserById } from "@/data/user";
+import { getUserById, updateUserVerification } from "@/data/user";
 // import { getVerificationTokenByToken } from "@/data/verificiation-token";
 
 export const newVerification = async (token: string) => {
@@ -20,6 +20,17 @@ export const newVerification = async (token: string) => {
   if (expires < new Date().getTime()) {
     return { error: "Token is expired!" };
   }
+
+  if (token !== existingUser.verificationToken) {
+    return { error: "Invalid Token!" };
+  }
+
+  const updatedUser = await updateUserVerification(userId);
+  if (!updatedUser) {
+    return { error: "Server error!" };
+  }
+
+  return { success: "Email verified!" };
 
   // const existingToken = await getVerificationTokenByToken(token);
   // if (!existingToken) {
@@ -47,6 +58,4 @@ export const newVerification = async (token: string) => {
   // await db.verificationToken.delete({
   //   where: { id: existingToken.id }
   // });
-
-  return { success: "Email verified!" };
 };
