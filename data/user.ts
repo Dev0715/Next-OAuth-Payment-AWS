@@ -54,3 +54,5 @@ export const createUser = async (data: NewUser) => {
     return null;
   }
 };
+
+export const updateUser = async (data) => {};
