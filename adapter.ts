@@ -35,22 +35,22 @@ export default {
     //   emailVerified: null
     // }
     return user;
+  },
+  async linkAccount(
+    account: AdapterAccount
+  ): Promise<void> | Awaitable<AdapterAccount | null | undefined> {
+    console.log("__linkAccount", account);
+    // {
+    //   access_token: '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',
+    //   scope: 'read:user,user:email',
+    //   token_type: 'bearer',
+    //   providerAccountId: '126603430',
+    //   provider: 'github',
+    //   type: 'oauth',
+    //   userId: '2e79e340-fb52-4e65-a535-a656734b5b3f'
+    // }
+    return;
   }
-  // async linkAccount(
-  //   account: AdapterAccount
-  // ): Promise<void> | Awaitable<AdapterAccount | null | undefined> {
-  //   console.log("__linkAccount", account);
-  //   // {
-  //   //   access_token: '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',
-  //   //   scope: 'read:user,user:email',
-  //   //   token_type: 'bearer',
-  //   //   providerAccountId: '126603430',
-  //   //   provider: 'github',
-  //   //   type: 'oauth',
-  //   //   userId: '2e79e340-fb52-4e65-a535-a656734b5b3f'
-  //   // }
-  //   return;
-  // }
   // async updateUser(
   //   user: Partial<AdapterUser> & Pick<AdapterUser, "id">
   // ): Awaitable<AdapterUser> {
