@@ -21,7 +21,7 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
     return { error: "Email not found!" };
   }
 
-  const verificationToken = uuidv4();
+  const verificationToken = uuidv4(); // length 36
 
   const updatedUser = await updateUser({
     username: existingUser.username,
