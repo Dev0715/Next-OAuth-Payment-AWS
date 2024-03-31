@@ -2,19 +2,20 @@ import { db, GetCommand } from "@/lib/db";
 
 export const getUserByEmail = async (email: string) => {
   const command = new GetCommand({
-    TableName: "tbl_users",
+    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Key: {
-      id: "king"
+      username: "user1",
+      email: email
     }
   });
 
   try {
     const response = await db.send(command);
-    console.log("getUserByEmail", response);
-    const item = response.item;
+    const item = response.Item;
+    console.log("__getUserByEmail_RESULT", item);
     return item;
   } catch (error) {
-    console.log("getUserByEmail", error);
+    console.log("__getUserByEmail__ERROR", error);
     return null;
   }
 };
