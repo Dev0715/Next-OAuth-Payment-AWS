@@ -15,6 +15,7 @@ interface NewUser {
 interface UpdateUser {
   username: string;
   verificationToken: string;
+  expires: Date;
 }
 
 export const getUserByEmail = async (email: string) => {
@@ -60,7 +61,7 @@ export const createUser = async (data: NewUser) => {
   }
 };
 
-export const updateUser = async (data) => {
+export const updateUser = async (data: UpdateUser) => {
   const command = new UpdateCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Key: {
