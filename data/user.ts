@@ -23,6 +23,12 @@ interface UserSetToken {
   expires: Date;
 }
 
+interface UserSetPassword {
+  username: string;
+  password: string;
+  emailVerified: Date;
+}
+
 export const getUserById = async (id: string) => {
   const command = new GetCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
@@ -107,28 +113,25 @@ export const updateUserToken = async (data: UserSetToken) => {
   }
 };
 
-export const updateUserPassword = async (data: UserSetToken) => {
+export const updateUserPassword = async (data: UserSetPassword) => {
   const command = new UpdateCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Key: { username: data.username },
     UpdateExpression:
-      "SET verificationToken = :verificationToken, expires = :expires",
+      "SET password = :password, emailVerified = :emailVerified",
     ExpressionAttributeValues: {
-      ":verificationToken": data.verificationToken,
-      ":expires": data.expires.toISOString()
+      ":password": data.password,
+      ":emailVerified": data.emailVerified.toISOString()
     },
     ReturnValues: "ALL_NEW"
   });
 
   try {
     const response = await db.send(command);
-    console.log(
-      "__updateUserVerificationToken__UpdateCommand__RESPONSE",
-      response
-    );
+    console.log("__updateUserPassword__UpdateCommand__RESPONSE", response);
     return response.Attributes;
   } catch (error) {
-    console.log("__updateUserVerificationToken__UpdateCommand__ERROR", error);
+    console.log("__updateUserPassword__UpdateCommand__ERROR", error);
     return null;
   }
 };
