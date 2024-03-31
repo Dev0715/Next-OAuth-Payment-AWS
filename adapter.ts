@@ -30,7 +30,7 @@ export default {
     console.log("__createUser", user);
     const existingUser = await getUserByEmail(user.email);
     if (!existingUser) {
-      await createUser(user);
+      await createUser({ ...user, emailVerified: new Date() });
     }
     // {
     //   id: '2e79e340-fb52-4e65-a535-a656734b5b3f',
