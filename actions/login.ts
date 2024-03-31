@@ -91,8 +91,6 @@ export const login = async (
   //   }
   // }
 
-  console.log("__signIn", signIn);
-
   try {
     await signIn("credentials", {
       email,

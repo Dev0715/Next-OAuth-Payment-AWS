@@ -48,7 +48,7 @@ export const LoginForm = () => {
 
     startTransition(() => {
       login(values, callbackUrl).then((data) => {
-        console.log("LOGIN__RETURNED", data);
+        console.log("__login__RETURNED", data);
 
         if (data?.error) {
           form.reset();
