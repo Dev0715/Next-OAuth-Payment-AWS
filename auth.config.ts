@@ -37,7 +37,9 @@ export default {
         console.log("__PROVIDER_CREDENTIALS", credentials);
         const { email, password } = credentials;
         const user = await getUserByEmail(email as string);
+        console.log("__AUTHORIZE", user);
         if (!user || !user.password) return null;
+        console.log("__AUTHORIZE", user);
         const passwordsMatch = await bcrypt.compare(
           password as string,
           user.password
