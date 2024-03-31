@@ -1,5 +1,13 @@
+import bcrypt from "bcryptjs";
+
 import db from "@/lib/db";
 import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+
+interface NewUser {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export const getUserByEmail = async (email: string) => {
   const command = new ScanCommand({
@@ -24,12 +32,12 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
-export const createUser = async (data) => {
+export const createUser = async (data: NewUser) => {
   const command = new PutCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Item: {
-      username: 
-      ...data,
+      username: data.name + bcrypt.genSaltSync(10),
+      ...data
     }
   });
 };
