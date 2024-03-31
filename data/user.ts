@@ -1,21 +1,22 @@
 import db from "@/lib/db";
-import { GetItemCommand } from "@aws-sdk/client-dynamodb";
+import { QueryCommand } from "@aws-sdk/lib-dynamodb";
 
 export const getUserByEmail = async (email: string) => {
   console.log("__getUserByEmail__START", email);
-  const command = new GetItemCommand({
+  const command = new QueryCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
-    Key: {
-      // username: "user1",
-      email: email
-    }
+    KeyConditionExpression: "email = :email",
+    ExpressionAttributeValues: {
+      ":email": email
+    },
+    ConsistentRead: true
   });
 
   try {
     const response = await db.send(command);
-    const item = response.Item;
-    console.log("__getUserByEmail_RESULT", item);
-    return item;
+    // const item = response.Item;
+    console.log("__getUserByEmail_RESULT", response);
+    // return item;
   } catch (error) {
     console.log("__getUserByEmail__ERROR", error);
     return null;
