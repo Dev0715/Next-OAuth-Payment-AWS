@@ -5,10 +5,10 @@ import adapter from "./adapter";
 export const { handlers, auth } = NextAuth({
   adapter,
   session: { strategy: "jwt" },
-  pages: {
-    signIn: "/auth/login",
-    error: "/auth/error"
-  },
+  // pages: {
+  //   signIn: "/auth/login",
+  //   error: "/auth/error"
+  // },
   events: {
     async linkAccount({ user }) {
       console.log("EVENTS__linkAccount", user);
