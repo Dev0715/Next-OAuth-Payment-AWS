@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import { v4 as uuidv4 } from "uuid";
 
 import db from "@/lib/db";
 import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
@@ -36,7 +36,7 @@ export const createUser = async (data: NewUser) => {
   const command = new PutCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Item: {
-      username: data.name + bcrypt.genSaltSync(10),
+      username: uuidv4(),
       ...data
     }
   });
