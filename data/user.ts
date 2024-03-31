@@ -1,15 +1,14 @@
 import db from "@/lib/db";
-import { QueryCommand } from "@aws-sdk/lib-dynamodb";
+import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 
 export const getUserByEmail = async (email: string) => {
   console.log("__getUserByEmail__START", email);
-  const command = new QueryCommand({
+  const command = new ScanCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
-    KeyConditionExpression: "email = :email",
-    ExpressionAttributeValues: {
-      ":email": email
-    },
-    ConsistentRead: true
+    ProjectionExpression: "#email",
+    ExpressionAttributeNames: {
+      "#email": email
+    }
   });
 
   try {
