@@ -1,7 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
 
 import db from "@/lib/db";
-import { GetCommand, PutCommand, ScanCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import {
+  GetCommand,
+  PutCommand,
+  ScanCommand,
+  UpdateCommand
+} from "@aws-sdk/lib-dynamodb";
 
 interface NewUser {
   name?: string | null | undefined;
@@ -23,11 +28,16 @@ export const getUserById = async (id: string) => {
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Key: {
       username: id
-    },
+    }
   });
 
   try {
-    
+    const response = await db.send(command);
+    console.log("__getUserById__GetCommand__RESPONSE", response);
+    return response.Item;
+  } catch (error) {
+    console.log("__getUserById__GetCommand__ERROR", error);
+    return null;
   }
 };
 
