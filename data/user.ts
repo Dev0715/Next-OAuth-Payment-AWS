@@ -69,7 +69,7 @@ export const updateUser = async (data: UpdateUser) => {
       "SET verificationToken = :verificationToken, expires = :expires",
     ExpressionAttributeValues: {
       ":verificationToken": data.verificationToken,
-      ":expires": data.expires
+      ":expires": data.expires.toISOString()
     },
     ReturnValues: "ALL_NEW"
   });
