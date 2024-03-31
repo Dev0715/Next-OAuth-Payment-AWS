@@ -24,7 +24,15 @@ export const newPassword = async (
   const userId = token.slice(0, 36); // length of uuidv4
   const tokenValue = token.slice(36); // length of uuidv4
 
-  const existingUser = getUserById(userId);
+  const existingUser = await getUserById(userId);
+  if (!existingUser) {
+    return { error: "Invalid Token!" };
+  }
+
+  const expires = Date.parse(existingUser.expires);
+  if (expires < new Date().getTime()) {
+    return { error: "Token expired!" };
+  }
 
   const { password } = validatedFields.data;
 
