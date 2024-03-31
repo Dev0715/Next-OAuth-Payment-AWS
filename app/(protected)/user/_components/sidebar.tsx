@@ -11,8 +11,8 @@ export const Sdiebar = () => {
 	const pathname = usePathname();
 
 	return (
-		<nav className="bg-secondary w-96 h-full">
+		<section className="bg-secondary w-96 h-full">
 
-		</nav>
+		</section>
 	);
 };
