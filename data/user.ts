@@ -23,3 +23,7 @@ export const getUserByEmail = async (email: string) => {
     return null;
   }
 };
+
+export const createUser = async (data) => {
+  
+};
