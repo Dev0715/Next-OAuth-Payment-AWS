@@ -5,10 +5,9 @@ export const getUserByEmail = async (email: string) => {
   console.log("__getUserByEmail__START", email);
   const command = new ScanCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
-    ProjectionExpression: "#email",
-    ExpressionAttributeNames: {
-      "#email": email
-    }
+    ProjectionExpression: "#email, username",
+    Limit: 1,
+    ExpressionAttributeNames: { "#email": email }
   });
 
   try {
