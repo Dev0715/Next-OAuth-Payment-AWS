@@ -12,6 +12,11 @@ interface NewUser {
   emailVerified?: Date | null;
 }
 
+interface UpdateUser {
+  username: string;
+  verificationToken: string;
+}
+
 export const getUserByEmail = async (email: string) => {
   const command = new ScanCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
@@ -67,4 +72,13 @@ export const updateUser = async (data) => {
     },
     ReturnValues: "ALL_NEW"
   });
+
+  try {
+    const response = await db.send(command);
+    console.log("__updateUser__UpdateCommand__RESPONSE", response);
+    return response;
+  } catch (error) {
+    console.log("__updateUser__UpdateCommand__ERROR", error);
+    return null;
+  }
 };
