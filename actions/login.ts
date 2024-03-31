@@ -3,17 +3,19 @@
 import { z } from "zod";
 import { AuthError } from "next-auth";
 
-import { db } from "@/lib/db";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
-import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { sendVerificationEmail, sendTwoFactorTokenEmail } from "@/lib/mail";
 import {
-  generateVerificationToken,
-  generateTwoFactorToken
+  sendVerificationEmail
+  // sendTwoFactorTokenEmail
+} from "@/lib/mail";
+// import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
+import {
+  generateVerificationToken
+  // generateTwoFactorToken
 } from "@/lib/tokens";
-import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
+// import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 import { signIn } from "next-auth/react";
 
 export const login = async (
@@ -27,7 +29,7 @@ export const login = async (
 
   const { email, password, code } = validateFields.data;
   const existingUser = await getUserByEmail(email);
-  if (!existingUser || !existingUser.email || !existingUser.password) {
+  if (!existingUser || !existingUser.email) {
     return { error: "Email does not exist!" };
   }
 
