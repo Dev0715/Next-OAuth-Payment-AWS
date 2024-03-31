@@ -16,7 +16,7 @@ import {
   // generateTwoFactorToken
 } from "@/lib/tokens";
 // import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
-import { signIn } from "next-auth/react";
+import { signIn } from "@/auth";
 
 export const login = async (
   values: z.infer<typeof LoginSchema>,
@@ -90,6 +90,8 @@ export const login = async (
   //     return { twoFactor: true };
   //   }
   // }
+
+  console.log("__signIn", signIn);
 
   try {
     await signIn("credentials", {
