@@ -64,12 +64,12 @@ export const createUser = async (data: NewUser) => {
 export const updateUser = async (data: UpdateUser) => {
   const command = new UpdateCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
-    Key: {
-      username: data.username
-    },
-    UpdateExpression: "set verificationToken = :verificationToken",
+    Key: { username: data.username },
+    UpdateExpression:
+      "SET verificationToken = :verificationToken, expires = :expires",
     ExpressionAttributeValues: {
-      ":verificationToken": data.verificationToken
+      ":verificationToken": data.verificationToken,
+      ":expires": data.expires
     },
     ReturnValues: "ALL_NEW"
   });
