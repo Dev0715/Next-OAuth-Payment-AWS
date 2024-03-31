@@ -11,8 +11,8 @@ export const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-secondary flex flex-col gap-y-6 p-6 w-full">
-      <div className="bg-secondary flex justify-between items-center w-full">
+    <nav className="w-full pb-6 flex flex-col gap-y-6">
+      <div className="flex justify-between items-center w-full">
         <div className="flex flex-col gap-y-2">
           <h1 className="text-3xl font-semibold text-black drop-shadow-md">
             ⚙️ Settings
@@ -24,6 +24,6 @@ export const Navbar = () => {
         <UserButton />
       </div>
       <Separator className="h-[1px]" />
-    </nav>
+    </nav >
   );
 };
