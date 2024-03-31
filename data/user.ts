@@ -1,5 +1,5 @@
 import db from "@/lib/db";
-import { ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 
 export const getUserByEmail = async (email: string) => {
   const command = new ScanCommand({
@@ -25,5 +25,11 @@ export const getUserByEmail = async (email: string) => {
 };
 
 export const createUser = async (data) => {
-  
+  const command = new PutCommand({
+    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    Item: {
+      username: 
+      ...data,
+    }
+  });
 };
