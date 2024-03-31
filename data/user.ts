@@ -14,7 +14,7 @@ interface NewUser {
   password?: string;
   id?: string;
   image?: string | null | undefined;
-  emailVerified?: Date | null;
+  emailVerified?: Date | string | null;
 }
 
 interface UserSetToken {
@@ -72,6 +72,9 @@ export const getUserByEmail = async (email: string) => {
 };
 
 export const createUser = async (data: NewUser) => {
+  if (data.emailVerified && data.emailVerified instanceof Date) {
+    data.emailVerified = data.emailVerified.toISOString();
+  }
   const command = new PutCommand({
     TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
     Item: {

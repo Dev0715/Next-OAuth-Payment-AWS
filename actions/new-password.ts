@@ -39,11 +39,15 @@ export const newPassword = async (
 
   const { password } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10);
-  const updatedUser = updateUserPassword({
+  const updatedUser = await updateUserPassword({
     username: userId,
     password: hashedPassword,
     emailVerified: new Date()
   });
+
+  if (!updatedUser) {
+    return { error: "Server error!" };
+  }
 
   return { success: "Password updated!" };
 
