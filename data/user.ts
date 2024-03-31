@@ -4,9 +4,12 @@ import db from "@/lib/db";
 import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 
 interface NewUser {
-  name: string;
+  name?: string | null | undefined;
   email: string;
-  password: string;
+  password?: string;
+  id?: string;
+  image?: string | null | undefined;
+  emailVerified?: Date | null;
 }
 
 export const getUserByEmail = async (email: string) => {

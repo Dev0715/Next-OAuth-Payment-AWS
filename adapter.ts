@@ -6,7 +6,7 @@ import type {
   AdapterUser,
   AdapterSession
 } from "next-auth/adapters";
-import { getUserByEmail } from "@/data/user";
+import { createUser, getUserByEmail } from "@/data/user";
 
 export default {
   async getUserByAccount(
@@ -29,7 +29,9 @@ export default {
   async createUser(user: AdapterUser): Awaitable<AdapterUser> {
     console.log("__createUser", user);
     const existingUser = await getUserByEmail(user.email);
-    console.log("__createUser__existingUser", existingUser);
+    if (!existingUser) {
+      await createUser(user);
+    }
     // {
     //   id: '2e79e340-fb52-4e65-a535-a656734b5b3f',
     //   name: 'DevKing',
