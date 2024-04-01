@@ -1,13 +1,12 @@
 "use client";
 
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import * as z from "zod";
 
-import { LoginSchema } from "@/schemas/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
@@ -15,6 +14,7 @@ import { FormSuccess } from "@/components/form-success";
 import {
 	Form,
 	FormControl,
+	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -22,44 +22,27 @@ import {
 } from "@/components/ui/form";
 import { login } from "@/actions/login";
 import { Separator } from "@/components/ui/separator";
+import { ProfileSchema } from "@/schemas/user";
 
 export default function Profile() {
-	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get("callbackUrl");
-	// const urlError =
-	// 	searchParams.get("error") === "OAuthAccountNotLinked"
-	// 		? "Email already in use with different provider!"
-	// 		: "";
 	const [error, setError] = useState<string | undefined>("");
 	const [success, setSuccess] = useState<string | undefined>("");
 	const [isPending, startTransition] = useTransition();
 
-	const form = useForm<z.infer<typeof LoginSchema>>({
-		resolver: zodResolver(LoginSchema),
+	const form = useForm<z.infer<typeof ProfileSchema>>({
+		resolver: zodResolver(ProfileSchema),
 		defaultValues: {
 			email: "",
 			password: ""
 		}
 	});
 
-	const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+	const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
 		setError("");
 		setSuccess("");
 
 		startTransition(() => {
-			login(values, callbackUrl).then((data) => {
-				console.log("__login__RETURNED", data);
-
-				if (data?.error) {
-					form.reset();
-					setError(data.error);
-				}
-
-				if (data?.success) {
-					form.reset();
-					setSuccess(data.success);
-				}
-			});
+			// save the user's profile
 		});
 	};
 
@@ -77,18 +60,14 @@ export default function Profile() {
 					<div className="space-y-6 w-96 max-w-full">
 						<FormField
 							control={form.control}
-							name="email"
+							name="username"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Email</FormLabel>
+									<FormLabel>Username</FormLabel>
 									<FormControl>
-										<Input
-											{...field}
-											disabled={isPending}
-											placeholder="username@myemail.com"
-											type="email"
-										/>
+										<Input placeholder="shadcn" {...field} />
 									</FormControl>
+									<FormDescription>This is your public display name.</FormDescription>
 									<FormMessage />
 								</FormItem>
 							)}
