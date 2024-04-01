@@ -77,24 +77,6 @@ export default function Profile() {
 					<div className="space-y-6 w-96 max-w-full">
 						<FormField
 							control={form.control}
-							name="text"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Email</FormLabel>
-									<FormControl>
-										<Input
-											{...field}
-											disabled={isPending}
-											placeholder="username@myemail.com"
-											type="email"
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
 							name="email"
 							render={({ field }) => (
 								<FormItem>

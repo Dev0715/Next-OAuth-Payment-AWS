@@ -2,7 +2,7 @@ import * as z from "zod";
 
 // for `Profile Settings` Form
 export const ProfileSchema = z.object({
-  userName: z
+  username: z
     .string()
     .min(1, "A name is required")
     .max(72, "Name must be a maximum of 72 characters"),
