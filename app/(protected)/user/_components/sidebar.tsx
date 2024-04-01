@@ -12,8 +12,20 @@ export const Sdiebar = () => {
 
 	const sidebarItems = [
 		{
-			name: "Profile",
+			name: "Roles",
 			path: "/user"
+		},
+		{
+			name: "Creator Profile",
+			path: "/user/creator"
+		},
+		{
+			name: "User Profile",
+			path: "/user/user"
+		},
+		{
+			name: "Affiliate Profile",
+			path: "/user/affiliate"
 		},
 		{
 			name: "Account",
