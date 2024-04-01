@@ -2,6 +2,8 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { SignupButton } from "@/components/auth/signup-button";
+import { useEffect } from "react";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -9,6 +11,11 @@ const font = Poppins({
 });
 
 export default function Home() {
+  useEffect(() => {
+    const user = useCurrentUser();
+    console.log(user);
+  }, []);
+
   return (
     <main className="flex h-full flex-col p-10">
       <div className="w-full h-full flex justify-center pt-32">
