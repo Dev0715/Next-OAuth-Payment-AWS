@@ -14,9 +14,7 @@ export const Navbar = () => {
     <nav className="w-full pb-6 flex flex-col gap-y-6">
       <div className="flex justify-between items-center w-full">
         <div className="flex flex-col gap-y-2">
-          <h1 className="text-3xl font-semibold text-black drop-shadow-md">
-            ⚙️ Settings
-          </h1>
+          <p className="text-3xl text-black font-medium drop-shadow-md">Settings</p>
           <p className="text-md text-gray-600">
             Manage your account settings set preferences.
           </p>

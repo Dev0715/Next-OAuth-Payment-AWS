@@ -13,7 +13,7 @@ export const Sdiebar = () => {
 	const sidebarItems = [
 		{
 			name: "Profile",
-			path: "/user/profile"
+			path: "/user"
 		},
 		{
 			name: "Account",
@@ -26,7 +26,7 @@ export const Sdiebar = () => {
 	];
 
 	return (
-		<section className="w-96 h-full flex flex-col gap-y-2 items-start">
+		<section className="w-72 h-full flex flex-col gap-y-2 items-start">
 			{sidebarItems.map((item) =>
 				pathName === item.path ? (
 					<Button key={item.name} asChild variant="secondary" className="w-full justify-start bg-gray-200 hover:bg-gray-200">
