@@ -33,8 +33,8 @@ export default function Profile() {
 	const form = useForm<z.infer<typeof ProfileSchema>>({
 		resolver: zodResolver(ProfileSchema),
 		defaultValues: {
-			email: "",
-			password: ""
+			username: "",
+			bio: ""
 		}
 	});
 
