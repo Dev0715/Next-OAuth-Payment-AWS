@@ -2,7 +2,6 @@
 
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
 import * as z from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,11 +19,10 @@ import {
 	FormLabel,
 	FormMessage
 } from "@/components/ui/form";
-import { login } from "@/actions/login";
 import { Separator } from "@/components/ui/separator";
 import { ProfileSchema } from "@/schemas/user";
 import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@radix-ui/react-switch";
+import { Switch } from "@/components/ui/switch";
 
 export default function Profile() {
 	const [error, setError] = useState<string | undefined>("");
@@ -101,8 +99,6 @@ export default function Profile() {
 												<Switch
 													checked={field.value}
 													onCheckedChange={field.onChange}
-													disabled
-													aria-readonly
 												/>
 											</FormControl>
 										</FormItem>
@@ -123,8 +119,6 @@ export default function Profile() {
 												<Switch
 													checked={field.value}
 													onCheckedChange={field.onChange}
-													disabled
-													aria-readonly
 												/>
 											</FormControl>
 										</FormItem>
