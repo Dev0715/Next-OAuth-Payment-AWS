@@ -14,7 +14,7 @@ export default function Home() {
       <div className="w-full flex">
         <div className="w-full flex items-end gap-4">
           <img src="./logo.svg" width="60" height="60" />
-          <p className="text-4xl font-semibold text-black drop-shadow-md">Kre8tive Logo</p>
+          <p className="text-4xl font-semibold text-black drop-shadow-md">Kre8tive</p>
         </div>
       </div>
       <div className="w-full h-full flex justify-center pt-32">
