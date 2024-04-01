@@ -26,10 +26,10 @@ import { Separator } from "@/components/ui/separator";
 export default function Profile() {
 	const searchParams = useSearchParams();
 	const callbackUrl = searchParams.get("callbackUrl");
-	const urlError =
-		searchParams.get("error") === "OAuthAccountNotLinked"
-			? "Email already in use with different provider!"
-			: "";
+	// const urlError =
+	// 	searchParams.get("error") === "OAuthAccountNotLinked"
+	// 		? "Email already in use with different provider!"
+	// 		: "";
 	const [error, setError] = useState<string | undefined>("");
 	const [success, setSuccess] = useState<string | undefined>("");
 	const [isPending, startTransition] = useTransition();
