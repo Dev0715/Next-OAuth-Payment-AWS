@@ -2,6 +2,7 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { SignupButton } from "@/components/auth/signup-button";
+import { Separator } from "@/components/ui/separator";
 
 const font = Poppins({
 	subsets: ["latin"],
@@ -10,13 +11,14 @@ const font = Poppins({
 
 export default function Home() {
 	return (
-		<main className="w-full h-full p-6">
-			<header className="flex flex-col gap-y-2">
-				<p className="text-3xl text-black font-medium drop-shadow-md">Settings</p>
-				<p className="text-md text-gray-600">
-					Manage your account settings set preferences.
+		<main className="w-full h-full px-8 flex flex-col gap-y-5">
+			<header className="flex flex-col gap-y-1">
+				<p className="text-xl text-black font-medium drop-shadow-md">Profile</p>
+				<p className="text-sm text-gray-600">
+					This is how others will see you on the site
 				</p>
 			</header>
+			<Separator />
 		</main>
 	);
 }

@@ -30,11 +30,11 @@ export const Sdiebar = () => {
 			{sidebarItems.map((item) =>
 				pathName === item.path ? (
 					<Button key={item.name} asChild variant="secondary" className="w-full justify-start bg-gray-200 hover:bg-gray-200">
-						<Link href={item.path} className="text-base">{item.name}</Link>
+						<Link href={item.path}>{item.name}</Link>
 					</Button>
 				) : (
 					<Button key={item.name} asChild variant="link" className="w-full justify-start">
-						<Link href={item.path} className="text-base">{item.name}</Link>
+						<Link href={item.path}>{item.name}</Link>
 					</Button>
 				))
 			}

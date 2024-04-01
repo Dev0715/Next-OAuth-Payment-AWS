@@ -9,7 +9,7 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   return (
     <div className="w-full h-full p-6 flex flex-col bg-secondary">
       <Navbar />
-      <div className="w-full h-full">
+      <div className="w-full h-full flex">
         <Sdiebar />
         {children}
       </div>
