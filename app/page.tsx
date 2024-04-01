@@ -36,7 +36,7 @@ export default function Home() {
             <p className="text-black text-lg">You can sign-up now as either a Seller, Affiliate or a User.</p>
             <div>
               <SignupButton>
-                <Button variant="secondary" size="lg">
+                <Button variant="default" size="lg">
                   Sign-Up Now
                 </Button>
               </SignupButton>
