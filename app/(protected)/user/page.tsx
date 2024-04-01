@@ -24,6 +24,7 @@ import { login } from "@/actions/login";
 import { Separator } from "@/components/ui/separator";
 import { ProfileSchema } from "@/schemas/user";
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@radix-ui/react-switch";
 
 export default function Profile() {
 	const [error, setError] = useState<string | undefined>("");
@@ -59,6 +60,55 @@ export default function Profile() {
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="space-y-6 md:w-2/3 max-w-full">
+						<div>
+							<h3 className="mb-4 text-lg font-medium">Email Notifications</h3>
+							<div className="space-y-4">
+								<FormField
+									control={form.control}
+									name="marketing_emails"
+									render={({ field }) => (
+										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+											<div className="space-y-0.5">
+												<FormLabel className="text-base">
+													Marketing emails
+												</FormLabel>
+												<FormDescription>
+													Receive emails about new products, features, and more.
+												</FormDescription>
+											</div>
+											<FormControl>
+												<Switch
+													checked={field.value}
+													onCheckedChange={field.onChange}
+												/>
+											</FormControl>
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name="security_emails"
+									render={({ field }) => (
+										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+											<div className="space-y-0.5">
+												<FormLabel className="text-base">Security emails</FormLabel>
+												<FormDescription>
+													Receive emails about your account security.
+												</FormDescription>
+											</div>
+											<FormControl>
+												<Switch
+													checked={field.value}
+													onCheckedChange={field.onChange}
+													disabled
+													aria-readonly
+												/>
+											</FormControl>
+										</FormItem>
+									)}
+								/>
+							</div>
+						</div>
 						<FormField
 							control={form.control}
 							name="username"
