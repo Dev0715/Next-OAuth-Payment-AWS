@@ -17,7 +17,7 @@ export const Navbar = () => {
           <h1 className="text-3xl font-semibold text-black drop-shadow-md">
             ⚙️ Settings
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-md text-gray-600">
             Manage your account settings set preferences.
           </p>
         </div>
