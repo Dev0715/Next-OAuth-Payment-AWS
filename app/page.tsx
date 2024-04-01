@@ -1,20 +1,21 @@
+"use client"
+
+import React from 'react';
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { SignupButton } from "@/components/auth/signup-button";
 import { useEffect } from "react";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import Link from 'next/link';
 
 const font = Poppins({
   subsets: ["latin"],
   weight: ["600"]
 });
 
-export default function Home() {
-  useEffect(() => {
-    const user = useCurrentUser();
-    console.log(user);
-  }, []);
+const Home = () => {
+  const user = useCurrentUser();
 
   return (
     <main className="flex h-full flex-col p-10">
@@ -36,11 +37,16 @@ export default function Home() {
           <div className="space-y-6 text-center">
             <p className="text-black text-lg">You can sign-up now as either a Seller, Affiliate or a User.</p>
             <div>
-              <SignupButton>
+              {user ?
                 <Button variant="default" size="lg">
-                  Sign-Up Now
-                </Button>
-              </SignupButton>
+                  <Link href="/user">Go to your profile</Link>
+                </Button> :
+                <SignupButton>
+                  <Button variant="default" size="lg">
+                    Sign-Up Now
+                  </Button>
+                </SignupButton>
+              }
             </div>
           </div>
         </div>
@@ -48,3 +54,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Home
