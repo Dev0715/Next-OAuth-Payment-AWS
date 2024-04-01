@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { AuthError } from "next-auth";
 
-import { LoginSchema } from "@/schemas";
+import { LoginSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import {

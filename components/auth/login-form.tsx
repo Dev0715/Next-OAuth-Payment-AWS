@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-import { LoginSchema } from "@/schemas";
+import { LoginSchema } from "@/schemas/auth";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
