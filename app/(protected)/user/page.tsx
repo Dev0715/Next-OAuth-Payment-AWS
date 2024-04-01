@@ -64,7 +64,7 @@ export default function Profile() {
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="space-y-6 md:w-2/3 max-w-full">
 						<div>
-							<h3 className="mb-4 text-lg font-medium">Email Notifications</h3>
+							<h3 className="mb-4 text-base font-medium">Your roles</h3>
 							<div className="space-y-4">
 								<FormField
 									control={form.control}
@@ -72,7 +72,7 @@ export default function Profile() {
 									render={({ field }) => (
 										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
 											<div className="space-y-0.5">
-												<FormLabel className="text-base">Creator</FormLabel>
+												<FormLabel>Creator</FormLabel>
 												<FormDescription>
 													You do something and something for a creator's role
 												</FormDescription>
@@ -92,7 +92,7 @@ export default function Profile() {
 									render={({ field }) => (
 										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
 											<div className="space-y-0.5">
-												<FormLabel className="text-base">Affiliate</FormLabel>
+												<FormLabel>Affiliate</FormLabel>
 												<FormDescription>
 													You do something and something for a affiliate's role
 												</FormDescription>
@@ -114,7 +114,7 @@ export default function Profile() {
 									render={({ field }) => (
 										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
 											<div className="space-y-0.5">
-												<FormLabel className="text-base">Customer</FormLabel>
+												<FormLabel>Customer</FormLabel>
 												<FormDescription>
 													You do something and something for a customer's role
 												</FormDescription>
