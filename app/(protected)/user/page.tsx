@@ -74,7 +74,25 @@ export default function Profile() {
 			<Separator />
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-					<div className="space-y-2">
+					<div className="space-y-6 w-96 max-w-full">
+						<FormField
+							control={form.control}
+							name="text"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Email</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											disabled={isPending}
+											placeholder="username@myemail.com"
+											type="email"
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 						<FormField
 							control={form.control}
 							name="email"
@@ -122,8 +140,8 @@ export default function Profile() {
 					</div>
 					<FormError message={error} />
 					<FormSuccess message={success} />
-					<Button disabled={isPending} type="submit" className="w-full">
-						Login
+					<Button disabled={isPending} type="submit">
+						Save Profile
 					</Button>
 				</form>
 			</Form>
