@@ -34,8 +34,11 @@ export default function Profile() {
 	const form = useForm<z.infer<typeof ProfileSchema>>({
 		resolver: zodResolver(ProfileSchema),
 		defaultValues: {
+			isCreator: false,
+			isAffiliate: false,
+			isCustomer: false,
 			username: "",
-			bio: ""
+			bio: "",
 		}
 	});
 
@@ -65,13 +68,11 @@ export default function Profile() {
 							<div className="space-y-4">
 								<FormField
 									control={form.control}
-									name="marketing_emails"
+									name="isCreator"
 									render={({ field }) => (
 										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
 											<div className="space-y-0.5">
-												<FormLabel className="text-base">
-													Creator
-												</FormLabel>
+												<FormLabel className="text-base">Creator</FormLabel>
 												<FormDescription>
 													You do something and something for a creator's role
 												</FormDescription>
@@ -87,13 +88,35 @@ export default function Profile() {
 								/>
 								<FormField
 									control={form.control}
-									name="security_emails"
+									name="isAffiliate"
 									render={({ field }) => (
 										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
 											<div className="space-y-0.5">
-												<FormLabel className="text-base">Security emails</FormLabel>
+												<FormLabel className="text-base">Affiliate</FormLabel>
 												<FormDescription>
-													Receive emails about your account security.
+													You do something and something for a affiliate's role
+												</FormDescription>
+											</div>
+											<FormControl>
+												<Switch
+													checked={field.value}
+													onCheckedChange={field.onChange}
+													disabled
+													aria-readonly
+												/>
+											</FormControl>
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name="isCustomer"
+									render={({ field }) => (
+										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+											<div className="space-y-0.5">
+												<FormLabel className="text-base">Customer</FormLabel>
+												<FormDescription>
+													You do something and something for a customer's role
 												</FormDescription>
 											</div>
 											<FormControl>
