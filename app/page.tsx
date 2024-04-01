@@ -31,7 +31,7 @@ const Home = () => {
           </h1>
           <div>
             <p className="text-black text-lg">
-              Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
+              Fields to let them know creative features will be coming and to give them the ability to Opt In to those programs
             </p>
           </div>
           <div className="space-y-6 text-center">
@@ -43,10 +43,16 @@ const Home = () => {
                 </Button> :
                 <SignupButton>
                   <Button variant="default" size="lg">
-                    Sign-Up Now
+                    Sign-Up now as a creator
                   </Button>
                 </SignupButton>
               }
+              <Button variant="default" size="lg">
+                Sign-Up now as a user
+              </Button>
+              <Button variant="default" size="lg">
+                Sign-Up now as an affiliate
+              </Button>
             </div>
           </div>
         </div>
