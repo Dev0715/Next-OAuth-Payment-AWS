@@ -50,7 +50,7 @@ export default function Profile() {
 	};
 
 	return (
-		<main className="w-full h-full px-8 flex flex-col gap-y-5">
+		<main className="w-full h-full pl-8 flex flex-col gap-y-5">
 			<header className="flex flex-col gap-y-1">
 				<p className="text-xl text-black font-medium drop-shadow-md">Profile</p>
 				<p className="text-sm text-gray-600">
@@ -60,8 +60,40 @@ export default function Profile() {
 			<Separator />
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-					<div className="space-y-6 md:w-2/3 max-w-full">
-						<div>
+					<div className="w-full flex gap-x-12">
+						<section className="w-1/2 flex flex-col gap-y-6">
+							<FormField
+								control={form.control}
+								name="username"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Username</FormLabel>
+										<FormControl>
+											<Input placeholder="John Doe" {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="bio"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Bio</FormLabel>
+										<FormControl>
+											<Textarea
+												{...field}
+												disabled={isPending}
+												placeholder="Tell us a little bit about yourself"
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						</section>
+						<section className="w-1/2">
 							<h3 className="mb-4 text-base font-medium">Your roles</h3>
 							<div className="space-y-4">
 								<FormField
@@ -125,37 +157,7 @@ export default function Profile() {
 									)}
 								/>
 							</div>
-						</div>
-						<FormField
-							control={form.control}
-							name="username"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Username</FormLabel>
-									<FormControl>
-										<Input placeholder="John Doe" {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name="bio"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Bio</FormLabel>
-									<FormControl>
-										<Textarea
-											{...field}
-											disabled={isPending}
-											placeholder="Tell us a little bit about yourself"
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
+						</section>
 					</div>
 					<FormError message={error} />
 					<FormSuccess message={success} />
@@ -164,6 +166,6 @@ export default function Profile() {
 					</Button>
 				</form>
 			</Form>
-		</main>
+		</main >
 	);
 };

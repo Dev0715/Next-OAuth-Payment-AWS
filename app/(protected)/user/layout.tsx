@@ -13,7 +13,6 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
         <Sdiebar />
         {children}
       </div>
-
     </div>
   );
 };
