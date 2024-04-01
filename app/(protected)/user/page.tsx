@@ -23,6 +23,7 @@ import {
 import { login } from "@/actions/login";
 import { Separator } from "@/components/ui/separator";
 import { ProfileSchema } from "@/schemas/user";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Profile() {
 	const [error, setError] = useState<string | undefined>("");
@@ -57,7 +58,7 @@ export default function Profile() {
 			<Separator />
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-					<div className="space-y-6 w-96 max-w-full">
+					<div className="space-y-6 md:w-2/3 max-w-full">
 						<FormField
 							control={form.control}
 							name="username"
@@ -65,9 +66,8 @@ export default function Profile() {
 								<FormItem>
 									<FormLabel>Username</FormLabel>
 									<FormControl>
-										<Input placeholder="shadcn" {...field} />
+										<Input placeholder="John Doe" {...field} />
 									</FormControl>
-									<FormDescription>This is your public display name.</FormDescription>
 									<FormMessage />
 								</FormItem>
 							)}
@@ -83,17 +83,8 @@ export default function Profile() {
 											{...field}
 											disabled={isPending}
 											placeholder="Tell us a little bit about yourself"
-											type="password"
 										/>
 									</FormControl>
-									<Button
-										size="sm"
-										variant="link"
-										asChild
-										className="px-0 font-normal"
-									>
-										<Link href="/auth/reset">Forgot password?</Link>
-									</Button>
 									<FormMessage />
 								</FormItem>
 							)}
