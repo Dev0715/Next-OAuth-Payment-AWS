@@ -70,10 +70,10 @@ export default function Profile() {
 										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
 											<div className="space-y-0.5">
 												<FormLabel className="text-base">
-													Marketing emails
+													Creator
 												</FormLabel>
 												<FormDescription>
-													Receive emails about new products, features, and more.
+													You do something and something for a creator's role
 												</FormDescription>
 											</div>
 											<FormControl>
