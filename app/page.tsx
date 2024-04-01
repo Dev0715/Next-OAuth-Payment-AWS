@@ -25,12 +25,6 @@ export default function Home() {
             <p className="text-black text-lg">
               Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
             </p>
-            <p className="text-black text-lg">
-              Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
-            </p>
-            <p className="text-black text-lg">
-              Fields to let them know these features will be coming and to give them the ability to Opt In to those programs
-            </p>
           </div>
           <div className="space-y-6 text-center">
             <p className="text-black text-lg">You can sign-up now as either a Seller, Affiliate or a User.</p>
