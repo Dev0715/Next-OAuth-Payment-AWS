@@ -74,15 +74,15 @@ export default function Profile() {
 						/>
 						<FormField
 							control={form.control}
-							name="password"
+							name="bio"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Password</FormLabel>
+									<FormLabel>Bio</FormLabel>
 									<FormControl>
-										<Input
+										<Textarea
 											{...field}
 											disabled={isPending}
-											placeholder="******"
+											placeholder="Tell us a little bit about yourself"
 											type="password"
 										/>
 									</FormControl>
