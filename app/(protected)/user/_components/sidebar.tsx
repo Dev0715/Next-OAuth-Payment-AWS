@@ -29,12 +29,12 @@ export const Sdiebar = () => {
 		<section className="w-96 h-full flex flex-col gap-y-2 items-start">
 			{sidebarItems.map((item) =>
 				pathName === item.path ? (
-					<Button key={item.name} asChild variant="secondary" className="w-full bg-gray-200 justify-start">
-						<Link href={item.path} className="font-semibold">{item.name}</Link>
+					<Button key={item.name} asChild variant="secondary" className="w-full justify-start bg-gray-200 hover:bg-gray-200">
+						<Link href={item.path} className="text-base">{item.name}</Link>
 					</Button>
 				) : (
-					<Button key={item.name} asChild variant="link">
-						<Link href={item.path} className="font-semibold">{item.name}</Link>
+					<Button key={item.name} asChild variant="link" className="w-full justify-start">
+						<Link href={item.path} className="text-base">{item.name}</Link>
 					</Button>
 				))
 			}
