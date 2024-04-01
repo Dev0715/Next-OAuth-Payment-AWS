@@ -1,10 +1,19 @@
-import { currentUser } from "@/lib/auth";
-import { UserInfo } from "@/components/user-info";
+"use client";
 
-const ServerPage = async () => {
-  const user = await currentUser();
+import { Separator } from "@/components/ui/separator";
 
-  return <UserInfo label="💻 Server component" user={user} />;
+const Settings = () => {
+  return (
+    <main className="w-full h-full pl-8 flex flex-col gap-y-5">
+      <header className="flex flex-col gap-y-1">
+        <p className="text-xl text-black font-medium drop-shadow-md">Settings</p>
+        <p className="text-sm text-gray-600">
+          Select how this site you want to serve you
+        </p>
+      </header>
+      <Separator />
+    </main>
+  )
 };
 
-export default ServerPage;
+export default Settings;
