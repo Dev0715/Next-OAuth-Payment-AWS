@@ -52,7 +52,7 @@ export default function SignUpCreator() {
 	}
 
 	return (
-		<main className="flex h-full flex-col gap-y-6">
+		<main className="w-full h-full flex flex-col gap-y-6">
 			<Navbar title="Creator Registration" content="Register as a creator" />
 			<section className="flex items-center gap-x-4">
 				<Button asChild variant="link">
