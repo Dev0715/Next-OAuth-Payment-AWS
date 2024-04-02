@@ -184,7 +184,7 @@ export default function SignUpCreator() {
 											</FormControl>
 											<SelectContent>
 												{typeOfUsers.map((item) => (
-													<SelectItem value={item}>{item}</SelectItem>
+													<SelectItem key={item} value={item}>{item}</SelectItem>
 												))}
 											</SelectContent>
 										</Select>
