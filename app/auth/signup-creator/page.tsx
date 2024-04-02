@@ -81,7 +81,7 @@ export default function SignUpCreator() {
 						<section className="w-1/2 flex flex-col gap-y-6">
 							<div className="flex items-end space-x-4">
 								<Avatar className="w-16 h-16 rounded-xl">
-									<AvatarImage src="./logo.svg" />
+									<AvatarImage src="@/public/logo.svg" />
 									<AvatarFallback className="bg-sky-500">
 										<FaUser className="text-white" />
 									</AvatarFallback>
