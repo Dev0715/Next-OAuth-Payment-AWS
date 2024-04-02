@@ -77,12 +77,26 @@ export default function SignUpCreator() {
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="w-full flex gap-x-12">
 						<section className="w-1/2 flex flex-col gap-y-6">
-							<Avatar className="w-16 h-16 rounded-xl">
-								<AvatarImage src="./logo.svg" />
-								<AvatarFallback className="bg-sky-500">
-									<FaUser className="text-white" />
-								</AvatarFallback>
-							</Avatar>
+							<div className="flex items-end space-x-4">
+								<Avatar className="w-16 h-16 rounded-xl">
+									<AvatarImage src="./logo.svg" />
+									<AvatarFallback className="bg-sky-500">
+										<FaUser className="text-white" />
+									</AvatarFallback>
+								</Avatar>
+								<FormField
+									control={form.control}
+									name="avatar"
+									render={({ field }) => (
+										<FormItem>
+											<FormControl>
+												<Input disabled={isPending} type="file" {...field} />
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</div>
 							<FormField
 								control={form.control}
 								name="username"
