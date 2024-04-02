@@ -66,6 +66,7 @@ export default function SignUpCreator() {
 
 	return (
 		<main className="w-full pb-6 flex flex-col gap-y-6">
+			<input type="file" onChange={(e) => console.log(e.target.files)} />
 			<Navbar title="Creator Registration" content="Register as a creator" />
 			<section className="flex items-center gap-x-4">
 				<Button asChild variant="link">
