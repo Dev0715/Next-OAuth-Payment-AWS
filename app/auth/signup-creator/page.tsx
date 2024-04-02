@@ -159,6 +159,19 @@ export default function SignUpCreator() {
 							/>
 							<FormField
 								control={form.control}
+								name="address"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Address</FormLabel>
+										<FormControl>
+											<Input disabled={isPending} placeholder="Address" {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
 								name="phone1"
 								render={({ field }) => (
 									<FormItem>

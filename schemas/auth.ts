@@ -56,6 +56,10 @@ export const CreatorRegisterSchema = z.object({
     .string()
     .min(1, "A name is required")
     .max(72, "Name must be a maximum of 72 characters"),
+  address: z
+    .string()
+    .min(1, "A name is required")
+    .max(72, "Name must be a maximum of 72 characters"),
   phone1: z
     .string()
     .min(1, "A name is required")
