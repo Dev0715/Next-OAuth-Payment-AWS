@@ -53,16 +53,18 @@ export default function SignUpCreator() {
 	const handleSubmit = form.handleSubmit;
 
 	const onSubmit = handleSubmit((values: z.infer<typeof CreatorRegisterSchema>) => {
-		setError("");
-		setSuccess("");
+		(() => {
+			setError("");
+			setSuccess("");
 
-		console.log("FORM VALUES", values);
+			console.log("FORM VALUES", values);
 
-		startTransition(() => {
-			registerCreator(values).then(data => {
-				console.log("__registerCreator__RESULT", data);
-			})
-		});
+			startTransition(() => {
+				registerCreator(values).then(data => {
+					console.log("__registerCreator__RESULT", data);
+				})
+			});
+		})
 	});
 
 	const onAgreeScrap = (checked: boolean) => {
