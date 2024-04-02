@@ -50,23 +50,19 @@ export default function SignUpCreator() {
 	});
 
 	const avatarRef = form.register("avatar");
-	const handleSubmit = form.handleSubmit;
 
-	const onSubmit = handleSubmit((values: z.infer<typeof CreatorRegisterSchema>) => {
-		(() => {
-			registerCreator(values);
-			// setError("");
-			// setSuccess("");
+	const onSubmit = (values: z.infer<typeof CreatorRegisterSchema>) => {
+		setError("");
+		setSuccess("");
 
-			// console.log("FORM VALUES", values);
+		console.log("FORM VALUES", values);
 
-			// startTransition(() => {
-			// 	registerCreator(values).then(data => {
-			// 		console.log("__registerCreator__RESULT", data);
-			// 	})
-			// });
-		})
-	});
+		startTransition(() => {
+			registerCreator(values).then(data => {
+				console.log("__registerCreator__RESULT", data);
+			})
+		});
+	};
 
 	const onAgreeScrap = (checked: boolean) => {
 		console.log("AGREE SCRAP", checked);
@@ -91,7 +87,7 @@ export default function SignUpCreator() {
 				<Switch onCheckedChange={onAgreeScrap} />
 			</section>
 			<Form {...form}>
-				<form onSubmit={onSubmit} className="space-y-6">
+				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="w-full flex gap-x-12">
 						<section className="w-1/2 flex flex-col gap-y-6">
 							<div className="flex items-end space-x-4">
