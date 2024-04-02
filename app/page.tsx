@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { SignupButton } from "@/components/auth/signup-button";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import Link from 'next/link';
 
 const font = Poppins({
   subsets: ["latin"],
@@ -28,21 +29,15 @@ const Home = () => {
           <p className="text-black text-lg">You can sign-up now as either a Seller or a User!</p>
         </div>
         <div className='flex gap-x-4'>
-          <SignupButton>
-            <Button variant="default" size="lg">
-              Sign-Up Now as a Creator
-            </Button>
-          </SignupButton>
-          <SignupButton>
-            <Button variant="default" size="lg">
-              Sign-Up Now as a User
-            </Button>
-          </SignupButton>
-          <SignupButton>
-            <Button variant="default" size="lg">
-              Sign-Up Now as an Affiliate
-            </Button>
-          </SignupButton>
+          <Button variant="default" size="lg">
+            <Link href="/auth/signup-creator">Sign-Up Now as a Creator</Link>
+          </Button>
+          <Button variant="default" size="lg">
+            Sign-Up Now as a User
+          </Button>
+          <Button variant="default" size="lg">
+            Sign-Up Now as an Affiliate
+          </Button>
         </div>
       </div>
     </main>
