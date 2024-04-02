@@ -15,16 +15,17 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { Button } from "@/components/ui/button";
+import { LoginButton } from "./login-button";
 
 export const UserButton = () => {
   const user = useCurrentUser();
 
   if (!user) return (
-    <Button asChild variant="default">
-      <Link href="/auth/login">
-        Login
-      </Link>
-    </Button>
+    <LoginButton>
+      <Button variant="default" size="lg">
+        Sign in
+      </Button>
+    </LoginButton>
   );
 
   return (
