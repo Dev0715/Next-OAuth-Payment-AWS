@@ -21,3 +21,7 @@ export const registerCreator = async (
 
   return { success: "Success" };
 };
+
+export const testUpload = async (data: any) => {
+  console.log("__testUpload", data);
+};

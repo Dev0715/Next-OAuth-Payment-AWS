@@ -46,6 +46,7 @@ export default function SignUpCreator() {
 			firstname: "temp",
 			lastname: "temp",
 			email: "temp@gmail.com",
+			typeOfUser: typeOfUsers[0],
 			address: "temp",
 			phone1: "temp",
 			phone2: "temp",
