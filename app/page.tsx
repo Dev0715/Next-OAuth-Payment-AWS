@@ -4,7 +4,6 @@ import React from 'react';
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { SignupButton } from "@/components/auth/signup-button";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import Link from 'next/link';
 
