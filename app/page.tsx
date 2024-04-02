@@ -27,18 +27,11 @@ const Home = () => {
           </p>
           <p className="text-black text-lg">You can sign-up now as either a Seller or a User!</p>
         </div>
-        <div className='flex gap-x-4'>
-          <SignupButton>
-            <Button variant="default" size="lg">
-              Sign-Up Now as a Creator
-            </Button>
-          </SignupButton>
-          <SignupButton>
-            <Button variant="default" size="lg">
-              Sign-Up Now as a User
-            </Button>
-          </SignupButton>
-        </div>
+        <SignupButton>
+          <Button variant="default" size="lg">
+            Sign-Up Now
+          </Button>
+        </SignupButton>
       </div>
     </main>
   );
