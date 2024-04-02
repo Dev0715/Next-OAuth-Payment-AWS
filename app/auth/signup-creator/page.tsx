@@ -1,8 +1,8 @@
-import { Poppins } from "next/font/google";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { LoginButton } from "@/components/auth/login-button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Navbar } from "../_components/navbar";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
 import {
 	Form,
 	FormControl,
@@ -12,8 +12,39 @@ import {
 	FormLabel,
 	FormMessage
 } from "@/components/ui/form";
+import { CreatorRegisterSchema } from "@/schemas/auth";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
 export default function SignUpCreator() {
+	const [error, setError] = useState<string | undefined>("");
+	const [success, setSuccess] = useState<string | undefined>("");
+	const [isPending, startTransition] = useTransition();
+
+	const form = useForm<z.infer<typeof CreatorRegisterSchema>>({
+		resolver: zodResolver(CreatorRegisterSchema),
+		defaultValues: {
+			isCreator: false,
+			isAffiliate: false,
+			isCustomer: false,
+			username: "",
+			bio: "",
+		}
+	});
+
+	const onSubmit = (values: z.infer<typeof CreatorRegisterSchema>) => {
+		setError("");
+		setSuccess("");
+
+		startTransition(() => {
+			// save the user's profile
+		});
+	};
+
 	return (
 		<main className="flex h-full flex-col">
 			<Navbar title="Creator Registration" content="Register as a creator" />
