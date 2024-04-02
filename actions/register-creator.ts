@@ -18,4 +18,6 @@ export const registerCreator = async (
 
   const { avatar } = validateFields.data;
   console.log("__registerCreator", avatar);
+
+  return { success: "Success" };
 };

@@ -24,6 +24,7 @@ import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
+import { registerCreator } from "@/actions/register-creator";
 
 export default function SignUpCreator() {
 	const [error, setError] = useState<string | undefined>("");
@@ -58,6 +59,9 @@ export default function SignUpCreator() {
 
 		startTransition(() => {
 			// save the user's profile
+			registerCreator(values).then(data => {
+				console.log("__registerCreator__RESULT", data);
+			})
 		});
 	};
 

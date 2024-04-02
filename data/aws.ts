@@ -13,5 +13,7 @@ export const uploadFileToS3 = async (file: File) => {
   });
 
   try {
+    const response = await s3.send(command);
+    console.log("__uploadFileToS3__RESPONSE", response);
   } catch (error) {}
 };
