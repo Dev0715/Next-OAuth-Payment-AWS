@@ -30,12 +30,12 @@ export default function SignUpCreator() {
 
 	const form = useForm<z.infer<typeof CreatorRegisterSchema>>({
 		resolver: zodResolver(CreatorRegisterSchema),
-		defaultValues: {
-			username: "",
-			firstname: "",
-			lastname: "",
-			email: "",
-		}
+		// defaultValues: {
+		// 	username: "",
+		// 	firstname: "",
+		// 	lastname: "",
+		// 	email: "",
+		// }
 	});
 
 	const onSubmit = (values: z.infer<typeof CreatorRegisterSchema>) => {
@@ -75,7 +75,7 @@ export default function SignUpCreator() {
 									<FormItem>
 										<FormLabel>Username</FormLabel>
 										<FormControl>
-											<Input disabled={isPending} placeholder="John Doe" {...field} />
+											<Input disabled={isPending} placeholder="JohnDoe1234" {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -89,7 +89,7 @@ export default function SignUpCreator() {
 										<FormItem className="w-1/2">
 											<FormLabel>First Name</FormLabel>
 											<FormControl>
-												<Input disabled={isPending} placeholder="John Doe" {...field} />
+												<Input disabled={isPending} placeholder="John" {...field} />
 											</FormControl>
 											<FormMessage />
 										</FormItem>
@@ -102,7 +102,7 @@ export default function SignUpCreator() {
 										<FormItem className="w-1/2">
 											<FormLabel>Last Name</FormLabel>
 											<FormControl>
-												<Input disabled={isPending} placeholder="John Doe" {...field} />
+												<Input disabled={isPending} placeholder="Doe" {...field} />
 											</FormControl>
 											<FormMessage />
 										</FormItem>
@@ -122,6 +122,45 @@ export default function SignUpCreator() {
 												placeholder="username@yemail.com"
 												type="email"
 											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="typeOfUser"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Type of User</FormLabel>
+										<FormControl>
+											<Input disabled={isPending} placeholder="John Doe" {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="phone1"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Phone Number 1</FormLabel>
+										<FormControl>
+											<Input disabled={isPending} placeholder="Phone Number" {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="phone2"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Phone Number 2</FormLabel>
+										<FormControl>
+											<Input disabled={isPending} placeholder="Phone Number" {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
