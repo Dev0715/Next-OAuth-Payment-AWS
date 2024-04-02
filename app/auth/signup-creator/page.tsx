@@ -29,6 +29,7 @@ export default function SignUpCreator() {
 	const [error, setError] = useState<string | undefined>("");
 	const [success, setSuccess] = useState<string | undefined>("");
 	const [isPending, startTransition] = useTransition();
+	const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
 
 	const typeOfUsers = [
 		"UI/UX Designer",
@@ -64,9 +65,15 @@ export default function SignUpCreator() {
 		console.log("AGREE SCRAP", checked);
 	}
 
+	const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files && e.target.files.length > 0) {
+			setAvatarImagePath(URL.createObjectURL(e.target.files[0]));
+		}
+		console.log(e.target.files);
+	}
+
 	return (
 		<main className="w-full pb-6 flex flex-col gap-y-6">
-			<input type="file" onChange={(e) => console.log(e.target.files)} />
 			<Navbar title="Creator Registration" content="Register as a creator" />
 			<section className="flex items-center gap-x-4">
 				<Button asChild variant="link">
@@ -81,8 +88,8 @@ export default function SignUpCreator() {
 					<div className="w-full flex gap-x-12">
 						<section className="w-1/2 flex flex-col gap-y-6">
 							<div className="flex items-end space-x-4">
-								<Avatar className="w-16 h-16 rounded-xl">
-									<AvatarImage src="/logo.svg" />
+								<Avatar className="w-24 h-24 rounded-xl">
+									<AvatarImage src={avatarImagePath} />
 									<AvatarFallback className="bg-sky-500">
 										<FaUser className="text-white" />
 									</AvatarFallback>
@@ -93,7 +100,7 @@ export default function SignUpCreator() {
 									render={({ field }) => (
 										<FormItem>
 											<FormControl>
-												<Input {...avatarRef} disabled={isPending} type="file" />
+												<Input {...avatarRef} disabled={isPending} type="file" accept="image/*" onChange={onAvatarChanged} />
 											</FormControl>
 											<FormMessage />
 										</FormItem>
