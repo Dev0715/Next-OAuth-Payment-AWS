@@ -32,6 +32,8 @@ export default function SignUpCreator() {
 		resolver: zodResolver(CreatorRegisterSchema),
 		defaultValues: {
 			username: "",
+			firstname: "",
+			lastname: "",
 			email: "",
 		}
 	});
@@ -79,6 +81,34 @@ export default function SignUpCreator() {
 									</FormItem>
 								)}
 							/>
+							<div className="flex gap-x-4">
+								<FormField
+									control={form.control}
+									name="firstname"
+									render={({ field }) => (
+										<FormItem className="w-1/2">
+											<FormLabel>First Name</FormLabel>
+											<FormControl>
+												<Input disabled={isPending} placeholder="John Doe" {...field} />
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name="lastname"
+									render={({ field }) => (
+										<FormItem className="w-1/2">
+											<FormLabel>Last Name</FormLabel>
+											<FormControl>
+												<Input disabled={isPending} placeholder="John Doe" {...field} />
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</div>
 							<FormField
 								control={form.control}
 								name="email"
