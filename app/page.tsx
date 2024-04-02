@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <main className="w-full h-full">
-      <div className="flex flex-col items-center gap-y-24 pt-24">
+      <div className="flex flex-col items-center gap-y-24 pt-32">
         <h1 className={cn("text-5xl font-semibold text-black drop-shadow-md", font.className)}>
           This site is scheduled to launch officially on May 15th
         </h1>
@@ -29,14 +29,14 @@ const Home = () => {
           <p className="text-black text-lg">You can sign-up now as either a Seller or a User!</p>
         </div>
         <div className='flex gap-x-4'>
-          <Button variant="default" size="lg">
+          <Button variant="default" asChild size="lg">
             <Link href="/auth/signup-creator">Sign-Up Now as a Creator</Link>
           </Button>
-          <Button variant="default" size="lg">
-            Sign-Up Now as a User
+          <Button variant="default" asChild size="lg">
+            <Link href="/auth/signup-user">Sign-Up Now as a User</Link>
           </Button>
-          <Button variant="default" size="lg">
-            Sign-Up Now as an Affiliate
+          <Button variant="default" asChild size="lg">
+            <Link href="/auth/signup-affiliate">Sign-Up Now as an Affiliate</Link>
           </Button>
         </div>
       </div>
