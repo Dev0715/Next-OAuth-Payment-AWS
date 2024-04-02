@@ -59,9 +59,9 @@ export default function SignUpCreator() {
 
 		startTransition(() => {
 			// save the user's profile
-			registerCreator(values).then(data => {
-				console.log("__registerCreator__RESULT", data);
-			})
+			// registerCreator(values).then(data => {
+			// 	console.log("__registerCreator__RESULT", data);
+			// })
 		});
 	};
 
