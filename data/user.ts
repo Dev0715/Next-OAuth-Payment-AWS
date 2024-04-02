@@ -8,6 +8,8 @@ import {
   UpdateCommand
 } from "@aws-sdk/lib-dynamodb";
 
+const TableName = process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME;
+
 interface NewUser {
   name?: string | null | undefined;
   email: string;
@@ -31,7 +33,7 @@ interface UserSetPassword {
 
 export const getUserById = async (id: string) => {
   const command = new GetCommand({
-    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    TableName,
     Key: {
       username: id
     }
@@ -49,7 +51,7 @@ export const getUserById = async (id: string) => {
 
 export const getUserByEmail = async (email: string) => {
   const command = new ScanCommand({
-    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    TableName,
     // ProjectionExpression: "email, emailVerified", // attr names to get
     // ProjectionExpression: "email, emailVerified, #name",
     // ExpressionAttributeNames: { "#name": "name" }, // for reserved attr names
@@ -80,7 +82,7 @@ export const createUser = async (data: NewUser) => {
   const verificationToken = username + uuidv4();
 
   const command = new PutCommand({
-    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    TableName,
     Item: {
       username,
       verificationToken,
@@ -101,7 +103,7 @@ export const createUser = async (data: NewUser) => {
 
 export const updateUserToken = async (data: UserSetToken) => {
   const command = new UpdateCommand({
-    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    TableName,
     Key: { username: data.username },
     UpdateExpression:
       "SET verificationToken = :verificationToken, expires = :expires",
@@ -124,7 +126,7 @@ export const updateUserToken = async (data: UserSetToken) => {
 
 export const updateUserPassword = async (data: UserSetPassword) => {
   const command = new UpdateCommand({
-    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    TableName,
     Key: { username: data.username },
     UpdateExpression:
       "SET password = :password, emailVerified = :emailVerified",
@@ -147,7 +149,7 @@ export const updateUserPassword = async (data: UserSetPassword) => {
 
 export const updateUserVerification = async (userId: string) => {
   const command = new UpdateCommand({
-    TableName: process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME,
+    TableName,
     Key: { username: userId },
     UpdateExpression: "SET emailVerified = :emailVerified",
     ExpressionAttributeValues: {
