@@ -22,11 +22,19 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import Link from "next/link";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function SignUpCreator() {
 	const [error, setError] = useState<string | undefined>("");
 	const [success, setSuccess] = useState<string | undefined>("");
 	const [isPending, startTransition] = useTransition();
+
+	const typeOfUsers = [
+		"UI/UX Designer",
+		"Web Designer",
+		"Web Developer",
+		"Project Manger"
+	];
 
 	const form = useForm<z.infer<typeof CreatorRegisterSchema>>({
 		resolver: zodResolver(CreatorRegisterSchema),
@@ -133,9 +141,18 @@ export default function SignUpCreator() {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Type of User</FormLabel>
-										<FormControl>
-											<Input disabled={isPending} placeholder="John Doe" {...field} />
-										</FormControl>
+										<Select onValueChange={field.onChange} defaultValue={field.value}>
+											<FormControl>
+												<SelectTrigger>
+													<SelectValue placeholder="Select what you join for" />
+												</SelectTrigger>
+											</FormControl>
+											<SelectContent>
+												{typeOfUsers.map((item) => (
+													<SelectItem value={item}>{item}</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
 										<FormMessage />
 									</FormItem>
 								)}
