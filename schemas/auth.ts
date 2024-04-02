@@ -39,7 +39,11 @@ export const RegisterSchema = z.object({
 
 // for `Creator Registration` Form
 export const CreatorRegisterSchema = z.object({
-  avatar: z.string().url({ message: "Please enter a valid URL" }),
+  avatar: z.object({
+    file: z
+      .instanceof(FileList)
+      .refine((file) => file?.length == 1, "File is required")
+  }),
   username: z
     .string()
     .min(1, "A name is required")
