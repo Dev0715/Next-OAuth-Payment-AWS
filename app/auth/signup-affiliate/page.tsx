@@ -6,7 +6,7 @@ import { Navbar } from "../_components/navbar";
 
 export default function SignUpAffiliate() {
 	return (
-		<main className="flex h-full flex-col">
+		<main className="w-full h-full flex flex-col">
 			<Navbar title="Affiliate Registration" content="Register as an affiliate" />
 		</main>
 	);

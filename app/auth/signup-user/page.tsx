@@ -6,7 +6,7 @@ import { Navbar } from "../_components/navbar";
 
 export default function SignUpUser() {
 	return (
-		<main className="flex h-full flex-col">
+		<main className="w-full h-full flex flex-col">
 			<Navbar title="User Registration" content="Register as a user" />
 		</main>
 	);
