@@ -54,16 +54,17 @@ export default function SignUpCreator() {
 
 	const onSubmit = handleSubmit((values: z.infer<typeof CreatorRegisterSchema>) => {
 		(() => {
-			setError("");
-			setSuccess("");
+			registerCreator(values);
+			// setError("");
+			// setSuccess("");
 
-			console.log("FORM VALUES", values);
+			// console.log("FORM VALUES", values);
 
-			startTransition(() => {
-				registerCreator(values).then(data => {
-					console.log("__registerCreator__RESULT", data);
-				})
-			});
+			// startTransition(() => {
+			// 	registerCreator(values).then(data => {
+			// 		console.log("__registerCreator__RESULT", data);
+			// 	})
+			// });
 		})
 	});
 
