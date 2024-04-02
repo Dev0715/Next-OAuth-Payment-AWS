@@ -47,7 +47,7 @@ export default function SignUpCreator() {
 		// }
 	});
 
-	const fileRef = form.register("avatar");
+	const avatarRef = form.register("avatar");
 
 	const onSubmit = (values: z.infer<typeof CreatorRegisterSchema>) => {
 		setError("");
@@ -92,11 +92,7 @@ export default function SignUpCreator() {
 									render={({ field }) => (
 										<FormItem>
 											<FormControl>
-												<Input {...fileRef} disabled={isPending} type="file"
-													onChange={event => {
-														field.onChange(event.target?.files?.[0] ?? undefined);
-													}}
-												/>
+												<Input {...avatarRef} disabled={isPending} type="file" />
 											</FormControl>
 											<FormMessage />
 										</FormItem>
