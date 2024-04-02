@@ -41,12 +41,15 @@ export default function SignUpCreator() {
 
 	const form = useForm<z.infer<typeof CreatorRegisterSchema>>({
 		resolver: zodResolver(CreatorRegisterSchema),
-		// defaultValues: {
-		// 	username: "",
-		// 	firstname: "",
-		// 	lastname: "",
-		// 	email: "",
-		// }
+		defaultValues: {
+			username: "temp",
+			firstname: "temp",
+			lastname: "temp",
+			email: "temp@gmail.com",
+			address: "temp",
+			phone1: "temp",
+			phone2: "temp",
+		}
 	});
 
 	const avatarRef = form.register("avatar");
