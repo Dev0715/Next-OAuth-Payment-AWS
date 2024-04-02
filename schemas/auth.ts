@@ -43,8 +43,5 @@ export const CreatorRegisterSchema = z.object({
     .string()
     .min(1, "A name is required")
     .max(72, "Name must be a maximum of 72 characters"),
-  email: z.string().email({ message: "Please enter a valid email" }),
-  isCreator: z.boolean(),
-  isAffiliate: z.boolean(),
-  isCustomer: z.boolean()
+  email: z.string().email({ message: "Please enter a valid email" })
 });

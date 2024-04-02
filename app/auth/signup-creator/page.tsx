@@ -21,6 +21,7 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import Link from "next/link";
 
 export default function SignUpCreator() {
 	const [error, setError] = useState<string | undefined>("");
@@ -32,9 +33,6 @@ export default function SignUpCreator() {
 		defaultValues: {
 			username: "",
 			email: "",
-			isCreator: false,
-			isAffiliate: false,
-			isCustomer: false,
 		}
 	});
 
@@ -49,9 +47,21 @@ export default function SignUpCreator() {
 		});
 	};
 
+	const onAgreeScrap = (checked: boolean) => {
+		console.log("AGREE SCRAP", checked);
+	}
+
 	return (
-		<main className="flex h-full flex-col">
+		<main className="flex h-full flex-col gap-y-6">
 			<Navbar title="Creator Registration" content="Register as a creator" />
+			<section className="flex items-center gap-x-4">
+				<Button asChild variant="link">
+					<Link href="">
+						Accept our standard Legal Agreements
+					</Link>
+				</Button>
+				<Switch onCheckedChange={onAgreeScrap} />
+			</section>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="w-full flex gap-x-12">
@@ -89,69 +99,7 @@ export default function SignUpCreator() {
 							/>
 						</section>
 						<section className="w-1/2">
-							<h3 className="mb-4 text-base font-medium">Your roles</h3>
-							<div className="space-y-4">
-								<FormField
-									control={form.control}
-									name="isCreator"
-									render={({ field }) => (
-										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-											<div className="space-y-0.5">
-												<FormLabel>Creator</FormLabel>
-												<FormDescription>
-													You do something and something for a creator's role
-												</FormDescription>
-											</div>
-											<FormControl>
-												<Switch
-													checked={field.value}
-													onCheckedChange={field.onChange}
-												/>
-											</FormControl>
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="isAffiliate"
-									render={({ field }) => (
-										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-											<div className="space-y-0.5">
-												<FormLabel>Affiliate</FormLabel>
-												<FormDescription>
-													You do something and something for a affiliate's role
-												</FormDescription>
-											</div>
-											<FormControl>
-												<Switch
-													checked={field.value}
-													onCheckedChange={field.onChange}
-												/>
-											</FormControl>
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="isCustomer"
-									render={({ field }) => (
-										<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-											<div className="space-y-0.5">
-												<FormLabel>Customer</FormLabel>
-												<FormDescription>
-													You do something and something for a customer's role
-												</FormDescription>
-											</div>
-											<FormControl>
-												<Switch
-													checked={field.value}
-													onCheckedChange={field.onChange}
-												/>
-											</FormControl>
-										</FormItem>
-									)}
-								/>
-							</div>
+
 						</section>
 					</div>
 					<FormError message={error} />
