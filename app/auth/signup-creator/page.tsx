@@ -1,3 +1,5 @@
+"use client"
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Navbar } from "../_components/navbar";
@@ -28,17 +30,19 @@ export default function SignUpCreator() {
 	const form = useForm<z.infer<typeof CreatorRegisterSchema>>({
 		resolver: zodResolver(CreatorRegisterSchema),
 		defaultValues: {
+			username: "",
+			email: "",
 			isCreator: false,
 			isAffiliate: false,
 			isCustomer: false,
-			username: "",
-			bio: "",
 		}
 	});
 
 	const onSubmit = (values: z.infer<typeof CreatorRegisterSchema>) => {
 		setError("");
 		setSuccess("");
+
+		console.log("FORM VALUES", values);
 
 		startTransition(() => {
 			// save the user's profile
@@ -59,7 +63,7 @@ export default function SignUpCreator() {
 									<FormItem>
 										<FormLabel>Username</FormLabel>
 										<FormControl>
-											<Input placeholder="John Doe" {...field} />
+											<Input disabled={isPending} placeholder="John Doe" {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -67,15 +71,16 @@ export default function SignUpCreator() {
 							/>
 							<FormField
 								control={form.control}
-								name="bio"
+								name="email"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Bio</FormLabel>
+										<FormLabel>Email</FormLabel>
 										<FormControl>
-											<Textarea
+											<Input
 												{...field}
 												disabled={isPending}
-												placeholder="Tell us a little bit about yourself"
+												placeholder="username@yemail.com"
+												type="email"
 											/>
 										</FormControl>
 										<FormMessage />
@@ -152,7 +157,7 @@ export default function SignUpCreator() {
 					<FormError message={error} />
 					<FormSuccess message={success} />
 					<Button disabled={isPending} type="submit">
-						Save Profile
+						Register
 					</Button>
 				</form>
 			</Form>
