@@ -12,7 +12,7 @@ export const Navbar = () => {
       <div className="w-full flex">
         <div className="w-full flex items-end gap-4">
           <Avatar className="w-16 h-16 rounded-xl">
-            <AvatarImage src="@/public/logo.svg" />
+            <AvatarImage src="/logo.svg" />
             <AvatarFallback className="bg-sky-500">
               <FaSignal className="text-white" />
             </AvatarFallback>
