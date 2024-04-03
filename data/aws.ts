@@ -9,7 +9,8 @@ export const uploadFileToS3 = async (file: File) => {
   const command = new PutObjectCommand({
     Bucket,
     Key: file.name,
-    Body
+    Body,
+    ContentType: "image/jpg"
   });
 
   try {
