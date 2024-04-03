@@ -5,9 +5,9 @@ import { LoginButton } from "@/components/auth/login-button";
 import { Navbar } from "../_components/navbar";
 
 export default function Manage() {
-    return (
-        <main className="w-full h-full flex flex-col">
-            Management Page
-        </main>
-    );
+	return (
+		<main className="w-full flex pt-6">
+			Management Page
+		</main>
+	);
 }
