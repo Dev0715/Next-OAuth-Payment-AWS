@@ -231,8 +231,8 @@ export default function SignUpUser() {
 								)}
 							/>
 						</section>
-						<section className="w-1/2">
-
+						<section className="w-1/2 sticky top-96">
+							Be the earliest users to get the latest updates and news from us.
 						</section>
 					</div>
 					<FormError message={error} />
