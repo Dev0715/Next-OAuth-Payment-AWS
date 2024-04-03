@@ -30,8 +30,10 @@ export default function SignUpCreator() {
 	const [error, setError] = useState<string | undefined>("");
 	const [success, setSuccess] = useState<string | undefined>("");
 	const [isPending, startTransition] = useTransition();
-	const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
+
 	const [avatar, setAvatar] = useState<File | null>();
+	const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
+
 
 	const typeOfUsers = [
 		"UI/UX Designer",
@@ -54,13 +56,10 @@ export default function SignUpCreator() {
 		}
 	});
 
-	const avatarRef = form.register("avatar");
-
 	const onSubmit = (values: z.infer<typeof CreatorRegisterSchema>) => {
 		setError("");
 		setSuccess("");
 
-		values.avatar = avatar;
 		console.log("FORM VALUES", values);
 
 		startTransition(() => {
