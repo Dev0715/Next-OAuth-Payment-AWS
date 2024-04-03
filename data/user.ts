@@ -8,7 +8,7 @@ import {
   UpdateCommand
 } from "@aws-sdk/lib-dynamodb";
 
-const TableName = process.env.NEXT_PUBLIC_AWS_DYNAMODB_TABLE_NAME;
+const TableName = process.env.AWS_DYNAMODB_TABLE_NAME;
 
 interface NewUser {
   name?: string | null | undefined;

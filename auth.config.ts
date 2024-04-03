@@ -13,20 +13,20 @@ import { getUserByEmail } from "@/data/user";
 export default {
   providers: [
     Google({
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET || ""
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
     }),
     Github({
-      clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET as string
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string
     }),
     Discord({
-      clientId: process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "",
-      clientSecret: process.env.NEXT_PUBLIC_DISCORD_CLIENT_SECRET || ""
+      clientId: process.env.DISCORD_CLIENT_ID || "",
+      clientSecret: process.env.DISCORD_CLIENT_SECRET || ""
     }),
     Apple({
-      clientId: process.env.NEXT_PUBLIC_APPLE_CLIENT_ID || "",
-      clientSecret: process.env.NEXT_PUBLIC_APPLE_CLIENT_SECRET || ""
+      clientId: process.env.APPLE_CLIENT_ID || "",
+      clientSecret: process.env.APPLE_CLIENT_SECRET || ""
     }),
     Credentials({
       credentials: {
