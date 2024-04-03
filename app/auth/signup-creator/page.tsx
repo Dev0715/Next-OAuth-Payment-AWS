@@ -34,7 +34,6 @@ export default function SignUpCreator() {
 	const [avatar, setAvatar] = useState<File | null>();
 	const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
 
-
 	const typeOfUsers = [
 		"UI/UX Designer",
 		"Web Designer",
@@ -63,9 +62,22 @@ export default function SignUpCreator() {
 		console.log("FORM VALUES", values);
 
 		startTransition(() => {
-			registerCreator(values).then(data => {
-				console.log("__registerCreator__RESULT", data);
-			})
+			if (avatar) {
+				console.log("__onSubmit__FILE__SELECTED");
+
+				const formData = new FormData();
+				formData.append("file", avatar);
+
+				fetch("/api/upload", {
+					method: "POST",
+					body: formData
+				}).then(res => res.json()).then(data => {
+					console.log("__upload__RESULT", data);
+				});
+			}
+			// registerCreator(values).then(data => {
+			// 	console.log("__registerCreator__RESULT", data);
+			// })
 		});
 	};
 
