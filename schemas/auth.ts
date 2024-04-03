@@ -70,3 +70,37 @@ export const CreatorRegisterSchema = z.object({
     .min(1, "A name is required")
     .max(72, "Name must be a maximum of 72 characters")
 });
+
+// for `User Registration` Form
+export const UserRegisterSchema = z.object({
+  avatar: z.string(),
+  username: z
+    .string()
+    .min(1, "A name is required")
+    .max(72, "Name must be a maximum of 72 characters"),
+  email: z.string().email({ message: "Please enter a valid email" }),
+  firstname: z
+    .string()
+    .min(1, "First name is required")
+    .max(72, "First name must be a maximum of 72 characters"),
+  lastname: z
+    .string()
+    .min(1, "Last name is required")
+    .max(72, "Last name must be a maximum of 72 characters"),
+  typeOfUser: z
+    .string()
+    .min(1, "A name is required")
+    .max(72, "Name must be a maximum of 72 characters"),
+  address: z
+    .string()
+    .min(1, "A name is required")
+    .max(72, "Name must be a maximum of 72 characters"),
+  phone1: z
+    .string()
+    .min(1, "A name is required")
+    .max(72, "Name must be a maximum of 72 characters"),
+  phone2: z
+    .string()
+    .min(1, "A name is required")
+    .max(72, "Name must be a maximum of 72 characters")
+});

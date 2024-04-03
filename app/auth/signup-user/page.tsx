@@ -13,7 +13,7 @@ import {
 	FormLabel,
 	FormMessage
 } from "@/components/ui/form";
-import { CreatorRegisterSchema } from "@/schemas/auth";
+import { UserRegisterSchema } from "@/schemas/auth";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
@@ -41,8 +41,8 @@ export default function SignUpUser() {
 		"Project Manger"
 	];
 
-	const form = useForm<z.infer<typeof CreatorRegisterSchema>>({
-		resolver: zodResolver(CreatorRegisterSchema),
+	const form = useForm<z.infer<typeof UserRegisterSchema>>({
+		resolver: zodResolver(UserRegisterSchema),
 		defaultValues: {
 			username: "temp",
 			firstname: "temp",
@@ -55,7 +55,7 @@ export default function SignUpUser() {
 		}
 	});
 
-	const onSubmit = (values: z.infer<typeof CreatorRegisterSchema>) => {
+	const onSubmit = (values: z.infer<typeof UserRegisterSchema>) => {
 		setError("");
 		setSuccess("");
 
