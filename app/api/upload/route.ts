@@ -1,9 +1,10 @@
 import { uploadFileToS3 } from "@/data/aws";
+import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
-export const POST = async (request: { formData: () => any }) => {
+export const POST = async (req: NextApiRequest) => {
   try {
-    const formData = await request.formData();
+    const formData = await req.body.formData();
     const file = formData.get("file");
 
     console.log("__FILE__", file);
