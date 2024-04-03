@@ -96,15 +96,7 @@ export default function SignUpUser() {
 
 	return (
 		<main className="w-full pb-6 flex flex-col gap-y-6">
-			<Navbar title="Creator Registration" content="Register as a creator" />
-			<section className="flex items-center gap-x-4">
-				<Button asChild variant="link">
-					<Link href="">
-						Accept our standard Legal Agreements
-					</Link>
-				</Button>
-				<Switch onCheckedChange={onAgreeScrap} />
-			</section>
+			<Navbar title="User Registration" content="Register as a user" />
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="w-full flex gap-x-12">
