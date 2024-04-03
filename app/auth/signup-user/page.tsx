@@ -201,12 +201,15 @@ export default function SignUpUser() {
 								)}
 							/>
 						</section>
-						<section className="w-1/2 sticky top-96">
-							Be the earliest users to get the latest updates and news from us.
-							Early subscribers will get exclusive access to our new features and various benefits.
-							We will also give a number of bonuses like $10 off.
-							You will have free Launch Package that will have a bundle of free fonts, images, ...
-							Join the Discord and follow notifications and news on our channel
+						<section className="w-1/2 space-y-4">
+							<p>Be the earliest users to get the latest updates and news from us.</p>
+							<p>Early subscribers will get exclusive access to our new features and various benefits.</p>
+							<p>We will also give a number of bonuses like $10 off.</p>
+							<p>You will have free Launch Package that will have a bundle of free fonts, images, ...</p>
+							<p>Join the Discord and follow notifications and news on our channel</p>
+							<Button disabled={isPending}>
+								Subscribe
+							</Button>
 						</section>
 					</div>
 					<FormError message={error} />
