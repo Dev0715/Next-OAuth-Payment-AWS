@@ -1,8 +1,16 @@
-export const POST = async (req: { file: File | null }) => {
+import { NextResponse } from "next/server";
+
+export const POST = async (request: { formData: () => any }) => {
   try {
-    const { file } = req;
-    console.log("__upload__FILE", file);
+    const formData = await request.formData();
+    const file = formData.get("file");
+
+    console.log("__FILE__", file);
+
+    if (!file) {
+      return NextResponse.json({ error: "File is required" }, { status: 400 });
+    }
   } catch (error) {
-    console.error("__upload__ERROR", error);
+    return NextResponse.json({ error });
   }
 };
