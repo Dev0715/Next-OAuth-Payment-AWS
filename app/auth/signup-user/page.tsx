@@ -210,6 +210,12 @@ export default function SignUpUser() {
 							<Button disabled={isPending}>
 								Subscribe
 							</Button>
+							<Button disabled={isPending}>
+								Paypal
+							</Button>
+							<Button disabled={isPending}>
+								Stripe
+							</Button>
 						</section>
 					</div>
 					<FormError message={error} />
