@@ -207,15 +207,17 @@ export default function SignUpUser() {
 							<p>We will also give a number of bonuses like $10 off.</p>
 							<p>You will have free Launch Package that will have a bundle of free fonts, images, ...</p>
 							<p>Join the Discord and follow notifications and news on our channel</p>
-							<Button disabled={isPending}>
-								Subscribe
-							</Button>
-							<Button disabled={isPending}>
-								Paypal
-							</Button>
-							<Button disabled={isPending}>
-								Stripe
-							</Button>
+							<div className="flex flex-col gap-y-4">
+								<Button disabled={isPending}>
+									Subscribe
+								</Button>
+								<Button disabled={isPending}>
+									Paypal
+								</Button>
+								<Button disabled={isPending}>
+									Stripe
+								</Button>
+							</div>
 						</section>
 					</div>
 					<FormError message={error} />
