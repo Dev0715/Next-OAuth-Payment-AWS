@@ -31,6 +31,7 @@ export default function SignUpCreator() {
 	const [success, setSuccess] = useState<string | undefined>("");
 	const [isPending, startTransition] = useTransition();
 	const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
+	const [avatar, setAvatar] = useState<File | null>();
 
 	const typeOfUsers = [
 		"UI/UX Designer",
@@ -59,6 +60,7 @@ export default function SignUpCreator() {
 		setError("");
 		setSuccess("");
 
+		values.avatar = avatar;
 		console.log("FORM VALUES", values);
 
 		startTransition(() => {
@@ -76,7 +78,7 @@ export default function SignUpCreator() {
 		if (e.target.files && e.target.files.length > 0) {
 			setAvatarImagePath(URL.createObjectURL(e.target.files[0]));
 		}
-		console.log(e.target.files);
+		setAvatar(e?.target?.files?.[0]);
 	}
 
 	return (
@@ -101,18 +103,7 @@ export default function SignUpCreator() {
 										<FaUser className="text-white" />
 									</AvatarFallback>
 								</Avatar>
-								<FormField
-									control={form.control}
-									name="avatar"
-									render={({ field }) => (
-										<FormItem>
-											<FormControl>
-												<Input {...avatarRef} disabled={isPending} type="file" accept="image/*" onChange={onAvatarChanged} />
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
+								<Input disabled={isPending} type="file" accept="image/*" onChange={onAvatarChanged} />
 							</div>
 							<FormField
 								control={form.control}
