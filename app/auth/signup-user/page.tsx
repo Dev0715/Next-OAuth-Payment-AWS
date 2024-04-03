@@ -24,7 +24,7 @@ import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
-import { registerCreator } from "@/actions/register-creator";
+import { registerUser } from "@/actions/register-user";
 
 export default function SignUpUser() {
 	const [error, setError] = useState<string | undefined>("");
@@ -34,13 +34,6 @@ export default function SignUpUser() {
 	const [avatar, setAvatar] = useState<File | null>();
 	const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
 
-	const typeOfUsers = [
-		"UI/UX Designer",
-		"Web Designer",
-		"Web Developer",
-		"Project Manger"
-	];
-
 	const form = useForm<z.infer<typeof UserRegisterSchema>>({
 		resolver: zodResolver(UserRegisterSchema),
 		defaultValues: {
@@ -48,7 +41,6 @@ export default function SignUpUser() {
 			firstname: "temp",
 			lastname: "temp",
 			email: "temp@gmail.com",
-			typeOfUser: typeOfUsers[0],
 			address: "temp",
 			phone1: "temp",
 			phone2: "temp",
@@ -75,8 +67,8 @@ export default function SignUpUser() {
 					console.log("__upload__RESULT", data);
 
 					values.avatar = data.filePath;
-					registerCreator(values).then(data => {
-						console.log("__registerCreator__RESULT", data);
+					registerUser(values).then(data => {
+						console.log("__registerUser__RESULT", data);
 					})
 				});
 			}
