@@ -34,6 +34,7 @@ export default {
         password: { type: "password" }
       },
       async authorize(credentials) {
+        console.log("__Credentials SignIn", credentials);
         const { email, password } = credentials;
         const user = await getUserByEmail(email as string);
         if (!user || !user.password) return null;
@@ -42,7 +43,7 @@ export default {
           user.password
         );
         if (passwordsMatch) return user;
-        else return null;
+        else return null; // You can also reject this callback for detailed error
       }
     })
   ]
