@@ -4,9 +4,7 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 const Bucket = process.env.NEXT_PUBLIC_AWS_BUCKET_NAME;
 
 export const uploadFileToS3 = async (file: File) => {
-  const Body = (await file.arrayBuffer()) as Buffer;
-
-  console.log("__uploadFileToS3__FILE_NAME", file.name, Body);
+  const Body = Buffer.from(await file.arrayBuffer());
 
   const command = new PutObjectCommand({
     Bucket,

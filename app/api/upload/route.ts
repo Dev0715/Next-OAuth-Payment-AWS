@@ -12,7 +12,7 @@ export const POST = async (request: { formData: () => any }) => {
       return NextResponse.json({ error: "File is required" }, { status: 400 });
     }
 
-    const fileName = uploadFileToS3(file);
+    const fileName = await uploadFileToS3(file);
     console.log("__UPLOADED__FILE__", fileName);
 
     return NextResponse.json({ success: true, fileName });
