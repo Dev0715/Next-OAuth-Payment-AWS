@@ -87,10 +87,6 @@ export const UserRegisterSchema = z.object({
     .string()
     .min(1, "Last name is required")
     .max(72, "Last name must be a maximum of 72 characters"),
-  typeOfUser: z
-    .string()
-    .min(1, "A name is required")
-    .max(72, "Name must be a maximum of 72 characters"),
   address: z
     .string()
     .min(1, "A name is required")

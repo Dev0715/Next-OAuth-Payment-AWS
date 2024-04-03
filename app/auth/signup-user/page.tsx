@@ -171,28 +171,6 @@ export default function SignUpUser() {
 							/>
 							<FormField
 								control={form.control}
-								name="typeOfUser"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Type of User</FormLabel>
-										<Select onValueChange={field.onChange} defaultValue={field.value}>
-											<FormControl>
-												<SelectTrigger>
-													<SelectValue placeholder="Select what you join for" />
-												</SelectTrigger>
-											</FormControl>
-											<SelectContent>
-												{typeOfUsers.map((item) => (
-													<SelectItem key={item} value={item}>{item}</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
 								name="address"
 								render={({ field }) => (
 									<FormItem>
