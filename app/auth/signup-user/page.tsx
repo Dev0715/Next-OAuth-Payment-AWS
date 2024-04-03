@@ -203,6 +203,10 @@ export default function SignUpUser() {
 						</section>
 						<section className="w-1/2 sticky top-96">
 							Be the earliest users to get the latest updates and news from us.
+							Early subscribers will get exclusive access to our new features and various benefits.
+							We will also give a number of bonuses like $10 off.
+							You will have free Launch Package that will have a bundle of free fonts, images, ...
+							Join the Discord and follow notifications and news on our channel
 						</section>
 					</div>
 					<FormError message={error} />
