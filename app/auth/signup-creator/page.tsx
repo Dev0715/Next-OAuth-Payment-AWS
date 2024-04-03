@@ -73,11 +73,13 @@ export default function SignUpCreator() {
 					body: formData
 				}).then(res => res.json()).then(data => {
 					console.log("__upload__RESULT", data);
+
+					values.avatar = data.filePath;
+					registerCreator(values).then(data => {
+						console.log("__registerCreator__RESULT", data);
+					})
 				});
 			}
-			// registerCreator(values).then(data => {
-			// 	console.log("__registerCreator__RESULT", data);
-			// })
 		});
 	};
 

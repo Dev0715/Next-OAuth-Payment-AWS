@@ -39,7 +39,7 @@ export const RegisterSchema = z.object({
 
 // for `Creator Registration` Form
 export const CreatorRegisterSchema = z.object({
-  avatar: z.optional(z.union([z.instanceof(File), z.null()])),
+  avatar: z.string(),
   username: z
     .string()
     .min(1, "A name is required")
