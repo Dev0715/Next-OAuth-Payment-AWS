@@ -1,6 +1,6 @@
 import client from "@/lib/paypal";
 import paypal from "@paypal/checkout-server-sdk";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 type Params = {
   order_price?: string;
