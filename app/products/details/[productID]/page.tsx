@@ -32,7 +32,7 @@ export default function ProductDetails({ params }: PropsParams) {
 				order_price: 100, // amountRef.current.value
 			}, axiosConfig);
 
-			return { orderid: '' });
+			return { orderid: '' }; // response.data.orderID
 		} catch (err) {
 			return null;
 		}
