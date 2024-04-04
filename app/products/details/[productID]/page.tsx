@@ -1,10 +1,10 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
+import { axiosClient, axiosConfig } from "@/lib/axios";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 interface PropsParams {
 	params: {
@@ -27,20 +27,12 @@ export default function ProductDetails({ params }: PropsParams) {
 
 	const paypalCreateOrder = async () => {
 		try {
-			const response = await fetch("/api/payment/paypal/create_order", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify({
-					user_id: "1234", // sotre.getState().auth.user._id
-					order_price: 100, // amountRef.current.value
-				})
-			});
+			const response = await axiosClient.post("/payment/paypal/create_order", {
+				user_id: "1234", // sotre.getState().auth.user._id
+				order_price: 100, // amountRef.current.value
+			}, axiosConfig);
 
-			return response.json().then((data) => {
-				return data.order_id;
-			});
+			return { orderid: '' });
 		} catch (err) {
 			return null;
 		}
