@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/auth/login-button";
 import { Navbar } from "../_components/navbar";
 
-export default function Manage() {
+export default function Dashboard() {
 	return (
 		<main className="w-full flex pt-6">
-			Management Page - You can manage products here
+			Dashboard Page - You can check various features here
 		</main>
 	);
 }
