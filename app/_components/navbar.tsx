@@ -50,9 +50,9 @@ export const Navbar = () => {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/users" legacyBehavior passHref>
+                <Link href="/manage" legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Users
+                    Manage
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
