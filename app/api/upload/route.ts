@@ -14,7 +14,7 @@ export const POST = async (req: RequestType) => {
       return NextResponse.json({ error: "File is required" }, { status: 400 });
     }
 
-    const response = await uploadFileToS3(file.name);
+    const response = await uploadFileToS3(file.name); // upload connection issu
 
     if (response.success) {
       return NextResponse.json(response, { status: 200 });
