@@ -7,6 +7,8 @@ type Params = {
 };
 
 export const POST = async (req: Request, context: { params: Params }) => {
+  console.log("__paypal__capture__", req, context);
+
   if (!context.params.order_id) {
     return NextResponse.json(
       { success: false, message: "Please provide order ID" },

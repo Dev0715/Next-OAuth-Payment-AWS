@@ -50,7 +50,6 @@ export default function ProductDetails({ params }: PropsParams) {
 			if (response) { // response.data.success
 				// Order is successful
 				// Custom code
-
 				// response.data.data.wallet.balance
 			}
 
@@ -99,7 +98,6 @@ export default function ProductDetails({ params }: PropsParams) {
 					}}
 				/>
 			</PayPalScriptProvider>
-
 		</main>
 	)
 }
