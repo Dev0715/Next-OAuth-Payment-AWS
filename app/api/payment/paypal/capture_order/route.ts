@@ -17,7 +17,7 @@ export const POST = async (req: Request, context: { params: Params }) => {
   const orderId = context.params.order_id;
   const PaypalClient = client();
   const request = new paypal.orders.OrdersCaptureRequest(orderId);
-  request.requestBody({});
+  request.requestBody({}); // typescript issue
   const response = await PaypalClient.execute(request);
   if (!response) {
     return NextResponse.json(
