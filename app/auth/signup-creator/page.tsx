@@ -62,23 +62,23 @@ export default function SignUpCreator() {
 
 		console.log("FORM VALUES", values);
 
-		startTransition(() => {
-			if (avatar) {
-				console.log("__onSubmit__FILE__SELECTED");
+		// startTransition(() => {
+		// 	if (avatar) {
+		// 		console.log("__onSubmit__FILE__SELECTED");
 
-				const formData = new FormData();
-				formData.append("file", avatar);
+		// 		const formData = new FormData();
+		// 		formData.append("file", avatar);
 
-				axiosClient.post("/upload", { body: formData }, axiosConfig).then(res => res.data.json).then(data => {
-					console.log("__upload__RESULT", data);
+		// 		axiosClient.post("/upload", { body: formData }, axiosConfig).then(res => res.data.json).then(data => {
+		// 			console.log("__upload__RESULT", data);
 
-					values.avatar = data.filePath;
-					registerCreator(values).then(data => {
-						console.log("__registerCreator__RESULT", data);
-					})
-				});
-			}
-		});
+		// 			values.avatar = data.filePath;
+		// 			registerCreator(values).then(data => {
+		// 				console.log("__registerCreator__RESULT", data);
+		// 			})
+		// 		});
+		// 	}
+		// });
 	};
 
 	const onAgreeScrap = (checked: boolean) => {
