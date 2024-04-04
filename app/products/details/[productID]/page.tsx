@@ -25,6 +25,54 @@ function Bold({ children }: { children: React.ReactNode }) {
 export default function ProductDetails({ params }: PropsParams) {
 	const searchParmas = useSearchParams();
 
+	const paypalCreateOrder = async () => {
+		try {
+			const response = await fetch("/api/payment/paypal/create_order", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					user_id: "1234", // sotre.getState().auth.user._id
+					order_price: 100, // amountRef.current.value
+				})
+			});
+
+			return response.json().then((data) => {
+				return data.order_id;
+			});
+		} catch (err) {
+			return null;
+		}
+	}
+
+	const paypalCaptureOrder = async (order_id: string) => {
+		try {
+			const response = await fetch("/api/payment/paypal/capture_order", {
+				method: "POST",
+				body: JSON.stringify({
+					order_id,
+				})
+			});
+
+			if (response) { // response.data.success
+				// Order is successful
+				// Custom code
+
+				// response.data.data.wallet.balance
+			}
+
+		} catch (err) {
+			// err
+		}
+	}
+
+	if (searchParmas.get('success')) {
+		console.log('Order placed! You will receive an email confirmation.');
+	}
+	if (searchParmas.get('canceled')) {
+		console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
+	}
 
 	return (
 		<main className="w-full flex flex-col gap-y-6 pt-6">
@@ -41,6 +89,24 @@ export default function ProductDetails({ params }: PropsParams) {
 					</Button>
 				</section>
 			</form>
+
+			<PayPalScriptProvider options={{
+				clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID as string,
+				currency: 'USD',
+				intent: 'capture'
+			}}>
+				<PayPalButtons
+					style={{ color: 'gold', shape: 'rect', label: 'pay', height: 50 }}
+					createOrder={async (data, action) => {
+						let order_id = await paypalCreateOrder();
+						return order_id;
+					}}
+					onApprove={async (data, actions) => {
+						let response = await paypalCaptureOrder(data.orderID);
+						if (response !== undefined && response !== null) return;
+					}}
+				/>
+			</PayPalScriptProvider>
 
 		</main>
 	)
