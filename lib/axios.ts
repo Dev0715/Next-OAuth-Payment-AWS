@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "/api/"
+  baseURL: "/api"
 });
 
 const axiosConfig: AxiosRequestConfig = {
