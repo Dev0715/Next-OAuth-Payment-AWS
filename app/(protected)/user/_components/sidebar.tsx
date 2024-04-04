@@ -20,6 +20,18 @@ export const Sdiebar = () => {
 			path: "/user/account"
 		},
 		{
+			name: "Creator Portal",
+			path: "/user/creator"
+		},
+		{
+			name: "Customer Portal",
+			path: "/user/customer"
+		},
+		{
+			name: "Affiliate Portal",
+			path: "/user/affiliate"
+		},
+		{
 			name: "Settings",
 			path: "/user/settings"
 		}
