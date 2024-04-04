@@ -4,10 +4,10 @@ const axiosClient = axios.create({
   baseURL: "/api/"
 });
 
-const config: AxiosRequestConfig = {
+const axiosConfig: AxiosRequestConfig = {
   headers: {
     Accept: "application/json"
   } as RawAxiosRequestHeaders
 };
 
-export { axiosClient, config };
+export { axiosClient, axiosConfig };
