@@ -25,8 +25,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { registerCreator } from "@/actions/register-creator";
-import { axiosClient } from "@/lib/axios";
-import axios from "axios";
+import { axiosClient, axiosConfig } from "@/lib/axios";
 
 export default function SignUpCreator() {
 	const [error, setError] = useState<string | undefined>("");
@@ -65,22 +64,20 @@ export default function SignUpCreator() {
 
 		startTransition(() => {
 			if (avatar) {
-				console.log("__onSubmit__FILE__SELECTED");
-
 				const formData = new FormData();
 				formData.append("file", avatar);
 
-				fetch("/api/upload", {
-					method: "POST",
-					body: formData,
-				}).then(res => res.json()).then(data => {
-					console.log("__upload__RESULT", data);
+				axiosClient.post("/upload", formData, axiosConfig)
+					.then(res => res.data.json).then(data => {
+						console.log("__upload__RESULT", data);
 
-					values.avatar = data.filePath;
-					registerCreator(values).then(data => {
-						console.log("__registerCreator__RESULT", data);
-					})
-				});
+						values.avatar = data.filePath;
+						registerCreator(values).then(data => {
+							console.log("__registerCreator__RESULT", data);
+						})
+					}).catch(error => {
+						console.log("__uploadFile__ERROR", error);
+					});
 			}
 		});
 	};

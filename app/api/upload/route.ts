@@ -1,22 +1,20 @@
 import { uploadFileToS3 } from "@/data/aws";
-import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
-export const POST = async (req: { formData: () => any }) => {
+type RequestType = {
+  formData: () => any;
+};
+
+export const POST = async (req: RequestType) => {
   try {
     const formData = await req.formData();
-
-    console.log("Form Data", formData);
-
     const file = formData.get("file");
-
-    console.log("__FILE__", file);
 
     if (!file) {
       return NextResponse.json({ error: "File is required" }, { status: 400 });
     }
 
-    const response = await uploadFileToS3(file);
+    const response = await uploadFileToS3(file.name);
 
     if (response.success) {
       return NextResponse.json(response, { status: 200 });
