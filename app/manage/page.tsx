@@ -7,7 +7,7 @@ import { Navbar } from "../_components/navbar";
 export default function Manage() {
 	return (
 		<main className="w-full flex pt-6">
-			Management Page
+			Management Page - You can manage products here
 		</main>
 	);
 }
