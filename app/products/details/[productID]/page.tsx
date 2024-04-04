@@ -89,10 +89,10 @@ export default function ProductDetails({ params }: PropsParams) {
 			}}>
 				<PayPalButtons
 					style={{ color: 'gold', shape: 'rect', label: 'pay', height: 50 }}
-					// createOrder={async (data, action) => {
-					// 	let order_id = await paypalCreateOrder();
-					// 	return order_id;
-					// }}
+					createOrder={async (data, action) => {
+						let order_id = await paypalCreateOrder();
+						return order_id;
+					}}
 					onApprove={async (data, actions) => {
 						let response = await paypalCaptureOrder(data.orderID);
 						if (response !== undefined && response !== null) return;
