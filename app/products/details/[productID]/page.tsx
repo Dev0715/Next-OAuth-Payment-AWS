@@ -33,6 +33,15 @@ export default function ProductDetails({ params }: PropsParams) {
 			<p>Something... Something ...</p>
 			<p>Something... Something ...</p>
 			<p>Price: <Bold>$100</Bold></p>
+
+			<form action="/api/payment/stripe/checkout_sessions" method="POST">
+				<section className="w-[400px] h-[112px]">
+					<Button type="submit" role="link">
+						Checkout with Stripe
+					</Button>
+				</section>
+			</form>
+
 		</main>
 	)
 }
