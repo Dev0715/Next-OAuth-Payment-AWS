@@ -7,6 +7,7 @@ const axiosClient = axios.create({
 const axiosConfig: AxiosRequestConfig = {
   headers: {
     Accept: "application/json"
+    // Authorization: `Bearer ${getToken()}`
   } as RawAxiosRequestHeaders
 };
 
