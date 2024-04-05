@@ -4,9 +4,11 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-type OrderType = {};
+type OrderType = {
+  redirectUrl: string;
+};
 
-export const createOrder = async () => {
+export const createOrder = async (params: OrderType) => {
   const tempPrice = 100;
 
   try {
@@ -43,8 +45,8 @@ export const createOrder = async () => {
       ],
       // success_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`,
       // cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-billing/stripe/return?session_id={CHECKOUT_SESSION_ID}&history_id=membershipHistory_id`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/current-membership`
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}${params.redirectUrl}?session_id={CHECKOUT_SESSION_ID}&history_id=membershipHistory_id`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}${params.redirectUrl}?canceled=true`
     });
 
     return {
