@@ -7,45 +7,52 @@ type OrderType = {};
 export const createOrder = async () => {
   const tempPrice = 100;
 
-  const taxRate = await stripe.taxRates.create({
-    display_name: "GST",
-    description: "Goods & Service Tax",
-    jurisdiction: "AU",
-    percentage: 10,
-    inclusive: false
-  });
+  try {
+    const taxRate = await stripe.taxRates.create({
+      display_name: "GST",
+      description: "Goods & Service Tax",
+      jurisdiction: "AU",
+      percentage: 10,
+      inclusive: false
+    });
 
-  // https://docs.stripe.com/api/checkout/sessions/create
-  let payment = await stripe.checkout.sessions.create({
-    mode: "payment",
-    client_reference_id: "user._id",
-    payment_method_types: ["card"],
-    // customer: customer.id,
-    customer_email: "sacreddevking@gmail.com",
-    line_items: [
-      {
-        price_data: {
-          currency: "USD",
-          product_data: {
-            name: "Your Product Name",
-            description: "Description of your Product",
-            // description: membership.description + " - " + moment().add(membership.period, 'months').format("YYYY-MM-DD HH:mm:ss"),
-            images: ["https://answersheet.au/logo.svg"]
+    // https://docs.stripe.com/api/checkout/sessions/create
+    let payment = await stripe.checkout.sessions.create({
+      mode: "payment",
+      client_reference_id: "user._id",
+      payment_method_types: ["card"],
+      // customer: customer.id,
+      customer_email: "sacreddevking@gmail.com",
+      line_items: [
+        {
+          price_data: {
+            currency: "USD",
+            product_data: {
+              name: "Your Product Name",
+              description: "Description of your Product",
+              // description: membership.description + " - " + moment().add(membership.period, 'months').format("YYYY-MM-DD HH:mm:ss"),
+              images: ["https://answersheet.au/logo.svg"]
+            },
+            unit_amount: Number(Math.round((tempPrice / 1.1) * 100))
           },
-          unit_amount: Number(Math.round((tempPrice / 1.1) * 100))
-        },
-        tax_rates: [taxRate.id],
-        quantity: 1
-      }
-    ],
-    // success_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`,
-    // cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-billing/stripe/return?session_id={CHECKOUT_SESSION_ID}&history_id=membershipHistory_id`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/current-membership`
-  });
+          tax_rates: [taxRate.id],
+          quantity: 1
+        }
+      ],
+      // success_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`,
+      // cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-billing/stripe/return?session_id={CHECKOUT_SESSION_ID}&history_id=membershipHistory_id`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/current-membership`
+    });
 
-  return {
-    success: true,
-    redirect_url: payment.url
-  };
+    return {
+      success: true,
+      payment
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error
+    };
+  }
 };
