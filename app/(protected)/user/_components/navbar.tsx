@@ -1,6 +1,5 @@
 "use client";
 
-import { UserButton } from "@/components/auth/user-button";
 import { Separator } from "@/components/ui/separator";
 
 export const Navbar = () => {
