@@ -23,6 +23,7 @@ import { Separator } from "@/components/ui/separator";
 import { ProfileSchema } from "@/schemas/user";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { Header } from "./_components/header";
 
 export default function Profile() {
 	const [error, setError] = useState<string | undefined>("");
@@ -51,12 +52,7 @@ export default function Profile() {
 
 	return (
 		<main className="w-full h-full pl-8 flex flex-col gap-y-5">
-			<header className="flex flex-col gap-y-1">
-				<p className="text-xl text-black font-medium drop-shadow-md">Profile</p>
-				<p className="text-sm text-gray-600">
-					This is how others will see you on the site
-				</p>
-			</header>
+			<Header title="Profile" content="This is how others will see you on the site" />
 			<Separator />
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
