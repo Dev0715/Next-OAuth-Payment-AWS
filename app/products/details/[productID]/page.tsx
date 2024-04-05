@@ -6,6 +6,10 @@ import { AiFillCreditCard } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaFacebook } from "react-icons/fa";
 import { Navbar } from "../../_components/navbar";
+import { usePathname, useSearchParams } from "next/navigation";
+import { captureOrder as captureStripeOrder } from '@/actions/stripe/capture-order';
+import { toast } from "sonner";
+import { useEffect } from "react";
 
 interface PropsParams {
 	params: {
@@ -22,6 +26,31 @@ function Bold({ children }: { children: React.ReactNode }) {
 }
 
 export default function ProductDetails({ params }: PropsParams) {
+	const Gateway_Paypal = 'paypal';
+	const Gateway_Stripe = 'stripe';
+	const Gateway_Cancelled = 'cancelled';
+
+	const searchParams = useSearchParams();
+	const currentPath = usePathname();
+	const gateway = searchParams.get('gateway');
+
+	useEffect(() => {
+		if (gateway) {
+			console.log("___GATEWAY___", gateway);
+			window.history.replaceState(null, '', currentPath)
+		}
+		toast.success('New Product Purchased Newly!');
+	}, [gateway])
+
+	// if (gateway === Gateway_Paypal || gateway === Gateway_Stripe) {
+	// 	const paymentId = String(gateway === Gateway_Paypal ? searchParams.get('session_id') : searchParams.get("paymentId"));
+	// 	const payerId = gateway === Gateway_Paypal ? searchParams.get('PayerID') : 0;
+	// 	// await captureStripeOrder({ paymentId });
+	// 	toast.success('New Product Purchased Newly!');
+	// } else if (gateway === Gateway_Cancelled) {
+
+	// }
+
 	return (
 		<div className="w-full flex flex-col gap-y-12 pt-6">
 			<Navbar title="Product Detail" content="You can see details of product" />
