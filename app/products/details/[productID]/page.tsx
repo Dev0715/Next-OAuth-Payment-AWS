@@ -3,7 +3,6 @@
 import { PaymentButton } from "@/components/payment/payment-button";
 import { Button } from "@/components/ui/button";
 import { axiosClient, axiosConfig } from "@/lib/axios";
-import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSearchParams } from "next/navigation";
 import { AiFillCreditCard } from "react-icons/ai";
@@ -81,24 +80,6 @@ export default function ProductDetails({ params }: PropsParams) {
 					<AiFillCreditCard />Purchase
 				</Button>
 			</PaymentButton>
-			{/* 
-			<PayPalScriptProvider options={{
-				clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID as string,
-				currency: 'USD',
-				intent: 'capture'
-			}}>
-				<PayPalButtons
-					style={{ color: 'gold', shape: 'rect', label: 'pay', height: 50 }}
-					createOrder={async (data, action) => {
-						let order_id = await paypalCreateOrder();
-						return order_id;
-					}}
-					onApprove={async (data, actions) => {
-						let response = await paypalCaptureOrder(data.orderID);
-						if (response !== undefined && response !== null) return;
-					}}
-				/>
-			</PayPalScriptProvider> */}
 		</main>
 	)
 }
@@ -111,4 +92,3 @@ export default function ProductDetails({ params }: PropsParams) {
 // 		</Button>
 // 	</section>
 // </form>
-
