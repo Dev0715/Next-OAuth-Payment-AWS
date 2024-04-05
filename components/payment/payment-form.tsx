@@ -41,26 +41,12 @@ export const PaymentForm = () => {
 	const onPurchase = async () => {
 		startTransition(async () => {
 			if (paymentMethod === Option_Paypal) {
-				const createdResponse = await createPaypalOrder();
-				console.log("RESULT", createdResponse);
+				const createdResponse = await createPaypalOrder({ redirectUrl: currentPath });
 				if (createdResponse.success) {
-					console.log("LINK", createdResponse.result.links[1]);
-					// window.location.href = createdResponse.result.links[1].href;
+					window.location.href = createdResponse.result.links[1].href;
 				}
-				// const response = await fetch("/api/payment/paypal/capture_order", {
-				// 	method: "POST",
-				// 	headers: {
-				// 		'Content-Type': 'application/json'
-				// 	},
-				// 	body: JSON.stringify({
-				// 		order_id: res.orderID,
-				// 	})
-				// });
-				// await captureOrder(res.orderID);
 			} else {
-				const response = await createStripeOrder({
-					redirectUrl: currentPath
-				});
+				const response = await createStripeOrder({ redirectUrl: currentPath });
 				if (response.success) {
 					window.location.href = response.payment?.url ?? '';
 				}
