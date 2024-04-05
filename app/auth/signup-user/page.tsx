@@ -92,7 +92,7 @@ export default function SignUpUser() {
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="w-full flex gap-x-12">
-						<section className="w-1/2 flex flex-col gap-y-6">
+						<div className="w-1/2 flex flex-col gap-y-6">
 							<div className="flex items-end space-x-4">
 								<Avatar className="w-24 h-24 rounded-xl">
 									<AvatarImage src={avatarImagePath} />
@@ -200,8 +200,8 @@ export default function SignUpUser() {
 									</FormItem>
 								)}
 							/>
-						</section>
-						<section className="w-1/2 space-y-4">
+						</div>
+						<div className="w-1/2 space-y-4">
 							<p>Be the earliest users to get the latest updates and news from us.</p>
 							<p>Early subscribers will get exclusive access to our new features and various benefits.</p>
 							<p>We will also give a number of bonuses like $10 off.</p>
@@ -218,7 +218,7 @@ export default function SignUpUser() {
 									Stripe
 								</Button>
 							</div>
-						</section>
+						</div>
 					</div>
 					<FormError message={error} />
 					<FormSuccess message={success} />

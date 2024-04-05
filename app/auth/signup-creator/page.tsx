@@ -96,18 +96,18 @@ export default function SignUpCreator() {
 	return (
 		<main className="w-full pb-6 flex flex-col gap-y-6">
 			<Navbar title="Creator Registration" content="Register as a creator" />
-			<section className="flex items-center gap-x-4">
+			<div className="flex items-center gap-x-4">
 				<Button asChild variant="link">
 					<Link href="">
 						Accept our standard Legal Agreements
 					</Link>
 				</Button>
 				<Switch onCheckedChange={onAgreeScrap} />
-			</section>
+			</div>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="w-full flex gap-x-12">
-						<section className="w-1/2 flex flex-col gap-y-6">
+						<div className="w-1/2 flex flex-col gap-y-6">
 							<div className="flex items-end space-x-4">
 								<Avatar className="w-24 h-24 rounded-xl">
 									<AvatarImage src={avatarImagePath} />
@@ -237,10 +237,10 @@ export default function SignUpCreator() {
 									</FormItem>
 								)}
 							/>
-						</section>
-						<section className="w-1/2">
+						</div>
+						<div className="w-1/2">
 
-						</section>
+						</div>
 					</div>
 					<FormError message={error} />
 					<FormSuccess message={success} />
