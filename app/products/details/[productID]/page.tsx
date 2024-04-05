@@ -32,15 +32,15 @@ export default function ProductDetails({ params }: PropsParams) {
 
 	const searchParams = useSearchParams();
 	const currentPath = usePathname();
-	const gateway = searchParams.get('gateway');
 
 	useEffect(() => {
+		const gateway = searchParams.get('gateway');
 		if (gateway) {
 			console.log("___GATEWAY___", gateway);
 			window.history.replaceState(null, '', currentPath)
 		}
 		toast.success('New Product Purchased Newly!');
-	}, [gateway])
+	}, [searchParams])
 
 	// if (gateway === Gateway_Paypal || gateway === Gateway_Stripe) {
 	// 	const paymentId = String(gateway === Gateway_Paypal ? searchParams.get('session_id') : searchParams.get("paymentId"));
@@ -54,7 +54,7 @@ export default function ProductDetails({ params }: PropsParams) {
 	return (
 		<div className="w-full flex flex-col gap-y-12 pt-6">
 			<Navbar title="Product Detail" content="You can see details of product" />
-			<section className="flex flex-col gap-y-6">
+			<div className="flex flex-col gap-y-6">
 				<Avatar className="w-48 h-48 rounded-xl">
 					<AvatarImage src="{imgPath}" />
 					<AvatarFallback className="bg-sky-500">
@@ -66,7 +66,7 @@ export default function ProductDetails({ params }: PropsParams) {
 				<p>Key features include a large display, high-quality camera, long-lasting battery, and fast processor. The Smartphone XYZ is perfect for users who want a premium device that can handle all their daily tasks and activities.</p>
 				<p>Whether you're browsing the web, streaming videos, or playing games, the Smartphone XYZ delivers smooth and responsive performance. It also offers a range of connectivity options, including Wi-Fi, Bluetooth, and 4G LTE, so you can stay connected wherever you go.</p>
 				<p>Price: <Bold>$100</Bold></p>
-			</section>
+			</div>
 			<PaymentButton mode="modal">
 				<WrappedButton variant="default" className="w-[480px] flex gap-x-2">
 					<AiFillCreditCard />Purchase

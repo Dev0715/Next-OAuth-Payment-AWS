@@ -13,7 +13,7 @@ interface PaymentButtonProps {
 
 export const PaymentButton = ({
 	children,
-	mode = "modal",
+	mode = "redirect",
 	asChild
 }: PaymentButtonProps) => {
 	const router = useRouter();

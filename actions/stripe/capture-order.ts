@@ -12,10 +12,9 @@ export const captureOrder = async (params: OrderType) => {
 
     let lineItems = await stripe.checkout.sessions.listLineItems(
       params.paymentId,
-      {
-        limit: 1
-      }
+      { limit: 1 }
     );
+
     let transaction = await stripe.paymentIntents.retrieve(
       payment.payment_intent as string
     );
