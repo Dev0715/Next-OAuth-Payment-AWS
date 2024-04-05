@@ -35,11 +35,14 @@ export default function ProductDetails({ params }: PropsParams) {
 
 	useEffect(() => {
 		const gateway = searchParams.get('gateway');
-		if (gateway === Gateway_Paypal || gateway === Gateway_Stripe) {
+		if (gateway === Gateway_Paypal) {
 			const paymentId = String(gateway === Gateway_Paypal ? searchParams.get('session_id') : searchParams.get("paymentId"));
 			const payerId = gateway === Gateway_Paypal ? searchParams.get('PayerID') : 0;
 			// captureStripeOrder({ paymentId });
 			toast.success('New Product Purchased Newly!');
+		} else if (gateway === Gateway_Stripe) {
+			const paymentId = String(gateway === Gateway_Paypal ? searchParams.get('session_id') : searchParams.get("paymentId"));
+			const payerId = gateway === Gateway_Paypal ? searchParams.get('PayerID') : 0;
 		} else if (gateway === Gateway_Cancelled) {
 			toast.error('Payment Cancelled');
 		}
