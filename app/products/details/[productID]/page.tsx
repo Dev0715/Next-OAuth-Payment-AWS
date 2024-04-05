@@ -1,10 +1,12 @@
 "use client"
 
+import { PaymentButton } from "@/components/payment/payment-button";
 import { Button } from "@/components/ui/button";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSearchParams } from "next/navigation";
+import { AiFillCreditCard } from "react-icons/ai";
 
 interface PropsParams {
 	params: {
@@ -66,21 +68,20 @@ export default function ProductDetails({ params }: PropsParams) {
 	}
 
 	return (
-		<main className="w-full flex flex-col gap-y-6 pt-6">
-			<p>Product detail page of <Bold>Product {params.productID}</Bold></p>
-			<p>Something... Something ...</p>
-			<p>Something... Something ...</p>
-			<p>Something... Something ...</p>
-			<p>Price: <Bold>$100</Bold></p>
-
-			<form action="/api/payment/stripe/checkout_sessions" method="POST">
-				<section className="w-[400px] h-[112px]">
-					<Button type="submit" role="link">
-						Checkout with Stripe
-					</Button>
-				</section>
-			</form>
-
+		<main className="w-full flex flex-col gap-y-12 pt-6">
+			<section className="flex flex-col gap-y-6">
+				<p>Product detail page of <Bold>Product {params.productID}</Bold></p>
+				<p>Something... Something ...</p>
+				<p>Something... Something ...</p>
+				<p>Something... Something ...</p>
+				<p>Price: <Bold>$100</Bold></p>
+			</section>
+			<PaymentButton>
+				<Button variant="default" className="w-[480px] flex gap-x-2">
+					<AiFillCreditCard />Purchase
+				</Button>
+			</PaymentButton>
+			{/* 
 			<PayPalScriptProvider options={{
 				clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID as string,
 				currency: 'USD',
@@ -97,7 +98,17 @@ export default function ProductDetails({ params }: PropsParams) {
 						if (response !== undefined && response !== null) return;
 					}}
 				/>
-			</PayPalScriptProvider>
+			</PayPalScriptProvider> */}
 		</main>
 	)
 }
+
+
+// <form action="/api/payment/stripe/checkout_sessions" method="POST">
+// 	<section className="w-[400px] h-[112px]">
+// 		<Button type="submit" role="link">
+// 			Checkout with Stripe
+// 		</Button>
+// 	</section>
+// </form>
+
