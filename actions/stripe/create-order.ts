@@ -44,7 +44,7 @@ export const createOrder = async (params: OrderType) => {
       // success_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`,
       // cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`
       success_url: `${process.env.NEXT_PUBLIC_APP_URL}${params.redirectUrl}?gateway=stripe&session_id={CHECKOUT_SESSION_ID}&history_id=membershipHistory_id`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}${params.redirectUrl}?canceled=true`
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}${params.redirectUrl}?gateway=cancelled`
     });
 
     return {
