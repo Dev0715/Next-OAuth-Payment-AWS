@@ -25,7 +25,7 @@ import { AiFillCreditCard } from "react-icons/ai";
 import { Label } from "@/components/ui/label";
 import { FaCcVisa, FaCcMastercard, FaCcPaypal, } from "react-icons/fa";
 import { useState, useTransition } from "react";
-import { createOrder as createPaypalOrder } from "@/actions/payment/create-order";
+import { createOrder as createPaypalOrder } from "@/actions/paypal/create-order";
 import { usePathname } from "next/navigation";
 import { createOrder as createStripeOrder } from "@/actions/stripe/create-order";
 

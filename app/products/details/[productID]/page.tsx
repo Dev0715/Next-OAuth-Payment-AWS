@@ -35,21 +35,17 @@ export default function ProductDetails({ params }: PropsParams) {
 
 	useEffect(() => {
 		const gateway = searchParams.get('gateway');
-		if (gateway) {
-			console.log("___GATEWAY___", gateway);
-			window.history.replaceState(null, '', currentPath)
+		if (gateway === Gateway_Paypal || gateway === Gateway_Stripe) {
+			const paymentId = String(gateway === Gateway_Paypal ? searchParams.get('session_id') : searchParams.get("paymentId"));
+			const payerId = gateway === Gateway_Paypal ? searchParams.get('PayerID') : 0;
+			// captureStripeOrder({ paymentId });
+			toast.success('New Product Purchased Newly!');
+		} else if (gateway === Gateway_Cancelled) {
+			toast.error('Payment Cancelled');
 		}
-		toast.success('New Product Purchased Newly!');
-	}, [searchParams])
+		window.history.replaceState(null, '', currentPath)
+	}, [searchParams]);
 
-	// if (gateway === Gateway_Paypal || gateway === Gateway_Stripe) {
-	// 	const paymentId = String(gateway === Gateway_Paypal ? searchParams.get('session_id') : searchParams.get("paymentId"));
-	// 	const payerId = gateway === Gateway_Paypal ? searchParams.get('PayerID') : 0;
-	// 	// await captureStripeOrder({ paymentId });
-	// 	toast.success('New Product Purchased Newly!');
-	// } else if (gateway === Gateway_Cancelled) {
-
-	// }
 
 	return (
 		<div className="w-full flex flex-col gap-y-12 pt-6">
