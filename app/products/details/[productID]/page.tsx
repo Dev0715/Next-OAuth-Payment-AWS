@@ -13,7 +13,7 @@ interface PropsParams {
 	}
 }
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
+// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
 function Bold({ children }: { children: React.ReactNode }) {
 	return (
@@ -24,48 +24,6 @@ function Bold({ children }: { children: React.ReactNode }) {
 }
 
 export default function ProductDetails({ params }: PropsParams) {
-	const searchParmas = useSearchParams();
-
-	const paypalCreateOrder = async () => {
-		try {
-			const response = await axiosClient.post("/payment/paypal/create_order", {
-				user_id: "1234", // sotre.getState().auth.user._id
-				order_price: 100, // amountRef.current.value
-			}, axiosConfig);
-
-			return { orderid: '' }; // response.data.orderID
-		} catch (err) {
-			return null;
-		}
-	}
-
-	const paypalCaptureOrder = async (order_id: string) => {
-		try {
-			const response = await fetch("/api/payment/paypal/capture_order", {
-				method: "POST",
-				body: JSON.stringify({
-					order_id,
-				})
-			});
-
-			if (response) { // response.data.success
-				// Order is successful
-				// Custom code
-				// response.data.data.wallet.balance
-			}
-
-		} catch (err) {
-			// err
-		}
-	}
-
-	if (searchParmas.get('success')) {
-		console.log('Order placed! You will receive an email confirmation.');
-	}
-	if (searchParmas.get('canceled')) {
-		console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
-	}
-
 	return (
 		<main className="w-full flex flex-col gap-y-12 pt-6">
 			<section className="flex flex-col gap-y-6">
