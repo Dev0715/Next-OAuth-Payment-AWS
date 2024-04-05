@@ -2,8 +2,8 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/auth/login-button";
-import { Navbar } from "../_components/navbar";
 import { ProductItem } from "./_components/productitem";
+import { Navbar } from "./_components/navbar";
 
 export default function Products() {
 	const products = [
@@ -28,15 +28,18 @@ export default function Products() {
 	]
 
 	return (
-		<main className="w-full flex pt-6 gap-4">
-			{products.map((product, index) => (
-				<ProductItem
-					key={index}
-					imgPath={product.imgPath}
-					title={product.title}
-					description={product.description}
-					price={product.price} />
-			))}
+		<main className="w-full flex flex-col pt-6">
+			<Navbar title="Products" content="You can see all products here" />
+			<div className="flex gap-4 pt-6">
+				{products.map((product, index) => (
+					<ProductItem
+						key={index}
+						imgPath={product.imgPath}
+						title={product.title}
+						description={product.description}
+						price={product.price} />
+				))}
+			</div>
 		</main>
 	);
 }
