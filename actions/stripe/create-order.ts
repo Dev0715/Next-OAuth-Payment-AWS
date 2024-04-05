@@ -5,6 +5,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 type OrderType = {};
 
 export const createOrder = async () => {
+  const tempPrice = 100;
+
   const taxRate = await stripe.taxRates.create({
     display_name: "GST",
     description: "Goods & Service Tax",
@@ -30,20 +32,20 @@ export const createOrder = async () => {
             // description: membership.description + " - " + moment().add(membership.period, 'months').format("YYYY-MM-DD HH:mm:ss"),
             images: ["https://answersheet.au/logo.svg"]
           },
-          unit_amount: Number(Math.round((membership.price / 1.1) * 100))
+          unit_amount: Number(Math.round((tempPrice / 1.1) * 100))
         },
         tax_rates: [taxRate.id],
         quantity: 1
       }
     ],
-    // success_url: `${global.env.HOSTNAME}/private-membership`,
-    // cancel_url: `${global.env.HOSTNAME}/private-membership`
-    success_url: `${global.env.HOSTNAME}/private-billing/stripe/return?session_id={CHECKOUT_SESSION_ID}&history_id=${membershipHistory._id}`,
-    cancel_url: `${global.env.HOSTNAME}/current-membership`
+    // success_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`,
+    // cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-membership`
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/private-billing/stripe/return?session_id={CHECKOUT_SESSION_ID}&history_id=membershipHistory_id`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/current-membership`
   });
 
-  return res.json({
+  return {
     success: true,
     redirect_url: payment.url
-  });
+  };
 };
