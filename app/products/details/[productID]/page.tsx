@@ -1,10 +1,8 @@
 "use client"
 
 import { PaymentButton } from "@/components/payment/payment-button";
-import { Button } from "@/components/ui/button";
-import { axiosClient, axiosConfig } from "@/lib/axios";
+import { WrappedButton } from "@/components/wrapped-button";
 import { loadStripe } from "@stripe/stripe-js";
-import { useSearchParams } from "next/navigation";
 import { AiFillCreditCard } from "react-icons/ai";
 
 interface PropsParams {
@@ -33,11 +31,11 @@ export default function ProductDetails({ params }: PropsParams) {
 				<p>Something... Something ...</p>
 				<p>Price: <Bold>$100</Bold></p>
 			</section>
-			{/* <PaymentButton> */}
-			<button className="w-[480px] flex gap-x-2">
-				<AiFillCreditCard />Purchase
-			</button>
-			{/* </PaymentButton> */}
+			<PaymentButton mode="modal">
+				<WrappedButton variant="default" className="w-[480px] flex gap-x-2">
+					<AiFillCreditCard />Purchase
+				</WrappedButton>
+			</PaymentButton>
 		</div>
 	)
 }
