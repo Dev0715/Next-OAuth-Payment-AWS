@@ -25,7 +25,7 @@ function Bold({ children }: { children: React.ReactNode }) {
 
 export default function ProductDetails({ params }: PropsParams) {
 	return (
-		<main className="w-full flex flex-col gap-y-12 pt-6">
+		<div className="w-full flex flex-col gap-y-12 pt-6">
 			<section className="flex flex-col gap-y-6">
 				<p>Product detail page of <Bold>Product {params.productID}</Bold></p>
 				<p>Something... Something ...</p>
@@ -33,12 +33,12 @@ export default function ProductDetails({ params }: PropsParams) {
 				<p>Something... Something ...</p>
 				<p>Price: <Bold>$100</Bold></p>
 			</section>
-			<PaymentButton>
-				<Button variant="default" className="w-[480px] flex gap-x-2">
-					<AiFillCreditCard />Purchase
-				</Button>
-			</PaymentButton>
-		</main>
+			{/* <PaymentButton> */}
+			<button className="w-[480px] flex gap-x-2">
+				<AiFillCreditCard />Purchase
+			</button>
+			{/* </PaymentButton> */}
+		</div>
 	)
 }
 
