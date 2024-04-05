@@ -1,11 +1,15 @@
 "use server";
 
-import client from "@/lib/paypal";
+import paypalClient from "@/lib/paypal";
 import paypal from "@paypal/checkout-server-sdk";
 
-export const createOrder = async () => {
+type OrderType = {
+  redirectUrl: string;
+};
+
+export const createOrder = async (params: OrderType) => {
   try {
-    const PaypalClient = client();
+    const PaypalClient = paypalClient();
     const request = new paypal.orders.OrdersCreateRequest();
     request.prefer("return=representation");
     request.requestBody({
@@ -17,7 +21,11 @@ export const createOrder = async () => {
             value: (100).toFixed(2) // order_price
           }
         }
-      ]
+      ],
+      application_context: {
+        return_url: `${process.env.NEXT_PUBLIC_APP_URL}${params.redirectUrl}?gateway=paypal&history_id=history_id`,
+        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}${params.redirectUrl}?gateway=cancelled`
+      }
     });
     const response = await PaypalClient.execute(request);
 
