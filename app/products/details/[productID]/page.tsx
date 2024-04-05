@@ -36,13 +36,14 @@ export default function ProductDetails({ params }: PropsParams) {
 	useEffect(() => {
 		const gateway = searchParams.get('gateway');
 		if (gateway === Gateway_Paypal) {
-			const paymentId = String(gateway === Gateway_Paypal ? searchParams.get('session_id') : searchParams.get("paymentId"));
-			const payerId = gateway === Gateway_Paypal ? searchParams.get('PayerID') : 0;
+			const paymentId = searchParams.get("paymentId");
+			const payerId = searchParams.get('PayerID');
 			// captureStripeOrder({ paymentId });
-			toast.success('New Product Purchased Newly!');
+			toast.success('New Product Purchased Newly through Paypal');
 		} else if (gateway === Gateway_Stripe) {
-			const paymentId = String(gateway === Gateway_Paypal ? searchParams.get('session_id') : searchParams.get("paymentId"));
-			const payerId = gateway === Gateway_Paypal ? searchParams.get('PayerID') : 0;
+			const paymentId = searchParams.get('session_id');
+			const payerId = 0;
+			toast.success('New Product Purchased Newly through Stripe');
 		} else if (gateway === Gateway_Cancelled) {
 			toast.error('Payment Cancelled');
 		}
