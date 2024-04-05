@@ -2,7 +2,6 @@
 
 import { PaymentButton } from "@/components/payment/payment-button";
 import { WrappedButton } from "@/components/wrapped-button";
-import { loadStripe } from "@stripe/stripe-js";
 import { AiFillCreditCard } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaFacebook } from "react-icons/fa";
@@ -13,8 +12,6 @@ interface PropsParams {
 		productID: string;
 	}
 }
-
-// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
 function Bold({ children }: { children: React.ReactNode }) {
 	return (
@@ -49,12 +46,3 @@ export default function ProductDetails({ params }: PropsParams) {
 		</div>
 	)
 }
-
-
-// <form action="/api/payment/stripe/checkout_sessions" method="POST">
-// 	<section className="w-[400px] h-[112px]">
-// 		<Button type="submit" role="link">
-// 			Checkout with Stripe
-// 		</Button>
-// 	</section>
-// </form>
