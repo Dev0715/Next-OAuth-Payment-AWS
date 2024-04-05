@@ -57,7 +57,7 @@ export default function Profile() {
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="w-full flex gap-x-12">
-						<section className="w-1/2 flex flex-col gap-y-6">
+						<div className="w-1/2 flex flex-col gap-y-6">
 							<FormField
 								control={form.control}
 								name="username"
@@ -88,8 +88,8 @@ export default function Profile() {
 									</FormItem>
 								)}
 							/>
-						</section>
-						<section className="w-1/2">
+						</div>
+						<div className="w-1/2">
 							<h3 className="mb-4 text-base font-medium">Your roles</h3>
 							<div className="space-y-4">
 								<FormField
@@ -153,7 +153,7 @@ export default function Profile() {
 									)}
 								/>
 							</div>
-						</section>
+						</div>
 					</div>
 					<FormError message={error} />
 					<FormSuccess message={success} />
