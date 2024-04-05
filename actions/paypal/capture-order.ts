@@ -1,13 +1,29 @@
 "use server";
 
-import client from "@/lib/paypal";
+import paypalClient from "@/lib/paypal";
 import paypal from "@paypal/checkout-server-sdk";
 
-export const captureOrder = async (order_id: string) => {
+type OrderType = {
+  paymentId: string;
+};
+
+export const captureOrder = async (params: OrderType) => {
   try {
-    const PaypalClient = client();
-    const request = new paypal.orders.OrdersCaptureRequest(order_id);
+    const PaypalClient = paypalClient();
+    const request = new paypal.orders.OrdersCaptureRequest(params.paymentId);
     request.requestBody({}); // typescript issue
     const response = await PaypalClient.execute(request);
-  } catch (error) {}
+
+    // Doing something related to the transaction
+
+    return {
+      success: true,
+      response
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error
+    };
+  }
 };

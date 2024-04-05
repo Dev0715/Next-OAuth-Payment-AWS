@@ -8,6 +8,7 @@ import { FaFacebook } from "react-icons/fa";
 import { Navbar } from "../../_components/navbar";
 import { usePathname, useSearchParams } from "next/navigation";
 import { captureOrder as captureStripeOrder } from '@/actions/stripe/capture-order';
+import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
 import { toast } from "sonner";
 import { useEffect } from "react";
 
@@ -36,13 +37,14 @@ export default function ProductDetails({ params }: PropsParams) {
 	useEffect(() => {
 		const gateway = searchParams.get('gateway');
 		if (gateway === Gateway_Paypal) {
-			const paymentId = searchParams.get("paymentId");
+			const paymentId = String(searchParams.get("paymentId"));
 			const payerId = searchParams.get('PayerID');
 			// captureStripeOrder({ paymentId });
 			toast.success('New Product Purchased Newly through Paypal');
 		} else if (gateway === Gateway_Stripe) {
-			const paymentId = searchParams.get('session_id');
+			const paymentId = String(searchParams.get('session_id'));
 			const payerId = 0;
+			// capturePaypalOrder({ paymentId });
 			toast.success('New Product Purchased Newly through Stripe');
 		} else if (gateway === Gateway_Cancelled) {
 			toast.error('Payment Cancelled');
