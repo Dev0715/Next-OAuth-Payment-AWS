@@ -12,19 +12,21 @@ export const createOrder = async () => {
     percentage: 10,
     inclusive: false
   });
+
+  // https://docs.stripe.com/api/checkout/sessions/create
   let payment = await stripe.checkout.sessions.create({
     mode: "payment",
-    client_reference_id: user._id.toString(),
+    client_reference_id: "user._id",
     payment_method_types: ["card"],
     // customer: customer.id,
-    customer_email: user.email,
+    customer_email: "sacreddevking@gmail.com",
     line_items: [
       {
         price_data: {
-          currency: "AUD",
+          currency: "USD",
           product_data: {
-            name: membership.name,
-            description: membership.description,
+            name: "Your Product Name",
+            description: "Description of your Product",
             // description: membership.description + " - " + moment().add(membership.period, 'months').format("YYYY-MM-DD HH:mm:ss"),
             images: ["https://answersheet.au/logo.svg"]
           },
