@@ -26,24 +26,21 @@ import { Label } from "@/components/ui/label";
 import { FaCcVisa, FaCcMastercard, FaCcPaypal, } from "react-icons/fa";
 import { useState, useTransition } from "react";
 import { createOrder as createPaypalOrder } from "@/actions/payment/create-order";
-import { axiosClient, axiosConfig } from "@/lib/axios";
-import { captureOrder } from "@/actions/payment/capture-order";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { createOrder as createStripeOrder } from "@/actions/stripe/create-order";
 
 export const PaymentForm = () => {
-	const optionPaypal = 'option-paypal';
-	const optionStripe = 'option-stripe';
+	const Option_Paypal = 'option-paypal';
+	const Option_Stripe = 'option-stripe';
 
 	const [isPending, startTransition] = useTransition();
-	const [paymentMethod, setPaymentMethod] = useState(optionPaypal);
+	const [paymentMethod, setPaymentMethod] = useState(Option_Paypal);
 
+	const currentPath = usePathname();
 
 	const onPurchase = async () => {
-		console.log("__PAYMENT__METHOD__", paymentMethod);
-
 		startTransition(async () => {
-			if (paymentMethod === optionPaypal) {
+			if (paymentMethod === Option_Paypal) {
 				const createdResponse = await createPaypalOrder();
 				console.log("RESULT", createdResponse);
 				if (createdResponse.success) {
@@ -61,8 +58,9 @@ export const PaymentForm = () => {
 				// });
 				// await captureOrder(res.orderID);
 			} else {
-				const response = await createStripeOrder();
-				console.log("___RESPONSE___STRIPE___", response);
+				const response = await createStripeOrder({
+					redirectUrl: currentPath
+				});
 				if (response.success) {
 					window.location.href = response.payment?.url ?? '';
 				}
@@ -77,18 +75,18 @@ export const PaymentForm = () => {
 				<CardDescription>Select the payment method you prefer</CardDescription>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-y-6">
-				<RadioGroup defaultValue={optionPaypal} onValueChange={setPaymentMethod} className="w-full flex justify-between">
+				<RadioGroup defaultValue={Option_Paypal} onValueChange={setPaymentMethod} className="w-full flex justify-between">
 					<div className="flex items-center gap-x-4">
-						<RadioGroupItem value={optionStripe} id={optionStripe} />
-						<Label htmlFor={optionStripe} className="flex items-center gap-x-4 text-5xl">
+						<RadioGroupItem value={Option_Stripe} id={Option_Stripe} />
+						<Label htmlFor={Option_Stripe} className="flex items-center gap-x-4 text-5xl">
 							<FaCcVisa className="text-emerald-700" />
 							<FaCcMastercard className="text-emerald-700" />
 							<p className="text-lg">Stripe</p>
 						</Label>
 					</div>
 					<div className="flex items-center gap-x-4">
-						<RadioGroupItem value={optionPaypal} id={optionPaypal} />
-						<Label htmlFor={optionPaypal} className="flex items-center gap-x-4 text-5xl">
+						<RadioGroupItem value={Option_Paypal} id={Option_Paypal} />
+						<Label htmlFor={Option_Paypal} className="flex items-center gap-x-4 text-5xl">
 							<FaCcPaypal className="text-sky-700" />
 							<p className="text-lg">Paypal</p>
 						</Label>
@@ -123,7 +121,7 @@ export const PaymentForm = () => {
 					<Button variant="destructive" className="flex gap-x-2">
 						<MdCancel /> Cancel	{/** Not Working Now */}
 					</Button>
-					<Button className="flex gap-x-2" onClick={onPurchase}>
+					<Button className="flex gap-x-2" disabled={isPending} onClick={onPurchase}>
 						<AiFillCreditCard />Purchase
 					</Button>
 				</div>
