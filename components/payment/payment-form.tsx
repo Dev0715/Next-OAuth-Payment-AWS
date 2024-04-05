@@ -25,10 +25,11 @@ import { AiFillCreditCard } from "react-icons/ai";
 import { Label } from "@/components/ui/label";
 import { FaCcVisa, FaCcMastercard, FaCcPaypal, } from "react-icons/fa";
 import { useState, useTransition } from "react";
-import { createOrder } from "@/actions/payment/create-order";
+import { createOrder as createPaypalOrder } from "@/actions/payment/create-order";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { captureOrder } from "@/actions/payment/capture-order";
 import { useRouter } from "next/navigation";
+import { createOrder as createStripeOrder } from "@/actions/stripe/create-order";
 
 export const PaymentForm = () => {
 	const optionPaypal = 'option-paypal';
@@ -42,22 +43,30 @@ export const PaymentForm = () => {
 		console.log("__PAYMENT__METHOD__", paymentMethod);
 
 		startTransition(async () => {
-			const createdResponse = await createOrder();
-			console.log("RESULT", createdResponse);
-			if (createdResponse.success) {
-				console.log("LINK", createdResponse.result.links[1]);
-				// window.location.href = createdResponse.result.links[1].href;
+			if (paymentMethod === optionPaypal) {
+				const createdResponse = await createPaypalOrder();
+				console.log("RESULT", createdResponse);
+				if (createdResponse.success) {
+					console.log("LINK", createdResponse.result.links[1]);
+					// window.location.href = createdResponse.result.links[1].href;
+				}
+				// const response = await fetch("/api/payment/paypal/capture_order", {
+				// 	method: "POST",
+				// 	headers: {
+				// 		'Content-Type': 'application/json'
+				// 	},
+				// 	body: JSON.stringify({
+				// 		order_id: res.orderID,
+				// 	})
+				// });
+				// await captureOrder(res.orderID);
+			} else {
+				const response = await createStripeOrder();
+				console.log("___RESPONSE___STRIPE___", response);
+				if (response.success) {
+					window.location.href = response.payment?.url ?? '';
+				}
 			}
-			// const response = await fetch("/api/payment/paypal/capture_order", {
-			// 	method: "POST",
-			// 	headers: {
-			// 		'Content-Type': 'application/json'
-			// 	},
-			// 	body: JSON.stringify({
-			// 		order_id: res.orderID,
-			// 	})
-			// });
-			// await captureOrder(res.orderID);
 		})
 	}
 
