@@ -1,8 +1,6 @@
 "use server";
 
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+import stripe from "@/lib/stripe";
 
 type OrderType = {
   redirectUrl: string;
@@ -13,7 +11,7 @@ export const createOrder = async (params: OrderType) => {
 
   try {
     const taxRate = await stripe.taxRates.create({
-      display_name: "GST",
+      display_name: "Sales Tax",
       description: "Goods & Service Tax",
       jurisdiction: "AU",
       percentage: 10,
