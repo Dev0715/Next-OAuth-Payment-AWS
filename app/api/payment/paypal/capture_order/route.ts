@@ -6,21 +6,32 @@ type Params = {
   order_id?: string;
 };
 
-export const POST = async (req: Request, context: { params: Params }) => {
-  console.log("__paypal__capture__", req, context);
+export const POST = async (req: Request) => {
+  const order_id = await req.json();
 
-  if (!context.params.order_id) {
+  if (!order_id) {
     return NextResponse.json(
       { success: false, message: "Please provide order ID" },
       { status: 400 }
     );
   }
 
-  const orderId = context.params.order_id;
+  console.log("________HERE__________11", order_id);
+
+  const orderId = order_id;
   const PaypalClient = client();
   const request = new paypal.orders.OrdersCaptureRequest(orderId);
+
+  console.log("________HERE__________22", order_id);
+
   request.requestBody({}); // typescript issue
+
+  console.log("________HERE__________33", order_id);
+
   const response = await PaypalClient.execute(request);
+
+  console.log("________HERE__________44", order_id);
+
   if (!response) {
     return NextResponse.json(
       { success: false, message: "Some Error occured" },
