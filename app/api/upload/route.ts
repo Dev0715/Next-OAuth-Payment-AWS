@@ -20,7 +20,7 @@ export const POST = async (req: RequestType) => {
 
     const response = await uploadFileToS3(file); // upload connection issue
 
-    console.log("__POST__UPLOAD__ROUTE__", file);
+    console.log("__POST__UPLOAD__ROUTE__", response);
 
     if (response.success) {
       return NextResponse.json(response, { status: 200 });
