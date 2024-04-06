@@ -77,7 +77,6 @@ export default function SignUpCreator() {
 
 						}
 
-						values.avatar = data.filePath;
 						// registerCreator(values).then(data => {
 						// 	console.log("__registerCreator__RESULT", data);
 						// })
