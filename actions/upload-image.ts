@@ -20,7 +20,7 @@ export const uploadFileToS3 = async (file: File) => {
   try {
     const response = await s3Client.send(command);
     console.log("__uploadFileToS3__RESPONSE", response);
-    return { success: true, filePath: file.name }; // Need to be updated with the actual file name got from response
+    return { success: true, response }; // Need to be updated with the actual file name got from response
   } catch (error) {
     console.log("__uploadFileToS3__ERROR", error);
     return { success: false, error };
