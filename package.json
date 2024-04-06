@@ -12,6 +12,7 @@
     "@aws-sdk/client-dynamodb": "^3.540.0",
     "@aws-sdk/client-s3": "^3.540.0",
     "@aws-sdk/lib-dynamodb": "^3.540.0",
+    "@aws-sdk/s3-request-presigner": "^3.550.0",
     "@hookform/resolvers": "^3.3.3",
     "@paypal/checkout-server-sdk": "^1.0.3",
     "@paypal/react-paypal-js": "^8.2.0",
