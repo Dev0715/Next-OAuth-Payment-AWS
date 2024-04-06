@@ -68,13 +68,19 @@ export default function SignUpCreator() {
 				formData.append("file", avatar);
 
 				axiosClient.post("/upload", formData, axiosConfig)
-					.then(res => res.data.json).then(data => {
-						console.log("__upload__RESULT", data);
+					.then(res => res.data).then(data => {
+						if (data.success) {
+							const res = data.response;
+							const metadata = res.$metadata;
+							console.log("__upload__RESULT", res, metadata);
+						} else {
+
+						}
 
 						values.avatar = data.filePath;
-						registerCreator(values).then(data => {
-							console.log("__registerCreator__RESULT", data);
-						})
+						// registerCreator(values).then(data => {
+						// 	console.log("__registerCreator__RESULT", data);
+						// })
 					}).catch(error => {
 						console.log("__uploadFile__ERROR", error);
 					});
