@@ -16,16 +16,23 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { LoginButton } from "./login-button";
 import { WrappedButton } from "../wrapped-button";
+import { SignupButton } from "./signup-button";
 
 export const UserButton = () => {
   const user = useCurrentUser();
 
   if (!user) return (
-    <LoginButton mode="modal">
-      {/* <WrappedButton variant="default" size="lg"> */}
-      <p className="test-lg font-medium">Sign in</p>
-      {/* </WrappedButton> */}
-    </LoginButton>
+    <div className="flex items-center gap-x-2">
+      <LoginButton>
+        {/* <WrappedButton variant="default" size="lg"> */}
+        <p className="text-md font-medium">Log in</p>
+        {/* </WrappedButton> */}
+      </LoginButton>
+      <p className="text-gray-400">|</p>
+      <SignupButton>
+        <p className="text-md font-medium">Sign up</p>
+      </SignupButton>
+    </div>
   );
 
   return (
