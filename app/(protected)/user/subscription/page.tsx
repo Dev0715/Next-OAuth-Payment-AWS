@@ -6,7 +6,7 @@ import { PaymentForm } from "@/components/payment/payment-form";
 
 const Subscription = () => {
   return (
-    <main className="w-full h-full pl-8 flex flex-col gap-y-5">
+    <main className="w-full pl-8 flex flex-col gap-y-5">
       <Header title="Subscription" content="Select your plan for a membership" />
       <Separator />
       <PaymentForm />

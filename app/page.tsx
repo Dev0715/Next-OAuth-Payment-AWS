@@ -16,9 +16,9 @@ const Home = () => {
   const user = useCurrentUser();
 
   return (
-    <main className="w-full h-full">
-      <div className="flex flex-col items-center gap-y-24 pt-32">
-        <h1 className={cn("text-5xl font-semibold text-black drop-shadow-md", font.className)}>
+    <main className="w-full">
+      <div className="w-1/2 flex flex-col items-center gap-y-24 pt-32 text-center">
+        <h1 className={cn("text-6xl font-semibold text-black drop-shadow-md", font.className)}>
           This site is scheduled to launch officially on May 15th
         </h1>
         <div className='space-y-4 text-center'>

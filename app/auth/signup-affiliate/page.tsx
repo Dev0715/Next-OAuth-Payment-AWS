@@ -5,9 +5,9 @@ import { LoginButton } from "@/components/auth/login-button";
 import { Navbar } from "../_components/navbar";
 
 export default function SignUpAffiliate() {
-	return (
-		<main className="w-full h-full flex flex-col">
-			<Navbar title="Affiliate Registration" content="Register as an affiliate" />
-		</main>
-	);
+  return (
+    <main className="w-full flex flex-col">
+      <Navbar title="Affiliate Registration" content="Register as an affiliate" />
+    </main>
+  );
 }
