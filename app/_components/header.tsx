@@ -19,7 +19,7 @@ import React from "react";
 
 export const Header = () => {
   return (
-    <nav className="w-full pb-6 flex items-end bg-gray-50 sticky top-6 box-border z-50">
+    <nav className="w-full flex items-end pb-2 sticky top-6 z-50 box-border border-b-2">
       <div className="w-full flex">
         <div className="w-full flex items-end gap-4">
           {/* <Avatar className="w-16 h-16 rounded-xl">
