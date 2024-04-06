@@ -9,12 +9,13 @@ export const POST = async (req: RequestType) => {
   try {
     const formData = await req.formData();
     const file = formData.get("file");
+    const keyName = formData.get("keyName");
 
     if (!file) {
       return NextResponse.json({ error: "File is required" }, { status: 400 });
     }
 
-    const response = await uploadFileToS3(file);
+    const response = await uploadFileToS3(file, keyName);
 
     if (response.success) {
       return NextResponse.json(response, { status: 200 });
