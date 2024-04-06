@@ -14,17 +14,17 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
-import { Button } from "@/components/ui/button";
 import { LoginButton } from "./login-button";
+import { WrappedButton } from "../wrapped-button";
 
 export const UserButton = () => {
   const user = useCurrentUser();
 
   if (!user) return (
-    <LoginButton>
-      <Button variant="default" size="lg">
-        Sign in
-      </Button>
+    <LoginButton mode="modal">
+      {/* <WrappedButton variant="default" size="lg"> */}
+      <p className="test-lg font-medium">Sign in</p>
+      {/* </WrappedButton> */}
     </LoginButton>
   );
 
