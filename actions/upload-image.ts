@@ -3,12 +3,12 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 const Bucket = process.env.AWS_BUCKET_NAME;
 
-export const uploadFileToS3 = async (file: File) => {
+export const uploadFileToS3 = async (file: File, keyName: string) => {
   const Body = Buffer.from(await file.arrayBuffer());
 
   const command = new PutObjectCommand({
     Bucket,
-    Key: `${file.name}`,
+    Key: keyName,
     Body,
     ContentType: "image/jpeg"
   });
