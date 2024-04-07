@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import { ResetSchema } from "@/schemas/auth";
 import { getUserByEmail, updateUserToken } from "@/data/user";
 import { sendPasswordResetEmail } from "@/lib/mail";
-import { generatePasswordResetToken } from "@/lib/tokens";
 
 export const reset = async (values: z.infer<typeof ResetSchema>) => {
   const validatedFields = ResetSchema.safeParse(values);
@@ -36,8 +35,9 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
   // const passwordResetToken = await generatePasswordResetToken(email);
   const response = await sendPasswordResetEmail(
     updatedUser.email,
-    updatedUser.token
+    updatedUser.verificationToken
   );
+
   if (response.error) {
     return { error: response.error.name };
   }
