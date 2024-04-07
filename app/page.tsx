@@ -16,26 +16,21 @@ const Home = () => {
   const user = useCurrentUser();
 
   return (
-    <main className="w-full">
-      <div className="w-1/2 flex flex-col items-center gap-y-24 pt-32 text-center">
-        <h1 className={cn("text-6xl font-semibold text-black drop-shadow-md", font.className)}>
-          This site is scheduled to launch officially on May 15th
+    <main className="w-full flex justify-center pt-24">
+      <div className="w-1/2 flex flex-col items-center gap-y-24 text-center">
+        <h1 className={cn("text-7xl font-semibold text-black drop-shadow-md", font.className)}>
+          Bring your creative ideas to life!
+
         </h1>
-        <div className='space-y-4 text-center'>
-          <p className="text-black text-lg">
-            //** Fields to let them know creative features will be coming and to give them the ability to Opt In to those programs. **//
-          </p>
-          <p className="text-black text-lg">You can sign-up now as either a Seller or a User!</p>
+        <div className='w-full space-y-4 text-left text-black text-lg'>
+          <p>/** This site is scheduled to launch officially on May 15th! - [ Need to be updated ]</p>
+          <p>You can bring creative features coming and Opt In to those programs. - [ Need to be updated ]</p>
+          <p>You can pre-register as a customer and will get big benefits by being a early subscriber! **/</p>
         </div>
-        <div className='flex gap-x-4'>
-          <Button variant="default" asChild size="lg">
-            <Link href="/auth/signup-creator">Sign-Up Now as a Creator</Link>
-          </Button>
-          <Button variant="default" asChild size="lg">
-            <Link href="/auth/signup-user">Sign-Up Now as a User</Link>
-          </Button>
-          <Button variant="default" asChild size="lg">
-            <Link href="/auth/signup-affiliate">Sign-Up Now as an Affiliate</Link>
+        <div className='flex flex-col items-center gap-y-4'>
+          <p className='text-2xl font-bold'>You can sign-up now as either a Seller or a User!</p>
+          <Button className='w-1/2' variant="default" asChild size="lg">
+            <Link href="/auth/register">Sign-Up Now</Link>
           </Button>
         </div>
       </div>
