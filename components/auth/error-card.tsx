@@ -1,4 +1,4 @@
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { PiWarningBold } from "react-icons/pi";
 
 import { CardWrapper } from "@/components/auth/card-wrapper";
 
@@ -10,7 +10,7 @@ export const ErrorCard = () => {
       backButtonLabel="Back to login"
     >
       <div className="w-full flex justify-center items-center">
-        <ExclamationTriangleIcon className="text-destructive" />
+        <PiWarningBold className="text-4xl text-red-400" />
       </div>
     </CardWrapper>
   );
