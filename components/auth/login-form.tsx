@@ -45,7 +45,7 @@ export const LoginForm = () => {
 
     startTransition(() => {
       login(values, callbackUrl).then((data) => {
-        console.log("__login__RETURNED", data);
+        console.log("__login__RESPONSE", data);
 
         if (data?.error) {
           form.reset();
@@ -65,8 +65,8 @@ export const LoginForm = () => {
       <CardWrapper
         headerLabel="Welcome Back!"
         backButtonLabel="Don't have an account?"
-        backButtonHref="/"
-        showSocial={false}
+        backButtonHref="/auth/register"
+        showSocial={true}
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
