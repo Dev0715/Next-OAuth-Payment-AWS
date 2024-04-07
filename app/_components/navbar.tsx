@@ -12,7 +12,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import React from "react";
-import { ListItem } from "@/components/list-item";
+import { ListItem } from "@/components/utils/list-item";
 
 type MenuItem = {
   title: string;
@@ -67,9 +67,16 @@ export const Navbar = () => {
     },
   ]
   return (
-    <nav className="w-full flex items-end py-2 sticky top-6 z-50 box-border border-b-[1px]">
+    <nav className="w-full flex items-end py-2 top-6 box-border border-b-[1px]">
       <NavigationMenu>
         <NavigationMenuList>
+          <NavigationMenuItem>
+            <Link href="/products" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                All
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
           {menuList.map((menuItem, index) => (
             <NavigationMenuItem key={menuItem.title}>
               <NavigationMenuTrigger>{menuItem.title}</NavigationMenuTrigger>
