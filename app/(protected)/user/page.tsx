@@ -57,6 +57,29 @@ export default function Profile() {
       <Separator />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="w-full flex flex-col">
+            <h3 className="mb-4 text-base font-medium">Your roles</h3>
+            <div className="w-full grid grid-cols-3 gap-x-6">
+              <SwitchBox
+                mode="small"
+                title="Creator"
+                content="You have started journey for a creator"
+                isChecked={true}
+              />
+              <SwitchBox
+                mode="small"
+                title="Customer"
+                content="You joined as a customer"
+                isChecked={true}
+              />
+              <SwitchBox
+                mode="small"
+                title="Affiliate"
+                content="You have started an affiliate's life"
+                isChecked={true}
+              />
+            </div>
+          </div>
           <div className="w-1/2 flex flex-col gap-y-6">
             <FormField
               control={form.control}
