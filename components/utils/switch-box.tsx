@@ -3,11 +3,11 @@ import { Switch } from "../ui/switch"
 import { Alert } from "./alert";
 
 type ParamsType = {
+  mode?: "small" | "big"
   title: string;
   content: string;
   isChecked: boolean;
   onCheckedChange?: () => void;
-  mode?: "small" | "big"
   alertTitle?: string;
   alertMessage?: string;
 }
@@ -22,9 +22,7 @@ export const SwitchBox = ({
         <p className="text-sm text-gray-500">{content}</p>
       </div>
       <Alert title={alertTitle} message={alertMessage} onContinue={onCheckedChange}>
-        <Switch
-          checked={isChecked}
-        />
+        <Switch checked={isChecked} />
       </Alert>
     </div>
   )
