@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FaUser } from "react-icons/fa";
-import { ExitIcon, PersonIcon } from "@radix-ui/react-icons";
+import { BackpackIcon, ExitIcon, MixerHorizontalIcon, PersonIcon } from "@radix-ui/react-icons";
 
 import {
   DropdownMenu,
@@ -15,7 +15,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { LoginButton } from "./login-button";
-import { WrappedButton } from "../wrapped-button";
+import { WrappedButton } from "../utils/wrapped-button";
 import { SignupButton } from "./signup-button";
 
 export const UserButton = () => {
@@ -38,7 +38,7 @@ export const UserButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar className="w-16 h-16 rounded-xl">
+        <Avatar className="rounded-xl">
           <AvatarImage src={user?.image || ""} />
           <AvatarFallback className="bg-sky-500">
             <FaUser className="text-white" />
@@ -46,15 +46,21 @@ export const UserButton = () => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="end">
+        <Link href="/profile/creator/userId">
+          <DropdownMenuItem>
+            <PersonIcon className="h-4 w-4 mr-3" />
+            <span>Creator Profile</span>
+          </DropdownMenuItem>
+        </Link>
         <Link href="/user">
           <DropdownMenuItem>
-            <PersonIcon className="h-4 w-4 mr-2" />
+            <MixerHorizontalIcon className="h-4 w-4 mr-3" />
             <span>User Settings</span>
           </DropdownMenuItem>
         </Link>
         <LogoutButton>
           <DropdownMenuItem>
-            <ExitIcon className="h-4 w-4 mr-2" />
+            <ExitIcon className="h-4 w-4 mr-3" />
             <span>Logout</span>
           </DropdownMenuItem>
         </LogoutButton>
