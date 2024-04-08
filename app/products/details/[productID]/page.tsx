@@ -34,6 +34,25 @@ export default function ProductDetails({ params }: PropsParams) {
   const searchParams = useSearchParams();
   const currentPath = usePathname();
 
+  useEffect(() => {
+    const gateway = searchParams.get('gateway');
+    if (gateway === Gateway_Paypal) {
+      const paymentId = String(searchParams.get("token"));
+      const payerId = searchParams.get('PayerID');
+      capturePaypalOrder({ paymentId });
+      toast.success('New Product Purchased Newly through Paypal');
+    } else if (gateway === Gateway_Stripe) {
+      const paymentId = String(searchParams.get('session_id'));
+      const payerId = 0;
+      // captureStripeOrder({ paymentId });
+      toast.success('New Product Purchased Newly through Stripe');
+    } else if (gateway === Gateway_Cancelled) {
+      toast.error('Payment Cancelled');
+    }
+    // window.history.replaceState(null, '', currentPath)
+  }, [searchParams]);
+
+
   return (
     <div className="w-full flex flex-col gap-y-12 py-6">
       <Navbar title="Product Detail" content="You can see details of product" />
