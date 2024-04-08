@@ -16,7 +16,7 @@ const Home = () => {
   const user = useCurrentUser();
 
   return (
-    <main className="w-full flex justify-center pt-24">
+    <main className="w-full flex justify-center pt-24 pb-6">
       <div className="w-1/2 flex flex-col items-center gap-y-24 text-center">
         <h1 className={cn("text-7xl font-semibold text-black drop-shadow-md", font.className)}>
           Bring your creative ideas to life!
