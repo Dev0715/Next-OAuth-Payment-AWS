@@ -21,6 +21,26 @@ const CustomerSettings = () => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
+  const form = useForm<z.infer<typeof ProfileSchema>>({
+    resolver: zodResolver(ProfileSchema),
+    defaultValues: {
+      isCreator: false,
+      isAffiliate: false,
+      isCustomer: false,
+      username: "",
+      bio: "",
+    }
+  });
+
+  const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
+    setError("");
+    setSuccess("");
+
+    startTransition(() => {
+      // save the user's profile
+    });
+  };
+
   return (
     <main className="w-full pl-8 pb-6 flex flex-col gap-y-6">
       {/* <Header title="Creator" content="Select how this site you want to serve you" /> */}

@@ -9,7 +9,7 @@ import { Navbar } from "./navbar";
 export const Header = () => {
   return (
     <nav className="w-full z-10">
-      <div className="w-full flex items-end justify-between pb-4 top-6 box-border border-b-[1px]">
+      <div className="w-full flex items-end justify-between pb-4 box-border border-b-[1px]">
         <div className="flex">
           {/* <Avatar className="w-16 h-16 rounded-xl">
             <AvatarImage src="/logo.svg" />
