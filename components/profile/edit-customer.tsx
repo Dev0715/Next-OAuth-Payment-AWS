@@ -26,13 +26,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/register-user";
 
-export default function EditCustomer() {
+export default function EditCustomer({ disabled }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
+
+  const isDisabled = () => {
+    return isPending || disabled;
+  }
 
   const form = useForm<z.infer<typeof UserRegisterSchema>>({
     resolver: zodResolver(UserRegisterSchema),
