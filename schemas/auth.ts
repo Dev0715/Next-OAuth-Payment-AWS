@@ -72,7 +72,7 @@ export const CreatorRegisterSchema = z.object({
 });
 
 // for `User Registration` Form
-export const UserRegisterSchema = z.object({
+export const CustomerRegisterSchema = z.object({
   image: z.string(),
   username: z
     .string()
