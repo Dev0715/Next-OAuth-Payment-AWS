@@ -26,7 +26,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/register-user";
 
-export default function EditCustomer({ disabled }: { disabled?: boolean }) {
+export default function EditCustomer({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -79,10 +79,6 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
     });
   };
 
-  const onAgreeScrap = (checked: boolean) => {
-    console.log("AGREE SCRAP", checked);
-  }
-
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setAvatarImagePath(URL.createObjectURL(e.target.files[0]));
@@ -103,7 +99,7 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
                     <FaUser className="text-white" />
                   </AvatarFallback>
                 </Avatar>
-                <Input disabled={isPending} type="file" accept="image/*" onChange={onAvatarChanged} />
+                <Input disabled={isDisabled()} type="file" accept="image/*" onChange={onAvatarChanged} />
               </div>
               <FormField
                 control={form.control}
@@ -112,7 +108,7 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} placeholder="JohnDoe1234" {...field} />
+                      <Input disabled={isDisabled()} placeholder="JohnDoe1234" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -126,7 +122,7 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
                     <FormItem className="w-1/2">
                       <FormLabel>First Name</FormLabel>
                       <FormControl>
-                        <Input disabled={isPending} placeholder="John" {...field} />
+                        <Input disabled={isDisabled()} placeholder="John" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -139,7 +135,7 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
                     <FormItem className="w-1/2">
                       <FormLabel>Last Name</FormLabel>
                       <FormControl>
-                        <Input disabled={isPending} placeholder="Doe" {...field} />
+                        <Input disabled={isDisabled()} placeholder="Doe" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -155,7 +151,7 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isPending}
+                        disabled={isDisabled()}
                         placeholder="username@yemail.com"
                         type="email"
                       />
@@ -171,7 +167,7 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} placeholder="Address" {...field} />
+                      <Input disabled={isDisabled()} placeholder="Address" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -184,7 +180,7 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
                   <FormItem>
                     <FormLabel>Phone Number 1</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} placeholder="Phone Number" {...field} />
+                      <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -197,7 +193,7 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
                   <FormItem>
                     <FormLabel>Phone Number 2</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} placeholder="Phone Number" {...field} />
+                      <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -211,13 +207,13 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
               <p>You will have free Launch Package that will have a bundle of free fonts, images, ...</p>
               <p>Join the Discord and follow notifications and news on our channel</p>
               <div className="flex flex-col gap-y-4">
-                <Button disabled={isPending}>
+                <Button disabled={isDisabled()}>
                   Subscribe
                 </Button>
-                <Button disabled={isPending}>
+                <Button disabled={isDisabled()}>
                   Paypal
                 </Button>
-                <Button disabled={isPending}>
+                <Button disabled={isDisabled()}>
                   Stripe
                 </Button>
               </div>
@@ -225,7 +221,7 @@ export default function EditCustomer({ disabled }: { disabled?: boolean }) {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit">
+          <Button disabled={isDisabled()} type="submit">
             Register
           </Button>
         </form>
