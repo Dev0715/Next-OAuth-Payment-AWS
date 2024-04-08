@@ -24,6 +24,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { registerCreator } from "@/actions/register-creator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
+import { LinkedSites } from "./linked-sites";
 
 export default function EditCreator({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
@@ -101,15 +102,15 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
   }
 
   return (
-    <main className="w-full flex">
+    <main className="w-full flex gap-x-6">
       <div className="w-1/2 flex flex-col gap-y-6">
         <div className="flex items-center gap-x-4">
           <Button asChild variant="link">
-            <Link href="">
+            <Link href="/">
               Accept our standard Legal Agreements
             </Link>
           </Button>
-          <Switch onCheckedChange={onAgreeScrap} />
+          <Switch disabled={isDisabled()} onCheckedChange={onAgreeScrap} />
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -188,7 +189,7 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Type of User</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select disabled={isDisabled()} onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select what you join for" />
@@ -251,6 +252,10 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
             </Button>
           </form>
         </Form>
+      </div>
+      <div className="w-1/2 flex flex-col gap-y-6">
+        <p className="text-xl font-medium">Confirm your profiles on other Creative markets</p>
+        <LinkedSites />
       </div>
     </main>
   );
