@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Navbar } from "../../app/profile/_components/navbar";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -15,13 +14,9 @@ import {
 } from "@/components/ui/form";
 import { CustomerRegisterSchema } from "@/schemas/auth";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
-import Link from "next/link";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/register-user";
