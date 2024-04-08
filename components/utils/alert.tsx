@@ -17,9 +17,11 @@ interface LoginButtonProps {
   asChild?: boolean;
   title?: string;
   message?: string;
+  onContinue?: () => void,
+  onCancel?: () => void
 }
 
-export const Alert = ({ children, asChild, title, message }: LoginButtonProps) => {
+export const Alert = ({ children, asChild, title, message, onContinue, onCancel }: LoginButtonProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild={asChild}>
@@ -31,8 +33,8 @@ export const Alert = ({ children, asChild, title, message }: LoginButtonProps) =
           <AlertDialogDescription>{message}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogCancel onClick={onCancel}>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={onContinue}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
