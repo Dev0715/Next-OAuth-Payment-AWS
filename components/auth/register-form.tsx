@@ -8,8 +8,8 @@ import { RegisterSchema } from "@/schemas/auth";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
+import { FormError } from "@/components/utils/form-error";
+import { FormSuccess } from "@/components/utils/form-success";
 import {
   Form,
   FormControl,
