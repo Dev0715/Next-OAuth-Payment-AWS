@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 export const Footer = () => {
   return (
-    <div className="w-full h-12 flex items-center justify-center bg-gray-200">
+    <div className="w-full h-12 flex items-center justify-center bg-gray-200 z-10 relative">
       <div className="w-5/6 flex justify-between">
         <p>
           Copyright © 2024 Kre8tive, Inc. All rights reserved.
