@@ -50,6 +50,11 @@ export default function ProductDetails({ params }: PropsParams) {
         <p>Whether you're browsing the web, streaming videos, or playing games, the Smartphone XYZ delivers smooth and responsive performance. It also offers a range of connectivity options, including Wi-Fi, Bluetooth, and 4G LTE, so you can stay connected wherever you go.</p>
         <p>Price: <Bold>$100</Bold></p>
       </div>
+      <PaymentButton mode="modal">
+        <WrappedButton variant="default" className="w-[480px] flex gap-x-2">
+          <AiFillCreditCard />Purchase
+        </WrappedButton>
+      </PaymentButton>
     </div>
   )
 }
