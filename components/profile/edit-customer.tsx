@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { UserRegisterSchema } from "@/schemas/auth";
+import { CustomerRegisterSchema } from "@/schemas/auth";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
@@ -38,8 +38,8 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
     return isPending || disabled;
   }
 
-  const form = useForm<z.infer<typeof UserRegisterSchema>>({
-    resolver: zodResolver(UserRegisterSchema),
+  const form = useForm<z.infer<typeof CustomerRegisterSchema>>({
+    resolver: zodResolver(CustomerRegisterSchema),
     defaultValues: {
       username: "temp",
       firstname: "temp",
@@ -51,7 +51,7 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
     }
   });
 
-  const onSubmit = (values: z.infer<typeof UserRegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof CustomerRegisterSchema>) => {
     setError("");
     setSuccess("");
 
