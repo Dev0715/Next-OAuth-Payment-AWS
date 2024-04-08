@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Navbar } from "../../auth/_components/navbar";
+import { Navbar } from "../../app/profile/_components/navbar";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -18,15 +18,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
+import { FormError } from "@/components/utils/form-error";
+import { FormSuccess } from "@/components/utils/form-success";
 import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/register-user";
 
-export default function SignUpUser() {
+export default function EditCustomer() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -66,7 +66,7 @@ export default function SignUpUser() {
         }).then(res => res.json()).then(data => {
           console.log("__upload__RESULT", data);
 
-          values.avatar = data.filePath;
+          values.image = data.filePath;
           registerUser(values).then(data => {
             console.log("__registerUser__RESULT", data);
           })
@@ -87,8 +87,7 @@ export default function SignUpUser() {
   }
 
   return (
-    <main className="w-full pb-6 flex flex-col gap-y-6">
-      <Navbar title="User Registration" content="Register as a user" />
+    <main className="w-full flex flex-col gap-y-6">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="w-full flex gap-x-12">
