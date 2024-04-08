@@ -1,52 +1,29 @@
 "use client";
 
-import { Separator } from "@/components/ui/separator";
-import { Header } from "../_components/header";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form";
-import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { ProfileSchema } from "@/schemas/user";
-import { Switch } from "@/components/ui/switch";
-import { FormError } from "@/components/utils/form-error";
-import { FormSuccess } from "@/components/utils/form-success";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { SwitchBox } from "@/components/utils/switch-box";
 import EditCreator from "@/components/profile/edit-creator";
 
 const CreatorSettings = () => {
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof ProfileSchema>>({
-    resolver: zodResolver(ProfileSchema),
-    defaultValues: {
-      isCreator: false,
-      isAffiliate: false,
-      isCustomer: false,
-      username: "",
-      bio: "",
-    }
-  });
-
-  const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
-    setError("");
-    setSuccess("");
-
-    startTransition(() => {
-      // save the user's profile
-    });
-  };
+  const onSwitch = () => {
+    setIsChecked(!isChecked);
+  }
 
   return (
     <main className="w-full pl-8 pb-6 flex flex-col gap-y-6">
-      {/* <Header title="Creator" content="Select how this site you want to serve you" /> */}
-      {/* <Separator /> */}
-      <SwitchBox title="Start Creator's Journey" content="You can start creator's journey here by making your profile" isChecked={isChecked} setIsChecked={setIsChecked} />
-      <EditCreator />
+      <SwitchBox
+        title="Start Creator's Journey"
+        content="You can start creator's journey here by making your profile"
+        isChecked={isChecked}
+        onCheckedChange={onSwitch}
+        alertTitle={isChecked ?
+          "Are you sure to close creator account?" :
+          "Are you sure to create creator account?"
+        }
+      />
+      <EditCreator disabled={!isChecked} />
     </main>
   )
 };
