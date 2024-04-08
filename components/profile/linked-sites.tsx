@@ -1,6 +1,10 @@
 import { CreativeSite } from "./creative-site"
 
-export const LinkedSites = () => {
+type Params = {
+  disabled: boolean
+}
+
+export const LinkedSites = ({ disabled }: Params) => {
   const siteList = [
     {
       href: "",
@@ -42,6 +46,7 @@ export const LinkedSites = () => {
         <CreativeSite
           key={site.title}
           {...site}
+          disabled={disabled}
         />
       ))}
 
