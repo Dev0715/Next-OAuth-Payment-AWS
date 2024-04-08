@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/form";
 import { CreatorRegisterSchema } from "@/schemas/auth";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/utils/form-error";
@@ -26,13 +25,17 @@ import { FaUser } from "react-icons/fa";
 import { registerCreator } from "@/actions/register-creator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 
-export default function EditCreator() {
+export default function EditCreator({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
+
+  const isDisabled = () => {
+    return isPending || disabled;
+  }
 
   const typeOfUsers = [
     "UI/UX Designer",
@@ -118,7 +121,7 @@ export default function EditCreator() {
                     <FaUser className="text-white" />
                   </AvatarFallback>
                 </Avatar>
-                <Input disabled={isPending} type="file" accept="image/*" onChange={onAvatarChanged} />
+                <Input disabled={isDisabled()} type="file" accept="image/*" onChange={onAvatarChanged} />
               </div>
               <FormField
                 control={form.control}
@@ -127,7 +130,7 @@ export default function EditCreator() {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} placeholder="JohnDoe1234" {...field} />
+                      <Input disabled={isDisabled()} placeholder="JohnDoe1234" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -141,7 +144,7 @@ export default function EditCreator() {
                     <FormItem className="w-1/2">
                       <FormLabel>First Name</FormLabel>
                       <FormControl>
-                        <Input disabled={isPending} placeholder="John" {...field} />
+                        <Input disabled={isDisabled()} placeholder="John" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -154,7 +157,7 @@ export default function EditCreator() {
                     <FormItem className="w-1/2">
                       <FormLabel>Last Name</FormLabel>
                       <FormControl>
-                        <Input disabled={isPending} placeholder="Doe" {...field} />
+                        <Input disabled={isDisabled()} placeholder="Doe" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -170,7 +173,7 @@ export default function EditCreator() {
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isPending}
+                        disabled={isDisabled()}
                         placeholder="username@yemail.com"
                         type="email"
                       />
@@ -208,7 +211,7 @@ export default function EditCreator() {
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} placeholder="Address" {...field} />
+                      <Input disabled={isDisabled()} placeholder="Address" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -221,7 +224,7 @@ export default function EditCreator() {
                   <FormItem>
                     <FormLabel>Phone Number 1</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} placeholder="Phone Number" {...field} />
+                      <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -234,7 +237,7 @@ export default function EditCreator() {
                   <FormItem>
                     <FormLabel>Phone Number 2</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} placeholder="Phone Number" {...field} />
+                      <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -243,7 +246,7 @@ export default function EditCreator() {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isPending} type="submit">
+            <Button disabled={isDisabled()} type="submit">
               Register
             </Button>
           </form>
