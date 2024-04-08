@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Navbar } from "../../auth/_components/navbar";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -18,8 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
+import { FormError } from "@/components/utils/form-error";
+import { FormSuccess } from "@/components/utils/form-success";
 import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -27,7 +26,7 @@ import { FaUser } from "react-icons/fa";
 import { registerCreator } from "@/actions/register-creator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 
-export default function SignUpCreator() {
+export default function EditCreator() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -61,12 +60,14 @@ export default function SignUpCreator() {
     setSuccess("");
 
     startTransition(() => {
-      values.avatar = 'USER_ID' + '.jpg';
+      values.image = '';
 
       if (avatar) {
+        values.image = 'USER_ID' + '.jpg';
+
         const formData = new FormData();
         formData.append("file", avatar);
-        formData.append("keyName", values.avatar);
+        formData.append("keyName", values.image);
 
         axiosClient.post("/upload", formData, axiosConfig)
           .then(res => res.data).then(data => {
@@ -97,20 +98,19 @@ export default function SignUpCreator() {
   }
 
   return (
-    <main className="w-full pb-6 flex flex-col gap-y-6">
-      <Navbar title="Creator Registration" content="Register as a creator" />
-      <div className="flex items-center gap-x-4">
-        <Button asChild variant="link">
-          <Link href="">
-            Accept our standard Legal Agreements
-          </Link>
-        </Button>
-        <Switch onCheckedChange={onAgreeScrap} />
-      </div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="w-full flex gap-x-12">
-            <div className="w-1/2 flex flex-col gap-y-6">
+    <main className="w-full flex">
+      <div className="w-1/2 flex flex-col gap-y-6">
+        <div className="flex items-center gap-x-4">
+          <Button asChild variant="link">
+            <Link href="">
+              Accept our standard Legal Agreements
+            </Link>
+          </Button>
+          <Switch onCheckedChange={onAgreeScrap} />
+        </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div className="w-full flex flex-col gap-y-6">
               <div className="flex items-end space-x-4">
                 <Avatar className="w-24 h-24 rounded-xl">
                   <AvatarImage src={avatarImagePath} />
@@ -241,17 +241,14 @@ export default function SignUpCreator() {
                 )}
               />
             </div>
-            <div className="w-1/2">
-
-            </div>
-          </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit">
-            Register
-          </Button>
-        </form>
-      </Form>
+            <FormError message={error} />
+            <FormSuccess message={success} />
+            <Button disabled={isPending} type="submit">
+              Register
+            </Button>
+          </form>
+        </Form>
+      </div>
     </main>
   );
 }
