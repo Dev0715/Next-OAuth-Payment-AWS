@@ -2,19 +2,16 @@
 
 import { z } from "zod";
 import { AuthError } from "next-auth";
+import { v4 as uuidv4 } from "uuid";
 
 import { LoginSchema } from "@/schemas/auth";
-import { getUserByEmail } from "@/data/user";
+import { getUserByEmail, updateUserToken } from "@/data/user";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import {
   sendVerificationEmail
   // sendTwoFactorTokenEmail
 } from "@/lib/mail";
 // import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
-import {
-  generateVerificationToken
-  // generateTwoFactorToken
-} from "@/lib/tokens";
 // import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 import { signIn } from "@/auth";
 
@@ -33,18 +30,26 @@ export const login = async (
     return { error: "Email does not exist!" };
   }
 
-  // if (!existingUser.emailVerified) {
-  //   const verificationToken = await generateVerificationToken(
-  //     existingUser.email
-  //   );
+  if (!existingUser.emailVerified) {
+    const verificationToken = uuidv4();
 
-  //   await sendVerificationEmail(
-  //     verificationToken.email,
-  //     verificationToken.token
-  //   );
+    const updatedUser = await updateUserToken({
+      username: existingUser.username,
+      verificationToken: existingUser.username + verificationToken,
+      expires: new Date(new Date().getTime() + 3600 * 1000)
+    });
 
-  //   return { success: "Confirmation email sent!" };
-  // }
+    const response = await sendVerificationEmail(
+      updatedUser.email,
+      updatedUser.verificationToken
+    );
+
+    if (response.error) {
+      return { error: response.error.name };
+    }
+
+    return { success: "Confirmation email sent!" };
+  }
 
   // if (existingUser.isTwoFactorEnabled && existingUser.email) {
   //   if (code) {
