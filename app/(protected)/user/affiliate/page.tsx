@@ -44,6 +44,12 @@ const AffiliateSettings = () => {
     <main className="w-full pl-8 flex flex-col gap-y-5">
       {/* <Header title="Creator" content="Select how this site you want to serve you" /> */}
       {/* <Separator /> */}
+      <SwitchBox
+        title="Start an Affiliate's life"
+        content="You can join as an affiliate and get an extra benefits"
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
     </main>
   )
 };
