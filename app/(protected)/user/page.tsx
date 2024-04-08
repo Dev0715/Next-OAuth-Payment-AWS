@@ -64,19 +64,19 @@ export default function Profile() {
                 mode="small"
                 title="Creator"
                 content="You have started journey for a creator"
-                isChecked={true}
+                isChecked={false}
               />
               <SwitchBox
                 mode="small"
                 title="Customer"
                 content="You joined as a customer"
-                isChecked={true}
+                isChecked={false}
               />
               <SwitchBox
                 mode="small"
                 title="Affiliate"
                 content="You have started an affiliate's life"
-                isChecked={true}
+                isChecked={false}
               />
             </div>
           </div>
