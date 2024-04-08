@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Button } from "../ui/button";
 
 interface Params {
   href: string;
@@ -14,11 +15,12 @@ interface Params {
   userId: string;
   numberOfProducts: number;
   numberOfFollowers: number;
+  disabled?: boolean
 }
 
 function Bold({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-bold text-sm">
+    <span className="font-semibold text-sm">
       {children}
     </span>
   )
@@ -30,7 +32,8 @@ export const CreativeSite = ({
   description,
   userId,
   numberOfProducts,
-  numberOfFollowers
+  numberOfFollowers,
+  disabled
 }: Params) => {
   return (
     <Card className="w-full">
@@ -40,10 +43,14 @@ export const CreativeSite = ({
       </CardHeader>
       <CardContent className="text-sm">
         <p>Username: <Bold>{userId}</Bold></p>
-        <p>Products: <Bold>{numberOfProducts}</Bold></p>
-        <p>Followers: <Bold>{numberOfFollowers}</Bold></p>
+        <div className="flex gap-x-4">
+          <p>Products: <Bold>{numberOfProducts}</Bold></p>
+          <p>Followers: <Bold>{numberOfFollowers}</Bold></p>
+        </div>
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="flex gap-x-6">
+        <Button disabled={disabled} variant="outline" className="border-green-700">Confirm</Button>
+        <Button disabled={disabled} variant="outline" className="border-red-700">Discard</Button>
       </CardFooter>
     </Card>
   )
