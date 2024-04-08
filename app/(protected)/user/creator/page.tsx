@@ -25,6 +25,7 @@ const CreatorSettings = () => {
     <main className="w-full pl-8 pb-6 flex flex-col gap-y-6">
       {/* <Header title="Creator" content="Select how this site you want to serve you" /> */}
       {/* <Separator /> */}
+      <SwitchBox title="Start Creator's Journey" content="You can start creator's journey here by making your profile" isChecked={isChecked} setIsChecked={setIsChecked} />
       <EditCreator />
     </main>
   )
