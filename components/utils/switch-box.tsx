@@ -5,12 +5,12 @@ type ParamsType = {
   title: string;
   content: string;
   isChecked: boolean;
-  setIsChecked?: Dispatch<SetStateAction<boolean>>;
+  onCheckedChange?: (checked: boolean) => void;
   mode?: "small" | "big"
 }
 
 export const SwitchBox = ({
-  title, content, isChecked, setIsChecked, mode = "big"
+  title, content, isChecked, onCheckedChange, mode = "big"
 }: ParamsType) => {
   return (
     <div className="w-full flex items-center justify-between rounded-lg border p-4">
@@ -20,7 +20,7 @@ export const SwitchBox = ({
       </div>
       <Switch
         checked={isChecked}
-        onCheckedChange={setIsChecked}
+        onCheckedChange={onCheckedChange}
       />
     </div>
   )
