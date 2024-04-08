@@ -17,8 +17,8 @@ import {
 } from "@/components/ui/form";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
+import { FormError } from "@/components/utils/form-error";
+import { FormSuccess } from "@/components/utils/form-success";
 import { reset } from "@/actions/reset";
 
 export const ResetForm = () => {
