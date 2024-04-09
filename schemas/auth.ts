@@ -44,7 +44,10 @@ export const CreatorRegisterSchema = z.object({
     .string()
     .min(1, "A name is required")
     .max(72, "Name must be a maximum of 72 characters"),
-  email: z.string().email({ message: "Please enter a valid email" }),
+  bio: z
+    .string()
+    .min(22, "Bio must be a minimum of 24 characters")
+    .max(2400, "Bio must be a maximum of 2400 characters"),
   firstname: z
     .string()
     .min(1, "First name is required")
@@ -53,6 +56,7 @@ export const CreatorRegisterSchema = z.object({
     .string()
     .min(1, "Last name is required")
     .max(72, "Last name must be a maximum of 72 characters"),
+  email: z.string().email({ message: "Please enter a valid email" }),
   typeOfUser: z
     .string()
     .min(1, "A name is required")
