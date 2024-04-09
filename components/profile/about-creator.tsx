@@ -2,6 +2,7 @@ import { FaEdit } from "react-icons/fa"
 import { Button } from "../ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
 import Link from "next/link"
+import { LinkedSites } from "./linked-sites"
 
 export const AboutCreator = () => {
   return (
@@ -15,12 +16,18 @@ export const AboutCreator = () => {
         </Button>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col gap-y-2">
-          <p className="text-sky-700 font-medium">/** Scraped data will be pre-populated here. **/</p>
-          <p>Name: </p>
-          <p>Description: </p>
-          <p>Specialization: </p>
-          <p>Contact: </p>
+        <div className="w-full flex justify-between">
+          <div className="w-1/2 flex flex-col gap-y-2">
+            <p className="text-sky-700 font-medium">/** Scraped data will be pre-populated here. **/</p>
+            <p>Name: </p>
+            <p>Description: </p>
+            <p>Specialization: </p>
+            <p>Contact: </p>
+          </div>
+          <div className="w-2/5 flex flex-col gap-y-6">
+            <p className="text-xl font-medium">Your profiles on other Creative markets</p>
+            <LinkedSites disabled showButton={false} />
+          </div>
         </div>
       </CardContent>
       <CardFooter>
