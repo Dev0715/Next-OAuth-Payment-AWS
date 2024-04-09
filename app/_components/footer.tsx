@@ -10,7 +10,7 @@ export const Footer = () => {
         <p>
           Copyright © 2024 Kre8tive, Inc. All rights reserved.
         </p>
-        <div className="flex items-center gap-x-4 underline underline-offset-4">
+        <div className="flex items-center gap-x-6 text-sm underline underline-offset-4">
           <Link href="/privacy-policy">
             <p>Privacy Policy</p>
           </Link>
