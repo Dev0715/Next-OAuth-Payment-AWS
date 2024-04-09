@@ -1,7 +1,7 @@
 import { FaPlus } from "react-icons/fa"
 import { Button } from "../ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
-import { ProductItem } from "./productitem"
+import { ProductItem } from "../product/product-item"
 import Link from "next/link"
 
 export const UserCollection = () => {
@@ -9,7 +9,7 @@ export const UserCollection = () => {
     <Card className="border-0 rounded-none">
       <CardHeader className="flex flex-row items-center justify-between">
         <p className="text-xl font-bold">Your Collections</p>
-        <Button variant="default" asChild className="flex gap-x-1">
+        <Button variant="default" asChild className="w-48 flex gap-x-2">
           <Link href="/">
             <FaPlus /> Add
           </Link>
