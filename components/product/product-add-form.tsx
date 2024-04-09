@@ -10,6 +10,7 @@ import { useState, useTransition } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { FaFileUpload } from "react-icons/fa";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -35,14 +36,21 @@ export const ProductAddForm = () => {
   }
 
   return (
-    <Card className="rounded-none">
+    <Card className="w-full flex rounded-none">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/2">
           <CardHeader>
             <CardTitle className="text-4xl font-medium">Add a new Product</CardTitle>
             <CardDescription>You can register your product and our admin users will check it and publish soon!</CardDescription>
           </CardHeader>
-          <CardContent className="w-1/2 flex flex-col gap-y-4">
+          <CardContent className="flex flex-col gap-y-4">
+            <FormLabel>
+              Upload your creative work
+            </FormLabel>
+            <Button variant="outline" type="button" className="h-24 flex gap-x-2 border-green-700">
+              <FaFileUpload />
+              Browse Files
+            </Button>
             <FormField
               control={form.control}
               name="title"
@@ -98,11 +106,18 @@ export const ProductAddForm = () => {
           </CardContent>
           <CardFooter>
             <Button type="submit">
-              Register
+
+              Add
             </Button>
           </CardFooter>
         </form>
       </Form>
+      <Card className="w-1/2 m-4">
+        <CardHeader>
+          <CardTitle>Preview</CardTitle>
+          <CardDescription>You can preview your creative works</CardDescription>
+        </CardHeader>
+      </Card>
     </Card>
   )
 }
