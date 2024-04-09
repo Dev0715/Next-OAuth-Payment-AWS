@@ -14,40 +14,13 @@ export const ProfileSchema = z.object({
 
 // for 'Crypto Preference' Form
 export const CryptoPrefSchema = z.object({
-  bitcoin: z
-    .string()
-    .min(1, "An address is required")
-    .max(72, "Address must be a maximum of 72 characters"),
-  ethereum: z
-    .string()
-    .min(1, "An address is required")
-    .max(72, "Address must be a maximum of 72 characters"),
-  litecoin: z
-    .string()
-    .min(1, "An address is required")
-    .max(72, "Address must be a maximum of 72 characters"),
-  dogecoin: z
-    .string()
-    .min(1, "An address is required")
-    .max(72, "Address must be a maximum of 72 characters"),
-  xrp: z
-    .string()
-    .min(1, "An address is required")
-    .max(72, "Address must be a maximum of 72 characters"),
-  sol: z
-    .string()
-    .min(1, "An address is required")
-    .max(72, "Address must be a maximum of 72 characters"),
-  usdcoin: z
-    .string()
-    .min(1, "An address is required")
-    .max(72, "Address must be a maximum of 72 characters"),
-  avax: z
-    .string()
-    .min(1, "An address is required")
-    .max(72, "Address must be a maximum of 72 characters"),
-  tron: z
-    .string()
-    .min(1, "An address is required")
-    .max(72, "Address must be a maximum of 72 characters")
+  bitcoin: z.string().optional(),
+  ethereum: z.string().optional(),
+  litecoin: z.string().optional(),
+  dogecoin: z.string().optional(),
+  xrp: z.string().optional(),
+  sol: z.string().optional(),
+  usdcoin: z.string().optional(),
+  avax: z.string().optional(),
+  tron: z.string().optional()
 });
