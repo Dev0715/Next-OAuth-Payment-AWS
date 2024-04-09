@@ -4,7 +4,7 @@ import { PaymentButton } from "@/components/payment/payment-button";
 import { WrappedButton } from "@/components/utils/wrapped-button";
 import { AiFillCreditCard } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaFacebook, FaProductHunt } from "react-icons/fa";
+import { FaCartArrowDown, FaFacebook, FaProductHunt, FaRegUser } from "react-icons/fa";
 import { Navbar } from "../../_components/navbar";
 import { usePathname, useSearchParams } from "next/navigation";
 import { captureOrder as captureStripeOrder } from '@/actions/stripe/capture-order';
@@ -78,7 +78,7 @@ export default function ProductDetails({ params }: PropsParams) {
               ))}
             </div>
           </div>
-          <div className="w-1/4 flex flex-col gap-y-8">
+          <div className="w-1/4 flex flex-col gap-y-12">
             <div className="w-full flex flex-col gap-y-4">
               <div className="w-full flex justify-between">
                 <p>Price:</p><Bold>$100</Bold>
@@ -96,14 +96,21 @@ export default function ProductDetails({ params }: PropsParams) {
                 <p>/** ... **/</p>
               </div>
             </div>
-            <Button variant="outline" className="border-green-700">
-              Add to cart
-            </Button>
-            <PaymentButton mode="modal">
-              <WrappedButton variant="default" className="w-full flex gap-x-2">
-                <AiFillCreditCard />Purchase
-              </WrappedButton>
-            </PaymentButton>
+            <div className="flex flex-col gap-y-4">
+              <Button variant="outline" className="border-green-700 gap-x-2">
+                <FaRegUser className="text-green-700" />
+                Go to Creator's Profile
+              </Button>
+              <Button variant="outline" className="border-green-700 gap-x-2">
+                <FaCartArrowDown className="text-green-700" />
+                Add to cart
+              </Button>
+              <PaymentButton mode="modal">
+                <WrappedButton variant="default" className="w-full flex gap-x-2">
+                  <AiFillCreditCard />Purchase
+                </WrappedButton>
+              </PaymentButton>
+            </div>
           </div>
         </div>
         <div className="w-full flex flex-col pt-2">
