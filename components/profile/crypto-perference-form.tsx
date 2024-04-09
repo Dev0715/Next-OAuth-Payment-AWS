@@ -4,7 +4,6 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { RegisterSchema } from "@/schemas/auth";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -19,30 +18,34 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { register } from "@/actions/register";
+import { CryptoPrefSchema } from "@/schemas/user";
 
 export const CryptoPreferenceForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const form = useForm<z.infer<typeof CryptoPrefSchema>>({
+    resolver: zodResolver(CryptoPrefSchema),
     defaultValues: {
-      email: "",
-      password: "",
-      name: ""
+      bitcoin: '',
+      ethereum: '',
+      litecoin: '',
+      dogecoin: '',
+      xrp: '',
+      sol: '',
+      usdcoin: '',
+      avax: '',
+      tron: ''
     }
   });
 
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof CryptoPrefSchema>) => {
     setError("");
     setSuccess("");
 
     startTransition(() => {
-      register(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-      });
+
     });
   };
 }
