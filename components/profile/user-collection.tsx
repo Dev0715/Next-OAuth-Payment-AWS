@@ -10,7 +10,7 @@ export const UserCollection = () => {
       <CardHeader className="flex flex-row items-center justify-between">
         <p className="text-xl font-bold">Your Collections</p>
         <Button variant="default" asChild className="w-48 flex gap-x-2">
-          <Link href="/">
+          <Link href="/products/new">
             <FaPlus /> Add
           </Link>
         </Button>
