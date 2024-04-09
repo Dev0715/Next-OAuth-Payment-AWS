@@ -24,7 +24,7 @@ interface LoginButtonProps {
 export const Alert = ({ children, asChild, title, message, onContinue, onCancel }: LoginButtonProps) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild={asChild}>
+      <AlertDialogTrigger disabled={!onContinue} asChild={asChild}>
         {children}
       </AlertDialogTrigger>
       <AlertDialogContent>
