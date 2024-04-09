@@ -124,7 +124,7 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
           <Switch disabled={isDisabled()} onCheckedChange={onAgreeScrap} />
         </div>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-end gap-y-6">
             <div className="w-full flex flex-col gap-y-6">
               <div className="flex flex-col gap-y-4">
                 <FormLabel>Cover Image & Avatar</FormLabel>
@@ -281,7 +281,7 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isDisabled()} type="submit">
+            <Button disabled={isDisabled()} className="w-64" type="submit">
               Register
             </Button>
           </form>
