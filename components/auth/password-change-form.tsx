@@ -40,7 +40,7 @@ export const PasswordChangeForm = () => {
       </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
-          <CardContent>
+          <CardContent className="flex flex-col gap-y-4">
             <FormField
               control={form.control}
               name="password"
