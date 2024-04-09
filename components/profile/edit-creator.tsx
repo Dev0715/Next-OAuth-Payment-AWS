@@ -25,6 +25,7 @@ import { FaUser } from "react-icons/fa";
 import { registerCreator } from "@/actions/register-creator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { LinkedSites } from "./linked-sites";
+import { Textarea } from "../ui/textarea";
 
 export default function EditCreator({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
@@ -67,14 +68,14 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
     setSuccess("");
 
     startTransition(() => {
-      values.image = '';
+      values.avatar = '';
 
       if (avatar) {
-        values.image = 'USER_ID' + '.jpg';
+        values.avatar = 'USER_ID' + '.jpg';
 
         const formData = new FormData();
         formData.append("file", avatar);
-        formData.append("keyName", values.image);
+        formData.append("keyName", values.avatar);
 
         axiosClient.post("/upload", formData, axiosConfig)
           .then(res => res.data).then(data => {
@@ -126,7 +127,7 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="w-full flex flex-col gap-y-6">
               <div className="flex flex-col gap-y-4">
-                <FormLabel>Cover Image</FormLabel>
+                <FormLabel>Cover Image & Avatar</FormLabel>
                 <Avatar className="w-full h-28 rounded-none">
                   <AvatarImage src={coverImagePath} className="object-cover" />
                   <AvatarFallback className="bg-sky-500">
@@ -152,6 +153,19 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
                     <FormLabel>Username</FormLabel>
                     <FormControl>
                       <Input disabled={isDisabled()} placeholder="JohnDoe1234" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="bio"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Bio</FormLabel>
+                    <FormControl>
+                      <Textarea disabled={isDisabled()} placeholder="JohnDoe1234" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
