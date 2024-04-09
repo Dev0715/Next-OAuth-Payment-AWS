@@ -46,7 +46,7 @@ export const LinkedSites = ({ disabled }: Params) => {
         <CreativeSite
           key={site.title}
           {...site}
-          disabled={disabled}
+        // disabled={disabled}
         />
       ))}
 
