@@ -34,6 +34,9 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
 
+  const [cover, setCover] = useState<File | null>();
+  const [coverImagePath, setCoverImagePath] = useState<string | undefined>("");
+
   const isDisabled = () => {
     return isPending || disabled;
   }
@@ -101,8 +104,15 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
     setAvatar(e?.target?.files?.[0]);
   }
 
+  const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setCoverImagePath(URL.createObjectURL(e.target.files[0]));
+    }
+    setCover(e?.target?.files?.[0]);
+  }
+
   return (
-    <main className="w-full flex gap-x-6">
+    <main className="w-full flex justify-between">
       <div className="w-1/2 flex flex-col gap-y-6">
         <div className="flex items-center gap-x-4">
           <Button asChild variant="link">
@@ -115,6 +125,16 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="w-full flex flex-col gap-y-6">
+              <div className="flex flex-col gap-y-4">
+                <FormLabel>Cover Image</FormLabel>
+                <Avatar className="w-full h-28 rounded-none">
+                  <AvatarImage src={coverImagePath} className="object-cover" />
+                  <AvatarFallback className="bg-sky-500">
+                    <div className="w-full h-full bg-inherit"></div>
+                  </AvatarFallback>
+                </Avatar>
+                <Input disabled={isDisabled()} type="file" accept="image/*" onChange={onCoverChanged} />
+              </div>
               <div className="flex items-end space-x-4">
                 <Avatar className="w-24 h-24 rounded-xl">
                   <AvatarImage src={avatarImagePath} />
@@ -253,9 +273,9 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
           </form>
         </Form>
       </div>
-      <div className="w-1/2 flex flex-col gap-y-6">
+      <div className="w-2/5 flex flex-col gap-y-6">
         <p className="text-xl font-medium">Confirm your profiles on other Creative markets</p>
-        <LinkedSites />
+        <LinkedSites disabled={isDisabled()} />
       </div>
     </main>
   );
