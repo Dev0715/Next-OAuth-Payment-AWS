@@ -52,19 +52,18 @@ export default function ProductDetails({ params }: PropsParams) {
     // window.history.replaceState(null, '', currentPath)
   }, [searchParams]);
 
-
   return (
     <div className="w-full flex justify-center py-6">
       <div className="w-5/6 flex flex-col gap-y-6">
         <Navbar title="Product Detail" content="You can see details of product" />
         <div className="w-full flex gap-x-6">
-          <Avatar className="w-1/2 h-96 rounded-none">
+          <Avatar className="w-3/5 h-[480px] rounded-none">
             <AvatarImage src="{imgPath}" />
             <AvatarFallback className="bg-sky-500">
               <div className="w-full h-full bg-inherit"></div>
             </AvatarFallback>
           </Avatar>
-          <div className="w-1/2 flex flex-col">
+          <div className="w-2/5 flex flex-col">
             <p>Product detail page of <Bold>Product {params.productId}</Bold></p>
             <p>The Smartphone XYZ is a high-end mobile device that offers a range of advanced features and capabilities. It combines sleek design with powerful performance to provide users with a top-notch mobile experience.</p>
             <p>Key features include a large display, high-quality camera, long-lasting battery, and fast processor. The Smartphone XYZ is perfect for users who want a premium device that can handle all their daily tasks and activities.</p>
