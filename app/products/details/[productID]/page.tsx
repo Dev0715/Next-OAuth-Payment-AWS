@@ -60,12 +60,24 @@ export default function ProductDetails({ params }: PropsParams) {
       <div className="w-5/6 flex flex-col gap-y-6">
         <Navbar title="Product Detail" content="You can see details of product" />
         <div className="w-full flex gap-x-8">
-          <Avatar className="w-3/4 h-[480px] rounded-none">
-            <AvatarImage src={tempImagePath} className="object-cover" />
-            <AvatarFallback className="bg-sky-500">
-              <div className="w-full h-full bg-inherit"></div>
-            </AvatarFallback>
-          </Avatar>
+          <div className="w-3/4 flex flex-col gap-y-4">
+            <Avatar className="w-full h-[480px] rounded-none">
+              <AvatarImage src={tempImagePath} className="object-cover" />
+              <AvatarFallback className="bg-sky-500">
+                <div className="w-full h-full bg-inherit"></div>
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex gap-x-4">
+              {[...Array(7)].map(item => (
+                <Avatar className="w-24 h-16 rounded-none">
+                  <AvatarImage src={tempImagePath} className="object-cover" />
+                  <AvatarFallback className="bg-sky-500">
+                    <div className="w-full h-full bg-inherit"></div>
+                  </AvatarFallback>
+                </Avatar>
+              ))}
+            </div>
+          </div>
           <div className="w-1/4 flex flex-col gap-y-8">
             <div className="w-full flex flex-col gap-y-4">
               <div className="w-full flex justify-between">
@@ -79,6 +91,10 @@ export default function ProductDetails({ params }: PropsParams) {
                 <p>Reviews:</p>
                 <p className="text-xl text-rose-700">★ ★ ★ ★ ★</p>
               </div>
+              <div className="w-full flex justify-between">
+                <p>/** Some More: **/</p>
+                <p>/** ... **/</p>
+              </div>
             </div>
             <Button variant="outline" className="border-green-700">
               Add to cart
@@ -90,7 +106,7 @@ export default function ProductDetails({ params }: PropsParams) {
             </PaymentButton>
           </div>
         </div>
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col pt-2">
           <p className="text-2xl font-bold mb-4">About the Product</p>
           <p>Fresh update! Flower Boom Posters included in the Bundle!</p>
           <p>The Smartphone XYZ is a high-end mobile device that offers a range of advanced features and capabilities. It combines sleek design with powerful performance to provide users with a top-notch mobile experience.</p>
