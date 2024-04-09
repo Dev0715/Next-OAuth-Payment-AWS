@@ -37,6 +37,22 @@ export const RegisterSchema = z.object({
     .max(72, "Name must be a maximum of 72 characters")
 });
 
+// for `Account Setting` Form
+export const PasswordChangeSchema = z.object({
+  password: z
+    .string()
+    .min(6, "Passwords must be at least 6 characters long")
+    .max(32, "Passwords must be a maximum of 32 characters"),
+  newPassword: z
+    .string()
+    .min(6, "Passwords must be at least 6 characters long")
+    .max(32, "Passwords must be a maximum of 32 characters"),
+  confirmPassword: z
+    .string()
+    .min(6, "Passwords must be at least 6 characters long")
+    .max(32, "Passwords must be a maximum of 32 characters")
+});
+
 // for `Creator Registration` Form
 export const CreatorRegisterSchema = z.object({
   avatar: z.string().optional(),
