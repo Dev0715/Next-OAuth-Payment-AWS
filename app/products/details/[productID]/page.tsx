@@ -57,7 +57,7 @@ export default function ProductDetails({ params }: PropsParams) {
     <div className="w-full flex flex-col gap-y-12 py-6">
       <Navbar title="Product Detail" content="You can see details of product" />
       <div className="flex flex-col gap-y-6">
-        <Avatar className="w-48 h-48 rounded-xl">
+        <Avatar className="w-1/2 h-48 rounded-none">
           <AvatarImage src="{imgPath}" />
           <AvatarFallback className="bg-sky-500">
             <FaProductHunt className="text-white" />
