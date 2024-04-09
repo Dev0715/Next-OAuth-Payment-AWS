@@ -11,6 +11,7 @@ import { captureOrder as captureStripeOrder } from '@/actions/stripe/capture-ord
 import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 interface PropsParams {
   params: {
@@ -65,32 +66,36 @@ export default function ProductDetails({ params }: PropsParams) {
               <div className="w-full h-full bg-inherit"></div>
             </AvatarFallback>
           </Avatar>
-          <div className="w-1/4 flex flex-col gap-y-4">
-            <div className="w-full flex justify-between">
-              <p>Price:</p><Bold>$100</Bold>
+          <div className="w-1/4 flex flex-col gap-y-8">
+            <div className="w-full flex flex-col gap-y-4">
+              <div className="w-full flex justify-between">
+                <p>Price:</p><Bold>$100</Bold>
+              </div>
+              <div className="w-full flex justify-between">
+                <p>Categories:</p>
+                <p className="text-lg font-medium">Graphics / Objects</p>
+              </div>
+              <div className="w-full flex justify-between">
+                <p>Reviews:</p>
+                <p className="text-xl text-rose-700">★ ★ ★ ★ ★</p>
+              </div>
             </div>
-            <div className="w-full flex justify-between">
-              <p>Categories:</p>
-              <p>Graphics / Objects</p>
-            </div>
-            <div className="w-full flex justify-between">
-              <p>Reviews:</p>
-              <p className="text-xl text-rose-700">★ ★ ★ ★ ★</p>
-            </div>
-
-            <p>Categories: <Bold>$100</Bold></p>
-            <p>Price: <Bold>$100</Bold></p>
-            <p>Product detail page of <Bold>Product {params.productId}</Bold></p>
-            <p>The Smartphone XYZ is a high-end mobile device that offers a range of advanced features and capabilities. It combines sleek design with powerful performance to provide users with a top-notch mobile experience.</p>
-            <p>Key features include a large display, high-quality camera, long-lasting battery, and fast processor. The Smartphone XYZ is perfect for users who want a premium device that can handle all their daily tasks and activities.</p>
-            <p>Whether you're browsing the web, streaming videos, or playing games, the Smartphone XYZ delivers smooth and responsive performance. It also offers a range of connectivity options, including Wi-Fi, Bluetooth, and 4G LTE, so you can stay connected wherever you go.</p>
-
+            <Button variant="outline" className="border-green-700">
+              Add to cart
+            </Button>
             <PaymentButton mode="modal">
-              <WrappedButton variant="default" className="w-[480px] flex gap-x-2">
+              <WrappedButton variant="default" className="w-full flex gap-x-2">
                 <AiFillCreditCard />Purchase
               </WrappedButton>
             </PaymentButton>
           </div>
+        </div>
+        <div className="w-full flex flex-col">
+          <p className="text-2xl font-bold mb-4">About the Product</p>
+          <p>Fresh update! Flower Boom Posters included in the Bundle!</p>
+          <p>The Smartphone XYZ is a high-end mobile device that offers a range of advanced features and capabilities. It combines sleek design with powerful performance to provide users with a top-notch mobile experience.</p>
+          <p>Key features include a large display, high-quality camera, long-lasting battery, and fast processor. The Smartphone XYZ is perfect for users who want a premium device that can handle all their daily tasks and activities.</p>
+          <p>Whether you're browsing the web, streaming videos, or playing games, the Smartphone XYZ delivers smooth and responsive performance. It also offers a range of connectivity options, including Wi-Fi, Bluetooth, and 4G LTE, so you can stay connected wherever you go.</p>
         </div>
       </div>
     </div>
