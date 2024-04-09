@@ -66,7 +66,7 @@ export const CryptoPrefForm = () => {
                 <FormItem>
                   <div className="flex items-center justify-between">
                     <FormLabel>Bitcoin</FormLabel>
-                    <FormControl className="w-11/12">
+                    <FormControl className="w-5/6">
                       <Input
                         {...field}
                         disabled={isPending}
@@ -79,12 +79,12 @@ export const CryptoPrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="bitcoin"
+              name="ethereum"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Bitcoin</FormLabel>
-                    <FormControl className="w-11/12">
+                    <FormLabel>Ethereum</FormLabel>
+                    <FormControl className="w-5/6">
                       <Input
                         {...field}
                         disabled={isPending}
@@ -97,12 +97,12 @@ export const CryptoPrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="bitcoin"
+              name="litecoin"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Bitcoin</FormLabel>
-                    <FormControl className="w-11/12">
+                    <FormLabel>Litecoin</FormLabel>
+                    <FormControl className="w-5/6">
                       <Input
                         {...field}
                         disabled={isPending}
@@ -115,12 +115,12 @@ export const CryptoPrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="bitcoin"
+              name="dogecoin"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Bitcoin</FormLabel>
-                    <FormControl className="w-11/12">
+                    <FormLabel>Dogecoin</FormLabel>
+                    <FormControl className="w-5/6">
                       <Input
                         {...field}
                         disabled={isPending}
@@ -133,12 +133,12 @@ export const CryptoPrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="bitcoin"
+              name="xrp"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Bitcoin</FormLabel>
-                    <FormControl className="w-11/12">
+                    <FormLabel>XRP</FormLabel>
+                    <FormControl className="w-5/6">
                       <Input
                         {...field}
                         disabled={isPending}
@@ -151,12 +151,12 @@ export const CryptoPrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="bitcoin"
+              name="sol"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Bitcoin</FormLabel>
-                    <FormControl className="w-11/12">
+                    <FormLabel>SOL</FormLabel>
+                    <FormControl className="w-5/6">
                       <Input
                         {...field}
                         disabled={isPending}
@@ -169,12 +169,12 @@ export const CryptoPrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="bitcoin"
+              name="usdcoin"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Bitcoin</FormLabel>
-                    <FormControl className="w-11/12">
+                    <FormLabel>USDcoin</FormLabel>
+                    <FormControl className="w-5/6">
                       <Input
                         {...field}
                         disabled={isPending}
@@ -187,12 +187,12 @@ export const CryptoPrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="bitcoin"
+              name="avax"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Bitcoin</FormLabel>
-                    <FormControl className="w-11/12">
+                    <FormLabel>Avax</FormLabel>
+                    <FormControl className="w-5/6">
                       <Input
                         {...field}
                         disabled={isPending}
@@ -205,12 +205,12 @@ export const CryptoPrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="bitcoin"
+              name="tron"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Bitcoin</FormLabel>
-                    <FormControl className="w-11/12">
+                    <FormLabel>Tron</FormLabel>
+                    <FormControl className="w-5/6">
                       <Input
                         {...field}
                         disabled={isPending}
