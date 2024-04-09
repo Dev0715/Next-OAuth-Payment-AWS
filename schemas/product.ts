@@ -3,14 +3,11 @@ import { z } from "zod";
 export const ProductRegistrationSchema = z.object({
   title: z
     .string()
-    .min(1, "First name is required")
-    .max(72, "First name must be a maximum of 72 characters"),
+    .min(1, "Title is required")
+    .max(120, "Title must be a maximum of 120 characters"),
   description: z
     .string()
-    .min(1, "Last name is required")
-    .max(72, "Last name must be a maximum of 72 characters"),
-  address: z
-    .string()
-    .min(1, "A name is required")
-    .max(72, "Name must be a maximum of 72 characters")
+    .min(1, "Description is required")
+    .max(2400, "Description must be a maximum of 2400 characters"),
+  price: z.number().min(1, "Price is required")
 });
