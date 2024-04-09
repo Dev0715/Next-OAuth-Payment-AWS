@@ -69,8 +69,8 @@ export default function ProductDetails({ params }: PropsParams) {
             </Avatar>
             <div className="flex gap-x-4">
               {[...Array(7)].map(item => (
-                <Avatar className="w-24 h-16 rounded-none">
-                  <AvatarImage src={tempImagePath} className="object-cover" />
+                <Avatar className="w-28 h-16 rounded-none border-[2px] hover:border-green-700">
+                  <AvatarImage src={tempImagePath} className="object-center object-fill" />
                   <AvatarFallback className="bg-sky-500">
                     <div className="w-full h-full bg-inherit"></div>
                   </AvatarFallback>
