@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { FaKey } from "react-icons/fa";
 
 export const PasswordChangeForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -38,14 +39,14 @@ export const PasswordChangeForm = () => {
         <CardDescription>It's recommended to update your password regularly for security</CardDescription>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
           <CardContent>
             <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Current Password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -59,8 +60,11 @@ export const PasswordChangeForm = () => {
               )}
             />
           </CardContent>
-          <CardFooter>
-            <Button type="submit" variant="default">Change Password</Button>
+          <CardFooter className="self-end">
+            <Button type="submit" variant="default" className="w-64 gap-x-2">
+              <FaKey />
+              Change Password
+            </Button>
           </CardFooter>
         </form>
       </Form>
