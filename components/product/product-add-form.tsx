@@ -39,10 +39,10 @@ export const ProductAddForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader>
-            <CardTitle>Add a new Product</CardTitle>
-            <CardDescription></CardDescription>
+            <CardTitle className="text-4xl font-medium">Add a new Product</CardTitle>
+            <CardDescription>You can register your product and our admin users will check it and publish soon!</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="w-1/2 flex flex-col gap-y-4">
             <FormField
               control={form.control}
               name="title"
@@ -88,6 +88,7 @@ export const ProductAddForm = () => {
                       {...field}
                       disabled={isPending}
                       placeholder="Product Price"
+                      type="number"
                     />
                   </FormControl>
                   <FormMessage />
