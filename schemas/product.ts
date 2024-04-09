@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const ProductRegistrationSchema = z.object({
+export const NewProductSchema = z.object({
   title: z
     .string()
     .min(1, "Title is required")
