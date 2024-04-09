@@ -86,41 +86,74 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
   }
 
   return (
-    <main className="w-full flex flex-col gap-y-6">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-end gap-y-6">
-          <div className="w-1/2 flex flex-col gap-y-6">
-            <div className="flex items-end space-x-4">
-              <Avatar className="w-24 h-24 rounded-xl">
-                <AvatarImage src={avatarImagePath} />
-                <AvatarFallback className="bg-sky-500">
-                  <FaUser className="text-white" />
-                </AvatarFallback>
-              </Avatar>
-              <Input disabled={isDisabled()} type="file" accept="image/*" onChange={onAvatarChanged} />
-            </div>
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input disabled={isDisabled()} placeholder="JohnDoe1234" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex gap-x-4">
+    <main className="w-full flex justify-between gap-x-6">
+      <div className="w-1/2">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-y-6">
+              <div className="flex items-end space-x-4">
+                <Avatar className="w-24 h-24 rounded-xl">
+                  <AvatarImage src={avatarImagePath} />
+                  <AvatarFallback className="bg-sky-500">
+                    <FaUser className="text-white" />
+                  </AvatarFallback>
+                </Avatar>
+                <Input disabled={isDisabled()} type="file" accept="image/*" onChange={onAvatarChanged} />
+              </div>
               <FormField
                 control={form.control}
-                name="firstname"
+                name="username"
                 render={({ field }) => (
-                  <FormItem className="w-1/2">
-                    <FormLabel>First Name</FormLabel>
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input disabled={isDisabled()} placeholder="John" {...field} />
+                      <Input disabled={isDisabled()} placeholder="JohnDoe1234" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex gap-x-4">
+                <FormField
+                  control={form.control}
+                  name="firstname"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <FormLabel>First Name</FormLabel>
+                      <FormControl>
+                        <Input disabled={isDisabled()} placeholder="John" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="lastname"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <FormLabel>Last Name</FormLabel>
+                      <FormControl>
+                        <Input disabled={isDisabled()} placeholder="Doe" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isDisabled()}
+                        placeholder="username@yemail.com"
+                        type="email"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -128,98 +161,66 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
               />
               <FormField
                 control={form.control}
-                name="lastname"
+                name="address"
                 render={({ field }) => (
-                  <FormItem className="w-1/2">
-                    <FormLabel>Last Name</FormLabel>
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
                     <FormControl>
-                      <Input disabled={isDisabled()} placeholder="Doe" {...field} />
+                      <Input disabled={isDisabled()} placeholder="Address" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="phone1"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number 1</FormLabel>
+                    <FormControl>
+                      <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone2"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number 2</FormLabel>
+                    <FormControl>
+                      <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormError message={error} />
+              <FormSuccess message={success} />
+              <Button disabled={isDisabled()} type="submit" className="w-64 self-end">
+                Register
+              </Button>
             </div>
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isDisabled()}
-                      placeholder="username@yemail.com"
-                      type="email"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Address</FormLabel>
-                  <FormControl>
-                    <Input disabled={isDisabled()} placeholder="Address" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="phone1"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number 1</FormLabel>
-                  <FormControl>
-                    <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="phone2"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number 2</FormLabel>
-                  <FormControl>
-                    <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormError message={error} />
-            <FormSuccess message={success} />
-            <Button disabled={isDisabled()} type="submit" className="w-64">
-              Register
-            </Button>
-          </div>
-        </form>
-
-      </Form>
-      <div className="w-1/2 space-y-4">
-        <p>Be the earliest users to get the latest updates and news from us.</p>
-        <p>Early subscribers will get exclusive access to our new features and various benefits.</p>
-        <p>We will also give a number of bonuses like $10 off.</p>
-        <p>You will have free Launch Package that will have a bundle of free fonts, images, ...</p>
-        <p>Join the Discord and follow notifications and news on our channel</p>
-        <div className="flex flex-col gap-y-4">
-          <Button disabled={isDisabled()}>
-            Subscribe
-          </Button>
-          <Button disabled={isDisabled()}>
+          </form>
+        </Form>
+      </div>
+      <div className="w-2/5 flex flex-col gap-y-12">
+        <div>
+          <p>Be the earliest users to get the latest updates and news from us!</p>
+          <p>Early subscribers will get exclusive access to our new features and various benefits.</p>
+          <p>We will also give a number of bonuses like $10 off.</p>
+          <p>You will have free Launch Package that will have a bundle of free fonts, images, ...</p>
+          <p>Join the Discord and follow notifications and news on our channel</p>
+        </div>
+        <p className="text-2xl font-medium -rotate-3">SUBSCRIBE NOW!</p>
+        <div className="w-3/4 flex flex-col self-center gap-y-6">
+          <Button variant="outline" disabled={isDisabled()}>
             Paypal
           </Button>
-          <Button disabled={isDisabled()}>
+          <Button variant="outline" disabled={isDisabled()}>
             Stripe
           </Button>
         </div>
