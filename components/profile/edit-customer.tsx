@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaUser } from "react-icons/fa";
+import { FaCcStripe, FaPaypal, FaStripe, FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 
@@ -208,6 +208,7 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
         </Form>
       </div>
       <div className="w-2/5 flex flex-col gap-y-12">
+        <p className="text-2xl font-medium">For First CUSTOMERs!</p>
         <div>
           <p>Be the earliest users to get the latest updates and news from us!</p>
           <p>Early subscribers will get exclusive access to our new features and various benefits.</p>
@@ -217,11 +218,13 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
         </div>
         <p className="text-2xl font-medium -rotate-3">SUBSCRIBE NOW!</p>
         <div className="w-3/4 flex flex-col self-center gap-y-6">
-          <Button variant="outline" disabled={isDisabled()}>
-            Paypal
+          <Button variant="outline" disabled={isDisabled()} className="flex gap-x-2 border-green-700">
+            <FaPaypal />
+            Subscribe with Paypal
           </Button>
-          <Button variant="outline" disabled={isDisabled()}>
-            Stripe
+          <Button variant="outline" disabled={isDisabled()} className="flex gap-x-2 border-blue-700">
+            <FaCcStripe />
+            Subscribe with Stripe
           </Button>
         </div>
       </div>
