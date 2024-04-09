@@ -9,6 +9,7 @@ import { NewProductSchema } from "@/schemas/product"
 import { useState, useTransition } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -53,6 +54,40 @@ export const ProductAddForm = () => {
                       {...field}
                       disabled={isPending}
                       placeholder="Product Name"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description for Product</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Product Description..."
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price for Product</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Product Price"
                     />
                   </FormControl>
                   <FormMessage />
