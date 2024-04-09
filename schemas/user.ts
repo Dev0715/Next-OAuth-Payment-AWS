@@ -2,9 +2,6 @@ import * as z from "zod";
 
 // for `Profile Settings` Form
 export const ProfileSchema = z.object({
-  isCreator: z.boolean(),
-  isAffiliate: z.boolean(),
-  isCustomer: z.boolean(),
   username: z
     .string()
     .min(1, "A name is required")
