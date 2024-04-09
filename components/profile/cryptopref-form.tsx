@@ -19,8 +19,9 @@ import {
 } from "@/components/ui/form";
 import { register } from "@/actions/register";
 import { CryptoPrefSchema } from "@/schemas/user";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 
-export const CryptoPreferenceForm = () => {
+export const CryptoPrefForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -48,4 +49,37 @@ export const CryptoPreferenceForm = () => {
 
     });
   };
+
+  return (
+    <Card className="w-1/2 rounded-none">
+      <CardHeader>
+        <CardTitle>Crypto Pref</CardTitle>
+        <CardDescription>You can select your crypto preference</CardDescription>
+      </CardHeader>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
+          <CardContent className="flex flex-col gap-y-4">
+            <FormField
+              control={form.control}
+              name="bitcoin"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>Bitcoin</FormLabel>
+                    <FormControl className="w-11/12">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </form>
+      </Form>
+    </Card>
+  )
 }
