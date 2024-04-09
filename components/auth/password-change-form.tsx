@@ -33,7 +33,7 @@ export const PasswordChangeForm = () => {
   };
 
   return (
-    <Card className="w-1/2 rounded-none">
+    <Card className="w-1/2 h-fit rounded-none">
       <CardHeader>
         <CardTitle>Change Password</CardTitle>
         <CardDescription>It's recommended to update your password regularly for security</CardDescription>
