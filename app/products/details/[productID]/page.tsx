@@ -34,6 +34,8 @@ export default function ProductDetails({ params }: PropsParams) {
   const searchParams = useSearchParams();
   const currentPath = usePathname();
 
+  const tempImagePath = "/profile-back-example.jpg";
+
   useEffect(() => {
     const gateway = searchParams.get('gateway');
     if (gateway === Gateway_Paypal) {
@@ -56,19 +58,33 @@ export default function ProductDetails({ params }: PropsParams) {
     <div className="w-full flex justify-center py-6">
       <div className="w-5/6 flex flex-col gap-y-6">
         <Navbar title="Product Detail" content="You can see details of product" />
-        <div className="w-full flex gap-x-6">
-          <Avatar className="w-3/5 h-[480px] rounded-none">
-            <AvatarImage src="{imgPath}" />
+        <div className="w-full flex gap-x-8">
+          <Avatar className="w-3/4 h-[480px] rounded-none">
+            <AvatarImage src={tempImagePath} className="object-cover" />
             <AvatarFallback className="bg-sky-500">
               <div className="w-full h-full bg-inherit"></div>
             </AvatarFallback>
           </Avatar>
-          <div className="w-2/5 flex flex-col">
+          <div className="w-1/4 flex flex-col gap-y-4">
+            <div className="w-full flex justify-between">
+              <p>Price:</p><Bold>$100</Bold>
+            </div>
+            <div className="w-full flex justify-between">
+              <p>Categories:</p>
+              <p>Graphics / Objects</p>
+            </div>
+            <div className="w-full flex justify-between">
+              <p>Reviews:</p>
+              <p className="text-xl text-rose-700">★ ★ ★ ★ ★</p>
+            </div>
+
+            <p>Categories: <Bold>$100</Bold></p>
+            <p>Price: <Bold>$100</Bold></p>
             <p>Product detail page of <Bold>Product {params.productId}</Bold></p>
             <p>The Smartphone XYZ is a high-end mobile device that offers a range of advanced features and capabilities. It combines sleek design with powerful performance to provide users with a top-notch mobile experience.</p>
             <p>Key features include a large display, high-quality camera, long-lasting battery, and fast processor. The Smartphone XYZ is perfect for users who want a premium device that can handle all their daily tasks and activities.</p>
             <p>Whether you're browsing the web, streaming videos, or playing games, the Smartphone XYZ delivers smooth and responsive performance. It also offers a range of connectivity options, including Wi-Fi, Bluetooth, and 4G LTE, so you can stay connected wherever you go.</p>
-            <p>Price: <Bold>$100</Bold></p>
+
             <PaymentButton mode="modal">
               <WrappedButton variant="default" className="w-[480px] flex gap-x-2">
                 <AiFillCreditCard />Purchase
