@@ -10,7 +10,7 @@ import { useState, useTransition } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { FaFileUpload } from "react-icons/fa";
+import { FaFileUpload, FaPlus } from "react-icons/fa";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -38,7 +38,7 @@ export const ProductAddForm = () => {
   return (
     <Card className="w-full flex rounded-none">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/2">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/2 flex flex-col">
           <CardHeader>
             <CardTitle className="text-4xl font-medium">Add a new Product</CardTitle>
             <CardDescription>You can register your product and our admin users will check it and publish soon!</CardDescription>
@@ -104,9 +104,9 @@ export const ProductAddForm = () => {
               )}
             />
           </CardContent>
-          <CardFooter>
-            <Button type="submit">
-
+          <CardFooter className="self-end">
+            <Button type="submit" className="w-48 flex gap-x-2">
+              <FaPlus />
               Add
             </Button>
           </CardFooter>
