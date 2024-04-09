@@ -51,7 +51,7 @@ export const CryptoPrefForm = () => {
   };
 
   return (
-    <Card className="w-1/2 rounded-none">
+    <Card className="w-1/2 flex flex-col rounded-none">
       <CardHeader>
         <CardTitle>Crypto Pref</CardTitle>
         <CardDescription>You can select your crypto preference</CardDescription>
@@ -224,6 +224,11 @@ export const CryptoPrefForm = () => {
           </CardContent>
         </form>
       </Form>
+      <CardFooter className="self-end">
+        <Button className="w-64 flex gap-x-2">
+          Update
+        </Button>
+      </CardFooter>
     </Card>
   )
 }
