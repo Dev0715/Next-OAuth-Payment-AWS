@@ -15,7 +15,8 @@ interface Params {
   userId: string;
   numberOfProducts: number;
   numberOfFollowers: number;
-  disabled?: boolean
+  disabled?: boolean;
+  showButton?: boolean;
 }
 
 function Bold({ children }: { children: React.ReactNode }) {
@@ -33,7 +34,8 @@ export const CreativeSite = ({
   userId,
   numberOfProducts,
   numberOfFollowers,
-  disabled
+  disabled,
+  showButton
 }: Params) => {
   return (
     <Card className="w-full">
@@ -48,7 +50,7 @@ export const CreativeSite = ({
           <p>Followers: <Bold>{numberOfFollowers}</Bold></p>
         </div>
       </CardContent>
-      <CardFooter className="flex gap-x-6">
+      <CardFooter className={`flex gap-x-6 ${showButton === false && 'hidden'}`}>
         <Button disabled={disabled} variant="outline" className="border-green-700">Confirm</Button>
         <Button disabled={disabled} variant="outline" className="border-red-700">Discard</Button>
       </CardFooter>
