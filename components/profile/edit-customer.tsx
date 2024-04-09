@@ -20,6 +20,7 @@ import { FormSuccess } from "@/components/utils/form-success";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/register-user";
+import { axiosClient, axiosConfig } from "@/lib/axios";
 
 export default function EditCustomer({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
@@ -50,27 +51,30 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
     setError("");
     setSuccess("");
 
-    console.log("FORM VALUES", values);
-
     startTransition(() => {
+      values.avatar = '';
+
       if (avatar) {
-        console.log("__onSubmit__FILE__SELECTED");
+        values.avatar = 'USER_ID' + '.jpg';
 
         const formData = new FormData();
         formData.append("file", avatar);
+        formData.append("keyName", values.avatar);
 
-        fetch("/api/upload", {
-          method: "POST",
-          body: formData
-        }).then(res => res.json()).then(data => {
-          console.log("__upload__RESULT", data);
-
-          values.image = data.filePath;
-          registerUser(values).then(data => {
-            console.log("__registerUser__RESULT", data);
-          })
-        });
+        axiosClient.post("/upload", formData, axiosConfig)
+          .then(res => res.data).then(data => {
+            if (data.success) {
+              // const res = data.response;
+              // const metadata = res.$metadata;
+            }
+          }).catch(error => {
+            console.log("__uploadFile__ERROR", error);
+          });
       }
+
+      registerUser(values).then(data => {
+        console.log("__registerUser__RESULT", data);
+      });
     });
   };
 
@@ -84,7 +88,7 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
   return (
     <main className="w-full flex flex-col gap-y-6">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-end gap-y-6">
           <div className="w-full flex gap-x-12">
             <div className="w-1/2 flex flex-col gap-y-6">
               <div className="flex items-end space-x-4">
