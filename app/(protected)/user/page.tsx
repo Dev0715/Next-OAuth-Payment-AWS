@@ -22,7 +22,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { ProfileSchema } from "@/schemas/user";
 import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
 import { Header } from "./_components/header";
 import { SwitchBox } from "@/components/utils/switch-box";
 
@@ -34,9 +33,6 @@ export default function Profile() {
   const form = useForm<z.infer<typeof ProfileSchema>>({
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
-      isCreator: false,
-      isAffiliate: false,
-      isCustomer: false,
       username: "",
       bio: "",
     }
@@ -55,66 +51,64 @@ export default function Profile() {
     <main className="w-full pl-8 flex flex-col gap-y-5">
       <Header title="Profile" content="This is how others will see you on the site" />
       <Separator />
+      <div className="w-full flex flex-col gap-y-4">
+        <h3 className="text-base font-medium">Your roles</h3>
+        <div className="w-full grid grid-cols-3 gap-x-6">
+          <SwitchBox
+            mode="small"
+            title="Creator"
+            content="You have started journey for a creator"
+            isChecked={false}
+          />
+          <SwitchBox
+            mode="small"
+            title="Customer"
+            content="You joined as a customer"
+            isChecked={false}
+          />
+          <SwitchBox
+            mode="small"
+            title="Affiliate"
+            content="You have started an affiliate's life"
+            isChecked={false}
+          />
+        </div>
+      </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="w-full flex flex-col">
-            <h3 className="mb-4 text-base font-medium">Your roles</h3>
-            <div className="w-full grid grid-cols-3 gap-x-6">
-              <SwitchBox
-                mode="small"
-                title="Creator"
-                content="You have started journey for a creator"
-                isChecked={false}
-              />
-              <SwitchBox
-                mode="small"
-                title="Customer"
-                content="You joined as a customer"
-                isChecked={false}
-              />
-              <SwitchBox
-                mode="small"
-                title="Affiliate"
-                content="You have started an affiliate's life"
-                isChecked={false}
-              />
-            </div>
-          </div>
-          <div className="w-1/2 flex flex-col gap-y-6">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="John Doe" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="bio"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Bio</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      disabled={isPending}
-                      placeholder="Tell us a little bit about yourself"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/2 flex flex-col gap-y-6">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="John Doe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="bio"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Bio</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    disabled={isPending}
+                    placeholder="Tell us a little bit about yourself"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit">
+          <Button disabled={isPending} type="submit" className="w-64 self-end">
             Save Profile
           </Button>
         </form>
