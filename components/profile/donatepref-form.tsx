@@ -29,13 +29,17 @@ export const DonatePrefForm = () => {
   const form = useForm<z.infer<typeof DonatePrefSchema>>({
     resolver: zodResolver(DonatePrefSchema),
     defaultValues: {
-      paypal: '',
-      cashapp: '',
-      venmo: '',
-      zelle: '',
-      applepay: '',
-      googlepay: '',
-      amazonpay: '',
+      lfxmentorship: '',
+      gofundme: '',
+      kickstarter: '',
+      indiegogo: '',
+      githubsponsors: '',
+      opencollective: '',
+      tidelift: '',
+      issuehunt: '',
+      patreon: '',
+      buymeacoffee: '',
+      kofi: '',
     }
   });
 
