@@ -12,7 +12,7 @@ const getNumericArrayFromString = (str: string) => {
 export const generateVerificationToken = (userId: string) => {
   const token = uuidv4();
   const encrypted = crypto.AES.encrypt(userId, token).toString();
-  const numericStr = getNumericArrayFromString(encrypted);
+  // const numericStr = getNumericArrayFromString(encrypted);
   const verificationToken = token + numericStr;
 
   return verificationToken;
@@ -21,9 +21,9 @@ export const generateVerificationToken = (userId: string) => {
 export const getUserIdFromToken = (token: string) => {
   const tokenId = token.slice(0, 36);
   const encryptedUserId = token.slice(36);
-  const encryptedStr = String.fromCharCode(
-    ...encryptedUserId.split("-").map((str) => Number(str))
-  );
+  // const encryptedStr = String.fromCharCode(
+  // ...encryptedUserId.split("-").map((str) => Number(str))
+  // );
   const bytes = crypto.AES.decrypt(encryptedStr, tokenId);
   const decryptedUserId = bytes.toString(crypto.enc.Utf8);
 
