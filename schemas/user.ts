@@ -24,3 +24,14 @@ export const CryptoPrefSchema = z.object({
   avax: z.string().optional(),
   tron: z.string().optional()
 });
+
+// for 'Payment Preference' Form
+export const PaymentPrefSchema = z.object({
+  paypal: z.string().optional(),
+  cashapp: z.string().optional(),
+  venmo: z.string().optional(),
+  zelle: z.string().optional(),
+  applepay: z.string().optional(),
+  googlepay: z.string().optional(),
+  amazonpay: z.string().optional()
+});
