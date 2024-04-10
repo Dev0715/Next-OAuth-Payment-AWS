@@ -35,3 +35,18 @@ export const PaymentPrefSchema = z.object({
   googlepay: z.string().optional(),
   amazonpay: z.string().optional()
 });
+
+// for 'Donate Preference' Form
+export const DonatePrefSchema = z.object({
+  lfxmentorship: z.string().optional(),
+  gofundme: z.string().optional(),
+  kickstarter: z.string().optional(),
+  indiegogo: z.string().optional(),
+  githubsponsors: z.string().optional(),
+  opencollective: z.string().optional(),
+  tidelift: z.string().optional(),
+  issuehunt: z.string().optional(),
+  patreon: z.string().optional(),
+  buymeacoffee: z.string().optional(),
+  kofi: z.string().optional()
+});
