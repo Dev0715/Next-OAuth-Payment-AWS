@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 import adapter from "@/adapter";
+import { getUserByEmail } from "./data/user";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter,
@@ -11,7 +12,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   // },
   events: {
     async linkAccount({ user }) {
-      console.log("EVENTS__linkAccount", user);
+      console.log("__EVENTS__linkAccount", user);
       // await db.user.update({
       //   where: { id: user.id },
       //   data: { emailVerified: new Date() }
@@ -20,7 +21,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account }) {
-      console.log("CALLBACK__signIn", user, account);
+      console.log("__CALLBACK__signIn", user, account);
       // Allow OAuth without email verification
       // if (account?.provider !== "credentials") return true;
 
@@ -45,34 +46,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return true;
     },
     async session({ token, session }) {
-      console.log("CALLBACK__session", token, session);
+      console.log("__CALLBACK__session", token, session);
       if (token.sub && session.user) {
         session.user.id = token.sub;
-      }
-
-      if (token.role && session.user) {
-        session.user.role = token.role;
       }
 
       if (session.user) {
         session.user.name = token.name;
         session.user.email = token.email as string;
         session.user.isOAuth = token.isOAuth as boolean;
+        session.user.userId = token.userId as string;
       }
 
       return session;
     },
     async jwt({ token }) {
-      console.log("CALLBACK__jwt", token);
-      // if (!token.sub) return token;
-      // const existingUser = await getUserById(token.sub);
+      console.log("__CALLBACK__jwt", token);
+      // if (!token.email) return token;
+      // const existingUser = await getUserByEmail(token.email);
       // if (!existingUser) return token;
-      // const existingAccount = await getAccountByUserId(existingUser.id);
-      // token.isOAuth = !!existingAccount;
-      // token.name = existingUser.name;
+      // token.isOAuth = !existingUser;
       // token.email = existingUser.email;
-      // token.role = existingUser.role;
-      // token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+      // token.userId = existingUser.userId;  // goes to session function above
       return token;
     }
   },
