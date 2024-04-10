@@ -1,3 +1,5 @@
+"use server";
+
 import { v4 as uuidv4 } from "uuid";
 
 import db from "@/lib/db";
@@ -7,35 +9,63 @@ import {
   ScanCommand,
   UpdateCommand
 } from "@aws-sdk/lib-dynamodb";
+import { generateVerificationToken } from "@/lib/tokens";
 
 const TableName = process.env.AWS_DYNAMODB_TABLE_NAME;
 
 interface NewUser {
-  name?: string | null | undefined;
+  username: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password?: string;
   id?: string;
-  image?: string | null | undefined;
-  emailVerified?: Date | string | null;
+  image?: string;
+  emailVerified?: Date | string;
 }
 
 interface UserSetToken {
-  username: string;
+  userId: string;
   verificationToken: string;
   expires: Date;
 }
 
 interface UserSetPassword {
-  username: string;
+  userId: string;
   password: string;
   emailVerified: Date;
 }
 
-export const getUserById = async (id: string) => {
+export const getAllUsernames = async () => {
+  const command = new ScanCommand({
+    TableName,
+    ProjectionExpression: "username" // attr names to get
+    // ProjectionExpression: "email, emailVerified, #name",
+    // ExpressionAttributeNames: { "#name": "name" }, // for reserved attr names
+    // FilterExpression: "email = :email",
+    // ExpressionAttributeValues: {
+    // ":email": email
+    // }
+    // Limit: 1 // just number of scanned items, not result
+  });
+
+  try {
+    const response = await db.send(command);
+    return {
+      items: response.Items
+    };
+  } catch (error) {
+    return {
+      items: []
+    };
+  }
+};
+
+export const getUserById = async (userId: string) => {
   const command = new GetCommand({
     TableName,
     Key: {
-      username: id
+      userId
     }
   });
 
@@ -73,30 +103,32 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
+// When social login, consider setting id same as userId into table
+// When social login, usernames just comes as name
 export const createUser = async (data: NewUser) => {
   if (data.emailVerified && data.emailVerified instanceof Date) {
     data.emailVerified = data.emailVerified.toISOString();
   }
 
-  const username = uuidv4();
-  const verificationToken = username + uuidv4();
+  const currentTime = Math.floor(new Date().getTime() / 1000);
+  const userId = data.username + currentTime;
+  const verificationToken = generateVerificationToken(userId);
+  const expires = new Date(new Date().getTime() + 3600 * 1000).toISOString();
 
   const command = new PutCommand({
     TableName,
     Item: {
-      username,
+      userId,
       verificationToken,
-      expires: new Date(new Date().getTime() + 3600 * 1000).toISOString(),
+      expires,
       ...data
     }
   });
 
   try {
-    const response = await db.send(command);
-    console.log("__createUser__PutCommand__RESPONSE", response);
+    await db.send(command);
     return verificationToken;
   } catch (error) {
-    console.log("__createUser__PutCommand__ERROR", error);
     return null;
   }
 };
@@ -104,7 +136,9 @@ export const createUser = async (data: NewUser) => {
 export const updateUserToken = async (data: UserSetToken) => {
   const command = new UpdateCommand({
     TableName,
-    Key: { username: data.username },
+    Key: {
+      userId: data.userId
+    },
     UpdateExpression:
       "SET verificationToken = :verificationToken, expires = :expires",
     ExpressionAttributeValues: {
@@ -127,7 +161,9 @@ export const updateUserToken = async (data: UserSetToken) => {
 export const updateUserPassword = async (data: UserSetPassword) => {
   const command = new UpdateCommand({
     TableName,
-    Key: { username: data.username },
+    Key: {
+      userId: data.userId
+    },
     UpdateExpression:
       "SET password = :password, emailVerified = :emailVerified",
     ExpressionAttributeValues: {
@@ -143,27 +179,6 @@ export const updateUserPassword = async (data: UserSetPassword) => {
     return response.Attributes;
   } catch (error) {
     console.log("__updateUserPassword__UpdateCommand__ERROR", error);
-    return null;
-  }
-};
-
-export const updateUserVerification = async (userId: string) => {
-  const command = new UpdateCommand({
-    TableName,
-    Key: { username: userId },
-    UpdateExpression: "SET emailVerified = :emailVerified",
-    ExpressionAttributeValues: {
-      ":emailVerified": new Date().toISOString()
-    },
-    ReturnValues: "ALL_NEW"
-  });
-
-  try {
-    const response = await db.send(command);
-    console.log("__updateUserVerification__UpdateCommand__RESPONSE", response);
-    return response.Attributes;
-  } catch (error) {
-    console.log("__updateUserVerification__UpdateCommand__ERROR", error);
     return null;
   }
 };
