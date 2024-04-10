@@ -39,7 +39,7 @@ export const PasswordChangeForm = () => {
         <CardDescription>It's recommended to update your password regularly for security</CardDescription>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
           <CardContent className="flex flex-col gap-y-4">
             <FormField
               control={form.control}
