@@ -57,7 +57,132 @@ export const PaymentPrefForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
           <CardContent className="flex flex-col gap-y-4">
-
+            <FormField
+              control={form.control}
+              name="paypal"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>Bitcoin</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="cashapp"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>Ethereum</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="venmo"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>Litecoin</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="zelle"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>Dogecoin</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="applepay"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>XRP</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="googlepay"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>SOL</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="amazonpay"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>USDcoin</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </CardContent>
         </form>
       </Form>
