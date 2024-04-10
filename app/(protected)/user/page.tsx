@@ -89,6 +89,7 @@ export default function Profile() {
               </FormItem>
             )}
           />
+          {/** No NEED to show Bio here. */}
           <FormField
             control={form.control}
             name="bio"
