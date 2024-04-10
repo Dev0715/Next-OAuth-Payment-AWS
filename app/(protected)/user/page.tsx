@@ -49,10 +49,10 @@ export default function Profile() {
 
   return (
     <main className="w-full pl-8 flex flex-col gap-y-5">
-      <Header title="Profile" content="This is how others will see you on the site" />
+      <Header title="General Profile" content="You can see your roles opened here" />
       <Separator />
       <div className="w-full flex flex-col gap-y-4">
-        <h3 className="text-base font-medium">Your roles</h3>
+        <h3 className="text-base font-medium">Your roles opened</h3>
         <div className="w-full grid grid-cols-3 gap-x-6">
           <SwitchBox
             mode="small"
