@@ -5,6 +5,7 @@ import { Header } from "../_components/header";
 import { PasswordChangeForm } from "@/components/auth/password-change-form";
 import { CryptoPrefForm } from "@/components/profile/cryptopref-form";
 import { PaymentPrefForm } from "@/components/profile/paymentpref-form";
+import { DonatePrefForm } from "@/components/profile/donatepref-form";
 
 const Account = () => {
   return (
@@ -14,9 +15,10 @@ const Account = () => {
       <div className="w-full flex gap-x-6">
         <div className="w-1/2 flex flex-col gap-y-6">
           <PasswordChangeForm />
-          <PaymentPrefForm />
+          <DonatePrefForm />
         </div>
         <div className="w-1/2">
+          <PaymentPrefForm />
           <CryptoPrefForm />
         </div>
       </div>
