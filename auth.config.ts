@@ -7,7 +7,6 @@ import bcrypt from "bcryptjs";
 
 import type { NextAuthConfig } from "next-auth";
 
-import { LoginSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user";
 
 export default {
@@ -34,7 +33,6 @@ export default {
         password: { type: "password" }
       },
       async authorize(credentials) {
-        console.log("__Credentials SignIn", credentials);
         const { email, password } = credentials;
         const user = await getUserByEmail(email as string);
         if (!user || !user.password) return null;
@@ -42,6 +40,8 @@ export default {
           password as string,
           user.password
         );
+        // !Important: this sets token's id as userId
+        user.id = user.userId;
         if (passwordsMatch) return user;
         else return null; // You can also reject this callback for detailed error
       }
