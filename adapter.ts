@@ -12,22 +12,25 @@ export default {
   async getUserByAccount(
     providerAccountId: Pick<AdapterAccount, "provider" | "providerAccountId">
   ): Awaitable<AdapterUser | null> {
-    console.log("__getUserByAccount", providerAccountId);
+    console.log("__GetUserByAccount", providerAccountId);
     // { providerAccountId: '126603430', provider: 'github' }
     return null;
   },
+
   async getUser(id: string): Awaitable<AdapterUser | null> {
-    console.log("__getUser", id);
+    console.log("__GetUser", id);
     // 8876a5dc-7248-4682-a255-5412417373dd
     return null;
   },
+
   async getUserByEmail(email: string): Awaitable<AdapterUser | null> {
-    console.log("__getUserByEmail", email);
+    console.log("__GetUserByEmail", email);
     // sacreddevking@gmail.com
     return null;
   },
+
   async createUser(user: AdapterUser): Awaitable<AdapterUser> {
-    console.log("__createUser", user);
+    console.log("__CreateUser", user);
     const existingUser = await getUserByEmail(user.email);
     if (!existingUser) {
       await createUser({ ...user, emailVerified: new Date() });
@@ -41,10 +44,11 @@ export default {
     // }
     return user;
   },
+
   async linkAccount(
     account: AdapterAccount
   ): Promise<void> | Awaitable<AdapterAccount | null | undefined> {
-    console.log("__linkAccount", account);
+    console.log("__LinkAccount", account);
     // {
     //   access_token: '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',
     //   scope: 'read:user,user:email',
@@ -56,6 +60,7 @@ export default {
     // }
     return;
   }
+
   // async updateUser(
   //   user: Partial<AdapterUser> & Pick<AdapterUser, "id">
   // ): Awaitable<AdapterUser> {
