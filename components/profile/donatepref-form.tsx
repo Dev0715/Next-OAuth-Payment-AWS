@@ -53,7 +53,7 @@ export const DonatePrefForm = () => {
   };
 
   return (
-    <Card className="w-full flex flex-col rounded-none">
+    <Card className="w-full h-fit flex flex-col rounded-none">
       <CardHeader>
         <CardTitle>Donate Pref</CardTitle>
         <CardDescription>You can select your Donate preference</CardDescription>
@@ -67,7 +67,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Bitcoin</FormLabel>
+                    <FormLabel>LFX Mentorship</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -85,7 +85,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Ethereum</FormLabel>
+                    <FormLabel>gofundme</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -103,7 +103,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Litecoin</FormLabel>
+                    <FormLabel>kickstarter</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -121,7 +121,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Dogecoin</FormLabel>
+                    <FormLabel>indiegogo</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -139,7 +139,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>XRP</FormLabel>
+                    <FormLabel>githubsponsors</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -157,7 +157,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>SOL</FormLabel>
+                    <FormLabel>opencollective</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -175,7 +175,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>USDcoin</FormLabel>
+                    <FormLabel>tidelift</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -193,7 +193,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>USDcoin</FormLabel>
+                    <FormLabel>issuehunt</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -211,7 +211,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>USDcoin</FormLabel>
+                    <FormLabel>patreon</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -229,7 +229,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>USDcoin</FormLabel>
+                    <FormLabel>buymeacoffee</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
@@ -247,7 +247,7 @@ export const DonatePrefForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>USDcoin</FormLabel>
+                    <FormLabel>kofi</FormLabel>
                     <FormControl className="w-5/6">
                       <Input
                         {...field}
