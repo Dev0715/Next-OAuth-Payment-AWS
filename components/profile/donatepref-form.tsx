@@ -63,7 +63,7 @@ export const DonatePrefForm = () => {
           <CardContent className="flex flex-col gap-y-4">
             <FormField
               control={form.control}
-              name="paypal"
+              name="lfxmentorship"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
@@ -81,7 +81,7 @@ export const DonatePrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="cashapp"
+              name="gofundme"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
@@ -99,7 +99,7 @@ export const DonatePrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="venmo"
+              name="kickstarter"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
@@ -117,7 +117,7 @@ export const DonatePrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="zelle"
+              name="indiegogo"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
@@ -135,7 +135,7 @@ export const DonatePrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="applepay"
+              name="githubsponsors"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
@@ -153,7 +153,7 @@ export const DonatePrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="googlepay"
+              name="opencollective"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
@@ -171,7 +171,79 @@ export const DonatePrefForm = () => {
             />
             <FormField
               control={form.control}
-              name="amazonpay"
+              name="tidelift"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>USDcoin</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="issuehunt"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>USDcoin</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="patreon"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>USDcoin</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="buymeacoffee"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>USDcoin</FormLabel>
+                    <FormControl className="w-5/6">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="kofi"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
