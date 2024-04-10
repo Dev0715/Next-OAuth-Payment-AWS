@@ -11,7 +11,10 @@ const Account = () => {
       <Header title="Account" content="Your account information here" />
       <Separator />
       <div className="w-full flex gap-x-4">
-        <PasswordChangeForm />
+        <div className="w-1/2">
+          <PasswordChangeForm />
+        </div>
+
         <CryptoPrefForm />
       </div>
 
