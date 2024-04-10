@@ -12,12 +12,12 @@ const Account = () => {
     <main className="w-full pl-8 pb-6 flex flex-col gap-y-5">
       <Header title="Account" content="Your account information here" />
       <Separator />
-      <div className="w-full flex gap-x-6">
-        <div className="w-1/2 flex flex-col gap-y-6">
+      <div className="w-full flex gap-x-12">
+        <div className="w-1/2 flex flex-col gap-y-12">
           <PasswordChangeForm />
           <DonatePrefForm />
         </div>
-        <div className="w-1/2">
+        <div className="w-1/2 flex flex-col gap-y-12">
           <PaymentPrefForm />
           <CryptoPrefForm />
         </div>

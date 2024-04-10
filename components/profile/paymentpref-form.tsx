@@ -49,7 +49,7 @@ export const PaymentPrefForm = () => {
   };
 
   return (
-    <Card className="w-full flex flex-col rounded-none">
+    <Card className="w-full h-fit flex flex-col rounded-none">
       <CardHeader>
         <CardTitle>Payment Pref</CardTitle>
         <CardDescription>You can select your Payment preference</CardDescription>
