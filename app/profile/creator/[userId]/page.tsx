@@ -28,7 +28,7 @@ export default function CreatorProfile({ params }: PropsParams) {
   }
 
   useEffect(() => {
-    // fet from API
+    // fetch from API
     if (params.userId) {
       getUserById(params.userId).then(data => {
         setCreator(data);
