@@ -20,7 +20,7 @@ export default function CreatorProfile({ params }: PropsParams) {
   const imageBack = "/profile-back-example.jpg";
 
   const onFollow = () => {
-    console.log("User Session", session);
+
   }
 
   useEffect(() => {
