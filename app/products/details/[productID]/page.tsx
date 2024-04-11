@@ -35,7 +35,7 @@ export default function ProductDetails({ params }: PropsParams) {
   const searchParams = useSearchParams();
 
   const tempImagePath = ["/profile-back-example.jpg", "/product-example.jpg", "/product-example-2.jpg"];
-  const [candidates, setCandidates] = useState([2, 1, 2, 1, 2, 0, 1, 1,]);
+  const [candidates, setCandidates] = useState([2, 1, 2, 1, 2, 0, 1, 2]);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   const onItemSelected = (index: number) => {
@@ -67,7 +67,7 @@ export default function ProductDetails({ params }: PropsParams) {
         <div className="w-full flex gap-x-8">
           <div className="w-3/4 flex flex-col gap-y-4">
             <Avatar className="w-full h-[480px] rounded-none">
-              <AvatarImage src={tempImagePath[selectedIndex]} className="object-cover" />
+              <AvatarImage src={tempImagePath[candidates[selectedIndex]]} className="object-cover" />
               <AvatarFallback className="bg-sky-500">
                 <div className="w-full h-full bg-inherit"></div>
               </AvatarFallback>
@@ -76,7 +76,7 @@ export default function ProductDetails({ params }: PropsParams) {
               {candidates.map((candidateIndex, index) => (
                 <div
                   key={index}
-                  onMouseEnter={() => onItemSelected(candidateIndex)}
+                  onMouseEnter={() => onItemSelected(index)}
                   className={`w-28 h-16 border-[2px] hover:border-green-700 cursor-pointer ${index === selectedIndex && 'border-green-700'}`}
                 >
                   <Avatar className={`w-full h-full rounded-none border-[1px] border-white`}>
