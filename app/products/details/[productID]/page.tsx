@@ -67,19 +67,25 @@ export default function ProductDetails({ params }: PropsParams) {
         <div className="w-full flex gap-x-8">
           <div className="w-3/4 flex flex-col gap-y-4">
             <Avatar className="w-full h-[480px] rounded-none">
-              <AvatarImage src={tempImagePath[Math.floor(Math.random() * 100) % 3]} className="object-cover" />
+              <AvatarImage src={tempImagePath[selectedIndex]} className="object-cover" />
               <AvatarFallback className="bg-sky-500">
                 <div className="w-full h-full bg-inherit"></div>
               </AvatarFallback>
             </Avatar>
             <div className="flex gap-x-4">
-              {candidates.map((candidateIndex) => (
-                <Avatar key={candidateIndex} onMouseEnter={() => onItemSelected(candidateIndex)} className="w-28 h-16 rounded-none border-[2px] hover:border-green-700">
-                  <AvatarImage src={tempImagePath[candidateIndex]} className="object-center object-fill" />
-                  <AvatarFallback className="bg-sky-500">
-                    <div className="w-full h-full bg-inherit"></div>
-                  </AvatarFallback>
-                </Avatar>
+              {candidates.map((candidateIndex, index) => (
+                <div
+                  key={index}
+                  onMouseEnter={() => onItemSelected(index)}
+                  className={`w-28 h-16 border-[2px] hover:border-green-700 cursor-pointer ${candidateIndex === selectedIndex && 'border-green-700'}`}
+                >
+                  <Avatar className={`w-full h-full rounded-none border-[1px] border-white`}>
+                    <AvatarImage src={tempImagePath[candidateIndex]} className="object-center object-fill" />
+                    <AvatarFallback className="bg-sky-500">
+                      <div className="w-full h-full bg-inherit"></div>
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
               ))}
             </div>
           </div>
