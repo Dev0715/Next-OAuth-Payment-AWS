@@ -46,7 +46,7 @@ export const UserButton = () => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="end">
-        <Link href="/profile/creator/userId">
+        <Link href={`/profile/creator/${user.id}`}>
           <DropdownMenuItem>
             <PersonIcon className="h-4 w-4 mr-3" />
             <span>Creator Profile</span>
