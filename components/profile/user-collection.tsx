@@ -16,8 +16,8 @@ export const UserCollection = () => {
         </Button>
       </CardHeader>
       <CardContent className="flex flex-wrap gap-6">
-        {[...Array(23)].map(item => (
-          <ProductItem key={item} imgPath="" title="" description="" price={5} />
+        {[...Array(23)].map((item, index) => (
+          <ProductItem key={index} imgPath="" title="" description="" price={5} />
         ))}
       </CardContent>
       <CardFooter>
