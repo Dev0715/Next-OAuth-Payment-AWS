@@ -126,14 +126,16 @@ export default function Products() {
   return (
     <main className="w-full flex flex-col pt-6">
       <Navbar title="Products" content="You can see all products here" />
-      <div className="w-full flex flex-wrap gap-4 py-6">
+      <div className="w-full flex flex-wrap py-6">
         {products.map((product, index) => (
-          <ProductItem
-            key={index}
-            imgPath={product.imgPath}
-            title={product.title}
-            description={product.description}
-            price={product.price} />
+          <div className="w-1/4 p-2">
+            <ProductItem
+              key={index}
+              imgPath={product.imgPath}
+              title={product.title}
+              description={product.description}
+              price={product.price} />
+          </div>
         ))}
       </div>
     </main>
