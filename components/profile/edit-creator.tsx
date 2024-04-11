@@ -105,13 +105,13 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
       getUserById(user.id).then(data => {
         setCreator(data);
         form.setValue("username", data.username);
-        form.setValue("bio", creator?.bio);
-        form.setValue("firstname", creator?.firstname);
-        form.setValue("lastname", creator?.lastname);
-        form.setValue("email", creator?.email);
-        form.setValue("address", creator.address);
-        form.setValue("phone1", creator.phone1);
-        form.setValue("phone2", creator.phone2);
+        form.setValue("bio", data.bio);
+        form.setValue("firstname", data.firstname);
+        form.setValue("lastname", data.lastname);
+        form.setValue("email", data.email);
+        form.setValue("address", data.address);
+        form.setValue("phone1", data.phone1);
+        form.setValue("phone2", data.phone2);
       });
     }
   }, []);
