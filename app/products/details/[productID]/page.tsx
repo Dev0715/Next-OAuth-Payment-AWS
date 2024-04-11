@@ -12,6 +12,8 @@ import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-ord
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 interface PropsParams {
   params: {
@@ -33,6 +35,7 @@ export default function ProductDetails({ params }: PropsParams) {
   const Gateway_Cancelled = 'cancelled';
 
   const searchParams = useSearchParams();
+  const user = useCurrentUser();
 
   const tempImagePath = ["/profile-back-example.jpg", "/product-example.jpg", "/product-example-2.jpg"];
   const [candidates, setCandidates] = useState([2, 1, 2, 1, 2, 0, 1, 2]);
@@ -108,9 +111,11 @@ export default function ProductDetails({ params }: PropsParams) {
               </div>
             </div>
             <div className="flex flex-col gap-y-4">
-              <Button variant="outline" className="border-green-700 gap-x-2">
-                <FaRegUser className="text-green-700" />
-                Go to Creator's Profile
+              <Button asChild variant="outline" className="border-green-700 gap-x-2">
+                <Link href={`/profile/creator/${user.id}`}>
+                  <FaRegUser className="text-green-700" />
+                  Go to Creator's Profile
+                </Link>
               </Button>
               <Button variant="outline" className="border-green-700 gap-x-2">
                 <FaCartArrowDown className="text-green-700" />
