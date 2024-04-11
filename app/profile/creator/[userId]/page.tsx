@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserById } from "@/data/user";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { CreatorInterface } from "@/shared/user";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
@@ -17,19 +18,10 @@ interface PropsParams {
   }
 }
 
-interface CreatorParam {
-  userId: string;
-  email: string;
-  firstname: string;
-  lastname: string;
-  username: string;
-  bio: string;
-}
-
 export default function CreatorProfile({ params }: PropsParams) {
   const user = useCurrentUser();
   const imageBack = "/profile-back-example.jpg";
-  const [creator, setCreator] = useState<CreatorParam>();
+  const [creator, setCreator] = useState<CreatorInterface>();
 
   const onFollow = () => {
 
