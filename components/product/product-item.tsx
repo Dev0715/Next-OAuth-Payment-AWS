@@ -20,7 +20,7 @@ export const ProductItem = ({ imgPath, title, description, price }: PropsParams)
         <CardContent className="w-full p-0 flex flex-col gap-y-4">
           <Avatar className="w-full h-56 rounded-none">
             {/* <AvatarImage src={imgPath} /> */}
-            <AvatarImage src={tempImagePath[Math.floor(Math.random()) % 3]} />
+            <AvatarImage src={tempImagePath[Math.floor(Math.random() * 100) % 3]} />
             <AvatarFallback className="bg-sky-500">
               <div className="w-full h-full bg-green-700"></div>
             </AvatarFallback>
