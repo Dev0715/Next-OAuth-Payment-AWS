@@ -217,7 +217,8 @@ export const updateCreatorProfile = async (
     Key: {
       userId
     },
-    UpdateExpression: "SET emailVerified = :emailVerified",
+    UpdateExpression:
+      "SET username = :username, firstname = :firstname, lastname = :lastname, email = :email, typeOfUser = :typeOfUser, address = :address, phone1 = :phone1, phone2 = :phone2",
     ExpressionAttributeValues: {
       ":emailVerified": new Date().toISOString()
     },
