@@ -35,7 +35,7 @@ export default function ProductDetails({ params }: PropsParams) {
   const searchParams = useSearchParams();
 
   const tempImagePath = ["/profile-back-example.jpg", "/product-example.jpg", "/product-example-2.jpg"];
-  const [candidates, setCandidates] = useState([0, 1, 2, 1, 2, 0, 1, 1, 2]);
+  const [candidates, setCandidates] = useState([2, 1, 2, 1, 2, 0, 1, 1,]);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   const onItemSelected = (index: number) => {
@@ -76,8 +76,8 @@ export default function ProductDetails({ params }: PropsParams) {
               {candidates.map((candidateIndex, index) => (
                 <div
                   key={index}
-                  onMouseEnter={() => onItemSelected(index)}
-                  className={`w-28 h-16 border-[2px] hover:border-green-700 cursor-pointer ${candidateIndex === selectedIndex && 'border-green-700'}`}
+                  onMouseEnter={() => onItemSelected(candidateIndex)}
+                  className={`w-28 h-16 border-[2px] hover:border-green-700 cursor-pointer ${index === selectedIndex && 'border-green-700'}`}
                 >
                   <Avatar className={`w-full h-full rounded-none border-[1px] border-white`}>
                     <AvatarImage src={tempImagePath[candidateIndex]} className="object-center object-fill" />
