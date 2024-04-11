@@ -20,7 +20,11 @@ export const registerCreator = async (
   const { avatar } = validateFields.data;
   console.log("__registerCreator", avatar);
 
-  await updateCreatorProfile(userId, values);
+  const response = await updateCreatorProfile(userId, values);
 
-  return { success: "Success" };
+  if (response) {
+    return { success: "Success" };
+  } else {
+    return { error: "Server Error" };
+  }
 };
