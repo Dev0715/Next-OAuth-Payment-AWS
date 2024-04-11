@@ -22,6 +22,8 @@ import { FaCcStripe, FaPaypal, FaStripe, FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { getUserById } from "@/data/user";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { CustomerInterface } from "@/shared/user";
 
 export default function EditCustomer({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
