@@ -94,7 +94,7 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
           });
       }
 
-      registerCreator(values).then(data => {
+      registerCreator(user?.id, values).then(data => {
         console.log("__registerCreator__RESULT", data);
       })
     });
