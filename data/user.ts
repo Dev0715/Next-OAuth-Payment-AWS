@@ -220,7 +220,14 @@ export const updateCreatorProfile = async (
     UpdateExpression:
       "SET username = :username, firstname = :firstname, lastname = :lastname, email = :email, typeOfUser = :typeOfUser, address = :address, phone1 = :phone1, phone2 = :phone2",
     ExpressionAttributeValues: {
-      ":emailVerified": new Date().toISOString()
+      ":username": values.username,
+      ":firstname": values.firstname,
+      ":lastname": values.lastname,
+      ":email": values.email,
+      ":typeOfUser": values.typeOfUser,
+      ":address": values.address,
+      ":phone1": values.phone1,
+      ":phone2": values.phone2
     },
     ReturnValues: "ALL_NEW"
   });
