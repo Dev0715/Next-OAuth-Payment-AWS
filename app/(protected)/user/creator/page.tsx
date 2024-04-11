@@ -8,7 +8,10 @@ const CreatorSettings = () => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const onSwitch = () => {
-    setIsChecked(!isChecked);
+    if (isChecked === false) {
+
+    }
+    setIsChecked(prevState => !prevState);
   }
 
   return (
