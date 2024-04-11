@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserById } from "@/data/user";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 
 interface PropsParams {
@@ -17,9 +17,17 @@ interface PropsParams {
   }
 }
 
+interface CreatorParam {
+  email: string;
+  emailVerified: string;
+  expires: string;
+  firstname: string;
+}
+
 export default function CreatorProfile({ params }: PropsParams) {
   const user = useCurrentUser();
   const imageBack = "/profile-back-example.jpg";
+  const [creator, setCreator] = useState();
 
   const onFollow = () => {
 
@@ -27,9 +35,9 @@ export default function CreatorProfile({ params }: PropsParams) {
 
   useEffect(() => {
     // fet from API
-    if (user) {
-      getUserById(user.id as string).then(data => {
-        console.log(data);
+    if (params.userId) {
+      getUserById(params.userId).then(data => {
+        setCreator(data);
       });
     }
   }, []);
