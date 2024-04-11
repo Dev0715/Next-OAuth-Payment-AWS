@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -21,11 +21,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaCcStripe, FaPaypal, FaStripe, FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
+import { getUserById } from "@/data/user";
 
 export default function EditCustomer({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+
+  const user = useCurrentUser();
+  const [customer, setCustomer] = useState<CustomerInterface>();
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
@@ -77,6 +81,21 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
       });
     });
   };
+
+  useEffect(() => {
+    if (user) {
+      getUserById(user.id).then(data => {
+        setCustomer(data);
+        form.setValue("username", data.username);
+        form.setValue("firstname", data.firstname);
+        form.setValue("lastname", data.lastname);
+        form.setValue("email", data.email);
+        form.setValue("address", data.address);
+        form.setValue("phone1", data.phone1);
+        form.setValue("phone2", data.phone2);
+      });
+    }
+  }, []);
 
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
