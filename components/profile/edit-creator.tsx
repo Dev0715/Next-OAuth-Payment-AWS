@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -26,11 +26,17 @@ import { registerCreator } from "@/actions/register-creator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { getUserById } from "@/data/user";
+import { CreatorInterface } from "@/shared/user";
 
 export default function EditCreator({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+
+  const user = useCurrentUser();
+  const [creator, setCreator] = useState<CreatorInterface>();
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
@@ -93,6 +99,14 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
       })
     });
   };
+
+  useEffect(() => {
+    if (user) {
+      getUserById(user.id).then(data => {
+        setCreator(data);
+      });
+    }
+  }, []);
 
   const onAgreeScrap = (checked: boolean) => {
     console.log("AGREE SCRAP", checked);
