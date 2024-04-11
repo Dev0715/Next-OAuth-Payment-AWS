@@ -112,7 +112,7 @@ export default function ProductDetails({ params }: PropsParams) {
             </div>
             <div className="flex flex-col gap-y-4">
               <Button asChild variant="outline" className="border-green-700 gap-x-2">
-                <Link href={`/profile/creator/${user.id}`}>
+                <Link href={`/profile/creator/${user?.id}`}>
                   <FaRegUser className="text-green-700" />
                   Go to Creator's Profile
                 </Link>
