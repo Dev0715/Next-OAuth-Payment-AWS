@@ -10,6 +10,8 @@ import {
   UpdateCommand
 } from "@aws-sdk/lib-dynamodb";
 import { generateVerificationToken } from "@/lib/tokens";
+import { z } from "zod";
+import { CreatorRegisterSchema } from "@/schemas/auth";
 
 const TableName = process.env.AWS_DYNAMODB_TABLE_NAME;
 
@@ -184,6 +186,32 @@ export const updateUserPassword = async (data: UserSetPassword) => {
 };
 
 export const updateUserVerification = async (userId: string) => {
+  const command = new UpdateCommand({
+    TableName,
+    Key: {
+      userId
+    },
+    UpdateExpression: "SET emailVerified = :emailVerified",
+    ExpressionAttributeValues: {
+      ":emailVerified": new Date().toISOString()
+    },
+    ReturnValues: "ALL_NEW"
+  });
+
+  try {
+    const response = await db.send(command);
+    console.log("__updateUserVerification__UpdateCommand__RESPONSE", response);
+    return response.Attributes;
+  } catch (error) {
+    console.log("__updateUserVerification__UpdateCommand__ERROR", error);
+    return null;
+  }
+};
+
+export const updateCreatorProfile = async (
+  userId: string,
+  values: z.infer<typeof CreatorRegisterSchema>
+) => {
   const command = new UpdateCommand({
     TableName,
     Key: {
