@@ -104,6 +104,14 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
     if (user) {
       getUserById(user.id).then(data => {
         setCreator(data);
+        form.setValue("username", data.username);
+        form.setValue("bio", creator?.bio);
+        form.setValue("firstname", creator?.firstname);
+        form.setValue("lastname", creator?.lastname);
+        form.setValue("email", creator?.email);
+        form.setValue("address", creator.address);
+        form.setValue("phone1", creator.phone1);
+        form.setValue("phone2", creator.phone2);
       });
     }
   }, []);
