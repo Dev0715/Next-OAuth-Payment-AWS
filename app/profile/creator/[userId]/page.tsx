@@ -18,16 +18,18 @@ interface PropsParams {
 }
 
 interface CreatorParam {
+  userId: string;
   email: string;
-  emailVerified: string;
-  expires: string;
   firstname: string;
+  lastname: string;
+  username: string;
+  bio: string;
 }
 
 export default function CreatorProfile({ params }: PropsParams) {
   const user = useCurrentUser();
   const imageBack = "/profile-back-example.jpg";
-  const [creator, setCreator] = useState();
+  const [creator, setCreator] = useState<CreatorParam>();
 
   const onFollow = () => {
 
@@ -59,9 +61,9 @@ export default function CreatorProfile({ params }: PropsParams) {
         </Avatar>
       </div>
       <div className="w-full flex flex-col items-center gap-y-3">
-        <p className="text-xl font-bold">@User Name</p>
+        <p className="text-xl font-bold">@{creator?.username}</p>
         <p className="text-xl text-rose-700">★ ★ ★ ★ ★</p>
-        <p className="text-lg">User Description</p>
+        <p className="text-lg">{creator?.bio}</p>
         <div className="flex gap-x-6">
           <Button variant="default" className="w-24" onClick={onFollow}>
             Follow
@@ -91,7 +93,7 @@ export default function CreatorProfile({ params }: PropsParams) {
             <UserCollection />
           </TabsContent>
           <TabsContent value="About">
-            <AboutCreator />
+            <AboutCreator creator={creator} />
           </TabsContent>
           <TabsContent value="Announcements"></TabsContent>
           <TabsContent value="Reviews"></TabsContent>
