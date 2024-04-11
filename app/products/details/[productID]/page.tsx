@@ -10,7 +10,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { captureOrder as captureStripeOrder } from '@/actions/stripe/capture-order';
 import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 interface PropsParams {
@@ -33,9 +33,14 @@ export default function ProductDetails({ params }: PropsParams) {
   const Gateway_Cancelled = 'cancelled';
 
   const searchParams = useSearchParams();
-  const currentPath = usePathname();
 
-  const tempImagePath = "/profile-back-example.jpg";
+  const tempImagePath = ["/profile-back-example.jpg", "/product-example.jpg", "/product-example-2.jpg"];
+  const [candidates, setCandidates] = useState([0, 1, 2, 1, 2, 0, 1, 1, 2]);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+
+  const onItemSelected = (index: number) => {
+    setSelectedIndex(index);
+  }
 
   useEffect(() => {
     const gateway = searchParams.get('gateway');
@@ -62,15 +67,15 @@ export default function ProductDetails({ params }: PropsParams) {
         <div className="w-full flex gap-x-8">
           <div className="w-3/4 flex flex-col gap-y-4">
             <Avatar className="w-full h-[480px] rounded-none">
-              <AvatarImage src={tempImagePath} className="object-cover" />
+              <AvatarImage src={tempImagePath[Math.floor(Math.random() * 100) % 3]} className="object-cover" />
               <AvatarFallback className="bg-sky-500">
                 <div className="w-full h-full bg-inherit"></div>
               </AvatarFallback>
             </Avatar>
             <div className="flex gap-x-4">
-              {[...Array(7)].map(item => (
-                <Avatar className="w-28 h-16 rounded-none border-[2px] hover:border-green-700">
-                  <AvatarImage src={tempImagePath} className="object-center object-fill" />
+              {candidates.map((candidateIndex, index) => (
+                <Avatar onMouseEnter={() => onItemSelected(candidateIndex)} className="w-28 h-16 rounded-none border-[2px] hover:border-green-700">
+                  <AvatarImage src={tempImagePath[candidateIndex]} className="object-center object-fill" />
                   <AvatarFallback className="bg-sky-500">
                     <div className="w-full h-full bg-inherit"></div>
                   </AvatarFallback>
