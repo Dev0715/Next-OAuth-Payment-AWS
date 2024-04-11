@@ -5,7 +5,7 @@ import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getUserById } from "@/data/user";
+import { getUserById } from "@/data/user/user-by-id";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { CreatorInterface } from "@/shared/user";
 import { useSession } from "next-auth/react";
