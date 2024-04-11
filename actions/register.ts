@@ -38,4 +38,15 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     email,
     password: hashedPassword
   });
+
+  if (verificationToken) {
+    await sendVerificationEmail(email, verificationToken);
+    return {
+      success: "New user registered, Check your mailbox!"
+    };
+  } else {
+    return {
+      error: "Server Error!"
+    };
+  }
 };
