@@ -1,4 +1,4 @@
-import { uploadFileToS3 } from "@/actions/upload-image";
+import { uploadFileToS3 } from "@/actions/s3/upload-image";
 import { NextResponse } from "next/server";
 
 type RequestType = {
