@@ -5,6 +5,7 @@ import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 
@@ -15,7 +16,13 @@ interface PropsParams {
 }
 
 export default function CreatorProfile({ params }: PropsParams) {
+  const session = useSession();
   const imageBack = "/profile-back-example.jpg";
+
+  const onFollow = () => {
+    console.log("User Session", session);
+  }
+
   useEffect(() => {
 
   }, []);
@@ -41,7 +48,7 @@ export default function CreatorProfile({ params }: PropsParams) {
         <p className="text-xl text-rose-700">★ ★ ★ ★ ★</p>
         <p className="text-lg">User Description</p>
         <div className="flex gap-x-6">
-          <Button variant="default" className="w-24">
+          <Button variant="default" className="w-24" onClick={onFollow}>
             Follow
           </Button>
           <Button variant="outline" className="w-24 border-green-700">
