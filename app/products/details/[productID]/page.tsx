@@ -73,8 +73,8 @@ export default function ProductDetails({ params }: PropsParams) {
               </AvatarFallback>
             </Avatar>
             <div className="flex gap-x-4">
-              {candidates.map((candidateIndex, index) => (
-                <Avatar onMouseEnter={() => onItemSelected(candidateIndex)} className="w-28 h-16 rounded-none border-[2px] hover:border-green-700">
+              {candidates.map((candidateIndex) => (
+                <Avatar key={candidateIndex} onMouseEnter={() => onItemSelected(candidateIndex)} className="w-28 h-16 rounded-none border-[2px] hover:border-green-700">
                   <AvatarImage src={tempImagePath[candidateIndex]} className="object-center object-fill" />
                   <AvatarFallback className="bg-sky-500">
                     <div className="w-full h-full bg-inherit"></div>
