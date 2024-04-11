@@ -5,6 +5,8 @@ import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getUserById } from "@/data/user";
+import { useCurrentUser } from "@/hooks/use-current-user";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
@@ -16,7 +18,7 @@ interface PropsParams {
 }
 
 export default function CreatorProfile({ params }: PropsParams) {
-  const session = useSession();
+  const user = useCurrentUser();
   const imageBack = "/profile-back-example.jpg";
 
   const onFollow = () => {
@@ -24,7 +26,12 @@ export default function CreatorProfile({ params }: PropsParams) {
   }
 
   useEffect(() => {
-
+    // fet from API
+    if (user) {
+      getUserById(user.id as string).then(data => {
+        console.log(data);
+      });
+    }
   }, []);
 
   return (
