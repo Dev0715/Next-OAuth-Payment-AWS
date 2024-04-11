@@ -13,12 +13,14 @@ interface PropsParams {
 }
 
 export const ProductItem = ({ imgPath, title, description, price }: PropsParams) => {
+  const tempImagePath = "/profile-back-example.jpg";
   return (
     <Link href={`/products/details/${title}`} className="w-full">
       <Card className="w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100 hover:translate-x-[-1px] hover:translate-y-[-1px]">
         <CardContent className="w-full p-0 flex flex-col gap-y-4">
           <Avatar className="w-full h-52 rounded-none">
-            <AvatarImage src={imgPath} />
+            {/* <AvatarImage src={imgPath} /> */}
+            <AvatarImage src={tempImagePath} />
             <AvatarFallback className="bg-sky-500">
               <div className="w-full h-full bg-green-700"></div>
             </AvatarFallback>
