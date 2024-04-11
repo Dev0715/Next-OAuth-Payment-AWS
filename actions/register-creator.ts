@@ -4,11 +4,12 @@ import { z } from "zod";
 import bcrypt from "bcryptjs";
 
 import { RegisterSchema, CreatorRegisterSchema } from "@/schemas/auth";
-import { createUser, getUserByEmail } from "@/data/user";
+import { createUser, getUserByEmail, updateCreatorProfile } from "@/data/user";
 import { sendVerificationEmail } from "@/lib/mail";
 // import { generateVerificationToken } from "@/lib/tokens";
 
 export const registerCreator = async (
+  userId: string,
   values: z.infer<typeof CreatorRegisterSchema>
 ) => {
   const validateFields = CreatorRegisterSchema.safeParse(values);
@@ -18,6 +19,8 @@ export const registerCreator = async (
 
   const { avatar } = validateFields.data;
   console.log("__registerCreator", avatar);
+
+  await updateCreatorProfile(userId, values);
 
   return { success: "Success" };
 };
