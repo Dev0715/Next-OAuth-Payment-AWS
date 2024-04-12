@@ -123,8 +123,8 @@ export default function ProductDetails({ params }: PropsParams) {
                   Go to Creator's Profile
                 </Link>
               </Button>
-              <Alert title="Confirmation" message="Are you sure to move this product to your cart?" onContinue={onConfirmCart}>
-                <Button variant="outline" className="border-green-700 gap-x-2">
+              <Alert title="Confirmation" message="Are you sure to move this product to your cart?" onContinue={onConfirmCart} onCancel={() => { }}>
+                <Button variant="outline" className="w-full border-green-700 gap-x-2">
                   <FaCartArrowDown className="text-green-700" />
                   Add to cart
                 </Button>
