@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <main className="relative w-full flex justify-center pt-24 pb-6">
-      <Avatar className="absolute top-0 left-0 w-96 h-56 rounded-none">
+      <Avatar className="absolute top-0 left-0 w-96 h-56 rounded-lg">
         {/* <AvatarImage src={imgPath} /> */}
         <AvatarImage
           src={tempImagePath[Math.floor(Math.random() * 100) % 3]}
@@ -29,7 +29,7 @@ const Home = () => {
           <div className="w-full h-full bg-green-700"></div>
         </AvatarFallback>
       </Avatar>
-      <Avatar className="absolute top-96 left-0 w-96 h-56 rounded-none">
+      <Avatar className="absolute top-96 left-0 w-96 h-56 rounded-lg">
         {/* <AvatarImage src={imgPath} /> */}
         <AvatarImage
           src={tempImagePath[Math.floor(Math.random() * 100) % 3]}
