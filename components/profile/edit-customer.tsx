@@ -19,11 +19,11 @@ import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaCcStripe, FaPaypal, FaStripe, FaUser } from "react-icons/fa";
-import { registerUser } from "@/actions/register-user";
+import { registerUser } from "@/actions/auth/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
-import { getUserById } from "@/data/user";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { CustomerInterface } from "@/shared/user";
+import { getUserById } from "@/data/user/user-by-id";
 
 export default function EditCustomer({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");
