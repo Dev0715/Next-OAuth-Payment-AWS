@@ -15,9 +15,11 @@ export const UserCollection = () => {
           </Link>
         </Button>
       </CardHeader>
-      <CardContent className="flex flex-wrap gap-6">
+      <CardContent className="flex flex-wrap">
         {[...Array(23)].map((item, index) => (
-          <ProductItem key={index} imgPath="" title="" description="" price={5} />
+          <div className="w-1/4 p-4">
+            <ProductItem key={index} imgPath="" title="" description="" price={5} />
+          </div>
         ))}
       </CardContent>
       <CardFooter>
