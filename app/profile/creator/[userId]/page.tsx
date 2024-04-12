@@ -20,7 +20,7 @@ interface PropsParams {
 
 export default function CreatorProfile({ params }: PropsParams) {
   const user = useCurrentUser();
-  const imageBack = "/profile-back-example.jpg";
+  const imageBack = "/product-example-2.jpg";
   const [creator, setCreator] = useState<CreatorInterface>();
 
   const onFollow = () => {
@@ -39,7 +39,7 @@ export default function CreatorProfile({ params }: PropsParams) {
   return (
     <div className="w-5/6 flex flex-col items-center gap-y-2 py-6">
       <div className="relative w-full flex flex-col items-center mb-12">
-        <Avatar className="w-full h-48 rounded-none">
+        <Avatar className="w-full h-56 rounded-none">
           <AvatarImage src={imageBack} className="object-cover" />
           <AvatarFallback className="bg-sky-500">
             <div className="w-full h-full bg-inherit"></div>
