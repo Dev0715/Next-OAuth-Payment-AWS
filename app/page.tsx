@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <main className="relative w-full flex justify-center pt-24 pb-6">
       {images.map(_style => (
-        <Avatar className={`absolute w-96 h-56 rounded-lg ${_style}`}>
+        <Avatar className={`absolute w-96 h-56 rounded-lg blur-sm ${_style}`}>
           {/* <AvatarImage src={imgPath} /> */}
           <AvatarImage
             src={tempImagePath[Math.floor(Math.random() * 100) % 3]}
