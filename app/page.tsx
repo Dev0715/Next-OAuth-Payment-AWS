@@ -18,9 +18,9 @@ const Home = () => {
   const tempImagePath = ["/profile-back-example.jpg", "/product-example.jpg", "/product-example-2.jpg"];
 
   const images = [
-    "top-0 left-0 rotate-[6deg]",
-    "top-0 left-0 rotate-[6deg]",
-    "top-0 left-0 rotate-[6deg]",
+    "top-12 left-16 rotate-[6deg]",
+    "top-64 left-6 rotate-[-12deg]",
+    "top-[480px] left-16 rotate-[6deg]",
   ]
 
   return (
