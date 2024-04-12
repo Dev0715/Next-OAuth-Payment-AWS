@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { AlertDialog } from "@/components/ui/alert-dialog";
+import { Alert } from "@/components/utils/alert";
 
 interface PropsParams {
   params: {
@@ -63,6 +64,10 @@ export default function ProductDetails({ params }: PropsParams) {
     }
     // window.history.replaceState(null, '', currentPath)
   }, [searchParams]);
+
+  const onConfirmCart = () => {
+
+  }
 
   return (
     <div className="w-full flex justify-center py-6">
@@ -118,12 +123,12 @@ export default function ProductDetails({ params }: PropsParams) {
                   Go to Creator's Profile
                 </Link>
               </Button>
-              <AlertDialog>
+              <Alert title="Confirmation" message="Are you sure to move this product to your cart?" onContinue={onConfirmCart}>
                 <Button variant="outline" className="border-green-700 gap-x-2">
                   <FaCartArrowDown className="text-green-700" />
                   Add to cart
                 </Button>
-              </AlertDialog>
+              </Alert>
               <PaymentButton mode="modal">
                 <WrappedButton variant="default" className="w-full flex gap-x-2">
                   <AiFillCreditCard />Purchase
