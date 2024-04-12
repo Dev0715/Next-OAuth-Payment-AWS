@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <main className="relative w-full flex justify-center pt-24 pb-6">
       {images.map(_style => (
-        <Avatar className={`absolute w-96 h-56 rounded-lg blur-sm ${_style}`}>
+        <Avatar className={`absolute w-96 h-56 rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 blur-sm ${_style}`}>
           {/* <AvatarImage src={imgPath} /> */}
           <AvatarImage
             src={tempImagePath[Math.floor(Math.random() * 100) % 3]}
@@ -43,7 +43,6 @@ const Home = () => {
       <div className="w-1/2 flex flex-col items-center gap-y-24 text-center">
         <h1 className={cn("text-7xl font-semibold text-green-700 drop-shadow-md", font.className)}>
           Bring your creative ideas to life!
-
         </h1>
         <div className='w-full space-y-4 text-left text-black text-lg'>
           <p>/** This site is scheduled to launch officially on May 15th! - [ Need to be updated ]</p>
@@ -52,7 +51,7 @@ const Home = () => {
         </div>
         <div className='flex flex-col items-center gap-y-4'>
           <p className='text-2xl font-bold'>You can sign-up now as either a Seller or a User!</p>
-          <Button className='w-1/2' variant="default" asChild size="lg">
+          <Button className='w-1/2 animate-pulse' variant="default" asChild size="lg">
             <Link href="/auth/register">Sign-Up Now</Link>
           </Button>
         </div>
