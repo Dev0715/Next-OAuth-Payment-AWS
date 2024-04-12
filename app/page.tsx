@@ -21,6 +21,9 @@ const Home = () => {
     "top-12 left-16 rotate-[6deg]",
     "top-64 left-6 rotate-[-12deg]",
     "top-[480px] left-16 rotate-[6deg]",
+    "top-12 right-16 rotate-[-6deg]",
+    "top-64 right-6 rotate-[12deg]",
+    "top-[480px] right-16 rotate-[-6deg]",
   ]
 
   return (
@@ -38,7 +41,7 @@ const Home = () => {
         </Avatar>
       ))}
       <div className="w-1/2 flex flex-col items-center gap-y-24 text-center">
-        <h1 className={cn("text-7xl font-semibold text-black drop-shadow-md", font.className)}>
+        <h1 className={cn("text-7xl font-semibold text-green-700 drop-shadow-md", font.className)}>
           Bring your creative ideas to life!
 
         </h1>
