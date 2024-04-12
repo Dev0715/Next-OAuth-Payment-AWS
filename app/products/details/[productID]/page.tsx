@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { AlertDialog } from "@/components/ui/alert-dialog";
 
 interface PropsParams {
   params: {
@@ -117,10 +118,12 @@ export default function ProductDetails({ params }: PropsParams) {
                   Go to Creator's Profile
                 </Link>
               </Button>
-              <Button variant="outline" className="border-green-700 gap-x-2">
-                <FaCartArrowDown className="text-green-700" />
-                Add to cart
-              </Button>
+              <AlertDialog>
+                <Button variant="outline" className="border-green-700 gap-x-2">
+                  <FaCartArrowDown className="text-green-700" />
+                  Add to cart
+                </Button>
+              </AlertDialog>
               <PaymentButton mode="modal">
                 <WrappedButton variant="default" className="w-full flex gap-x-2">
                   <AiFillCreditCard />Purchase
