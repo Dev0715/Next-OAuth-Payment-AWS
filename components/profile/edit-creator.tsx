@@ -22,13 +22,13 @@ import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
-import { registerCreator } from "@/actions/register-creator";
+import { registerCreator } from "@/actions/auth/register-creator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { getUserById } from "@/data/user";
 import { CreatorInterface } from "@/shared/user";
+import { getUserById } from "@/data/user/user-by-id";
 
 export default function EditCreator({ disabled = false }: { disabled?: boolean }) {
   const [error, setError] = useState<string | undefined>("");

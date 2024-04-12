@@ -17,7 +17,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { register } from "@/actions/register";
+import { register } from "@/actions/auth/register";
 import { DonatePrefSchema } from "@/schemas/user";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 
