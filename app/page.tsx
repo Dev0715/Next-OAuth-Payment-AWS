@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const font = Poppins({
   subsets: ["latin"],
@@ -14,9 +15,22 @@ const font = Poppins({
 
 const Home = () => {
   const user = useCurrentUser();
+  const tempImagePath = ["/profile-back-example.jpg", "/product-example.jpg", "/product-example-2.jpg"];
 
   return (
     <main className="w-full flex justify-center pt-24 pb-6">
+      <div className="w-full">
+        <Avatar className="w-full h-56 rounded-none">
+          {/* <AvatarImage src={imgPath} /> */}
+          <AvatarImage
+            src={tempImagePath[Math.floor(Math.random() * 100) % 3]}
+            className="object-fill aspect-auto"
+          />
+          <AvatarFallback className="bg-sky-500">
+            <div className="w-full h-full bg-green-700"></div>
+          </AvatarFallback>
+        </Avatar>
+      </div>
       <div className="w-1/2 flex flex-col items-center gap-y-24 text-center">
         <h1 className={cn("text-7xl font-semibold text-black drop-shadow-md", font.className)}>
           Bring your creative ideas to life!
