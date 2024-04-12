@@ -22,7 +22,7 @@ export const ProductItem = ({ imgPath, title, description, price }: PropsParams)
             {/* <AvatarImage src={imgPath} /> */}
             <AvatarImage
               src={tempImagePath[Math.floor(Math.random() * 100) % 3]}
-              className="object-cover"
+              className="object-fill aspect-auto"
             />
             <AvatarFallback className="bg-sky-500">
               <div className="w-full h-full bg-green-700"></div>
