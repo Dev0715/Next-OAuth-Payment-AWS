@@ -1,12 +1,11 @@
 import classNames from "classnames";
 import React, { ComponentPropsWithRef } from "react";
-import { Input } from "../ui/input";
 
 type Props = ComponentPropsWithRef<"input">;
 
 const MultiFileSelector = (props: Props) => {
   return (
-    <Input
+    <input
       {...props}
       type="file"
       multiple
