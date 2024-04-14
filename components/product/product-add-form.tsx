@@ -139,15 +139,12 @@ export const ProductAddForm = () => {
         <CardHeader>
           <CardTitle>Preview</CardTitle>
           <CardDescription>You can preview your creative works</CardDescription>
-          <CardContent>
-            {files.map(file => (
-              <div>
-                <p>{file.type}</p>
-                <Image src={URL.createObjectURL(file)} alt="product" />
-              </div>
-            ))}
-          </CardContent>
         </CardHeader>
+        <CardContent className="flex flex-wrap gap-4">
+          {files.map(file => (
+            <img src={URL.createObjectURL(file)} className="h-24" />
+          ))}
+        </CardContent>
       </Card>
     </Card>
   )
