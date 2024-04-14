@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { FaFileUpload, FaPlus } from "react-icons/fa";
+import Image from "next/image";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -140,7 +141,10 @@ export const ProductAddForm = () => {
           <CardDescription>You can preview your creative works</CardDescription>
           <CardContent>
             {files.map(file => (
-              <p>{file.type}</p>
+              <div>
+                <p>{file.type}</p>
+                <Image src={URL.createObjectURL(file)} alt="product" />
+              </div>
             ))}
           </CardContent>
         </CardHeader>
