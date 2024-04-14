@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { FaFileUpload, FaPlus } from "react-icons/fa";
+import { ImagePreview } from "./image-preview";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -151,7 +152,7 @@ export const ProductAddForm = () => {
           <div className="h-full overflow-y-auto">
             <div className="flex flex-row flex-wrap gap-4">
               {files.map(file => (
-                <img key={file.name} src={URL.createObjectURL(file)} className="h-28" />
+                <ImagePreview key={file.name} src={URL.createObjectURL(file)} />
               ))}
             </div>
           </div>
