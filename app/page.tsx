@@ -14,20 +14,20 @@ const font = Poppins({
 });
 
 const Home = () => {
-  const tempImagePath = ["/profile-back-example.jpg", "/product-example.jpg", "/product-example-2.jpg"];
+  // const tempImagePath = ["/profile-back-example.jpg", "/product-example.jpg", "/product-example-2.jpg"];
 
-  const imagesPosition = [
-    "top-12 left-16 rotate-[6deg]",
-    "top-64 left-6 rotate-[-12deg]",
-    "top-[480px] left-16 rotate-[6deg]",
-    "top-12 right-16 rotate-[-6deg]",
-    "top-64 right-6 rotate-[12deg]",
-    "top-[480px] right-16 rotate-[-6deg]",
-  ]
+  // const imagesPosition = [
+  //   "top-12 left-16 rotate-[6deg]",
+  //   "top-64 left-6 rotate-[-12deg]",
+  //   "top-[480px] left-16 rotate-[6deg]",
+  //   "top-12 right-16 rotate-[-6deg]",
+  //   "top-64 right-6 rotate-[12deg]",
+  //   "top-[480px] right-16 rotate-[-6deg]",
+  // ]
 
   return (
     <main className="relative w-full flex justify-center pt-24 pb-6">
-      {imagesPosition.map(_style => (
+      {/* {imagesPosition.map(_style => (
         <Avatar className={`absolute w-96 h-56 rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 blur-sm ${_style}`}>
           <AvatarImage
             src={tempImagePath[Math.floor(Math.random() * 100) % 3]}
@@ -37,7 +37,7 @@ const Home = () => {
             <div className="w-full h-full bg-green-700"></div>
           </AvatarFallback>
         </Avatar>
-      ))}
+      ))} */}
       <div className="w-1/2 flex flex-col items-center gap-y-24 text-center">
         <h1 className={cn("text-7xl font-semibold text-green-700 drop-shadow-md", font.className)}>
           Bring your creative ideas to life!
