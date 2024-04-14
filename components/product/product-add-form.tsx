@@ -38,6 +38,14 @@ export const ProductAddForm = () => {
     }
   }
 
+  const onPreviewFile = (index: number) => {
+
+  }
+
+  const onDeleteFile = (index: number) => {
+
+  }
+
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
     defaultValues: {
@@ -151,8 +159,13 @@ export const ProductAddForm = () => {
         <CardContent className="h-[560px]">
           <div className="h-full overflow-y-auto">
             <div className="flex flex-row flex-wrap gap-4">
-              {files.map(file => (
-                <ImagePreview key={file.name} src={URL.createObjectURL(file)} />
+              {files.map((file, index) => (
+                <ImagePreview
+                  key={file.name}
+                  src={URL.createObjectURL(file)}
+                  onPreview={() => onPreviewFile(index)}
+                  onDelete={() => onDeleteFile(index)}
+                />
               ))}
             </div>
           </div>
