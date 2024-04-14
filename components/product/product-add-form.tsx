@@ -131,7 +131,7 @@ export const ProductAddForm = () => {
           <CardFooter className="self-end">
             <Button type="submit" className="w-48 flex gap-x-2">
               <FaPlus />
-              Add
+              Register
             </Button>
           </CardFooter>
         </form>
