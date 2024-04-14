@@ -3,6 +3,8 @@ import { Button } from "../ui/button";
 
 type PropsParams = {
   src: string;
+  onPreview: () => void;
+  onDelete: () => void;
 }
 
 export const ImagePreview = ({ src }: PropsParams) => {
