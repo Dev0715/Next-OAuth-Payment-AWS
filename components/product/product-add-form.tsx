@@ -17,6 +17,7 @@ export const ProductAddForm = () => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
+  const [files, setFiles] = useState<File[]>([]);
   const hiddenFileInput = useRef<HTMLInputElement | null>(null);
 
   const onFileBrowse = () => {
@@ -25,7 +26,7 @@ export const ProductAddForm = () => {
 
   const onFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files);
+      setFiles(Array.from(event.target.files));
     }
   }
 
