@@ -24,6 +24,10 @@ export const ProductAddForm = () => {
     hiddenFileInput.current?.click();
   }
 
+  const onFileAdded = (event) => {
+
+  }
+
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
     defaultValues: {
@@ -58,7 +62,7 @@ export const ProductAddForm = () => {
               <FaFileUpload />
               Browse Files
             </Button>
-            <MultiFileSelector ref={hiddenFileInput} />
+            <MultiFileSelector ref={hiddenFileInput} onChange={onFileAdded} />
             <FormField
               control={form.control}
               name="title"
