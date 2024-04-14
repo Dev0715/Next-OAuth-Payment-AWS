@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { NewProductSchema } from "@/schemas/product"
-import { useState, useTransition } from "react"
+import { useRef, useState, useTransition } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
@@ -17,6 +17,12 @@ export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+
+  const hiddenFileInput = useRef<HTMLInputElement | null>(null);
+
+  const onFileBrowse = () => {
+    hiddenFileInput.current?.click();
+  }
 
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
@@ -48,11 +54,11 @@ export const ProductAddForm = () => {
             <FormLabel>
               Upload your creative work
             </FormLabel>
-            <Button variant="outline" type="button" className="h-24 flex gap-x-2 border-green-700">
+            <Button onClick={onFileBrowse} variant="outline" type="button" className="h-24 flex gap-x-2 border-green-700">
               <FaFileUpload />
               Browse Files
             </Button>
-            <MultiFileSelector />
+            <MultiFileSelector ref={hiddenFileInput} />
             <FormField
               control={form.control}
               name="title"
