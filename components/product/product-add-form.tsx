@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { FaFileUpload, FaPlus } from "react-icons/fa";
+import MultiFileSelector from "../utils/MultiFileSelector";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -51,6 +52,7 @@ export const ProductAddForm = () => {
               <FaFileUpload />
               Browse Files
             </Button>
+            <MultiFileSelector />
             <FormField
               control={form.control}
               name="title"
