@@ -70,6 +70,7 @@ export const ProductAddForm = () => {
                 type="file"
                 multiple
                 ref={hiddenFileInput}
+                onChange={onFileAdded}
               />
             </div>
             <FormField
@@ -137,6 +138,11 @@ export const ProductAddForm = () => {
         <CardHeader>
           <CardTitle>Preview</CardTitle>
           <CardDescription>You can preview your creative works</CardDescription>
+          <CardContent>
+            {files.map(file => (
+              <p>{file.type}</p>
+            ))}
+          </CardContent>
         </CardHeader>
       </Card>
     </Card>
