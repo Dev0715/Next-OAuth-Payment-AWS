@@ -11,7 +11,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { FaFileUpload, FaPlus } from "react-icons/fa";
-import MultiFileSelector from "../utils/MultiFileSelector";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -24,8 +23,10 @@ export const ProductAddForm = () => {
     hiddenFileInput.current?.click();
   }
 
-  const onFileAdded = (event) => {
-
+  const onFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      console.log(event.target.files);
+    }
   }
 
   const form = useForm<z.infer<typeof NewProductSchema>>({
@@ -58,11 +59,18 @@ export const ProductAddForm = () => {
             <FormLabel>
               Upload your creative work
             </FormLabel>
-            <Button onClick={onFileBrowse} variant="outline" type="button" className="h-24 flex gap-x-2 border-green-700">
-              <FaFileUpload />
-              Browse Files
-            </Button>
-            <MultiFileSelector ref={hiddenFileInput} onChange={onFileAdded} />
+            <div className="w-full">
+              <Button onClick={onFileBrowse} variant="outline" type="button" className="w-full h-24 flex gap-x-2 border-green-700">
+                <FaFileUpload />
+                Add Files
+              </Button>
+              <Input
+                className="hidden"
+                type="file"
+                multiple
+                ref={hiddenFileInput}
+              />
+            </div>
             <FormField
               control={form.control}
               name="title"
