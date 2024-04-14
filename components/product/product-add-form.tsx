@@ -69,6 +69,7 @@ export const ProductAddForm = () => {
               <Input
                 className="hidden"
                 type="file"
+                accept="image/*"
                 multiple
                 ref={hiddenFileInput}
                 onChange={onFileAdded}
@@ -142,7 +143,7 @@ export const ProductAddForm = () => {
         </CardHeader>
         <CardContent className="flex flex-wrap gap-4">
           {files.map(file => (
-            <img src={URL.createObjectURL(file)} className="h-24" />
+            <img src={URL.createObjectURL(file)} className="h-28" />
           ))}
         </CardContent>
       </Card>
