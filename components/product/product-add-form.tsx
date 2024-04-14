@@ -11,7 +11,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { FaFileUpload, FaPlus } from "react-icons/fa";
-import Image from "next/image";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -150,7 +149,7 @@ export const ProductAddForm = () => {
         </CardHeader>
         <CardContent className="flex flex-wrap gap-4">
           {files.map(file => (
-            <img src={URL.createObjectURL(file)} className="h-28" />
+            <img key={file.name} src={URL.createObjectURL(file)} className="h-28" />
           ))}
         </CardContent>
       </Card>
