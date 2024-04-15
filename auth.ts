@@ -12,7 +12,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   // },
   events: {
     async linkAccount({ user }) {
-      console.log("__EVENTS__linkAccount", user);
       // await db.user.update({
       //   where: { id: user.id },
       //   data: { emailVerified: new Date() }
@@ -21,7 +20,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account }) {
-      console.log("__CALLBACK__signIn", user, account);
       // Allow OAuth without email verification
       // if (account?.provider !== "credentials") return true;
 
@@ -46,7 +44,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return true;
     },
     async session({ token, session }) {
-      console.log("__CALLBACK__session", token, session);
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
@@ -61,7 +58,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
     async jwt({ token }) {
-      console.log("__CALLBACK__jwt", token);
       // if (!token.email) return token;
       // const existingUser = await getUserByEmail(token.email);
       // if (!existingUser) return token;
