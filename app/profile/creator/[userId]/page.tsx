@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserById } from "@/data/user/user-by-id";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { CreatorInterface } from "@/shared/user";
+import { CreatorInterface } from "@/shared/user-type";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
