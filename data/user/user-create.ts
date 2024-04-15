@@ -13,7 +13,7 @@ import { generateVerificationToken } from "@/lib/tokens";
 import { z } from "zod";
 import { CreatorRegisterSchema } from "@/schemas/auth";
 
-const TableName = process.env.AWS_DYNAMODB_TABLE_NAME;
+const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
 interface NewUser {
   username: string;
