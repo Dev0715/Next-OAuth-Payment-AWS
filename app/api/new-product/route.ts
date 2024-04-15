@@ -8,6 +8,10 @@ type RequestType = {
 export const POST = async (req: RequestType) => {
   try {
     const formData = await req.formData();
+    const formDataEntryValues = Array.from(formData.values());
+
+    console.log("__formDataEntryValues__", formDataEntryValues);
+
     const file = formData.get("file");
     const keyName = formData.get("product");
 
