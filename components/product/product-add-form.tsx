@@ -28,12 +28,15 @@ export const ProductAddForm = () => {
   }
 
   const onFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("__fileAdded__", event.target.files);
     if (event.target.files && event.target.files[0]) {
       const newFiles = Array.from(event.target.files).
         filter(newFile => !files.find(
           savedFile => savedFile.name === newFile.name && savedFile.size === newFile.size && savedFile.lastModified === newFile.lastModified
         ));
       setFiles(prev => [...prev, ...newFiles]);
+
+      console.log("__newFiles__", newFiles);
     }
   }
 
