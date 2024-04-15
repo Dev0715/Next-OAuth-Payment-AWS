@@ -84,10 +84,10 @@ export const ProductAddForm = () => {
   return (
     <Card className="w-full flex rounded-none">
       <Dialog open={isPreviewing} onOpenChange={isOpen => setPreviewing(isOpen)}>
-        <DialogContent className="max-w-[90%] max-h-[90%] bg-transparent">
-          <DialogHeader>
+        <DialogContent className="max-w-[90%] max-h-[90%]">
+          {/* <DialogHeader>
             <DialogTitle>{files[previewIndex as number]?.name}</DialogTitle>
-          </DialogHeader>
+          </DialogHeader> */}
           <div className="max-w-full max-h-full w-fit h-fit overflow-hidden">
             {isPreviewing && <img src={URL.createObjectURL(files[previewIndex as number])} className="max-w-full max-h-full object-fill" />}
           </div>
