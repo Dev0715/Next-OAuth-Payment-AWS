@@ -10,7 +10,16 @@ export const POST = async (req: RequestType) => {
     const formData = await req.formData();
     const formDataEntryValues = Array.from(formData.values());
 
+    formDataEntryValues.forEach((value) => {
+      if (value instanceof File) {
+      } else {
+        const product = JSON.parse(value as string);
+        console.log(product);
+      }
+    });
+
     console.log("__formDataEntryValues__", formDataEntryValues);
+    return;
 
     const file = formData.get("file");
     const keyName = formData.get("product");
