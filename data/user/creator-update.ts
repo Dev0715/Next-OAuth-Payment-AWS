@@ -5,7 +5,7 @@ import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { z } from "zod";
 import { CreatorRegisterSchema } from "@/schemas/auth";
 
-const TableName = process.env.AWS_DYNAMODB_TABLE_NAME;
+const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
 export const updateCreatorProfile = async (
   userId: string,
