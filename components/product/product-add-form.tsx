@@ -84,12 +84,15 @@ export const ProductAddForm = () => {
   return (
     <Card className="w-full flex rounded-none">
       <Dialog open={isPreviewing} onOpenChange={isOpen => setPreviewing(isOpen)}>
-        <DialogContent className="max-w-[90%] max-h-[90%]">
-          <div className="max-h-full w-fit h-fit overflow-hidden">
-            {previewIndex ? <img src={URL.createObjectURL(files[previewIndex])} className="max-w-full max-h-full object-fill" /> : null}
+        <DialogContent className="max-w-[90%] max-h-[90%] bg-transparent">
+          <DialogHeader>
+            <DialogTitle>{files[previewIndex as number]?.name}</DialogTitle>
+          </DialogHeader>
+          <div className="max-w-full max-h-full w-fit h-fit overflow-hidden">
+            {isPreviewing && <img src={URL.createObjectURL(files[previewIndex as number])} className="max-w-full max-h-full object-fill" />}
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog> {/** Preview is not working with images whose width < height  */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/2 flex flex-col">
           <CardHeader>
