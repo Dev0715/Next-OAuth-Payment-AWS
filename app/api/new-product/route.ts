@@ -11,15 +11,20 @@ export const POST = async (req: RequestType) => {
     const formData = await req.formData();
     const formDataEntryValues = Array.from(formData.values());
 
+    const productFiles = [];
+
     formDataEntryValues.forEach(async (value) => {
       if (value instanceof File) {
         const keyName = uuidv4();
         const response = await uploadFileToS3(value, keyName);
+        productFiles.push(keyName);
       } else {
         const product = JSON.parse(value as string);
         console.log(product);
       }
     });
+
+    // # Save product files to user data
 
     // if (response.success) {
     //   return NextResponse.json(response, { status: 200 });
