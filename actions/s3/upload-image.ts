@@ -1,3 +1,5 @@
+"use server";
+
 import s3Client from "@/lib/s3";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
