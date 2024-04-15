@@ -14,6 +14,7 @@ import { FaFileUpload, FaPlus } from "react-icons/fa";
 import { ImagePreview } from "./image-preview";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -21,6 +22,7 @@ export const ProductAddForm = () => {
   const [isPending, startTransition] = useTransition();
 
   const [files, setFiles] = useState<File[]>([]);
+  const [previewIndex, setPreviewIndex] = useState<number>();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   const onFileBrowse = () => {
@@ -41,7 +43,7 @@ export const ProductAddForm = () => {
   }
 
   const onPreviewFile = (index: number) => {
-
+    setPreviewIndex(index);
   }
 
   const onDeleteFile = (index: number) => {
@@ -79,6 +81,11 @@ export const ProductAddForm = () => {
 
   return (
     <Card className="w-full flex rounded-none">
+      <Dialog open={!!previewIndex}>
+        <DialogContent className="max-w-3/4 max-h-[50%] overflow-hidden">
+          {previewIndex ? <img src={URL.createObjectURL(files[previewIndex])} className="max-w-full max-h-full object-cover" /> : null}
+        </DialogContent>
+      </Dialog>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/2 flex flex-col">
           <CardHeader>
