@@ -3,7 +3,7 @@ import { Button } from "../ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
 import Link from "next/link"
 import { LinkedSites } from "./linked-sites"
-import { CreatorInterface } from "@/shared/user"
+import { CreatorInterface } from "@/shared/user-type"
 
 type PropsParams = {
   creator: CreatorInterface | undefined;
