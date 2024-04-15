@@ -23,6 +23,7 @@ export const ProductAddForm = () => {
 
   const [files, setFiles] = useState<File[]>([]);
   const [previewIndex, setPreviewIndex] = useState<number>();
+  const [isPreviewing, setPreviewing] = useState<boolean>(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   const onFileBrowse = () => {
@@ -43,6 +44,7 @@ export const ProductAddForm = () => {
   }
 
   const onPreviewFile = (index: number) => {
+    setPreviewing(true);
     setPreviewIndex(index);
   }
 
@@ -81,9 +83,11 @@ export const ProductAddForm = () => {
 
   return (
     <Card className="w-full flex rounded-none">
-      <Dialog open={!!previewIndex}>
-        <DialogContent className="max-w-3/4 max-h-[50%] overflow-hidden">
-          {previewIndex ? <img src={URL.createObjectURL(files[previewIndex])} className="max-w-full max-h-full object-cover" /> : null}
+      <Dialog open={isPreviewing} onOpenChange={isOpen => setPreviewing(isOpen)}>
+        <DialogContent className="max-w-[90%] max-h-[90%]">
+          <div className="max-h-full w-fit h-fit overflow-hidden">
+            {previewIndex ? <img src={URL.createObjectURL(files[previewIndex])} className="max-w-full max-h-full object-fill" /> : null}
+          </div>
         </DialogContent>
       </Dialog>
       <Form {...form}>
