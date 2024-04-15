@@ -17,14 +17,14 @@ export const ImagePreview = ({ src, onPreview, onDelete }: PropsParams) => {
         <div className="flex flex-col items-center gap-y-2">
           <Button
             variant="outline"
-            className="w-fit h-6 px-1 py-0 bg-transparent hover:bg-transparent hover border border-green-400 text-sm text-white hover:text-white hover:font-bold"
+            className="w-fit h-6 px-1 py-0 bg-transparent hover:bg-transparent hover border border-green-400 text-sm text-white hover:text-white hover:px-2"
             onClick={onPreview}
           >
             Preview
           </Button>
           <Button
             variant="outline"
-            className="w-fit h-6 px-1 py-0 bg-transparent hover:bg-transparent hover border border-red-400 text-sm text-white hover:text-white hover:font-bold"
+            className="w-fit h-6 px-1 py-0 bg-transparent hover:bg-transparent hover border border-red-400 text-sm text-white hover:text-white hover:px-2"
             onClick={onDelete}
           >
             Delete
