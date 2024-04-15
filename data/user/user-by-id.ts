@@ -3,7 +3,7 @@
 import db from "@/lib/db";
 import { GetCommand } from "@aws-sdk/lib-dynamodb";
 
-const TableName = process.env.AWS_DYNAMODB_TABLE_NAME;
+const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
 export const getUserById = async (userId: string) => {
   const command = new GetCommand({
