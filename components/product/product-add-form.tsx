@@ -62,7 +62,8 @@ export const ProductAddForm = () => {
     setSuccess("");
 
     startTransition(() => {
-
+      console.log(values);
+      console.log(files);
     })
   }
 
