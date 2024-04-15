@@ -64,6 +64,10 @@ export const ProductAddForm = () => {
     startTransition(() => {
       console.log(values);
       console.log(files);
+      const formData = new FormData();
+      files.forEach(file => {
+        formData.append(file.name, file);
+      })
     })
   }
 
