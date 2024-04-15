@@ -18,9 +18,6 @@ export const POST = async (req: RequestType) => {
       }
     });
 
-    console.log("__formDataEntryValues__", formDataEntryValues);
-    return;
-
     const file = formData.get("file");
     const keyName = formData.get("product");
 
