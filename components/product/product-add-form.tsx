@@ -43,7 +43,9 @@ export const ProductAddForm = () => {
   }
 
   const onDeleteFile = (index: number) => {
-
+    const updatedFiles = [...files];
+    updatedFiles.splice(index, 1);
+    setFiles(updatedFiles);
   }
 
   const form = useForm<z.infer<typeof NewProductSchema>>({
