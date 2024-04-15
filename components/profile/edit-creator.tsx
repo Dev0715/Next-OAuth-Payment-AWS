@@ -27,7 +27,7 @@ import { axiosClient, axiosConfig } from "@/lib/axios";
 import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { CreatorInterface } from "@/shared/user";
+import { CreatorInterface } from "@/shared/user-type";
 import { getUserById } from "@/data/user/user-by-id";
 
 export default function EditCreator({ disabled = false }: { disabled?: boolean }) {
