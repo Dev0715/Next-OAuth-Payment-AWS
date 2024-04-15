@@ -29,9 +29,6 @@ export const ProductAddForm = () => {
 
   const onFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      Array.from(event.target.files).map(file => {
-        console.log(URL.createObjectURL(file));
-      })
       const newFiles = Array.from(event.target.files).
         filter(newFile => !files.find(
           savedFile => savedFile.name === newFile.name && savedFile.size === newFile.size && savedFile.lastModified === newFile.lastModified

@@ -12,7 +12,6 @@ export const Social = () => {
   const callbackUrl = searchParams.get("callbackUrl");
 
   const onClick = (provider: "google" | "github" | "discord" | "apple") => {
-    console.log("PROVIDER", provider);
     signIn(provider, {
       callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT
     });

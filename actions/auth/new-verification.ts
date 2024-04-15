@@ -10,7 +10,6 @@ export const newVerification = async (token: string) => {
   }
 
   const userId = getUserIdFromToken(token);
-  console.log("__newVerification__getUserIdFromToken", userId);
 
   const existingUser = await getUserById(userId);
   if (!existingUser) {

@@ -15,7 +15,6 @@ export const registerCreator = async (
   }
 
   const { avatar } = validateFields.data;
-  console.log("__registerCreator", avatar);
 
   const response = await updateCreatorProfile(userId, values);
 
