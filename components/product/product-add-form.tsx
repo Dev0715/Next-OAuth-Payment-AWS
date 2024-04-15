@@ -138,6 +138,7 @@ export const ProductAddForm = () => {
                       disabled={isPending}
                       placeholder="Product Price"
                       type="number"
+                      onChange={event => field.onChange(+event.target.value)}
                     />
                   </FormControl>
                   <FormMessage />
