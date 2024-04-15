@@ -3,7 +3,7 @@
 import db from "@/lib/db";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
-const TableName = process.env.AWS_DYNAMODB_TABLE_NAME;
+const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
 interface UserSetPassword {
   userId: string;
