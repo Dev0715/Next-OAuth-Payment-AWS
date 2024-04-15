@@ -12,6 +12,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { FaFileUpload, FaPlus } from "react-icons/fa";
 import { ImagePreview } from "./image-preview";
+import { v4 as uuidv4 } from "uuid";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -66,7 +67,7 @@ export const ProductAddForm = () => {
       console.log(files);
       const formData = new FormData();
       files.forEach(file => {
-        formData.append(file.name, file);
+        formData.append(uuidv4(), file);
       })
     })
   }
