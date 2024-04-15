@@ -13,6 +13,7 @@ import { Textarea } from "../ui/textarea";
 import { FaFileUpload, FaPlus } from "react-icons/fa";
 import { ImagePreview } from "./image-preview";
 import { v4 as uuidv4 } from "uuid";
+import { axiosClient, axiosConfig } from "@/lib/axios";
 
 export const ProductAddForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -63,12 +64,16 @@ export const ProductAddForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      console.log(values);
-      console.log(files);
       const formData = new FormData();
       files.forEach(file => {
         formData.append(uuidv4(), file);
       })
+      formData.append("product", JSON.stringify(values));
+
+      axiosClient.post("/new-product", formData, axiosConfig)
+        .then(res => res.data).then(data => {
+          console.log(data);
+        })
     })
   }
 
