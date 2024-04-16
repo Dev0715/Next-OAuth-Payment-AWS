@@ -219,6 +219,66 @@ export const ProductAddForm = () => {
                 </FormItem>
               )}
             />
+            <Card>
+              <CardHeader>
+                <CardTitle>Tags</CardTitle>
+                <CardDescription>
+                  You select from your original tags or add new one
+                </CardDescription>
+                <div className="flex justify-between gap-x-4 pt-2">
+                  <Select
+                    value={tagSelected}
+                    onValueChange={onTagSelectChange}
+                  >
+                    <SelectTrigger className="w-1/3">
+                      <SelectValue placeholder="Select a Tag" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {/* <SelectLabel>Tags</SelectLabel> */}
+                        {storedTags.map((tag) => (
+                          <SelectItem value={tag}>{tag}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                  <div className="w-1/2 flex">
+                    <Input
+                      type="text"
+                      value={newTagVal}
+                      onChange={(e) => setNewTagVal(e.target.value)}
+                    />
+                    <Button
+                      type="button"
+                      variant="link"
+                      className="flex gap-x-2 text-sm"
+                      onClick={onAddNewTag}
+                    >
+                      <FaPlus />
+                      Add a new Tag
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-4">
+                {selectedTags.map((tag, index) => (
+                  <Badge
+                    key={tag}
+                    className="h-8 flex gap-x-2 px-4 rounded-full"
+                  >
+                    <p>{tag}</p>
+                    <Button
+                      asChild
+                      variant="link"
+                      className="p-0 text-base text-black cursor-pointer"
+                      onClick={() => onDeleteTag(index)}
+                    >
+                      <MdClose />
+                    </Button>
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
             <FormError message={error} />
             <FormSuccess message={success} />
           </CardContent>
