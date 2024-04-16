@@ -25,6 +25,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
+import { PRODCUT_TYPES } from "@/shared/product-info";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
@@ -142,9 +143,28 @@ export const ProductAddForm = () => {
                 onChange={onFileAdded}
               />
             </div>
-            <Select>
-
-            </Select>
+            <FormField
+              control={form.control}
+              name="productType"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Product Type</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a product type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {PRODCUT_TYPES.map(type => (
+                        <SelectItem key={type} value={type}>{type}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="title"
