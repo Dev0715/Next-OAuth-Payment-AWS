@@ -19,5 +19,9 @@ export const getProductsByType = async (productType: string) => {
     return {
       items: response.Items
     };
-  } catch (error) {}
+  } catch (error) {
+    return {
+      items: []
+    };
+  }
 };
