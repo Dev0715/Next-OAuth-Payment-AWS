@@ -15,11 +15,17 @@ import { ImagePreview } from "./image-preview";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { FormError } from "../utils/form-error";
+import { FormSuccess } from "../utils/form-success";
 
 export const ProductAddForm = () => {
+  const user = useCurrentUser();
+
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const [isPending, startTransition] = useTransition();
+  const [isTransactionPending, startTransition] = useTransition();
+  const [isPending, setPending] = useState<boolean>(false);
 
   const [files, setFiles] = useState<File[]>([]);
   const [previewIndex, setPreviewIndex] = useState<number>();
@@ -68,15 +74,26 @@ export const ProductAddForm = () => {
     setSuccess("");
 
     startTransition(() => {
+      setPending(true);
+
       const formData = new FormData();
       files.forEach(file => {
         formData.append(uuidv4(), file);
       })
       formData.append("product", JSON.stringify(values));
+      formData.append("userId", user?.id as string);
 
       axiosClient.post("/new-product", formData, axiosConfig)
         .then(res => res.data).then(data => {
-          console.log(data);
+          if (data.success) {
+            setSuccess("Your product was registered successfully");
+          } else {
+            setError(data?.error); // # Need to be clear message #
+          }
+          setPending(false);
+        }).catch(error => {
+          setError("Internal Server Error"); // # Need to be clear message #
+          setPending(false);
         })
     })
   }
@@ -105,7 +122,7 @@ export const ProductAddForm = () => {
               Upload your creative work
             </FormLabel>
             <div className="w-full">
-              <Button onClick={onFileBrowse} variant="outline" type="button" className="w-full h-24 flex gap-x-2 border-green-700">
+              <Button disabled={isPending} onClick={onFileBrowse} variant="outline" type="button" className="w-full h-24 flex gap-x-2 border-green-700">
                 <FaFileUpload />
                 Add Files
               </Button>
@@ -171,9 +188,11 @@ export const ProductAddForm = () => {
                 </FormItem>
               )}
             />
+            <FormError message={error} />
+            <FormSuccess message={success} />
           </CardContent>
           <CardFooter className="self-end">
-            <Button type="submit" className="w-48 flex gap-x-2">
+            <Button disabled={isPending} type="submit" className="w-48 flex gap-x-2">
               <FaPlus />
               Register
             </Button>
@@ -191,6 +210,7 @@ export const ProductAddForm = () => {
               {files.map((file, index) => (
                 <ImagePreview
                   key={file.name}
+                  disabled={isPending}
                   src={URL.createObjectURL(file)}
                   onPreview={() => onPreviewFile(index)}
                   onDelete={() => onDeleteFile(index)}
