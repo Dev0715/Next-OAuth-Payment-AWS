@@ -48,12 +48,13 @@ export const ProductAddForm = () => {
   const onAddNewKeyword = () => {
     if (!selectedKeywords.find(keyword => keyword === newKeywordVal))
       setSelectedKeywords(prev => [...prev, newKeywordVal]);
+    setNewKeywordVal("");
   }
 
   const onDeleteKeyword = (index: number) => {
     const newKeywords = [...selectedKeywords];
     newKeywords.splice(index, 1);
-    setSelectedKeywords(newKeywords); // # Duplication Error #
+    setSelectedKeywords(newKeywords); // # Show Duplication Error? #
   }
 
   const onFileBrowse = () => {
@@ -241,23 +242,21 @@ export const ProductAddForm = () => {
                 <CardDescription>
                   You can set as many keywords as you want to improve chance of your product to be found out
                 </CardDescription>
-                <div className="flex justify-between gap-x-4 pt-2">
-                  <div className="w-1/2 flex">
-                    <Input
-                      type="text"
-                      value={newKeywordVal}
-                      onChange={(e) => setNewKeywordVal(e.target.value)}
-                    />
-                    <Button
-                      type="button"
-                      variant="link"
-                      className="flex gap-x-2 text-sm"
-                      onClick={onAddNewKeyword}
-                    >
-                      <FaPlus />
-                      Add a new Keyword
-                    </Button>
-                  </div>
+                <div className="w-1/2 flex gap-x-4 pt-2">
+                  <Input
+                    type="text"
+                    value={newKeywordVal}
+                    onChange={(e) => setNewKeywordVal(e.target.value)}
+                  />
+                  <Button
+                    type="button"
+                    variant="link"
+                    className="flex gap-x-2 text-sm"
+                    onClick={onAddNewKeyword}
+                  >
+                    <FaPlus />
+                    Add a new Keyword
+                  </Button>
                 </div>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-4">
