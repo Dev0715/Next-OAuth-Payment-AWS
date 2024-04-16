@@ -26,6 +26,8 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 import { PRODCUT_TYPES } from "@/shared/product-info";
+import { Badge } from "../ui/badge";
+import { MdClose } from "react-icons/md";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
@@ -45,6 +47,12 @@ export const ProductAddForm = () => {
 
   const onAddNewKeyword = () => {
     setSelectedKeywords(prev => [...prev, newKeywordVal]);
+  }
+
+  const onDeleteKeyword = (index: number) => {
+    const newKeywords = [...selectedKeywords];
+    newKeywords.splice(index, 1);
+    setSelectedKeywords(newKeywords);
   }
 
   const onFileBrowse = () => {
@@ -252,17 +260,17 @@ export const ProductAddForm = () => {
                 </div>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-4">
-                {selectedTags.map((tag, index) => (
+                {selectedKeywords.map((keyword, index) => (
                   <Badge
-                    key={tag}
+                    key={keyword}
                     className="h-8 flex gap-x-2 px-4 rounded-full"
                   >
-                    <p>{tag}</p>
+                    <p>{keyword}</p>
                     <Button
                       asChild
                       variant="link"
                       className="p-0 text-base text-black cursor-pointer"
-                      onClick={() => onDeleteTag(index)}
+                      onClick={() => onDeleteKeyword(index)}
                     >
                       <MdClose />
                     </Button>
