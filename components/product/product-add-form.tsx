@@ -91,7 +91,8 @@ export const ProductAddForm = () => {
       productType: '',
       title: '',
       description: '',
-      price: 0
+      price: 0,
+      keywords: []
     }
   });
 
