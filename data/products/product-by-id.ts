@@ -16,4 +16,10 @@ export const getProductById = async (
       productId
     }
   });
+
+  try {
+    const response = await db.send(command);
+    console.log("__getProductById__GetCommand__RESPONSE", response);
+    return response;
+  } catch (error) {}
 };
