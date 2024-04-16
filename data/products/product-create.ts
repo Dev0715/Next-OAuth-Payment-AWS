@@ -8,18 +8,19 @@ import { PutCommand } from "@aws-sdk/lib-dynamodb";
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 
 interface NewProduct {
+  productType: string;
   title: string;
   description: string;
   price: string;
   imageList: string[];
 }
 
-export const createProduct = async (userId: string, data: NewProduct) => {
+export const createProduct = async (ownerId: string, data: NewProduct) => {
   const command = new PutCommand({
     TableName,
     Item: {
-      userId,
       productId: uuidv4(),
+      ownerId,
       ...data
     }
   });
