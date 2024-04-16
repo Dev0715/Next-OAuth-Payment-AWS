@@ -20,6 +20,9 @@ export const getProductById = async (
   try {
     const response = await db.send(command);
     console.log("__getProductById__GetCommand__RESPONSE", response);
-    return response;
-  } catch (error) {}
+    return response.Item;
+  } catch (error) {
+    console.log("__getProductById__GetCommand__ERROR", error);
+    return null;
+  }
 };
