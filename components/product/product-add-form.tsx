@@ -46,13 +46,14 @@ export const ProductAddForm = () => {
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
   const onAddNewKeyword = () => {
-    setSelectedKeywords(prev => [...prev, newKeywordVal]);
+    if (!selectedKeywords.find(keyword => keyword === newKeywordVal))
+      setSelectedKeywords(prev => [...prev, newKeywordVal]);
   }
 
   const onDeleteKeyword = (index: number) => {
     const newKeywords = [...selectedKeywords];
     newKeywords.splice(index, 1);
-    setSelectedKeywords(newKeywords);
+    setSelectedKeywords(newKeywords); // # Duplication Error #
   }
 
   const onFileBrowse = () => {
@@ -254,7 +255,7 @@ export const ProductAddForm = () => {
                       onClick={onAddNewKeyword}
                     >
                       <FaPlus />
-                      Add a new Tag
+                      Add a new Keyword
                     </Button>
                   </div>
                 </div>
