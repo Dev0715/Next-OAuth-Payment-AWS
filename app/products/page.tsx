@@ -7,7 +7,7 @@ import { LoginButton } from "@/components/auth/login-button";
 import { ProductItem } from "@/components/product/product-item";
 import { Navbar } from "./_components/navbar";
 import { useEffect, useState } from "react";
-import { Product } from "@/shared/product-type";
+import { Product } from "@/shared/product-interface";
 import { getAllProducts } from "@/data/products/all-products";
 
 export default function Products() {
