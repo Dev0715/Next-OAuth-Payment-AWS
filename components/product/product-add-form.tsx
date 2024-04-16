@@ -71,6 +71,7 @@ export const ProductAddForm = () => {
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
     defaultValues: {
+      productType: '',
       title: '',
       description: '',
       price: 0
