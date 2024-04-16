@@ -10,6 +10,13 @@ import { useRef, useState, useTransition } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { FaFileUpload, FaPlus } from "react-icons/fa";
 import { ImagePreview } from "./image-preview";
 import { v4 as uuidv4 } from "uuid";
@@ -18,7 +25,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
-import { Select } from "../ui/select";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
