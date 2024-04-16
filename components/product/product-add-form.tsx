@@ -18,6 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
+import { Select } from "../ui/select";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
@@ -135,6 +136,9 @@ export const ProductAddForm = () => {
                 onChange={onFileAdded}
               />
             </div>
+            <Select>
+
+            </Select>
             <FormField
               control={form.control}
               name="title"
