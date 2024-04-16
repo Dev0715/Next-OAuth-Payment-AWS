@@ -44,7 +44,7 @@ export const ProductAddForm = () => {
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
   const onAddNewKeyword = () => {
-
+    setSelectedKeywords(prev => [...prev, newKeywordVal]);
   }
 
   const onFileBrowse = () => {
