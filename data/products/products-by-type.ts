@@ -13,4 +13,11 @@ export const getProductsByType = async (productType: string) => {
       ":productType": productType
     }
   });
+
+  try {
+    const response = await db.send(command);
+    return {
+      items: response.Items
+    };
+  } catch (error) {}
 };
