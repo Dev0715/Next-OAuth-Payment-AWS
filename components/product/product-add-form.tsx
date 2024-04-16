@@ -237,9 +237,9 @@ export const ProductAddForm = () => {
             />
             <Card>
               <CardHeader>
-                <CardTitle>Tags</CardTitle>
+                <CardTitle>Keywords</CardTitle>
                 <CardDescription>
-                  You select from your original tags or add new one
+                  You can set as many keywords as you want to improve chance of your product to be found out
                 </CardDescription>
                 <div className="flex justify-between gap-x-4 pt-2">
                   <div className="w-1/2 flex">
