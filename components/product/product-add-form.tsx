@@ -40,6 +40,13 @@ export const ProductAddForm = () => {
   const [isPreviewing, setPreviewing] = useState<boolean>(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
+  const [newKeywordVal, setNewKeywordVal] = useState<string>("");
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+
+  const onAddNewKeyword = () => {
+
+  }
+
   const onFileBrowse = () => {
     hiddenFileInput.current?.click();
   }
@@ -226,33 +233,17 @@ export const ProductAddForm = () => {
                   You select from your original tags or add new one
                 </CardDescription>
                 <div className="flex justify-between gap-x-4 pt-2">
-                  <Select
-                    value={tagSelected}
-                    onValueChange={onTagSelectChange}
-                  >
-                    <SelectTrigger className="w-1/3">
-                      <SelectValue placeholder="Select a Tag" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {/* <SelectLabel>Tags</SelectLabel> */}
-                        {storedTags.map((tag) => (
-                          <SelectItem value={tag}>{tag}</SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
                   <div className="w-1/2 flex">
                     <Input
                       type="text"
-                      value={newTagVal}
-                      onChange={(e) => setNewTagVal(e.target.value)}
+                      value={newKeywordVal}
+                      onChange={(e) => setNewKeywordVal(e.target.value)}
                     />
                     <Button
                       type="button"
                       variant="link"
                       className="flex gap-x-2 text-sm"
-                      onClick={onAddNewTag}
+                      onClick={onAddNewKeyword}
                     >
                       <FaPlus />
                       Add a new Tag
