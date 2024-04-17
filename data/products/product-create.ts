@@ -12,8 +12,7 @@ export const createProduct = async (data: Product) => {
   const command = new PutCommand({
     TableName,
     Item: {
-      ...data,
-      productId: uuidv4()
+      ...data
     }
   });
 
