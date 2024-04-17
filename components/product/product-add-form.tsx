@@ -326,13 +326,16 @@ export const ProductAddForm = () => {
                 <CardDescription>
                   You can set as many keywords as you want to improve chance of your product to be found out
                 </CardDescription>
-                <div className="w-1/2 flex gap-x-4 pt-2">
+                <div className="w-full flex gap-x-4 pt-2">
                   <Input
+                    disabled={isPending}
+                    className="max-w-60"
                     type="text"
                     value={newKeywordVal}
                     onChange={(e) => setNewKeywordVal(e.target.value)}
                   />
                   <Button
+                    disabled={isPending}
                     type="button"
                     variant="link"
                     className="flex gap-x-2 text-sm"
