@@ -215,19 +215,35 @@ export const ProductAddForm = () => {
             <FormLabel>
               Upload your creative work
             </FormLabel>
-            <div className="w-full">
-              <Button disabled={isPending} onClick={onFileBrowse} variant="outline" type="button" className="w-full h-24 flex gap-x-2 border-green-700">
-                <FaFileUpload />
-                Add Files
-              </Button>
-              <Input
-                className="hidden"
-                type="file"
-                accept="image/*"
-                multiple
-                ref={hiddenFileInput}
-                onChange={onFileAdded}
-              />
+            <div className="w-full flex gap-x-4">
+              <div className="w-1/2">
+                <Button disabled={isPending} onClick={onCreativeFileBrowse} variant="outline" type="button" className="w-full h-16 flex gap-x-2 border-green-700">
+                  <FaFileUpload />
+                  Upload your creative work
+                </Button>
+                <Input
+                  className="hidden"
+                  type="file"
+                  // accept="image/*"
+                  multiple
+                  ref={hiddenCreativeFileInput}
+                  onChange={onCreativeFileAdded}
+                />
+              </div>
+              <div className="w-1/2">
+                <Button disabled={isPending} onClick={onPreviewFileBrowse} variant="outline" type="button" className="w-full h-16 flex gap-x-2 border-green-700">
+                  <FaFileUpload />
+                  Add images for preview
+                </Button>
+                <Input
+                  className="hidden"
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  ref={hiddenPreviewInput}
+                  onChange={onPreviewFileAdded}
+                />
+              </div>
             </div>
             <FormField
               control={form.control}
