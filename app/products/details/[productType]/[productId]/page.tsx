@@ -4,7 +4,7 @@ import { PaymentButton } from "@/components/payment/payment-button";
 import { WrappedButton } from "@/components/utils/wrapped-button";
 import { AiFillCreditCard } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaCartArrowDown, FaFacebook, FaProductHunt, FaRegUser } from "react-icons/fa";
+import { FaCartArrowDown, FaDownload, FaFacebook, FaProductHunt, FaRegUser } from "react-icons/fa";
 import { Navbar } from "../../../_components/navbar";
 import { usePathname, useSearchParams } from "next/navigation";
 import { captureOrder as captureStripeOrder } from '@/actions/stripe/capture-order';
