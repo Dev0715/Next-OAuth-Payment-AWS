@@ -377,27 +377,62 @@ export const ProductAddForm = () => {
           </CardFooter>
         </form>
       </Form>
-      <Card className="w-1/2 m-4">
-        <CardHeader>
-          <CardTitle>Preview</CardTitle>
-          <CardDescription>You can preview your creative works</CardDescription>
-        </CardHeader>
-        <CardContent className="h-[560px]">
-          <div className="h-full overflow-y-auto">
+      <div className="w-1/2 flex flex-col gap-y-6 p-4 pt-24">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Creative Works</CardTitle>
+            {/* <CardDescription>You can preview your creative works</CardDescription> */}
+          </CardHeader>
+          <CardContent>
             <div className="flex flex-row flex-wrap gap-4">
-              {files.map((file, index) => (
+              {creativeFiles.map((file, index) => (
+                <Badge
+                  key={index}
+                  className="h-8 flex gap-x-2 px-4 rounded-full"
+                >
+                  <p>{file.name}</p>
+                  <Button
+                    // asChild
+                    disabled={isPending}
+                    variant="link"
+                    className="p-0 text-base text-black cursor-pointer"
+                    onClick={() => onDeleteCreativeFile(index)}
+                  >
+                    <MdClose />
+                  </Button>
+                </Badge>
+              ))}
+              {creativeFiles.length === 0 &&
+                <div className="w-full h-64 flex items-center justify-center">
+                  <p>
+                    No Creative Files selected
+                  </p>
+                </div>
+              }
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Preview Images</CardTitle>
+            {/* <CardDescription>You can preview your creative works</CardDescription> */}
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-row flex-wrap gap-4">
+              {previewFiles.map((file, index) => (
                 <ImagePreview
                   key={file.name}
                   disabled={isPending}
                   src={URL.createObjectURL(file)}
                   onPreview={() => onPreviewFile(index)}
-                  onDelete={() => onDeleteFile(index)}
+                  onDelete={() => onDeletePreviewFile(index)}
                 />
               ))}
+
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
     </Card>
   )
 }
