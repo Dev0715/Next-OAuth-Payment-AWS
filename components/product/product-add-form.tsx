@@ -21,33 +21,42 @@ import { FaFileUpload, FaPlus } from "react-icons/fa";
 import { ImagePreview } from "./image-preview";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Dialog, DialogContent } from "../ui/dialog";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 import { PRODCUT_TYPES } from "@/shared/product-info";
 import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
+import { createProduct } from "@/data/products/product-create";
+import { addNewProduct } from "@/actions/user/new-product";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const [isTransactionPending, startTransition] = useTransition();
   const [isPending, setPending] = useState<boolean>(false);
 
-  const [files, setFiles] = useState<File[]>([]);
+  const [previewFiles, setPreviewFiles] = useState<File[]>([]);
   const [previewIndex, setPreviewIndex] = useState<number>();
   const [isPreviewing, setPreviewing] = useState<boolean>(false);
-  const hiddenFileInput = useRef<HTMLInputElement>(null);
+  const hiddenPreviewInput = useRef<HTMLInputElement>(null);
+
+  const [creativeFiles, setCreativeFiles] = useState<File[]>([]);
+  const hiddenCreativeFileInput = useRef<HTMLInputElement>(null);
 
   const [newKeywordVal, setNewKeywordVal] = useState<string>("");
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
   const onAddNewKeyword = () => {
-    if (!selectedKeywords.find(keyword => keyword === newKeywordVal))
+    if (newKeywordVal === '')
+      return;
+
+    const existingOne = selectedKeywords.find(keyword => keyword === newKeywordVal);
+    if (!existingOne)
       setSelectedKeywords(prev => [...prev, newKeywordVal]);
+
     setNewKeywordVal("");
   }
 
