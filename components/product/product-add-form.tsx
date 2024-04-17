@@ -66,20 +66,43 @@ export const ProductAddForm = () => {
     setSelectedKeywords(newKeywords); // # Show Duplication Error? #
   }
 
-  const onFileBrowse = () => {
-    hiddenFileInput.current?.click();
+  const onCreativeFileBrowse = () => {
+    hiddenCreativeFileInput.current?.click();
   }
 
-  const onFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onCreativeFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const newFiles = Array.from(event.target.files).
-        filter(newFile => !files.find(
+        filter(newFile => !creativeFiles.find(
           savedFile => savedFile.name === newFile.name && savedFile.size === newFile.size && savedFile.lastModified === newFile.lastModified
         ));
-      setFiles(prev => [...prev, ...newFiles]);
+      setCreativeFiles(prev => [...prev, ...newFiles]);
     }
-    if (hiddenFileInput.current) {
-      hiddenFileInput.current.value = '';
+    if (hiddenCreativeFileInput.current) {
+      hiddenCreativeFileInput.current.value = '';
+    }
+  }
+
+  const onDeleteCreativeFile = (index: number) => {
+    const updatedFiles = [...creativeFiles];
+    updatedFiles.splice(index, 1);
+    setCreativeFiles(updatedFiles);
+  }
+
+  const onPreviewFileBrowse = () => {
+    hiddenPreviewInput.current?.click();
+  }
+
+  const onPreviewFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const newFiles = Array.from(event.target.files).
+        filter(newFile => !previewFiles.find(
+          savedFile => savedFile.name === newFile.name && savedFile.size === newFile.size && savedFile.lastModified === newFile.lastModified
+        ));
+      setPreviewFiles(prev => [...prev, ...newFiles]);
+    }
+    if (hiddenPreviewInput.current) {
+      hiddenPreviewInput.current.value = '';
     }
   }
 
