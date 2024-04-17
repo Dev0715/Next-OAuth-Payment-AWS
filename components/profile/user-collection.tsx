@@ -20,38 +20,39 @@ export const UserCollection = ({ userId }: { userId: string }) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    let ignore = false;
     getUserById(userId).then(user => {
-      user?.products.map((item: ProductLink) => {
-        getProductById(item.productType, item.productId).then(res => {
-          if (res) {
-            setProducts(prev => [...prev, res]);
-          }
-        })
-      })
-    }
-    })
-}, [userId]);
+      if (!ignore) {
+        user?.products.map((item: ProductLink) => {
 
-return (
-  <Card className="border-0 rounded-none">
-    <CardHeader className="flex flex-row items-center justify-between">
-      <p className="text-xl font-bold">Your Collections</p>
-      {signedUser?.id === userId && (
-        <Button variant="default" asChild className="w-48 flex gap-x-2">
-          <Link href="/products/new">
-            <FaPlus /> Add
-          </Link>
-        </Button>
-      )}
-    </CardHeader>
-    <CardContent className="flex flex-wrap">
-      {products.map((product, index) => (
-        <div className="w-1/4 p-4">
-          <ProductItem key={index} product={product} />
-        </div>
-      ))}
-    </CardContent>
-    <CardFooter>
-    </CardFooter>
-  </Card>)
+        })
+      }
+    })
+    return () => {
+      ignore = true;
+    }
+  }, [userId]);
+
+  return (
+    <Card className="border-0 rounded-none">
+      <CardHeader className="flex flex-row items-center justify-between">
+        <p className="text-xl font-bold">Your Collections</p>
+        {signedUser?.id === userId && (
+          <Button variant="default" asChild className="w-48 flex gap-x-2">
+            <Link href="/products/new">
+              <FaPlus /> Add
+            </Link>
+          </Button>
+        )}
+      </CardHeader>
+      <CardContent className="flex flex-wrap">
+        {products.map((product, index) => (
+          <div className="w-1/4 p-4">
+            <ProductItem key={index} product={product} />
+          </div>
+        ))}
+      </CardContent>
+      <CardFooter>
+      </CardFooter>
+    </Card>)
 }
