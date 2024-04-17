@@ -428,7 +428,13 @@ export const ProductAddForm = () => {
                   onDelete={() => onDeletePreviewFile(index)}
                 />
               ))}
-
+              {previewFiles.length === 0 &&
+                <div className="w-full h-64 flex items-center justify-center">
+                  <p>
+                    No Preview Images selected
+                  </p>
+                </div>
+              }
             </div>
           </CardContent>
         </Card>
