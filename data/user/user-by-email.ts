@@ -15,7 +15,7 @@ export const getUserByEmail = async (email: string) => {
     ExpressionAttributeValues: {
       ":email": email
     }
-    // Limit: 1 // just number of scanned items, not result
+    // Limit: 1 // # just number of scanned items, not result
   });
 
   try {
