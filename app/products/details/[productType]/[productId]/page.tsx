@@ -19,6 +19,8 @@ import { Alert } from "@/components/utils/alert";
 import { Product } from "@/shared/product-interface";
 import { getProductById } from "@/data/products/product-by-id";
 import { getS3ImageLink } from "@/actions/s3/image-link";
+import { axiosClient, axiosConfig } from "@/lib/axios";
+import { link } from "fs";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return (
