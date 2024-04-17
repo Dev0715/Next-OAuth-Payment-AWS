@@ -1,3 +1,8 @@
+type CreativeFile = {
+  name: string;
+  path: string;
+};
+
 export type Product = {
   productType: string;
   productId: string;
@@ -5,6 +10,7 @@ export type Product = {
   title: string;
   description: string;
   price: number;
-  imageList: string[];
+  fileList: CreativeFile[];
+  previewList: string[];
   keywords: string[];
 };
