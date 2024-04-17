@@ -35,7 +35,7 @@ const Thumbnail = (props: {
 }) => {
   return (
     <div
-      onMouseEnter={props.onItemSelected}
+      onMouseEnter={() => props.onItemSelected}
       className={`w-28 h-16 border-[2px] cursor-pointer ${props.focused && 'border-green-700'}`}
     >
       <Avatar className={`w-full h-full rounded-none border-[1px] border-white`}>
@@ -72,7 +72,13 @@ export default function ProductDetails({ params }: {
       getProductById(params.productType, params.productId).then((response) => {
         if (!ignore && response) {
           setProduct(response);
-
+          response?.previewList.map((path: string) => {
+            getS3ImageLink(path).then(res => {
+              if (res.success) {
+                setImageList(prev => [...prev, res.response as string]);
+              }
+            })
+          })
         }
       })
     }
@@ -81,7 +87,9 @@ export default function ProductDetails({ params }: {
     }
   }, [params]);
 
-
+  const onItemSelected = (index: number) => {
+    setSelectedIndex(index);
+  }
 
   useEffect(() => {
     const gateway = searchParams.get('gateway');
