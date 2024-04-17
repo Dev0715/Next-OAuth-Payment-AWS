@@ -15,4 +15,11 @@ export const addNewProduct = async (userId: string, product: ParamsType) => {
   }
 
   const products = existingUser.products || [];
+
+  const response = await updateUserProducts({
+    userId,
+    products: [...products, product]
+  });
+
+  return response;
 };
