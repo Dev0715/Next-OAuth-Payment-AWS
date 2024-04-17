@@ -29,7 +29,7 @@ export const Navbar = () => {
             </Link>
           </NavigationMenuItem>
           {PRODCUT_TYPES.map((menuItem, index) => (
-            <NavigationMenuItem>
+            <NavigationMenuItem key={index}>
               <Link href={`/products/category/${menuItem}`} legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   {menuItem}
