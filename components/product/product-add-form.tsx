@@ -111,10 +111,10 @@ export const ProductAddForm = () => {
     setPreviewIndex(index);
   }
 
-  const onDeleteFile = (index: number) => {
-    const updatedFiles = [...files];
+  const onDeletePreviewFile = (index: number) => {
+    const updatedFiles = [...previewFiles];
     updatedFiles.splice(index, 1);
-    setFiles(updatedFiles);
+    setPreviewFiles(updatedFiles);
   }
 
   const form = useForm<z.infer<typeof NewProductSchema>>({
