@@ -235,7 +235,7 @@ export const ProductAddForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Product Type</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a product type" />
