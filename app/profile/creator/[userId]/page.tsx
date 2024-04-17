@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserById } from "@/data/user/user-by-id";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { CreatorInterface } from "@/shared/user-interface";
+import { Creator } from "@/shared/user-interface";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
@@ -19,9 +19,8 @@ interface PropsParams {
 }
 
 export default function CreatorProfile({ params }: PropsParams) {
-  const user = useCurrentUser();
   const imageBack = "/product-example-2.jpg";
-  const [creator, setCreator] = useState<CreatorInterface>();
+  const [creator, setCreator] = useState<Creator>();
 
   const onFollow = () => {
 
@@ -53,7 +52,8 @@ export default function CreatorProfile({ params }: PropsParams) {
         </Avatar>
       </div>
       <div className="w-full flex flex-col items-center gap-y-3">
-        <p className="text-xl font-bold">@{creator?.username}</p>
+        {/* <p className="text-xl font-bold">@{creator?.username}</p> */}
+        <p className="text-xl font-bold">@{creator?.userId}</p>
         <p className="text-xl text-rose-700">★ ★ ★ ★ ★</p>
         <p className="text-lg">{creator?.bio}</p>
         <div className="flex gap-x-6">
@@ -82,7 +82,7 @@ export default function CreatorProfile({ params }: PropsParams) {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="Collection">
-            <UserCollection />
+            <UserCollection userId={params.userId} />
           </TabsContent>
           <TabsContent value="About">
             <AboutCreator creator={creator} />
