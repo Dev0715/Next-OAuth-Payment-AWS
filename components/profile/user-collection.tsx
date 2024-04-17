@@ -24,7 +24,11 @@ export const UserCollection = ({ userId }: { userId: string }) => {
     getUserById(userId).then(user => {
       if (!ignore) {
         user?.products.map((item: ProductLink) => {
-
+          getProductById(item.productType).then(res => {
+            if (res) {
+              setProducts(prev => [...prev, res]);
+            }
+          })
         })
       }
     })
