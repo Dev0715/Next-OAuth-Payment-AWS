@@ -4,24 +4,16 @@ import { v4 as uuidv4 } from "uuid";
 
 import db from "@/lib/db";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { Product } from "@/shared/product-interface";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 
-interface NewProduct {
-  productType: string;
-  title: string;
-  description: string;
-  price: string;
-  imageList: string[];
-}
-
-export const createProduct = async (ownerId: string, data: NewProduct) => {
+export const createProduct = async (data: Product) => {
   const command = new PutCommand({
     TableName,
     Item: {
       ...data,
-      productId: uuidv4(),
-      ownerId
+      productId: uuidv4()
     }
   });
 
