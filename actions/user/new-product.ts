@@ -21,5 +21,9 @@ export const addNewProduct = async (userId: string, product: ParamsType) => {
     products: [...products, product]
   });
 
-  return response;
+  if (response) {
+    return { success: "New product was registered successfully" };
+  } else {
+    return { error: "Internal server error" };
+  }
 };
