@@ -166,7 +166,7 @@ export const ProductAddForm = () => {
             <DialogTitle>{files[previewIndex as number]?.name}</DialogTitle>
           </DialogHeader> */}
           <div className="max-w-full max-h-full w-fit h-fit overflow-hidden">
-            {isPreviewing && <img src={URL.createObjectURL(files[previewIndex as number])} className="max-w-full max-h-full object-fill" />}
+            {isPreviewing && <img src={URL.createObjectURL(previewFiles[previewIndex as number])} className="max-w-full max-h-full object-fill" />}
           </div>
         </DialogContent>
       </Dialog>
