@@ -351,7 +351,8 @@ export const ProductAddForm = () => {
                   >
                     <p>{keyword}</p>
                     <Button
-                      asChild
+                      // asChild
+                      disabled={isPending}
                       variant="link"
                       className="p-0 text-base text-black cursor-pointer"
                       onClick={() => onDeleteKeyword(index)}
