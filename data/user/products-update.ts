@@ -25,4 +25,11 @@ export const updateUserProducts = async (data: ParamsType) => {
     },
     ReturnValues: "ALL_NEW"
   });
+
+  try {
+    const response = await db.send(command);
+    return response.Attributes;
+  } catch (error) {
+    return null;
+  }
 };
