@@ -3,22 +3,38 @@ import { Button } from "../ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
 import { ProductItem } from "../product/product-item"
 import Link from "next/link"
+import { useEffect, useState } from "react"
+import { Product } from "@/shared/product-interface"
+import { Creator } from "@/shared/user-interface"
+import { getProductById } from "@/data/products/product-by-id"
+import { useCurrentUser } from "@/hooks/use-current-user"
+import { getUserById } from "@/data/user/user-by-id"
 
-export const UserCollection = () => {
+type ProductLink = {
+  productType: string;
+  productId: string;
+}
+
+export const UserCollection = ({ userId }: { userId: string }) => {
+  const signedUser = useCurrentUser();
+  const [products, setProducts] = useState<Product[]>([]);
+
   return (
     <Card className="border-0 rounded-none">
       <CardHeader className="flex flex-row items-center justify-between">
         <p className="text-xl font-bold">Your Collections</p>
-        <Button variant="default" asChild className="w-48 flex gap-x-2">
-          <Link href="/products/new">
-            <FaPlus /> Add
-          </Link>
-        </Button>
+        {signedUser?.id === userId && (
+          <Button variant="default" asChild className="w-48 flex gap-x-2">
+            <Link href="/products/new">
+              <FaPlus /> Add
+            </Link>
+          </Button>
+        )}
       </CardHeader>
       <CardContent className="flex flex-wrap">
-        {[...Array(23)].map((item, index) => (
+        {products.map((product, index) => (
           <div className="w-1/4 p-4">
-            <ProductItem key={index} imgPath="" title="" description="" price={5} />
+            <ProductItem key={index} product={product} />
           </div>
         ))}
       </CardContent>
