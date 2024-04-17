@@ -27,7 +27,7 @@ import { axiosClient, axiosConfig } from "@/lib/axios";
 import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { CreatorInterface } from "@/shared/user-interface";
+import { Creator } from "@/shared/user-interface";
 import { getUserById } from "@/data/user/user-by-id";
 
 export default function EditCreator({ disabled = false }: { disabled?: boolean }) {
@@ -36,7 +36,7 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
   const [isPending, startTransition] = useTransition();
 
   const user = useCurrentUser();
-  const [creator, setCreator] = useState<CreatorInterface>();
+  const [creator, setCreator] = useState<Creator>();
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
