@@ -174,6 +174,10 @@ export default function ProductDetails({ params }: {
                   <AiFillCreditCard />Purchase
                 </WrappedButton>
               </PaymentButton>
+              <Button onClick={onDownloadCreativeFiles} variant="outline" className="w-full border-green-700 gap-x-2">
+                <FaDownload className="text-green-700" />
+                Download
+              </Button>
             </div>
           </div>
         </div>
