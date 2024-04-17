@@ -35,7 +35,7 @@ const Thumbnail = (props: {
 }) => {
   return (
     <div
-      onMouseEnter={() => props.onItemSelected}
+      onMouseEnter={props.onItemSelected}
       className={`w-28 h-16 border-[2px] cursor-pointer ${props.focused && 'border-green-700'}`}
     >
       <Avatar className={`w-full h-full rounded-none border-[1px] border-white`}>
