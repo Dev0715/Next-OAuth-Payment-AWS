@@ -29,7 +29,14 @@ export default function Products({ params }: ParamsType) {
 
   return (
     <main className="w-full flex flex-col pt-6">
-
+      <Navbar title={`${params.productType} Products`} content={`You can see all ${params.productType} products here`} />
+      <div className="w-full flex flex-wrap py-6">
+        {products.map((product, index) => (
+          <div key={index} className="w-1/4 p-2">
+            <ProductItem product={product} />
+          </div>
+        ))}
+      </div>
     </main>
   );
 }
