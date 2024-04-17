@@ -115,6 +115,14 @@ export default function ProductDetails({ params }: {
 
   }
 
+  const onDownloadCreativeFiles = async () => {
+    fetch('/api/download').then(response => response.blob()).then(blob => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    })
+  }
+
   return (
     <div className="w-full flex justify-center py-6">
       <div className="w-5/6 flex flex-col gap-y-6">
