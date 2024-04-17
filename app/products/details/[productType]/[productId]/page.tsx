@@ -62,6 +62,27 @@ export default function ProductDetails({ params }: {
   const searchParams = useSearchParams();
   const user = useCurrentUser();
 
+  const [product, setProduct] = useState<Product>();
+  const [imageList, setImageList] = useState<string[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+
+  useEffect(() => {
+    let ignore = false; // # to prevent twice loading #
+    if (params.productType && params.productId) {
+      getProductById(params.productType, params.productId).then((response) => {
+        if (!ignore && response) {
+          setProduct(response);
+
+        }
+      })
+    }
+    return () => {
+      ignore = true;
+    }
+  }, [params]);
+
+
+
   useEffect(() => {
     const gateway = searchParams.get('gateway');
     if (gateway === Gateway_Paypal) {
