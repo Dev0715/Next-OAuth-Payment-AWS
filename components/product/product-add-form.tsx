@@ -128,32 +128,67 @@ export const ProductAddForm = () => {
     }
   });
 
+  const getPathList = async (fileList: File[]) => {
+    const formData = new FormData();
+    fileList.forEach(file => {
+      formData.append(uuidv4(), file);
+    });
+
+    const response = await axiosClient.post("/multi-upload", formData, axiosConfig);
+    const data = response.data;
+
+    if (data.success) {
+      return data.pathList;
+    } else {
+      throw new Error(data.error);
+    }
+  }
+
   const onSubmit = (values: z.infer<typeof NewProductSchema>) => {
     setError("");
     setSuccess("");
+    setPending(true);
 
-    startTransition(() => {
-      setPending(true);
-
-      const formData = new FormData();
-      files.forEach(file => {
-        formData.append(uuidv4(), file);
+    Promise.all([
+      getPathList(creativeFiles),
+      getPathList(previewFiles)
+    ]).then(([pathList, previewList]) => {
+      const productId = uuidv4();
+      const fileList = pathList.map((path: string, index: number) => ({
+        name: creativeFiles[index].name,
+        path
+      }));
+      createProduct({
+        ...values,
+        productId,
+        fileList,
+        previewList,
+        keywords: selectedKeywords,
+        ownerId: user?.id as string,
+      }).then(res => {
+        if (res.success) {
+          addNewProduct(user?.id as string, {
+            productType: values.productType,
+            productId
+          }).then(res => {
+            setSuccess(res.success);
+            setError(res.error);
+            setPending(false);
+          }).catch(error => {
+            setError("Internal Server Error");
+            setPending(false);
+          })
+        } else {
+          setError("Internal Sever Error");
+          setPending(false);
+        }
+      }).catch(error => {
+        setError("Internal Sever Error");
+        setPending(false);
       })
-      formData.append("product", JSON.stringify(values));
-      formData.append("userId", user?.id as string);
-
-      axiosClient.post("/new-product", formData, axiosConfig)
-        .then(res => res.data).then(data => {
-          if (data.success) {
-            setSuccess("Your product was registered successfully");
-          } else {
-            setError(data?.error); // # Need to be clear message #
-          }
-          setPending(false);
-        }).catch(error => {
-          setError("Internal Server Error"); // # Need to be clear message #
-          setPending(false);
-        })
+    }).catch(error => {
+      setError("Internal Sever Error");
+      setPending(false);
     })
   }
 
