@@ -24,18 +24,18 @@ export const createOrder = async (params: OrderType) => {
       client_reference_id: "_user._id",
       payment_method_types: ["card"],
       // customer: customer.id,
-      customer_email: "sacreddevking@gmail.com",
+      customer_email: params.userEmail,
       line_items: [
         {
           price_data: {
             currency: "USD",
             product_data: {
-              name: "Product Name",
-              description: "Description of Product",
+              name: params.product.name,
+              description: params.product.description,
               // description: membership.description + " - " + moment().add(membership.period, 'months').format("YYYY-MM-DD HH:mm:ss"),
-              images: ["https://answersheet.au/logo.svg"] // image would be shown on payment page
+              images: params.product.images // image would be shown on payment page
             },
-            unit_amount: Number(Math.round((tempPrice / 1.1) * 100))
+            unit_amount: Number(Math.round((params.amount / 1.1) * 100))
           },
           tax_rates: [taxRate.id],
           quantity: 1
