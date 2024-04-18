@@ -11,6 +11,7 @@ import { Product } from "@/shared/product-interface";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserById } from "@/data/user/user-by-id";
 import { getProductById } from "@/data/products/product-by-id";
+import { CartItem } from "./_components/cart-item";
 
 type ProductInfo = {
   productType: string;
@@ -33,6 +34,9 @@ export default function Cart() {
         })
       }
     })
+    return () => {
+      ignore = true;
+    }
   }, []);
 
   return (
@@ -40,8 +44,8 @@ export default function Cart() {
       <Navbar title="Your Cart" content="Here are products in your cart" />
       <div className="w-full flex flex-wrap py-6">
         {products.map((product, index) => (
-          <div key={index} className="w-1/4 p-2">
-            <ProductItem product={product} />
+          <div key={index} className="w-1/2 p-2">
+            <CartItem product={product} />
           </div>
         ))}
       </div>
