@@ -47,7 +47,7 @@ export const CartItem = ({ product, onSelected, onRemoveItem }: PropsParams) => 
             <p className="text-base text-gray-700 drop-shadow-md">{product.description}</p>
           </div>
           <div className="flex items-center justify-between">
-            <Button variant={"outline"} className="border-red-700">
+            <Button variant={"outline"} className="border-red-700" onClick={onRemoveItem}>
               Remove
             </Button>
             <Switch className="h-3/4" checked={product.selected} onCheckedChange={onSelected}></Switch>
