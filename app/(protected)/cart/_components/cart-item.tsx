@@ -12,9 +12,10 @@ import { useEffect, useState } from "react";
 interface PropsParams {
   product: CartItemType,
   onSelected: (checked: boolean) => void;
+  onRemoveItem: () => void;
 }
 
-export const CartItem = ({ product, onSelected }: PropsParams) => {
+export const CartItem = ({ product, onSelected, onRemoveItem }: PropsParams) => {
   const [imagePath, setImagePath] = useState<string>("");
 
   useEffect(() => {
