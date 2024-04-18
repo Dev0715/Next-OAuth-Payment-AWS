@@ -46,20 +46,13 @@ export const GET = async () => {
   });
 
   return response;
+
+  // Handle Exception
 };
 
 export const POST = async (req: NextRequest) => {
   const data = await req.json();
-  const fileList = [
-    {
-      name: "kre8tive-temp_202404161915.rar",
-      path: "f7554959-06ef-453b-af79-0d7e483b500c"
-    },
-    {
-      name: "Samuel_RTR.docx",
-      path: "b7750835-e4fa-4ee7-828c-a8eafcb63848"
-    }
-  ];
+  const fileList = data.fileList;
 
   const archive = archiver("zip", {
     zlib: { level: 9 }
