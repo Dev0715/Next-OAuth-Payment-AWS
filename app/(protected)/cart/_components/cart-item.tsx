@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
+import { Alert } from "@/components/utils/alert";
 import { CartItemType, Product } from "@/shared/product-interface";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -47,9 +48,11 @@ export const CartItem = ({ product, onSelected, onRemoveItem }: PropsParams) => 
             <p className="text-base text-gray-700 drop-shadow-md">{product.description}</p>
           </div>
           <div className="flex items-center justify-between">
-            <Button variant={"outline"} className="border-red-700" onClick={onRemoveItem}>
-              Remove
-            </Button>
+            <Alert title="Warning" message="Are you sure to remove this product from your cart?" onContinue={onRemoveItem}>
+              <Button variant={"outline"} className="border-red-700">
+                Remove
+              </Button>
+            </Alert>
             <Switch className="h-3/4" checked={product.selected} onCheckedChange={onSelected}></Switch>
           </div>
         </div>
