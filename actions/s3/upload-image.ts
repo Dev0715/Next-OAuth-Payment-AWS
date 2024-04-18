@@ -11,8 +11,8 @@ export const uploadFileToS3 = async (file: File, keyName: string) => {
   const command = new PutObjectCommand({
     Bucket,
     Key: keyName,
-    Body
-    // ContentType: "image/jpeg"
+    Body,
+    ContentType: file.type
   });
 
   try {
