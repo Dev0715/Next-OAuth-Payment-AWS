@@ -21,7 +21,7 @@ interface LoginButtonProps {
   onCancel?: () => void
 }
 
-export const Alert = ({ children, asChild, title, message, onContinue, onCancel }: LoginButtonProps) => {
+export const QustionAlert = ({ children, asChild, title, message, onContinue, onCancel }: LoginButtonProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger disabled={!onContinue} asChild={asChild}>
