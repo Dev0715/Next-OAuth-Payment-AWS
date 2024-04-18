@@ -39,7 +39,7 @@ export default {
           password as string,
           user.password
         );
-        // !Important: this sets token's id as userId
+        // !Important: this sets token's `sub` as userId on `jwt` func
         user.id = user.userId;
         if (passwordsMatch) return user;
         else return null; // You can also reject this callback for detailed error
