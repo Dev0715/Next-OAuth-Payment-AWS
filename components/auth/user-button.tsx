@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaUser } from "react-icons/fa";
+import { FaBitbucket, FaCartArrowDown, FaCartPlus, FaUser } from "react-icons/fa";
 import { BackpackIcon, ExitIcon, MixerHorizontalIcon, PersonIcon } from "@radix-ui/react-icons";
 
 import {
