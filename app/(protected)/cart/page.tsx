@@ -12,8 +12,10 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 
 export default function Cart() {
   const user = useCurrentUser();
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+
   }, []);
 
   return (
