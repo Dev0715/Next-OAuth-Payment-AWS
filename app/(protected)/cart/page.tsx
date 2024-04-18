@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/auth/login-button";
 import { ProductItem } from "@/components/product/product-item";
 import { Navbar } from "./_components/navbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { CartItemType, Product } from "@/shared/product-interface";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserById } from "@/data/user/user-by-id";
@@ -21,6 +21,7 @@ type ProductInfo = {
 
 export default function Cart() {
   const user = useCurrentUser();
+  const [isPending, startTransition] = useTransition();
   const [products, setProducts] = useState<CartItemType[]>([]);
 
   useEffect(() => {
@@ -48,18 +49,20 @@ export default function Cart() {
   }
 
   const onRemoveItem = (index: number) => {
-    removeProductFromCart({
-      userId: user?.id as string,
-      product: {
-        productType: products[index].productType,
-        productId: products[index].productId
-      }
-    }).then(res => {
-      if (res.success) {
-        const newList = [...products];
-        newList.splice(index, 1);
-        setProducts(newList);
-      }
+    startTransition(() => {
+      removeProductFromCart({
+        userId: user?.id as string,
+        product: {
+          productType: products[index].productType,
+          productId: products[index].productId
+        }
+      }).then(res => {
+        if (res.success) {
+          const newList = [...products];
+          newList.splice(index, 1);
+          setProducts(newList);
+        }
+      })
     })
   }
 
@@ -69,11 +72,12 @@ export default function Cart() {
 
   return (
     <main className="w-full flex flex-col pt-6">
-      <Navbar title="Your Cart" content="Here are products in your cart" onCheckout={onCheckout} />
+      <Navbar isPending={isPending} title="Your Cart" content="Here are products in your cart" onCheckout={onCheckout} />
       <div className="w-full flex flex-wrap py-6">
         {products.map((product, index) => (
           <div key={index} className="w-1/2 p-2">
             <CartItem
+              isPending={isPending}
               product={product}
               onSelected={(checked: boolean) => onSelected(index, checked)}
               onRemoveItem={() => onRemoveItem(index)}
