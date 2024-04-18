@@ -5,15 +5,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { Product } from "@/shared/product-interface";
+import { CartItemType, Product } from "@/shared/product-interface";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface PropsParams {
-  product: Product
+  product: CartItemType,
+  onSelected: (checked: boolean) => void;
 }
 
-export const CartItem = ({ product }: PropsParams) => {
+export const CartItem = ({ product, onSelected }: PropsParams) => {
   const [imagePath, setImagePath] = useState<string>("");
 
   useEffect(() => {
