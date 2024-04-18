@@ -40,13 +40,19 @@ export default function Cart() {
     }
   }, []);
 
+  const onSelected = (index: number, checked: boolean) => {
+    const newList = [...products];
+    newList[index].selected = checked;
+    setProducts(newList);
+  }
+
   return (
     <main className="w-full flex flex-col pt-6">
       <Navbar title="Your Cart" content="Here are products in your cart" />
       <div className="w-full flex flex-wrap py-6">
         {products.map((product, index) => (
           <div key={index} className="w-1/2 p-2">
-            <CartItem product={product} />
+            <CartItem onSelected={(checked: boolean) => onSelected(index, checked)} product={product} />
           </div>
         ))}
       </div>
