@@ -12,6 +12,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserById } from "@/data/user/user-by-id";
 import { getProductById } from "@/data/products/product-by-id";
 import { CartItem } from "./_components/cart-item";
+import { removeProductFromCart } from "@/actions/user/remove-product-from-cart";
 
 type ProductInfo = {
   productType: string;
@@ -47,7 +48,19 @@ export default function Cart() {
   }
 
   const onRemoveItem = (index: number) => {
-
+    removeProductFromCart({
+      userId: user?.id as string,
+      product: {
+        productType: products[index].productType,
+        productId: products[index].productId
+      }
+    }).then(res => {
+      if (res.success) {
+        const newList = [...products];
+        newList.splice(index, 1);
+        setProducts(newList);
+      }
+    })
   }
 
   const onCheckout = () => {
