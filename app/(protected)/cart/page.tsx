@@ -18,11 +18,14 @@ type ProductInfo = {
 export default function Cart() {
   const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
-  const [products, setProducts] = useState<CartItemType[]>([]);
+  const [products, setProducts] = useState<CartProduct[]>([]);
+  const [isConfirming, setConfirming] = useState<boolean>(false);
+  const [confirmingTitle, setConfirmingTitle] = useState<string>("");
+  const [confirmingMessage, setConfirmingMessage] = useState<string>("");
 
   useEffect(() => {
     let ignore = false;
-    getUserById(user?.id as string).then(user => {
+    getUserById(user?.userId as string).then(user => {
       if (!ignore && user && user.cart) {
         user.cart.map((product: ProductInfo) => {
           getProductById(product.productType, product.productId).then(res => {
