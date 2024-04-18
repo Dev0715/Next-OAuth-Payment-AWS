@@ -1,18 +1,14 @@
 "use client"
 
-import { Poppins } from "next/font/google";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { LoginButton } from "@/components/auth/login-button";
-import { ProductItem } from "@/components/product/product-item";
 import { Navbar } from "./_components/navbar";
 import { useEffect, useState, useTransition } from "react";
-import { CartItemType, Product } from "@/shared/product-interface";
+import { CartProduct, Product } from "@/shared/types-product";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserById } from "@/data/user/user-by-id";
 import { getProductById } from "@/data/products/product-by-id";
 import { CartItem } from "./_components/cart-item";
 import { removeProductFromCart } from "@/actions/user/remove-product-from-cart";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 type ProductInfo = {
   productType: string;
