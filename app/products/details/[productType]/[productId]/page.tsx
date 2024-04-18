@@ -21,6 +21,7 @@ import { getProductById } from "@/data/products/product-by-id";
 import { getS3ImageLink } from "@/actions/s3/image-link";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { link } from "fs";
+import { addProductToCart } from "@/data/user/product-to-cart";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -112,7 +113,13 @@ export default function ProductDetails({ params }: {
   }, [searchParams]);
 
   const onConfirmCart = () => {
-
+    addProductToCart({
+      userId: user?.id,
+      product: {
+        productType: product?.productType,
+        productId: product?.productId
+      }
+    });
   }
 
   const onDownloadCreativeFiles = () => {
