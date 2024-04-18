@@ -113,13 +113,23 @@ export default function ProductDetails({ params }: {
   }, [searchParams]);
 
   const onConfirmCart = () => {
-    addProductToCart({
-      userId: user?.id,
-      product: {
-        productType: product?.productType,
-        productId: product?.productId
-      }
-    });
+    startTransition(() => {
+      addProductToCart({
+        userId: user?.id as string,
+        product: {
+          productType: product?.productType as string,
+          productId: product?.productId as string
+        }
+      }).then(res => {
+        if (res.success) {
+          // Success
+        } else {
+          // Failure
+        }
+      }).catch(error => {
+        // Failure
+      });
+    })
   }
 
   const onDownloadCreativeFiles = () => {
