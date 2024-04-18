@@ -115,12 +115,18 @@ export default function ProductDetails({ params }: {
 
   }
 
-  const onDownloadCreativeFiles = async () => {
+  const onDownloadCreativeFiles = () => {
     fetch('/api/download').then(response => response.blob()).then(blob => {
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.click();
     })
+
+    // axiosClient.post('/download', { fileList: product?.fileList }, axiosConfig).then(response => response.blob()).then(blob => {
+    //   const link = document.createElement('a');
+    //   link.href = URL.createObjectURL(blob);
+    //   link.click();
+    // })
   }
 
   return (
