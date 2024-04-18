@@ -39,7 +39,10 @@ export const GET = async () => {
 
   archive.finalize();
 
-  return new Response(archive, {
+  const stream = archive as unknown as ReadableStream<Uint8Array>;
+  const response = new Response(stream, {
     headers
   });
+
+  return response;
 };
