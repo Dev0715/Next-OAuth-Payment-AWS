@@ -7,7 +7,7 @@ import { LoginButton } from "@/components/auth/login-button";
 import { ProductItem } from "@/components/product/product-item";
 import { Navbar } from "./_components/navbar";
 import { useEffect, useState } from "react";
-import { Product } from "@/shared/product-interface";
+import { CartItemType, Product } from "@/shared/product-interface";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserById } from "@/data/user/user-by-id";
 import { getProductById } from "@/data/products/product-by-id";
@@ -18,13 +18,9 @@ type ProductInfo = {
   productId: string;
 }
 
-interface CartItem extends Product {
-  selected: boolean
-}
-
 export default function Cart() {
   const user = useCurrentUser();
-  const [products, setProducts] = useState<CartItem[]>([]);
+  const [products, setProducts] = useState<CartItemType[]>([]);
 
   useEffect(() => {
     let ignore = false;
