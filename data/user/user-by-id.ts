@@ -15,10 +15,8 @@ export const getUserById = async (userId: string) => {
 
   try {
     const response = await db.send(command);
-    console.log("__getUserById__GetCommand__RESPONSE", response);
     return response.Item;
   } catch (error) {
-    console.log("__getUserById__GetCommand__ERROR", error);
     return null;
   }
 };
