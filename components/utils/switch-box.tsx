@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { Switch } from "../ui/switch"
-import { Alert } from "./alert";
+import { QustionAlert } from "./question-alert";
 
 type ParamsType = {
   mode?: "small" | "big"
@@ -21,9 +21,9 @@ export const SwitchBox = ({
         <p className={`text-black font-medium ${mode === 'big' ? "text-xl" : "text-base"}`}>{title}</p>
         <p className="text-sm text-gray-500">{content}</p>
       </div>
-      <Alert title={alertTitle} message={alertMessage} onContinue={onCheckedChange}>
+      <QustionAlert title={alertTitle} message={alertMessage} onContinue={onCheckedChange}>
         <Switch checked={isChecked} />
-      </Alert>
+      </QustionAlert>
     </div>
   )
 }
