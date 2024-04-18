@@ -2,7 +2,9 @@
 
 import { getS3ImageLink } from "@/actions/s3/image-link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
 import { Product } from "@/shared/product-interface";
 import Link from "next/link";
 import { useEffect, useState } from "react";
