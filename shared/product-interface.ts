@@ -14,3 +14,7 @@ export type Product = {
   previewList: string[];
   keywords: string[];
 };
+
+export interface CartItemType extends Product {
+  selected: boolean;
+}
