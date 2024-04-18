@@ -46,9 +46,13 @@ export default function Cart() {
     setProducts(newList);
   }
 
+  const onCheckout = () => {
+
+  }
+
   return (
     <main className="w-full flex flex-col pt-6">
-      <Navbar title="Your Cart" content="Here are products in your cart" />
+      <Navbar title="Your Cart" content="Here are products in your cart" onCheckout={onCheckout} />
       <div className="w-full flex flex-wrap py-6">
         {products.map((product, index) => (
           <div key={index} className="w-1/2 p-2">
