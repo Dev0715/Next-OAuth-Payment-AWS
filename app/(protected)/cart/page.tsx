@@ -47,10 +47,21 @@ export default function Cart() {
     setProducts(newList);
   }
 
+  const setRemoveConfirming = (success: boolean) => {
+    setConfirming(true);
+    if (success) {
+      setConfirmingTitle("Success");
+      setConfirmingMessage("1 product was removed successfully from your cart");
+    } else {
+      setConfirmingTitle("Failure");
+      setConfirmingMessage("An error occured while removing product from cart");
+    }
+  }
+
   const onRemoveItem = (index: number) => {
     startTransition(() => {
       removeProductFromCart({
-        userId: user?.id as string,
+        userId: user?.userId as string,
         product: {
           productType: products[index].productType,
           productId: products[index].productId
