@@ -39,7 +39,10 @@ export const GET = async () => {
     const stream = archive as unknown as ReadableStream<Uint8Array>;
 
     const headers = new Headers();
-    headers.append("Content-Disposition", 'attachment; filename="image.zip"');
+    headers.append(
+      "Content-Disposition",
+      'attachment; filename="creative-work.zip"'
+    );
     headers.append("Content-Type", "application/zip");
 
     return new Response(stream, {
