@@ -10,7 +10,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { captureOrder as captureStripeOrder } from '@/actions/stripe/capture-order';
 import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
 import { toast } from "sonner";
-import { useCallback, useEffect, useState } from "react";
+import { startTransition, useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
