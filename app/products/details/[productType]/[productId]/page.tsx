@@ -21,7 +21,7 @@ import { getProductById } from "@/data/products/product-by-id";
 import { getS3ImageLink } from "@/actions/s3/image-link";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { link } from "fs";
-import { addProductToCart } from "@/data/user/product-to-cart";
+import { addProductToCart } from "@/actions/user/add-product-to-cart";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return (
