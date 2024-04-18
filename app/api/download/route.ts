@@ -1,23 +1,21 @@
-import { NextRequest, NextResponse } from "next/server";
 import archiver from "archiver";
 import { PassThrough, Readable } from "stream";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import s3Client from "@/lib/s3";
-import { NextApiResponse } from "next";
 
 const Bucket = process.env.AWS_BUCKET_NAME;
 
 export const GET = async () => {
-
-const fileList = [
-  {
-    name: "kre8tive-temp_202404161915.rar",
-    path: "f7554959-06ef-453b-af79-0d7e483b500c"
-  },
-  {
-    name: "Samuel_RTR.docx",
-    path: "b7750835-e4fa-4ee7-828c-a8eafcb63848"
-}];
+  const fileList = [
+    {
+      name: "kre8tive-temp_202404161915.rar",
+      path: "f7554959-06ef-453b-af79-0d7e483b500c"
+    },
+    {
+      name: "Samuel_RTR.docx",
+      path: "b7750835-e4fa-4ee7-828c-a8eafcb63848"
+    }
+  ];
 
   const archive = archiver("zip", {
     zlib: { level: 9 }
@@ -36,20 +34,12 @@ const fileList = [
   }
 
   const headers = new Headers();
-  headers.append('Content-Disposition', 'attachment; filename="image.zip"');
-  headers.append('Content-Type', 'application/zip');
+  headers.append("Content-Disposition", 'attachment; filename="image.zip"');
+  headers.append("Content-Type", "application/zip");
 
-  archive.finalize()
+  archive.finalize();
 
   return new Response(archive, {
     headers
   });
-
-  // console.log("fileList", fileList);
-
-  // res.setHeader('Content-Type', 'application/zip');
-  // res.setHeader('content-disposition', `attachment; filename="download.zip"`)
-
-  // archive.pipe(res);
-  // await archive.finalize();
 };
