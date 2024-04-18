@@ -5,6 +5,7 @@ import paypal from "@paypal/checkout-server-sdk";
 
 type OrderType = {
   redirectUrl: string;
+  amount: number;
 };
 
 export const createOrder = async (params: OrderType) => {
@@ -18,7 +19,7 @@ export const createOrder = async (params: OrderType) => {
         {
           amount: {
             currency_code: "USD",
-            value: (100).toFixed(2) // order_price
+            value: params.amount.toFixed(2) // order_price
           }
         }
       ],
