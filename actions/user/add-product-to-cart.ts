@@ -1,17 +1,12 @@
 "use server";
 
 import { getUserById } from "@/data/user/user-by-id";
-import { updateUserProducts } from "@/data/user/products-update";
 import { updateUserCart } from "@/data/user/cart-update";
-
-type ProductInfo = {
-  productType: string;
-  productId: string;
-};
+import { ProductLink } from "@/shared/types-user";
 
 type ParamsType = {
   userId: string;
-  product: ProductInfo;
+  product: ProductLink;
 };
 
 export const addProductToCart = async ({ userId, product }: ParamsType) => {
