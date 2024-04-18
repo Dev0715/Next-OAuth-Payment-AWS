@@ -4,11 +4,16 @@ import stripe from "@/lib/stripe";
 
 type OrderType = {
   redirectUrl: string;
+  userEmail: string;
+  product: {
+    name: string;
+    description: string;
+    images: string[];
+  };
+  amount: number;
 };
 
 export const createOrder = async (params: OrderType) => {
-  const tempPrice = 100;
-
   try {
     const taxRate = await stripe.taxRates.create({
       display_name: "Sales Tax",
