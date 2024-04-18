@@ -18,9 +18,13 @@ type ProductInfo = {
   productId: string;
 }
 
+interface CartItem extends Product {
+  selected: boolean
+}
+
 export default function Cart() {
   const user = useCurrentUser();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<CartItem[]>([]);
 
   useEffect(() => {
     let ignore = false;
@@ -29,7 +33,7 @@ export default function Cart() {
         user.cart.map((product: ProductInfo) => {
           getProductById(product.productType, product.productId).then(res => {
             if (res) {
-              setProducts(prev => [...prev, res]);
+              setProducts(prev => [...prev, { ...res, selected: false }]);
             }
           })
         })
