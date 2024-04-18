@@ -15,18 +15,29 @@ export const addProductToCart = async ({ userId, product }: ParamsType) => {
     return { error: "Internal server error" };
   }
 
-  const products: ProductInfo[] = existingUser.products || [];
-  const existingProduct = products.find(
-    (_product) =>
-      _product.productType === product.productType &&
-      _product.productId === product.productId
+  const products: ProductLink[] = existingUser.products || [];
+  const ownProduct = products.find(
+    (_product) => _product.productId === product.productId
   );
-
-  if (existingProduct) {
+  if (ownProduct) {
     return { error: "You can't move your own product to your cart" };
   }
 
-  const cart = existingUser.cart || [];
+  const cart: ProductLink[] = existingUser.cart || [];
+  const exisitingOne = cart.find(
+    (_product) => _product.productId === product.productId
+  );
+  if (exisitingOne) {
+    return { error: "It's already in your cart" };
+  }
+
+  const purchasedProducts: ProductLink[] = existingUser.purchasedProducts || [];
+  const exisitingProduct = purchasedProducts.find(
+    (_product) => _product.productId === product.productId
+  );
+  if (exisitingProduct) {
+    return { error: "You have already purchased this product" };
+  }
 
   const response = await updateUserCart({
     userId,
