@@ -58,6 +58,12 @@ export const UserButton = () => {
             <span>User Settings</span>
           </DropdownMenuItem>
         </Link>
+        <Link href="/cart">
+          <DropdownMenuItem>
+            <FaCartArrowDown className="h-4 w-4 mr-3" />
+            <span>Your Cart</span>
+          </DropdownMenuItem>
+        </Link>
         <LogoutButton>
           <DropdownMenuItem>
             <ExitIcon className="h-4 w-4 mr-3" />
