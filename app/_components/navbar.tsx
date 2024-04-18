@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import React from "react";
 import { ListItem } from "@/components/utils/list-item";
-import { PRODCUT_TYPES } from "@/shared/product-info";
+import { PRODCUT_TYPES } from "@/shared/product-types";
 import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
