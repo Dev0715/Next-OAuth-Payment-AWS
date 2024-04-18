@@ -112,7 +112,20 @@ export default function ProductDetails({ params }: {
     // window.history.replaceState(null, '', currentPath)
   }, [searchParams]);
 
+  const setCartConfirming = (success: boolean, message?: string) => {
+    setConfirming(true);
+    if (success) {
+      setConfirmingTitle("Success");
+      setConfirmingMessage("1 product was moved to your cart successfully");
+    } else {
+      setConfirmingTitle("Failure");
+      setConfirmingMessage(message || "An error occured while moving product to your cart");
+    }
+  }
+
+
   const onConfirmCart = () => {
+    <ConfirmAlert open={isConfirming} title={confirmingTitle} message={confirmingMessage} onContinue={() => setConfirming(false)} />
     startTransition(() => {
       addProductToCart({
         userId: user?.id as string,
