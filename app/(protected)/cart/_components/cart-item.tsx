@@ -5,18 +5,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { Alert } from "@/components/utils/alert";
+import { QustionAlert } from "@/components/utils/question-alert";
 import { CartItemType, Product } from "@/shared/product-interface";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface PropsParams {
+  isPending: boolean,
   product: CartItemType,
   onSelected: (checked: boolean) => void;
   onRemoveItem: () => void;
 }
 
-export const CartItem = ({ product, onSelected, onRemoveItem }: PropsParams) => {
+export const CartItem = ({ isPending, product, onSelected, onRemoveItem }: PropsParams) => {
   const [imagePath, setImagePath] = useState<string>("");
 
   useEffect(() => {
@@ -29,7 +30,6 @@ export const CartItem = ({ product, onSelected, onRemoveItem }: PropsParams) => 
   }, []);
 
   return (
-
     <Card className="w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100 hover:translate-x-[-1px] hover:translate-y-[-1px]">
       <CardContent className="w-full p-0 flex gap-y-4">
         <Avatar className="w-72 h-48 rounded-none">
@@ -48,12 +48,21 @@ export const CartItem = ({ product, onSelected, onRemoveItem }: PropsParams) => 
             <p className="text-base text-gray-700 drop-shadow-md">{product.description}</p>
           </div>
           <div className="flex items-center justify-between">
-            <Alert title="Warning" message="Are you sure to remove this product from your cart?" onContinue={onRemoveItem}>
-              <Button variant={"outline"} className="border-red-700">
+            <QustionAlert title="Warning" message="Are you sure to remove this product from your cart?" onContinue={onRemoveItem}>
+              <Button
+                disabled={isPending}
+                variant={"outline"}
+                className="border-red-700"
+              >
                 Remove
               </Button>
-            </Alert>
-            <Switch className="h-3/4" checked={product.selected} onCheckedChange={onSelected}></Switch>
+            </QustionAlert>
+            <Switch
+              disabled={isPending}
+              className="h-3/4"
+              checked={product.selected}
+              onCheckedChange={onSelected}
+            />
           </div>
         </div>
       </CardContent>
