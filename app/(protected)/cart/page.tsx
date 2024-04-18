@@ -23,8 +23,9 @@ export default function Cart() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    let ignore = false;
     getUserById(user?.id as string).then(user => {
-      if (user && user.cart) {
+      if (!ignore && user && user.cart) {
         user.cart.map((product: ProductInfo) => {
           getProductById(product.productType, product.productId).then(res => {
             if (res) {
