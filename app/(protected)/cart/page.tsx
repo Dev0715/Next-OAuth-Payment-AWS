@@ -46,6 +46,10 @@ export default function Cart() {
     setProducts(newList);
   }
 
+  const onRemoveItem = (index: number) => {
+
+  }
+
   const onCheckout = () => {
 
   }
@@ -56,7 +60,11 @@ export default function Cart() {
       <div className="w-full flex flex-wrap py-6">
         {products.map((product, index) => (
           <div key={index} className="w-1/2 p-2">
-            <CartItem onSelected={(checked: boolean) => onSelected(index, checked)} product={product} />
+            <CartItem
+              product={product}
+              onSelected={(checked: boolean) => onSelected(index, checked)}
+              onRemoveItem={() => onRemoveItem(index)}
+            />
           </div>
         ))}
       </div>
