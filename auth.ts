@@ -44,27 +44,20 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return true;
     },
     async session({ token, session }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-      }
-
       if (session.user) {
-        session.user.name = token.name;
-        session.user.email = token.email as string;
-        session.user.isOAuth = token.isOAuth as boolean;
-        session.user.userId = token.userId as string;
+        session.user = {
+          ...session.user,
+          ...token,
+          email: token.email as string
+        };
       }
-
       return session;
     },
     async jwt({ token }) {
-      // if (!token.email) return token;
-      // const existingUser = await getUserByEmail(token.email);
-      // if (!existingUser) return token;
-      // token.isOAuth = !existingUser;
-      // token.email = existingUser.email;
-      // token.userId = existingUser.userId;  // goes to session function above
-      return token;
+      if (!token.sub) return token;
+      const existingUser = await getUserById(token.sub as string);
+      if (!existingUser) return token;
+      return existingUser; // to token in `session` func
     }
   },
   ...authConfig
