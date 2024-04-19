@@ -22,7 +22,7 @@ import { FaCcStripe, FaPaypal, FaStripe, FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/auth/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { CustomerInterface } from "@/shared/user-interface";
+import { Customer } from "@/shared/types-user";
 import { getUserById } from "@/data/user/user-by-id";
 
 export default function EditCustomer({ disabled = false }: { disabled?: boolean }) {
@@ -31,7 +31,7 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
   const [isPending, startTransition] = useTransition();
 
   const user = useCurrentUser();
-  const [customer, setCustomer] = useState<CustomerInterface>();
+  const [customer, setCustomer] = useState<Customer>();
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
@@ -86,7 +86,7 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
 
   useEffect(() => {
     if (user) {
-      getUserById(user.id).then(data => {
+      getUserById(user.userId).then(data => {
         setCustomer(data);
         form.setValue("username", data.username);
         form.setValue("firstname", data.firstname);
