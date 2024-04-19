@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { QustionAlert } from "@/components/utils/question-alert";
-import { CartItemType, Product } from "@/shared/product-interface";
+import { CartProduct, Product } from "@/shared/types-product";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface PropsParams {
   isPending: boolean,
-  product: CartItemType,
+  product: CartProduct,
   onSelected: (checked: boolean) => void;
   onRemoveItem: () => void;
 }
@@ -67,5 +67,6 @@ export const CartItem = ({ isPending, product, onSelected, onRemoveItem }: Props
         </div>
       </CardContent>
     </Card>
+
   );
 };
