@@ -25,7 +25,7 @@ import { Dialog, DialogContent } from "../ui/dialog";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
-import { PRODCUT_TYPES } from "@/shared/product-info";
+import { PRODCUT_TYPES } from "@/shared/product-types";
 import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
 import { createProduct } from "@/data/products/product-create";
