@@ -4,8 +4,8 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
 import { ProductItem } from "../product/product-item"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { Product } from "@/shared/product-interface"
-import { Creator } from "@/shared/user-interface"
+import { Product } from "@/shared/types-product"
+import { Creator } from "@/shared/types-user"
 import { getProductById } from "@/data/products/product-by-id"
 import { useCurrentUser } from "@/hooks/use-current-user"
 import { getUserById } from "@/data/user/user-by-id"
@@ -41,7 +41,7 @@ export const UserCollection = ({ userId }: { userId: string }) => {
     <Card className="border-0 rounded-none">
       <CardHeader className="flex flex-row items-center justify-between">
         <p className="text-xl font-bold">Your Collections</p>
-        {signedUser?.id === userId && (
+        {signedUser?.userId === userId && (
           <Button variant="default" asChild className="w-48 flex gap-x-2">
             <Link href="/products/new">
               <FaPlus /> Add
