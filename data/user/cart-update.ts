@@ -1,16 +1,14 @@
 "use server";
 
 import db from "@/lib/db";
+import { ProductLink } from "@/shared/types-user";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
 interface PropsType {
   userId: string;
-  newCart: {
-    productType: string;
-    productId: string;
-  }[];
+  newCart: ProductLink[];
 }
 
 export const updateUserCart = async ({ userId, newCart }: PropsType) => {
