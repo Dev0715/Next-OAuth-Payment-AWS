@@ -168,44 +168,62 @@ export default function ProductDetails({ params }: {
     }
   }
 
-
   const onConfirmCart = () => {
-    <ConfirmAlert open={isConfirming} title={confirmingTitle} message={confirmingMessage} onContinue={() => setConfirming(false)} />
     startTransition(() => {
+      const newProductLink = {
+        productType: product?.productType as string,
+        productId: product?.productId as string
+      }
       addProductToCart({
-        userId: user?.id as string,
-        product: {
-          productType: product?.productType as string,
-          productId: product?.productId as string
-        }
+        userId: user?.userId as string,
+        product: newProductLink
       }).then(res => {
         if (res.success) {
-          // Success
+          if (!cart) {
+            setCart([newProductLink]);
+          } else {
+            setCart([...cart, newProductLink]);
+          }
+          setCartConfirming(true);
         } else {
-          // Failure
+          setCartConfirming(false, res.error);
         }
       }).catch(error => {
-        // Failure
+        setCartConfirming(false);
       });
     })
   }
 
-  const onDownloadCreativeFiles = () => {
-    fetch('/api/download').then(response => response.blob()).then(blob => {
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.click();
-    })
+  const setDownloadFailureConfirming = () => {
+    setConfirming(true);
+    setConfirmingTitle("Failure");
+    setConfirmingMessage("An internal server error occured while tyring to download");
+  }
 
-    // axiosClient.post('/download', { fileList: product?.fileList }, axiosConfig).then(response => response.blob()).then(blob => {
+  const onDownloadCreativeFiles = () => {
+    // fetch('/api/download').then(response => response.blob()).then(blob => {
     //   const link = document.createElement('a');
+    //   link.download = 'creative-work.zip';
     //   link.href = URL.createObjectURL(blob);
     //   link.click();
     // })
+
+    axiosClient.post('/download', { fileList: product?.fileList }, blobConfig)
+      .then(response => response.data).then(blob => {
+        const link = document.createElement('a');
+        link.download = `${product?.title}.zip`;
+        link.href = URL.createObjectURL(blob);
+        link.click();
+      }).catch(error => {
+        setDownloadFailureConfirming();
+      }).catch(error => {
+        setDownloadFailureConfirming();
+      })
   }
 
   return (
     <div className="w-full flex justify-center py-6">
+      <ConfirmAlert open={isConfirming} title={confirmingTitle} message={confirmingMessage} onContinue={() => setConfirming(false)} />
       <div className="w-5/6 flex flex-col gap-y-6">
         <Navbar title="Product Detail" content="You can see details of product" />
         <div className="w-full flex gap-x-8">
