@@ -104,22 +104,57 @@ export default function ProductDetails({ params }: {
     setSelectedIndex(index);
   }
 
+  const setPurchasedConfirming = (success: boolean) => {
+    setConfirming(true);
+    if (success) {
+      setConfirmingTitle("Success");
+      setConfirmingMessage("This product was purchased successfully");
+    } else {
+      setConfirmingTitle("Failure");
+      setConfirmingMessage("Payment for this product was cancelled");
+    }
+  }
+
+  const setPurchasedErrorConfirming = () => {
+    setConfirming(true);
+    setConfirmingTitle("Failure");
+    setConfirmingMessage("Internal server error occured while purchasing");
+  }
+
+  const onProductPurchased = () => {
+    addProductToPurchased({
+      userId: user?.userId as string,
+      products: [{
+        productType: params.productType,
+        productId: params.productId
+      }]
+    }).then(res => {
+      if (res.success) {
+        setPurchasedConfirming(true);
+      } else {
+        setPurchasedErrorConfirming();
+      }
+    }).catch(error => {
+      setPurchasedErrorConfirming();
+    })
+  }
+
   useEffect(() => {
     const gateway = searchParams.get('gateway');
     if (gateway === Gateway_Paypal) {
       const paymentId = String(searchParams.get("token"));
       const payerId = searchParams.get('PayerID');
       capturePaypalOrder({ paymentId });
-      toast.success('New Product Purchased Newly through Paypal');
+      onProductPurchased();
     } else if (gateway === Gateway_Stripe) {
       const paymentId = String(searchParams.get('session_id'));
       const payerId = 0;
       // captureStripeOrder({ paymentId });
-      toast.success('New Product Purchased Newly through Stripe');
+      onProductPurchased();
     } else if (gateway === Gateway_Cancelled) {
-      toast.error('Payment Cancelled');
+      setPurchasedConfirming(false);
     }
-    // window.history.replaceState(null, '', currentPath)
+    window.history.replaceState(null, '', currentPath);
   }, [searchParams]);
 
   const setCartConfirming = (success: boolean, message?: string) => {
