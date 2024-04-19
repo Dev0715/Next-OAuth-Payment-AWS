@@ -164,10 +164,10 @@ export const ProductAddForm = () => {
         fileList,
         previewList,
         keywords: selectedKeywords,
-        ownerId: user?.id as string,
+        ownerId: user?.userId as string,
       }).then(res => {
         if (res.success) {
-          addNewProduct(user?.id as string, {
+          addNewProduct(user?.userId as string, {
             productType: values.productType,
             productId
           }).then(res => {
