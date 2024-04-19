@@ -15,11 +15,41 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { LoginButton } from "./login-button";
-import { WrappedButton } from "../utils/wrapped-button";
 import { SignupButton } from "./signup-button";
+import { useEffect, useState } from "react";
+import { getS3ImageLink } from "@/actions/s3/image-link";
+import { useAtom } from "jotai";
+import { cartAtom } from "@/store/cart";
+import { getUserById } from "@/data/user/user-by-id";
+import { Button } from "../ui/button";
 
 export const UserButton = () => {
   const user = useCurrentUser();
+
+  const [avatarImage, setAvatarImage] = useState<string>("");
+  const [cart, setCart] = useAtom(cartAtom)
+
+  useEffect(() => {
+    if (!user)
+      return;
+
+    if (user.image) {
+      setAvatarImage(user.image);
+    } else if (user.avatar) {
+      getS3ImageLink(user.avatar).then(res => {
+        if (res.success)
+          setAvatarImage(res.response as string);
+      });
+    }
+
+    if (!cart) {
+      getUserById(user.userId).then(res => {
+        if (res) {
+          setCart(res?.cart || []);
+        }
+      })
+    }
+  }, [user]);
 
   if (!user) return (
     <div className="flex items-center gap-x-2">
