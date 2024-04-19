@@ -48,18 +48,29 @@ export const CartItem = ({ isPending, product, onSelected, onRemoveItem }: Props
             <p className="text-base text-gray-700 drop-shadow-md">{product.description}</p>
           </div>
           <div className="flex items-center justify-between">
-            <QustionAlert title="Warning" message="Are you sure to remove this product from your cart?" onContinue={onRemoveItem}>
+            <div className="flex items-center gap-x-6">
               <Button
+                asChild
                 disabled={isPending}
-                variant={"outline"}
-                className="border-red-700"
+                variant={"link"}
+                className="p-0"
               >
-                Remove
+                <Link href={`/products/details/${product.productType}/${product.productId}`} className="w-full">
+                  Details
+                </Link>
               </Button>
-            </QustionAlert>
+              <QustionAlert title="Warning" message="Are you sure to remove this product from your cart?" onContinue={onRemoveItem}>
+                <Button
+                  disabled={isPending}
+                  variant={"link"}
+                  className="p-0 text-red-700"
+                >
+                  Remove
+                </Button>
+              </QustionAlert>
+            </div>
             <Switch
               disabled={isPending}
-              className="h-3/4"
               checked={product.selected}
               onCheckedChange={onSelected}
             />
