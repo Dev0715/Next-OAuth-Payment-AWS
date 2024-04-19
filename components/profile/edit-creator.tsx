@@ -27,7 +27,7 @@ import { axiosClient, axiosConfig } from "@/lib/axios";
 import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Creator } from "@/shared/user-interface";
+import { Creator } from "@/shared/types-user";
 import { getUserById } from "@/data/user/user-by-id";
 
 export default function EditCreator({ disabled = false }: { disabled?: boolean }) {
@@ -104,7 +104,7 @@ export default function EditCreator({ disabled = false }: { disabled?: boolean }
 
   useEffect(() => {
     if (user) {
-      getUserById(user.id).then(data => {
+      getUserById(user.userId).then(data => {
         setCreator(data);
         form.setValue("username", data.username);
         form.setValue("bio", data.bio);
