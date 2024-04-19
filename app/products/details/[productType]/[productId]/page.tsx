@@ -56,10 +56,7 @@ const Thumbnail = (props: {
 }
 
 export default function ProductDetails({ params }: {
-  params: {
-    productType: string;
-    productId: string;
-  }
+  params: ProductLink
 }
 ) {
   const Gateway_Paypal = 'paypal';
@@ -68,10 +65,19 @@ export default function ProductDetails({ params }: {
 
   const searchParams = useSearchParams();
   const user = useCurrentUser();
+  const currentPath = usePathname();
+
+  const [isPending, startTransition] = useTransition();
+  const [isConfirming, setConfirming] = useState<boolean>(false);
+  const [confirmingTitle, setConfirmingTitle] = useState<string>("");
+  const [confirmingMessage, setConfirmingMessage] = useState<string>("");
 
   const [product, setProduct] = useState<Product>();
   const [imageList, setImageList] = useState<string[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+
+  const [cart, setCart] = useAtom(cartAtom);
+  const [orderList, setOrderList] = useAtom(orderListAtom);
 
   useEffect(() => {
     let ignore = false; // # to prevent twice loading #
