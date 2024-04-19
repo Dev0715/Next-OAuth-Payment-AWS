@@ -36,41 +36,56 @@ export const UserButton = () => {
   );
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Avatar className="rounded-xl">
-          <AvatarImage src={user?.image || ""} />
-          <AvatarFallback className="bg-sky-500">
-            <FaUser className="text-white" />
-          </AvatarFallback>
-        </Avatar>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40" align="end">
-        <Link href={`/profile/creator/${user.id}`}>
-          <DropdownMenuItem>
-            <PersonIcon className="h-4 w-4 mr-3" />
-            <span>Creator Profile</span>
-          </DropdownMenuItem>
+    <div className="flex items-center gap-x-4">
+      <Button asChild variant={"ghost"} className="p-0 rounded-full">
+        <Link href={"/cart"}>
+          <div className="relative w-10 h-10 flex items-center justify-center cursor-pointer">
+            <FaCartArrowDown className="text-xl" />
+            {cart && cart.length ?
+              <span className="absolute -top-[2px] -right-[2px] w-5 h-5 flex items-center justify-center rounded-full bg-red-700 text-xs text-white">
+                {cart.length}
+              </span>
+              : null
+            }
+          </div>
         </Link>
-        <Link href="/user">
-          <DropdownMenuItem>
-            <MixerHorizontalIcon className="h-4 w-4 mr-3" />
-            <span>User Settings</span>
-          </DropdownMenuItem>
-        </Link>
-        <Link href="/cart">
-          <DropdownMenuItem>
-            <FaCartArrowDown className="h-4 w-4 mr-3" />
-            <span>Your Cart</span>
-          </DropdownMenuItem>
-        </Link>
-        <LogoutButton>
-          <DropdownMenuItem>
-            <ExitIcon className="h-4 w-4 mr-3" />
-            <span>Logout</span>
-          </DropdownMenuItem>
-        </LogoutButton>
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <Avatar className="rounded-xl">
+            <AvatarImage src={avatarImage} />
+            <AvatarFallback className="bg-sky-500">
+              <FaUser className="text-white" />
+            </AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-40" align="end">
+          <Link href={`/profile/creator/${user.userId}`}>
+            <DropdownMenuItem>
+              <PersonIcon className="h-4 w-4 mr-3" />
+              <span>Creator Profile</span>
+            </DropdownMenuItem>
+          </Link>
+          <Link href="/user">
+            <DropdownMenuItem>
+              <MixerHorizontalIcon className="h-4 w-4 mr-3" />
+              <span>User Settings</span>
+            </DropdownMenuItem>
+          </Link>
+          <Link href="/cart">
+            <DropdownMenuItem>
+              <FaCartArrowDown className="h-4 w-4 mr-3" />
+              <span>Your Cart</span>
+            </DropdownMenuItem>
+          </Link>
+          <LogoutButton>
+            <DropdownMenuItem>
+              <ExitIcon className="h-4 w-4 mr-3" />
+              <span>Logout</span>
+            </DropdownMenuItem>
+          </LogoutButton>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div >
   );
 };
