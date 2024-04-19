@@ -4,24 +4,28 @@ import { PaymentButton } from "@/components/payment/payment-button";
 import { WrappedButton } from "@/components/utils/wrapped-button";
 import { AiFillCreditCard } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaCartArrowDown, FaDownload, FaFacebook, FaProductHunt, FaRegUser } from "react-icons/fa";
+import { FaCartArrowDown, FaDownload, FaRegUser } from "react-icons/fa";
 import { Navbar } from "../../../_components/navbar";
 import { usePathname, useSearchParams } from "next/navigation";
 import { captureOrder as captureStripeOrder } from '@/actions/stripe/capture-order';
 import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
 import { toast } from "sonner";
-import { startTransition, useCallback, useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { AlertDialog } from "@/components/ui/alert-dialog";
-import { Alert } from "@/components/utils/alert";
-import { Product } from "@/shared/product-interface";
+import { QustionAlert } from "@/components/utils/question-alert";
+import { Product } from "@/shared/types-product";
 import { getProductById } from "@/data/products/product-by-id";
 import { getS3ImageLink } from "@/actions/s3/image-link";
-import { axiosClient, axiosConfig } from "@/lib/axios";
-import { link } from "fs";
+import { axiosClient, axiosConfig, blobConfig } from "@/lib/axios";
 import { addProductToCart } from "@/actions/user/add-product-to-cart";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { useAtom } from "jotai";
+import { cartAtom } from "@/store/cart";
+import { ProductLink } from "@/shared/types-user";
+import { orderListAtom } from "@/store/orderList";
+import { addProductToPurchased } from "@/actions/user/add-product-to-purchased";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return (
