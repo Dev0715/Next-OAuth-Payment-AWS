@@ -211,24 +211,24 @@ export default function ProductDetails({ params }: {
               </div>
             </div>
             <div className="flex flex-col gap-y-4">
-              <Button asChild variant="outline" className="border-green-700 gap-x-2">
+              <Button disabled={isPending} asChild variant="outline" className="border-green-700 gap-x-2">
                 <Link href={`/profile/creator/${product?.ownerId}`}>
                   <FaRegUser className="text-green-700" />
                   Go to Creator's Profile
                 </Link>
               </Button>
-              <Alert title="Confirmation" message="Are you sure to move this product to your cart?" onContinue={onConfirmCart} onCancel={() => { }}>
-                <Button variant="outline" className="w-full border-green-700 gap-x-2">
+              <QustionAlert title="Confirmation" message="Are you sure to move this product to your cart?" onContinue={onConfirmCart} onCancel={() => { }}>
+                <Button disabled={isPending} variant="outline" className="w-full border-green-700 gap-x-2">
                   <FaCartArrowDown className="text-green-700" />
                   Add to cart
                 </Button>
-              </Alert>
-              <PaymentButton mode="modal">
-                <WrappedButton variant="default" className="w-full flex gap-x-2">
+              </QustionAlert>
+              <PaymentButton disabled={isPending} mode="modal">
+                <WrappedButton onClick={() => { setOrderList(product ? [product] : []) }} variant="default" className="w-full flex gap-x-2">
                   <AiFillCreditCard />Purchase
                 </WrappedButton>
               </PaymentButton>
-              <Button onClick={onDownloadCreativeFiles} variant="outline" className="w-full border-green-700 gap-x-2">
+              <Button disabled={isPending} onClick={onDownloadCreativeFiles} variant="outline" className="w-full border-green-700 gap-x-2">
                 <FaDownload className="text-green-700" />
                 Download
               </Button>
