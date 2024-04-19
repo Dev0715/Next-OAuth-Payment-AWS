@@ -11,4 +11,8 @@ const axiosConfig: AxiosRequestConfig = {
   } as RawAxiosRequestHeaders
 };
 
-export { axiosClient, axiosConfig };
+const blobConfig: AxiosRequestConfig = {
+  responseType: "blob"
+};
+
+export { axiosClient, axiosConfig, blobConfig };
