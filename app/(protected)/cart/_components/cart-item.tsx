@@ -30,7 +30,7 @@ export const CartItem = ({ isPending, product, onSelected, onRemoveItem }: Props
   }, []);
 
   return (
-    <Card className="w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100 hover:translate-x-[-1px] hover:translate-y-[-1px]">
+    <Card className="w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100">
       <CardContent className="w-full p-0 flex gap-y-4">
         <Avatar className="w-72 h-48 rounded-none">
           <AvatarImage
