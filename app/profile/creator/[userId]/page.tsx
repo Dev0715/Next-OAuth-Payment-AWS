@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserById } from "@/data/user/user-by-id";
-import { Creator } from "@/shared/user-interface";
+import { Creator } from "@/shared/types-user";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 
