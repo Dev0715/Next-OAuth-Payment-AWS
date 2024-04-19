@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import db from "@/lib/db";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
-import { Product } from "@/shared/product-interface";
+import { Product } from "@/shared/types-product";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 
