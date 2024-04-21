@@ -65,11 +65,55 @@ export const SelectAccounts = ({ onContinue }: Props) => {
               render={({ field }) => (
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                   <div className="space-y-0.5">
+                    <FormLabel className="text-base">Creator Account</FormLabel>
+                    <FormDescription>
+                      ** You can create creator's account **
+                    </FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="w-full">
+            <FormField
+              control={form.control}
+              name="user"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">User Account</FormLabel>
+                    <FormDescription>
+                      ** You can create general user's account **
+                    </FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="w-full">
+            <FormField
+              control={form.control}
+              name="affiliate"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                  <div className="space-y-0.5">
                     <FormLabel className="text-base">
-                      Marketing emails
+                      Affiliate Account
                     </FormLabel>
                     <FormDescription>
-                      Receive emails about new products, features, and more.
+                      ** You can create affiliate user's account **
                     </FormDescription>
                   </div>
                   <FormControl>
