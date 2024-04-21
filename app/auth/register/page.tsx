@@ -7,7 +7,20 @@ import { useState } from "react";
 import { z } from "zod";
 
 const RegisterPage = () => {
-  const [userData, setUserData] = useState<any>({});
+  const [userData, setUserData] = useState<any>({
+    username: "andreicasian",
+    firstname: "andrei",
+    lastname: "caisan",
+    address1: "str Vasile Lupy 64/4",
+    address2: "",
+    city: "Chisinau",
+    postal: "MD-2012",
+    country: "Moldova",
+    phone1: "",
+    phone2: "",
+    email: "andrei.devcasian@gmail.com",
+    password: "123456"
+  });
   const [step, setStep] = useState<number>(0);
 
   const onGeneralDetailsContinue = (
