@@ -1,7 +1,7 @@
 "use client";
 
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
-import { SelectAccounts } from "@/components/auth/register/select-accounts";
+import { SelectAccounts } from "@/components/auth/register/select-accounts-form";
 import {
   GeneralDetailsSchema,
   SelectAccountsSchema
