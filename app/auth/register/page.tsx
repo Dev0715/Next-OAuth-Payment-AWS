@@ -112,6 +112,20 @@ const RegisterPage = () => {
     setStep((prev) => prev - 1);
   };
 
+  const onCreatorDetailsContinue = (
+    values: z.infer<typeof CreatorDetailsSchema>
+  ) => {
+    setUserData((prev) => ({ ...prev, creatorDetails: values }));
+    setStep((prev) => prev + 1);
+  };
+
+  const onCreatorDetailsBack = (
+    values: z.infer<typeof CreatorDetailsSchema>
+  ) => {
+    setUserData((prev) => ({ ...prev, creatorDetails: values }));
+    setStep((prev) => prev - 1);
+  };
+
   return (
     <div className="w-[640px] flex flex-col pt-6 gap-y-12">
       <p className="text-4xl font-semibold">Let's get you started</p>
