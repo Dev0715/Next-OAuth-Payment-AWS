@@ -21,8 +21,6 @@ import { GeneralDetailsSchema } from "@/schemas/auth/register";
 import { FaArrowRight } from "react-icons/fa";
 
 export const GeneralDetailsForm = () => {
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
@@ -42,14 +40,8 @@ export const GeneralDetailsForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof GeneralDetailsSchema>) => {
-    setError("");
-    setSuccess("");
-
     startTransition(() => {
-      register(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-      });
+      register(values).then((data) => {});
     });
   };
 
@@ -303,8 +295,6 @@ export const GeneralDetailsForm = () => {
               />
             </div>
           </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
           <Button
             disabled={isPending}
             type="submit"
