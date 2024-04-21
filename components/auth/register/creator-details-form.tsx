@@ -70,6 +70,35 @@ export const CreatorDetailsForm = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-y-6"
         >
+          <div className="flex flex-col gap-y-4">
+            <FormLabel>Cover Image & Avatar</FormLabel>
+            <Avatar className="w-full h-28 rounded-none">
+              <AvatarImage src={coverImagePath} className="object-cover" />
+              <AvatarFallback className="bg-sky-500">
+                <div className="w-full h-full bg-inherit"></div>
+              </AvatarFallback>
+            </Avatar>
+            <Input
+              disabled={isDisabled()}
+              type="file"
+              accept="image/*"
+              onChange={onCoverChanged}
+            />
+          </div>
+          <div className="flex items-end space-x-4">
+            <Avatar className="w-24 h-24 rounded-xl">
+              <AvatarImage src={avatarImagePath} />
+              <AvatarFallback className="bg-sky-500">
+                <FaUser className="text-white" />
+              </AvatarFallback>
+            </Avatar>
+            <Input
+              disabled={isDisabled()}
+              type="file"
+              accept="image/*"
+              onChange={onAvatarChanged}
+            />
+          </div>
           <div className="w-1/2">
             <FormField
               control={form.control}
