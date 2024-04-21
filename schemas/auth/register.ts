@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-// for `Signup` Form
 export const GeneralDetailsSchema = z.object({
   username: z
     .string()
@@ -35,4 +34,10 @@ export const GeneralDetailsSchema = z.object({
     .string()
     .min(6, "Passwords must be at least 6 characters long")
     .max(32, "Passwords must be a maximum of 32 characters")
+});
+
+export const SelectAccountsSchema = z.object({
+  creator: z.boolean(),
+  user: z.boolean(),
+  affiliate: z.boolean()
 });
