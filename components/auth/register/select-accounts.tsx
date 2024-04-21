@@ -15,16 +15,17 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { SelectAccountsSchema } from "@/schemas/auth/register";
 import { Switch } from "@/components/ui/switch";
 
 type Props = {
   onContinue: () => void;
+  onBack: () => void;
 };
 
-export const SelectAccounts = ({ onContinue }: Props) => {
+export const SelectAccounts = ({ onContinue, onBack }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
@@ -126,14 +127,25 @@ export const SelectAccounts = ({ onContinue }: Props) => {
               )}
             />
           </div>
-          <Button
-            disabled={isPending}
-            type="submit"
-            className="w-64 flex gap-x-4 self-end mt-4"
-          >
-            <FaArrowRight />
-            Next
-          </Button>
+          <div className="w-full flex items-center justify-between mt-4">
+            <Button
+              disabled={isPending}
+              type="button"
+              className="w-64 flex gap-x-4"
+              onClick={onBack}
+            >
+              <FaArrowLeft />
+              Back
+            </Button>
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="w-64 flex gap-x-4"
+            >
+              <FaArrowRight />
+              Next
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
