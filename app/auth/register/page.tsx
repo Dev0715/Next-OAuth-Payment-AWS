@@ -7,37 +7,50 @@ import {
   GeneralDetailsSchema,
   SelectAccountsSchema
 } from "@/schemas/auth/register";
+import { SingedUpData } from "@/shared/types-user";
 import { useState } from "react";
 import { z } from "zod";
 
 const RegisterPage = () => {
-  const [userData, setUserData] = useState<any>({
-    username: "andreicasian1",
-    firstname: "andrei",
-    lastname: "caisan",
-    address1: "str Vasile Lupy 64/4",
-    address2: "",
-    city: "Chisinau",
-    postal: "MD-2012",
-    country: "Moldova",
-    phone1: "",
-    phone2: "",
-    email: "andrei.devcasian1@gmail.com",
-    password: "123456",
-    creator: false,
-    user: false,
-    affiliate: false
+  const [userData, setUserData] = useState<SingedUpData>({
+    generalDetails: {
+      username: "andreicasian1",
+      firstname: "andrei",
+      lastname: "caisan",
+      address1: "str Vasile Lupy 64/4",
+      address2: "",
+      city: "Chisinau",
+      postal: "MD-2012",
+      country: "Moldova",
+      phone1: "",
+      phone2: "",
+      email: "andrei.devcasian1@gmail.com",
+      password: "123456"
+    },
+    selectedAccounts: {
+      creator: false,
+      user: false,
+      affiliate: false
+    }
   });
   const [step, setStep] = useState<number>(0);
 
   const isCreatorStep = () => {
-    return userData.creator && step === 2;
+    return userData.selectedAccounts.creator && step === 2;
   };
 
   const isUserStep = () => {
-    if (userData.user && userData.creator && step === 3) {
+    if (
+      userData.selectedAccounts.user &&
+      userData.selectedAccounts.creator &&
+      step === 3
+    ) {
       return true;
-    } else if (userData.user && !userData.creator && step === 2) {
+    } else if (
+      userData.selectedAccounts.user &&
+      !userData.selectedAccounts.creator &&
+      step === 2
+    ) {
       return true;
     } else {
       return false;
