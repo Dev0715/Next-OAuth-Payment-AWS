@@ -57,14 +57,14 @@ export const GeneralDetailsForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-y-4"
+          className="w-full flex flex-col gap-y-4"
         >
-          <div className="flex flex-col gap-y-4">
+          <div className="w-1/2">
             <FormField
               control={form.control}
               name="username"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                   <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input
@@ -77,12 +77,14 @@ export const GeneralDetailsForm = () => {
                 </FormItem>
               )}
             />
-            <div className="flex gap-x-4">
+          </div>
+          <div className="w-full flex gap-x-4">
+            <div className="w-1/2 flex">
               <FormField
                 control={form.control}
                 name="firstname"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full">
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
                       <Input
@@ -95,11 +97,13 @@ export const GeneralDetailsForm = () => {
                   </FormItem>
                 )}
               />
+            </div>
+            <div className="w-1/2 flex gap-x-4">
               <FormField
                 control={form.control}
                 name="lastname"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full">
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
                       <Input
@@ -113,6 +117,8 @@ export const GeneralDetailsForm = () => {
                 )}
               />
             </div>
+          </div>
+          <div className="w-full flex gap-x-4">
             <FormField
               control={form.control}
               name="email"
@@ -150,6 +156,7 @@ export const GeneralDetailsForm = () => {
               )}
             />
           </div>
+
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button
