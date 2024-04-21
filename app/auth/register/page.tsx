@@ -2,13 +2,16 @@
 
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
 import { SelectAccounts } from "@/components/auth/register/select-accounts";
-import { GeneralDetailsSchema } from "@/schemas/auth/register";
+import {
+  GeneralDetailsSchema,
+  SelectAccountsSchema
+} from "@/schemas/auth/register";
 import { useState } from "react";
 import { z } from "zod";
 
 const RegisterPage = () => {
   const [userData, setUserData] = useState<any>({
-    username: "andreicasian",
+    username: "andreicasian1",
     firstname: "andrei",
     lastname: "caisan",
     address1: "str Vasile Lupy 64/4",
@@ -18,18 +21,40 @@ const RegisterPage = () => {
     country: "Moldova",
     phone1: "",
     phone2: "",
-    email: "andrei.devcasian@gmail.com",
-    password: "123456"
+    email: "andrei.devcasian1@gmail.com",
+    password: "123456",
+    creator: false,
+    user: false,
+    affiliate: false
   });
   const [step, setStep] = useState<number>(0);
 
-  const onGeneralDetailsContinue = (
-    values: z.infer<typeof GeneralDetailsSchema>
-  ) => {
+  const updateUserData = (values: any) => {
     setUserData((prev: any) => ({
       ...prev,
       ...values
     }));
+  };
+
+  const onGeneralDetailsContinue = (
+    values: z.infer<typeof GeneralDetailsSchema>
+  ) => {
+    updateUserData(values);
+    setStep((prev) => prev + 1);
+  };
+
+  const onSelectAccountsContinue = (
+    values: z.infer<typeof SelectAccountsSchema>
+  ) => {
+    updateUserData(values);
+    setStep((prev) => prev + 1);
+  };
+
+  const onSelectAccountsBack = (
+    values: z.infer<typeof SelectAccountsSchema>
+  ) => {
+    updateUserData(values);
+    setStep((prev) => prev - 1);
   };
 
   return (
@@ -37,14 +62,15 @@ const RegisterPage = () => {
       <p className="text-4xl font-semibold">Let's get you started</p>
       {step === 0 && (
         <GeneralDetailsForm
-          defaultValue={userData}
+          defaultData={userData}
           onContinue={onGeneralDetailsContinue}
         />
       )}
       {step === 1 && (
         <SelectAccounts
-          onContinue={() => setStep((prev) => prev + 1)}
-          onBack={() => setStep((prev) => prev - 1)}
+          defaultData={userData}
+          onContinue={onSelectAccountsContinue}
+          onBack={onSelectAccountsBack}
         />
       )}
     </div>
