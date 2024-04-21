@@ -35,24 +35,35 @@ export const CreatorDetailsForm = ({
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
 
-  const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
-    resolver: zodResolver(GeneralDetailsSchema),
+  const [avatar, setAvatar] = useState<File | null>();
+  const [avatarImagePath, setAvatarImagePath] = useState<string>("");
+
+  const [cover, setCover] = useState<File | null>();
+  const [coverImagePath, setCoverImagePath] = useState<string>("");
+
+  const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
+    resolver: zodResolver(CreatorDetailsSchema),
     defaultValues: {
       ...defaultData
     }
   });
 
-  const onSubmit = (values: z.infer<typeof GeneralDetailsSchema>) => {
-    startTransition(() => {
-      checkGeneralDetails(values).then((data) => {
-        if (data.success) {
-          onContinue(values);
-        } else {
-          setConfirmMessage(data.error as string);
-          setConfirmOpen(true);
-        }
-      });
-    });
+  const onSubmit = (values: z.infer<typeof CreatorDetailsSchema>) => {
+    startTransition(() => {});
+  };
+
+  const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setAvatarImagePath(URL.createObjectURL(e.target.files[0]));
+    }
+    setAvatar(e?.target?.files?.[0]);
+  };
+
+  const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setCoverImagePath(URL.createObjectURL(e.target.files[0]));
+    }
+    setCover(e?.target?.files?.[0]);
   };
 
   return (
