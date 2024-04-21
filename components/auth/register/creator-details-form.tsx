@@ -20,11 +20,16 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 
 type Props = {
+  step: number;
   defaultData: any;
   onContinue: (values: z.infer<typeof GeneralDetailsSchema>) => void;
 };
 
-export const CreatorDetailsForm = ({ defaultData, onContinue }: Props) => {
+export const CreatorDetailsForm = ({
+  step,
+  defaultData,
+  onContinue
+}: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
@@ -58,7 +63,7 @@ export const CreatorDetailsForm = ({ defaultData, onContinue }: Props) => {
         onOK={() => setConfirmOpen(false)}
       />
       <p className="text-xl text-green-700">
-        1. Please provide your general details.
+        {step + 1}. Please provide your KRE8TOR details.
       </p>
       <Form {...form}>
         <form
