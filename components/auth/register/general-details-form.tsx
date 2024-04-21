@@ -20,11 +20,11 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 
 type Props = {
-  defaultValue: any;
+  defaultData: any;
   onContinue: (values: z.infer<typeof GeneralDetailsSchema>) => void;
 };
 
-export const GeneralDetailsForm = ({ defaultValue, onContinue }: Props) => {
+export const GeneralDetailsForm = ({ defaultData, onContinue }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
@@ -32,7 +32,7 @@ export const GeneralDetailsForm = ({ defaultValue, onContinue }: Props) => {
   const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
     resolver: zodResolver(GeneralDetailsSchema),
     defaultValues: {
-      ...defaultValue
+      ...defaultData
     }
   });
 
