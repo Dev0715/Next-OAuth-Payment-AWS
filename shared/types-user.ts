@@ -1,4 +1,5 @@
 import {
+  CreatorDetailsSchema,
   GeneralDetailsSchema,
   SelectAccountsSchema
 } from "@/schemas/auth/register";
@@ -45,4 +46,5 @@ export type User = {
 export type SingedUpData = {
   generalDetails: z.infer<typeof GeneralDetailsSchema>;
   selectedAccounts: z.infer<typeof SelectAccountsSchema>;
+  creatorDetails: z.infer<typeof CreatorDetailsSchema>;
 };
