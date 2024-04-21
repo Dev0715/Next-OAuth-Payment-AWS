@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-import { LoginSchema } from "@/schemas/auth";
+import { LoginSchema } from "@/schemas/auth/auth";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -45,7 +45,6 @@ export const LoginForm = () => {
 
     startTransition(() => {
       login(values, callbackUrl).then((data) => {
-
         if (data?.error) {
           form.reset();
           setError(data.error);

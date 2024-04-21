@@ -1,10 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import bcrypt from "bcryptjs";
 
-import { RegisterSchema, CustomerRegisterSchema } from "@/schemas/auth";
-import { sendVerificationEmail } from "@/lib/mail";
+import { CustomerRegisterSchema } from "@/schemas/auth/auth";
 // import { generateVerificationToken } from "@/lib/tokens";
 
 export const registerUser = async (
