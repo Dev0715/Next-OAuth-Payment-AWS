@@ -86,31 +86,24 @@ const RegisterPage = () => {
     }
   };
 
-  const updateUserData = (values: any) => {
-    setUserData((prev: any) => ({
-      ...prev,
-      ...values
-    }));
-  };
-
   const onGeneralDetailsContinue = (
     values: z.infer<typeof GeneralDetailsSchema>
   ) => {
-    updateUserData(values);
+    setUserData((prev) => ({ ...prev, generalDetails: values }));
     setStep((prev) => prev + 1);
   };
 
   const onSelectAccountsContinue = (
     values: z.infer<typeof SelectAccountsSchema>
   ) => {
-    updateUserData(values);
+    setUserData((prev) => ({ ...prev, selectedAccounts: values }));
     setStep((prev) => prev + 1);
   };
 
   const onSelectAccountsBack = (
     values: z.infer<typeof SelectAccountsSchema>
   ) => {
-    updateUserData(values);
+    setUserData((prev) => ({ ...prev, selectedAccounts: values }));
     setStep((prev) => prev - 1);
   };
 
