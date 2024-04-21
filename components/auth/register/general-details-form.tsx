@@ -50,6 +50,9 @@ export const GeneralDetailsForm = () => {
 
   return (
     <div className="w-full flex flex-col gap-y-6">
+      <p className="text-xl text-green-700">
+        1. Please provide your general details
+      </p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

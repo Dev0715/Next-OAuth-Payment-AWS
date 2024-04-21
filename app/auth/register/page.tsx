@@ -2,8 +2,8 @@ import { GeneralDetailsForm } from "@/components/auth/register/general-details-f
 
 const RegisterPage = () => {
   return (
-    <div className="full flex flex-col gap-y-4">
-      <p className="text-xl font-semibold">Let's get you started</p>
+    <div className="w-[640px] flex flex-col gap-y-12">
+      <p className="text-4xl font-semibold">Let's get you started</p>
       <GeneralDetailsForm />
     </div>
   );
