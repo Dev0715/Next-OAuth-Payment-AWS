@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,9 +17,16 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { register } from "@/actions/auth/register";
+import { register } from "@/actions/auth/register/check-general-details";
 import { PaymentPrefSchema } from "@/schemas/user";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "../ui/card";
 
 export const PaymentPrefForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -29,13 +36,13 @@ export const PaymentPrefForm = () => {
   const form = useForm<z.infer<typeof PaymentPrefSchema>>({
     resolver: zodResolver(PaymentPrefSchema),
     defaultValues: {
-      paypal: '',
-      cashapp: '',
-      venmo: '',
-      zelle: '',
-      applepay: '',
-      googlepay: '',
-      amazonpay: '',
+      paypal: "",
+      cashapp: "",
+      venmo: "",
+      zelle: "",
+      applepay: "",
+      googlepay: "",
+      amazonpay: ""
     }
   });
 
@@ -43,19 +50,22 @@ export const PaymentPrefForm = () => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {
-
-    });
+    startTransition(() => {});
   };
 
   return (
     <Card className="w-full h-fit flex flex-col rounded-none">
       <CardHeader>
         <CardTitle>Payment Pref</CardTitle>
-        <CardDescription>You can select your Payment preference</CardDescription>
+        <CardDescription>
+          You can select your Payment preference
+        </CardDescription>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-y-4"
+        >
           <CardContent className="flex flex-col gap-y-4">
             <FormField
               control={form.control}
@@ -65,10 +75,7 @@ export const PaymentPrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>Bitcoin</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -83,10 +90,7 @@ export const PaymentPrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>Ethereum</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -101,10 +105,7 @@ export const PaymentPrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>Litecoin</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -119,10 +120,7 @@ export const PaymentPrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>Dogecoin</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -137,10 +135,7 @@ export const PaymentPrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>XRP</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -155,10 +150,7 @@ export const PaymentPrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>SOL</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -173,10 +165,7 @@ export const PaymentPrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>USDcoin</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -187,10 +176,8 @@ export const PaymentPrefForm = () => {
         </form>
       </Form>
       <CardFooter className="self-end">
-        <Button className="w-64 flex gap-x-2">
-          Update
-        </Button>
+        <Button className="w-64 flex gap-x-2">Update</Button>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};

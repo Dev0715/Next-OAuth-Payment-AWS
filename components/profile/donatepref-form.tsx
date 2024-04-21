@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,9 +17,16 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { register } from "@/actions/auth/register";
+import { register } from "@/actions/auth/register/check-general-details";
 import { DonatePrefSchema } from "@/schemas/user";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "../ui/card";
 
 export const DonatePrefForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -29,17 +36,17 @@ export const DonatePrefForm = () => {
   const form = useForm<z.infer<typeof DonatePrefSchema>>({
     resolver: zodResolver(DonatePrefSchema),
     defaultValues: {
-      lfxmentorship: '',
-      gofundme: '',
-      kickstarter: '',
-      indiegogo: '',
-      githubsponsors: '',
-      opencollective: '',
-      tidelift: '',
-      issuehunt: '',
-      patreon: '',
-      buymeacoffee: '',
-      kofi: '',
+      lfxmentorship: "",
+      gofundme: "",
+      kickstarter: "",
+      indiegogo: "",
+      githubsponsors: "",
+      opencollective: "",
+      tidelift: "",
+      issuehunt: "",
+      patreon: "",
+      buymeacoffee: "",
+      kofi: ""
     }
   });
 
@@ -47,9 +54,7 @@ export const DonatePrefForm = () => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {
-
-    });
+    startTransition(() => {});
   };
 
   return (
@@ -59,7 +64,10 @@ export const DonatePrefForm = () => {
         <CardDescription>You can select your Donate preference</CardDescription>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-y-4"
+        >
           <CardContent className="flex flex-col gap-y-4">
             <FormField
               control={form.control}
@@ -69,10 +77,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>LFX Mentorship</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -87,10 +92,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>gofundme</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -105,10 +107,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>kickstarter</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -123,10 +122,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>indiegogo</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -141,10 +137,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>githubsponsors</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -159,10 +152,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>opencollective</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -177,10 +167,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>tidelift</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -195,10 +182,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>issuehunt</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -213,10 +197,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>patreon</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -231,10 +212,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>buymeacoffee</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -249,10 +227,7 @@ export const DonatePrefForm = () => {
                   <div className="flex items-center justify-between">
                     <FormLabel>kofi</FormLabel>
                     <FormControl className="w-5/6">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input {...field} disabled={isPending} />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -263,10 +238,8 @@ export const DonatePrefForm = () => {
         </form>
       </Form>
       <CardFooter className="self-end">
-        <Button className="w-64 flex gap-x-2">
-          Update
-        </Button>
+        <Button className="w-64 flex gap-x-2">Update</Button>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};

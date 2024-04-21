@@ -20,7 +20,8 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 
 type Props = {
-  onContinue: () => void;
+  defaultValue: any;
+  onContinue: (values: z.infer<typeof GeneralDetailsSchema>) => void;
 };
 
 export const GeneralDetailsForm = ({ onContinue }: Props) => {
@@ -50,7 +51,7 @@ export const GeneralDetailsForm = ({ onContinue }: Props) => {
     startTransition(() => {
       checkGeneralDetails(values).then((data) => {
         if (data.success) {
-          onContinue();
+          onContinue(values);
         } else {
           setConfirmMessage(data.error as string);
           setConfirmOpen(true);
