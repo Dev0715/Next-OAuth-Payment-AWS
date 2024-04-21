@@ -28,6 +28,8 @@ export const GeneralDetailsSchema = z.object({
     .string()
     .min(1, "Country is required")
     .max(72, "Country must be a maximum of 72 characters"),
+  phone1: z.string().optional(),
+  phone2: z.string().optional(),
   email: z.string().email({ message: "Please enter a valid email" }),
   password: z
     .string()
