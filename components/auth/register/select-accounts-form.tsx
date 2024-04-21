@@ -39,7 +39,12 @@ export const SelectAccounts = ({ defaultData, onContinue, onBack }: Props) => {
   });
 
   const onSubmit = (values: z.infer<typeof SelectAccountsSchema>) => {
-    onContinue(values);
+    if (!values.creator && !values.user && !values.affiliate) {
+      setConfirmOpen(true);
+      setConfirmMessage("Please select at least one account type to create!");
+    } else {
+      onContinue(values);
+    }
   };
 
   const onBackClicked = () => {
