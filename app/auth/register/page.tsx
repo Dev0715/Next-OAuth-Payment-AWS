@@ -29,6 +29,49 @@ const RegisterPage = () => {
   });
   const [step, setStep] = useState<number>(0);
 
+  const isCreatorStep = () => {
+    return userData.creator && step === 2;
+  };
+
+  const isUserStep = () => {
+    if (userData.user && userData.creator && step === 3) {
+      return true;
+    } else if (userData.user && !userData.creator && step === 2) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const isAffiliateStep = () => {
+    if (userData.affiliate && userData.creator && userData.user && step === 4) {
+      return true;
+    } else if (
+      userData.affiliate &&
+      userData.creator &&
+      !userData.user &&
+      step === 3
+    ) {
+      return true;
+    } else if (
+      userData.affiliate &&
+      !userData.creator &&
+      userData.user &&
+      step === 3
+    ) {
+      return true;
+    } else if (
+      userData.affiliate &&
+      !userData.creator &&
+      !userData.user &&
+      step === 2
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const updateUserData = (values: any) => {
     setUserData((prev: any) => ({
       ...prev,
