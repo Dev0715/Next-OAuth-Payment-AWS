@@ -1,3 +1,9 @@
+import {
+  GeneralDetailsSchema,
+  SelectAccountsSchema
+} from "@/schemas/auth/register";
+import { z } from "zod";
+
 export type ProductLink = {
   productType: string;
   productId: string;
@@ -34,4 +40,9 @@ export type User = {
   products?: ProductLink[];
   cart?: ProductLink[];
   purchasedProducts: ProductLink[];
+};
+
+export type SingedUpData = {
+  generalDetails: z.infer<typeof GeneralDetailsSchema>;
+  selectedAccounts: z.infer<typeof SelectAccountsSchema>;
 };
