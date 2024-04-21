@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Navbar } from "./_components/navbar";
 import { useEffect, useState, useTransition } from "react";
@@ -13,7 +13,7 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 type ProductInfo = {
   productType: string;
   productId: string;
-}
+};
 
 export default function Cart() {
   const user = useCurrentUser();
@@ -25,27 +25,27 @@ export default function Cart() {
 
   useEffect(() => {
     let ignore = false;
-    getUserById(user?.userId as string).then(user => {
+    getUserById(user?.userId as string).then((user) => {
       if (!ignore && user && user.cart) {
         user.cart.map((product: ProductInfo) => {
-          getProductById(product.productType, product.productId).then(res => {
+          getProductById(product.productType, product.productId).then((res) => {
             if (res) {
-              setProducts(prev => [...prev, { ...res, selected: false }]);
+              setProducts((prev) => [...prev, { ...res, selected: false }]);
             }
-          })
-        })
+          });
+        });
       }
-    })
+    });
     return () => {
       ignore = true;
-    }
+    };
   }, []);
 
   const onSelected = (index: number, checked: boolean) => {
     const newList = [...products];
     newList[index].selected = checked;
     setProducts(newList);
-  }
+  };
 
   const setRemoveConfirming = (success: boolean) => {
     setConfirming(true);
@@ -56,7 +56,7 @@ export default function Cart() {
       setConfirmingTitle("Failure");
       setConfirmingMessage("An error occured while removing product from cart");
     }
-  }
+  };
 
   const onRemoveItem = (index: number) => {
     startTransition(() => {
