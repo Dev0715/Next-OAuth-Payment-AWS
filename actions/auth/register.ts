@@ -3,14 +3,16 @@
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 
-import { RegisterSchema } from "@/schemas/auth";
 import { createUser } from "@/data/user/user-create";
 import { sendVerificationEmail } from "@/lib/mail";
 import { getAllUsernames } from "@/data/user/all-usernames";
 import { getUserByEmail } from "@/data/user/user-by-email";
+import { GeneralDetailsSchema } from "@/schemas/auth/register";
 
-export const register = async (values: z.infer<typeof RegisterSchema>) => {
-  const validateFields = RegisterSchema.safeParse(values);
+export const register = async (
+  values: z.infer<typeof GeneralDetailsSchema>
+) => {
+  const validateFields = GeneralDetailsSchema.safeParse(values);
   if (!validateFields.success) {
     return { error: "Server Says Fields are Invalid!" };
   }

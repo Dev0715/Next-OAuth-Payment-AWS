@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -12,7 +12,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { CustomerRegisterSchema } from "@/schemas/auth";
+import { CustomerRegisterSchema } from "@/schemas/auth/auth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/utils/form-error";
@@ -25,7 +25,11 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { Customer } from "@/shared/types-user";
 import { getUserById } from "@/data/user/user-by-id";
 
-export default function EditCustomer({ disabled = false }: { disabled?: boolean }) {
+export default function EditCustomer({
+  disabled = false
+}: {
+  disabled?: boolean;
+}) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -34,11 +38,13 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
   const [customer, setCustomer] = useState<Customer>();
 
   const [avatar, setAvatar] = useState<File | null>();
-  const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>("");
+  const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>(
+    ""
+  );
 
   const isDisabled = () => {
     return isPending || disabled;
-  }
+  };
 
   const form = useForm<z.infer<typeof CustomerRegisterSchema>>({
     resolver: zodResolver(CustomerRegisterSchema),
@@ -49,7 +55,7 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
       email: "temp@gmail.com",
       address: "temp",
       phone1: "temp",
-      phone2: "temp",
+      phone2: "temp"
     }
   });
 
@@ -58,27 +64,30 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
     setSuccess("");
 
     startTransition(() => {
-      values.avatar = '';
+      values.avatar = "";
 
       if (avatar) {
-        values.avatar = 'USER_ID' + '.jpg';
+        values.avatar = "USER_ID" + ".jpg";
 
         const formData = new FormData();
         formData.append("file", avatar);
         formData.append("keyName", values.avatar);
 
-        axiosClient.post("/upload", formData, axiosConfig)
-          .then(res => res.data).then(data => {
+        axiosClient
+          .post("/upload", formData, axiosConfig)
+          .then((res) => res.data)
+          .then((data) => {
             if (data.success) {
               // const res = data.response;
               // const metadata = res.$metadata;
             }
-          }).catch(error => {
+          })
+          .catch((error) => {
             console.log("__uploadFile__ERROR", error);
           });
       }
 
-      registerUser(values).then(data => {
+      registerUser(values).then((data) => {
         console.log("__registerUser__RESULT", data);
       });
     });
@@ -86,7 +95,7 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
 
   useEffect(() => {
     if (user) {
-      getUserById(user.userId).then(data => {
+      getUserById(user.userId).then((data) => {
         setCustomer(data);
         form.setValue("username", data.username);
         form.setValue("firstname", data.firstname);
@@ -104,7 +113,7 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
       setAvatarImagePath(URL.createObjectURL(e.target.files[0]));
     }
     setAvatar(e?.target?.files?.[0]);
-  }
+  };
 
   return (
     <main className="w-full flex justify-between gap-x-6">
@@ -119,7 +128,12 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
                     <FaUser className="text-white" />
                   </AvatarFallback>
                 </Avatar>
-                <Input disabled={isDisabled()} type="file" accept="image/*" onChange={onAvatarChanged} />
+                <Input
+                  disabled={isDisabled()}
+                  type="file"
+                  accept="image/*"
+                  onChange={onAvatarChanged}
+                />
               </div>
               <FormField
                 control={form.control}
@@ -128,7 +142,11 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input disabled={isDisabled()} placeholder="JohnDoe1234" {...field} />
+                      <Input
+                        disabled={isDisabled()}
+                        placeholder="JohnDoe1234"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -142,7 +160,11 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
                     <FormItem className="w-1/2">
                       <FormLabel>First Name</FormLabel>
                       <FormControl>
-                        <Input disabled={isDisabled()} placeholder="John" {...field} />
+                        <Input
+                          disabled={isDisabled()}
+                          placeholder="John"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -155,7 +177,11 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
                     <FormItem className="w-1/2">
                       <FormLabel>Last Name</FormLabel>
                       <FormControl>
-                        <Input disabled={isDisabled()} placeholder="Doe" {...field} />
+                        <Input
+                          disabled={isDisabled()}
+                          placeholder="Doe"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -187,7 +213,11 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
-                      <Input disabled={isDisabled()} placeholder="Address" {...field} />
+                      <Input
+                        disabled={isDisabled()}
+                        placeholder="Address"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -200,7 +230,11 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
                   <FormItem>
                     <FormLabel>Phone Number 1</FormLabel>
                     <FormControl>
-                      <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
+                      <Input
+                        disabled={isDisabled()}
+                        placeholder="Phone Number"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -213,7 +247,11 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
                   <FormItem>
                     <FormLabel>Phone Number 2</FormLabel>
                     <FormControl>
-                      <Input disabled={isDisabled()} placeholder="Phone Number" {...field} />
+                      <Input
+                        disabled={isDisabled()}
+                        placeholder="Phone Number"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -221,7 +259,11 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
               />
               <FormError message={error} />
               <FormSuccess message={success} />
-              <Button disabled={isDisabled()} type="submit" className="w-64 self-end">
+              <Button
+                disabled={isDisabled()}
+                type="submit"
+                className="w-64 self-end"
+              >
                 Register
               </Button>
             </div>
@@ -231,19 +273,37 @@ export default function EditCustomer({ disabled = false }: { disabled?: boolean 
       <div className="w-2/5 flex flex-col gap-y-12">
         <p className="text-2xl font-medium">For First CUSTOMERs!</p>
         <div>
-          <p>Be the earliest users to get the latest updates and news from us!</p>
-          <p>Early subscribers will get exclusive access to our new features and various benefits.</p>
+          <p>
+            Be the earliest users to get the latest updates and news from us!
+          </p>
+          <p>
+            Early subscribers will get exclusive access to our new features and
+            various benefits.
+          </p>
           <p>We will also give a number of bonuses like $10 off.</p>
-          <p>You will have free Launch Package that will have a bundle of free fonts, images, ...</p>
-          <p>Join the Discord and follow notifications and news on our channel</p>
+          <p>
+            You will have free Launch Package that will have a bundle of free
+            fonts, images, ...
+          </p>
+          <p>
+            Join the Discord and follow notifications and news on our channel
+          </p>
         </div>
         <p className="text-2xl font-medium -rotate-3">SUBSCRIBE NOW!</p>
         <div className="w-3/4 flex flex-col self-center gap-y-6">
-          <Button variant="outline" disabled={isDisabled()} className="flex gap-x-2 border-green-700">
+          <Button
+            variant="outline"
+            disabled={isDisabled()}
+            className="flex gap-x-2 border-green-700"
+          >
             <FaPaypal />
             Subscribe with Paypal
           </Button>
-          <Button variant="outline" disabled={isDisabled()} className="flex gap-x-2 border-blue-700">
+          <Button
+            variant="outline"
+            disabled={isDisabled()}
+            className="flex gap-x-2 border-blue-700"
+          >
             <FaCcStripe />
             Subscribe with Stripe
           </Button>

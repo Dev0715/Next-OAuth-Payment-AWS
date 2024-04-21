@@ -4,7 +4,6 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { RegisterSchema } from "@/schemas/auth";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -19,14 +18,15 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { register } from "@/actions/auth/register";
+import { GeneralDetailsSchema } from "@/schemas/auth/register";
 
 export const GeneralDetailsForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
+    resolver: zodResolver(GeneralDetailsSchema),
     defaultValues: {
       username: "",
       firstname: "",
@@ -36,7 +36,7 @@ export const GeneralDetailsForm = () => {
     }
   });
 
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof GeneralDetailsSchema>) => {
     setError("");
     setSuccess("");
 

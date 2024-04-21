@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { CreatorRegisterSchema } from "@/schemas/auth";
+import { CreatorRegisterSchema } from "@/schemas/auth/auth";
 import { updateCreatorProfile } from "@/data/user/creator-update";
 // import { generateVerificationToken } from "@/lib/tokens";
 

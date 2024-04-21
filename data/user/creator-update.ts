@@ -3,7 +3,7 @@
 import db from "@/lib/db";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { z } from "zod";
-import { CreatorRegisterSchema } from "@/schemas/auth";
+import { CreatorRegisterSchema } from "@/schemas/auth/auth";
 
 const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
