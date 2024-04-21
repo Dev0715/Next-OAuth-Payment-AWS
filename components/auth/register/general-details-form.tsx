@@ -4,7 +4,6 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/utils/form-error";
@@ -32,6 +31,11 @@ export const GeneralDetailsForm = () => {
       username: "",
       firstname: "",
       lastname: "",
+      address1: "",
+      address2: "",
+      city: "",
+      postal: "",
+      country: "",
       email: "",
       password: ""
     }
@@ -110,6 +114,46 @@ export const GeneralDetailsForm = () => {
                         {...field}
                         disabled={isPending}
                         placeholder="Doe"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+          <div className="w-full flex gap-x-6">
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
+                name="address1"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Address 1*</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Address Line 1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
+                name="address2"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Address 2</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Address Line 2"
                       />
                     </FormControl>
                     <FormMessage />
