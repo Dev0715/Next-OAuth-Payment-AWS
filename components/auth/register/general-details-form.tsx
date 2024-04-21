@@ -6,8 +6,6 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/utils/form-error";
-import { FormSuccess } from "@/components/utils/form-success";
 import {
   Form,
   FormControl,
@@ -16,39 +14,61 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { register } from "@/actions/auth/register";
 import { GeneralDetailsSchema } from "@/schemas/auth/register";
 import { FaArrowRight } from "react-icons/fa";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 
-export const GeneralDetailsForm = () => {
+type Props = {
+  onContinue: () => void;
+};
+
+export const GeneralDetailsForm = ({ onContinue }: Props) => {
   const [isPending, startTransition] = useTransition();
+  const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
+  const [confirmMessage, setConfirmMessage] = useState<string>("");
 
   const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
     resolver: zodResolver(GeneralDetailsSchema),
     defaultValues: {
-      username: "",
-      firstname: "",
-      lastname: "",
-      address1: "",
+      username: "andreicasian",
+      firstname: "andrei",
+      lastname: "caisan",
+      address1: "str Vasile Lupy 64/4",
       address2: "",
-      city: "",
-      postal: "",
-      country: "",
-      email: "",
-      password: ""
+      city: "Chisinau",
+      postal: "MD-2012",
+      country: "Moldova",
+      phone1: "",
+      phone2: "",
+      email: "andrei.devcasian@gmail.com",
+      password: "123456"
     }
   });
 
   const onSubmit = (values: z.infer<typeof GeneralDetailsSchema>) => {
     startTransition(() => {
-      register(values).then((data) => {});
+      checkGeneralDetails(values).then((data) => {
+        if (data.success) {
+          onContinue();
+        } else {
+          setConfirmMessage(data.error as string);
+          setConfirmOpen(true);
+        }
+      });
     });
   };
 
   return (
     <div className="w-full flex flex-col gap-y-6">
+      <ConfirmAlert
+        open={isConfirmOpen}
+        title="Error"
+        message={confirmMessage}
+        onOK={() => setConfirmOpen(false)}
+      />
       <p className="text-xl text-green-700">
-        1. Please provide your general details
+        1. Please provide your general details.
       </p>
       <Form {...form}>
         <form
