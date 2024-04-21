@@ -21,7 +21,7 @@ import { SelectAccountsSchema } from "@/schemas/auth/register";
 import { Switch } from "@/components/ui/switch";
 
 type Props = {
-  defaultData: any;
+  defaultData: z.infer<typeof SelectAccountsSchema>;
   onContinue: (values: z.infer<typeof SelectAccountsSchema>) => void;
   onBack: (values: z.infer<typeof SelectAccountsSchema>) => void;
 };
