@@ -20,7 +20,7 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 
 type Props = {
-  defaultData: any;
+  defaultData: z.infer<typeof GeneralDetailsSchema>;
   onContinue: (values: z.infer<typeof GeneralDetailsSchema>) => void;
 };
 
