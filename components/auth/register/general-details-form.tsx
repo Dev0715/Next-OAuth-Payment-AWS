@@ -24,7 +24,7 @@ type Props = {
   onContinue: (values: z.infer<typeof GeneralDetailsSchema>) => void;
 };
 
-export const GeneralDetailsForm = ({ onContinue }: Props) => {
+export const GeneralDetailsForm = ({ defaultValue, onContinue }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
@@ -32,18 +32,7 @@ export const GeneralDetailsForm = ({ onContinue }: Props) => {
   const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
     resolver: zodResolver(GeneralDetailsSchema),
     defaultValues: {
-      username: "andreicasian",
-      firstname: "andrei",
-      lastname: "caisan",
-      address1: "str Vasile Lupy 64/4",
-      address2: "",
-      city: "Chisinau",
-      postal: "MD-2012",
-      country: "Moldova",
-      phone1: "",
-      phone2: "",
-      email: "andrei.devcasian@gmail.com",
-      password: "123456"
+      ...defaultValue
     }
   });
 
