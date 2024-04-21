@@ -18,6 +18,7 @@ import { GeneralDetailsSchema } from "@/schemas/auth/register";
 import { FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type Props = {
   step: number;
