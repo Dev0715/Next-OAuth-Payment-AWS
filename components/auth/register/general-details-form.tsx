@@ -225,6 +225,46 @@ export const GeneralDetailsForm = () => {
             <div className="w-1/2">
               <FormField
                 control={form.control}
+                name="phone1"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Phone Number1</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Phone Number"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
+                name="phone2"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Phone Number2</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Phone Number"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+          <div className="w-full flex gap-x-6">
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem className="w-full">
