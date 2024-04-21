@@ -2,13 +2,14 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { use, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,8 +17,8 @@ import {
 } from "@/components/ui/form";
 import { FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 import { SelectAccountsSchema } from "@/schemas/auth/register";
+import { Switch } from "@/components/ui/switch";
 
 type Props = {
   onContinue: () => void;
@@ -57,245 +58,29 @@ export const SelectAccounts = ({ onContinue }: Props) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-y-6"
         >
-          <div className="w-1/2">
+          <div className="w-full">
             <FormField
               control={form.control}
-              name="username"
+              name="creator"
               render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Username*</FormLabel>
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">
+                      Marketing emails
+                    </FormLabel>
+                    <FormDescription>
+                      Receive emails about new products, features, and more.
+                    </FormDescription>
+                  </div>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="johndoe"
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                  <FormMessage />
                 </FormItem>
               )}
             />
-          </div>
-          <div className="w-full flex gap-x-6">
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="firstname"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>First Name*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="John"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="lastname"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Last Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Doe"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <div className="w-full flex gap-x-6">
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="address1"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Address 1*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Address Line 1"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="address2"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Address 2</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Address Line 2"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <div className="w-full flex gap-x-6">
-            <div className="w-1/3">
-              <FormField
-                control={form.control}
-                name="city"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>City*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="City"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="w-1/3">
-              <FormField
-                control={form.control}
-                name="postal"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Postal Code*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Postal Code"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="w-1/3">
-              <FormField
-                control={form.control}
-                name="country"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Country*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Country"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <div className="w-full flex gap-x-6">
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="phone1"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Phone Number1</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Phone Number"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="phone2"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Phone Number2</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Phone Number"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <div className="w-full flex gap-x-6">
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Email*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="username@myemail.com"
-                        type="email"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Password*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="******"
-                        type="password"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
           </div>
           <Button
             disabled={isPending}
