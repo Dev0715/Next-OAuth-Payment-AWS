@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { PaymentButton } from "@/components/payment/payment-button";
 import { WrappedButton } from "@/components/utils/wrapped-button";
@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaCartArrowDown, FaDownload, FaRegUser } from "react-icons/fa";
 import { Navbar } from "../../../_components/navbar";
 import { usePathname, useSearchParams } from "next/navigation";
-import { captureOrder as captureStripeOrder } from '@/actions/stripe/capture-order';
+import { captureOrder as captureStripeOrder } from "@/actions/stripe/capture-order";
 import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
 import { toast } from "sonner";
 import { useEffect, useState, useTransition } from "react";
@@ -81,23 +81,23 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         if (!ignore && response) {
           setProduct(response);
           response?.previewList.map((path: string) => {
-            getS3ImageLink(path).then(res => {
+            getS3ImageLink(path).then((res) => {
               if (res.success) {
-                setImageList(prev => [...prev, res.response as string]);
+                setImageList((prev) => [...prev, res.response as string]);
               }
-            })
-          })
+            });
+          });
         }
-      })
+      });
     }
     return () => {
       ignore = true;
-    }
+    };
   }, [params]);
 
   const onItemSelected = (index: number) => {
     setSelectedIndex(index);
-  }
+  };
 
   const setPurchasedConfirming = (success: boolean) => {
     setConfirming(true);
@@ -108,48 +108,52 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
       setConfirmingTitle("Failure");
       setConfirmingMessage("Payment for this product was cancelled");
     }
-  }
+  };
 
   const setPurchasedErrorConfirming = () => {
     setConfirming(true);
     setConfirmingTitle("Failure");
     setConfirmingMessage("Internal server error occured while purchasing");
-  }
+  };
 
   const onProductPurchased = () => {
     addProductToPurchased({
       userId: user?.userId as string,
-      products: [{
-        productType: params.productType,
-        productId: params.productId
-      }]
-    }).then(res => {
-      if (res.success) {
-        setPurchasedConfirming(true);
-      } else {
-        setPurchasedErrorConfirming();
-      }
-    }).catch(error => {
-      setPurchasedErrorConfirming();
+      products: [
+        {
+          productType: params.productType,
+          productId: params.productId
+        }
+      ]
     })
-  }
+      .then((res) => {
+        if (res.success) {
+          setPurchasedConfirming(true);
+        } else {
+          setPurchasedErrorConfirming();
+        }
+      })
+      .catch((error) => {
+        setPurchasedErrorConfirming();
+      });
+  };
 
   useEffect(() => {
-    const gateway = searchParams.get('gateway');
+    const gateway = searchParams.get("gateway");
     if (gateway === Gateway_Paypal) {
       const paymentId = String(searchParams.get("token"));
-      const payerId = searchParams.get('PayerID');
+      const payerId = searchParams.get("PayerID");
       capturePaypalOrder({ paymentId });
       onProductPurchased();
     } else if (gateway === Gateway_Stripe) {
-      const paymentId = String(searchParams.get('session_id'));
+      const paymentId = String(searchParams.get("session_id"));
       const payerId = 0;
       // captureStripeOrder({ paymentId });
       onProductPurchased();
     } else if (gateway === Gateway_Cancelled) {
       setPurchasedConfirming(false);
     }
-    window.history.replaceState(null, '', currentPath);
+    window.history.replaceState(null, "", currentPath);
   }, [searchParams]);
 
   const setCartConfirming = (success: boolean, message?: string) => {
@@ -159,41 +163,47 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
       setConfirmingMessage("1 product was moved to your cart successfully");
     } else {
       setConfirmingTitle("Failure");
-      setConfirmingMessage(message || "An error occured while moving product to your cart");
+      setConfirmingMessage(
+        message || "An error occured while moving product to your cart"
+      );
     }
-  }
+  };
 
   const onConfirmCart = () => {
     startTransition(() => {
       const newProductLink = {
         productType: product?.productType as string,
         productId: product?.productId as string
-      }
+      };
       addProductToCart({
         userId: user?.userId as string,
         product: newProductLink
-      }).then(res => {
-        if (res.success) {
-          if (!cart) {
-            setCart([newProductLink]);
+      })
+        .then((res) => {
+          if (res.success) {
+            if (!cart) {
+              setCart([newProductLink]);
+            } else {
+              setCart([...cart, newProductLink]);
+            }
+            setCartConfirming(true);
           } else {
-            setCart([...cart, newProductLink]);
+            setCartConfirming(false, res.error);
           }
-          setCartConfirming(true);
-        } else {
-          setCartConfirming(false, res.error);
-        }
-      }).catch(error => {
-        setCartConfirming(false);
-      });
-    })
-  }
+        })
+        .catch((error) => {
+          setCartConfirming(false);
+        });
+    });
+  };
 
   const setDownloadFailureConfirming = () => {
     setConfirming(true);
     setConfirmingTitle("Failure");
-    setConfirmingMessage("An internal server error occured while tyring to download");
-  }
+    setConfirmingMessage(
+      "An internal server error occured while tyring to download"
+    );
+  };
 
   const onDownloadCreativeFiles = () => {
     // fetch('/api/download').then(response => response.blob()).then(blob => {
@@ -203,28 +213,43 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     //   link.click();
     // })
 
-    axiosClient.post('/download', { fileList: product?.fileList }, blobConfig)
-      .then(response => response.data).then(blob => {
-        const link = document.createElement('a');
+    axiosClient
+      .post("/download", { fileList: product?.fileList }, blobConfig)
+      .then((response) => response.data)
+      .then((blob) => {
+        const link = document.createElement("a");
         link.download = `${product?.title}.zip`;
         link.href = URL.createObjectURL(blob);
         link.click();
-      }).catch(error => {
-        setDownloadFailureConfirming();
-      }).catch(error => {
+      })
+      .catch((error) => {
         setDownloadFailureConfirming();
       })
-  }
+      .catch((error) => {
+        setDownloadFailureConfirming();
+      });
+  };
 
   return (
     <div className="w-full flex justify-center py-6">
-      <ConfirmAlert open={isConfirming} title={confirmingTitle} message={confirmingMessage} onContinue={() => setConfirming(false)} />
+      <ConfirmAlert
+        open={isConfirming}
+        title={confirmingTitle}
+        message={confirmingMessage}
+        onOK={() => setConfirming(false)}
+      />
       <div className="w-5/6 flex flex-col gap-y-6">
-        <Navbar title="Product Detail" content="You can see details of product" />
+        <Navbar
+          title="Product Detail"
+          content="You can see details of product"
+        />
         <div className="w-full flex gap-x-8">
           <div className="w-3/4 flex flex-col gap-y-4">
             <Avatar className="w-full h-[480px] rounded-none">
-              <AvatarImage src={imageList[selectedIndex]} className="object-cover" />
+              <AvatarImage
+                src={imageList[selectedIndex]}
+                className="object-cover"
+              />
               <AvatarFallback className="bg-sky-500">
                 <div className="w-full h-full bg-inherit"></div>
               </AvatarFallback>
@@ -243,7 +268,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           <div className="w-1/4 flex flex-col gap-y-12">
             <div className="w-full flex flex-col gap-y-4">
               <div className="w-full flex justify-between">
-                <p>Price:</p><Bold>${product?.price}</Bold>
+                <p>Price:</p>
+                <Bold>${product?.price}</Bold>
               </div>
               <div className="w-full flex justify-between">
                 <p>Categories:</p>
@@ -259,24 +285,50 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
               </div>
             </div>
             <div className="flex flex-col gap-y-4">
-              <Button disabled={isPending} asChild variant="outline" className="border-green-700 gap-x-2">
+              <Button
+                disabled={isPending}
+                asChild
+                variant="outline"
+                className="border-green-700 gap-x-2"
+              >
                 <Link href={`/profile/creator/${product?.ownerId}`}>
                   <FaRegUser className="text-green-700" />
                   Go to Creator's Profile
                 </Link>
               </Button>
-              <QustionAlert title="Confirmation" message="Are you sure to move this product to your cart?" onContinue={onConfirmCart} onCancel={() => { }}>
-                <Button disabled={isPending} variant="outline" className="w-full border-green-700 gap-x-2">
+              <QustionAlert
+                title="Confirmation"
+                message="Are you sure to move this product to your cart?"
+                onContinue={onConfirmCart}
+                onCancel={() => {}}
+              >
+                <Button
+                  disabled={isPending}
+                  variant="outline"
+                  className="w-full border-green-700 gap-x-2"
+                >
                   <FaCartArrowDown className="text-green-700" />
                   Add to cart
                 </Button>
               </QustionAlert>
               <PaymentButton disabled={isPending} mode="modal">
-                <WrappedButton onClick={() => { setOrderList(product ? [product] : []) }} variant="default" className="w-full flex gap-x-2">
-                  <AiFillCreditCard />Purchase
+                <WrappedButton
+                  onClick={() => {
+                    setOrderList(product ? [product] : []);
+                  }}
+                  variant="default"
+                  className="w-full flex gap-x-2"
+                >
+                  <AiFillCreditCard />
+                  Purchase
                 </WrappedButton>
               </PaymentButton>
-              <Button disabled={isPending} onClick={onDownloadCreativeFiles} variant="outline" className="w-full border-green-700 gap-x-2">
+              <Button
+                disabled={isPending}
+                onClick={onDownloadCreativeFiles}
+                variant="outline"
+                className="w-full border-green-700 gap-x-2"
+              >
                 <FaDownload className="text-green-700" />
                 Download
               </Button>
@@ -290,5 +342,5 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
