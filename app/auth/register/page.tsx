@@ -14,7 +14,10 @@ const RegisterPage = () => {
         <GeneralDetailsForm onContinue={() => setStep((prev) => prev + 1)} />
       )}
       {step === 1 && (
-        <SelectAccounts onContinue={() => setStep((prev) => prev + 1)} />
+        <SelectAccounts
+          onContinue={() => setStep((prev) => prev + 1)}
+          onBack={() => setStep((prev) => prev - 1)}
+        />
       )}
     </div>
   );
