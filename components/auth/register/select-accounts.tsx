@@ -21,11 +21,12 @@ import { SelectAccountsSchema } from "@/schemas/auth/register";
 import { Switch } from "@/components/ui/switch";
 
 type Props = {
-  onContinue: () => void;
-  onBack: () => void;
+  defaultData: any;
+  onContinue: (values: z.infer<typeof SelectAccountsSchema>) => void;
+  onBack: (values: z.infer<typeof SelectAccountsSchema>) => void;
 };
 
-export const SelectAccounts = ({ onContinue, onBack }: Props) => {
+export const SelectAccounts = ({ defaultData, onContinue, onBack }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
@@ -33,14 +34,16 @@ export const SelectAccounts = ({ onContinue, onBack }: Props) => {
   const form = useForm<z.infer<typeof SelectAccountsSchema>>({
     resolver: zodResolver(SelectAccountsSchema),
     defaultValues: {
-      creator: false,
-      user: false,
-      affiliate: false
+      ...defaultData
     }
   });
 
   const onSubmit = (values: z.infer<typeof SelectAccountsSchema>) => {
-    onContinue();
+    onContinue(values);
+  };
+
+  const onBackClicked = () => {
+    onBack(form.getValues());
   };
 
   return (
@@ -132,7 +135,7 @@ export const SelectAccounts = ({ onContinue, onBack }: Props) => {
               disabled={isPending}
               type="button"
               className="w-64 flex gap-x-4"
-              onClick={onBack}
+              onClick={onBackClicked}
             >
               <FaArrowLeft />
               Back
