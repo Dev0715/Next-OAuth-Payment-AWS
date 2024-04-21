@@ -58,26 +58,31 @@ const RegisterPage = () => {
   };
 
   const isAffiliateStep = () => {
-    if (userData.affiliate && userData.creator && userData.user && step === 4) {
+    if (
+      userData.selectedAccounts.affiliate &&
+      userData.selectedAccounts.creator &&
+      userData.selectedAccounts.user &&
+      step === 4
+    ) {
       return true;
     } else if (
-      userData.affiliate &&
-      userData.creator &&
-      !userData.user &&
+      userData.selectedAccounts.affiliate &&
+      userData.selectedAccounts.creator &&
+      !userData.selectedAccounts.user &&
       step === 3
     ) {
       return true;
     } else if (
-      userData.affiliate &&
-      !userData.creator &&
-      userData.user &&
+      userData.selectedAccounts.affiliate &&
+      !userData.selectedAccounts.creator &&
+      userData.selectedAccounts.user &&
       step === 3
     ) {
       return true;
     } else if (
-      userData.affiliate &&
-      !userData.creator &&
-      !userData.user &&
+      userData.selectedAccounts.affiliate &&
+      !userData.selectedAccounts.creator &&
+      !userData.selectedAccounts.user &&
       step === 2
     ) {
       return true;
