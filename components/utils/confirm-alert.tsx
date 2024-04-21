@@ -18,13 +18,20 @@ interface LoginButtonProps {
   asChild?: boolean;
   title?: string;
   message?: string;
-  onContinue?: () => void,
+  onOK?: () => void;
 }
 
-export const ConfirmAlert = ({ open, children, asChild, title, message, onContinue }: LoginButtonProps) => {
+export const ConfirmAlert = ({
+  open,
+  children,
+  asChild,
+  title,
+  message,
+  onOK
+}: LoginButtonProps) => {
   return (
     <AlertDialog open={open}>
-      <AlertDialogTrigger disabled={!onContinue} asChild={asChild}>
+      <AlertDialogTrigger disabled={!onOK} asChild={asChild}>
         {children}
       </AlertDialogTrigger>
       <AlertDialogContent>
