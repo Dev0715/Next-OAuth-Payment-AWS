@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { register } from "@/actions/auth/register";
 import { GeneralDetailsSchema } from "@/schemas/auth/register";
+import { FaArrowRight } from "react-icons/fa";
 
 export const GeneralDetailsForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -151,8 +152,13 @@ export const GeneralDetailsForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-full">
-            Register
+          <Button
+            disabled={isPending}
+            type="submit"
+            className="w-64 flex gap-x-4 mt-6"
+          >
+            <FaArrowRight />
+            Next
           </Button>
         </form>
       </Form>
