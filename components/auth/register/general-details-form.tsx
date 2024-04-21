@@ -78,8 +78,8 @@ export const GeneralDetailsForm = () => {
               )}
             />
           </div>
-          <div className="w-full flex gap-x-4">
-            <div className="w-1/2 flex">
+          <div className="w-full flex gap-x-6">
+            <div className="w-1/2">
               <FormField
                 control={form.control}
                 name="firstname"
@@ -98,7 +98,7 @@ export const GeneralDetailsForm = () => {
                 )}
               />
             </div>
-            <div className="w-1/2 flex gap-x-4">
+            <div className="w-1/2">
               <FormField
                 control={form.control}
                 name="lastname"
