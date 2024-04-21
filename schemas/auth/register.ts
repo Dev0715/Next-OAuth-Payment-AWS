@@ -41,3 +41,10 @@ export const SelectAccountsSchema = z.object({
   user: z.boolean(),
   affiliate: z.boolean()
 });
+
+export const CreatorDetailsSchema = z.object({
+  bio: z
+    .string()
+    .min(6, "Bio should be at least 6 characters long")
+    .max(1024, "Bio must be a maximum of 1024 characters")
+});
