@@ -49,7 +49,7 @@ export const GeneralDetailsForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-y-6">
+    <div className="w-full flex flex-col gap-y-6">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
