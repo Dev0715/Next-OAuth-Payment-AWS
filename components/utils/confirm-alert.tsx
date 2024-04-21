@@ -30,9 +30,9 @@ export const ConfirmAlert = ({
 }: LoginButtonProps) => {
   return (
     <AlertDialog open={open}>
-      <AlertDialogTrigger disabled={!onOK} asChild={asChild}>
+      {/* <AlertDialogTrigger disabled={!onOK} asChild={asChild}>
         {children}
-      </AlertDialogTrigger>
+      </AlertDialogTrigger> */}
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
