@@ -117,13 +117,13 @@ const RegisterPage = () => {
       <p className="text-4xl font-semibold">Let's get you started</p>
       {step === 0 && (
         <GeneralDetailsForm
-          defaultData={userData}
+          defaultData={userData.generalDetails}
           onContinue={onGeneralDetailsContinue}
         />
       )}
       {step === 1 && (
         <SelectAccounts
-          defaultData={userData}
+          defaultData={userData.selectedAccounts}
           onContinue={onSelectAccountsContinue}
           onBack={onSelectAccountsBack}
         />
