@@ -3,14 +3,13 @@
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+  AlertDialogTrigger
+} from "@/components/ui/alert-dialog";
 
 interface LoginButtonProps {
   open: boolean;
@@ -40,7 +39,7 @@ export const ConfirmAlert = ({
           <AlertDialogDescription>{message}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction onClick={onContinue}>OK</AlertDialogAction>
+          <AlertDialogAction onClick={onOK}>OK</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
