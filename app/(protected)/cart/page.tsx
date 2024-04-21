@@ -66,30 +66,42 @@ export default function Cart() {
           productType: products[index].productType,
           productId: products[index].productId
         }
-      }).then(res => {
-        if (res.success) {
-          const newList = [...products];
-          newList.splice(index, 1);
-          setProducts(newList);
-          setRemoveConfirming(true);
-        } else {
-          setRemoveConfirming(false);
-        }
-      }).catch(error => {
-        setRemoveConfirming(false);
       })
-    })
-  }
+        .then((res) => {
+          if (res.success) {
+            const newList = [...products];
+            newList.splice(index, 1);
+            setProducts(newList);
+            setRemoveConfirming(true);
+          } else {
+            setRemoveConfirming(false);
+          }
+        })
+        .catch((error) => {
+          setRemoveConfirming(false);
+        });
+    });
+  };
 
   const onCheckout = () => {
     // @ CHECK FIRST
     // Whether one of these products is already purchased
-  }
+  };
 
   return (
     <main className="w-full flex flex-col pt-6">
-      <ConfirmAlert open={isConfirming} title={confirmingTitle} message={confirmingMessage} onContinue={() => setConfirming(false)} />
-      <Navbar isPending={isPending} title="Your Cart" content="Here are products in your cart" onCheckout={onCheckout} />
+      <ConfirmAlert
+        open={isConfirming}
+        title={confirmingTitle}
+        message={confirmingMessage}
+        onOK={() => setConfirming(false)}
+      />
+      <Navbar
+        isPending={isPending}
+        title="Your Cart"
+        content="Here are products in your cart"
+        onCheckout={onCheckout}
+      />
       <div className="w-full flex flex-wrap py-6">
         {products.map((product, index) => (
           <div key={index} className="w-1/2 p-2">
