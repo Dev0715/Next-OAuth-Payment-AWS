@@ -61,7 +61,7 @@ export const GeneralDetailsForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full flex flex-col gap-y-4"
+          className="w-full flex flex-col gap-y-6"
         >
           <div className="w-1/2">
             <FormField
@@ -69,7 +69,7 @@ export const GeneralDetailsForm = () => {
               name="username"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Username*</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -89,7 +89,7 @@ export const GeneralDetailsForm = () => {
                 name="firstname"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel>First Name*</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -268,7 +268,7 @@ export const GeneralDetailsForm = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Email*</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -288,7 +288,7 @@ export const GeneralDetailsForm = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>Password*</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -308,7 +308,7 @@ export const GeneralDetailsForm = () => {
           <Button
             disabled={isPending}
             type="submit"
-            className="w-64 flex gap-x-4 mt-6"
+            className="w-64 flex gap-x-4 self-end mt-4"
           >
             <FaArrowRight />
             Next
