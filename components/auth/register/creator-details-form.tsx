@@ -83,32 +83,50 @@ export const CreatorDetailsForm = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-y-6"
         >
-          <div className="flex items-end space-x-4">
-            <Avatar className="w-24 h-24 rounded-xl">
-              <AvatarImage src={avatarImagePath} />
-              <AvatarFallback className="bg-sky-500">
-                <FaUser className="text-white" />
-              </AvatarFallback>
-            </Avatar>
-            <Input
-              disabled={isPending}
-              type="file"
-              accept="image/*"
-              onChange={onAvatarChanged}
-            />
+          <div className="flex flex-col items-start gap-y-4">
+            <FormLabel>Avatar Image</FormLabel>
+            <div className="flex items-end gap-x-4">
+              <Avatar className="w-24 h-24 rounded-xl">
+                <AvatarImage src={avatarImagePath} />
+                <AvatarFallback className="bg-sky-500">
+                  <FaUser className="text-white" />
+                </AvatarFallback>
+              </Avatar>
+              <Button
+                disabled={isPending}
+                variant={"default"}
+                onClick={() => hiddenAvatarFileInput.current?.click()}
+              >
+                Upload New
+              </Button>
+              <Input
+                className="hidden"
+                type="file"
+                accept="image/*"
+                ref={hiddenAvatarFileInput}
+                onChange={onAvatarChanged}
+              />
+            </div>
           </div>
           <div className="flex flex-col gap-y-4">
-            <FormLabel>Cover Image & Avatar</FormLabel>
             <Avatar className="w-full h-28 rounded-none">
               <AvatarImage src={coverImagePath} className="object-cover" />
               <AvatarFallback className="bg-sky-500">
                 <div className="w-full h-full bg-inherit"></div>
               </AvatarFallback>
             </Avatar>
-            <Input
+            <Button
               disabled={isPending}
+              variant={"default"}
+              onClick={() => hiddenCoverFileIniput.current?.click()}
+            >
+              Upload New
+            </Button>
+            <Input
+              className="hidden"
               type="file"
               accept="image/*"
+              ref={hiddenCoverFileIniput}
               onChange={onCoverChanged}
             />
           </div>
