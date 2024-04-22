@@ -37,6 +37,13 @@ const RegisterPage = () => {
     creatorDetails: {
       bio: "",
       typeOfUser: ""
+    },
+    scraped: {
+      env: {},
+      beh: {},
+      art: {},
+      drb: {},
+      cmk: {}
     }
   });
   const [step, setStep] = useState<number>(0);
