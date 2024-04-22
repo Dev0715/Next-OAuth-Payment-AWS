@@ -143,6 +143,25 @@ export const CreatorDetailsForm = ({
               onChange={onCoverChanged}
             />
           </div>
+          <div className="w-full">
+            <FormField
+              control={form.control}
+              name="bio"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Bio*</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Description"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <div className="w-full flex items-center justify-between mt-4">
             <Button
               disabled={isPending}
