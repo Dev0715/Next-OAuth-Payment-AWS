@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormLabel, FormMessage } from "@/components/ui/form";
 import { CreatorDetailsSchema } from "@/schemas/auth/register";
-import { FaArrowRight, FaUser } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SignedUpData } from "@/shared/types-user";
@@ -46,7 +46,17 @@ export const CreatorDetailsForm = ({
   });
 
   const onSubmit = (values: z.infer<typeof CreatorDetailsSchema>) => {
-    startTransition(() => {});
+    startTransition(() => {
+      onContinue({
+        ...values,
+        avatar,
+        cover
+      });
+    });
+  };
+
+  const onBackClicked = () => {
+    onBack({ ...form.getValues(), avatar, cover });
   };
 
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
