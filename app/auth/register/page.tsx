@@ -175,10 +175,34 @@ const RegisterPage = () => {
       {isMatchingStep() && (
         <SelectMatchingForm
           defaultData={userData.creatorMatchings}
-          onContinue={onSelectAccountsContinue}
-          onBack={onSelectAccountsBack}
+          onContinue={onSelectMatchingContinue}
+          onBack={onSelectMatchingBack}
         />
       )}
+      {isCreatorCompleteStep() && (
+        <CreatorCompleteForm
+          pending={!isActive()}
+          onContinue={onCreatorCompleteContinue}
+          onBack={onCreatorCompleteBack}
+        />
+      )}
+      {isUserStep() && (
+        <UserCompleteForm
+          pending={!isActive()}
+          step={step}
+          onContinue={onUserCompleteContinue}
+          onBack={onUserCompleteBack}
+        />
+      )}
+      {isAffiliateStep() && (
+        <AffiliateCompleteForm
+          pending={!isActive()}
+          step={step}
+          onContinue={onAffiliateCompleteContinue}
+          onBack={onAffiliateCompleteBack}
+        />
+      )}
+      {isRegisterCompleteStep() && <RegisterCompleteForm step={step} />}
     </div>
   );
 };
