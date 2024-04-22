@@ -38,12 +38,12 @@ const RegisterPage = () => {
       bio: "",
       typeOfUser: ""
     },
-    scraped: {
-      env: {},
-      beh: {},
-      art: {},
-      drb: {},
-      cmk: {}
+    creatorMatchings: {
+      env: false,
+      beh: false,
+      art: false,
+      drb: false,
+      cmk: false
     }
   });
   const [step, setStep] = useState<number>(0);
@@ -168,7 +168,7 @@ const RegisterPage = () => {
       )}
       {isMatchingStep() && (
         <SelectMatchingForm
-          defaultData={userData.selectedAccounts}
+          defaultData={userData.creatorMatchings}
           onContinue={onSelectAccountsContinue}
           onBack={onSelectAccountsBack}
         />
