@@ -34,7 +34,8 @@ const RegisterPage = () => {
       affiliate: false
     },
     creatorDetails: {
-      bio: ""
+      bio: "",
+      typeOfUser: ""
     }
   });
   const [step, setStep] = useState<number>(0);
