@@ -48,5 +48,6 @@ export const CreatorDetailsSchema = z.object({
     .min(6, "Bio should be at least 6 characters long")
     .max(1024, "Bio must be a maximum of 1024 characters"),
   avatar: z.instanceof(File).optional(),
-  cover: z.instanceof(File).optional()
+  cover: z.instanceof(File).optional(),
+  typeOfUser: z.string().min(1, "Type of user is required")
 });
