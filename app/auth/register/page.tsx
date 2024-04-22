@@ -44,11 +44,15 @@ const RegisterPage = () => {
     return userData.selectedAccounts.creator && step === 2;
   };
 
+  const isMatchingStep = () => {
+    return userData.selectedAccounts.creator && step === 3;
+  };
+
   const isUserStep = () => {
     if (
       userData.selectedAccounts.user &&
       userData.selectedAccounts.creator &&
-      step === 3
+      step === 4
     ) {
       return true;
     } else if (
@@ -67,21 +71,21 @@ const RegisterPage = () => {
       userData.selectedAccounts.affiliate &&
       userData.selectedAccounts.creator &&
       userData.selectedAccounts.user &&
-      step === 4
+      step === 5
     ) {
       return true;
     } else if (
       userData.selectedAccounts.affiliate &&
       userData.selectedAccounts.creator &&
       !userData.selectedAccounts.user &&
-      step === 3
+      step === 4
     ) {
       return true;
     } else if (
       userData.selectedAccounts.affiliate &&
       !userData.selectedAccounts.creator &&
       userData.selectedAccounts.user &&
-      step === 3
+      step === 4
     ) {
       return true;
     } else if (
