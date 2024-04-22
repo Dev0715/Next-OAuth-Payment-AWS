@@ -54,7 +54,18 @@ const RegisterPage = () => {
       cmk: false
     }
   });
+
   const [step, setStep] = useState<number>(0);
+  const [isPending, startTransition] = useTransition();
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+
+  const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
+  const [confirmTitle, setConfirmTitle] = useState<string>("");
+  const [confirmMessage, setConfirmMessage] = useState<string>("");
+
+  const isActive = () => {
+    return !isDisabled && !isPending;
+  };
 
   const isCreatorStep = () => {
     return userData.selectedAccounts.creator && step === 2;
