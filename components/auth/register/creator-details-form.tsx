@@ -208,6 +208,164 @@ export const CreatorDetailsForm = ({
               )}
             />
           </div>
+          <div className="w-full flex gap-x-6">
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
+                name="companyName"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Company Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Your company"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
+                name="companyCountry"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Location</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Country"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+          <div className="w-1/2 pr-3">
+            <FormField
+              control={form.control}
+              name="companyWebsite"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Company Website</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Website URL"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="w-full flex items-end gap-x-6">
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
+                name="website1"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Personal Websites</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Website 1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
+                name="website2"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    {/* <FormLabel></FormLabel> */}
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Website 2"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+          <div className="w-full flex items-end gap-x-6">
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
+                name="website3"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    {/* <FormLabel></FormLabel> */}
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Website 3"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="w-1/2">
+              <FormField
+                control={form.control}
+                name="website4"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    {/* <FormLabel></FormLabel> */}
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Website 4"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+          <div className="w-1/2 pr-3">
+            <FormField
+              control={form.control}
+              name="website5"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  {/* <FormLabel></FormLabel> */}
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Website 5"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <div className="w-full flex items-center justify-between mt-4">
             <Button
               disabled={isPending}
