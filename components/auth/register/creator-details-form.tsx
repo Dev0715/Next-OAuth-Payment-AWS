@@ -6,41 +6,35 @@ import { useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "@/components/ui/form";
+import { Form, FormLabel, FormMessage } from "@/components/ui/form";
 import { CreatorDetailsSchema } from "@/schemas/auth/register";
 import { FaArrowRight, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SignedUpData } from "@/shared/types-user";
 
 type Props = {
   step: number;
-  defaultData: any;
-  onContinue: (values: z.infer<typeof CreatorDetailsSchema>) => void;
-  onBack: (values: z.infer<typeof CreatorDetailsSchema>) => void;
+  defaultData: SignedUpData["creatorDetails"];
+  onContinue: (values: SignedUpData["creatorDetails"]) => void;
+  onBack: (values: SignedUpData["creatorDetails"]) => void;
 };
 
 export const CreatorDetailsForm = ({
   step,
   defaultData,
-  onContinue
+  onContinue,
+  onBack
 }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
 
-  const [avatar, setAvatar] = useState<File | null>();
+  const [avatar, setAvatar] = useState<File | undefined>(defaultData?.avatar);
   const [avatarImagePath, setAvatarImagePath] = useState<string>("");
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
 
-  const [cover, setCover] = useState<File | null>();
+  const [cover, setCover] = useState<File | undefined>(defaultData?.cover);
   const [coverImagePath, setCoverImagePath] = useState<string>("");
   const hiddenCoverFileIniput = useRef<HTMLInputElement>(null);
 
