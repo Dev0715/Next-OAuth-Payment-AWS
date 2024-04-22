@@ -139,7 +139,8 @@ export const SelectAccounts = ({ defaultData, onContinue, onBack }: Props) => {
             <Button
               disabled={isPending}
               type="button"
-              className="w-64 flex gap-x-4"
+              variant={"outline"}
+              className="w-64 flex gap-x-4 border-red-700"
               onClick={onBackClicked}
             >
               <FaArrowLeft />
