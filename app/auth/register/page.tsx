@@ -35,8 +35,16 @@ const RegisterPage = () => {
       affiliate: false
     },
     creatorDetails: {
-      bio: "",
-      typeOfUser: ""
+      bio: "description",
+      typeOfUser: "Project Manager",
+      companyName: "",
+      companyCountry: "",
+      companyWebsite: "",
+      website1: "",
+      website2: "",
+      website3: "",
+      website4: "",
+      website5: ""
     },
     creatorMatchings: {
       env: false,
