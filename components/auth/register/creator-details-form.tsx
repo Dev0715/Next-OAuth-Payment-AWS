@@ -23,9 +23,9 @@ import { Textarea } from "@/components/ui/textarea";
 
 type Props = {
   step: number;
-  defaultData: SignedUpData["creatorDetails"];
-  onContinue: (values: SignedUpData["creatorDetails"]) => void;
-  onBack: (values: SignedUpData["creatorDetails"]) => void;
+  defaultData: z.infer<typeof CreatorDetailsSchema>;
+  onContinue: (values: z.infer<typeof CreatorDetailsSchema>) => void;
+  onBack: (values: z.infer<typeof CreatorDetailsSchema>) => void;
 };
 
 export const CreatorDetailsForm = ({
