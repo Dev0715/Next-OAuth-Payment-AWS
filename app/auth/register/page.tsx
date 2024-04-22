@@ -4,6 +4,7 @@ import { CreatorDetailsForm } from "@/components/auth/register/creator-details-f
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
 import { SelectAccounts } from "@/components/auth/register/select-accounts-form";
 import {
+  CreatorDetailsSchema,
   GeneralDetailsSchema,
   SelectAccountsSchema
 } from "@/schemas/auth/register";
@@ -31,6 +32,9 @@ const RegisterPage = () => {
       creator: false,
       user: false,
       affiliate: false
+    },
+    creatorDetails: {
+      bio: ""
     }
   });
   const [step, setStep] = useState<number>(0);
@@ -145,8 +149,9 @@ const RegisterPage = () => {
       {isCreatorStep() && (
         <CreatorDetailsForm
           step={step}
-          defaultData={userData}
-          onContinue={onGeneralDetailsContinue}
+          defaultData={userData.creatorDetails}
+          onContinue={onCreatorDetailsContinue}
+          onBack={onCreatorDetailsBack}
         />
       )}
     </div>
