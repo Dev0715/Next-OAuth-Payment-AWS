@@ -8,12 +8,12 @@ import {
   GeneralDetailsSchema,
   SelectAccountsSchema
 } from "@/schemas/auth/register";
-import { SingedUpData } from "@/shared/types-user";
+import { SignedUpData } from "@/shared/types-user";
 import { useState } from "react";
 import { z } from "zod";
 
 const RegisterPage = () => {
-  const [userData, setUserData] = useState<SingedUpData>({
+  const [userData, setUserData] = useState<SignedUpData>({
     generalDetails: {
       username: "andreicasian1",
       firstname: "andrei",
@@ -116,16 +116,12 @@ const RegisterPage = () => {
     setStep((prev) => prev - 1);
   };
 
-  const onCreatorDetailsContinue = (
-    values: z.infer<typeof CreatorDetailsSchema>
-  ) => {
+  const onCreatorDetailsContinue = (values: SignedUpData["creatorDetails"]) => {
     setUserData((prev) => ({ ...prev, creatorDetails: values }));
     setStep((prev) => prev + 1);
   };
 
-  const onCreatorDetailsBack = (
-    values: z.infer<typeof CreatorDetailsSchema>
-  ) => {
+  const onCreatorDetailsBack = (values: SignedUpData["creatorDetails"]) => {
     setUserData((prev) => ({ ...prev, creatorDetails: values }));
     setStep((prev) => prev - 1);
   };
