@@ -46,8 +46,5 @@ export type User = {
 export type SignedUpData = {
   generalDetails: z.infer<typeof GeneralDetailsSchema>;
   selectedAccounts: z.infer<typeof SelectAccountsSchema>;
-  creatorDetails: z.infer<typeof CreatorDetailsSchema> & {
-    avatar?: File;
-    cover?: File;
-  };
+  creatorDetails: z.infer<typeof CreatorDetailsSchema>;
 };
