@@ -139,14 +139,25 @@ export const CreatorDetailsForm = ({
               onChange={onCoverChanged}
             />
           </div>
-          <Button
-            disabled={isPending}
-            type="submit"
-            className="w-64 flex gap-x-4 self-end mt-4"
-          >
-            <FaArrowRight />
-            Next
-          </Button>
+          <div className="w-full flex items-center justify-between mt-4">
+            <Button
+              disabled={isPending}
+              type="button"
+              className="w-64 flex gap-x-4"
+              onClick={onBackClicked}
+            >
+              <FaArrowLeft />
+              Back
+            </Button>
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="w-64 flex gap-x-4"
+            >
+              <FaArrowRight />
+              Next
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
