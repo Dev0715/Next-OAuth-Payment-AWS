@@ -59,7 +59,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="mt-6">
       <CardWrapper
         headerLabel="Welcome Back!"
         backButtonLabel="Don't have an account?"
