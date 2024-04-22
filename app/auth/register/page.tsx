@@ -2,7 +2,8 @@
 
 import { CreatorDetailsForm } from "@/components/auth/register/creator-details-form";
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
-import { SelectAccounts } from "@/components/auth/register/select-accounts-form";
+import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
+import { SelectMatchingForm } from "@/components/auth/register/select-matching-form";
 import {
   CreatorDetailsSchema,
   GeneralDetailsSchema,
@@ -145,7 +146,7 @@ const RegisterPage = () => {
         />
       )}
       {step === 1 && (
-        <SelectAccounts
+        <SelectAccountsForm
           defaultData={userData.selectedAccounts}
           onContinue={onSelectAccountsContinue}
           onBack={onSelectAccountsBack}
@@ -153,10 +154,16 @@ const RegisterPage = () => {
       )}
       {isCreatorStep() && (
         <CreatorDetailsForm
-          step={step}
           defaultData={userData.creatorDetails}
           onContinue={onCreatorDetailsContinue}
           onBack={onCreatorDetailsBack}
+        />
+      )}
+      {isMatchingStep() && (
+        <SelectMatchingForm
+          defaultData={userData.selectedAccounts}
+          onContinue={onSelectAccountsContinue}
+          onBack={onSelectAccountsBack}
         />
       )}
     </div>
