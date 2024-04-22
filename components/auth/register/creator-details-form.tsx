@@ -31,11 +31,15 @@ export const CreatorDetailsForm = ({
   const [confirmMessage, setConfirmMessage] = useState<string>("");
 
   const [avatar, setAvatar] = useState<File | undefined>(defaultData?.avatar);
-  const [avatarImagePath, setAvatarImagePath] = useState<string>("");
+  const [avatarImagePath, setAvatarImagePath] = useState<string>(
+    defaultData?.avatar ? URL.createObjectURL(defaultData.avatar) : ""
+  );
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
 
   const [cover, setCover] = useState<File | undefined>(defaultData?.cover);
-  const [coverImagePath, setCoverImagePath] = useState<string>("");
+  const [coverImagePath, setCoverImagePath] = useState<string>(
+    defaultData?.cover ? URL.createObjectURL(defaultData.cover) : ""
+  );
   const hiddenCoverFileIniput = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
