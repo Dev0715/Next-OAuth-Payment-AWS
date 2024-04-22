@@ -27,6 +27,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+import { CREATOR_TYPES } from "@/shared/creator-types";
 
 type Props = {
   step: number;
@@ -41,6 +42,8 @@ export const CreatorDetailsForm = ({
   onContinue,
   onBack
 }: Props) => {
+  const typeOfUserList = CREATOR_TYPES;
+
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
@@ -187,18 +190,19 @@ export const CreatorDetailsForm = ({
                 <FormItem className="w-full">
                   <FormLabel>Type of user*</FormLabel>
                   <Select
+                    disabled={isPending}
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a verified email to display" />
+                        <SelectValue placeholder="Select a type of user" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="m@example.com">
-                        m@example.com
-                      </SelectItem>
+                      {typeOfUserList.map((type) => (
+                        <SelectItem value={type}>{type}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
