@@ -87,16 +87,17 @@ export const CreatorDetailsForm = ({
         >
           <div className="flex flex-col items-start gap-y-4">
             <FormLabel>Avatar Image</FormLabel>
-            <div className="flex items-end gap-x-4">
-              <Avatar className="w-24 h-24 rounded-xl">
+            <div className="flex items-end gap-x-6">
+              <Avatar className="w-24 h-24 rounded-[24px]">
                 <AvatarImage src={avatarImagePath} />
-                <AvatarFallback className="bg-sky-500">
+                <AvatarFallback className="bg-sky-500 rounded-[24px]">
                   <FaUser className="text-white" />
                 </AvatarFallback>
               </Avatar>
               <Button
                 disabled={isPending}
-                variant={"default"}
+                variant={"outline"}
+                className="border-green-700"
                 onClick={() => hiddenAvatarFileInput.current?.click()}
               >
                 Upload New
