@@ -58,15 +58,15 @@ export const CreatorDetailsForm = ({
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setAvatarImagePath(URL.createObjectURL(e.target.files[0]));
+      setAvatar(e?.target?.files?.[0]);
     }
-    setAvatar(e?.target?.files?.[0]);
   };
 
   const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setCoverImagePath(URL.createObjectURL(e.target.files[0]));
+      setCover(e?.target?.files?.[0]);
     }
-    setCover(e?.target?.files?.[0]);
   };
 
   return (
