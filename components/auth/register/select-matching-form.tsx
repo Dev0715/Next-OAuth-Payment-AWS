@@ -25,6 +25,17 @@ export const SelectMatchingForm = ({
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
+  const [matchings, setMatchings] = useState<SignedUpData["creatorMatchings"]>({
+    ...defaultData
+  });
+
+  const onContinueClicked = () => {
+    onContinue(matchings);
+  };
+
+  const onBackClicked = () => {
+    onBack(matchings);
+  };
 
   return (
     <div className="w-full flex flex-col gap-y-6">
