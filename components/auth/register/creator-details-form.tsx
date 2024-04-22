@@ -30,14 +30,12 @@ import {
 import { CREATOR_TYPES } from "@/shared/creator-types";
 
 type Props = {
-  step: number;
   defaultData: z.infer<typeof CreatorDetailsSchema>;
   onContinue: (values: z.infer<typeof CreatorDetailsSchema>) => void;
   onBack: (values: z.infer<typeof CreatorDetailsSchema>) => void;
 };
 
 export const CreatorDetailsForm = ({
-  step,
   defaultData,
   onContinue,
   onBack
@@ -104,7 +102,7 @@ export const CreatorDetailsForm = ({
         onOK={() => setConfirmOpen(false)}
       />
       <p className="text-xl text-green-700">
-        {step + 1}. Please provide your KRE8TOR details.
+        3. Please provide your KRE8TOR details.
       </p>
       <Form {...form}>
         <form

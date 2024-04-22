@@ -26,7 +26,11 @@ type Props = {
   onBack: (values: z.infer<typeof SelectAccountsSchema>) => void;
 };
 
-export const SelectAccounts = ({ defaultData, onContinue, onBack }: Props) => {
+export const SelectAccountsForm = ({
+  defaultData,
+  onContinue,
+  onBack
+}: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
