@@ -112,15 +112,17 @@ export const CreatorDetailsForm = ({
             </div>
           </div>
           <div className="flex flex-col gap-y-4">
-            <Avatar className="w-full h-28 rounded-none">
+            <FormLabel>Cover Image</FormLabel>
+            <Avatar className="w-full h-28 rounded-xl">
               <AvatarImage src={coverImagePath} className="object-cover" />
-              <AvatarFallback className="bg-sky-500">
+              <AvatarFallback className="bg-sky-400 rounded-xl">
                 <div className="w-full h-full bg-inherit"></div>
               </AvatarFallback>
             </Avatar>
             <Button
               disabled={isPending}
-              variant={"default"}
+              variant={"outline"}
+              className="w-32 border-green-700"
               onClick={() => hiddenCoverFileIniput.current?.click()}
             >
               Upload New
