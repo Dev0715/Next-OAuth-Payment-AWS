@@ -15,20 +15,9 @@ import { CreatorRegisterSchema } from "@/schemas/auth/auth";
 
 const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
-interface NewUser {
-  username: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  password?: string;
-  id?: string;
-  image?: string;
-  emailVerified?: Date | string;
-}
-
 // When social login, consider setting id same as userId into table
 // When social login, usernames just comes as name
-export const createUser = async (data: NewUser) => {
+export const createUser = async (data: any) => {
   if (data.emailVerified && data.emailVerified instanceof Date) {
     data.emailVerified = data.emailVerified.toISOString();
   }
