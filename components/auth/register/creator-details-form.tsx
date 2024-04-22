@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -38,9 +38,11 @@ export const CreatorDetailsForm = ({
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string>("");
+  const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
 
   const [cover, setCover] = useState<File | null>();
   const [coverImagePath, setCoverImagePath] = useState<string>("");
+  const hiddenCoverFileIniput = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
     resolver: zodResolver(CreatorDetailsSchema),
