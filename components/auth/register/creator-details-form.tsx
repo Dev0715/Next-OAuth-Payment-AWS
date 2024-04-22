@@ -112,6 +112,7 @@ export const CreatorDetailsForm = ({
               </Avatar>
               <Button
                 disabled={isPending}
+                type="button"
                 variant={"outline"}
                 className="border-green-700"
                 onClick={() => hiddenAvatarFileInput.current?.click()}
@@ -137,6 +138,7 @@ export const CreatorDetailsForm = ({
             </Avatar>
             <Button
               disabled={isPending}
+              type="button"
               variant={"outline"}
               className="w-32 border-green-700"
               onClick={() => hiddenCoverFileIniput.current?.click()}
