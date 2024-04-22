@@ -62,7 +62,7 @@ export const SelectMatchingForm = ({
         onOK={() => setConfirmOpen(false)}
       />
       <p className="text-xl text-green-700">
-        2. Please select accounts you want to create.
+        4. Please confirm your accounts on other creative markets.
       </p>
       <Form {...form}>
         <form
