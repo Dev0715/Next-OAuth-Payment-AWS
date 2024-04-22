@@ -75,56 +75,43 @@ const RegisterPage = () => {
     return userData.selectedAccounts.creator && step === 3;
   };
 
+  const isCreatorCompleteStep = () => {
+    return userData.selectedAccounts.creator && step === 4;
+  };
+
   const isUserStep = () => {
-    if (
-      userData.selectedAccounts.user &&
-      userData.selectedAccounts.creator &&
-      step === 4
-    ) {
-      return true;
-    } else if (
-      userData.selectedAccounts.user &&
-      !userData.selectedAccounts.creator &&
-      step === 2
-    ) {
-      return true;
-    } else {
-      return false;
+    let _step = 2;
+    if (userData.selectedAccounts.creator) {
+      _step += 3;
     }
+
+    return userData.selectedAccounts.user && step === _step;
   };
 
   const isAffiliateStep = () => {
-    if (
-      userData.selectedAccounts.affiliate &&
-      userData.selectedAccounts.creator &&
-      userData.selectedAccounts.user &&
-      step === 5
-    ) {
-      return true;
-    } else if (
-      userData.selectedAccounts.affiliate &&
-      userData.selectedAccounts.creator &&
-      !userData.selectedAccounts.user &&
-      step === 4
-    ) {
-      return true;
-    } else if (
-      userData.selectedAccounts.affiliate &&
-      !userData.selectedAccounts.creator &&
-      userData.selectedAccounts.user &&
-      step === 4
-    ) {
-      return true;
-    } else if (
-      userData.selectedAccounts.affiliate &&
-      !userData.selectedAccounts.creator &&
-      !userData.selectedAccounts.user &&
-      step === 2
-    ) {
-      return true;
-    } else {
-      return false;
+    let _step = 2;
+    if (userData.selectedAccounts.creator) {
+      _step += 3;
     }
+    if (userData.selectedAccounts.user) {
+      _step += 1;
+    }
+
+    return userData.selectedAccounts.affiliate && step === _step;
+  };
+
+  const isRegisterCompleteStep = () => {
+    let _step = 2;
+    if (userData.selectedAccounts.creator) {
+      _step += 3;
+    }
+    if (userData.selectedAccounts.user) {
+      _step += 1;
+    }
+    if (userData.selectedAccounts.affiliate) {
+      _step += 1;
+    }
+    return step === _step;
   };
 
   const onGeneralDetailsContinue = (
