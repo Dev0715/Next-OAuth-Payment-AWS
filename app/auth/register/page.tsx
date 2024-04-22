@@ -116,12 +116,16 @@ const RegisterPage = () => {
     setStep((prev) => prev - 1);
   };
 
-  const onCreatorDetailsContinue = (values: SignedUpData["creatorDetails"]) => {
+  const onCreatorDetailsContinue = (
+    values: z.infer<typeof CreatorDetailsSchema>
+  ) => {
     setUserData((prev) => ({ ...prev, creatorDetails: values }));
     setStep((prev) => prev + 1);
   };
 
-  const onCreatorDetailsBack = (values: SignedUpData["creatorDetails"]) => {
+  const onCreatorDetailsBack = (
+    values: z.infer<typeof CreatorDetailsSchema>
+  ) => {
     setUserData((prev) => ({ ...prev, creatorDetails: values }));
     setStep((prev) => prev - 1);
   };
