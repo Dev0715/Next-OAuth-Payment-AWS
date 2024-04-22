@@ -14,8 +14,8 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { GeneralDetailsSchema } from "@/schemas/auth/register";
-import { FaArrowRight } from "react-icons/fa";
+import { CreatorDetailsSchema } from "@/schemas/auth/register";
+import { FaArrowRight, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,7 +23,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 type Props = {
   step: number;
   defaultData: any;
-  onContinue: (values: z.infer<typeof GeneralDetailsSchema>) => void;
+  onContinue: (values: z.infer<typeof CreatorDetailsSchema>) => void;
+  onBack: (values: z.infer<typeof CreatorDetailsSchema>) => void;
 };
 
 export const CreatorDetailsForm = ({
