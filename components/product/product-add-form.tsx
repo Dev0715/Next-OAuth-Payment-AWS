@@ -338,7 +338,8 @@ export const ProductAddForm = () => {
               <CardHeader>
                 <CardTitle>Keywords</CardTitle>
                 <CardDescription>
-                  You can set as many keywords as you want to improve chance of your product to be found out
+                  You can set as many keywords as you want to improve chance of
+                  your product to be found out
                 </CardDescription>
                 <div className="w-full flex gap-x-4 pt-2">
                   <Input
@@ -416,13 +417,11 @@ export const ProductAddForm = () => {
                   </Button>
                 </Badge>
               ))}
-              {creativeFiles.length === 0 &&
+              {creativeFiles.length === 0 && (
                 <div className="w-full h-64 flex items-center justify-center">
-                  <p>
-                    No Creative Files selected
-                  </p>
+                  <p>No Creative Files selected</p>
                 </div>
-              }
+              )}
             </div>
           </CardContent>
         </Card>
