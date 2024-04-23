@@ -10,36 +10,58 @@ export type ProductLink = {
   productId: string;
 };
 
-export type Creator = {
-  userId: string;
-  email: string;
-  firstname: string;
-  lastname: string;
-  username: string;
-  bio: string;
-  products: ProductLink[];
+export type Address = {
+  addy1: string;
+  addy2?: string;
+  city: string;
+  postal: string;
+  country: string;
+  geo?: {
+    lat: number;
+    lng: number;
+  };
 };
 
-export type Customer = {
-  userId: string;
-  email: string;
-  firstname: string;
-  lastname: string;
-  username: string;
+export type Company = {
+  name: string;
+  country: string;
+  website: string;
 };
+
+// export type Creator = {
+//   userId: string;
+//   email: string;
+//   firstname: string;
+//   lastname: string;
+//   username: string;
+//   bio: string;
+//   products: ProductLink[];
+// };
+
+// export type Customer = {
+//   userId: string;
+//   email: string;
+//   firstname: string;
+//   lastname: string;
+//   username: string;
+// };
 
 export type CreatorData = {
   isCreator: boolean;
   creatorId: string;
+  cover?: string;
   bio: string;
 };
 
-export type UserData = {
-  isUser: boolean;
-  userId: string;
+export type CustomerData = {
+  isCustomer: boolean;
+  customerId: string;
 };
 
-export type AffiliateData = {};
+export type AffiliateData = {
+  isAffiliate: boolean;
+  affiliateId: string;
+};
 
 export type User = {
   userId: string;
@@ -51,10 +73,12 @@ export type User = {
 
   avatar?: string;
   image?: string; // in case of social login
-  cover?: string;
+
+  address: Address;
+  company: Company;
 
   creator?: CreatorData;
-  user?: UserData;
+  customer?: CustomerData;
   affiliate?: AffiliateData;
 
   products?: ProductLink[];
