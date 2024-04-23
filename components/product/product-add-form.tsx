@@ -337,7 +337,7 @@ export const ProductAddForm = () => {
                       disabled={isPending}
                       placeholder="Product Price"
                       type="number"
-                      onChange={event => field.onChange(+event.target.value)}
+                      onChange={(event) => field.onChange(+event.target.value)}
                     />
                   </FormControl>
                   <FormMessage />
@@ -395,7 +395,11 @@ export const ProductAddForm = () => {
             <FormSuccess message={success} />
           </CardContent>
           <CardFooter className="self-end">
-            <Button disabled={isPending} type="submit" className="w-48 flex gap-x-2">
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="w-48 flex gap-x-2"
+            >
               <FaPlus />
               Register
             </Button>
