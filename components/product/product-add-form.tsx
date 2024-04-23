@@ -275,15 +275,21 @@ export const ProductAddForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Product Type</FormLabel>
-                  <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    disabled={isPending}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a product type" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {PRODCUT_TYPES.map(type => (
-                        <SelectItem key={type} value={type}>{type}</SelectItem>
+                      {PRODCUT_TYPES.map((type) => (
+                        <SelectItem key={type} value={type}>
+                          {type}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
