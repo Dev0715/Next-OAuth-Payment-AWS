@@ -144,11 +144,15 @@ export const ProductAddForm = () => {
 
   const getPathList = async (fileList: File[]) => {
     const formData = new FormData();
-    fileList.forEach(file => {
+    fileList.forEach((file) => {
       formData.append(uuidv4(), file);
     });
 
-    const response = await axiosClient.post("/multi-upload", formData, axiosConfig);
+    const response = await axiosClient.post(
+      "/multi-upload",
+      formData,
+      axiosConfig
+    );
     const data = response.data;
 
     if (data.success) {
