@@ -9,11 +9,11 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+  navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu";
 import React from "react";
 import { ListItem } from "@/components/utils/list-item";
-import { PRODCUT_TYPES } from "@/shared/product-types";
+import { PRODCUT_TYPES } from "@/assets/product-types";
 import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
@@ -30,7 +30,11 @@ export const Navbar = () => {
           </NavigationMenuItem>
           {PRODCUT_TYPES.map((menuItem, index) => (
             <NavigationMenuItem key={index}>
-              <Link href={`/products/category/${menuItem}`} legacyBehavior passHref>
+              <Link
+                href={`/products/category/${menuItem}`}
+                legacyBehavior
+                passHref
+              >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   {menuItem}
                 </NavigationMenuLink>
@@ -42,4 +46,3 @@ export const Navbar = () => {
     </nav>
   );
 };
-

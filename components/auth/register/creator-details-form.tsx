@@ -26,7 +26,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { CREATOR_TYPES } from "@/shared/creator-types";
+import { CREATOR_TYPES } from "@/assets/creator-types";
 
 type Props = {
   defaultData: z.infer<typeof CreatorDetailsSchema>;
