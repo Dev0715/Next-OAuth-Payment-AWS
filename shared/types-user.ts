@@ -24,27 +24,9 @@ export type Address = {
 
 export type Company = {
   name: string;
-  country: string;
-  website: string;
+  country?: string;
+  website?: string;
 };
-
-// export type Creator = {
-//   userId: string;
-//   email: string;
-//   firstname: string;
-//   lastname: string;
-//   username: string;
-//   bio: string;
-//   products: ProductLink[];
-// };
-
-// export type Customer = {
-//   userId: string;
-//   email: string;
-//   firstname: string;
-//   lastname: string;
-//   username: string;
-// };
 
 export type CreatorData = {
   isCreator: boolean;
@@ -74,6 +56,8 @@ export type User = {
   avatar?: string;
   image?: string; // in case of social login
 
+  phone1?: string;
+  phone2?: string;
   address: Address;
   company: Company;
 
