@@ -27,43 +27,42 @@ export const UserButton = () => {
   const user = useCurrentUser();
 
   const [avatarImage, setAvatarImage] = useState<string>("");
-  const [cart, setCart] = useAtom(cartAtom)
+  const [cart, setCart] = useAtom(cartAtom);
 
   useEffect(() => {
-    if (!user)
-      return;
+    if (!user) return;
 
     if (user.image) {
       setAvatarImage(user.image);
     } else if (user.avatar) {
-      getS3ImageLink(user.avatar).then(res => {
-        if (res.success)
-          setAvatarImage(res.response as string);
+      getS3ImageLink(user.avatar).then((res) => {
+        if (res.success) setAvatarImage(res.response as string);
       });
     }
 
     if (!cart) {
-      getUserById(user.userId).then(res => {
+      getUserById(user.userId).then((res) => {
         if (res) {
           setCart(res?.cart || []);
         }
-      })
+      });
     }
   }, [user]);
 
-  if (!user) return (
-    <div className="flex items-center gap-x-2">
-      <LoginButton>
-        {/* <WrappedButton variant="default" size="lg"> */}
-        <p className="text-md font-medium">Log in</p>
-        {/* </WrappedButton> */}
-      </LoginButton>
-      <p className="text-gray-400">|</p>
-      <SignupButton>
-        <p className="text-md font-medium">Sign up</p>
-      </SignupButton>
-    </div>
-  );
+  if (!user)
+    return (
+      <div className="flex items-center gap-x-2">
+        <LoginButton>
+          {/* <WrappedButton variant="default" size="lg"> */}
+          <p className="text-md font-medium">Log in</p>
+          {/* </WrappedButton> */}
+        </LoginButton>
+        <p className="text-gray-400">|</p>
+        <SignupButton>
+          <p className="text-md font-medium">Sign up</p>
+        </SignupButton>
+      </div>
+    );
 
   return (
     <div className="flex items-center gap-x-4">
