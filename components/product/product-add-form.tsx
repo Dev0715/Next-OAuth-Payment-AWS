@@ -249,7 +249,13 @@ export const ProductAddForm = () => {
                 />
               </div>
               <div className="w-1/2">
-                <Button disabled={isPending} onClick={onPreviewFileBrowse} variant="outline" type="button" className="w-full h-16 flex gap-x-2 border-green-700">
+                <Button
+                  disabled={isPending}
+                  onClick={onPreviewFileBrowse}
+                  variant="outline"
+                  type="button"
+                  className="w-full h-16 flex gap-x-2 border-green-700"
+                >
                   <FaFileUpload />
                   Add images for preview
                 </Button>
