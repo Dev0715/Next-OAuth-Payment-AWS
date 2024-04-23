@@ -1,20 +1,20 @@
 "use client";
 
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { SelectAccountsSchema } from "@/schemas/auth/register";
-import { Switch } from "@/components/ui/switch";
 import { SignedUpData } from "@/shared/types-user";
+import { Evanto } from "./matching-sites/evanto";
+import { Behance } from "./matching-sites/behance";
+import { ArtStation } from "./matching-sites/artstation";
+import { Dribble } from "./matching-sites/dribble";
+import { CreativeMarket } from "./matching-sites/creative-market";
 
 type Props = {
   defaultData: SignedUpData["creatorMatchings"];
-  onContinue: (values: z.infer<typeof SelectAccountsSchema>) => void;
-  onBack: (values: z.infer<typeof SelectAccountsSchema>) => void;
+  onContinue: (values: SignedUpData["creatorMatchings"]) => void;
+  onBack: (values: SignedUpData["creatorMatchings"]) => void;
 };
 
 export const SelectMatchingForm = ({
