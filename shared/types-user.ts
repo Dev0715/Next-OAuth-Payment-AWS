@@ -30,6 +30,10 @@ export type Customer = {
 
 export type CreatorData = {};
 
+export type UserData = {};
+
+export type AffiliateData = {};
+
 export type User = {
   userId: string;
   username: string;
@@ -37,6 +41,7 @@ export type User = {
   firstname: string;
   lastname: string;
   creator: CreatorData;
+  user: UserData;
   image?: string; // in case of social login
   avatar?: string;
   cover?: string;
