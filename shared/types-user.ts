@@ -28,12 +28,15 @@ export type Customer = {
   username: string;
 };
 
+export type CreatorData = {};
+
 export type User = {
   userId: string;
+  username: string;
   email: string;
   firstname: string;
   lastname: string;
-  username: string;
+  creator: CreatorData;
   image?: string; // in case of social login
   avatar?: string;
   cover?: string;
