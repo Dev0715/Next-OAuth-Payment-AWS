@@ -53,11 +53,16 @@ export const login = async (
     return { success: "Confirmation email sent!" };
   }
 
+  let callbackLink = callbackUrl || DEFAULT_LOGIN_REDIRECT;
+  if (existingUser.creator) {
+    callbackLink = `/profile/creator/${existingUser.userId}`;
+  }
+
   try {
     await signIn("credentials", {
       email,
       password,
-      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
+      redirectTo: callbackLink
     });
   } catch (error) {
     if (error instanceof AuthError) {
