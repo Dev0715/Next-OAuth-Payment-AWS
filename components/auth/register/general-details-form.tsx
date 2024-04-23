@@ -230,7 +230,7 @@ export const GeneralDetailsForm = ({ defaultData, onContinue }: Props) => {
                 name="phone1"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Phone Number1</FormLabel>
+                    <FormLabel>Phone Number 1</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -249,7 +249,7 @@ export const GeneralDetailsForm = ({ defaultData, onContinue }: Props) => {
                 name="phone2"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Phone Number2</FormLabel>
+                    <FormLabel>Phone Number 2</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
