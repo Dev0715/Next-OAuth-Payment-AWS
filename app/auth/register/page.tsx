@@ -1,17 +1,25 @@
 "use client";
 
+import { register } from "@/actions/auth/register/register";
+import { CreatorCompleteForm } from "@/components/auth/register/creator-complete-form";
 import { CreatorDetailsForm } from "@/components/auth/register/creator-details-form";
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
 import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
 import { SelectMatchingForm } from "@/components/auth/register/select-matching-form";
+import { UserCompleteForm } from "@/components/auth/register/user-complete-form";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { axiosClient, axiosConfig } from "@/lib/axios";
 import {
   CreatorDetailsSchema,
   GeneralDetailsSchema,
   SelectAccountsSchema
 } from "@/schemas/auth/register";
 import { SignedUpData } from "@/shared/types-user";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { z } from "zod";
+import { v4 as uuidv4 } from "uuid";
+import { AffiliateCompleteForm } from "@/components/auth/register/affiliate-complete-form";
+import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
 
 const RegisterPage = () => {
   const [userData, setUserData] = useState<SignedUpData>({

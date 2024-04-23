@@ -18,7 +18,6 @@ import { CreatorDetailsSchema } from "@/schemas/auth/register";
 import { FaArrowLeft, FaArrowRight, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { SignedUpData } from "@/shared/types-user";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
