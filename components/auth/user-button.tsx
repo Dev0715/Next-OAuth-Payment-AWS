@@ -2,7 +2,11 @@
 
 import Link from "next/link";
 import { FaCartArrowDown, FaUser } from "react-icons/fa";
-import { ExitIcon, MixerHorizontalIcon, PersonIcon } from "@radix-ui/react-icons";
+import {
+  ExitIcon,
+  MixerHorizontalIcon,
+  PersonIcon
+} from "@radix-ui/react-icons";
 
 import {
   DropdownMenu,
@@ -70,12 +74,11 @@ export const UserButton = () => {
         <Link href={"/cart"}>
           <div className="relative w-10 h-10 flex items-center justify-center cursor-pointer">
             <FaCartArrowDown className="text-xl" />
-            {cart && cart.length ?
+            {cart && cart.length ? (
               <span className="absolute -top-[2px] -right-[2px] w-5 h-5 flex items-center justify-center rounded-full bg-red-700 text-xs text-white">
                 {cart.length}
               </span>
-              : null
-            }
+            ) : null}
           </div>
         </Link>
       </Button>
@@ -89,12 +92,14 @@ export const UserButton = () => {
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40" align="end">
-          <Link href={`/profile/creator/${user.userId}`}>
-            <DropdownMenuItem>
-              <PersonIcon className="h-4 w-4 mr-3" />
-              <span>Creator Profile</span>
-            </DropdownMenuItem>
-          </Link>
+          {user.creator && (
+            <Link href={`/profile/creator/${user.userId}`}>
+              <DropdownMenuItem>
+                <PersonIcon className="h-4 w-4 mr-3" />
+                <span>Creator Profile</span>
+              </DropdownMenuItem>
+            </Link>
+          )}
           <Link href="/user">
             <DropdownMenuItem>
               <MixerHorizontalIcon className="h-4 w-4 mr-3" />
@@ -115,6 +120,6 @@ export const UserButton = () => {
           </LogoutButton>
         </DropdownMenuContent>
       </DropdownMenu>
-    </div >
+    </div>
   );
 };
