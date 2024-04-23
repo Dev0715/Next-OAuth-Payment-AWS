@@ -160,82 +160,105 @@ export const ProductAddForm = () => {
     } else {
       throw new Error(data.error);
     }
-  }
+  };
 
   const onSubmit = (values: z.infer<typeof NewProductSchema>) => {
     setError("");
     setSuccess("");
     setPending(true);
 
-    Promise.all([
-      getPathList(creativeFiles),
-      getPathList(previewFiles)
-    ]).then(([pathList, previewList]) => {
-      const productId = uuidv4();
-      const fileList = pathList.map((path: string, index: number) => ({
-        name: creativeFiles[index].name,
-        path
-      }));
-      createProduct({
-        ...values,
-        productId,
-        fileList,
-        previewList,
-        keywords: selectedKeywords,
-        ownerId: user?.userId as string,
-      }).then(res => {
-        if (res.success) {
-          addNewProduct(user?.userId as string, {
-            productType: values.productType,
-            productId
-          }).then(res => {
-            setSuccess(res.success);
-            setError(res.error);
-            setPending(false);
-          }).catch(error => {
-            setError("Internal Server Error");
-            setPending(false);
+    Promise.all([getPathList(creativeFiles), getPathList(previewFiles)])
+      .then(([pathList, previewList]) => {
+        const productId = uuidv4();
+        const fileList = pathList.map((path: string, index: number) => ({
+          name: creativeFiles[index].name,
+          path
+        }));
+        createProduct({
+          ...values,
+          productId,
+          fileList,
+          previewList,
+          keywords: selectedKeywords,
+          ownerId: user?.userId as string
+        })
+          .then((res) => {
+            if (res.success) {
+              addNewProduct(user?.userId as string, {
+                productType: values.productType,
+                productId
+              })
+                .then((res) => {
+                  setSuccess(res.success);
+                  setError(res.error);
+                  setPending(false);
+                })
+                .catch((error) => {
+                  setError("Internal Server Error");
+                  setPending(false);
+                });
+            } else {
+              setError("Internal Sever Error");
+              setPending(false);
+            }
           })
-        } else {
-          setError("Internal Sever Error");
-          setPending(false);
-        }
-      }).catch(error => {
+          .catch((error) => {
+            setError("Internal Sever Error");
+            setPending(false);
+          });
+      })
+      .catch((error) => {
         setError("Internal Sever Error");
         setPending(false);
-      })
-    }).catch(error => {
-      setError("Internal Sever Error");
-      setPending(false);
-    })
-  }
+      });
+  };
 
   return (
     <Card className="w-full flex rounded-none">
       {/** Preview is not working with images whose width < height  */}
-      <Dialog open={isPreviewing} onOpenChange={isOpen => setPreviewing(isOpen)}>
+      <Dialog
+        open={isPreviewing}
+        onOpenChange={(isOpen) => setPreviewing(isOpen)}
+      >
         <DialogContent className="max-w-[90%] max-h-[90%]">
           {/* <DialogHeader>
             <DialogTitle>{files[previewIndex as number]?.name}</DialogTitle>
           </DialogHeader> */}
           <div className="max-w-full max-h-full w-fit h-fit overflow-hidden">
-            {isPreviewing && <img src={URL.createObjectURL(previewFiles[previewIndex as number])} className="max-w-full max-h-full object-fill" />}
+            {isPreviewing && (
+              <img
+                src={URL.createObjectURL(previewFiles[previewIndex as number])}
+                className="max-w-full max-h-full object-fill"
+              />
+            )}
           </div>
         </DialogContent>
       </Dialog>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/2 flex flex-col">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-1/2 flex flex-col"
+        >
           <CardHeader>
-            <CardTitle className="text-4xl font-medium">Add a new Product</CardTitle>
-            <CardDescription>You can register your product and our admin users will check it and publish soon!</CardDescription>
+            <CardTitle className="text-4xl font-medium">
+              Add a new Product
+            </CardTitle>
+            <CardDescription>
+              You can register your product and our admin users will check it
+              and publish soon!
+            </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-y-4">
-            <FormLabel>
-              Upload your creative work
-            </FormLabel>
+            <FormLabel>Upload your creative work</FormLabel>
             <div className="w-full flex gap-x-4">
               <div className="w-1/2">
-                <Button disabled={isPending} onClick={onCreativeFileBrowse} variant="outline" type="button" className="w-full h-16 flex gap-x-2 border-green-700">
+                <Button
+                  disabled={isPending}
+                  onClick={onCreativeFileBrowse}
+                  variant="outline"
+                  type="button"
+                  className="w-full h-16 flex gap-x-2 border-green-700"
+                >
                   <FaFileUpload />
                   Upload your creative work
                 </Button>
