@@ -28,24 +28,35 @@ export type Customer = {
   username: string;
 };
 
-export type CreatorData = {};
+export type CreatorData = {
+  isCreator: boolean;
+  creatorId: string;
+  bio: string;
+};
 
-export type UserData = {};
+export type UserData = {
+  isUser: boolean;
+  userId: string;
+};
 
 export type AffiliateData = {};
 
 export type User = {
   userId: string;
   username: string;
+
   email: string;
   firstname: string;
-  lastname: string;
-  creator: CreatorData;
-  user: UserData;
-  image?: string; // in case of social login
+  lastname?: string;
+
   avatar?: string;
+  image?: string; // in case of social login
   cover?: string;
-  bio?: string;
+
+  creator?: CreatorData;
+  user?: UserData;
+  affiliate?: AffiliateData;
+
   products?: ProductLink[];
   cart?: ProductLink[];
   purchasedProducts: ProductLink[];
