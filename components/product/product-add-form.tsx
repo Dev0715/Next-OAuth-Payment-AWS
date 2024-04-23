@@ -64,79 +64,89 @@ export const ProductAddForm = () => {
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
   const onAddNewKeyword = () => {
-    if (newKeywordVal === '')
-      return;
+    if (newKeywordVal === "") return;
 
-    const existingOne = selectedKeywords.find(keyword => keyword === newKeywordVal);
-    if (!existingOne)
-      setSelectedKeywords(prev => [...prev, newKeywordVal]);
+    const existingOne = selectedKeywords.find(
+      (keyword) => keyword === newKeywordVal
+    );
+    if (!existingOne) setSelectedKeywords((prev) => [...prev, newKeywordVal]);
 
     setNewKeywordVal("");
-  }
+  };
 
   const onDeleteKeyword = (index: number) => {
     const newKeywords = [...selectedKeywords];
     newKeywords.splice(index, 1);
     setSelectedKeywords(newKeywords); // # Show Duplication Error? #
-  }
+  };
 
   const onCreativeFileBrowse = () => {
     hiddenCreativeFileInput.current?.click();
-  }
+  };
 
   const onCreativeFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      const newFiles = Array.from(event.target.files).
-        filter(newFile => !creativeFiles.find(
-          savedFile => savedFile.name === newFile.name && savedFile.size === newFile.size && savedFile.lastModified === newFile.lastModified
-        ));
-      setCreativeFiles(prev => [...prev, ...newFiles]);
+      const newFiles = Array.from(event.target.files).filter(
+        (newFile) =>
+          !creativeFiles.find(
+            (savedFile) =>
+              savedFile.name === newFile.name &&
+              savedFile.size === newFile.size &&
+              savedFile.lastModified === newFile.lastModified
+          )
+      );
+      setCreativeFiles((prev) => [...prev, ...newFiles]);
     }
     if (hiddenCreativeFileInput.current) {
-      hiddenCreativeFileInput.current.value = '';
+      hiddenCreativeFileInput.current.value = "";
     }
-  }
+  };
 
   const onDeleteCreativeFile = (index: number) => {
     const updatedFiles = [...creativeFiles];
     updatedFiles.splice(index, 1);
     setCreativeFiles(updatedFiles);
-  }
+  };
 
   const onPreviewFileBrowse = () => {
     hiddenPreviewInput.current?.click();
-  }
+  };
 
   const onPreviewFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      const newFiles = Array.from(event.target.files).
-        filter(newFile => !previewFiles.find(
-          savedFile => savedFile.name === newFile.name && savedFile.size === newFile.size && savedFile.lastModified === newFile.lastModified
-        ));
-      setPreviewFiles(prev => [...prev, ...newFiles]);
+      const newFiles = Array.from(event.target.files).filter(
+        (newFile) =>
+          !previewFiles.find(
+            (savedFile) =>
+              savedFile.name === newFile.name &&
+              savedFile.size === newFile.size &&
+              savedFile.lastModified === newFile.lastModified
+          )
+      );
+      setPreviewFiles((prev) => [...prev, ...newFiles]);
     }
     if (hiddenPreviewInput.current) {
-      hiddenPreviewInput.current.value = '';
+      hiddenPreviewInput.current.value = "";
     }
-  }
+  };
 
   const onPreviewFile = (index: number) => {
     setPreviewing(true);
     setPreviewIndex(index);
-  }
+  };
 
   const onDeletePreviewFile = (index: number) => {
     const updatedFiles = [...previewFiles];
     updatedFiles.splice(index, 1);
     setPreviewFiles(updatedFiles);
-  }
+  };
 
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
     defaultValues: {
-      productType: '',
-      title: '',
-      description: '',
+      productType: "",
+      title: "",
+      description: "",
       price: 0,
       keywords: []
     }
