@@ -71,6 +71,14 @@ const RegisterPage = () => {
   const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmMessage, setConfirmMessage] = useState<string>("");
 
+  const moveStepForward = () => {
+    setStep(step + 1);
+  };
+
+  const moveStepBackward = () => {
+    setStep(step + 1);
+  };
+
   const isActive = () => {
     return !isDisabled && !isPending;
   };
@@ -371,7 +379,8 @@ const RegisterPage = () => {
         <GeneralDetailsForm
           userData={userData}
           setUserData={setUserData}
-          onContinue={onGeneralDetailsContinue}
+          moveStepForward={moveStepForward}
+          moveStepBackward={moveStepBackward}
         />
       )}
       {step === 1 && (

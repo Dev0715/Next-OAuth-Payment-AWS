@@ -23,13 +23,15 @@ import { SignedUpData } from "@/shared/types-user";
 type Props = {
   userData: SignedUpData;
   setUserData: Dispatch<SetStateAction<SignedUpData>>;
-  onContinue: (values: z.infer<typeof GeneralDetailsSchema>) => void;
+  moveStepForward: () => void;
+  moveStepBackward: () => void;
 };
 
 export const GeneralDetailsForm = ({
   userData,
   setUserData,
-  onContinue
+  moveStepForward,
+  moveStepBackward
 }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
@@ -38,7 +40,7 @@ export const GeneralDetailsForm = ({
   const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
     resolver: zodResolver(GeneralDetailsSchema),
     defaultValues: {
-      ...defaultData
+      ...userData.generalDetails
     }
   });
 
@@ -46,7 +48,7 @@ export const GeneralDetailsForm = ({
     startTransition(() => {
       checkGeneralDetails(values).then((data) => {
         if (data.success) {
-          onContinue(values);
+          setUserData({ ...userData, generalDetails: values });
         } else {
           setConfirmMessage(data.error as string);
           setConfirmOpen(true);
