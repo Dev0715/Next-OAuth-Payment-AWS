@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
+import React from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,10 +8,13 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
-import React from "react";
+import Link from "next/link";
+
 import { PRODCUT_TYPES } from "@/assets/product-types";
 
 export const Navbar = () => {
+  const productTypes = PRODCUT_TYPES;
+
   return (
     <nav className="w-full flex items-end py-2 top-6 box-border border-b-[1px]">
       <NavigationMenu>
@@ -24,15 +26,15 @@ export const Navbar = () => {
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
-          {PRODCUT_TYPES.map((menuItem, index) => (
+          {productTypes.map((category, index) => (
             <NavigationMenuItem key={index}>
               <Link
-                href={`/products/category/${menuItem}`}
+                href={`/products/category/${category.key}`}
                 legacyBehavior
                 passHref
               >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  {menuItem}
+                  {category.name}
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
