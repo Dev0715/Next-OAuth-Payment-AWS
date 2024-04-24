@@ -124,128 +124,6 @@ const RegisterPage = () => {
     return step === _step;
   };
 
-  const onSelectMatchingContinue = (
-    values: SignedUpData["creatorMatchings"]
-  ) => {
-    setUserData((prev) => ({ ...prev, creatorMatchings: values }));
-    setStep((prev) => prev + 1);
-  };
-
-  const onSelectMatchingBack = (values: SignedUpData["creatorMatchings"]) => {
-    setUserData((prev) => ({ ...prev, creatorMatchings: values }));
-    setStep((prev) => prev - 1);
-  };
-
-  const uploadImages = async () => {
-    const formData = new FormData();
-    if (userData.creatorDetails.avatar)
-      formData.append("file1", userData.creatorDetails.avatar);
-    if (userData.creatorDetails.cover)
-      formData.append("file2", userData.creatorDetails.cover);
-
-    if (userData.creatorDetails.avatar || userData.creatorDetails.cover) {
-      try {
-        const response = await axiosClient.post(
-          "/multi-upload",
-          formData,
-          axiosConfig
-        );
-        const data = response.data;
-
-        if (data.success) {
-          return data.pathList;
-        } else {
-          return [];
-        }
-      } catch (error) {
-        return [];
-      }
-    } else {
-      return [];
-    }
-  };
-
-  const getCreatorData = () => {
-    const scraped: any = {};
-    if (userData.creatorMatchings.env) {
-      scraped["env"] = {};
-    } else if (userData.creatorMatchings.beh) {
-      scraped["beh"] = {};
-    } else if (userData.creatorMatchings.art) {
-      scraped["art"] = {};
-    } else if (userData.creatorMatchings.drb) {
-      scraped["drb"] = {};
-    } else if (userData.creatorMatchings.cmk) {
-      scraped["cmk"] = {};
-    }
-
-    const creator: any = {
-      ...userData.generalDetails,
-      creator: {
-        ...userData.creatorDetails
-      },
-      scraped
-    };
-
-    if (userData.selectedAccounts.user) {
-      creator["userRoleId"] = uuidv4();
-    }
-
-    if (userData.selectedAccounts.affiliate) {
-      creator["affiliateId"] = uuidv4();
-    }
-
-    return creator;
-  };
-
-  const onCreatorCompleteContinue = () => {
-    startTransition(() => {
-      setIsDisabled(true);
-      const creator = getCreatorData();
-
-      uploadImages().then((pathList) => {
-        if (userData.creatorDetails.avatar) {
-          if (pathList.length > 0) {
-            creator.creator.avatar = pathList[0];
-          } else {
-            delete creator.creator.avatar;
-          }
-
-          if (userData.creatorDetails.cover) {
-            if (pathList.length > 1) {
-              creator.creator.cover = pathList[1];
-            } else {
-              delete creator.creator.cover;
-            }
-          }
-        } else if (userData.creatorDetails.cover) {
-          if (pathList.length > 0) {
-            creator.creator.cover = pathList[0];
-          } else {
-            delete creator.creator.cover;
-          }
-        }
-
-        register(creator).then((res) => {
-          setConfirmOpen(true);
-          setIsDisabled(false);
-          if (res.success) {
-            setConfirmTitle("Success");
-            setConfirmMessage("A new creator was newly registerd!");
-            setStep((prev) => prev + 1);
-          } else {
-            setConfirmTitle("Error");
-            setConfirmMessage(res.error as string);
-          }
-        });
-      });
-    });
-  };
-
-  const onCreatorCompleteBack = () => {
-    setStep((prev) => prev - 1);
-  };
-
   const onUserCompleteContinue = () => {
     if (userData.selectedAccounts.creator) {
       setConfirmOpen(true);
@@ -367,9 +245,10 @@ const RegisterPage = () => {
       )}
       {isCreatorCompleteStep() && (
         <CreatorCompleteForm
-          pending={!isActive()}
-          onContinue={onCreatorCompleteContinue}
-          onBack={onCreatorCompleteBack}
+          userData={userData}
+          setUserData={setUserData}
+          moveStepForward={moveStepForward}
+          moveStepBackward={moveStepBackward}
         />
       )}
       {isUserStep() && (
