@@ -1,19 +1,23 @@
-export const PRODCUT_TYPES = [
-  "UI-Kit",
-  "Wireframe",
-  "Dashboard",
-  "Plugin",
-  "Icon-Sets",
-  "Fonts",
-  "Mockups",
-  "Posters",
-  "Scaffolding",
-  "3D-Assets",
-  "Illustrations",
-  "Documents",
-  "Spreadsheets",
-  "Photos",
-  "Videos",
-  "Audio",
-  "Sound-Effects"
+export type CategoryInfo = {
+  key: string;
+  name: string;
+};
+
+export const PRODCUT_TYPES: CategoryInfo[] = [
+  {
+    key: "ui-kits",
+    name: "UI Kits"
+  },
+  {
+    key: "dashboards-wireframes",
+    name: "Dashboards / Wireframes"
+  },
+  {
+    key: "themes-spas",
+    name: "Themes / SPAs"
+  },
+  {
+    key: "plugins",
+    name: "Plugins"
+  }
 ];
