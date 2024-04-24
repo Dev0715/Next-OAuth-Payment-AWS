@@ -1,8 +1,8 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub, FaDiscord, FaApple } from "react-icons/fa";
+import { FcAddressBook } from "react-icons/fc";
+import { FaGithub, FaDiscord, FaApple, FaArtstation } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
@@ -11,7 +11,7 @@ export const Social = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
 
-  const onClick = (provider: "google" | "github" | "discord" | "apple") => {
+  const onClick = (provider: "adobe" | "github" | "discord" | "epicgames") => {
     signIn(provider, {
       callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT
     });
@@ -24,10 +24,10 @@ export const Social = () => {
         className="w-full"
         variant="outline"
         onClick={() => {
-          onClick("google");
+          onClick("adobe");
         }}
       >
-        <FcGoogle className="h-5 w-4" />
+        <FcAddressBook className="h-5 w-4" />
       </Button>
       <Button
         size="lg"
@@ -54,10 +54,10 @@ export const Social = () => {
         className="w-full"
         variant="outline"
         onClick={() => {
-          onClick("apple");
+          onClick("epicgames");
         }}
       >
-        <FaApple className="h-5 w-4" />
+        <FaArtstation className="h-5 w-4" />
       </Button>
     </div>
   );
