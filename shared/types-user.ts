@@ -44,7 +44,7 @@ export type CustomerData = {
   customerId: string;
 
   cart?: ProductLink[];
-  purchasedProducts?: ProductLink[];
+  purchases?: ProductLink[];
 };
 
 export type AffiliateData = {
