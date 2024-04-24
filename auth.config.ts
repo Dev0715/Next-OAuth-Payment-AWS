@@ -11,17 +11,17 @@ import { getUserByEmail } from "./data/user/user-by-email";
 export default {
   secret: process.env.AUTH_SECRET,
   providers: [
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
-    }),
+    //    Google({
+    //      clientId: process.env.GOOGLE_CLIENT_ID || "",
+    //      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
+    //    }),
     Github({
       clientId: process.env.GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string
     }),
     Discord({
-      clientId: process.env.DISCORD_CLIENT_ID || "",
-      clientSecret: process.env.DISCORD_CLIENT_SECRET || ""
+      clientId: process.env.DISCORD_CLIENT_ID as string,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET as string
     }),
     Apple({
       clientId: process.env.APPLE_CLIENT_ID || "",
