@@ -35,11 +35,16 @@ export type CreatorData = {
   cover?: string;
   bio: string;
   typeOfUser: TypeOfUser;
+
+  products?: ProductLink[];
 };
 
 export type CustomerData = {
   isCustomer: boolean;
   customerId: string;
+
+  cart?: ProductLink[];
+  purchasedProducts?: ProductLink[];
 };
 
 export type AffiliateData = {
@@ -68,10 +73,6 @@ export type User = {
   creator?: CreatorData;
   customer?: CustomerData;
   affiliate?: AffiliateData;
-
-  products?: ProductLink[];
-  cart?: ProductLink[];
-  purchasedProducts: ProductLink[];
 };
 
 export type SignedUpData = {
