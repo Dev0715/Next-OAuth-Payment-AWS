@@ -1,26 +1,56 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { SignedUpData } from "@/shared/types-user";
 
 type Props = {
-  pending: boolean;
-  step: number;
-  onContinue: () => void;
-  onBack: () => void;
+  userData: SignedUpData;
+  setUserData: Dispatch<SetStateAction<SignedUpData>>;
+  moveStepForward: () => void;
+  moveStepBackward: () => void;
 };
 
 export const UserCompleteForm = ({
-  pending,
-  step,
-  onContinue,
-  onBack
+  userData,
+  setUserData,
+  moveStepForward,
+  moveStepBackward
 }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
+
+  const onContinue = () => {
+    if (userData.selectedAccounts.creator) {
+      setConfirmOpen(true);
+      setConfirmTitle("Success");
+      setConfirmMessage("A new user was newly registerd!");
+      setStep((prev) => prev + 1);
+    } else {
+      startTransition(() => {
+        const user: any = { ...userData.generalDetails, userRoleId: uuidv4() };
+        if (userData.selectedAccounts.affiliate) {
+          user["affiliateId"] = uuidv4();
+        }
+
+        register(user).then((res) => {
+          setConfirmOpen(true);
+          setIsDisabled(false);
+          if (res.success) {
+            setConfirmTitle("Success");
+            setConfirmMessage("A new user was newly registerd!");
+            setStep((prev) => prev + 1);
+          } else {
+            setConfirmTitle("Error");
+            setConfirmMessage(res.error as string);
+          }
+        });
+      });
+    }
+  };
 
   return (
     <div className="w-full flex flex-col gap-y-6">
