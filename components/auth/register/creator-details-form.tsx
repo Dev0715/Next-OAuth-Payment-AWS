@@ -2,7 +2,13 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRef, useState, useTransition } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useState,
+  useTransition,
+  useRef
+} from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -27,19 +33,23 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { CREATOR_TYPES } from "@/assets/creator-types";
+import { SignedUpData } from "@/shared/types-user";
 
 type Props = {
-  defaultData: z.infer<typeof CreatorDetailsSchema>;
-  onContinue: (values: z.infer<typeof CreatorDetailsSchema>) => void;
-  onBack: (values: z.infer<typeof CreatorDetailsSchema>) => void;
+  userData: SignedUpData;
+  setUserData: Dispatch<SetStateAction<SignedUpData>>;
+  moveStepForward: () => void;
+  moveStepBackward: () => void;
 };
 
 export const CreatorDetailsForm = ({
-  defaultData,
-  onContinue,
-  onBack
+  userData,
+  setUserData,
+  moveStepForward,
+  moveStepBackward
 }: Props) => {
   const typeOfUserList = CREATOR_TYPES;
+  const defaultData = userData.creatorDetails;
 
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
@@ -49,12 +59,13 @@ export const CreatorDetailsForm = ({
   const [avatarImagePath, setAvatarImagePath] = useState<string>(
     defaultData?.avatar ? URL.createObjectURL(defaultData.avatar) : ""
   );
-  const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
 
   const [cover, setCover] = useState<File | undefined>(defaultData?.cover);
   const [coverImagePath, setCoverImagePath] = useState<string>(
     defaultData?.cover ? URL.createObjectURL(defaultData.cover) : ""
   );
+
+  const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const hiddenCoverFileIniput = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
@@ -65,17 +76,27 @@ export const CreatorDetailsForm = ({
   });
 
   const onSubmit = (values: z.infer<typeof CreatorDetailsSchema>) => {
-    startTransition(() => {
-      onContinue({
+    setUserData({
+      ...userData,
+      creatorDetails: {
         ...values,
         avatar,
         cover
-      });
+      }
     });
+    moveStepForward();
   };
 
   const onBackClicked = () => {
-    onBack({ ...form.getValues(), avatar, cover });
+    setUserData({
+      ...userData,
+      creatorDetails: {
+        ...form.getValues(),
+        avatar,
+        cover
+      }
+    });
+    moveStepBackward();
   };
 
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
