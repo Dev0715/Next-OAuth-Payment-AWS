@@ -124,18 +124,6 @@ const RegisterPage = () => {
     return step === _step;
   };
 
-  const onUserCompleteBack = () => {
-    if (userData.selectedAccounts.creator) {
-      setConfirmOpen(true);
-      setConfirmTitle("Warning");
-      setConfirmMessage(
-        "You can't go backward since you already registered a creator!"
-      );
-    } else {
-      setStep((prev) => prev - 1);
-    }
-  };
-
   const onAffiliateCompleteContinue = () => {
     if (userData.selectedAccounts.creator || userData.selectedAccounts.user) {
       setConfirmOpen(true);
@@ -224,6 +212,7 @@ const RegisterPage = () => {
       )}
       {isUserStep() && (
         <UserCompleteForm
+          step={step}
           userData={userData}
           setUserData={setUserData}
           moveStepForward={moveStepForward}

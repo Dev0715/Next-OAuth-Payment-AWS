@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { register } from "@/actions/auth/register/register";
 
 type Props = {
+  step: number;
   userData: SignedUpData;
   setUserData: Dispatch<SetStateAction<SignedUpData>>;
   moveStepForward: () => void;
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export const UserCompleteForm = ({
+  step,
   userData,
   setUserData,
   moveStepForward,
@@ -53,6 +55,18 @@ export const UserCompleteForm = ({
           }
         });
       });
+    }
+  };
+
+  const onBack = () => {
+    if (userData.selectedAccounts.creator) {
+      setConfirmOpen(true);
+      setConfirmTitle("Warning");
+      setConfirmMessage(
+        "You can't go backward since you already registered a creator!"
+      );
+    } else {
+      moveStepBackward();
     }
   };
 
