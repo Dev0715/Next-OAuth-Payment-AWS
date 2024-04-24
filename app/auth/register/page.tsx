@@ -359,9 +359,10 @@ const RegisterPage = () => {
       )}
       {isMatchingStep() && (
         <SelectMatchingForm
-          defaultData={userData.creatorMatchings}
-          onContinue={onSelectMatchingContinue}
-          onBack={onSelectMatchingBack}
+          userData={userData}
+          setUserData={setUserData}
+          moveStepForward={moveStepForward}
+          moveStepBackward={moveStepBackward}
         />
       )}
       {isCreatorCompleteStep() && (
