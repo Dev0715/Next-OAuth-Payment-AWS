@@ -24,14 +24,12 @@ type Props = {
   userData: SignedUpData;
   setUserData: Dispatch<SetStateAction<SignedUpData>>;
   moveStepForward: () => void;
-  moveStepBackward: () => void;
 };
 
 export const GeneralDetailsForm = ({
   userData,
   setUserData,
-  moveStepForward,
-  moveStepBackward
+  moveStepForward
 }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
@@ -49,6 +47,7 @@ export const GeneralDetailsForm = ({
       checkGeneralDetails(values).then((data) => {
         if (data.success) {
           setUserData({ ...userData, generalDetails: values });
+          moveStepForward();
         } else {
           setConfirmMessage(data.error as string);
           setConfirmOpen(true);
