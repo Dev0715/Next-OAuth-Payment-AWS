@@ -45,6 +45,47 @@ export default {
         if (passwordsMatch) return user;
         else return null; // You can also reject this callback for detailed error
       }
-    })
+    }),
+    {
+      id: "adobe",
+      name: "Adobe",
+      type: "oauth",
+      clientId: process.env.ADOBE_CLIENT_ID,
+      clientSecret: process.env.ADOBE_CLIENT_SECRET,
+      // authorization: { params: { scope: "openid email profile" } },
+      // You'll need to specify the correct URLs for Adobe's OAuth service.
+      token: `https://ims-na1.adobelogin.com/ims/token/v3?client_id=${process.env.ADOBE_CLIENT_ID}`,
+      authorization:
+        "https://ims-na1.adobelogin.com/ims/authorize/v3?scope=openid+email+profile",
+      userinfo: "https://ims-na1.adobelogin.com/ims/userinfo/v3",
+      // A function that takes the token response and returns the profile
+      profile: (profile) => {
+        // You'll need to map the returned user profile to the profile object that NextAuth expects
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email
+        };
+      }
+    },
+    {
+      id: "epicgames",
+      name: "EpicGames",
+      type: "oauth",
+      clientId: process.env.EPIC_CLIENT_ID,
+      clientSecret: process.env.EPIC_CLIENT_SECRET,
+      token: `https://api.epicgames.dev/epic/oauth/v2/token?client_id=${process.env.EPIC_CLIENT_ID}`,
+      authorization: `https://www.epicgames.com/id/authorize?client_id=${process.env.EPIC_CLIENT_ID}&response_type=code&scope=basic_profile`,
+      userinfo: "https://api.epicgames.dev/epic/oauth/v2/userInfo",
+      // A function that takes the token response and returns the profile
+      profile: (profile) => {
+        // You'll need to map the returned user profile to the profile object that NextAuth expects
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email
+        };
+      }
+    }
   ]
 } satisfies NextAuthConfig;
