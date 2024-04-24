@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
@@ -12,29 +12,33 @@ import { Dribble } from "./matching-sites/dribble";
 import { CreativeMarket } from "./matching-sites/creative-market";
 
 type Props = {
-  defaultData: SignedUpData["creatorMatchings"];
-  onContinue: (values: SignedUpData["creatorMatchings"]) => void;
-  onBack: (values: SignedUpData["creatorMatchings"]) => void;
+  userData: SignedUpData;
+  setUserData: Dispatch<SetStateAction<SignedUpData>>;
+  moveStepForward: () => void;
+  moveStepBackward: () => void;
 };
 
 export const SelectMatchingForm = ({
-  defaultData,
-  onContinue,
-  onBack
+  userData,
+  setUserData,
+  moveStepForward,
+  moveStepBackward
 }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
   const [matchings, setMatchings] = useState<SignedUpData["creatorMatchings"]>({
-    ...defaultData
+    ...userData.creatorMatchings
   });
 
   const onContinueClicked = () => {
-    onContinue(matchings);
+    setUserData({ ...userData, creatorMatchings: matchings });
+    moveStepForward();
   };
 
   const onBackClicked = () => {
-    onBack(matchings);
+    setUserData({ ...userData, creatorMatchings: matchings });
+    moveStepBackward();
   };
 
   return (

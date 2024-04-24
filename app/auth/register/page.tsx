@@ -9,14 +9,8 @@ import { SelectMatchingForm } from "@/components/auth/register/select-matching-f
 import { UserCompleteForm } from "@/components/auth/register/user-complete-form";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { axiosClient, axiosConfig } from "@/lib/axios";
-import {
-  CreatorDetailsSchema,
-  GeneralDetailsSchema,
-  SelectAccountsSchema
-} from "@/schemas/auth/register";
 import { SignedUpData } from "@/shared/types-user";
 import { useState, useTransition } from "react";
-import { z } from "zod";
 import { v4 as uuidv4 } from "uuid";
 import { AffiliateCompleteForm } from "@/components/auth/register/affiliate-complete-form";
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
