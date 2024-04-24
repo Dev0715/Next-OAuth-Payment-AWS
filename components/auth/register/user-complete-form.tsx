@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { SignedUpData } from "@/shared/types-user";
+import { v4 as uuidv4 } from "uuid";
+import { register } from "@/actions/auth/register/register";
 
 type Props = {
   userData: SignedUpData;
@@ -19,8 +21,10 @@ export const UserCompleteForm = ({
   moveStepForward,
   moveStepBackward
 }: Props) => {
+  const [isDisabled, setDisabled] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
+  const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmMessage, setConfirmMessage] = useState<string>("");
 
   const onContinue = () => {
@@ -28,7 +32,7 @@ export const UserCompleteForm = ({
       setConfirmOpen(true);
       setConfirmTitle("Success");
       setConfirmMessage("A new user was newly registerd!");
-      setStep((prev) => prev + 1);
+      moveStepForward();
     } else {
       startTransition(() => {
         const user: any = { ...userData.generalDetails, userRoleId: uuidv4() };
@@ -38,11 +42,11 @@ export const UserCompleteForm = ({
 
         register(user).then((res) => {
           setConfirmOpen(true);
-          setIsDisabled(false);
+          setDisabled(false);
           if (res.success) {
             setConfirmTitle("Success");
             setConfirmMessage("A new user was newly registerd!");
-            setStep((prev) => prev + 1);
+            moveStepForward();
           } else {
             setConfirmTitle("Error");
             setConfirmMessage(res.error as string);
@@ -81,7 +85,7 @@ export const UserCompleteForm = ({
       </p>
       <div className="w-full flex items-center justify-between mt-4">
         <Button
-          disabled={pending}
+          disabled={isDisabled}
           variant={"outline"}
           className="w-64 flex gap-x-4 border-red-700"
           onClick={onBack}
@@ -90,7 +94,7 @@ export const UserCompleteForm = ({
           Back
         </Button>
         <Button
-          disabled={pending}
+          disabled={isDisabled}
           className="w-64 flex gap-x-4"
           onClick={onContinue}
         >

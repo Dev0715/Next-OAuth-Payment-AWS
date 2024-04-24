@@ -124,35 +124,6 @@ const RegisterPage = () => {
     return step === _step;
   };
 
-  const onUserCompleteContinue = () => {
-    if (userData.selectedAccounts.creator) {
-      setConfirmOpen(true);
-      setConfirmTitle("Success");
-      setConfirmMessage("A new user was newly registerd!");
-      setStep((prev) => prev + 1);
-    } else {
-      startTransition(() => {
-        const user: any = { ...userData.generalDetails, userRoleId: uuidv4() };
-        if (userData.selectedAccounts.affiliate) {
-          user["affiliateId"] = uuidv4();
-        }
-
-        register(user).then((res) => {
-          setConfirmOpen(true);
-          setIsDisabled(false);
-          if (res.success) {
-            setConfirmTitle("Success");
-            setConfirmMessage("A new user was newly registerd!");
-            setStep((prev) => prev + 1);
-          } else {
-            setConfirmTitle("Error");
-            setConfirmMessage(res.error as string);
-          }
-        });
-      });
-    }
-  };
-
   const onUserCompleteBack = () => {
     if (userData.selectedAccounts.creator) {
       setConfirmOpen(true);
@@ -253,10 +224,10 @@ const RegisterPage = () => {
       )}
       {isUserStep() && (
         <UserCompleteForm
-          pending={!isActive()}
-          step={step}
-          onContinue={onUserCompleteContinue}
-          onBack={onUserCompleteBack}
+          userData={userData}
+          setUserData={setUserData}
+          moveStepForward={moveStepForward}
+          moveStepBackward={moveStepBackward}
         />
       )}
       {isAffiliateStep() && (
