@@ -130,20 +130,6 @@ const RegisterPage = () => {
     return step === _step;
   };
 
-  const onCreatorDetailsContinue = (
-    values: z.infer<typeof CreatorDetailsSchema>
-  ) => {
-    setUserData((prev) => ({ ...prev, creatorDetails: values }));
-    setStep((prev) => prev + 1);
-  };
-
-  const onCreatorDetailsBack = (
-    values: z.infer<typeof CreatorDetailsSchema>
-  ) => {
-    setUserData((prev) => ({ ...prev, creatorDetails: values }));
-    setStep((prev) => prev - 1);
-  };
-
   const onSelectMatchingContinue = (
     values: SignedUpData["creatorMatchings"]
   ) => {
@@ -371,9 +357,10 @@ const RegisterPage = () => {
       )}
       {isCreatorStep() && (
         <CreatorDetailsForm
-          defaultData={userData.creatorDetails}
-          onContinue={onCreatorDetailsContinue}
-          onBack={onCreatorDetailsBack}
+          userData={userData}
+          setUserData={setUserData}
+          moveStepForward={moveStepForward}
+          moveStepBackward={moveStepBackward}
         />
       )}
       {isMatchingStep() && (
