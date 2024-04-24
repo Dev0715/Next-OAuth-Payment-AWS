@@ -3,3 +3,5 @@ export const CREATOR_TYPES = [
   "Web Designer",
   "Project Manager"
 ];
+
+export type TypeOfUser = (typeof CREATOR_TYPES)[number];

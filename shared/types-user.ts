@@ -1,3 +1,4 @@
+import { TypeOfUser } from "@/assets/creator-types";
 import {
   CreatorDetailsSchema,
   GeneralDetailsSchema,
@@ -33,6 +34,7 @@ export type CreatorData = {
   creatorId: string;
   cover?: string;
   bio: string;
+  typeOfUser: TypeOfUser;
 };
 
 export type CustomerData = {
