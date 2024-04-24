@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,17 +17,20 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { SelectAccountsSchema } from "@/schemas/auth/register";
 import { Switch } from "@/components/ui/switch";
+import { SignedUpData } from "@/shared/types-user";
 
 type Props = {
-  defaultData: z.infer<typeof SelectAccountsSchema>;
-  onContinue: (values: z.infer<typeof SelectAccountsSchema>) => void;
-  onBack: (values: z.infer<typeof SelectAccountsSchema>) => void;
+  userData: SignedUpData;
+  setUserData: Dispatch<SetStateAction<SignedUpData>>;
+  moveStepForward: () => void;
+  moveStepBackward: () => void;
 };
 
 export const SelectAccountsForm = ({
-  defaultData,
-  onContinue,
-  onBack
+  userData,
+  setUserData,
+  moveStepForward,
+  moveStepBackward
 }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
@@ -36,7 +39,7 @@ export const SelectAccountsForm = ({
   const form = useForm<z.infer<typeof SelectAccountsSchema>>({
     resolver: zodResolver(SelectAccountsSchema),
     defaultValues: {
-      ...defaultData
+      ...userData.selectedAccounts
     }
   });
 
@@ -45,12 +48,14 @@ export const SelectAccountsForm = ({
       setConfirmOpen(true);
       setConfirmMessage("Please select at least one account type to create!");
     } else {
-      onContinue(values);
+      setUserData({ ...userData, selectedAccounts: values });
+      moveStepForward();
     }
   };
 
   const onBackClicked = () => {
-    onBack(form.getValues());
+    setUserData({ ...userData, selectedAccounts: form.getValues() });
+    moveStepBackward();
   };
 
   return (
