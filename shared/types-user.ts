@@ -60,6 +60,13 @@ export type User = {
 
   phone1?: string;
   phone2?: string;
+
+  website1?: string;
+  website2?: string;
+  website3?: string;
+  website4?: string;
+  website5?: string;
+
   address: Address;
   company: Company;
 
