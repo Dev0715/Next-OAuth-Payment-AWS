@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -18,13 +18,19 @@ import { GeneralDetailsSchema } from "@/schemas/auth/register";
 import { FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
+import { SignedUpData } from "@/shared/types-user";
 
 type Props = {
-  defaultData: z.infer<typeof GeneralDetailsSchema>;
+  userData: SignedUpData;
+  setUserData: Dispatch<SetStateAction<SignedUpData>>;
   onContinue: (values: z.infer<typeof GeneralDetailsSchema>) => void;
 };
 
-export const GeneralDetailsForm = ({ defaultData, onContinue }: Props) => {
+export const GeneralDetailsForm = ({
+  userData,
+  setUserData,
+  onContinue
+}: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>("");
