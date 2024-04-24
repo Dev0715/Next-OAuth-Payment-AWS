@@ -130,27 +130,6 @@ const RegisterPage = () => {
     return step === _step;
   };
 
-  const onGeneralDetailsContinue = (
-    values: z.infer<typeof GeneralDetailsSchema>
-  ) => {
-    setUserData((prev) => ({ ...prev, generalDetails: values }));
-    setStep((prev) => prev + 1);
-  };
-
-  const onSelectAccountsContinue = (
-    values: z.infer<typeof SelectAccountsSchema>
-  ) => {
-    setUserData((prev) => ({ ...prev, selectedAccounts: values }));
-    setStep((prev) => prev + 1);
-  };
-
-  const onSelectAccountsBack = (
-    values: z.infer<typeof SelectAccountsSchema>
-  ) => {
-    setUserData((prev) => ({ ...prev, selectedAccounts: values }));
-    setStep((prev) => prev - 1);
-  };
-
   const onCreatorDetailsContinue = (
     values: z.infer<typeof CreatorDetailsSchema>
   ) => {
@@ -380,14 +359,14 @@ const RegisterPage = () => {
           userData={userData}
           setUserData={setUserData}
           moveStepForward={moveStepForward}
-          moveStepBackward={moveStepBackward}
         />
       )}
       {step === 1 && (
         <SelectAccountsForm
-          defaultData={userData.selectedAccounts}
-          onContinue={onSelectAccountsContinue}
-          onBack={onSelectAccountsBack}
+          userData={userData}
+          setUserData={setUserData}
+          moveStepForward={moveStepForward}
+          moveStepBackward={moveStepBackward}
         />
       )}
       {isCreatorStep() && (
