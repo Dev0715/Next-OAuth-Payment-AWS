@@ -76,7 +76,7 @@ const RegisterPage = () => {
   };
 
   const moveStepBackward = () => {
-    setStep(step + 1);
+    setStep(step - 1);
   };
 
   const isActive = () => {
