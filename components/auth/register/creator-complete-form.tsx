@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { SignedUpData } from "@/shared/types-user";
+import { v4 as uuidv4 } from "uuid";
+import { axiosClient, axiosConfig } from "@/lib/axios";
+import { register } from "@/actions/auth/register/register";
 
 type Props = {
   userData: SignedUpData;
@@ -22,7 +25,37 @@ export const CreatorCompleteForm = ({
   const [isPending, startTransition] = useTransition();
   const [isDisabled, setDisabled] = useState<boolean>(false);
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
+  const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmMessage, setConfirmMessage] = useState<string>("");
+
+  const uploadImages = async () => {
+    const formData = new FormData();
+    if (userData.creatorDetails.avatar)
+      formData.append("file1", userData.creatorDetails.avatar);
+    if (userData.creatorDetails.cover)
+      formData.append("file2", userData.creatorDetails.cover);
+
+    if (userData.creatorDetails.avatar || userData.creatorDetails.cover) {
+      try {
+        const response = await axiosClient.post(
+          "/multi-upload",
+          formData,
+          axiosConfig
+        );
+        const data = response.data;
+
+        if (data.success) {
+          return data.pathList;
+        } else {
+          return [];
+        }
+      } catch (error) {
+        return [];
+      }
+    } else {
+      return [];
+    }
+  };
 
   const getCreatorData = () => {
     const scraped: any = {};
@@ -91,7 +124,7 @@ export const CreatorCompleteForm = ({
           if (res.success) {
             setConfirmTitle("Success");
             setConfirmMessage("A new creator was newly registerd!");
-            setStep((prev) => prev + 1);
+            moveStepForward();
           } else {
             setConfirmTitle("Error");
             setConfirmMessage(res.error as string);
@@ -99,6 +132,10 @@ export const CreatorCompleteForm = ({
         });
       });
     });
+  };
+
+  const onBack = () => {
+    moveStepBackward();
   };
 
   return (
@@ -134,7 +171,7 @@ export const CreatorCompleteForm = ({
       </p>
       <div className="w-full flex items-center justify-between mt-4">
         <Button
-          disabled={pending}
+          disabled={isDisabled}
           variant={"outline"}
           className="w-64 flex gap-x-4 border-red-700"
           onClick={onBack}
@@ -143,7 +180,7 @@ export const CreatorCompleteForm = ({
           Back
         </Button>
         <Button
-          disabled={pending}
+          disabled={isDisabled}
           className="w-64 flex gap-x-4"
           onClick={onContinue}
         >
