@@ -100,12 +100,15 @@ export const UserButton = () => {
               </DropdownMenuItem>
             </Link>
           )}
-          <Link href="/user">
-            <DropdownMenuItem>
-              <MixerHorizontalIcon className="h-4 w-4 mr-3" />
-              <span>User Settings</span>
-            </DropdownMenuItem>
-          </Link>
+          {user.customer && (
+            <Link href="/user">
+              <DropdownMenuItem>
+                <MixerHorizontalIcon className="h-4 w-4 mr-3" />
+                <span>User Settings</span>
+              </DropdownMenuItem>
+            </Link>
+          )}
+
           <Link href="/cart">
             <DropdownMenuItem>
               <FaCartArrowDown className="h-4 w-4 mr-3" />
