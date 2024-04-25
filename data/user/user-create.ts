@@ -21,10 +21,10 @@ export const createUser = async (data: any) => {
   const command = new PutCommand({
     TableName,
     Item: {
+      ...data,
       userId,
       verificationToken,
-      expires,
-      ...data
+      expires
     }
   });
 

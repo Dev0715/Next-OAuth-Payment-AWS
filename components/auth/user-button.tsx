@@ -108,7 +108,6 @@ export const UserButton = () => {
               </DropdownMenuItem>
             </Link>
           )}
-
           <Link href="/cart">
             <DropdownMenuItem>
               <FaCartArrowDown className="h-4 w-4 mr-3" />
