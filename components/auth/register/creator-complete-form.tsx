@@ -1,10 +1,10 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { SignedUpData } from "@/shared/types-user";
+import { SignedUpData, User } from "@/shared/types-user";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { register } from "@/actions/auth/register/register";
@@ -22,7 +22,6 @@ export const CreatorCompleteForm = ({
   moveStepForward,
   moveStepBackward
 }: Props) => {
-  const [isPending, startTransition] = useTransition();
   const [isDisabled, setDisabled] = useState<boolean>(false);
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
@@ -142,9 +141,9 @@ export const CreatorCompleteForm = ({
     <div className="w-full flex flex-col gap-y-6">
       <ConfirmAlert
         open={isConfirmOpen}
-        title="Error"
+        title={confirmTitle}
         message={confirmMessage}
-        onOK={() => setConfirmOpen(false)}
+        onOK={onConfimred}
       />
       <p className="text-xl text-green-700">
         5. Complete registration for a creator.
