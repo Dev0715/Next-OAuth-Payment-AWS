@@ -14,18 +14,18 @@ import { RegisterCompleteForm } from "@/components/auth/register/register-comple
 const RegisterPage = () => {
   const [userData, setUserData] = useState<SignedUpData>({
     generalDetails: {
-      username: "andreicasian1",
-      email: "andrei.devcasian1@gmail.com",
+      username: "firstnamelastname",
+      email: "firstname@org.com",
       password: "123456",
-      firstname: "andrei",
-      lastname: "caisan",
+      firstname: "firstname",
+      lastname: "lastname",
       phone1: "",
       phone2: "",
-      address1: "str Vasile Lupy 64/4",
-      address2: "",
-      city: "Chisinau",
-      postal: "MD-2012",
-      country: "Moldova"
+      address1: "address 1",
+      address2: "address 2",
+      city: "city",
+      postal: "postal",
+      country: "country"
     },
     selectedAccounts: {
       creator: false,
@@ -33,7 +33,7 @@ const RegisterPage = () => {
       affiliate: false
     },
     creatorDetails: {
-      bio: "description",
+      bio: "Description - Bio",
       typeOfUser: "Project Manager",
       companyName: "",
       companyCountry: "",
