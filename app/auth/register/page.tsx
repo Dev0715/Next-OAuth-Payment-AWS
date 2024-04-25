@@ -10,6 +10,7 @@ import { SignedUpData } from "@/shared/types-user";
 import { useState, useTransition } from "react";
 import { AffiliateCompleteForm } from "@/components/auth/register/affiliate-complete-form";
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
+import { Transition } from "@headlessui/react";
 
 const RegisterPage = () => {
   const [userData, setUserData] = useState<SignedUpData>({
@@ -119,21 +120,40 @@ const RegisterPage = () => {
   return (
     <div className="w-[640px] flex flex-col pt-6 gap-y-12">
       <p className="text-4xl font-semibold">Let's get you started</p>
-      {step === 0 && (
+
+      <Transition
+        show={step == 0}
+        enter="transition ease-in-out duration-500 delay-200 order-first"
+        enterFrom="opacity-0 scale-105"
+        enterTo="opacity-100 scale-100"
+        leave="transition ease-in-out duration-300 absolute"
+        leaveFrom="opacity-100 scale-100"
+        leaveTo="opacity-0 scale-95"
+      >
         <GeneralDetailsForm
           userData={userData}
           setUserData={setUserData}
           moveStepForward={moveStepForward}
         />
-      )}
-      {step === 1 && (
+      </Transition>
+
+      <Transition
+        show={step == 1}
+        enter="transition ease-in-out duration-500 delay-200 order-first"
+        enterFrom="opacity-0 scale-105"
+        enterTo="opacity-100 scale-100"
+        leave="transition ease-in-out duration-300 absolute"
+        leaveFrom="opacity-100 scale-100"
+        leaveTo="opacity-0 scale-95"
+      >
         <SelectAccountsForm
           userData={userData}
           setUserData={setUserData}
           moveStepForward={moveStepForward}
           moveStepBackward={moveStepBackward}
         />
-      )}
+      </Transition>
+
       {isCreatorStep() && (
         <CreatorDetailsForm
           userData={userData}
