@@ -33,7 +33,6 @@ export const AffiliateCompleteForm = ({
       setConfirmOpen(true);
       setConfirmTitle("Success");
       setConfirmMessage("A new affiliate was newly registerd!");
-      moveStepForward();
     } else {
       startTransition(() => {
         const user: User = {
@@ -63,7 +62,6 @@ export const AffiliateCompleteForm = ({
           if (res.success) {
             setConfirmTitle("Success");
             setConfirmMessage("A new affiliate was newly registerd!");
-            moveStepForward();
           } else {
             setConfirmTitle("Error");
             setConfirmMessage(res.error as string);
@@ -74,7 +72,7 @@ export const AffiliateCompleteForm = ({
   };
 
   const onBack = () => {
-    if (!userData.selectedAccounts.creator && userData.selectedAccounts.user) {
+    if (!userData.selectedAccounts.creator || userData.selectedAccounts.user) {
       setConfirmOpen(true);
       setConfirmTitle("Warning");
       setConfirmMessage(
@@ -85,13 +83,20 @@ export const AffiliateCompleteForm = ({
     }
   };
 
+  const onConfirmed = () => {
+    setConfirmOpen(false);
+    if (confirmTitle === "Success") {
+      moveStepForward();
+    }
+  };
+
   return (
     <div className="w-full flex flex-col gap-y-6">
       <ConfirmAlert
         open={isConfirmOpen}
-        title="Error"
+        title={confirmTitle}
         message={confirmMessage}
-        onOK={() => setConfirmOpen(false)}
+        onOK={onConfirmed}
       />
       <p className="text-xl text-green-700">
         {step + 1}. Complete registration for an affiliate.
