@@ -12,8 +12,8 @@ export type ProductLink = {
 };
 
 export type Address = {
-  addy1: string;
-  addy2?: string;
+  address1: string;
+  address2?: string;
   city: string;
   postal: string;
   country: string;
@@ -55,11 +55,11 @@ export type AffiliateData = {
 };
 
 export type User = {
-  userId?: string;
+  userId: string;
   username: string;
+  email: string;
   password: string;
 
-  email: string;
   firstname: string;
   lastname?: string;
 
