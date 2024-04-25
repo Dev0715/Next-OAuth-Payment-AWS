@@ -11,6 +11,7 @@ import { useState, useTransition } from "react";
 import { AffiliateCompleteForm } from "@/components/auth/register/affiliate-complete-form";
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
 import { Transition } from "@headlessui/react";
+import { TransitionInOut } from "@/components/utils/transition-in-out";
 
 const RegisterPage = () => {
   const [userData, setUserData] = useState<SignedUpData>({
@@ -118,67 +119,47 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="w-[640px] flex flex-col pt-6 gap-y-12">
-      <p className="text-4xl font-semibold">Let's get you started</p>
-
-      <Transition
-        show={step == 0}
-        enter="transition ease-in-out duration-500 delay-200 order-first"
-        enterFrom="opacity-0 scale-105"
-        enterTo="opacity-100 scale-100"
-        leave="transition ease-in-out duration-300 absolute"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
+    <div className="w-[640px] flex flex-col pt-6">
+      <TransitionInOut condition={step === 0}>
         <GeneralDetailsForm
           userData={userData}
           setUserData={setUserData}
           moveStepForward={moveStepForward}
         />
-      </Transition>
-
-      <Transition
-        show={step == 1}
-        enter="transition ease-in-out duration-500 delay-200 order-first"
-        enterFrom="opacity-0 scale-105"
-        enterTo="opacity-100 scale-100"
-        leave="transition ease-in-out duration-300 absolute"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
+      </TransitionInOut>
+      <TransitionInOut condition={step === 1}>
         <SelectAccountsForm
           userData={userData}
           setUserData={setUserData}
           moveStepForward={moveStepForward}
           moveStepBackward={moveStepBackward}
         />
-      </Transition>
-
-      {isCreatorStep() && (
+      </TransitionInOut>
+      <TransitionInOut condition={isCreatorStep()}>
         <CreatorDetailsForm
           userData={userData}
           setUserData={setUserData}
           moveStepForward={moveStepForward}
           moveStepBackward={moveStepBackward}
         />
-      )}
-      {isMatchingStep() && (
+      </TransitionInOut>
+      <TransitionInOut condition={isMatchingStep()}>
         <SelectMatchingForm
           userData={userData}
           setUserData={setUserData}
           moveStepForward={moveStepForward}
           moveStepBackward={moveStepBackward}
         />
-      )}
-      {isCreatorCompleteStep() && (
+      </TransitionInOut>
+      <TransitionInOut condition={isCreatorCompleteStep()}>
         <CreatorCompleteForm
           userData={userData}
           setUserData={setUserData}
           moveStepForward={moveStepForward}
           moveStepBackward={moveStepBackward}
         />
-      )}
-      {isUserStep() && (
+      </TransitionInOut>
+      <TransitionInOut condition={isUserStep()}>
         <UserCompleteForm
           step={step}
           userData={userData}
@@ -186,8 +167,8 @@ const RegisterPage = () => {
           moveStepForward={moveStepForward}
           moveStepBackward={moveStepBackward}
         />
-      )}
-      {isAffiliateStep() && (
+      </TransitionInOut>
+      <TransitionInOut condition={isAffiliateStep()}>
         <AffiliateCompleteForm
           step={step}
           userData={userData}
@@ -195,8 +176,10 @@ const RegisterPage = () => {
           moveStepForward={moveStepForward}
           moveStepBackward={moveStepBackward}
         />
-      )}
-      {isRegisterCompleteStep() && <RegisterCompleteForm step={step} />}
+      </TransitionInOut>
+      <TransitionInOut condition={isRegisterCompleteStep()}>
+        <RegisterCompleteForm step={step} />
+      </TransitionInOut>
     </div>
   );
 };
