@@ -11,7 +11,14 @@ export const captureOrder = async (params: OrderType) => {
   try {
     const PaypalClient = paypalClient();
     const request = new paypal.orders.OrdersCaptureRequest(params.paymentId);
-    request.requestBody({}); // typescript issue
+    request.requestBody({
+      payment_source: {
+        token: {
+          id: params.paymentId,
+          type: "BILLING_AGREEMENT"
+        }
+      }
+    });
     const response = await PaypalClient.execute(request);
 
     // Doing something related to the transaction
