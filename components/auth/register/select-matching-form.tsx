@@ -1,10 +1,9 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { SignedUpData } from "@/shared/types-user";
+import { SignedUpData } from "@/shared/types/types-signup-data";
 import { Evanto } from "./matching-sites/evanto";
 import { Behance } from "./matching-sites/behance";
 import { ArtStation } from "./matching-sites/artstation";
@@ -24,9 +23,6 @@ export const SelectMatchingForm = ({
   moveStepForward,
   moveStepBackward
 }: Props) => {
-  const [isPending, startTransition] = useTransition();
-  const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
-  const [confirmMessage, setConfirmMessage] = useState<string>("");
   const [matchings, setMatchings] = useState<SignedUpData["creatorMatchings"]>({
     ...userData.creatorMatchings
   });
@@ -43,12 +39,6 @@ export const SelectMatchingForm = ({
 
   return (
     <div className="w-full flex flex-col gap-y-6">
-      <ConfirmAlert
-        open={isConfirmOpen}
-        title="Error"
-        message={confirmMessage}
-        onOK={() => setConfirmOpen(false)}
-      />
       <p className="text-xl text-green-700">
         4. Please confirm your accounts on other creative markets.
       </p>
@@ -74,7 +64,6 @@ export const SelectMatchingForm = ({
       />
       <div className="w-full flex items-center justify-between mt-4">
         <Button
-          disabled={isPending}
           variant={"outline"}
           className="w-64 flex gap-x-4 border-red-700"
           onClick={onBackClicked}
@@ -82,11 +71,7 @@ export const SelectMatchingForm = ({
           <FaArrowLeft />
           Back
         </Button>
-        <Button
-          disabled={isPending}
-          className="w-64 flex gap-x-4"
-          onClick={onContinueClicked}
-        >
+        <Button className="w-64 flex gap-x-4" onClick={onContinueClicked}>
           <FaArrowRight />
           Next
         </Button>
