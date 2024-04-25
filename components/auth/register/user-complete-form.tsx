@@ -91,13 +91,20 @@ export const UserCompleteForm = ({
     }
   };
 
+  const onConfirmed = () => {
+    setConfirmOpen(false);
+    if (confirmTitle === "Success") {
+      moveStepForward();
+    }
+  };
+
   return (
     <div className="w-full flex flex-col gap-y-6">
       <ConfirmAlert
         open={isConfirmOpen}
         title="Error"
         message={confirmMessage}
-        onOK={() => setConfirmOpen(false)}
+        onOK={() => onConfirmed}
       />
       <p className="text-xl text-green-700">
         {step + 1}. Complete registration for a user.
@@ -120,7 +127,7 @@ export const UserCompleteForm = ({
       </p>
       <div className="w-full flex items-center justify-between mt-4">
         <Button
-          disabled={isDisabled}
+          disabled={isPending}
           variant={"outline"}
           className="w-64 flex gap-x-4 border-red-700"
           onClick={onBack}
@@ -129,7 +136,7 @@ export const UserCompleteForm = ({
           Back
         </Button>
         <Button
-          disabled={isDisabled}
+          disabled={isPending}
           className="w-64 flex gap-x-4"
           onClick={onContinue}
         >
