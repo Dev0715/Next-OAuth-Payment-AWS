@@ -15,17 +15,17 @@ const RegisterPage = () => {
   const [userData, setUserData] = useState<SignedUpData>({
     generalDetails: {
       username: "andreicasian1",
+      email: "andrei.devcasian1@gmail.com",
+      password: "123456",
       firstname: "andrei",
       lastname: "caisan",
+      phone1: "",
+      phone2: "",
       address1: "str Vasile Lupy 64/4",
       address2: "",
       city: "Chisinau",
       postal: "MD-2012",
-      country: "Moldova",
-      phone1: "",
-      phone2: "",
-      email: "andrei.devcasian1@gmail.com",
-      password: "123456"
+      country: "Moldova"
     },
     selectedAccounts: {
       creator: false,
