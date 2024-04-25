@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { SignedUpData } from "@/shared/types-user";
+import { SignedUpData, User } from "@/shared/types-user";
 import { v4 as uuidv4 } from "uuid";
 import { register } from "@/actions/auth/register/register";
 
@@ -37,9 +37,34 @@ export const UserCompleteForm = ({
       moveStepForward();
     } else {
       startTransition(() => {
-        const user: any = { ...userData.generalDetails, userRoleId: uuidv4() };
+        const user: User = {
+          userId: userData.generalDetails.username,
+          username: userData.generalDetails.username,
+          email: userData.generalDetails.email,
+          password: userData.generalDetails.password,
+          firstname: userData.generalDetails.firstname,
+          lastname: userData.generalDetails.lastname,
+          phone1: userData.generalDetails.phone1,
+          phone2: userData.generalDetails.phone2,
+          address: {
+            address1: userData.generalDetails.address1,
+            address2: userData.generalDetails.address2,
+            city: userData.generalDetails.city,
+            postal: userData.generalDetails.postal,
+            country: userData.generalDetails.country
+          },
+
+          customer: {
+            isCustomer: true,
+            customerId: uuidv4()
+          }
+        };
+
         if (userData.selectedAccounts.affiliate) {
-          user["affiliateId"] = uuidv4();
+          user.affiliate = {
+            isAffiliate: true,
+            affiliateId: uuidv4()
+          };
         }
 
         register(user).then((res) => {
