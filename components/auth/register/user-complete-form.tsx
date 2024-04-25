@@ -23,7 +23,6 @@ export const UserCompleteForm = ({
   moveStepForward,
   moveStepBackward
 }: Props) => {
-  const [isDisabled, setDisabled] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
@@ -34,7 +33,6 @@ export const UserCompleteForm = ({
       setConfirmOpen(true);
       setConfirmTitle("Success");
       setConfirmMessage("A new user was newly registerd!");
-      moveStepForward();
     } else {
       startTransition(() => {
         const user: User = {
@@ -69,11 +67,9 @@ export const UserCompleteForm = ({
 
         register(user).then((res) => {
           setConfirmOpen(true);
-          setDisabled(false);
           if (res.success) {
             setConfirmTitle("Success");
             setConfirmMessage("A new user was newly registerd!");
-            moveStepForward();
           } else {
             setConfirmTitle("Error");
             setConfirmMessage(res.error as string);
