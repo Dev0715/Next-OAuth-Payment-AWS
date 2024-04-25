@@ -55,7 +55,7 @@ export const login = async (
 
   let callbackLink = callbackUrl || DEFAULT_LOGIN_REDIRECT;
   if (existingUser.creator) {
-    callbackLink = `/profile/creator/${existingUser.userId}`;
+    callbackLink = `/creator/${existingUser.userId}`;
   }
 
   try {
