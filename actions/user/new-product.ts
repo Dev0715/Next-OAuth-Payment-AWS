@@ -14,11 +14,13 @@ export const addNewProduct = async (userId: string, product: ParamsType) => {
     return { error: "Internal server error" };
   }
 
-  const products = existingUser.products || [];
+  const creatorData = existingUser.creator;
+  creatorData.products = creatorData.products || [];
+  creatorData.products.push(product);
 
   const response = await updateUserProducts({
     userId,
-    products: [...products, product]
+    creator: creatorData
   });
 
   if (response) {

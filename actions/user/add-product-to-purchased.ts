@@ -1,9 +1,8 @@
 "use server";
 
 import { getUserById } from "@/data/user/user-by-id";
-import { updateUserCart } from "@/data/user/cart-update";
-import { ProductLink } from "@/shared/types-user";
 import { updateUserPurchased } from "@/data/user/purchased-update";
+import { ProductLink } from "@/shared/types/types-user";
 
 type Params = {
   userId: string;
