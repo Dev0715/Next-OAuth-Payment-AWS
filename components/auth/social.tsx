@@ -1,8 +1,8 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { FcAddressBook } from "react-icons/fc";
-import { FaGithub, FaDiscord, FaApple, FaArtstation } from "react-icons/fa";
+import { SiAdobe, SiDiscord, SiEpicgames } from "react-icons/si";
+import { FaGithub } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
@@ -27,7 +27,7 @@ export const Social = () => {
           onClick("adobe");
         }}
       >
-        <FcAddressBook className="h-5 w-4" />
+        <SiAdobe className="h-5 w-4" />
       </Button>
       <Button
         size="lg"
@@ -47,7 +47,7 @@ export const Social = () => {
           onClick("discord");
         }}
       >
-        <FaDiscord className="h-5 w-4" />
+        <SiDiscord className="h-5 w-4" />
       </Button>
       <Button
         size="lg"
@@ -57,7 +57,7 @@ export const Social = () => {
           onClick("epicgames");
         }}
       >
-        <FaArtstation className="h-5 w-4" />
+        <SiEpicgames className="h-5 w-4" />
       </Button>
     </div>
   );
