@@ -1,12 +1,13 @@
-"use client"
+"use client";
 
-import React from 'react';
+import React, { useEffect } from "react";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import Link from 'next/link';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import authConfig from "@/auth.config";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -25,8 +26,15 @@ const Home = () => {
   //   "top-[480px] right-16 rotate-[-6deg]",
   // ]
 
+  const user = useCurrentUser();
+
+  const onClick = () => {
+    console.log(user);
+  };
+
   return (
     <main className="relative w-full flex justify-center pt-24 pb-6">
+      <Button onClick={onClick}> sadfsdaf </Button>
       {/* {imagesPosition.map(_style => (
         <Avatar className={`absolute w-96 h-56 rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 blur-sm ${_style}`}>
           <AvatarImage
