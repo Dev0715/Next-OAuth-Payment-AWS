@@ -57,80 +57,103 @@ export const CreatorCompleteForm = ({
   };
 
   const getCreatorData = () => {
-    const scraped: any = {};
-    if (userData.creatorMatchings.env) {
-      scraped["env"] = {};
-    } else if (userData.creatorMatchings.beh) {
-      scraped["beh"] = {};
-    } else if (userData.creatorMatchings.art) {
-      scraped["art"] = {};
-    } else if (userData.creatorMatchings.drb) {
-      scraped["drb"] = {};
-    } else if (userData.creatorMatchings.cmk) {
-      scraped["cmk"] = {};
-    }
+    // const scraped: any = {};
 
-    const creator: any = {
-      ...userData.generalDetails,
-      creator: {
-        ...userData.creatorDetails
+    const user: User = {
+      userId: userData.generalDetails.username,
+      username: userData.generalDetails.username,
+      email: userData.generalDetails.email,
+      password: userData.generalDetails.password,
+      firstname: userData.generalDetails.firstname,
+      lastname: userData.generalDetails.lastname,
+      phone1: userData.generalDetails.phone1,
+      phone2: userData.generalDetails.phone2,
+      address: {
+        address1: userData.generalDetails.address1,
+        address2: userData.generalDetails.address2,
+        city: userData.generalDetails.city,
+        postal: userData.generalDetails.postal,
+        country: userData.generalDetails.country
       },
-      scraped
+
+      creator: {
+        isCreator: true,
+        creatorId: uuidv4(),
+        bio: userData.creatorDetails.bio,
+        typeOfUser: userData.creatorDetails.typeOfUser,
+        websites: []
+      }
     };
 
-    if (userData.selectedAccounts.user) {
-      creator["userRoleId"] = uuidv4();
+    if (user.creator && userData.creatorDetails.companyName) {
+      user.creator["company"] = {
+        name: userData.creatorDetails.companyName,
+        country: userData.creatorDetails.companyCountry,
+        website: userData.creatorDetails.companyWebsite
+      };
     }
 
-    if (userData.selectedAccounts.affiliate) {
-      creator["affiliateId"] = uuidv4();
+    if (user.creator?.websites) {
+      if (userData.creatorDetails.website1)
+        user.creator.websites.push(userData.creatorDetails.website1);
+      if (userData.creatorDetails.website2)
+        user.creator.websites.push(userData.creatorDetails.website2);
+      if (userData.creatorDetails.website3)
+        user.creator.websites.push(userData.creatorDetails.website3);
+      if (userData.creatorDetails.website4)
+        user.creator.websites.push(userData.creatorDetails.website4);
+      if (userData.creatorDetails.website5)
+        user.creator.websites.push(userData.creatorDetails.website5);
     }
 
-    return creator;
+    return user;
   };
 
   const onContinue = () => {
-    startTransition(() => {
-      setDisabled(true);
-      const creator = getCreatorData();
+    setDisabled(true);
+    const user = getCreatorData();
 
-      uploadImages().then((pathList) => {
-        if (userData.creatorDetails.avatar) {
-          if (pathList.length > 0) {
-            creator.creator.avatar = pathList[0];
-          } else {
-            delete creator.creator.avatar;
-          }
-
-          if (userData.creatorDetails.cover) {
-            if (pathList.length > 1) {
-              creator.creator.cover = pathList[1];
-            } else {
-              delete creator.creator.cover;
-            }
-          }
-        } else if (userData.creatorDetails.cover) {
-          if (pathList.length > 0) {
-            creator.creator.cover = pathList[0];
-          } else {
-            delete creator.creator.cover;
+    uploadImages().then((pathList) => {
+      if (userData.creatorDetails.avatar) {
+        if (pathList.length > 0) {
+          user.avatar = pathList[0];
+        }
+        if (userData.creatorDetails.cover) {
+          if (pathList.length > 1 && user.creator) {
+            user.creator.cover = pathList[1];
           }
         }
+      } else if (userData.creatorDetails.cover) {
+        if (pathList.length > 0 && user.creator) {
+          user.creator.cover = pathList[0];
+        }
+      }
 
-        register(creator).then((res) => {
-          setConfirmOpen(true);
+      register(user)
+        .then((res) => {
           setDisabled(false);
+          setConfirmOpen(true);
           if (res.success) {
             setConfirmTitle("Success");
             setConfirmMessage("A new creator was newly registerd!");
-            moveStepForward();
           } else {
             setConfirmTitle("Error");
             setConfirmMessage(res.error as string);
           }
+        })
+        .catch((error) => {
+          setConfirmOpen(true);
+          setConfirmTitle("Error");
+          setConfirmMessage("Internal Server Error!");
         });
-      });
     });
+  };
+
+  const onConfimred = () => {
+    setConfirmOpen(false);
+    if (confirmTitle === "Success") {
+      moveStepForward();
+    }
   };
 
   const onBack = () => {
