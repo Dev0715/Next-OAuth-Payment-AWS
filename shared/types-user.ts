@@ -35,6 +35,8 @@ export type CreatorData = {
   cover?: string;
   bio: string;
   typeOfUser: TypeOfUser;
+  company?: Company;
+  websites?: string[];
 
   products?: ProductLink[];
 };
@@ -53,8 +55,9 @@ export type AffiliateData = {
 };
 
 export type User = {
-  userId: string;
+  userId?: string;
   username: string;
+  password: string;
 
   email: string;
   firstname: string;
@@ -65,14 +68,15 @@ export type User = {
 
   phone1?: string;
   phone2?: string;
-  websites?: string[];
 
   address: Address;
-  company: Company;
 
   creator?: CreatorData;
   customer?: CustomerData;
   affiliate?: AffiliateData;
+
+  verificationToken?: string;
+  expires?: string;
 };
 
 export type SignedUpData = {
