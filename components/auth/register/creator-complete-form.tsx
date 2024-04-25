@@ -106,6 +106,20 @@ export const CreatorCompleteForm = ({
         user.creator.websites.push(userData.creatorDetails.website5);
     }
 
+    if (userData.selectedAccounts.user) {
+      user.customer = {
+        isCustomer: true,
+        customerId: uuidv4()
+      };
+    }
+
+    if (userData.selectedAccounts.affiliate) {
+      user.affiliate = {
+        isAffiliate: true,
+        affiliateId: uuidv4()
+      };
+    }
+
     return user;
   };
 
