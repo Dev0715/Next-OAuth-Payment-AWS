@@ -102,9 +102,9 @@ export const UserCompleteForm = ({
     <div className="w-full flex flex-col gap-y-6">
       <ConfirmAlert
         open={isConfirmOpen}
-        title="Error"
+        title={confirmTitle}
         message={confirmMessage}
-        onOK={() => onConfirmed}
+        onOK={onConfirmed}
       />
       <p className="text-xl text-green-700">
         {step + 1}. Complete registration for a user.
