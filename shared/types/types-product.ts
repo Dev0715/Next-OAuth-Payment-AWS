@@ -1,6 +1,14 @@
+export type ProductState = "created" | "approved" | "rejected" | "updated";
+
 type CreativeFile = {
   name: string;
   path: string;
+};
+
+export type ProductEvent = {
+  state: ProductState;
+  comment: string;
+  userId: string;
 };
 
 export type Product = {
@@ -13,6 +21,10 @@ export type Product = {
   fileList: CreativeFile[];
   previewList: string[];
   keywords: string[];
+  approval: {
+    state: ProductState;
+    history: ProductEvent[];
+  };
 };
 
 export interface CartProduct extends Product {

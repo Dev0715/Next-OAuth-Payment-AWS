@@ -1,10 +1,4 @@
 import { TypeOfUser } from "@/assets/creator-types";
-import {
-  CreatorDetailsSchema,
-  GeneralDetailsSchema,
-  SelectAccountsSchema
-} from "@/schemas/auth/register";
-import { z } from "zod";
 
 export type ProductLink = {
   productType: string;
@@ -54,6 +48,11 @@ export type AffiliateData = {
   affiliateId: string;
 };
 
+export type ManagerData = {
+  isManager: boolean;
+  managerId: string;
+};
+
 export type User = {
   userId: string;
   username: string;
@@ -74,20 +73,8 @@ export type User = {
   creator?: CreatorData;
   customer?: CustomerData;
   affiliate?: AffiliateData;
+  manager?: ManagerData;
 
   verificationToken?: string;
   expires?: string;
-};
-
-export type SignedUpData = {
-  generalDetails: z.infer<typeof GeneralDetailsSchema>;
-  selectedAccounts: z.infer<typeof SelectAccountsSchema>;
-  creatorDetails: z.infer<typeof CreatorDetailsSchema>;
-  creatorMatchings: {
-    env: boolean;
-    beh: boolean;
-    art: boolean;
-    drb: boolean;
-    cmk: boolean;
-  };
 };
