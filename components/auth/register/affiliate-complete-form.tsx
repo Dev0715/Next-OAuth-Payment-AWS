@@ -1,26 +1,69 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { SignedUpData } from "@/shared/types-user";
+import { v4 as uuidv4 } from "uuid";
+import { register } from "@/actions/auth/register/register";
 
 type Props = {
-  pending: boolean;
   step: number;
-  onContinue: () => void;
-  onBack: () => void;
+  userData: SignedUpData;
+  setUserData: Dispatch<SetStateAction<SignedUpData>>;
+  moveStepForward: () => void;
+  moveStepBackward: () => void;
 };
 
 export const AffiliateCompleteForm = ({
-  pending,
   step,
-  onContinue,
-  onBack
+  userData,
+  setUserData,
+  moveStepForward,
+  moveStepBackward
 }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
+  const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmMessage, setConfirmMessage] = useState<string>("");
+
+  const onContinue = () => {
+    if (userData.selectedAccounts.creator || userData.selectedAccounts.user) {
+      setConfirmOpen(true);
+      setConfirmTitle("Success");
+      setConfirmMessage("A new affiliate was newly registerd!");
+      moveStepForward();
+    } else {
+      startTransition(() => {
+        register({ ...userData.generalDetails, affiliateId: uuidv4() }).then(
+          (res) => {
+            setConfirmOpen(true);
+            if (res.success) {
+              setConfirmTitle("Success");
+              setConfirmMessage("A new affiliate was newly registerd!");
+              moveStepForward();
+            } else {
+              setConfirmTitle("Error");
+              setConfirmMessage(res.error as string);
+            }
+          }
+        );
+      });
+    }
+  };
+
+  const onBack = () => {
+    if (!userData.selectedAccounts.creator && userData.selectedAccounts.user) {
+      setConfirmOpen(true);
+      setConfirmTitle("Warning");
+      setConfirmMessage(
+        "You can't go backward since you already registered a user!"
+      );
+    } else {
+      moveStepBackward();
+    }
+  };
 
   return (
     <div className="w-full flex flex-col gap-y-6">
@@ -57,7 +100,7 @@ export const AffiliateCompleteForm = ({
       </p>
       <div className="w-full flex items-center justify-between mt-4">
         <Button
-          disabled={pending}
+          disabled={isPending}
           variant={"outline"}
           className="w-64 flex gap-x-4 border-red-700"
           onClick={onBack}
@@ -66,7 +109,7 @@ export const AffiliateCompleteForm = ({
           Back
         </Button>
         <Button
-          disabled={pending}
+          disabled={isPending}
           className="w-64 flex gap-x-4"
           onClick={onContinue}
         >
