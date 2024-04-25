@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <main className="relative w-full flex justify-center pt-24 pb-6">
-      <Button onClick={onClick}> sadfsdaf </Button>
+      <Button onClick={onClick}> Check Session </Button>
       {/* {imagesPosition.map(_style => (
         <Avatar className={`absolute w-96 h-56 rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 blur-sm ${_style}`}>
           <AvatarImage
