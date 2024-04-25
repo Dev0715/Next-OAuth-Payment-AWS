@@ -1,16 +1,14 @@
 "use server";
 
 import db from "@/lib/db";
+import { CreatorData } from "@/shared/types/types-user";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
 type ParamsType = {
   userId: string;
-  products: {
-    productType: string;
-    productId: string;
-  }[];
+  creator: CreatorData;
 };
 
 export const updateUserProducts = async (data: ParamsType) => {
@@ -19,9 +17,9 @@ export const updateUserProducts = async (data: ParamsType) => {
     Key: {
       userId: data.userId
     },
-    UpdateExpression: "SET products = :products",
+    UpdateExpression: "SET creator = :creator",
     ExpressionAttributeValues: {
-      ":products": data.products
+      ":creator": data.creator
     },
     ReturnValues: "ALL_NEW"
   });
