@@ -1,64 +1,106 @@
 "use client";
 
+import { getS3ImageLink } from "@/actions/s3/image-link";
 import { AboutCreator } from "@/components/profile/about-creator";
 import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getProductById } from "@/data/products/product-by-id";
 import { getUserById } from "@/data/user/user-by-id";
-import { Creator } from "@/shared/types-user";
+import { Product } from "@/shared/types/types-product";
+import { ProductLink, User } from "@/shared/types/types-user";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 
 interface PropsParams {
   params: {
     userId: string;
-  }
+  };
 }
 
-export default function CreatorProfile({ params }: PropsParams) {
-  const imageBack = "/product-example-2.jpg";
-  const [creator, setCreator] = useState<Creator>();
-
-  const onFollow = () => {
-
-  }
+export default function CreatorProfile({ params: { userId } }: PropsParams) {
+  const [userData, setUserData] = useState<User>();
+  const [avatarPath, setAvatarPath] = useState<string>("");
+  const [coverPath, setCoverPath] = useState<string>("");
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    // fetch from API
-    if (params.userId) {
-      getUserById(params.userId).then(data => {
-        setCreator(data);
+    let ignore = false;
+    if (userId) {
+      getUserById(userId).then((_userData) => {
+        if (ignore) return;
+
+        if (_userData) {
+          setUserData(_userData);
+          if (_userData.avatar) {
+            getS3ImageLink(_userData.avatar).then((res) => {
+              if (res.success) {
+                setAvatarPath(res.response as string);
+              }
+            });
+          }
+          if (_userData.creator.cover) {
+            getS3ImageLink(_userData.creator.cover).then((res) => {
+              if (res.success) {
+                setCoverPath(res.response as string);
+              }
+            });
+          }
+          if (_userData.creator.products) {
+            _userData.creator.products.map((item: ProductLink) => {
+              getProductById(item.productType, item.productId).then(
+                (_product) => {
+                  if (_product) {
+                    setProducts((prev) => [...prev, _product]);
+                  }
+                }
+              );
+            });
+          }
+        }
       });
     }
+    return () => {
+      ignore = true;
+    };
   }, []);
+
+  const onFollow = () => {};
 
   return (
     <div className="w-5/6 flex flex-col items-center gap-y-2 py-6">
       <div className="relative w-full flex flex-col items-center mb-12">
         <Avatar className="w-full h-56 rounded-none">
-          <AvatarImage src={imageBack} className="object-cover" />
+          <AvatarImage src={coverPath} className="object-cover" />
           <AvatarFallback className="bg-sky-500">
             <div className="w-full h-full bg-inherit"></div>
           </AvatarFallback>
         </Avatar>
         <Avatar className="absolute bottom-[-48px] w-24 h-24 border-4 border-white">
-          <AvatarImage src="" />
+          <AvatarImage src={avatarPath} />
           <AvatarFallback className="bg-sky-500">
             <FaUser className="text-white" />
           </AvatarFallback>
         </Avatar>
       </div>
       <div className="w-full flex flex-col items-center gap-y-3">
-        {/* <p className="text-xl font-bold">@{creator?.username}</p> */}
-        <p className="text-xl font-bold">@{creator?.userId}</p>
-        <p className="text-xl text-rose-700">★ ★ ★ ★ ★</p>
-        <p className="text-lg">{creator?.bio}</p>
+        {/* <p className="text-xl font-bold">@{userData?.username}</p> */}
+        <p className="text-xl font-bold">@{userData?.userId}</p>
+        <p className="text-xl font-bold text-rose-700">★ ★ ★ ★ ★</p>
+        <p className="text-lg font-semibold">{`${userData?.firstname} ${userData?.lastname}`}</p>
         <div className="flex gap-x-6">
-          <Button variant="default" className="w-24" onClick={onFollow}>
+          <Button
+            variant="default"
+            className="w-24 rounded-none"
+            onClick={onFollow}
+          >
             Follow
           </Button>
-          <Button variant="outline" className="w-24 border-green-700">
+          <Button
+            variant="outline"
+            className="w-24 border-green-700 rounded-none"
+          >
             Message
           </Button>
         </div>
@@ -80,15 +122,15 @@ export default function CreatorProfile({ params }: PropsParams) {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="Collection">
-            <UserCollection userId={params.userId} />
+            <UserCollection products={products} userId={userId} />
           </TabsContent>
           <TabsContent value="About">
-            <AboutCreator creator={creator} />
+            <AboutCreator creator={userData} />
           </TabsContent>
           <TabsContent value="Announcements"></TabsContent>
           <TabsContent value="Reviews"></TabsContent>
         </Tabs>
       </div>
     </div>
-  )
+  );
 }
