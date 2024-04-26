@@ -10,6 +10,5 @@ export const NewProductSchema = z.object({
     .string()
     .min(1, "Description is required")
     .max(2400, "Description must be a maximum of 2400 characters"),
-  price: z.number().min(1, "Price is required"),
-  keywords: z.array(z.string())
+  price: z.number().min(1, "Price is required")
 });
