@@ -4,10 +4,13 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { SignedUpData, User } from "@/shared/types-user";
+import { SignedUpData } from "@/shared/types/types-signup-data";
 import { v4 as uuidv4 } from "uuid";
-import { axiosClient, axiosConfig } from "@/lib/axios";
 import { register } from "@/actions/auth/register/register";
+import {
+  getUserFromGeneralDetails,
+  uploadImage
+} from "@/shared/funcs/user-from-signup";
 
 type Props = {
   userData: SignedUpData;
@@ -27,63 +30,24 @@ export const CreatorCompleteForm = ({
   const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmMessage, setConfirmMessage] = useState<string>("");
 
-  const uploadImages = async () => {
-    const formData = new FormData();
-    if (userData.creatorDetails.avatar)
-      formData.append("file1", userData.creatorDetails.avatar);
-    if (userData.creatorDetails.cover)
-      formData.append("file2", userData.creatorDetails.cover);
+  const processUserData = async () => {
+    // # Scraped Data #
 
-    if (userData.creatorDetails.avatar || userData.creatorDetails.cover) {
-      try {
-        const response = await axiosClient.post(
-          "/multi-upload",
-          formData,
-          axiosConfig
-        );
-        const data = response.data;
-
-        if (data.success) {
-          return data.pathList;
-        } else {
-          return [];
-        }
-      } catch (error) {
-        return [];
-      }
-    } else {
-      return [];
-    }
-  };
-
-  const getCreatorData = () => {
-    // const scraped: any = {};
-
-    const user: User = {
-      userId: userData.generalDetails.username,
-      username: userData.generalDetails.username,
-      email: userData.generalDetails.email,
-      password: userData.generalDetails.password,
-      firstname: userData.generalDetails.firstname,
-      lastname: userData.generalDetails.lastname,
-      phone1: userData.generalDetails.phone1,
-      phone2: userData.generalDetails.phone2,
-      address: {
-        address1: userData.generalDetails.address1,
-        address2: userData.generalDetails.address2,
-        city: userData.generalDetails.city,
-        postal: userData.generalDetails.postal,
-        country: userData.generalDetails.country
-      },
-
-      creator: {
-        isCreator: true,
-        creatorId: uuidv4(),
-        bio: userData.creatorDetails.bio,
-        typeOfUser: userData.creatorDetails.typeOfUser,
-        websites: []
-      }
+    const user = await getUserFromGeneralDetails(userData.generalDetails);
+    user.creator = {
+      isCreator: true,
+      creatorId: uuidv4(),
+      bio: userData.creatorDetails.bio,
+      typeOfUser: userData.creatorDetails.typeOfUser,
+      websites: []
     };
+
+    if (userData.creatorDetails.cover) {
+      const keyName = `${userData.generalDetails.username}/${uuidv4()}`;
+      if (await uploadImage(userData.creatorDetails.cover, keyName)) {
+        if (user.creator) user.creator.cover = keyName;
+      }
+    }
 
     if (user.creator && userData.creatorDetails.companyName) {
       user.creator["company"] = {
@@ -120,46 +84,27 @@ export const CreatorCompleteForm = ({
       };
     }
 
-    return user;
+    try {
+      const response = await register(user);
+      setConfirmOpen(true);
+      if (response.success) {
+        setConfirmTitle("Success");
+        setConfirmMessage("A new creator was newly registerd!");
+      } else {
+        setConfirmTitle("Error");
+        setConfirmMessage(response.error as string);
+      }
+    } catch (error) {
+      setConfirmOpen(true);
+      setConfirmTitle("Error");
+      setConfirmMessage("Internal Server Error!");
+    }
   };
 
   const onContinue = () => {
     setDisabled(true);
-    const user = getCreatorData();
-
-    uploadImages().then((pathList) => {
-      if (userData.creatorDetails.avatar) {
-        if (pathList.length > 0) {
-          user.avatar = pathList[0];
-        }
-        if (userData.creatorDetails.cover) {
-          if (pathList.length > 1 && user.creator) {
-            user.creator.cover = pathList[1];
-          }
-        }
-      } else if (userData.creatorDetails.cover) {
-        if (pathList.length > 0 && user.creator) {
-          user.creator.cover = pathList[0];
-        }
-      }
-
-      register(user)
-        .then((res) => {
-          setDisabled(false);
-          setConfirmOpen(true);
-          if (res.success) {
-            setConfirmTitle("Success");
-            setConfirmMessage("A new creator was newly registerd!");
-          } else {
-            setConfirmTitle("Error");
-            setConfirmMessage(res.error as string);
-          }
-        })
-        .catch((error) => {
-          setConfirmOpen(true);
-          setConfirmTitle("Error");
-          setConfirmMessage("Internal Server Error!");
-        });
+    processUserData().then(() => {
+      setDisabled(false);
     });
   };
 
