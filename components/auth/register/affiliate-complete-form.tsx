@@ -4,9 +4,10 @@ import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { SignedUpData, User } from "@/shared/types-user";
 import { v4 as uuidv4 } from "uuid";
 import { register } from "@/actions/auth/register/register";
+import { getUserFromGeneralDetails } from "@/shared/funcs/user-from-signup";
+import { SignedUpData } from "@/shared/types/types-signup-data";
 
 type Props = {
   step: number;
@@ -23,10 +24,34 @@ export const AffiliateCompleteForm = ({
   moveStepForward,
   moveStepBackward
 }: Props) => {
-  const [isPending, startTransition] = useTransition();
+  const [isDisabled, setDisabled] = useState<boolean>(false);
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmMessage, setConfirmMessage] = useState<string>("");
+
+  const processUserData = async () => {
+    const user = await getUserFromGeneralDetails(userData.generalDetails);
+    user.affiliate = {
+      isAffiliate: true,
+      affiliateId: uuidv4()
+    };
+
+    try {
+      const response = await register(user);
+      setConfirmOpen(true);
+      if (response.success) {
+        setConfirmTitle("Success");
+        setConfirmMessage("A new affiliate was newly registerd!");
+      } else {
+        setConfirmTitle("Error");
+        setConfirmMessage(response.error as string);
+      }
+    } catch (error) {
+      setConfirmOpen(true);
+      setConfirmTitle("Error");
+      setConfirmMessage("Internal Server Error!");
+    }
+  };
 
   const onContinue = () => {
     if (userData.selectedAccounts.creator || userData.selectedAccounts.user) {
@@ -34,39 +59,9 @@ export const AffiliateCompleteForm = ({
       setConfirmTitle("Success");
       setConfirmMessage("A new affiliate was newly registerd!");
     } else {
-      startTransition(() => {
-        const user: User = {
-          userId: userData.generalDetails.username,
-          username: userData.generalDetails.username,
-          email: userData.generalDetails.email,
-          password: userData.generalDetails.password,
-          firstname: userData.generalDetails.firstname,
-          lastname: userData.generalDetails.lastname,
-          phone1: userData.generalDetails.phone1,
-          phone2: userData.generalDetails.phone2,
-          address: {
-            address1: userData.generalDetails.address1,
-            address2: userData.generalDetails.address2,
-            city: userData.generalDetails.city,
-            postal: userData.generalDetails.postal,
-            country: userData.generalDetails.country
-          },
-
-          affiliate: {
-            isAffiliate: true,
-            affiliateId: uuidv4()
-          }
-        };
-        register(user).then((res) => {
-          setConfirmOpen(true);
-          if (res.success) {
-            setConfirmTitle("Success");
-            setConfirmMessage("A new affiliate was newly registerd!");
-          } else {
-            setConfirmTitle("Error");
-            setConfirmMessage(res.error as string);
-          }
-        });
+      setDisabled(true);
+      processUserData().then(() => {
+        setDisabled(false);
       });
     }
   };
@@ -76,7 +71,7 @@ export const AffiliateCompleteForm = ({
       setConfirmOpen(true);
       setConfirmTitle("Warning");
       setConfirmMessage(
-        "You can't go backward since you already registered a user!"
+        "You can't go backward since you are already registered!"
       );
     } else {
       moveStepBackward();
@@ -125,7 +120,7 @@ export const AffiliateCompleteForm = ({
       </p>
       <div className="w-full flex items-center justify-between mt-4">
         <Button
-          disabled={isPending}
+          disabled={isDisabled}
           variant={"outline"}
           className="w-64 flex gap-x-4 border-red-700"
           onClick={onBack}
@@ -134,7 +129,7 @@ export const AffiliateCompleteForm = ({
           Back
         </Button>
         <Button
-          disabled={isPending}
+          disabled={isDisabled}
           className="w-64 flex gap-x-4"
           onClick={onContinue}
         >
