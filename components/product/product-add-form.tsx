@@ -47,12 +47,14 @@ import { addNewProduct } from "@/actions/user/new-product";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
+  const productTypes = PRODCUT_TYPES;
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setPending] = useState<boolean>(false);
 
   const [previewFiles, setPreviewFiles] = useState<File[]>([]);
+  const [previewPaths, setPreviewPaths] = useState<string[]>([]);
   const [previewIndex, setPreviewIndex] = useState<number>();
   const [isPreviewing, setPreviewing] = useState<boolean>(false);
   const hiddenPreviewInput = useRef<HTMLInputElement>(null);
@@ -123,7 +125,9 @@ export const ProductAddForm = () => {
               savedFile.lastModified === newFile.lastModified
           )
       );
+      const newPaths = newFiles.map((file) => URL.createObjectURL(file));
       setPreviewFiles((prev) => [...prev, ...newFiles]);
+      setPreviewPaths((prev) => [...prev, ...newPaths]);
     }
     if (hiddenPreviewInput.current) {
       hiddenPreviewInput.current.value = "";
@@ -147,13 +151,13 @@ export const ProductAddForm = () => {
       productType: "",
       title: "",
       description: "",
-      price: 0,
-      keywords: []
+      price: 0
     }
   });
 
   const getPathList = async (fileList: File[]) => {
     const formData = new FormData();
+    formData.append("username", user?.username as string);
     fileList.forEach((file) => {
       formData.append(uuidv4(), file);
     });
@@ -168,57 +172,84 @@ export const ProductAddForm = () => {
     if (data.success) {
       return data.pathList;
     } else {
-      throw new Error(data.error);
+      return [];
+    }
+  };
+
+  const submitProduct = async () => {
+    try {
+      const [pathList, previewList] = await Promise.all([
+        getPathList(creativeFiles),
+        getPathList(previewFiles)
+      ]);
+
+      if (pathList.length === 0 || previewList.length === 0) {
+        throw new Error("Failed to upload images.");
+      }
+
+      const productId = uuidv4();
+      const fileList = pathList.map((path: string, index: number) => ({
+        name: creativeFiles[index].name,
+        path
+      }));
+
+      const res = await createProduct({
+        ...form.getValues(),
+        productId,
+        ownerId: user?.userId as string,
+        fileList,
+        previewList,
+        keywords: selectedKeywords,
+        approval: {
+          state: "created",
+          history: [
+            {
+              state: "created",
+              comment: "Newly created and deployed, waiting for approval.",
+              userId: user?.userId as string
+            }
+          ]
+        }
+      });
+
+      if (!res.success) {
+        throw new Error("Failed to create product. Please try again.");
+      }
+
+      const response = await addNewProduct(user?.userId as string, {
+        productType: form.getValues().productType,
+        productId
+      });
+
+      if (response.error) {
+        throw new Error("Failed to save products into user information.");
+      }
+    } catch (error) {
+      throw new Error("Internal Server Error");
     }
   };
 
   const onSubmit = (values: z.infer<typeof NewProductSchema>) => {
+    if (creativeFiles.length === 0 || previewFiles.length === 0) {
+      setSuccess("");
+      setError(
+        "Please upload at least one creative file and one preview image"
+      );
+      return;
+    }
+
     setError("");
     setSuccess("");
     setPending(true);
 
-    Promise.all([getPathList(creativeFiles), getPathList(previewFiles)])
-      .then(([pathList, previewList]) => {
-        const productId = uuidv4();
-        const fileList = pathList.map((path: string, index: number) => ({
-          name: creativeFiles[index].name,
-          path
-        }));
-        createProduct({
-          ...values,
-          productId,
-          fileList,
-          previewList,
-          keywords: selectedKeywords,
-          ownerId: user?.userId as string
-        })
-          .then((res) => {
-            if (res.success) {
-              addNewProduct(user?.userId as string, {
-                productType: values.productType,
-                productId
-              })
-                .then((res) => {
-                  setSuccess(res.success);
-                  setError(res.error);
-                  setPending(false);
-                })
-                .catch((error) => {
-                  setError("Internal Server Error");
-                  setPending(false);
-                });
-            } else {
-              setError("Internal Sever Error");
-              setPending(false);
-            }
-          })
-          .catch((error) => {
-            setError("Internal Sever Error");
-            setPending(false);
-          });
+    submitProduct()
+      .then(() => {
+        setSuccess("Product registered successfully!");
       })
       .catch((error) => {
-        setError("Internal Sever Error");
+        setError(error.message);
+      })
+      .finally(() => {
         setPending(false);
       });
   };
@@ -319,9 +350,9 @@ export const ProductAddForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {PRODCUT_TYPES.map((type) => (
-                        <SelectItem key={type} value={type}>
-                          {type}
+                      {productTypes.map((category) => (
+                        <SelectItem key={category.key} value={category.key}>
+                          {category.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -489,7 +520,7 @@ export const ProductAddForm = () => {
                 <ImagePreview
                   key={file.name}
                   disabled={isPending}
-                  src={URL.createObjectURL(file)}
+                  src={previewPaths[index]}
                   onPreview={() => onPreviewFile(index)}
                   onDelete={() => onDeletePreviewFile(index)}
                 />
