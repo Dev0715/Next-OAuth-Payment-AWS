@@ -9,19 +9,26 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+  AlertDialogTrigger
+} from "@/components/ui/alert-dialog";
 
 interface LoginButtonProps {
   children: React.ReactNode;
   asChild?: boolean;
   title?: string;
   message?: string;
-  onContinue?: () => void,
-  onCancel?: () => void
+  onContinue?: () => void;
+  onCancel?: () => void;
 }
 
-export const QustionAlert = ({ children, asChild, title, message, onContinue, onCancel }: LoginButtonProps) => {
+export const QuestionAlert = ({
+  children,
+  asChild,
+  title,
+  message,
+  onContinue,
+  onCancel
+}: LoginButtonProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger disabled={!onContinue} asChild={asChild}>
