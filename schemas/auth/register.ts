@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const GeneralDetailsSchema = z.object({
+  avatar: z.instanceof(File).optional(),
   username: z
     .string()
     .min(1, "Username is required")
@@ -43,7 +44,6 @@ export const SelectAccountsSchema = z.object({
 });
 
 export const CreatorDetailsSchema = z.object({
-  avatar: z.instanceof(File).optional(),
   cover: z.instanceof(File).optional(),
   bio: z
     .string()
