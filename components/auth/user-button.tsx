@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaCartArrowDown, FaUser } from "react-icons/fa";
+import { FaCartArrowDown, FaProductHunt, FaUser } from "react-icons/fa";
 import {
   ExitIcon,
   MixerHorizontalIcon,
@@ -36,18 +36,20 @@ export const UserButton = () => {
   useEffect(() => {
     if (!user) return;
 
-    if (user.image) {
-      setAvatarImage(user.image);
-    } else if (user.avatar) {
-      getS3ImageLink(user.avatar).then((res) => {
-        if (res.success) setAvatarImage(res.response as string);
-      });
+    if (!avatarImage) {
+      if (user.image) {
+        setAvatarImage(user.image);
+      } else if (user.avatar) {
+        getS3ImageLink(user.avatar).then((res) => {
+          if (res.success) setAvatarImage(res.response as string);
+        });
+      }
     }
 
     if (!cart) {
       getUserById(user.userId).then((res) => {
         if (res) {
-          setCart(res?.cart || []);
+          setCart(res?.customer.cart || []);
         }
       });
     }
@@ -70,18 +72,18 @@ export const UserButton = () => {
 
   return (
     <div className="flex items-center gap-x-4">
-      <Button asChild variant={"ghost"} className="p-0 rounded-full">
-        <Link href={"/cart"}>
-          <div className="relative w-10 h-10 flex items-center justify-center cursor-pointer">
-            <FaCartArrowDown className="text-xl" />
-            {cart && cart.length ? (
+      {user.customer && cart && cart.length ? (
+        <Button asChild variant={"ghost"} className="p-0 rounded-full">
+          <Link href={"/cart"}>
+            <div className="relative w-10 h-10 flex items-center justify-center cursor-pointer">
+              <FaCartArrowDown className="text-xl" />
               <span className="absolute -top-[2px] -right-[2px] w-5 h-5 flex items-center justify-center rounded-full bg-red-700 text-xs text-white">
                 {cart.length}
               </span>
-            ) : null}
-          </div>
-        </Link>
-      </Button>
+            </div>
+          </Link>
+        </Button>
+      ) : null}
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar className="rounded-xl">
@@ -92,8 +94,16 @@ export const UserButton = () => {
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40" align="end">
+          {user.manager && (
+            <Link href={`/creator/${user.userId}`}>
+              <DropdownMenuItem>
+                <FaProductHunt className="h-4 w-4 mr-3" />
+                <span>Approval Page</span>
+              </DropdownMenuItem>
+            </Link>
+          )}
           {user.creator && (
-            <Link href={`/profile/creator/${user.userId}`}>
+            <Link href={`/creator/${user.userId}`}>
               <DropdownMenuItem>
                 <PersonIcon className="h-4 w-4 mr-3" />
                 <span>Creator Profile</span>
