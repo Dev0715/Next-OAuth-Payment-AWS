@@ -16,7 +16,10 @@ export const TransitionInOut = ({ children, condition }: Props) => {
       leaveFrom="opacity-100 scale-100"
       leaveTo="opacity-0 scale-95"
     >
-      {children}
+      <div className="w-full flex flex-col gap-y-12">
+        <p className="text-4xl font-semibold">Let's get you started</p>
+        {children}
+      </div>
     </Transition>
   );
 };
