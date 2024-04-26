@@ -1,41 +1,18 @@
-import { FaPlus } from "react-icons/fa"
-import { Button } from "../ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
-import { ProductItem } from "../product/product-item"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import { Product } from "@/shared/types-product"
-import { Creator } from "@/shared/types-user"
-import { getProductById } from "@/data/products/product-by-id"
-import { useCurrentUser } from "@/hooks/use-current-user"
-import { getUserById } from "@/data/user/user-by-id"
+import { FaPlus } from "react-icons/fa";
+import { Button } from "../ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import { ProductItem } from "../product/product-item";
+import Link from "next/link";
+import { Product } from "@/shared/types/types-product";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
-type ProductLink = {
-  productType: string;
-  productId: string;
-}
+type Props = {
+  products: Product[];
+  userId: string;
+};
 
-export const UserCollection = ({ userId }: { userId: string }) => {
+export const UserCollection = ({ products, userId }: Props) => {
   const signedUser = useCurrentUser();
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    let ignore = false;
-    getUserById(userId).then(user => {
-      if (!ignore) {
-        user?.products.map((item: ProductLink) => {
-          getProductById(item.productType, item.productId).then(res => {
-            if (res) {
-              setProducts(prev => [...prev, res]);
-            }
-          })
-        })
-      }
-    })
-    return () => {
-      ignore = true;
-    }
-  }, [userId]);
 
   return (
     <Card className="border-0 rounded-none">
@@ -51,12 +28,12 @@ export const UserCollection = ({ userId }: { userId: string }) => {
       </CardHeader>
       <CardContent className="flex flex-wrap">
         {products.map((product, index) => (
-          <div className="w-1/4 p-4">
+          <div key={product.productId} className="w-1/4 p-4">
             <ProductItem key={index} product={product} />
           </div>
         ))}
       </CardContent>
-      <CardFooter>
-      </CardFooter>
-    </Card>)
-}
+      <CardFooter></CardFooter>
+    </Card>
+  );
+};
