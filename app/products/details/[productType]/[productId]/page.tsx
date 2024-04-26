@@ -9,23 +9,22 @@ import { Navbar } from "../../../_components/navbar";
 import { usePathname, useSearchParams } from "next/navigation";
 import { captureOrder as captureStripeOrder } from "@/actions/stripe/capture-order";
 import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
-import { toast } from "sonner";
 import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { QustionAlert } from "@/components/utils/question-alert";
-import { Product } from "@/shared/types-product";
+import { QuestionAlert } from "@/components/utils/question-alert";
+import { Product } from "@/shared/types/types-product";
 import { getProductById } from "@/data/products/product-by-id";
 import { getS3ImageLink } from "@/actions/s3/image-link";
-import { axiosClient, axiosConfig, blobConfig } from "@/lib/axios";
+import { axiosClient, blobConfig } from "@/lib/axios";
 import { addProductToCart } from "@/actions/user/add-product-to-cart";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { useAtom } from "jotai";
 import { cartAtom } from "@/store/cart";
-import { ProductLink } from "@/shared/types-user";
 import { orderListAtom } from "@/store/orderList";
 import { addProductToPurchased } from "@/actions/user/add-product-to-purchased";
+import { ProductLink } from "@/shared/types/types-user";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;
@@ -296,7 +295,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
                   Go to Creator's Profile
                 </Link>
               </Button>
-              <QustionAlert
+              <QuestionAlert
                 title="Confirmation"
                 message="Are you sure to move this product to your cart?"
                 onContinue={onConfirmCart}
@@ -310,7 +309,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
                   <FaCartArrowDown className="text-green-700" />
                   Add to cart
                 </Button>
-              </QustionAlert>
+              </QuestionAlert>
               <PaymentButton disabled={isPending} mode="modal">
                 <WrappedButton
                   onClick={() => {
