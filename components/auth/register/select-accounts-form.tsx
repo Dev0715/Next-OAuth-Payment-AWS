@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dispatch, SetStateAction, useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +17,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { SelectAccountsSchema } from "@/schemas/auth/register";
 import { Switch } from "@/components/ui/switch";
-import { SignedUpData } from "@/shared/types-user";
+import { SignedUpData } from "@/shared/types/types-signup-data";
 
 type Props = {
   userData: SignedUpData;
@@ -32,9 +32,7 @@ export const SelectAccountsForm = ({
   moveStepForward,
   moveStepBackward
 }: Props) => {
-  const [isPending, startTransition] = useTransition();
-  const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
-  const [confirmMessage, setConfirmMessage] = useState<string>("");
+  const [isErr, setErr] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof SelectAccountsSchema>>({
     resolver: zodResolver(SelectAccountsSchema),
@@ -45,8 +43,7 @@ export const SelectAccountsForm = ({
 
   const onSubmit = (values: z.infer<typeof SelectAccountsSchema>) => {
     if (!values.creator && !values.user && !values.affiliate) {
-      setConfirmOpen(true);
-      setConfirmMessage("Please select at least one account type to create!");
+      setErr(true);
     } else {
       setUserData({ ...userData, selectedAccounts: values });
       moveStepForward();
@@ -61,10 +58,10 @@ export const SelectAccountsForm = ({
   return (
     <div className="w-full flex flex-col gap-y-6">
       <ConfirmAlert
-        open={isConfirmOpen}
+        open={isErr}
         title="Error"
-        message={confirmMessage}
-        onOK={() => setConfirmOpen(false)}
+        message="Please select at least one account type to create!"
+        onOK={() => setErr(false)}
       />
       <p className="text-xl text-green-700">
         2. Please select accounts you want to create.
@@ -144,7 +141,6 @@ export const SelectAccountsForm = ({
           </div>
           <div className="w-full flex items-center justify-between mt-4">
             <Button
-              disabled={isPending}
               type="button"
               variant={"outline"}
               className="w-64 flex gap-x-4 border-red-700"
@@ -153,11 +149,7 @@ export const SelectAccountsForm = ({
               <FaArrowLeft />
               Back
             </Button>
-            <Button
-              disabled={isPending}
-              type="submit"
-              className="w-64 flex gap-x-4"
-            >
+            <Button type="submit" className="w-64 flex gap-x-4">
               <FaArrowRight />
               Next
             </Button>

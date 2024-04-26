@@ -2,13 +2,7 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Dispatch,
-  SetStateAction,
-  useState,
-  useTransition,
-  useRef
-} from "react";
+import { Dispatch, SetStateAction, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -21,8 +15,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { CreatorDetailsSchema } from "@/schemas/auth/register";
-import { FaArrowLeft, FaArrowRight, FaUser } from "react-icons/fa";
-import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -33,7 +26,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { CREATOR_TYPES } from "@/assets/creator-types";
-import { SignedUpData } from "@/shared/types-user";
+import { SignedUpData } from "@/shared/types/types-signup-data";
 
 type Props = {
   userData: SignedUpData;
@@ -51,22 +44,18 @@ export const CreatorDetailsForm = ({
   const typeOfUserList = CREATOR_TYPES;
   const defaultData = userData.creatorDetails;
 
-  const [isPending, startTransition] = useTransition();
-  const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
-  const [confirmMessage, setConfirmMessage] = useState<string>("");
-
-  const [avatar, setAvatar] = useState<File | undefined>(defaultData?.avatar);
-  const [avatarImagePath, setAvatarImagePath] = useState<string>(
-    defaultData?.avatar ? URL.createObjectURL(defaultData.avatar) : ""
-  );
-
-  const [cover, setCover] = useState<File | undefined>(defaultData?.cover);
+  const [cover, setCover] = useState<File | undefined>(defaultData.cover);
   const [coverImagePath, setCoverImagePath] = useState<string>(
-    defaultData?.cover ? URL.createObjectURL(defaultData.cover) : ""
+    defaultData.cover ? URL.createObjectURL(defaultData.cover) : ""
   );
 
-  const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const hiddenCoverFileIniput = useRef<HTMLInputElement>(null);
+  const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setCoverImagePath(URL.createObjectURL(e.target.files[0]));
+      setCover(e?.target?.files?.[0]);
+    }
+  };
 
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
     resolver: zodResolver(CreatorDetailsSchema),
@@ -80,7 +69,6 @@ export const CreatorDetailsForm = ({
       ...userData,
       creatorDetails: {
         ...values,
-        avatar,
         cover
       }
     });
@@ -92,35 +80,14 @@ export const CreatorDetailsForm = ({
       ...userData,
       creatorDetails: {
         ...form.getValues(),
-        avatar,
         cover
       }
     });
     moveStepBackward();
   };
 
-  const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setAvatarImagePath(URL.createObjectURL(e.target.files[0]));
-      setAvatar(e?.target?.files?.[0]);
-    }
-  };
-
-  const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setCoverImagePath(URL.createObjectURL(e.target.files[0]));
-      setCover(e?.target?.files?.[0]);
-    }
-  };
-
   return (
     <div className="w-full flex flex-col gap-y-6">
-      <ConfirmAlert
-        open={isConfirmOpen}
-        title="Error"
-        message={confirmMessage}
-        onOK={() => setConfirmOpen(false)}
-      />
       <p className="text-xl text-green-700">
         3. Please provide your KRE8TOR details.
       </p>
@@ -129,46 +96,19 @@ export const CreatorDetailsForm = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-y-6"
         >
-          <div className="flex flex-col items-start gap-y-4">
-            <FormLabel>Avatar Image</FormLabel>
-            <div className="flex items-end gap-x-6">
-              <Avatar className="w-24 h-24 rounded-[24px]">
-                <AvatarImage src={avatarImagePath} />
-                <AvatarFallback className="bg-sky-500 rounded-[24px]">
-                  <FaUser className="text-white" />
-                </AvatarFallback>
-              </Avatar>
-              <Button
-                disabled={isPending}
-                type="button"
-                variant={"outline"}
-                className="border-green-700"
-                onClick={() => hiddenAvatarFileInput.current?.click()}
-              >
-                Upload New
-              </Button>
-              <Input
-                className="hidden"
-                type="file"
-                accept="image/*"
-                ref={hiddenAvatarFileInput}
-                onChange={onAvatarChanged}
-              />
-            </div>
-          </div>
           <div className="flex flex-col gap-y-4">
             <FormLabel>Cover Image</FormLabel>
-            <Avatar className="w-full h-28 rounded-xl">
+            <Avatar className="w-full h-28 rounded-sm">
               <AvatarImage src={coverImagePath} className="object-cover" />
-              <AvatarFallback className="bg-sky-400 rounded-xl">
+              <AvatarFallback className="bg-sky-400 rounded-sm">
                 <div className="w-full h-full bg-inherit"></div>
               </AvatarFallback>
             </Avatar>
             <Button
-              disabled={isPending}
               type="button"
               variant={"outline"}
-              className="w-32 border-green-700"
+              size={"sm"}
+              className="w-32 rounded-none"
               onClick={() => hiddenCoverFileIniput.current?.click()}
             >
               Upload New
@@ -189,11 +129,7 @@ export const CreatorDetailsForm = ({
                 <FormItem className="w-full">
                   <FormLabel>Bio*</FormLabel>
                   <FormControl>
-                    <Textarea
-                      {...field}
-                      disabled={isPending}
-                      placeholder="Description"
-                    />
+                    <Textarea {...field} placeholder="Description" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -208,7 +144,6 @@ export const CreatorDetailsForm = ({
                 <FormItem className="w-full">
                   <FormLabel>Type of user*</FormLabel>
                   <Select
-                    disabled={isPending}
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
@@ -237,11 +172,7 @@ export const CreatorDetailsForm = ({
                   <FormItem className="w-full">
                     <FormLabel>Company Name</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Your company"
-                      />
+                      <Input {...field} placeholder="Your company" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -256,11 +187,7 @@ export const CreatorDetailsForm = ({
                   <FormItem className="w-full">
                     <FormLabel>Location</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Country"
-                      />
+                      <Input {...field} placeholder="Country" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -276,11 +203,7 @@ export const CreatorDetailsForm = ({
                 <FormItem className="w-full">
                   <FormLabel>Company Website</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="Website URL"
-                    />
+                    <Input {...field} placeholder="Website URL" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -296,11 +219,7 @@ export const CreatorDetailsForm = ({
                   <FormItem className="w-full">
                     <FormLabel>Personal Websites</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Website 1"
-                      />
+                      <Input {...field} placeholder="Website 1" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -315,11 +234,7 @@ export const CreatorDetailsForm = ({
                   <FormItem className="w-full">
                     {/* <FormLabel></FormLabel> */}
                     <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Website 2"
-                      />
+                      <Input {...field} placeholder="Website 2" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -336,11 +251,7 @@ export const CreatorDetailsForm = ({
                   <FormItem className="w-full">
                     {/* <FormLabel></FormLabel> */}
                     <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Website 3"
-                      />
+                      <Input {...field} placeholder="Website 3" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -355,11 +266,7 @@ export const CreatorDetailsForm = ({
                   <FormItem className="w-full">
                     {/* <FormLabel></FormLabel> */}
                     <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Website 4"
-                      />
+                      <Input {...field} placeholder="Website 4" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -375,11 +282,7 @@ export const CreatorDetailsForm = ({
                 <FormItem className="w-full">
                   {/* <FormLabel></FormLabel> */}
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="Website 5"
-                    />
+                    <Input {...field} placeholder="Website 5" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -388,7 +291,6 @@ export const CreatorDetailsForm = ({
           </div>
           <div className="w-full flex items-center justify-between mt-4">
             <Button
-              disabled={isPending}
               type="button"
               variant={"outline"}
               className="w-64 flex gap-x-4 border-red-700"
@@ -397,11 +299,7 @@ export const CreatorDetailsForm = ({
               <FaArrowLeft />
               Back
             </Button>
-            <Button
-              disabled={isPending}
-              type="submit"
-              className="w-64 flex gap-x-4"
-            >
+            <Button type="submit" className="w-64 flex gap-x-4">
               <FaArrowRight />
               Next
             </Button>
