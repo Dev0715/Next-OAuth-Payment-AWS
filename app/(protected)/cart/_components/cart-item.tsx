@@ -52,7 +52,9 @@ export const CartItem = ({
           <div className="flex flex-col gap-y-2">
             <p>{product.title}</p>
             <p className="text-base text-black">Price: ${product.price}</p>
-            <p className="text-base text-gray-700 drop-shadow-md">{product.description}</p>
+            <p className="text-base text-gray-700 drop-shadow-md">
+              {product.description}
+            </p>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-6">
@@ -62,11 +64,18 @@ export const CartItem = ({
                 variant={"link"}
                 className="p-0"
               >
-                <Link href={`/products/details/${product.productType}/${product.productId}`} className="w-full">
+                <Link
+                  href={`/products/details/${product.productType}/${product.productId}`}
+                  className="w-full"
+                >
                   Details
                 </Link>
               </Button>
-              <QustionAlert title="Warning" message="Are you sure to remove this product from your cart?" onContinue={onRemoveItem}>
+              <QuestionAlert
+                title="Warning"
+                message="Are you sure to remove this product from your cart?"
+                onContinue={onRemoveItem}
+              >
                 <Button
                   disabled={isPending}
                   variant={"link"}
@@ -74,7 +83,7 @@ export const CartItem = ({
                 >
                   Remove
                 </Button>
-              </QustionAlert>
+              </QuestionAlert>
             </div>
             <Switch
               disabled={isPending}
@@ -85,6 +94,5 @@ export const CartItem = ({
         </div>
       </CardContent>
     </Card>
-
   );
 };
