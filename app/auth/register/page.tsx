@@ -6,11 +6,10 @@ import { GeneralDetailsForm } from "@/components/auth/register/general-details-f
 import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
 import { SelectMatchingForm } from "@/components/auth/register/select-matching-form";
 import { UserCompleteForm } from "@/components/auth/register/user-complete-form";
-import { SignedUpData } from "@/shared/types-user";
+import { SignedUpData } from "@/shared/types/types-signup-data";
 import { useState, useTransition } from "react";
 import { AffiliateCompleteForm } from "@/components/auth/register/affiliate-complete-form";
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
-import { Transition } from "@headlessui/react";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
 
 const RegisterPage = () => {
@@ -21,13 +20,13 @@ const RegisterPage = () => {
       password: "123456",
       firstname: "firstname",
       lastname: "lastname",
-      phone1: "",
-      phone2: "",
       address1: "address 1",
       address2: "address 2",
       city: "city",
       postal: "postal",
-      country: "country"
+      country: "country",
+      phone1: "",
+      phone2: ""
     },
     selectedAccounts: {
       creator: false,
