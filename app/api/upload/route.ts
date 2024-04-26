@@ -1,18 +1,17 @@
 import { uploadFileToS3 } from "@/actions/s3/upload-image";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-type RequestType = {
-  formData: () => any;
-};
-
-export const POST = async (req: RequestType) => {
+export const POST = async (req: NextRequest) => {
   try {
     const formData = await req.formData();
-    const file = formData.get("file");
-    const keyName = formData.get("keyName");
+    const file = formData.get("file") as File;
+    const keyName = formData.get("keyName") as string;
 
     if (!file) {
-      return NextResponse.json({ error: "File is required" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: "File is required" },
+        { status: 400 }
+      );
     }
 
     const response = await uploadFileToS3(file, keyName);
