@@ -3,40 +3,47 @@
 import { getS3ImageLink } from "@/actions/s3/image-link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader
+} from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { QustionAlert } from "@/components/utils/question-alert";
-import { CartProduct, Product } from "@/shared/types-product";
+import { QuestionAlert } from "@/components/utils/question-alert";
+import { CartProduct, Product } from "@/shared/types/types-product";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface PropsParams {
-  isPending: boolean,
-  product: CartProduct,
+  isPending: boolean;
+  product: CartProduct;
   onSelected: (checked: boolean) => void;
   onRemoveItem: () => void;
 }
 
-export const CartItem = ({ isPending, product, onSelected, onRemoveItem }: PropsParams) => {
+export const CartItem = ({
+  isPending,
+  product,
+  onSelected,
+  onRemoveItem
+}: PropsParams) => {
   const [imagePath, setImagePath] = useState<string>("");
 
   useEffect(() => {
     const s3Link = product.previewList[0];
-    getS3ImageLink(s3Link).then(res => {
+    getS3ImageLink(s3Link).then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }
-    })
+    });
   }, []);
 
   return (
     <Card className="w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100">
       <CardContent className="w-full p-0 flex gap-y-4">
         <Avatar className="w-72 h-48 rounded-none">
-          <AvatarImage
-            src={imagePath}
-            className="object-fill aspect-auto"
-          />
+          <AvatarImage src={imagePath} className="object-fill aspect-auto" />
           <AvatarFallback className="bg-sky-500">
             <div className="w-full h-full bg-green-700"></div>
           </AvatarFallback>
