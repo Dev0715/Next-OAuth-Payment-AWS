@@ -1,6 +1,6 @@
 "use client";
 
-import { getS3ImageLink } from "@/actions/s3/image-link";
+import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Product, ProductState } from "@/shared/types/types-product";
@@ -17,7 +17,7 @@ export const ProductItem = ({ product, _url }: PropsParams) => {
 
   useEffect(() => {
     const s3Link = product.previewList[0];
-    getS3ImageLink(s3Link).then((res) => {
+    getLinkFromS3(s3Link).then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }

@@ -6,7 +6,7 @@ import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { v4 as uuidv4 } from "uuid";
 import { register } from "@/actions/auth/register/register";
-import { getUserFromGeneralDetails } from "@/shared/funcs/user-from-signup";
+import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
 import { SignedUpData } from "@/shared/types/types-signup-data";
 
 type Props = {

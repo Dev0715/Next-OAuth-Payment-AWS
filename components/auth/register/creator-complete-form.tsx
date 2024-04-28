@@ -10,7 +10,7 @@ import { register } from "@/actions/auth/register/register";
 import {
   getUserFromGeneralDetails,
   uploadImage
-} from "@/shared/funcs/user-from-signup";
+} from "@/shared/functions/user-from-signup";
 
 type Props = {
   userData: SignedUpData;
