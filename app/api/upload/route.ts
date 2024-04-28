@@ -1,4 +1,4 @@
-import { uploadFileToS3 } from "@/actions/s3/upload-image";
+import { uploadFileToS3 } from "@/actions/s3/upload-file";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {

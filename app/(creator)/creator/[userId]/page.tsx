@@ -1,6 +1,6 @@
 "use client";
 
-import { getS3ImageLink } from "@/actions/s3/image-link";
+import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { AboutCreator } from "@/components/profile/about-creator";
 import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -34,14 +34,14 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
         if (_userData) {
           setUserData(_userData);
           if (_userData.avatar) {
-            getS3ImageLink(_userData.avatar).then((res) => {
+            getLinkFromS3(_userData.avatar).then((res) => {
               if (res.success) {
                 setAvatarPath(res.response as string);
               }
             });
           }
           if (_userData.creator.cover) {
-            getS3ImageLink(_userData.creator.cover).then((res) => {
+            getLinkFromS3(_userData.creator.cover).then((res) => {
               if (res.success) {
                 setCoverPath(res.response as string);
               }

@@ -21,7 +21,7 @@ import { LogoutButton } from "@/components/auth/logout-button";
 import { LoginButton } from "./login-button";
 import { SignupButton } from "./signup-button";
 import { useEffect, useState } from "react";
-import { getS3ImageLink } from "@/actions/s3/image-link";
+import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { useAtom } from "jotai";
 import { cartAtom } from "@/store/cart";
 import { getUserById } from "@/data/user/user-by-id";
@@ -40,7 +40,7 @@ export const UserButton = () => {
       if (user.image) {
         setAvatarImage(user.image);
       } else if (user.avatar) {
-        getS3ImageLink(user.avatar).then((res) => {
+        getLinkFromS3(user.avatar).then((res) => {
           if (res.success) setAvatarImage(res.response as string);
         });
       }

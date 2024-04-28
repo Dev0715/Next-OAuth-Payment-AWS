@@ -16,7 +16,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { Product } from "@/shared/types/types-product";
 import { getProductById } from "@/data/products/product-by-id";
-import { getS3ImageLink } from "@/actions/s3/image-link";
+import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
 import { addProductToCart } from "@/actions/user/add-product-to-cart";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
@@ -80,7 +80,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         if (!ignore && response) {
           setProduct(response);
           response?.previewList.map((path: string) => {
-            getS3ImageLink(path).then((res) => {
+            getLinkFromS3(path).then((res) => {
               if (res.success) {
                 setImageList((prev) => [...prev, res.response as string]);
               }

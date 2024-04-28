@@ -1,4 +1,4 @@
-import { uploadFileToS3 } from "@/actions/s3/upload-image";
+import { uploadFileToS3 } from "@/actions/s3/upload-file";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
