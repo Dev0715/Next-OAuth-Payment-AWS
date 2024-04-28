@@ -91,10 +91,17 @@ export const PaymentForm = ({ onCancel }: { onCancel: () => void }) => {
         <CardDescription>Select the payment method you prefer</CardDescription>
       </CardHeader>
       <CardContent className="w-full flex flex-col gap-y-6">
-        <RadioGroup defaultValue={Option_Paypal} onValueChange={setPaymentMethod} className="w-full flex justify-between">
+        <RadioGroup
+          defaultValue={Option_Paypal}
+          onValueChange={setPaymentMethod}
+          className="w-full flex justify-between"
+        >
           <div className="flex items-center gap-x-4 cursor-pointer">
             <RadioGroupItem value={Option_Stripe} id={Option_Stripe} />
-            <Label htmlFor={Option_Stripe} className="flex items-center gap-x-4 text-5xl cursor-pointer">
+            <Label
+              htmlFor={Option_Stripe}
+              className="flex items-center gap-x-4 text-5xl cursor-pointer"
+            >
               <FaCcVisa className="text-emerald-700" />
               <FaCcMastercard className="text-emerald-700" />
               <p className="text-lg">Stripe</p>
@@ -102,7 +109,10 @@ export const PaymentForm = ({ onCancel }: { onCancel: () => void }) => {
           </div>
           <div className="flex items-center gap-x-4 cursor-pointer">
             <RadioGroupItem value={Option_Paypal} id={Option_Paypal} />
-            <Label htmlFor={Option_Paypal} className="flex items-center gap-x-4 text-5xl cursor-pointer">
+            <Label
+              htmlFor={Option_Paypal}
+              className="flex items-center gap-x-4 text-5xl cursor-pointer"
+            >
               <FaCcPaypal className="text-sky-700" />
               <p className="text-lg">Paypal</p>
             </Label>
@@ -118,32 +128,52 @@ export const PaymentForm = ({ onCancel }: { onCancel: () => void }) => {
             </TableRow>
           </TableHeader>
           <TableBody className="w-full">
-            {orderList.map(product => (
+            {orderList.map((product) => (
               <TableRow className="w-full flex">
-                <TableCell className="w-1/4 truncate font-medium">{product.title}</TableCell>
-                <TableCell className="w-7/12 truncate">{product.description}sdafsadfdsafsdafdsaf</TableCell>
-                <TableCell className="w-1/6 truncate text-right">${product.price}</TableCell>
+                <TableCell className="w-1/4 truncate font-medium">
+                  {product.title}
+                </TableCell>
+                <TableCell className="w-7/12 truncate">
+                  {product.description}sdafsadfdsafsdafdsaf
+                </TableCell>
+                <TableCell className="w-1/6 truncate text-right">
+                  ${product.price}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter className="w-full">
             <TableRow className="w-full flex">
-              <TableCell className="w-5/6" colSpan={2}>Total</TableCell>
-              <TableCell className="w-1/6 text-right">${getTotalPrice()}</TableCell>
+              <TableCell className="w-5/6" colSpan={2}>
+                Total
+              </TableCell>
+              <TableCell className="w-1/6 text-right">
+                ${getTotalPrice()}
+              </TableCell>
             </TableRow>
           </TableFooter>
         </Table>
       </CardContent>
       <CardFooter className="flex flex-col">
         <div className="w-full flex justify-between">
-          <Button disabled={isPending} onClick={onCancel} variant="destructive" className="flex gap-x-2">
-            <MdCancel /> Cancel	{/** Not Working Now */}
+          <Button
+            disabled={isPending}
+            onClick={onCancel}
+            variant="destructive"
+            className="flex gap-x-2"
+          >
+            <MdCancel /> Cancel {/** Not Working Now */}
           </Button>
-          <Button className="flex gap-x-2" disabled={isPending} onClick={onPurchase}>
-            <AiFillCreditCard />Purchase
+          <Button
+            className="flex gap-x-2"
+            disabled={isPending}
+            onClick={onPurchase}
+          >
+            <AiFillCreditCard />
+            Purchase
           </Button>
         </div>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};
