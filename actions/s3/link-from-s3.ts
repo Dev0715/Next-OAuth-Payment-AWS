@@ -6,7 +6,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const Bucket = process.env.AWS_BUCKET_NAME;
 
-export const getS3ImageLink = async (keyName: string) => {
+export const getLinkFromS3 = async (keyName: string) => {
   const command = new GetObjectCommand({
     Bucket,
     Key: keyName
