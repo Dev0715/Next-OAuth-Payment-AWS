@@ -6,6 +6,47 @@ import { NextRequest } from "next/server";
 
 const Bucket = process.env.AWS_BUCKET_NAME;
 
+export const POST = async (req: NextRequest) => {
+  const data = await req.json();
+  const fileList = data.fileList;
+
+  const archive = archiver("zip", {
+    zlib: { level: 9 }
+  });
+
+  try {
+    for (let i = 0; i < fileList.length; i++) {
+      const passThrough = new PassThrough();
+
+      const file = fileList[i];
+      const command = new GetObjectCommand({ Bucket, Key: file.path });
+
+      const item = await s3Client.send(command);
+      (item.Body as Readable).pipe(passThrough);
+
+      archive.append(passThrough, { name: file.name });
+    }
+
+    const headers = new Headers();
+    headers.append("Content-Disposition", 'attachment; filename="image.zip"');
+    headers.append("Content-Type", "application/zip");
+
+    archive.finalize();
+
+    const stream = archive as unknown as ReadableStream<Uint8Array>;
+    return new Response(stream, {
+      headers
+    });
+  } catch (error) {
+    console.error("Error creating zip file:", error);
+    return new Response("Internal Server Error", {
+      status: 500
+    });
+  }
+};
+
+// ## Can't send fileList in the same manner with POST method ##
+
 export const GET = async () => {
   const fileList = [
     {
@@ -45,45 +86,6 @@ export const GET = async () => {
     );
     headers.append("Content-Type", "application/zip");
 
-    return new Response(stream, {
-      headers
-    });
-  } catch (error) {
-    console.error("Error creating zip file:", error);
-    return new Response("Internal Server Error", {
-      status: 500
-    });
-  }
-};
-
-export const POST = async (req: NextRequest) => {
-  const data = await req.json();
-  const fileList = data.fileList;
-
-  const archive = archiver("zip", {
-    zlib: { level: 9 }
-  });
-
-  try {
-    for (let i = 0; i < fileList.length; i++) {
-      const passThrough = new PassThrough();
-
-      const file = fileList[i];
-      const command = new GetObjectCommand({ Bucket, Key: file.path });
-
-      const item = await s3Client.send(command);
-      (item.Body as Readable).pipe(passThrough);
-
-      archive.append(passThrough, { name: file.name });
-    }
-
-    const headers = new Headers();
-    headers.append("Content-Disposition", 'attachment; filename="image.zip"');
-    headers.append("Content-Type", "application/zip");
-
-    archive.finalize();
-
-    const stream = archive as unknown as ReadableStream<Uint8Array>;
     return new Response(stream, {
       headers
     });
