@@ -15,6 +15,7 @@ import {
   PaginationPrevious
 } from "@/components/ui/pagination";
 import { Separator } from "@/components/ui/separator";
+import { getProductsCountByType } from "@/data/products/products-count-by-type";
 
 type ParamsType = {
   params: {
@@ -24,8 +25,12 @@ type ParamsType = {
 
 export default function Products({ params }: ParamsType) {
   const [products, setProducts] = useState<Product[]>([]);
+  const [productCnt, setProductCnt] = useState<number>(0);
 
   useEffect(() => {
+    getProductsCountByType(params.productType).then((res) => {
+      if (res.cnt) setProductCnt(res.cnt);
+    });
     getProductsByType(params.productType).then((res) => {
       console.log(res);
       setProducts(res.items);
