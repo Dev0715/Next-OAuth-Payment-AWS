@@ -1,7 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { FaCartArrowDown, FaProductHunt, FaUser } from "react-icons/fa";
+import {
+  FaCartArrowDown,
+  FaProductHunt,
+  FaToolbox,
+  FaUser
+} from "react-icons/fa";
 import {
   ExitIcon,
   MixerHorizontalIcon,
@@ -93,12 +98,20 @@ export const UserButton = () => {
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-40" align="end">
+        <DropdownMenuContent className="w-48" align="end">
           {user.manager && (
             <Link href={`/approval`}>
               <DropdownMenuItem>
                 <FaProductHunt className="h-4 w-4 mr-3" />
                 <span>Approval Page</span>
+              </DropdownMenuItem>
+            </Link>
+          )}
+          {user.manager && (
+            <Link href={`/manage/users`}>
+              <DropdownMenuItem>
+                <FaToolbox className="h-4 w-4 mr-3" />
+                <span>Users Management</span>
               </DropdownMenuItem>
             </Link>
           )}
