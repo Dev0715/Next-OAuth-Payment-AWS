@@ -9,6 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from "@/components/ui/alert-dialog";
+import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
 
 interface LoginButtonProps {
   open: boolean;
@@ -22,8 +23,6 @@ interface LoginButtonProps {
 
 export const ConfirmAlert = ({
   open,
-  children,
-  asChild,
   title,
   message,
   onOK,
@@ -39,9 +38,14 @@ export const ConfirmAlert = ({
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{message}</AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        <AlertDialogFooter className="flex gap-x-4">
           {onCancel && (
-            <AlertDialogAction onClick={onCancel}>Cancel</AlertDialogAction>
+            <AlertDialogCancel
+              className="px-4 border border-red-700 rounded-lg"
+              onClick={onCancel}
+            >
+              Cancel
+            </AlertDialogCancel>
           )}
           <AlertDialogAction onClick={onOK}>OK</AlertDialogAction>
         </AlertDialogFooter>
