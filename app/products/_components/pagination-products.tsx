@@ -29,16 +29,18 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
           />
         </PaginationItem>
 
-        <PaginationItem>
-          <PaginationLink
-            isActive={selectedIndex === 1}
-            onClick={() => setSelectedIndex(1)}
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>
+        {stepCnt > 0 && (
+          <PaginationItem>
+            <PaginationLink
+              isActive={selectedIndex === 1}
+              onClick={() => setSelectedIndex(1)}
+            >
+              1
+            </PaginationLink>
+          </PaginationItem>
+        )}
 
-        {selectedIndex > 4 && (
+        {selectedIndex > 4 && stepCnt > 5 && (
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>
@@ -53,7 +55,7 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
                 : stepCnt - 3
               : 2);
 
-          return (
+          return stepCnt >= _value ? (
             <PaginationItem key={value}>
               <PaginationLink
                 isActive={selectedIndex === _value}
@@ -62,23 +64,25 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
                 {_value}
               </PaginationLink>
             </PaginationItem>
-          );
+          ) : null;
         })}
 
-        {selectedIndex < stepCnt - 2 && (
+        {selectedIndex < stepCnt - 2 && stepCnt > 5 && (
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>
         )}
 
-        <PaginationItem>
-          <PaginationLink
-            isActive={selectedIndex === stepCnt}
-            onClick={() => setSelectedIndex(stepCnt)}
-          >
-            {stepCnt}
-          </PaginationLink>
-        </PaginationItem>
+        {stepCnt > 4 && (
+          <PaginationItem>
+            <PaginationLink
+              isActive={selectedIndex === stepCnt}
+              onClick={() => setSelectedIndex(stepCnt)}
+            >
+              {stepCnt}
+            </PaginationLink>
+          </PaginationItem>
+        )}
 
         <PaginationItem>
           <PaginationNext
