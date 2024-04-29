@@ -22,7 +22,7 @@ export const ProductItem = ({ product, _url }: PropsParams) => {
         setImagePath(res.response as string);
       }
     });
-  }, []);
+  }, [product]);
 
   const stateText = () => {
     const _state: ProductState = product.approval.state;
