@@ -95,7 +95,7 @@ export const UserButton = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40" align="end">
           {user.manager && (
-            <Link href={`/creator/${user.userId}`}>
+            <Link href={`/approval`}>
               <DropdownMenuItem>
                 <FaProductHunt className="h-4 w-4 mr-3" />
                 <span>Approval Page</span>
