@@ -5,17 +5,9 @@ import { Navbar } from "../_components/navbar";
 import { useEffect, useState } from "react";
 import { Product } from "@/shared/types/types-product";
 import { getProductsByType } from "@/data/products/products-by-type";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from "@/components/ui/pagination";
 import { Separator } from "@/components/ui/separator";
 import { getProductsCountByType } from "@/data/products/products-count-by-type";
+import { ProductPagination } from "../_components/pagination-products";
 
 type ParamsType = {
   params: {
@@ -45,30 +37,7 @@ export default function Products({ params }: ParamsType) {
           content={`You can see all ${params.productType} products here`}
         />
         <div className="w-fit flex flex-col gap-y-2">
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  2
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+          <ProductPagination totalCnt={productCnt} stepCnt={3} />
           <Separator className="h-[1px]" />
         </div>
       </div>
