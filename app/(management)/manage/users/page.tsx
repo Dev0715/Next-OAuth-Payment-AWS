@@ -33,6 +33,7 @@ import { User } from "@/shared/types/types-user";
 import { getAllUsers } from "@/data/user/users-all";
 import { getColumnsForUsersTable } from "../_components/users-column";
 import { Button } from "@/components/ui/button";
+import { v4 as uuidv4 } from "uuid";
 
 const ManagementUsers = () => {
   const user = useCurrentUser();
@@ -51,8 +52,23 @@ const ManagementUsers = () => {
     });
   }, []);
 
+  const onCheckedChange = (checked: boolean, index: number) => {
+    console.log(checked, users[index].userId);
+    const _users = [...users];
+    if (checked) {
+      _users[index].manager = {
+        isManager: true,
+        managerId: uuidv4()
+      };
+    } else {
+      delete _users[index].manager;
+    }
+    setUsers(_users);
+  };
+
   const columns = getColumnsForUsersTable({
-    isPending
+    isPending,
+    onCheckedChange
   });
 
   const table = useReactTable({
