@@ -123,7 +123,7 @@ export const getColumnsForUsersTable = ({
         return (
           <div className="text-center font-medium">
             <Switch
-              checked={!!user.manager}
+              checked={user.manager && user.manager.isManager}
               onCheckedChange={(checked: boolean) =>
                 onCheckedChange(checked, row.index)
               }
