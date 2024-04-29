@@ -28,11 +28,7 @@ export const Navbar = () => {
           </NavigationMenuItem>
           {productTypes.map((category, index) => (
             <NavigationMenuItem key={index}>
-              <Link
-                href={`/products/category/${category.key}`}
-                legacyBehavior
-                passHref
-              >
+              <Link href={`/products/${category.key}`} legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   {category.name}
                 </NavigationMenuLink>
