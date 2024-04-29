@@ -5,9 +5,14 @@ import { QueryCommand, QueryCommandInput } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 
+type KeyType = {
+  productType: string;
+  productId: string;
+};
+
 export const getProductsByType = async (
   productType: string,
-  exclusiveStartKey: string
+  exclusiveStartKey?: KeyType
 ) => {
   const queryCommand: QueryCommandInput = {
     TableName,
@@ -19,17 +24,16 @@ export const getProductsByType = async (
   };
 
   if (exclusiveStartKey) {
-    // queryCommand.ExclusiveStartKey = exclusiveStartKey;
+    queryCommand.ExclusiveStartKey = exclusiveStartKey;
   }
 
   const command = new QueryCommand(queryCommand);
 
   try {
     const response = await db.send(command);
-    console.log(response);
     return {
-      items: response.Items
-      // lastEvaluatedKey: response.LastEvaluatedKey
+      items: response.Items,
+      lastEvaluatedKey: response.LastEvaluatedKey
     };
   } catch (error) {
     return {
