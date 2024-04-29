@@ -24,13 +24,12 @@ export const getProductsCountByType = async (productType: string) => {
 
   try {
     const response = await db.send(command);
-    console.log(response);
     return {
-      items: []
+      cnt: response.Count
     };
   } catch (error) {
     return {
-      items: []
+      error
     };
   }
 };
