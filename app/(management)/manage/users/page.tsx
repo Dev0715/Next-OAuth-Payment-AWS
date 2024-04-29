@@ -35,10 +35,12 @@ import { getColumnsForUsersTable } from "../_components/users-column";
 import { Button } from "@/components/ui/button";
 import { v4 as uuidv4 } from "uuid";
 import { updateManagerProfile } from "@/data/user/manager-update";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 const ManagementUsers = () => {
   const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
+  const [editIndex, setEditIndex] = useState<number>(0);
 
   const [isConfirmAlert, setConfirmAlert] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
@@ -60,27 +62,15 @@ const ManagementUsers = () => {
   const onCheckedChange = (checked: boolean, index: number) => {
     setConfirmAlert(true);
     setConfirmTitle("Update Manager Profile");
-    if (checked)
+    if (checked) {
       setConfirmMessage("Are you sure you want to set this user as a manager?");
-    else
+    } else {
       setConfirmMessage(
         "Are you sure you want to get this user out of the manager role?"
       );
 
-    startTransition(() => {
-      const _manager: ManagerData = {
-        managerId: users[index].manager?.managerId || uuidv4(),
-        isManager: checked
-      };
-
-      updateManagerProfile(users[index].userId, _manager).then((res) => {
-        if (res) {
-          const _users = [...users];
-          _users[index].manager = _manager;
-          setUsers(_users);
-        }
-      });
-    });
+      setEditIndex(index);
+    }
   };
 
   const columns = getColumnsForUsersTable({
@@ -107,8 +97,36 @@ const ManagementUsers = () => {
     }
   });
 
+  const onConfirmOK = () => {
+    setConfirmAlert(false);
+    const index = editIndex;
+    const checked = !(users[index].manager && users[index].manager?.isManager);
+
+    startTransition(() => {
+      const _manager: ManagerData = {
+        managerId: users[index].manager?.managerId || uuidv4(),
+        isManager: checked
+      };
+
+      updateManagerProfile(users[index].userId, _manager).then((res) => {
+        if (res) {
+          const _users = [...users];
+          _users[index].manager = _manager;
+          setUsers(_users);
+        }
+      });
+    });
+  };
+
   return (
     <div className="w-full flex flex-col pt-6">
+      <ConfirmAlert
+        open={isConfirmAlert}
+        title={confirmTitle}
+        message={confirmMessage}
+        onOK={onConfirmOK}
+        onCancel={() => setConfirmAlert(false)}
+      />
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
           <Input
