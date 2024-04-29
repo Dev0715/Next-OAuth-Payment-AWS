@@ -17,7 +17,7 @@ type ParamsType = {
 };
 
 export default function Products({ params }: ParamsType) {
-  const cntPerPage = 1;
+  const cntPerPage = 16; // numbers of products showed per page
 
   const [products, setProducts] = useState<Product[]>([]);
   const [productCnt, setProductCnt] = useState<number>(0);
@@ -76,6 +76,9 @@ export default function Products({ params }: ParamsType) {
           />
           <Separator className="h-[1px]" />
         </div>
+      </div>
+      <div className="pt-4">
+        <p className="text-xl font-semibold">{productCnt} Products</p>
       </div>
       <div className="w-full flex flex-wrap py-6">
         {[...Array(cntPerPage)].map((value, index) => {
