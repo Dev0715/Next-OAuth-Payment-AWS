@@ -27,9 +27,9 @@ export const ProductPagination = ({
   // };
 
   return (
-    <Pagination className="cursor-pointer">
+    <Pagination>
       <PaginationContent>
-        <PaginationItem>
+        <PaginationItem className="cursor-pointer">
           <PaginationPrevious
             // onClick={() => {
             //   onStepChanged(selectedIndex > 1 ? selectedIndex - 1 : 1);
@@ -94,7 +94,7 @@ export const ProductPagination = ({
           </PaginationItem>
         )}
 
-        <PaginationItem>
+        <PaginationItem className="cursor-pointer">
           <PaginationNext
             // onClick={() => {
             //   onStepChanged(
