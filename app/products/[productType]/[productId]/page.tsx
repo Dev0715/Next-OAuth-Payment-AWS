@@ -5,7 +5,7 @@ import { WrappedButton } from "@/components/utils/wrapped-button";
 import { AiFillCreditCard } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaCartArrowDown, FaDownload, FaRegUser } from "react-icons/fa";
-import { Navbar } from "../../../_components/navbar";
+import { Navbar } from "../../_components/navbar";
 import { usePathname, useSearchParams } from "next/navigation";
 import { captureOrder as captureStripeOrder } from "@/actions/stripe/capture-order";
 import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
