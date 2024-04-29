@@ -99,7 +99,7 @@ export const UserButton = () => {
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48" align="end">
-          {user.manager && (
+          {user.manager && user.manager.isManager && (
             <Link href={`/approval`}>
               <DropdownMenuItem>
                 <FaProductHunt className="h-4 w-4 mr-3" />
@@ -107,7 +107,7 @@ export const UserButton = () => {
               </DropdownMenuItem>
             </Link>
           )}
-          {user.manager && (
+          {user.manager && user.manager.isManager && (
             <Link href={`/manage/users`}>
               <DropdownMenuItem>
                 <FaToolbox className="h-4 w-4 mr-3" />
