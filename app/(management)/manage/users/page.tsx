@@ -58,6 +58,15 @@ const ManagementUsers = () => {
   }, []);
 
   const onCheckedChange = (checked: boolean, index: number) => {
+    setConfirmAlert(true);
+    setConfirmTitle("Update Manager Profile");
+    if (checked)
+      setConfirmMessage("Are you sure you want to set this user as a manager?");
+    else
+      setConfirmMessage(
+        "Are you sure you want to get this user out of the manager role?"
+      );
+
     startTransition(() => {
       const _manager: ManagerData = {
         managerId: users[index].manager?.managerId || uuidv4(),
