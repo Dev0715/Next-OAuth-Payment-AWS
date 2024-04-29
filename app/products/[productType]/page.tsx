@@ -8,6 +8,7 @@ import { getProductsByType } from "@/data/products/products-by-type";
 import { Separator } from "@/components/ui/separator";
 import { getProductsCountByType } from "@/data/products/products-count-by-type";
 import { ProductPagination } from "../_components/pagination-products";
+import { ProductLink } from "@/shared/types/types-user";
 
 type ParamsType = {
   params: {
@@ -16,18 +17,40 @@ type ParamsType = {
 };
 
 export default function Products({ params }: ParamsType) {
+  const cntPerPage = 1;
+
   const [products, setProducts] = useState<Product[]>([]);
   const [productCnt, setProductCnt] = useState<number>(0);
+  const [stepCnt, setStepCnt] = useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = useState<number>(1);
+  const [lastEvaluatedKey, setLastEvaluatedKey] = useState<ProductLink>();
 
   useEffect(() => {
     getProductsCountByType(params.productType).then((res) => {
-      if (res.cnt) setProductCnt(res.cnt);
+      if (res.cnt) {
+        setProductCnt(res.cnt);
+        setStepCnt(Math.ceil(res.cnt / cntPerPage));
+        setSelectedIndex(1);
+      }
     });
-    getProductsByType(params.productType).then((res) => {
-      console.log(res);
+    getProductsByType(params.productType, cntPerPage).then((res) => {
       setProducts(res.items);
+      if (res.lastEvaluatedKey) {
+        setLastEvaluatedKey(res.lastEvaluatedKey);
+      }
     });
   }, []);
+
+  const onPreviousPage = () => {
+    setSelectedIndex(selectedIndex > 1 ? selectedIndex - 1 : 1);
+  };
+
+  const onNextPage = () => {
+    const newIndex = selectedIndex < stepCnt ? selectedIndex + 1 : stepCnt;
+    setSelectedIndex(newIndex);
+    if (newIndex > products.length / cntPerPage) {
+    }
+  };
 
   return (
     <main className="w-full flex flex-col pt-6">
@@ -37,7 +60,12 @@ export default function Products({ params }: ParamsType) {
           content={`You can see all ${params.productType} products here`}
         />
         <div className="w-fit flex flex-col gap-y-2">
-          <ProductPagination totalCnt={100} cntForPage={5} />
+          <ProductPagination
+            stepCnt={stepCnt}
+            selectedIndex={selectedIndex}
+            onPrevious={onPreviousPage}
+            onNext={onNextPage}
+          />
           <Separator className="h-[1px]" />
         </div>
       </div>
