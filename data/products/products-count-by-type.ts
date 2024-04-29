@@ -5,11 +5,6 @@ import { QueryCommand, QueryCommandInput } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 
-type KeyType = {
-  productType: string;
-  productId: string;
-};
-
 export const getProductsCountByType = async (productType: string) => {
   const queryCommand: QueryCommandInput = {
     TableName,
