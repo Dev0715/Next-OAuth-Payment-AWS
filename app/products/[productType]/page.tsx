@@ -49,6 +49,14 @@ export default function Products({ params }: ParamsType) {
     const newIndex = selectedIndex < stepCnt ? selectedIndex + 1 : stepCnt;
     setSelectedIndex(newIndex);
     if (newIndex > products.length / cntPerPage) {
+      getProductsByType(params.productType, cntPerPage, lastEvaluatedKey).then(
+        (res) => {
+          setProducts([...products, ...res.items]);
+          if (res.lastEvaluatedKey) {
+            setLastEvaluatedKey(res.lastEvaluatedKey);
+          }
+        }
+      );
     }
   };
 
@@ -70,11 +78,14 @@ export default function Products({ params }: ParamsType) {
         </div>
       </div>
       <div className="w-full flex flex-wrap py-6">
-        {products.map((product, index) => (
-          <div key={index} className="w-1/4 p-2">
-            <ProductItem product={product} />
-          </div>
-        ))}
+        {[...Array(cntPerPage)].map((value, index) => {
+          const _index = index + (selectedIndex - 1) * cntPerPage;
+          return _index < products.length ? (
+            <div key={index} className="w-1/4 p-2">
+              <ProductItem product={products[_index]} />
+            </div>
+          ) : null;
+        })}
       </div>
     </main>
   );
