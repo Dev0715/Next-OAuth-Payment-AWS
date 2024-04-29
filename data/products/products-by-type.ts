@@ -17,7 +17,7 @@ export const getProductsByType = async (
     ExpressionAttributeValues: {
       ":productType": productType
     },
-    Limit: 1
+    Limit: limit
   };
 
   if (exclusiveStartKey) {
