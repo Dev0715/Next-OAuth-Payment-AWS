@@ -3,30 +3,43 @@
 import { UserButton } from "@/components/auth/user-button";
 import Link from "next/link";
 
-import React from "react";
+import React, { useState } from "react";
 import { Navbar } from "./navbar";
 import { usePathname } from "next/navigation";
 
-export const Header = () => {
+type HeaderProps = { transparent?: boolean };
+
+export const Header = ({ transparent = true }: HeaderProps) => {
   const path = usePathname();
+  const [navbarOpen, setNavbarOpen] = useState(false);
 
   const isAuthPage = () => {
     return path.indexOf("/auth") === 0;
   };
 
   return (
-    <nav className="w-full z-10">
-      <div className="w-full flex items-end justify-between pb-4 box-border border-b-[1px]">
-        <div className="flex">
-          <Link href="/">
-            <p className="text-4xl font-semibold text-black drop-shadow-md">
-              Kre8tive
-            </p>
+    <nav
+      className={
+        (transparent
+          ? "top-0 absolute z-50 w-full"
+          : "relative bg-white shadow-lg") +
+        " flex flex-wrap items-center justify-between px-2 py-3 "
+      }
+    >
+      <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+        <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+          <Link
+            className={
+              (transparent ? "text-white" : "text-gray-800") +
+              " text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+            }
+            href="/"
+          >
+            Kre8tive
           </Link>
         </div>
         <UserButton />
       </div>
-      {isAuthPage() ? null : <Navbar />}
     </nav>
   );
 };

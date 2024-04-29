@@ -1,11 +1,17 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Poppins } from "next/font/google";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Hero } from "@/components/landing/hero";
+import { Services } from "@/components/landing/services";
+import { Featured } from "@/components/landing/featured";
+import { Team } from "@/components/landing/team";
+import { Finisher } from "@/components/landing/finisher";
+import { Contact } from "@/components/landing/contact";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -13,30 +19,14 @@ const font = Poppins({
 });
 
 const Home = () => {
-  // const tempImagePath = ["/profile-back-example.jpg", "/product-example.jpg", "/product-example-2.jpg"];
-
-  // const imagesPosition = [
-  //   "top-12 left-16 rotate-[6deg]",
-  //   "top-64 left-6 rotate-[-12deg]",
-  //   "top-[480px] left-16 rotate-[6deg]",
-  //   "top-12 right-16 rotate-[-6deg]",
-  //   "top-64 right-6 rotate-[12deg]",
-  //   "top-[480px] right-16 rotate-[-6deg]",
-  // ]
-
   return (
-    <main className="relative w-full flex justify-center pt-24 pb-6">
-      {/* {imagesPosition.map(_style => (
-        <Avatar className={`absolute w-96 h-56 rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 blur-sm ${_style}`}>
-          <AvatarImage
-            src={tempImagePath[Math.floor(Math.random() * 100) % 3]}
-            className="object-fill aspect-auto"
-          />
-          <AvatarFallback className="bg-sky-500">
-            <div className="w-full h-full bg-green-700"></div>
-          </AvatarFallback>
-        </Avatar>
-      ))} */}
+    <main className="relative w-full">
+      <Hero />
+      <Services />
+      <Featured />
+      <Team />
+      <Finisher />
+      <Contact />
       <div className="w-1/2 flex flex-col items-center gap-y-24 text-center">
         <h1
           className={cn(
