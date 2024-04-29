@@ -1,18 +1,15 @@
 "use server";
 
 import db from "@/lib/db";
+import { ProductLink } from "@/shared/types/types-user";
 import { QueryCommand, QueryCommandInput } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 
-type KeyType = {
-  productType: string;
-  productId: string;
-};
-
 export const getProductsByType = async (
   productType: string,
-  exclusiveStartKey?: KeyType
+  limit: number,
+  exclusiveStartKey?: ProductLink
 ) => {
   const queryCommand: QueryCommandInput = {
     TableName,
