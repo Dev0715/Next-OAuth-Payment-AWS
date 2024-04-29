@@ -18,13 +18,17 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
   const stepCnt = Math.ceil(totalCnt / cntForPage);
   const [selectedIndex, setSelectedIndex] = useState<number>(1);
 
+  const onStepChanged = (index: number) => {
+    setSelectedIndex(index);
+  };
+
   return (
     <Pagination className="cursor-pointer">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
             onClick={() => {
-              setSelectedIndex(selectedIndex > 1 ? selectedIndex - 1 : 1);
+              onStepChanged(selectedIndex > 1 ? selectedIndex - 1 : 1);
             }}
           />
         </PaginationItem>
@@ -33,14 +37,15 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
           <PaginationItem>
             <PaginationLink
               isActive={selectedIndex === 1}
-              onClick={() => setSelectedIndex(1)}
+              onClick={() => onStepChanged(1)}
             >
               1
             </PaginationLink>
           </PaginationItem>
         )}
 
-        {selectedIndex > 4 && stepCnt > 5 && (
+        {((selectedIndex > 4 && stepCnt > 5) ||
+          (selectedIndex === 4 && stepCnt === 6)) && (
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>
@@ -49,7 +54,7 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
         {[0, 1, 2].map((value) => {
           const _value =
             value +
-            (selectedIndex > 4
+            (selectedIndex > 4 || (selectedIndex === 4 && stepCnt === 6)
               ? selectedIndex < stepCnt - 2
                 ? selectedIndex - 1
                 : stepCnt - 3
@@ -59,7 +64,7 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
             <PaginationItem key={value}>
               <PaginationLink
                 isActive={selectedIndex === _value}
-                onClick={() => setSelectedIndex(_value)}
+                onClick={() => onStepChanged(_value)}
               >
                 {_value}
               </PaginationLink>
@@ -77,7 +82,7 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
           <PaginationItem>
             <PaginationLink
               isActive={selectedIndex === stepCnt}
-              onClick={() => setSelectedIndex(stepCnt)}
+              onClick={() => onStepChanged(stepCnt)}
             >
               {stepCnt}
             </PaginationLink>
@@ -87,7 +92,7 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
         <PaginationItem>
           <PaginationNext
             onClick={() => {
-              setSelectedIndex(
+              onStepChanged(
                 selectedIndex < stepCnt ? selectedIndex + 1 : stepCnt
               );
             }}
