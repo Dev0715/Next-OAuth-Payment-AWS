@@ -37,7 +37,7 @@ export default function Products({ params }: ParamsType) {
           content={`You can see all ${params.productType} products here`}
         />
         <div className="w-fit flex flex-col gap-y-2">
-          <ProductPagination totalCnt={productCnt} cntForPage={1} />
+          <ProductPagination totalCnt={100} cntForPage={5} />
           <Separator className="h-[1px]" />
         </div>
       </div>

@@ -19,6 +19,10 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
 
   const [selectedIndex, setSelectedIndex] = useState<number>(1);
 
+  const secondValue = selectedIndex > 4 ? selectedIndex - 1 : 2;
+  const thirdValue = selectedIndex > 4 ? selectedIndex : 3;
+  const fourthValue = selectedIndex > 4 ? selectedIndex + 1 : 4;
+
   return (
     <Pagination>
       <PaginationContent>
@@ -32,23 +36,42 @@ export const ProductPagination = ({ totalCnt, cntForPage }: Props) => {
           </PaginationLink>
         </PaginationItem>
 
-        {selectedIndex > 4 && selectedIndex < stepCnt - 3 && (
+        {selectedIndex > 4 && (
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>
         )}
 
         <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
+          <PaginationLink href="#" isActive={selectedIndex === secondValue}>
+            {secondValue}
           </PaginationLink>
         </PaginationItem>
+
         <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
+          <PaginationLink href="#" isActive={selectedIndex === thirdValue}>
+            {thirdValue}
+          </PaginationLink>
         </PaginationItem>
+
         <PaginationItem>
-          <PaginationEllipsis />
+          <PaginationLink href="#" isActive={selectedIndex === fourthValue}>
+            {fourthValue}
+          </PaginationLink>
         </PaginationItem>
+
+        {selectedIndex < stepCnt - 2 && (
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+        )}
+
+        <PaginationItem>
+          <PaginationLink href="#" isActive={selectedIndex === stepCnt}>
+            {stepCnt}
+          </PaginationLink>
+        </PaginationItem>
+
         <PaginationItem>
           <PaginationNext href="#" />
         </PaginationItem>
