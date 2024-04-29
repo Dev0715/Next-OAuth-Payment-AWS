@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, useTransition } from "react";
 import {
   ColumnFiltersState,
@@ -27,24 +29,34 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { User } from "@/shared/types/types-user";
+import { getAllUsers } from "@/data/user/users-all";
+import { getColumnsForUsersTable } from "../_components/users-column";
+import { Button } from "@/components/ui/button";
 
 const ManagementUsers = () => {
   const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
+
+  const [users, setUsers] = useState<User[]>([]);
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
+  useEffect(() => {
+    getAllUsers().then((res) => {
+      setUsers(res.items);
+    });
+  }, []);
+
   const columns = getColumnsForUsersTable({
-    onSegmentDelete,
-    onSegmentDetails,
-    onSegmentEdit,
     isPending
   });
+
   const table = useReactTable({
-    data: segments,
+    data: users,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -64,27 +76,19 @@ const ManagementUsers = () => {
 
   return (
     <div className="w-full flex flex-col pt-6">
-      Manage users
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
           <Input
             disabled={isPending}
-            placeholder="Filter Title..."
-            value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+            placeholder="Filter User ID"
+            value={
+              (table.getColumn("userId")?.getFilterValue() as string) ?? ""
+            }
             onChange={(event) =>
-              table.getColumn("title")?.setFilterValue(event.target.value)
+              table.getColumn("userId")?.setFilterValue(event.target.value)
             }
             className="max-w-xs"
           />
-          {isRowSelected() && (
-            <Button
-              variant={"outline"}
-              className="border-red-700"
-              onClick={onSelectedRowsDelete}
-            >
-              Delete selected mails
-            </Button>
-          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
