@@ -40,6 +40,10 @@ const ManagementUsers = () => {
   const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
 
+  const [isConfirmAlert, setConfirmAlert] = useState<boolean>(false);
+  const [confirmTitle, setConfirmTitle] = useState<string>("");
+  const [confirmMessage, setConfirmMessage] = useState<string>("");
+
   const [users, setUsers] = useState<User[]>([]);
 
   const [sorting, setSorting] = useState<SortingState>([]);
