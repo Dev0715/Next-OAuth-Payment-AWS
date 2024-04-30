@@ -65,3 +65,5 @@ export const PRODCUT_TYPES: CategoryInfo[] = [
     name: "Audio / Sound Effects"
   }
 ];
+
+export type TypeOfProduct = (typeof PRODCUT_TYPES)[number];
