@@ -4,7 +4,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-full min-h-full flex">
       <SideNavBar />
-      {children}
+      <div className="w-full px-12 pt-6 pb-24">{children}</div>
     </div>
   );
 };

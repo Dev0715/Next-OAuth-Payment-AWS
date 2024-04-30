@@ -1,7 +1,9 @@
+import { Navbar } from "../_components/navbar";
+
 const ManagementBundles = () => {
   return (
-    <div>
-      <h1>Bundles</h1>
+    <div className="w-full flex">
+      <Navbar title="Bundles" content="You can manage bundles" />
     </div>
   );
 };

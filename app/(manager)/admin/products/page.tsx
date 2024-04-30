@@ -1,7 +1,7 @@
 "use client";
 
 import { ProductItem } from "@/components/product/product-item";
-import { Navbar } from "./_components/navbar";
+import { Navbar } from "../_components/navbar";
 import { useEffect, useState } from "react";
 import { Product } from "@/shared/types/types-product";
 import { getAllProducts } from "@/data/products/all-products";
@@ -16,7 +16,7 @@ export default function Approval() {
   }, []);
 
   return (
-    <main className="w-full p-6 flex flex-col">
+    <main className="w-full flex flex-col">
       <Navbar
         title="All Products"
         content="You can check and approve or reject products"
