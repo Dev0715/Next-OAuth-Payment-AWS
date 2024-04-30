@@ -31,7 +31,7 @@ import {
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { ManagerData, User } from "@/shared/types/types-user";
 import { getAllUsers } from "@/data/user/users-all";
-import { getColumnsForUsersTable } from "../_components/users-column";
+import { getColumnsForUsersTable } from "../../../../components/admin/users-column";
 import { Button } from "@/components/ui/button";
 import { v4 as uuidv4 } from "uuid";
 import { updateManagerProfile } from "@/data/user/manager-update";
