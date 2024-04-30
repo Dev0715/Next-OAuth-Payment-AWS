@@ -1,4 +1,4 @@
-import { SideNavBar } from "@/components/admin/siden-navbar";
+import { SideNavBar } from "@/components/admin/side-navbar";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
