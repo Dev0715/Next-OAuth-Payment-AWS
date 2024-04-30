@@ -1,3 +1,5 @@
+import { TypeOfProduct } from "@/assets/product-types";
+
 export type ProductState = "created" | "approved" | "rejected" | "updated";
 
 type CreativeFile = {
@@ -12,7 +14,7 @@ export type ProductEvent = {
 };
 
 export type Product = {
-  productType: string;
+  productType: TypeOfProduct;
   productId: string;
   ownerId: string;
   title: string;
