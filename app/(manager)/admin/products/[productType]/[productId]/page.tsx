@@ -4,7 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaDownload, FaRegUser } from "react-icons/fa";
 import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { Product, ProductState } from "@/shared/types/types-product";
@@ -17,7 +16,7 @@ import { ProductHistory } from "@/components/product/product-history";
 import { Textarea } from "@/components/ui/textarea";
 import { updateProductApproval } from "@/data/products/product-approval-update";
 import { Navbar } from "../../../_components/navbar";
-import { TypeOfProduct } from "@/assets/product-types";
+import Link from "next/link";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;

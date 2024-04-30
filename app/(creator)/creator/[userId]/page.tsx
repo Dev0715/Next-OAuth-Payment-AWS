@@ -69,7 +69,7 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
   const onFollow = () => {};
 
   return (
-    <div className="w-5/6 flex flex-col items-center gap-y-2 py-6">
+    <div className="w-5/6 flex flex-col items-center gap-y-2 pt-6 pb-24">
       <div className="relative w-full flex flex-col items-center mb-12">
         <Avatar className="w-full h-56 rounded-none">
           <AvatarImage src={coverPath} className="object-cover" />
