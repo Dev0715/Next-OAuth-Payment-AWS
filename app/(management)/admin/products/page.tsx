@@ -17,11 +17,14 @@ export default function Approval() {
 
   return (
     <main className="w-full p-6 flex flex-col">
-      <Navbar title="Products" content="You can see all products here" />
+      <Navbar
+        title="All Products"
+        content="You can check and approve or reject products"
+      />
       <div className="w-full flex flex-wrap py-6">
         {products.map((product, index) => (
           <div key={index} className="w-1/4 p-2">
-            <ProductItem product={product} _url="/approval/product" />
+            <ProductItem product={product} _url="/admin/products" />
           </div>
         ))}
       </div>
