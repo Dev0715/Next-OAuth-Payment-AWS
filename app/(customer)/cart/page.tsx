@@ -89,7 +89,7 @@ export default function Cart() {
   };
 
   return (
-    <main className="w-full flex flex-col pt-6">
+    <main className="w-full p-6 flex flex-col">
       <ConfirmAlert
         open={isConfirming}
         title={confirmingTitle}

@@ -61,7 +61,7 @@ export default function Products({ params }: ParamsType) {
   };
 
   return (
-    <main className="w-full flex flex-col pt-6">
+    <main className="w-full p-6 flex flex-col">
       <div className="w-full flex items-end justify-between">
         <Navbar
           title={`${params.productType} Products`}

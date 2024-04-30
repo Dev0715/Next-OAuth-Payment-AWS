@@ -11,7 +11,7 @@ export const Header = () => {
   const path = usePathname();
 
   const transparent = useMemo(() => {
-    return !path.startsWith("/auth");
+    return path === "/";
   }, [path]);
 
   return (
