@@ -27,9 +27,11 @@ import { cartAtom } from "@/store/cart";
 import { getUserById } from "@/data/user/user-by-id";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
+import { useCurrentRole } from "@/hooks/use-current-role";
 
 export const UserButton = () => {
   const user = useCurrentUser();
+  const userRole = useCurrentRole();
 
   const [avatarImage, setAvatarImage] = useState<string>("");
   const [cart, setCart] = useAtom(cartAtom);
@@ -95,7 +97,7 @@ export const UserButton = () => {
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48" align="end">
-          {user.manager && user.manager.isManager && (
+          {userRole.isManager && (
             <>
               <Link href={`/admin`}>
                 <DropdownMenuItem>
@@ -106,7 +108,7 @@ export const UserButton = () => {
               <Separator />
             </>
           )}
-          {user.creator && (
+          {userRole.isCreator && (
             <>
               <Link href={`/creator/${user.userId}`}>
                 <DropdownMenuItem>
@@ -117,7 +119,7 @@ export const UserButton = () => {
               <Separator />
             </>
           )}
-          {user.customer && (
+          {userRole.isCustomer && (
             <Link href="/user">
               <DropdownMenuItem>
                 <MixerHorizontalIcon className="h-4 w-4 mr-3" />

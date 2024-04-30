@@ -49,7 +49,7 @@ export const login = async (
   let callbackLink = callbackUrl || DEFAULT_LOGIN_REDIRECT;
   if (existingUser.manager && existingUser.manager.isManager) {
     callbackLink = "/admin";
-  } else if (existingUser.creator) {
+  } else if (existingUser.creator && existingUser.creator.isCreator) {
     callbackLink = `/creator/${existingUser.userId}`;
   }
 
