@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   FaCartArrowDown,
+  FaLayerGroup,
   FaProductHunt,
   FaToolbox,
   FaUser
@@ -31,6 +32,7 @@ import { useAtom } from "jotai";
 import { cartAtom } from "@/store/cart";
 import { getUserById } from "@/data/user/user-by-id";
 import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
 
 export const UserButton = () => {
   const user = useCurrentUser();
@@ -100,28 +102,38 @@ export const UserButton = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48" align="end">
           {user.manager && user.manager.isManager && (
-            <Link href={`/approval`}>
-              <DropdownMenuItem>
-                <FaProductHunt className="h-4 w-4 mr-3" />
-                <span>Approval Page</span>
-              </DropdownMenuItem>
-            </Link>
-          )}
-          {user.manager && user.manager.isManager && (
-            <Link href={`/manage/users`}>
-              <DropdownMenuItem>
-                <FaToolbox className="h-4 w-4 mr-3" />
-                <span>Users Management</span>
-              </DropdownMenuItem>
-            </Link>
+            <>
+              <Link href={`/approval`}>
+                <DropdownMenuItem>
+                  <FaProductHunt className="h-4 w-4 mr-3" />
+                  <span>Approval Page</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link href={`/manage/users`}>
+                <DropdownMenuItem>
+                  <FaToolbox className="h-4 w-4 mr-3" />
+                  <span>Users Management</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link href={`/manage/bundles`}>
+                <DropdownMenuItem>
+                  <FaLayerGroup className="h-4 w-4 mr-3" />
+                  <span>Bundle Management</span>
+                </DropdownMenuItem>
+              </Link>
+              <Separator />
+            </>
           )}
           {user.creator && (
-            <Link href={`/creator/${user.userId}`}>
-              <DropdownMenuItem>
-                <PersonIcon className="h-4 w-4 mr-3" />
-                <span>Creator Profile</span>
-              </DropdownMenuItem>
-            </Link>
+            <>
+              <Link href={`/creator/${user.userId}`}>
+                <DropdownMenuItem>
+                  <PersonIcon className="h-4 w-4 mr-3" />
+                  <span>Creator Profile</span>
+                </DropdownMenuItem>
+              </Link>
+              <Separator />
+            </>
           )}
           {user.customer && (
             <Link href="/user">
