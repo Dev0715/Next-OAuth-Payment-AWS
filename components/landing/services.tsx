@@ -8,10 +8,12 @@ export const Services = () => (
               <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
                 <i className="fas fa-award"></i>
               </div>
-              <h6 className="text-xl font-semibold">Awarded Agency</h6>
+              <h6 className="text-xl font-semibold">
+                Design & Developer communities
+              </h6>
               <p className="mt-2 mb-4 text-gray-600">
-                Divide details about your product or agency work into parts. A
-                paragraph describing a feature will be enough.
+                Prioritize our resources to primarily meet the needs of the
+                Design and Developer communities
               </p>
             </div>
           </div>
@@ -23,10 +25,10 @@ export const Services = () => (
               <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400">
                 <i className="fas fa-retweet"></i>
               </div>
-              <h6 className="text-xl font-semibold">Free Revisions</h6>
+              <h6 className="text-xl font-semibold">Quality and Price</h6>
               <p className="mt-2 mb-4 text-gray-600">
-                Keep you user engaged by providing meaningful information.
-                Remember that by this time, the user is curious.
+                To establish ourselves as the preeminent luxury brand, renowned
+                for superior quality and unmatched value
               </p>
             </div>
           </div>
@@ -38,10 +40,12 @@ export const Services = () => (
               <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400">
                 <i className="fas fa-fingerprint"></i>
               </div>
-              <h6 className="text-xl font-semibold">Verified Company</h6>
+              <h6 className="text-xl font-semibold">
+                Unique Pricing Strategies
+              </h6>
               <p className="mt-2 mb-4 text-gray-600">
-                Write a few lines about each one. A paragraph describing a
-                feature will be enough. Keep you user engaged!
+                To enhance customer loyalty through innovative pricing
+                strategies and embracing calculated risks
               </p>
             </div>
           </div>
@@ -54,23 +58,13 @@ export const Services = () => (
             <i className="fas fa-user-friends text-xl"></i>
           </div>
           <h3 className="text-3xl mb-2 font-semibold leading-normal">
-            Working with us is a pleasure
+            We have everything you need
           </h3>
           <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700">
-            Don't let your uses guess by attaching tooltips and popoves to any
-            element. Just make sure you enable them first via JavaScript.
+            Unlock limitless creativity with our digital asset marketplace.
+            Discover, create, and collaborate with ease.
           </p>
-          <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
-            The kit comes with three pre-built pages to help you get started
-            faster. You can change the text and images and you're good to go.
-            Just make sure you enable them first via JavaScript.
-          </p>
-          <a
-            href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/presentation"
-            className="font-bold text-gray-800 mt-8"
-          >
-            Check Tailwind Starter Kit!
-          </a>
+          <a className="font-bold text-gray-800 mt-8">Explore Assets</a>
         </div>
 
         <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
@@ -80,7 +74,7 @@ export const Services = () => (
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
               className="w-full align-middle rounded-t-lg"
             />
-            <blockquote className="relative p-8 mb-4">
+            <blockquote className="relative p-8">
               <svg
                 preserveAspectRatio="none"
                 xmlns="http://www.w3.org/2000/svg"

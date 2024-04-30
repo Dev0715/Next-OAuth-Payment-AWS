@@ -34,7 +34,7 @@ export const Featured = () => (
             <div className="text-pink-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-pink-300">
               <i className="fas fa-rocket text-xl"></i>
             </div>
-            <h3 className="text-3xl font-semibold">A growing company</h3>
+            <h3 className="text-3xl font-semibold">A growing marketplace</h3>
             <p className="mt-4 text-lg leading-relaxed text-gray-600">
               The extension comes with three pre-built pages to help you get
               started faster. You can change the text and images and you're good
@@ -49,9 +49,7 @@ export const Featured = () => (
                     </span>
                   </div>
                   <div>
-                    <h4 className="text-gray-600">
-                      Carefully crafted components
-                    </h4>
+                    <h4 className="text-gray-600">Carefully crafted assets</h4>
                   </div>
                 </div>
               </li>
@@ -63,7 +61,7 @@ export const Featured = () => (
                     </span>
                   </div>
                   <div>
-                    <h4 className="text-gray-600">Amazing page examples</h4>
+                    <h4 className="text-gray-600">Amazing templates</h4>
                   </div>
                 </div>
               </li>

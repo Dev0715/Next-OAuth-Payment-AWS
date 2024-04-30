@@ -7,7 +7,7 @@ export const Footer = () => {
   return (
     <footer className="relative bg-gray-300 pt-8 pb-6">
       <div
-        className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+        className="bottom-auto top-px left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
         style={{ height: "80px" }}
       >
         <svg
@@ -67,27 +67,8 @@ export const Footer = () => {
                 </span>
                 <ul className="list-unstyled">
                   <li>
-                    <a
-                      className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      href="https://www.creative-tim.com/presentation"
-                    >
+                    <a className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">
                       About Us
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      href="https://blog.creative-tim.com"
-                    >
-                      Blog
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      href="https://www.github.com/creativetimofficial"
-                    >
-                      Github
                     </a>
                   </li>
                   <li>
