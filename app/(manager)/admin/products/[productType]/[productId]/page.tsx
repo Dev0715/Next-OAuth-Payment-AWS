@@ -127,33 +127,36 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     if (!checkComment()) {
       return;
     }
-    const history = [...(product?.approval.history || [])];
-    const state: ProductState = isApprove ? "approved" : "rejected";
-    history.push({
-      state,
-      comment,
-      userId: user?.userId as string
-    });
-    const approval = { state, history };
-    updateProductApproval({
-      productType: params.productType,
-      productId: params.productId,
-      approval
-    }).then((res) => {
-      if (res) {
-        setProduct((prev) => {
-          if (prev) {
-            return { ...prev, approval };
-          }
-          return prev;
-        });
-      }
-      setComment("");
+
+    startTransition(() => {
+      const history = [...(product?.approval.history || [])];
+      const state: ProductState = isApprove ? "approved" : "rejected";
+      history.push({
+        state,
+        comment,
+        userId: user?.userId as string
+      });
+      const approval = { state, history };
+      updateProductApproval({
+        productType: params.productType,
+        productId: params.productId,
+        approval
+      }).then((res) => {
+        if (res) {
+          setProduct((prev) => {
+            if (prev) {
+              return { ...prev, approval };
+            }
+            return prev;
+          });
+        }
+        setComment("");
+      });
     });
   };
 
   return (
-    <div className="w-full flex flex-col gap-y-6">
+    <div className="w-full flex flex-col gap-y-8">
       <ConfirmAlert
         open={isConfirming}
         title={confirmingTitle}
@@ -199,12 +202,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
               </p>
             </div>
             <div className="w-full flex justify-between">
-              <p>Reviews:</p>
-              <p className="text-xl text-rose-700">★ ★ ★ ★ ★</p>
-            </div>
-            <div className="w-full flex justify-between">
-              <p>Some More:</p>
-              <p>...</p>
+              <p>Creator:</p>
+              <p className="text-lg font-medium">{product?.ownerId}</p>
             </div>
           </div>
           <div className="w-full flex flex-col">
@@ -213,17 +212,16 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
             <p>...</p>
           </div>
           <div className="flex flex-col gap-y-4">
-            <Button
-              disabled={isPending}
-              asChild
-              variant="outline"
-              className="border-green-700 gap-x-2"
-            >
-              <Link href={`/creator/${product?.ownerId}`}>
+            <Link href={`/creator/${product?.ownerId}`}>
+              <Button
+                disabled={isPending}
+                variant="outline"
+                className="w-full border-green-700 gap-x-2"
+              >
                 <FaRegUser className="text-green-700" />
                 Go to Creator's Profile
-              </Link>
-            </Button>
+              </Button>
+            </Link>
             <Button
               disabled={isPending}
               onClick={onDownloadCreativeFiles}
@@ -236,8 +234,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           </div>
         </div>
       </div>
-      <div className="w-full flex flex-col mb-4">
-        <p className="text-2xl font-semibold mb-4">Product History</p>
+      <div className="w-full flex flex-col gap-y-4">
+        <p className="text-2xl font-semibold">Product History</p>
         <ProductHistory history={product?.approval.history || []} />
       </div>
       <div className="w-full flex flex-col gap-y-4">
@@ -245,8 +243,10 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         <div className="flex flex-col gap-y-1">
           <p>Your Comment</p>
           <Textarea
+            disabled={isPending}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            className="w-1/2"
           />
         </div>
         <div className="flex items-center gap-x-4">
