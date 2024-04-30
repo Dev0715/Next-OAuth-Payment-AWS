@@ -1,29 +1,24 @@
 "use client";
 
-import { UserButton } from "@/components/auth/user-button";
 import Link from "next/link";
-
-import React, { useState } from "react";
-import { Navbar } from "./navbar";
 import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 
-type HeaderProps = { transparent?: boolean };
+import { UserButton } from "@/components/auth/user-button";
+import { Navbar } from "./navbar";
 
-export const Header = ({ transparent = true }: HeaderProps) => {
+export const Header = () => {
   const path = usePathname();
-  const [navbarOpen, setNavbarOpen] = useState(false);
 
-  const isAuthPage = () => {
-    return path.indexOf("/auth") === 0;
-  };
+  const transparent = useMemo(() => {
+    return !path.startsWith("/auth");
+  }, [path]);
 
   return (
     <nav
       className={
-        (transparent
-          ? "top-0 absolute z-50 w-full"
-          : "relative bg-white shadow-lg") +
-        " flex flex-wrap items-center justify-between px-2 py-3 "
+        (transparent ? "top-0 absolute z-50" : "relative bg-white shadow-lg") +
+        " w-full flex flex-wrap items-center justify-between px-2 py-3 "
       }
     >
       <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
@@ -38,7 +33,9 @@ export const Header = ({ transparent = true }: HeaderProps) => {
             Kre8tive
           </Link>
         </div>
-        <UserButton />
+        <div className={transparent ? "text-white" : "text-gray-800"}>
+          <UserButton />
+        </div>
       </div>
     </nav>
   );
