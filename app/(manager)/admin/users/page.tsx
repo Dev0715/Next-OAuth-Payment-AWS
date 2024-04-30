@@ -36,6 +36,7 @@ import { Button } from "@/components/ui/button";
 import { v4 as uuidv4 } from "uuid";
 import { updateManagerProfile } from "@/data/user/manager-update";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { Navbar } from "../_components/navbar";
 
 const ManagementUsers = () => {
   const user = useCurrentUser();
@@ -119,7 +120,7 @@ const ManagementUsers = () => {
   };
 
   return (
-    <div className="w-full p-6 flex flex-col">
+    <div className="w-full flex flex-col gap-y-6">
       <ConfirmAlert
         open={isConfirmAlert}
         title={confirmTitle}
@@ -127,6 +128,7 @@ const ManagementUsers = () => {
         onOK={onConfirmOK}
         onCancel={() => setConfirmAlert(false)}
       />
+      <Navbar title="Users" content="You can assign manager's role" />
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
           <Input
