@@ -3,15 +3,11 @@
 import { getUserById } from "@/data/user/user-by-id";
 import { updateUserProducts } from "@/data/user/products-update";
 import { updateUserCart } from "@/data/user/cart-update";
-
-type ProductInfo = {
-  productType: string;
-  productId: string;
-};
+import { ProductLink } from "@/shared/types/types-user";
 
 type ParamsType = {
   userId: string;
-  product: ProductInfo;
+  product: ProductLink;
 };
 
 export const removeProductFromCart = async ({
@@ -25,7 +21,7 @@ export const removeProductFromCart = async ({
 
   const cart = existingUser.cart || [];
   const newCart = cart.filter(
-    (item: ProductInfo) => item.productId !== product.productId
+    (item: ProductLink) => item.productId !== product.productId
   );
 
   const response = await updateUserCart({
