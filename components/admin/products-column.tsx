@@ -1,5 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, ArrowUp, ArrowDown, MoreHorizontal } from "lucide-react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -11,48 +12,38 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Product, ProductState } from "@/shared/types/types-product";
-import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+
+import type { Product, ProductState } from "@/shared/types/types-product";
+import type { BadgeVariant } from "@/components/ui/badge";
+
+const STATE_DISPLAY_Text: Record<ProductState, string> = {
+  created: "Created",
+  approved: "Approved",
+  rejected: "Rejected",
+  updated: "Updated"
+};
+
+const STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
+  created: "default",
+  approved: "success",
+  rejected: "destructive",
+  updated: "secondary"
+};
 
 type PropsType = {
   isPending: boolean;
 };
 
 export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
-  const stateText = (product: Product) => {
-    const _state: ProductState = product.approval.state;
-    if (_state === "created") {
-      return "Created";
-    } else if (_state === "approved") {
-      return "Approved";
-    } else if (_state === "rejected") {
-      return "Rejected";
-    } else if (_state === "updated") {
-      return "Updated";
-    }
-  };
-
-  const stateClassName = (product: Product) => {
-    const _state: ProductState = product.approval.state;
-    if (_state === "created") {
-      return "text-white";
-    } else if (_state === "approved") {
-      return "text-green-700 font-semibold";
-    } else if (_state === "rejected") {
-      return "text-red-700 font-semibold";
-    } else if (_state === "updated") {
-      return "text-white";
-    }
-  };
-
-  const commentMaker = (product: Product) => {
+  const getLastReviewer = (product: Product) => {
     const _history = product.approval.history;
     const _userId = _history[_history.length - 1].userId;
 
     return _userId;
   };
 
-  const columns: ColumnDef<Product>[] = [
+  const columns: ColumnDef<Product, string | string[]>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -81,121 +72,90 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
     },
     {
       accessorKey: "ownerId",
-      header: ({ column }) => {
-        return (
-          <div className="flex justify-center">
-            <Button
-              variant="ghost"
-              onClick={() =>
-                column.toggleSorting(column.getIsSorted() === "asc")
-              }
-            >
-              Creator
-              <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        );
-      },
-      cell: ({ row }) => (
-        <div className="text-center">{row.getValue("ownerId")}</div>
-      )
+      header: ({ column }) => (
+        <button
+          className="inline-flex items-center"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Creator
+          {column.getIsSorted() === "asc" ? (
+            <ArrowUp className="ml-2 h-4 w-4" />
+          ) : (
+            <ArrowDown className="ml-2 h-4 w-4" />
+          )}
+        </button>
+      ),
+      cell: (info) => info.getValue()
     },
     {
       accessorKey: "productType",
-      header: ({ column }) => {
-        return (
-          <div className="flex justify-center">
-            <Button
-              variant="ghost"
-              onClick={() =>
-                column.toggleSorting(column.getIsSorted() === "asc")
-              }
-            >
-              Product Type
-              <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        );
-      },
-      cell: ({ row }) => (
-        <div className="text-center">{row.getValue("productType")}</div>
-      )
+      header: ({ column }) => (
+        <button
+          className="inline-flex items-center"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Product Type
+          {column.getIsSorted() === "asc" ? (
+            <ArrowUp className="ml-2 h-4 w-4" />
+          ) : (
+            <ArrowDown className="ml-2 h-4 w-4" />
+          )}
+        </button>
+      ),
+      cell: (info) => <Badge variant="outline">{info.getValue()}</Badge>
     },
     {
       accessorKey: "title",
-      header: () => <div className="text-center">Title</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">{row.getValue("title")}</div>
-      )
+      header: () => "Title",
+      cell: (info) => <span className="font-medium">{info.getValue()}</span>
     },
     {
       accessorKey: "price",
-      header: () => <div className="text-center">Price</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">{row.getValue("price")}</div>
+      header: () => <div className="text-right">Price</div>,
+      cell: (info) => (
+        <div className="text-right font-medium">{info.getValue()}</div>
       )
     },
     {
       accessorKey: "fileList",
-      header: () => <div className="text-center">Uploaded Files</div>,
-      cell: ({ row }) => {
-        const fileList = row.getValue("fileList") as string[];
-        return <div className="text-center font-medium">{fileList.length}</div>;
-      }
+      header: () => <div className="text-right">Uploaded Files</div>,
+      cell: (info) => (
+        <div className="text-right font-medium">{info.getValue().length}</div>
+      )
     },
     {
       accessorKey: "previewList",
-      header: () => <div className="text-center">Preview Images</div>,
-      cell: ({ row }) => {
-        const previewList = row.getValue("previewList") as string[];
-        return (
-          <div className="text-center font-medium">{previewList.length}</div>
-        );
-      }
+      header: () => <div className="text-right">Preview Images</div>,
+      cell: (info) => (
+        <div className="text-right font-medium">{info.getValue().length}</div>
+      )
     },
     {
-      accessorKey: "State",
+      accessorKey: "approval.state",
       header: () => <div className="text-center">State</div>,
-      cell: ({ row }) => {
-        const product = row.original;
+      cell: (info) => {
         return (
-          <div className="flex justify-center">
-            <p className="flex gap-x-2">
-              <span
-                className={`text-sm px-2 bg-black/20 rounded-full ${stateClassName(product)}`}
-              >
-                {stateText(product)}
-              </span>
-              by {commentMaker(product)}
-            </p>
+          <div className="text-center">
+            <Badge
+              variant={STATE_BADGE_VARIANT[info.getValue() as ProductState]}
+            >
+              {STATE_DISPLAY_Text[info.getValue() as ProductState]}
+            </Badge>
           </div>
         );
       }
     },
     {
-      id: "approve",
-      header: () => <div className="text-center">Approve</div>,
-      cell: ({ row }) => {
-        const _product = row.original;
-        return (
-          <div className="flex justify-center">
-            <Link
-              href={`/admin/products/${_product.productType}/${_product.productId}`}
-            >
-              <Button disabled={isPending} variant="outline" size="sm">
-                Go to Details
-              </Button>
-            </Link>
-          </div>
-        );
-      }
+      id: "reviewer",
+      header: () => "Reviewer",
+      cell: ({ row }) => getLastReviewer(row.original)
     },
 
     {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
-        const customer = row.original;
+        const product = row.original;
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -213,7 +173,13 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
               <DropdownMenuItem disabled>Copy Product ID</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem disabled>Delete Product</DropdownMenuItem>
-              <DropdownMenuItem disabled>Edit Product</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  href={`/admin/products/${product.productType}/${product.productId}`}
+                >
+                  Edit Product
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );

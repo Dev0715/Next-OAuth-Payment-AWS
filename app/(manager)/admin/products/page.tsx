@@ -1,11 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Navbar } from "../_components/navbar";
 import { useEffect, useState, useTransition } from "react";
-import { Product } from "@/shared/types/types-product";
-import { getAllProducts } from "@/data/products/all-products";
-import { getColumnsForProductsTable } from "@/components/admin/products-column";
 import {
   ColumnFiltersState,
   SortingState,
@@ -18,6 +13,10 @@ import {
   useReactTable
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
+
+import { getAllProducts } from "@/data/products/all-products";
+import { getColumnsForProductsTable } from "@/components/admin/products-column";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -33,6 +32,9 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { Navbar } from "../_components/navbar";
+
+import type { Product } from "@/shared/types/types-product";
 
 export default function Approval() {
   const [isPending, startTransition] = useTransition();
@@ -112,20 +114,18 @@ export default function Approval() {
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -134,18 +134,16 @@ export default function Approval() {
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                      </TableHead>
-                    );
-                  })}
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  ))}
                 </TableRow>
               ))}
             </TableHeader>
