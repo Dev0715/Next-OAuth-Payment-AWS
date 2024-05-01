@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Product } from "@/shared/types/types-product";
+import Link from "next/link";
 
 type PropsType = {
   isPending: boolean;
@@ -104,11 +105,20 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
     {
       id: "approve",
       header: () => <div className="text-center">Approve</div>,
-      cell: ({ row }) => (
-        <div className="flex flex-wrap items-center justify-center gap-1">
-          Go to Approval
-        </div>
-      )
+      cell: ({ row }) => {
+        const _product = row.original;
+        return (
+          <div className="flex">
+            <Link
+              href={`/admin/products/${_product.productType}/${_product.productId}`}
+            >
+              <Button variant="outline" size="sm" disabled={isPending}>
+                Go to Approval
+              </Button>
+            </Link>
+          </div>
+        );
+      }
     },
 
     {
