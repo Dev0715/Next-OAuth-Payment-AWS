@@ -73,20 +73,45 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
       enableHiding: false
     },
     {
-      accessorKey: "productType",
+      accessorKey: "ownerId",
       header: ({ column }) => {
         return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Product Type
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
+          <div className="flex justify-center">
+            <Button
+              variant="ghost"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              Creator
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
         );
       },
       cell: ({ row }) => (
-        <div className="lowercase">{row.getValue("productType")}</div>
+        <div className="text-center">{row.getValue("ownerId")}</div>
+      )
+    },
+    {
+      accessorKey: "productType",
+      header: ({ column }) => {
+        return (
+          <div className="flex justify-center">
+            <Button
+              variant="ghost"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              Product Type
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="text-center">{row.getValue("productType")}</div>
       )
     },
     {
@@ -147,7 +172,7 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
             <Link
               href={`/admin/products/${_product.productType}/${_product.productId}`}
             >
-              <Button variant="outline" size="sm" disabled={isPending}>
+              <Button disabled={isPending} variant="outline" size="sm">
                 Go to Approval
               </Button>
             </Link>
