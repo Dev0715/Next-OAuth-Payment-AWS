@@ -1,4 +1,4 @@
-import { TypeOfProduct } from "@/assets/product-types";
+import { ProductType } from "@/assets/product-types";
 
 export type ProductState = "created" | "approved" | "rejected" | "updated";
 
@@ -14,7 +14,7 @@ export type ProductEvent = {
 };
 
 export type Product = {
-  productType: TypeOfProduct;
+  productType: ProductType;
   productId: string;
   ownerId: string;
   title: string;

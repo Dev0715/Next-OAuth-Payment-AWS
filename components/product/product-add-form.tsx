@@ -43,11 +43,11 @@ import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
 import { createProduct } from "@/data/products/product-create";
 import { addNewProduct } from "@/actions/user/new-product";
-import { PRODUCT_TYPES, TypeOfProduct } from "@/assets/product-types";
+import { PRODUCT_TYPE_DISPLAY_Text, ProductType } from "@/assets/product-types";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
-  const productTypes = PRODUCT_TYPES;
+  const productTypes = PRODUCT_TYPE_DISPLAY_Text;
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -187,7 +187,7 @@ export const ProductAddForm = () => {
         throw new Error("Failed to upload images.");
       }
 
-      const productType = form.getValues().productType as TypeOfProduct;
+      const productType = form.getValues().productType as ProductType;
       const productId = uuidv4();
       const fileList = pathList.map((path: string, index: number) => ({
         name: creativeFiles[index].name,
@@ -354,7 +354,7 @@ export const ProductAddForm = () => {
                     <SelectContent>
                       {Object.keys(productTypes).map((productType) => (
                         <SelectItem key={productType} value={productType}>
-                          {productTypes[productType as TypeOfProduct]}
+                          {productTypes[productType as ProductType]}
                         </SelectItem>
                       ))}
                     </SelectContent>

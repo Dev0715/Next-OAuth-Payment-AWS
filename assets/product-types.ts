@@ -1,4 +1,4 @@
-export type TypeOfProduct =
+export type ProductType =
   | "ui-kits"
   | "dashboard-wireframes"
   | "themes-spas"
@@ -15,7 +15,7 @@ export type TypeOfProduct =
   | "video"
   | "audio-sound-effects";
 
-export const PRODUCT_TYPES: Record<TypeOfProduct, string> = {
+export const PRODUCT_TYPE_DISPLAY_Text: Record<ProductType, string> = {
   "ui-kits": "UI Kits",
   "dashboard-wireframes": "Dashboard / Wireframes",
   "themes-spas": "Themes / SPAs",
