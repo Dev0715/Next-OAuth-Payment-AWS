@@ -78,15 +78,30 @@ export default function Approval() {
       />
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
-          <Input
-            disabled={isPending}
-            placeholder="Filter Product"
-            value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("title")?.setFilterValue(event.target.value)
-            }
-            className="max-w-xs"
-          />
+          <div className="flex gap-x-4">
+            <Input
+              disabled={isPending}
+              placeholder="Filter Creator"
+              value={
+                (table.getColumn("ownerId")?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table.getColumn("ownerId")?.setFilterValue(event.target.value)
+              }
+              className="max-w-xs"
+            />
+            <Input
+              disabled={isPending}
+              placeholder="Filter Product"
+              value={
+                (table.getColumn("title")?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table.getColumn("title")?.setFilterValue(event.target.value)
+              }
+              className="max-w-xs"
+            />
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
