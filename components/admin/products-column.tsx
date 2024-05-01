@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Product } from "@/shared/types/types-product";
+import { Product, ProductState } from "@/shared/types/types-product";
 import Link from "next/link";
 
 type PropsType = {
@@ -19,6 +19,32 @@ type PropsType = {
 };
 
 export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
+  const stateText = (product: Product) => {
+    const _state: ProductState = product.approval.state;
+    if (_state === "created") {
+      return "Created, waiting for approval";
+    } else if (_state === "approved") {
+      return "Approved";
+    } else if (_state === "rejected") {
+      return "Rejected";
+    } else if (_state === "updated") {
+      return "Updated, waiting for approval";
+    }
+  };
+
+  const stateClassName = (product: Product) => {
+    const _state: ProductState = product.approval.state;
+    if (_state === "created") {
+      return "text-white";
+    } else if (_state === "approved") {
+      return "text-green-500 font-semibold";
+    } else if (_state === "rejected") {
+      return "text-red-400 font-semibold";
+    } else if (_state === "updated") {
+      return "text-white";
+    }
+  };
+
   const columns: ColumnDef<Product>[] = [
     {
       id: "select",
@@ -98,9 +124,18 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
     {
       accessorKey: "State",
       header: () => <div className="text-center">State</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">"Created"</div>
-      )
+      cell: ({ row }) => {
+        const product = row.original;
+        return (
+          <div className="flex">
+            <p
+              className={`text-sm px-2 bg-black/40 rounded-full ${stateClassName(product)}`}
+            >
+              {stateText(product)}
+            </p>
+          </div>
+        );
+      }
     },
     {
       id: "approve",
