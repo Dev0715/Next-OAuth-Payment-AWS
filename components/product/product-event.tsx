@@ -1,27 +1,22 @@
-import { ProductEvent } from "@/shared/types/types-product";
-import { Badge } from "../ui/badge";
+import { ProductEvent, ProductState } from "@/shared/types/types-product";
+import { Badge, BadgeVariant } from "../ui/badge";
+
+const STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
+  created: "default",
+  approved: "success",
+  rejected: "destructive",
+  updated: "secondary"
+};
 
 type Props = {
   event: ProductEvent;
-};
-
-const variantText = (state: string) => {
-  if (state === "created" || state === "updated") {
-    return "default";
-  } else if (state === "approved") {
-    return "success";
-  } else if (state === "rejected") {
-    return "destructive";
-  } else {
-    return "secondary";
-  }
 };
 
 export const ProductEventCard = ({ event }: Props) => {
   return (
     <div className="w-full flex gap-x-6">
       <div className="w-1/3 flex items-center gap-x-2">
-        <Badge variant={variantText(event.state)}>{event.state}</Badge>
+        <Badge variant={STATE_BADGE_VARIANT[event.state]}>{event.state}</Badge>
         <p>
           by <span className="font-semibold">{event.userId}</span>
         </p>
