@@ -37,9 +37,9 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
     if (_state === "created") {
       return "text-white";
     } else if (_state === "approved") {
-      return "text-green-500 font-semibold";
+      return "text-green-700 font-semibold";
     } else if (_state === "rejected") {
-      return "text-red-400 font-semibold";
+      return "text-red-700 font-semibold";
     } else if (_state === "updated") {
       return "text-white";
     }
@@ -127,9 +127,9 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
       cell: ({ row }) => {
         const product = row.original;
         return (
-          <div className="flex">
+          <div className="flex justify-center">
             <p
-              className={`text-sm px-2 bg-black/40 rounded-full ${stateClassName(product)}`}
+              className={`text-sm px-2 bg-black/20 rounded-full ${stateClassName(product)}`}
             >
               {stateText(product)}
             </p>
