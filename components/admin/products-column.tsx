@@ -77,6 +77,24 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
       )
     },
     {
+      accessorKey: "fileList",
+      header: () => <div className="text-center">Uploaded Files</div>,
+      cell: ({ row }) => {
+        const fileList = row.getValue("fileList") as string[];
+        return <div className="text-center font-medium">{fileList.length}</div>;
+      }
+    },
+    {
+      accessorKey: "previewList",
+      header: () => <div className="text-center">Preview Images</div>,
+      cell: ({ row }) => {
+        const previewList = row.getValue("previewList") as string[];
+        return (
+          <div className="text-center font-medium">{previewList.length}</div>
+        );
+      }
+    },
+    {
       accessorKey: "State",
       header: () => <div className="text-center">State</div>,
       cell: ({ row }) => (
