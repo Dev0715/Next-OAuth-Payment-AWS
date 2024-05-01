@@ -15,13 +15,9 @@ import { Product } from "@/shared/types/types-product";
 
 type PropsType = {
   isPending: boolean;
-  onCheckedChange: (checked: boolean, index: number) => void;
 };
 
-export const getColumnsForProductsTable = ({
-  isPending,
-  onCheckedChange
-}: PropsType) => {
+export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
   const columns: ColumnDef<Product>[] = [
     {
       id: "select",
