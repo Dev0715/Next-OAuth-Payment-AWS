@@ -22,13 +22,13 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
   const stateText = (product: Product) => {
     const _state: ProductState = product.approval.state;
     if (_state === "created") {
-      return "Created, waiting for approval";
+      return "Created";
     } else if (_state === "approved") {
       return "Approved";
     } else if (_state === "rejected") {
       return "Rejected";
     } else if (_state === "updated") {
-      return "Updated, waiting for approval";
+      return "Updated";
     }
   };
 
@@ -43,6 +43,13 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
     } else if (_state === "updated") {
       return "text-white";
     }
+  };
+
+  const commentMaker = (product: Product) => {
+    const _history = product.approval.history;
+    const _userId = _history[_history.length - 1].userId;
+
+    return _userId;
   };
 
   const columns: ColumnDef<Product>[] = [
@@ -153,10 +160,13 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
         const product = row.original;
         return (
           <div className="flex justify-center">
-            <p
-              className={`text-sm px-2 bg-black/20 rounded-full ${stateClassName(product)}`}
-            >
-              {stateText(product)}
+            <p className="flex gap-x-2">
+              <span
+                className={`text-sm px-2 bg-black/20 rounded-full ${stateClassName(product)}`}
+              >
+                {stateText(product)}
+              </span>
+              by {commentMaker(product)}
             </p>
           </div>
         );
@@ -173,7 +183,7 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
               href={`/admin/products/${_product.productType}/${_product.productId}`}
             >
               <Button disabled={isPending} variant="outline" size="sm">
-                Go to Approval
+                Go to Details
               </Button>
             </Link>
           </div>
