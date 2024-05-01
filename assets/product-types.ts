@@ -1,69 +1,19 @@
-export type CategoryInfo = {
-  key: string;
-  name: string;
+export const PRODUCT_TYPES = {
+  "ui-kits": "UI Kits",
+  "dashboard-wireframes": "Dashboard / Wireframes",
+  "themes-spas": "Themes / SPAs",
+  plugins: "Plugins",
+  "icon-sets-brushes-actions": "Icon Sets / Brushes / Actions",
+  fonts: "Fonts",
+  "mockups-posters": "Mockups / Posters",
+  "scaffolding-starters": "Scaffolding / Starters",
+  "3d-assets": "3D Assets",
+  illustrations: "Illustrations",
+  "documents-page-templates": "Documents / Page Templates",
+  spreadsheets: "Spreadsheets",
+  photos: "Photos",
+  video: "Video",
+  "audio-sound-effects": "Audio / Sound Effects"
 };
 
-export const PRODCUT_TYPES: CategoryInfo[] = [
-  {
-    key: "ui-kits",
-    name: "UI Kits"
-  },
-  {
-    key: "dashboard-wireframes",
-    name: "Dashboard / Wireframes"
-  },
-  {
-    key: "themes-spas",
-    name: "Themes / SPAs"
-  },
-  {
-    key: "plugins",
-    name: "Plugins"
-  },
-  {
-    key: "icon-sets-brushes-actions",
-    name: "Icon Sets / Brushes / Actions"
-  },
-  {
-    key: "fonts",
-    name: "Fonts"
-  },
-  {
-    key: "mockups-posters",
-    name: "Mockups / Posters"
-  },
-  {
-    key: "scaffolding-starters",
-    name: "Scaffolding / Starters"
-  },
-  {
-    key: "3d-assets",
-    name: "3D Assets"
-  },
-  {
-    key: "illustrations",
-    name: "Illustrations"
-  },
-  {
-    key: "documents-page-templates",
-    name: "Documents / Page Templates"
-  },
-  {
-    key: "spreadsheets",
-    name: "Spreadsheets"
-  },
-  {
-    key: "photos",
-    name: "Photos"
-  },
-  {
-    key: "video",
-    name: "Video"
-  },
-  {
-    key: "audio-sound-effects",
-    name: "Audio / Sound Effects"
-  }
-];
-
-export type TypeOfProduct = (typeof PRODCUT_TYPES)[number];
+export type TypeOfProduct = keyof typeof PRODUCT_TYPES;
