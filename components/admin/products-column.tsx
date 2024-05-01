@@ -108,7 +108,7 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
       cell: ({ row }) => {
         const _product = row.original;
         return (
-          <div className="flex">
+          <div className="flex justify-center">
             <Link
               href={`/admin/products/${_product.productType}/${_product.productId}`}
             >
