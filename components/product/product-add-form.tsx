@@ -39,15 +39,15 @@ import { Dialog, DialogContent } from "../ui/dialog";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
-import { PRODCUT_TYPES } from "@/assets/product-types";
 import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
 import { createProduct } from "@/data/products/product-create";
 import { addNewProduct } from "@/actions/user/new-product";
+import { PRODUCT_TYPES, TypeOfProduct } from "@/assets/product-types";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
-  const productTypes = PRODCUT_TYPES;
+  const productTypes = PRODUCT_TYPES;
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -187,6 +187,7 @@ export const ProductAddForm = () => {
         throw new Error("Failed to upload images.");
       }
 
+      const productType = form.getValues().productType as TypeOfProduct;
       const productId = uuidv4();
       const fileList = pathList.map((path: string, index: number) => ({
         name: creativeFiles[index].name,
@@ -195,6 +196,7 @@ export const ProductAddForm = () => {
 
       const res = await createProduct({
         ...form.getValues(),
+        productType,
         productId,
         ownerId: user?.userId as string,
         fileList,
@@ -350,9 +352,9 @@ export const ProductAddForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {productTypes.map((category) => (
-                        <SelectItem key={category.key} value={category.key}>
-                          {category.name}
+                      {Object.keys(productTypes).map((productType) => (
+                        <SelectItem key={productType} value={productType}>
+                          {productTypes[productType as TypeOfProduct]}
                         </SelectItem>
                       ))}
                     </SelectContent>

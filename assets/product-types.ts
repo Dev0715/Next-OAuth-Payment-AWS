@@ -1,4 +1,21 @@
-export const PRODUCT_TYPES = {
+export type TypeOfProduct =
+  | "ui-kits"
+  | "dashboard-wireframes"
+  | "themes-spas"
+  | "plugins"
+  | "icon-sets-brushes-actions"
+  | "fonts"
+  | "mockups-posters"
+  | "scaffolding-starters"
+  | "3d-assets"
+  | "illustrations"
+  | "documents-page-templates"
+  | "spreadsheets"
+  | "photos"
+  | "video"
+  | "audio-sound-effects";
+
+export const PRODUCT_TYPES: Record<TypeOfProduct, string> = {
   "ui-kits": "UI Kits",
   "dashboard-wireframes": "Dashboard / Wireframes",
   "themes-spas": "Themes / SPAs",
@@ -15,5 +32,3 @@ export const PRODUCT_TYPES = {
   video: "Video",
   "audio-sound-effects": "Audio / Sound Effects"
 };
-
-export type TypeOfProduct = keyof typeof PRODUCT_TYPES;
