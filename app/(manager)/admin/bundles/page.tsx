@@ -28,12 +28,44 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { Bundle } from "@/shared/types/types-bundles";
+import { getColumnsForBundlesTable } from "@/components/admin/bundles-colum";
 
 const ManagementBundles = () => {
+  const [isPending, startTransition] = useTransition();
+  const [bundles, setBundles] = useState<Bundle[]>([]);
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+
+  useEffect(() => {
+    getAllBundles().then((res) => {
+      setBundles(res.items);
+    });
+  }, []);
+
+  const columns = getColumnsForBundlesTable({ isPending });
+
+  const table = useReactTable({
+    data: bundles,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection
+    }
+  });
 
   return (
     <div className="w-full flex">
