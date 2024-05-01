@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUp, ArrowDown, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -12,8 +12,9 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { User } from "@/shared/types/types-user";
 import { Switch } from "@/components/ui/switch";
+
+import type { User } from "@/shared/types/types-user";
 
 type PropsType = {
   isPending: boolean;
@@ -24,7 +25,7 @@ export const getColumnsForUsersTable = ({
   isPending,
   onCheckedChange
 }: PropsType) => {
-  const columns: ColumnDef<User>[] = [
+  const columns: ColumnDef<User, string>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -53,48 +54,38 @@ export const getColumnsForUsersTable = ({
     },
     {
       accessorKey: "userId",
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            User ID
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => (
-        <div className="lowercase">{row.getValue("userId")}</div>
-      )
+      header: ({ column }) => (
+        <button
+          className="inline-flex items-center"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          User ID
+          {column.getIsSorted() === "asc" ? (
+            <ArrowUp className="ml-2 h-4 w-4" />
+          ) : (
+            <ArrowDown className="ml-2 h-4 w-4" />
+          )}
+        </button>
+      ),
+      cell: (info) => <div className="lowercase">{info.getValue()}</div>
     },
     {
       accessorKey: "firstname",
-      header: () => <div className="text-center">First Name</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">
-          {row.getValue("firstname")}
-        </div>
-      )
+      header: () => "First Name",
+      cell: (info) => <span className="font-medium">{info.getValue()}</span>
     },
     {
       accessorKey: "lastname",
-      header: () => <div className="text-center">Last Name</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">
-          {row.getValue("lastname")}
-        </div>
-      )
+      header: () => "Last Name",
+      cell: (info) => <span className="font-medium">{info.getValue()}</span>
     },
     {
       accessorKey: "email",
-      header: () => <div className="text-center">Email</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">{row.getValue("email")}</div>
-      )
+      header: () => "Email",
+      cell: (info) => <span className="font-medium">{info.getValue()}</span>
     },
     {
-      accessorKey: "Roles",
+      id: "Roles",
       header: () => <div className="text-center">Roles</div>,
       cell: ({ row }) => {
         const user = row.original;
@@ -106,7 +97,7 @@ export const getColumnsForUsersTable = ({
 
         return (
           <div className="flex flex-wrap items-center justify-center gap-1">
-            {roles.map((role: string) => (
+            {roles.map((role) => (
               <Badge key={role} className="cursor-pointer">
                 {role}
               </Badge>
@@ -116,7 +107,7 @@ export const getColumnsForUsersTable = ({
       }
     },
     {
-      accessorKey: "Manager",
+      id: "Manager",
       header: () => <div className="text-center">Manager</div>,
       cell: ({ row }) => {
         const user = row.original;
@@ -124,9 +115,7 @@ export const getColumnsForUsersTable = ({
           <div className="text-center font-medium">
             <Switch
               checked={user.manager && user.manager.isManager}
-              onCheckedChange={(checked: boolean) =>
-                onCheckedChange(checked, row.index)
-              }
+              onCheckedChange={(checked) => onCheckedChange(checked, row.index)}
             />
           </div>
         );

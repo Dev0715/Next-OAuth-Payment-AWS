@@ -13,6 +13,10 @@ import {
   useReactTable
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
+
+import { updateManagerProfile } from "@/data/user/manager-update";
+import { getAllUsers } from "@/data/user/users-all";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -28,15 +32,13 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { ManagerData, User } from "@/shared/types/types-user";
-import { getAllUsers } from "@/data/user/users-all";
-import { getColumnsForUsersTable } from "../../../../components/admin/users-column";
 import { Button } from "@/components/ui/button";
-import { v4 as uuidv4 } from "uuid";
-import { updateManagerProfile } from "@/data/user/manager-update";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { getColumnsForUsersTable } from "@/components/admin/users-column";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Navbar } from "../_components/navbar";
+
+import type { ManagerData, User } from "@/shared/types/types-user";
 
 const ManagementUsers = () => {
   const user = useCurrentUser();
@@ -152,20 +154,18 @@ const ManagementUsers = () => {
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -174,18 +174,16 @@ const ManagementUsers = () => {
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                      </TableHead>
-                    );
-                  })}
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  ))}
                 </TableRow>
               ))}
             </TableHeader>
