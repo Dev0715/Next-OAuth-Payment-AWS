@@ -1,5 +1,4 @@
 import { TypeOfUser } from "@/assets/creator-types";
-import { ProductType } from "@/assets/product-types";
 
 export type ProductLink = {
   productType: string;
