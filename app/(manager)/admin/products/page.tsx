@@ -71,7 +71,7 @@ export default function Approval() {
   });
 
   return (
-    <main className="w-full flex flex-col">
+    <main className="w-full flex flex-col gap-y-6">
       <Navbar
         title="All Products"
         content="You can check and approve or reject products"
