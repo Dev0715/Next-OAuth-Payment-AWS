@@ -22,9 +22,12 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
+import { ProductLink } from "@/shared/types/types-user";
+import { Product } from "@/shared/types/types-product";
 
 type Props = {
   isPending: boolean;
+  products: Product[];
 };
 
 export const BundleProducts = ({ isPending }: Props) => {
