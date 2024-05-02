@@ -39,7 +39,7 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Navbar } from "../_components/navbar";
 import type { ManagerData, User } from "@/shared/types/user.type";
 
-const ROWS_PER_PAGE = 10;
+const ROWS_PER_PAGE = 1;
 
 const ManagementUsers = () => {
   const user = useCurrentUser();
@@ -51,6 +51,8 @@ const ManagementUsers = () => {
   const [confirmMessage, setConfirmMessage] = useState<string>("");
 
   const [users, setUsers] = useState<User[]>([]);
+  const [lastEvaluatedKey, setLastEvaluatedKey] =
+    useState<Record<string, string>>();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -60,7 +62,8 @@ const ManagementUsers = () => {
   useEffect(() => {
     getAllUsers(ROWS_PER_PAGE).then((res) => {
       setUsers(res.items as User[]);
-      console.log(res);
+      setLastEvaluatedKey(res.lastEvaluatedKey);
+      table.setPageSize(ROWS_PER_PAGE);
     });
   }, []);
 
@@ -121,6 +124,30 @@ const ManagementUsers = () => {
         }
       });
     });
+  };
+
+  const isNextAvailable = () => {
+    const currentPageIndex = table.getState().pagination.pageIndex;
+  };
+
+  const onPrevious = () => {
+    table.previousPage();
+    console.log(table.getPageCount());
+  };
+
+  const onNext = () => {
+    console.log();
+    table.nextPage();
+    // startTransition(() => {
+    //   if (lastEvaluatedKey) {
+    //     getAllUsers(ROWS_PER_PAGE, lastEvaluatedKey?.userId).then((res) => {
+    //       setUsers([...users, ...(res.items as User[])]);
+    //       setLastEvaluatedKey(res.lastEvaluatedKey);
+
+    //       table.nextPage();
+    //     });
+    //   }
+    // });
   };
 
   return (
@@ -228,16 +255,16 @@ const ManagementUsers = () => {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
+              onClick={onPrevious}
+              // disabled={!table.getCanPreviousPage()}
             >
               Previous
             </Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
+              onClick={onNext}
+              // disabled={!table.getCanNextPage()}
             >
               Next
             </Button>
