@@ -12,8 +12,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
-import { Bundle } from "@/shared/types/types-bundles";
+import { Badge, BadgeVariant } from "@/components/ui/badge";
+import { Bundle, BundleState } from "@/shared/types/types-bundles";
+
+const STATE_BADGE_VARIANT: Record<BundleState, BadgeVariant> = {
+  editing: "default",
+  available: "success"
+};
 
 type PropsType = {
   isPending: boolean;
@@ -62,7 +67,7 @@ export const getColumnsForBundlesTable = ({ isPending }: PropsType) => {
           )}
         </button>
       ),
-      cell: (info) => <Badge variant="outline">{info.getValue()}</Badge>
+      cell: (info) => <p>{info.getValue()}</p>
     },
     {
       accessorKey: "userId",
@@ -79,50 +84,48 @@ export const getColumnsForBundlesTable = ({ isPending }: PropsType) => {
           )}
         </button>
       ),
-      cell: (info) => <Badge variant="outline">{info.getValue()}</Badge>
-    },
-    {
-      accessorKey: "bundleId",
-      header: ({ column }) => (
-        <button
-          className="inline-flex items-center"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Bundle Id
-          {column.getIsSorted() === "asc" ? (
-            <ArrowUp className="ml-2 h-4 w-4" />
-          ) : (
-            <ArrowDown className="ml-2 h-4 w-4" />
-          )}
-        </button>
-      ),
-      cell: (info) => <Badge variant="outline">{info.getValue()}</Badge>
+      cell: (info) => <p>{info.getValue()}</p>
     },
     {
       accessorKey: "description",
-      header: () => <div className="text-right">Description</div>,
+      header: () => <div className="text-left">Description</div>,
       cell: (info) => (
-        <div className="text-right font-medium">{info.getValue()}</div>
+        <div className="text-left font-medium">{info.getValue()}</div>
       )
     },
     {
       accessorKey: "price",
-      header: () => <div className="text-right">Price</div>,
+      header: () => <div className="text-center">Price</div>,
       cell: (info) => (
-        <div className="text-right font-medium">{info.getValue()}</div>
+        <div className="text-center font-medium">{info.getValue()}</div>
       )
     },
     {
       accessorKey: "products",
-      header: () => <div className="text-right">Products</div>,
+      header: () => <div className="text-center">Products</div>,
       cell: (info) => (
-        <div className="text-right font-medium">{info.getValue().length}</div>
+        <div className="text-center font-medium">{info.getValue()?.length}</div>
+      )
+    },
+    {
+      accessorKey: "state",
+      header: () => <div className="text-center">State</div>,
+      cell: (info) => (
+        <div className="flex justify-center">
+          <Badge
+            variant={STATE_BADGE_VARIANT[info.getValue() as BundleState]}
+            className="capitalize"
+          >
+            {info.getValue()}
+          </Badge>
+        </div>
       )
     },
     {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
+        const bundle = row.original;
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -141,7 +144,9 @@ export const getColumnsForBundlesTable = ({ isPending }: PropsType) => {
               <DropdownMenuSeparator />
               <DropdownMenuItem disabled>Delete Bundle</DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="">Edit Bundle</Link>
+                <Link href={`/admin/bundles/edit/${bundle.bundleId}`}>
+                  Edit Bundle
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

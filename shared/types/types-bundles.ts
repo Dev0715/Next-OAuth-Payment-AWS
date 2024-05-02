@@ -1,6 +1,6 @@
 import { ProductLink } from "./types-user";
 
-type BundleState = "editing" | "available";
+export type BundleState = "editing" | "available";
 
 export type Bundle = {
   //  bundleType: string;
