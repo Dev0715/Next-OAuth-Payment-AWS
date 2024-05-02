@@ -70,7 +70,11 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
             type="number"
           />
         </div>
-        <BundleProducts isPending={isPending} products={products} />
+        <BundleProducts
+          isPending={isPending}
+          products={products}
+          setProducts={setProducts}
+        />
       </div>
     </div>
   );
