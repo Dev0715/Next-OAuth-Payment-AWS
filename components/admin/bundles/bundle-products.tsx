@@ -28,7 +28,7 @@ type Props = {
   products: Product[];
 };
 
-export const BundleProducts = ({ isPending }: Props) => {
+export const BundleProducts = ({ isPending, products }: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -37,7 +37,7 @@ export const BundleProducts = ({ isPending }: Props) => {
   const columns = getColumnsForBundleProductsTable({ isPending });
 
   const table = useReactTable({
-    data: [],
+    data: products,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

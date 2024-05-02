@@ -27,23 +27,23 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    getBundleById(bundleId).then((res) => {
-      if (res) {
-        setBundle(res);
-        if (res.products) {
-          Promise.all(
-            res.products.map(
-              async (product: ProductLink) =>
-                await getProductById(product.productType, product.productId)
-            )
-          ).then((products) => {
-            setProducts(
-              products.filter((product) => product !== null) as Product[]
-            );
-          });
-        }
-      }
-    });
+    // getBundleById(bundleId).then((res) => {
+    //   if (res) {
+    //     setBundle(res);
+    //     if (res.products) {
+    //       Promise.all(
+    //         res.products.map(
+    //           async (product: ProductLink) =>
+    //             await getProductById(product.productType, product.productId)
+    //         )
+    //       ).then((products) => {
+    //         setProducts(
+    //           products.filter((product) => product !== null) as Product[]
+    //         );
+    //       });
+    //     }
+    //   }
+    // });
   }, []);
 
   return (
