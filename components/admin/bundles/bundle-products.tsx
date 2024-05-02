@@ -25,7 +25,7 @@ import { FaPlus } from "react-icons/fa";
 import { ProductLink } from "@/shared/types/types-user";
 import { Product } from "@/shared/types/types-product";
 import { BundleProductSelect } from "./bundle-products-select";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 type Props = {
   isPending: boolean;
@@ -33,12 +33,12 @@ type Props = {
 };
 
 export const BundleProducts = ({ isPending }: Props) => {
+  const [isAddNew, setAddNew] = useState<boolean>(true);
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
-
-  const [isAddNew, setAddNew] = useState<boolean>(false);
 
   const columns = getColumnsForBundleProductsTable({ isPending });
 
@@ -67,6 +67,16 @@ export const BundleProducts = ({ isPending }: Props) => {
 
   return (
     <div className="flex flex-col gap-y-2 pt-4">
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button>New</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <BundleProductSelect />
+          Something
+        </DialogContent>
+      </Dialog>
+
       <div className="w-full flex items-end justify-between">
         <p className="text-lg font-medium">Products in this bundle</p>
         <Button className="h-8 flex gap-x-2 rounded-none" onClick={onAddNew}>
@@ -74,14 +84,7 @@ export const BundleProducts = ({ isPending }: Props) => {
           Add New
         </Button>
       </div>
-
-      <Dialog open={isAddNew} onOpenChange={(opened) => setAddNew(opened)}>
-        <DialogContent>
-          <BundleProductSelect />
-        </DialogContent>
-      </Dialog>
-
-      <div className="w-full flex flex-col gap-y-4">
+      {/* <div className="w-full flex flex-col gap-y-4">
         <div className="rounded-md border">
           <Table>
             <TableHeader>
@@ -150,7 +153,7 @@ export const BundleProducts = ({ isPending }: Props) => {
             </Button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

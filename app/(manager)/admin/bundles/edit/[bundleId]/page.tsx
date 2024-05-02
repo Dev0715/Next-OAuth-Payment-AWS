@@ -32,8 +32,9 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
         setBundle(res);
         if (res.products) {
           Promise.all(
-            res.products.map((product: ProductLink) =>
-              getProductById(product.productType, product.productId)
+            res.products.map(
+              async (product: ProductLink) =>
+                await getProductById(product.productType, product.productId)
             )
           ).then((products) => {
             setProducts(
@@ -65,7 +66,7 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
           <Input
             className="w-1/4"
             value={price}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setPrice(Number(e.target.value))}
             type="number"
           />
         </div>
