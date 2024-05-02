@@ -24,6 +24,8 @@ import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import { ProductLink } from "@/shared/types/types-user";
 import { Product } from "@/shared/types/types-product";
+import { BundleProductSelect } from "./bundle-products-select";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 type Props = {
   isPending: boolean;
@@ -35,6 +37,8 @@ export const BundleProducts = ({ isPending }: Props) => {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+
+  const [isAddNew, setAddNew] = useState<boolean>(false);
 
   const columns = getColumnsForBundleProductsTable({ isPending });
 
@@ -57,15 +61,25 @@ export const BundleProducts = ({ isPending }: Props) => {
     }
   });
 
+  const onAddNew = () => {
+    setAddNew(true);
+  };
+
   return (
     <div className="flex flex-col gap-y-2 pt-4">
       <div className="w-full flex items-end justify-between">
         <p className="text-lg font-medium">Products in this bundle</p>
-        <Button className="h-8 flex gap-x-2 rounded-none">
+        <Button className="h-8 flex gap-x-2 rounded-none" onClick={onAddNew}>
           <FaPlus />
           Add New
         </Button>
       </div>
+
+      <Dialog open={isAddNew} onOpenChange={(opened) => setAddNew(opened)}>
+        <DialogContent>
+          <BundleProductSelect />
+        </DialogContent>
+      </Dialog>
 
       <div className="w-full flex flex-col gap-y-4">
         <div className="rounded-md border">
