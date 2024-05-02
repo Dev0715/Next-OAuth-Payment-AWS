@@ -5,7 +5,7 @@ export type Bundle = {
   userId: string;
   //  bundleType: string;
   title: string;
-  description: string;
-  price: number;
-  products: ProductLink[];
+  description?: string;
+  price?: number;
+  products?: ProductLink[];
 };
