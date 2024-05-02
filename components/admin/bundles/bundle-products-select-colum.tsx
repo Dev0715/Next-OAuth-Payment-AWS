@@ -6,19 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import type { Product, ProductState } from "@/shared/types/types-product";
 import type { BadgeVariant } from "@/components/ui/badge";
 
-type PropsType = {
-  isPending: boolean;
-};
-
-export const getColumnsForBundlesProductsSelectTable = ({
-  isPending
-}: PropsType) => {
+export const getColumnsForBundlesProductsSelectTable = () => {
   const columns: ColumnDef<Product, string | string[]>[] = [
     {
       id: "select",
       header: ({ table }) => (
         <Checkbox
-          disabled={isPending}
           checked={
             table.getIsAllPageRowsSelected() ||
             (table.getIsSomePageRowsSelected() && "indeterminate")
@@ -31,7 +24,6 @@ export const getColumnsForBundlesProductsSelectTable = ({
       ),
       cell: ({ row }) => (
         <Checkbox
-          disabled={isPending}
           checked={row.getIsSelected()}
           onCheckedChange={(value: boolean) => row.toggleSelected(!!value)}
           aria-label="Select row"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   ColumnFiltersState,
   SortingState,
@@ -28,16 +28,18 @@ import { BundleProductSelect } from "./bundle-products-select";
 type Props = {
   isPending: boolean;
   products: Product[];
+  setProducts: Dispatch<SetStateAction<Product[]>>;
 };
 
-export const BundleProducts = ({ isPending, products }: Props) => {
+export const BundleProducts = ({ isPending, products, setProducts }: Props) => {
+  const [isAddDlg, setAddDlg] = useState<boolean>(false);
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
   const columns = getColumnsForBundleProductsTable({ isPending });
-
   const table = useReactTable({
     data: products,
     columns,
@@ -57,19 +59,21 @@ export const BundleProducts = ({ isPending, products }: Props) => {
     }
   });
 
+  const onAddNewProducts = () => {};
+
   return (
     <div className="flex flex-col gap-y-2 pt-4">
       <div className="w-full flex items-end justify-between">
         <p className="text-lg font-medium">Products in this bundle</p>
-        <Dialog>
+        <Dialog open={isAddDlg} onOpenChange={(opened) => setAddDlg(opened)}>
           <DialogTrigger asChild>
             <Button className="h-8 flex gap-x-2 rounded-none">
               <FaPlus />
               Add New
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-full w-[720px] pt-16">
-            <BundleProductSelect />
+          <DialogContent className="max-w-full w-[960px]">
+            <BundleProductSelect onAddNewProducts={onAddNewProducts} />
           </DialogContent>
         </Dialog>
       </div>
