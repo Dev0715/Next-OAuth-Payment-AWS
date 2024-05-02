@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge, BadgeVariant } from "@/components/ui/badge";
 import { Bundle, BundleState } from "@/shared/types/bundles.type";
-import { QuestionAlert } from "@/components/utils/question-alert";
 
 const STATE_BADGE_VARIANT: Record<BundleState, BadgeVariant> = {
   editing: "default",
@@ -40,9 +39,7 @@ export const getColumnsForBundlesTable = ({
             table.getIsAllPageRowsSelected() ||
             (table.getIsSomePageRowsSelected() && "indeterminate")
           }
-          onCheckedChange={(value: boolean) =>
-            table.toggleAllPageRowsSelected(!!value)
-          }
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
           aria-label="Select all"
         />
       ),
@@ -50,7 +47,7 @@ export const getColumnsForBundlesTable = ({
         <Checkbox
           disabled={isPending}
           checked={row.getIsSelected()}
-          onCheckedChange={(value: boolean) => row.toggleSelected(!!value)}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
           aria-label="Select row"
         />
       ),

@@ -1,8 +1,9 @@
 "use server";
 
 import db from "@/lib/db";
-import { ManagerData } from "@/shared/types/user.type";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
+
+import type { ManagerData } from "@/shared/types/user.type";
 
 const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 

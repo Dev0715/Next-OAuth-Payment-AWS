@@ -1,7 +1,9 @@
 "use server";
 
-import db from "@/lib/db";
 import { GetCommand } from "@aws-sdk/lib-dynamodb";
+
+import db from "@/lib/db";
+import type { User } from "@/shared/types/user.type";
 
 const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
@@ -15,8 +17,8 @@ export const getUserById = async (userId: string) => {
 
   try {
     const response = await db.send(command);
-    return response.Item;
+    return response.Item as User;
   } catch (error) {
-    return null;
+    console.log(error);
   }
 };

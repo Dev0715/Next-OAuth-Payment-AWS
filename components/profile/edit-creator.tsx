@@ -33,8 +33,8 @@ import { axiosClient, axiosConfig } from "@/lib/axios";
 import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Creator } from "@/shared/types/user.type";
 import { getUserById } from "@/data/user/user-by-id";
+import { JOB_TITLES } from "@/shared/constants/user.constant";
 
 export default function EditCreator({
   disabled = false
@@ -46,7 +46,6 @@ export default function EditCreator({
   const [isPending, startTransition] = useTransition();
 
   const user = useCurrentUser();
-  const [creator, setCreator] = useState<Creator>();
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>(
@@ -60,13 +59,6 @@ export default function EditCreator({
     return isPending || disabled;
   };
 
-  const typeOfUsers = [
-    "UI/UX Designer",
-    "Web Designer",
-    "Web Developer",
-    "Project Manger"
-  ];
-
   const form = useForm<z.infer<typeof CreatorRegisterSchema>>({
     resolver: zodResolver(CreatorRegisterSchema),
     defaultValues: {
@@ -74,7 +66,7 @@ export default function EditCreator({
       firstname: "temp",
       lastname: "temp",
       email: "temp@gmail.com",
-      typeOfUser: typeOfUsers[0],
+      jobTitle: JOB_TITLES[0],
       address: "temp",
       phone1: "temp",
       phone2: "temp"
@@ -120,15 +112,16 @@ export default function EditCreator({
   useEffect(() => {
     if (user) {
       getUserById(user.userId).then((data) => {
-        setCreator(data);
+        if (!data) return;
+
         form.setValue("username", data.username);
-        form.setValue("bio", data.bio);
+        form.setValue("bio", data.creator?.bio || "");
         form.setValue("firstname", data.firstname);
-        form.setValue("lastname", data.lastname);
+        form.setValue("lastname", data.lastname || "");
         form.setValue("email", data.email);
-        form.setValue("address", data.address);
-        form.setValue("phone1", data.phone1);
-        form.setValue("phone2", data.phone2);
+        form.setValue("address", data.address.address1);
+        form.setValue("phone1", data.phone1 || "");
+        form.setValue("phone2", data.phone2 || "");
       });
     }
   }, []);
@@ -285,7 +278,7 @@ export default function EditCreator({
               />
               <FormField
                 control={form.control}
-                name="typeOfUser"
+                name="jobTitle"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Type of User</FormLabel>
@@ -300,7 +293,7 @@ export default function EditCreator({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {typeOfUsers.map((item) => (
+                        {JOB_TITLES.map((item) => (
                           <SelectItem key={item} value={item}>
                             {item}
                           </SelectItem>

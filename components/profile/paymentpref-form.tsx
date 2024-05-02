@@ -17,7 +17,6 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { register } from "@/actions/auth/register/check-general-details";
 import { PaymentPrefSchema } from "@/schemas/user";
 import {
   Card,

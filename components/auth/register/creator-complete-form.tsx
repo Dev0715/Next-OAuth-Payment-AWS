@@ -38,7 +38,7 @@ export const CreatorCompleteForm = ({
       isCreator: true,
       creatorId: uuidv4(),
       bio: userData.creatorDetails.bio,
-      typeOfUser: userData.creatorDetails.typeOfUser,
+      jobTitle: userData.creatorDetails.jobTitle,
       websites: []
     };
 

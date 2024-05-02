@@ -7,7 +7,8 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { v4 as uuidv4 } from "uuid";
 import { register } from "@/actions/auth/register/register";
 import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
-import { SignedUpData } from "@/shared/types/signup-data.type";
+
+import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   step: number;

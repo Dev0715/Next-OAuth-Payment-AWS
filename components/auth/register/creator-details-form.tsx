@@ -25,8 +25,9 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { CREATOR_TYPES } from "@/assets/creator-types";
-import { SignedUpData } from "@/shared/types/signup-data.type";
+import { JOB_TITLES } from "@/shared/constants/user.constant";
+
+import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   userData: SignedUpData;
@@ -41,7 +42,6 @@ export const CreatorDetailsForm = ({
   moveStepForward,
   moveStepBackward
 }: Props) => {
-  const typeOfUserList = CREATOR_TYPES;
   const defaultData = userData.creatorDetails;
 
   const [cover, setCover] = useState<File | undefined>(defaultData.cover);
@@ -139,7 +139,7 @@ export const CreatorDetailsForm = ({
           <div className="w-full">
             <FormField
               control={form.control}
-              name="typeOfUser"
+              name="jobTitle"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Type of user*</FormLabel>
@@ -153,7 +153,7 @@ export const CreatorDetailsForm = ({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {typeOfUserList.map((type) => (
+                      {JOB_TITLES.map((type) => (
                         <SelectItem value={type}>{type}</SelectItem>
                       ))}
                     </SelectContent>

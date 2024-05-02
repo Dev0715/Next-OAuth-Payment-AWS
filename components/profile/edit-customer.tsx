@@ -22,7 +22,6 @@ import { FaCcStripe, FaPaypal, FaStripe, FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/auth/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Customer } from "@/shared/types/user.type";
 import { getUserById } from "@/data/user/user-by-id";
 
 export default function EditCustomer({
@@ -35,7 +34,6 @@ export default function EditCustomer({
   const [isPending, startTransition] = useTransition();
 
   const user = useCurrentUser();
-  const [customer, setCustomer] = useState<Customer>();
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>(
@@ -96,14 +94,15 @@ export default function EditCustomer({
   useEffect(() => {
     if (user) {
       getUserById(user.userId).then((data) => {
-        setCustomer(data);
+        if (!data) return;
+
         form.setValue("username", data.username);
         form.setValue("firstname", data.firstname);
-        form.setValue("lastname", data.lastname);
+        form.setValue("lastname", data.lastname || "");
         form.setValue("email", data.email);
-        form.setValue("address", data.address);
-        form.setValue("phone1", data.phone1);
-        form.setValue("phone2", data.phone2);
+        form.setValue("address", data.address.address1);
+        form.setValue("phone1", data.phone1 || "");
+        form.setValue("phone2", data.phone2 || "");
       });
     }
   }, []);

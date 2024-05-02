@@ -1,7 +1,10 @@
 "use server";
 
-import db from "@/lib/db";
 import { GetCommand } from "@aws-sdk/lib-dynamodb";
+
+import db from "@/lib/db";
+
+import type { Product } from "@/shared/types/product.type";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 
@@ -20,7 +23,7 @@ export const getProductById = async (
   try {
     const response = await db.send(command);
     console.log("__getProductById__GetCommand__RESPONSE", response);
-    return response.Item;
+    return response.Item as Product;
   } catch (error) {
     console.log("__getProductById__GetCommand__ERROR", error);
     return null;

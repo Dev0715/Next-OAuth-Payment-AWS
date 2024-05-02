@@ -1,4 +1,3 @@
-import { TypeOfUser } from "@/assets/creator-types";
 import type { ProductLink } from "./product.type";
 
 export type Address = {
@@ -24,7 +23,7 @@ export type CreatorData = {
   creatorId: string;
   cover?: string;
   bio: string;
-  typeOfUser: TypeOfUser;
+  jobTitle: string;
   company?: Company;
   websites?: string[];
 

@@ -17,13 +17,13 @@ export const updateCreatorProfile = async (
       userId
     },
     UpdateExpression:
-      "SET username = :username, firstname = :firstname, lastname = :lastname, email = :email, typeOfUser = :typeOfUser, address = :address, phone1 = :phone1, phone2 = :phone2",
+      "SET username = :username, firstname = :firstname, lastname = :lastname, email = :email, jobTitle = :jobTitle, address = :address, phone1 = :phone1, phone2 = :phone2",
     ExpressionAttributeValues: {
       ":username": values.username,
       ":firstname": values.firstname,
       ":lastname": values.lastname,
       ":email": values.email,
-      ":typeOfUser": values.typeOfUser,
+      ":jobTitle": values.jobTitle,
       ":address": values.address,
       ":phone1": values.phone1,
       ":phone2": values.phone2

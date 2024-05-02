@@ -1,5 +1,6 @@
-import { ProductEvent } from "@/shared/types/product.type";
 import { ProductEventCard } from "./product-event";
+
+import type { ProductEvent } from "@/shared/types/product.type";
 
 type Props = {
   history: ProductEvent[];

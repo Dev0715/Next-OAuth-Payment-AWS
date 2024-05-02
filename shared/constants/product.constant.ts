@@ -1,4 +1,5 @@
-import { ProductType } from "@/shared/types/product.type";
+import type { BadgeVariant } from "@/components/ui/badge";
+import type { ProductState, ProductType } from "../types/product.type";
 
 export const PRODUCT_TYPE_DISPLAY_TEXT: Record<ProductType, string> = {
   "ui-kits": "UI Kits",
@@ -16,4 +17,11 @@ export const PRODUCT_TYPE_DISPLAY_TEXT: Record<ProductType, string> = {
   photos: "Photos",
   video: "Video",
   "audio-sound-effects": "Audio / Sound Effects"
+};
+
+export const PRODUCT_STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
+  created: "default",
+  approved: "success",
+  rejected: "destructive",
+  updated: "secondary"
 };

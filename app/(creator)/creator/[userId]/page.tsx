@@ -8,11 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProductById } from "@/data/products/product-by-id";
 import { getUserById } from "@/data/user/user-by-id";
-import { Product } from "@/shared/types/product.type";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 
-import type { ProductLink } from "@/shared/types/product.type";
+import type { Product, ProductLink } from "@/shared/types/product.type";
 import type { User } from "@/shared/types/user.type";
 
 interface PropsParams {
@@ -42,14 +41,14 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
               }
             });
           }
-          if (_userData.creator.cover) {
+          if (_userData.creator?.cover) {
             getLinkFromS3(_userData.creator.cover).then((res) => {
               if (res.success) {
                 setCoverPath(res.response as string);
               }
             });
           }
-          if (_userData.creator.products) {
+          if (_userData.creator?.products) {
             _userData.creator.products.map((item: ProductLink) => {
               getProductById(item.productType, item.productId).then(
                 (_product) => {

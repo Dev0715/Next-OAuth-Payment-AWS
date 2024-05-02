@@ -1,20 +1,20 @@
 "use server";
 
-import db from "@/lib/db";
-import { Bundle } from "@/shared/types/bundles.type";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
+
+import db from "@/lib/db";
+
+import type { Bundle } from "@/shared/types/bundles.type";
 
 const TableName = process.env.AWS_DYNAMODB_BUNDLES_TABLE_NAME;
 
 export const createBundle = async (data: Bundle) => {
-  const command = new PutCommand({
-    TableName,
-    Item: {
-      ...data
-    }
-  });
-
   try {
+    const command = new PutCommand({
+      TableName,
+      Item: data
+    });
+
     await db.send(command);
     return { success: true };
   } catch (error) {

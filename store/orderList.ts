@@ -1,5 +1,6 @@
-import { Product } from "@/shared/types/product.type";
 import { atom } from "jotai";
+
+import type { Product } from "@/shared/types/product.type";
 
 const orderListAtom = atom<Product[]>([]);
 

@@ -35,7 +35,7 @@ const RegisterPage = () => {
     },
     creatorDetails: {
       bio: "Description - Bio",
-      typeOfUser: "Project Manager",
+      jobTitle: "Project Manager",
       companyName: "",
       companyCountry: "",
       companyWebsite: "",

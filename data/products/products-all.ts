@@ -1,7 +1,9 @@
 "use server";
 
-import db from "@/lib/db";
 import { ScanCommand } from "@aws-sdk/lib-dynamodb";
+
+import db from "@/lib/db";
+import type { Product } from "@/shared/types/product.type";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 
@@ -21,7 +23,7 @@ export const getAllProducts = async () => {
   try {
     const response = await db.send(command);
     return {
-      items: response.Items
+      items: response.Items as Product[]
     };
   } catch (error) {
     return {

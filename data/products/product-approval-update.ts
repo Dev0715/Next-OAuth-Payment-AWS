@@ -1,8 +1,10 @@
 "use server";
 
-import db from "@/lib/db";
-import { ProductEvent, ProductState } from "@/shared/types/product.type";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
+
+import db from "@/lib/db";
+
+import type { ProductEvent, ProductState } from "@/shared/types/product.type";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 

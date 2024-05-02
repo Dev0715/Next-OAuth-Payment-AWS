@@ -43,11 +43,12 @@ import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
 import { createProduct } from "@/data/products/product-create";
 import { addNewProduct } from "@/actions/user/new-product";
-import { PRODUCT_TYPE_DISPLAY_TEXT, ProductType } from "@/assets/product-types";
+import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
+
+import type { ProductType } from "@/shared/types/product.type";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
-  const productTypes = PRODUCT_TYPE_DISPLAY_TEXT;
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -352,11 +353,13 @@ export const ProductAddForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {Object.keys(productTypes).map((productType) => (
-                        <SelectItem key={productType} value={productType}>
-                          {productTypes[productType as ProductType]}
-                        </SelectItem>
-                      ))}
+                      {Object.entries(PRODUCT_TYPE_DISPLAY_TEXT).map(
+                        ([productType, text]) => (
+                          <SelectItem key={productType} value={productType}>
+                            {text}
+                          </SelectItem>
+                        )
+                      )}
                     </SelectContent>
                   </Select>
                   <FormMessage />

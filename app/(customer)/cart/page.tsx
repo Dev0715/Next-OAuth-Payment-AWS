@@ -2,13 +2,14 @@
 
 import { Navbar } from "./_components/navbar";
 import { useEffect, useState, useTransition } from "react";
-import { CartProduct, Product } from "@/shared/types/product.type";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserById } from "@/data/user/user-by-id";
 import { getProductById } from "@/data/products/product-by-id";
 import { CartItem } from "./_components/cart-item";
 import { removeProductFromCart } from "@/actions/user/remove-product-from-cart";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+
+import type { CartProduct, Product } from "@/shared/types/product.type";
 
 type ProductInfo = {
   productType: string;

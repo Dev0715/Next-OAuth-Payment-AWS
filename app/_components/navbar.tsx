@@ -10,9 +10,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
-import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/assets/product-types";
-
-import type { ProductType } from "@/shared/types/product.type";
+import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 
 export const Navbar = () => {
   return (
@@ -26,15 +24,17 @@ export const Navbar = () => {
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
-          {Object.keys(PRODUCT_TYPE_DISPLAY_TEXT).map((productType) => (
-            <NavigationMenuItem key={productType}>
-              <Link href={`/products/${productType}`} legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  {PRODUCT_TYPE_DISPLAY_TEXT[productType as ProductType]}
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          ))}
+          {Object.entries(PRODUCT_TYPE_DISPLAY_TEXT).map(
+            ([productType, text]) => (
+              <NavigationMenuItem key={productType}>
+                <Link href={`/products/${productType}`} legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    {text}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            )
+          )}
         </NavigationMenuList>
       </NavigationMenu>
     </nav>

@@ -13,22 +13,15 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { PRODUCT_STATE_BADGE_VARIANT } from "@/shared/constants/product.constant";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
-import type { BadgeVariant } from "@/components/ui/badge";
 
-const STATE_DISPLAY_Text: Record<ProductState, string> = {
+const STATE_DISPLAY_TEXT: Record<ProductState, string> = {
   created: "Created",
   approved: "Approved",
   rejected: "Rejected",
   updated: "Updated"
-};
-
-const STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
-  created: "default",
-  approved: "success",
-  rejected: "destructive",
-  updated: "secondary"
 };
 
 type PropsType = {
@@ -137,9 +130,11 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
         return (
           <div className="text-center">
             <Badge
-              variant={STATE_BADGE_VARIANT[info.getValue() as ProductState]}
+              variant={
+                PRODUCT_STATE_BADGE_VARIANT[info.getValue() as ProductState]
+              }
             >
-              {STATE_DISPLAY_Text[info.getValue() as ProductState]}
+              {STATE_DISPLAY_TEXT[info.getValue() as ProductState]}
             </Badge>
           </div>
         );

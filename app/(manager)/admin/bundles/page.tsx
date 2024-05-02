@@ -28,7 +28,6 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { Bundle } from "@/shared/types/bundles.type";
 import { getColumnsForBundlesTable } from "@/components/admin/bundles/bundles-colum";
 import { getAllBundles } from "@/data/bundles/bundles-all";
 import { Input } from "@/components/ui/input";
@@ -37,6 +36,8 @@ import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
 import { deleteBundle } from "@/data/bundles/bundle-delete";
 import { toast } from "sonner";
+
+import type { Bundle } from "@/shared/types/bundles.type";
 
 const ManagementBundles = () => {
   const [isPending, startTransition] = useTransition();
@@ -49,7 +50,7 @@ const ManagementBundles = () => {
 
   useEffect(() => {
     getAllBundles().then((res) => {
-      setBundles(res.items);
+      setBundles(res);
     });
   }, []);
 

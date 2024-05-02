@@ -24,8 +24,9 @@ import { GeneralDetailsSchema } from "@/schemas/auth/register";
 import { FaArrowRight, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
-import { SignedUpData } from "@/shared/types/signup-data.type";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   userData: SignedUpData;

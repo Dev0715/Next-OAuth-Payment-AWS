@@ -4,7 +4,8 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import Link from "next/link";
 import { LinkedSites } from "./linked-sites";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { User } from "@/shared/types/user.type";
+
+import type { User } from "@/shared/types/user.type";
 
 type PropsParams = {
   creator: User | undefined;
