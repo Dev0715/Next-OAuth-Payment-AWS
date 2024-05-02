@@ -27,6 +27,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { FaPlus } from "react-icons/fa";
 
 type Props = {
   params: {
@@ -99,8 +100,15 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
             type="number"
           />
         </div>
-        <div className="flex flex-col gap-y-2">
-          <p className="text-md">Products in this bundle</p>
+        <div className="flex flex-col gap-y-2 pt-4">
+          <div className="w-full flex items-end justify-between">
+            <p className="text-lg font-medium">Products in this bundle</p>
+            <Button className="h-8 flex gap-x-2 rounded-none">
+              <FaPlus />
+              Add New
+            </Button>
+          </div>
+
           <div className="w-full flex flex-col gap-y-4">
             <div className="rounded-md border">
               <Table>
@@ -150,11 +158,7 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
                 </TableBody>
               </Table>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-              <div className="flex-1 text-sm text-muted-foreground">
-                {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                {table.getFilteredRowModel().rows.length} row(s) selected.
-              </div>
+            <div className="flex items-center justify-end space-x-2 pb-4">
               <div className="space-x-2">
                 <Button
                   variant="outline"
