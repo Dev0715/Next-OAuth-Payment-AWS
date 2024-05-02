@@ -37,8 +37,9 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { getColumnsForUsersTable } from "@/components/admin/users-column";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Navbar } from "../_components/navbar";
-
 import type { ManagerData, User } from "@/shared/types/user.type";
+
+const ROWS_PER_PAGE = 10;
 
 const ManagementUsers = () => {
   const user = useCurrentUser();
@@ -57,8 +58,9 @@ const ManagementUsers = () => {
   const [rowSelection, setRowSelection] = useState({});
 
   useEffect(() => {
-    getAllUsers().then((res) => {
-      setUsers(res.items);
+    getAllUsers(ROWS_PER_PAGE).then((res) => {
+      setUsers(res.items as User[]);
+      console.log(res);
     });
   }, []);
 
