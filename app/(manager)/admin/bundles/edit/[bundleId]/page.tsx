@@ -17,7 +17,7 @@ import {
   getSortedRowModel,
   useReactTable
 } from "@tanstack/react-table";
-import { getColumnsForBundleProductsTable } from "@/components/admin/bundle-products-column";
+import { getColumnsForBundleProductsTable } from "@/components/admin/bundles/bundle-products-column";
 import {
   Table,
   TableBody,

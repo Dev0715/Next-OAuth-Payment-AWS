@@ -29,7 +29,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { Bundle } from "@/shared/types/types-bundles";
-import { getColumnsForBundlesTable } from "@/components/admin/bundles-colum";
+import { getColumnsForBundlesTable } from "@/components/admin/bundles/bundles-colum";
 import { getAllBundles } from "@/data/bundles/bundles-all";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
