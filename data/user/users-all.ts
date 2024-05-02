@@ -5,15 +5,24 @@ import { ScanCommand, ScanCommandInput } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_USERS_TABLE_NAME;
 
-export const getAllUsers = async (exclusiveStartKey?: string) => {
+export const getAllUsers = async (
+  limit?: number,
+  exclusiveStartKey?: string
+) => {
   const scanCommandInput: ScanCommandInput = {
     TableName
   };
+
   if (exclusiveStartKey) {
     scanCommandInput.ExclusiveStartKey = {
       userId: exclusiveStartKey as string
     };
   }
+
+  if (limit) {
+    scanCommandInput.Limit = limit;
+  }
+
   const command = new ScanCommand(scanCommandInput);
 
   try {
