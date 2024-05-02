@@ -34,15 +34,18 @@ const NewBundlePage = () => {
 
     const bundleId = uuidv4();
     startTransition(() => {
-      createBundle({ bundleId, title, userId: user?.userId as string }).then(
-        (res) => {
-          if (res.success) {
-            history.push(`/admin/bundles/edit/${bundleId}`);
-          } else {
-            setServerError(true);
-          }
+      createBundle({
+        bundleId,
+        title,
+        userId: user?.userId as string,
+        state: "editing"
+      }).then((res) => {
+        if (res.success) {
+          history.push(`/admin/bundles/edit/${bundleId}`);
+        } else {
+          setServerError(true);
         }
-      );
+      });
     });
   };
 
