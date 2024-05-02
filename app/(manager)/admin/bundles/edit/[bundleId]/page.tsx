@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/button";
 import { FaSave } from "react-icons/fa";
 import { updateBundle } from "@/data/bundles/bundle-update";
 import { Switch } from "@/components/ui/switch";
+import { useRouter } from "next/navigation";
+import { FormError } from "@/components/utils/form-error";
 
 type Props = {
   params: {
@@ -22,8 +24,11 @@ type Props = {
 };
 
 export default function BundleEditPage({ params: { bundleId } }: Props) {
+  const history = useRouter();
+
   const [isPending, startTransition] = useTransition();
   const [isAvailable, setAvailable] = useState<boolean>(false);
+  const [isServerError, setServerError] = useState<boolean>(false);
 
   const [bundle, setBundle] = useState<Bundle>();
   const [description, setDescription] = useState<string>("");
@@ -35,6 +40,13 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
     getBundleById(bundleId).then((res) => {
       if (res) {
         setBundle(res);
+
+        setDescription(res.description || "");
+        setPrice(res.price || 0);
+        if (res.state === "available") {
+          setAvailable(true);
+        }
+
         if (res.products) {
           Promise.all(
             res.products.map(
@@ -62,7 +74,13 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
           productType: product.productType,
           productId: product.productId
         }))
-      } as Bundle);
+      } as Bundle).then((res) => {
+        if (res) {
+          history.push("/admin/bundles");
+        } else {
+          setServerError(true);
+        }
+      });
     });
   };
 
@@ -102,6 +120,9 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
             onCheckedChange={(checked) => setAvailable(checked)}
           />
         </div>
+        {isServerError && (
+          <FormError message="Internal Server Error occured while saving this bundle" />
+        )}
         <Button
           disabled={isPending}
           className="w-64 flex items-center gap-x-2 rounded-none"
