@@ -34,10 +34,12 @@ export const BundleProductSelect = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
+  const [products, setProducts] = useState<Product[]>([]);
+
   const columns = getColumnsForBundlesProductsSelectTable({ isPending });
 
   const table = useReactTable({
-    data: [],
+    data: products,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

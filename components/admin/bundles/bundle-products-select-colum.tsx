@@ -1,24 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUp, ArrowDown, MoreHorizontal } from "lucide-react";
-import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
+import { ArrowUp, ArrowDown } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
-import { Badge, BadgeVariant } from "@/components/ui/badge";
-import { Bundle, BundleState } from "@/shared/types/types-bundles";
+import { Badge } from "@/components/ui/badge";
 
-const STATE_BADGE_VARIANT: Record<BundleState, BadgeVariant> = {
-  editing: "default",
-  available: "success"
-};
+import type { Product, ProductState } from "@/shared/types/types-product";
+import type { BadgeVariant } from "@/components/ui/badge";
 
 type PropsType = {
   isPending: boolean;
@@ -27,7 +13,7 @@ type PropsType = {
 export const getColumnsForBundlesProductsSelectTable = ({
   isPending
 }: PropsType) => {
-  const columns: ColumnDef<Bundle, string | string[]>[] = [
+  const columns: ColumnDef<Product, string | string[]>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -55,105 +41,64 @@ export const getColumnsForBundlesProductsSelectTable = ({
       enableHiding: false
     },
     {
+      accessorKey: "ownerId",
+      header: ({ column }) => (
+        <button
+          className="inline-flex items-center"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Creator
+          {column.getIsSorted() === "asc" ? (
+            <ArrowUp className="ml-2 h-4 w-4" />
+          ) : (
+            <ArrowDown className="ml-2 h-4 w-4" />
+          )}
+        </button>
+      ),
+      cell: (info) => info.getValue()
+    },
+    {
+      accessorKey: "productType",
+      header: ({ column }) => (
+        <button
+          className="inline-flex items-center"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Product Type
+          {column.getIsSorted() === "asc" ? (
+            <ArrowUp className="ml-2 h-4 w-4" />
+          ) : (
+            <ArrowDown className="ml-2 h-4 w-4" />
+          )}
+        </button>
+      ),
+      cell: (info) => <Badge variant="outline">{info.getValue()}</Badge>
+    },
+    {
       accessorKey: "title",
-      header: ({ column }) => (
-        <button
-          className="inline-flex items-center"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Title
-          {column.getIsSorted() === "asc" ? (
-            <ArrowUp className="ml-2 h-4 w-4" />
-          ) : (
-            <ArrowDown className="ml-2 h-4 w-4" />
-          )}
-        </button>
-      ),
-      cell: (info) => <p>{info.getValue()}</p>
-    },
-    {
-      accessorKey: "userId",
-      header: ({ column }) => (
-        <button
-          className="inline-flex items-center"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          User Id
-          {column.getIsSorted() === "asc" ? (
-            <ArrowUp className="ml-2 h-4 w-4" />
-          ) : (
-            <ArrowDown className="ml-2 h-4 w-4" />
-          )}
-        </button>
-      ),
-      cell: (info) => <p>{info.getValue()}</p>
-    },
-    {
-      accessorKey: "description",
-      header: () => <div className="text-left">Description</div>,
-      cell: (info) => (
-        <div className="text-left font-medium">{info.getValue()}</div>
-      )
+      header: () => "Title",
+      cell: (info) => <span className="font-medium">{info.getValue()}</span>
     },
     {
       accessorKey: "price",
-      header: () => <div className="text-center">Price</div>,
+      header: () => <div className="text-right">Price</div>,
       cell: (info) => (
-        <div className="text-center font-medium">{info.getValue()}</div>
+        <div className="text-right font-medium">{info.getValue()}</div>
       )
     },
     {
-      accessorKey: "products",
-      header: () => <div className="text-center">Products</div>,
+      accessorKey: "fileList",
+      header: () => <div className="text-right">Uploaded Files</div>,
       cell: (info) => (
-        <div className="text-center font-medium">{info.getValue()?.length}</div>
+        <div className="text-right font-medium">{info.getValue().length}</div>
       )
     },
     {
-      accessorKey: "state",
-      header: () => <div className="text-center">State</div>,
+      accessorKey: "previewList",
+      header: () => <div className="text-right">Preview Images</div>,
       cell: (info) => (
-        <div className="flex justify-center">
-          <Badge
-            variant={STATE_BADGE_VARIANT[info.getValue() as BundleState]}
-            className="capitalize"
-          >
-            {info.getValue()}
-          </Badge>
-        </div>
+        <div className="text-right font-medium">{info.getValue().length}</div>
       )
-    },
-    {
-      id: "actions",
-      enableHiding: false,
-      cell: ({ row }) => {
-        const bundle = row.original;
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                disabled={isPending}
-                variant="ghost"
-                className="h-8 w-8 p-0"
-              >
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem disabled>Copy Bundle ID</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem disabled>Delete Bundle</DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href={`/admin/bundles/edit/${bundle.bundleId}`}>
-                  Edit Bundle
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      }
     }
   ];
 

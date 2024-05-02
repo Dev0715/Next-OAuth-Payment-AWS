@@ -22,6 +22,8 @@ import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import { Product } from "@/shared/types/types-product";
 import { getColumnsForBundleProductsTable } from "@/components/admin/bundles/bundle-products-column";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { BundleProductSelect } from "./bundle-products-select";
 
 type Props = {
   isPending: boolean;
@@ -59,10 +61,17 @@ export const BundleProducts = ({ isPending, products }: Props) => {
     <div className="flex flex-col gap-y-2 pt-4">
       <div className="w-full flex items-end justify-between">
         <p className="text-lg font-medium">Products in this bundle</p>
-        <Button className="h-8 flex gap-x-2 rounded-none">
-          <FaPlus />
-          Add New
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="h-8 flex gap-x-2 rounded-none">
+              <FaPlus />
+              Add New
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-full w-[720px] pt-16">
+            <BundleProductSelect />
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="w-full flex flex-col gap-y-4">
         <div className="rounded-md border">
