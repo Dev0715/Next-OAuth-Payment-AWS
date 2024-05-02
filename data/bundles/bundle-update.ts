@@ -11,7 +11,10 @@ export const updateBundle = async (bundle: Bundle) => {
     TableName,
     Key: { bundleId: bundle.bundleId },
     UpdateExpression:
-      "SET description = :description, state: :state, price: :price, products: :products",
+      "SET description = :description, #state = :state, price = :price, products = :products",
+    ExpressionAttributeNames: {
+      "#state": "state"
+    },
     ExpressionAttributeValues: {
       ":description": bundle.description,
       ":state": bundle.state,
