@@ -1,4 +1,4 @@
-import { ProductEvent, ProductState } from "@/shared/types/types-product";
+import { ProductEvent, ProductState } from "@/shared/types/product.type";
 import { Badge, BadgeVariant } from "../ui/badge";
 
 const STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {

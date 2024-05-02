@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { SignedUpData } from "@/shared/types/types-signup-data";
+import { SignedUpData } from "@/shared/types/signup-data.type";
 import { v4 as uuidv4 } from "uuid";
 import { register } from "@/actions/auth/register/register";
 import {

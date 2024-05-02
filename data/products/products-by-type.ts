@@ -1,8 +1,9 @@
 "use server";
 
-import db from "@/lib/db";
-import { ProductLink } from "@/shared/types/types-user";
 import { QueryCommand, QueryCommandInput } from "@aws-sdk/lib-dynamodb";
+
+import db from "@/lib/db";
+import type { ProductLink } from "@/shared/types/product.type";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 

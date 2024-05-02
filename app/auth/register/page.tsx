@@ -6,7 +6,7 @@ import { GeneralDetailsForm } from "@/components/auth/register/general-details-f
 import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
 import { SelectMatchingForm } from "@/components/auth/register/select-matching-form";
 import { UserCompleteForm } from "@/components/auth/register/user-complete-form";
-import { SignedUpData } from "@/shared/types/types-signup-data";
+import { SignedUpData } from "@/shared/types/signup-data.type";
 import { useState, useTransition } from "react";
 import { AffiliateCompleteForm } from "@/components/auth/register/affiliate-complete-form";
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";

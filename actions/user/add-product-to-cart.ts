@@ -2,7 +2,7 @@
 
 import { getUserById } from "@/data/user/user-by-id";
 import { updateUserCart } from "@/data/user/cart-update";
-import { ProductLink } from "@/shared/types/types-user";
+import type { ProductLink } from "@/shared/types/product.type";
 
 type ParamsType = {
   userId: string;
@@ -24,18 +24,18 @@ export const addProductToCart = async ({ userId, product }: ParamsType) => {
   }
 
   const cart: ProductLink[] = existingUser.cart || [];
-  const exisitingOne = cart.find(
+  const existingOne = cart.find(
     (_product) => _product.productId === product.productId
   );
-  if (exisitingOne) {
+  if (existingOne) {
     return { error: "It's already in your cart" };
   }
 
   const purchasedProducts: ProductLink[] = existingUser.purchasedProducts || [];
-  const exisitingProduct = purchasedProducts.find(
+  const existingProduct = purchasedProducts.find(
     (_product) => _product.productId === product.productId
   );
-  if (exisitingProduct) {
+  if (existingProduct) {
     return { error: "You have already purchased this product" };
   }
 

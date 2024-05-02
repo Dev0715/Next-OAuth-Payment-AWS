@@ -38,7 +38,7 @@ import { getColumnsForUsersTable } from "@/components/admin/users-column";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Navbar } from "../_components/navbar";
 
-import type { ManagerData, User } from "@/shared/types/types-user";
+import type { ManagerData, User } from "@/shared/types/user.type";
 
 const ManagementUsers = () => {
   const user = useCurrentUser();

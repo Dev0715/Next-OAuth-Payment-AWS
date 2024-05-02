@@ -22,7 +22,7 @@ import { FaCcStripe, FaPaypal, FaStripe, FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/auth/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Customer } from "@/shared/types/types-user";
+import { Customer } from "@/shared/types/user.type";
 import { getUserById } from "@/data/user/user-by-id";
 
 export default function EditCustomer({

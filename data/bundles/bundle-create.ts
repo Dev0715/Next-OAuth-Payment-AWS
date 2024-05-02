@@ -1,7 +1,7 @@
 "use server";
 
 import db from "@/lib/db";
-import { Bundle } from "@/shared/types/types-bundles";
+import { Bundle } from "@/shared/types/bundles.type";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_BUNDLES_TABLE_NAME;

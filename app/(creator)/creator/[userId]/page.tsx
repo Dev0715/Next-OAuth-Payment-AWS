@@ -8,10 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProductById } from "@/data/products/product-by-id";
 import { getUserById } from "@/data/user/user-by-id";
-import { Product } from "@/shared/types/types-product";
-import { ProductLink, User } from "@/shared/types/types-user";
+import { Product } from "@/shared/types/product.type";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
+
+import type { ProductLink } from "@/shared/types/product.type";
+import type { User } from "@/shared/types/user.type";
 
 interface PropsParams {
   params: {

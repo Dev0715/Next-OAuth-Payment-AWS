@@ -26,7 +26,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { CREATOR_TYPES } from "@/assets/creator-types";
-import { SignedUpData } from "@/shared/types/types-signup-data";
+import { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   userData: SignedUpData;

@@ -3,7 +3,7 @@
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
-import { Product, ProductState } from "@/shared/types/types-product";
+import { Product, ProductState } from "@/shared/types/product.type";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

@@ -2,20 +2,21 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { Navbar } from "../../../_components/navbar";
-import { Bundle } from "@/shared/types/types-bundles";
+import { Bundle } from "@/shared/types/bundles.type";
 import { getBundleById } from "@/data/bundles/bundle-by-id";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { BundleProducts } from "@/components/admin/bundles/bundle-products";
-import { Product } from "@/shared/types/types-product";
+import { Product } from "@/shared/types/product.type";
 import { getProductById } from "@/data/products/product-by-id";
-import { ProductLink } from "@/shared/types/types-user";
 import { Button } from "@/components/ui/button";
 import { FaSave } from "react-icons/fa";
 import { updateBundle } from "@/data/bundles/bundle-update";
 import { Switch } from "@/components/ui/switch";
 import { useRouter } from "next/navigation";
 import { FormError } from "@/components/utils/form-error";
+
+import type { ProductLink } from "@/shared/types/product.type";
 
 type Props = {
   params: {

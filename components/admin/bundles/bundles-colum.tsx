@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Badge, BadgeVariant } from "@/components/ui/badge";
-import { Bundle, BundleState } from "@/shared/types/types-bundles";
+import { Bundle, BundleState } from "@/shared/types/bundles.type";
 import { QuestionAlert } from "@/components/utils/question-alert";
 
 const STATE_BADGE_VARIANT: Record<BundleState, BadgeVariant> = {

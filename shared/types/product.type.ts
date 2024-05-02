@@ -1,4 +1,19 @@
-import { ProductType } from "@/assets/product-types";
+export type ProductType =
+  | "ui-kits"
+  | "dashboard-wireframes"
+  | "themes-spas"
+  | "plugins"
+  | "icon-sets-brushes-actions"
+  | "fonts"
+  | "mockups-posters"
+  | "scaffolding-starters"
+  | "3d-assets"
+  | "illustrations"
+  | "documents-page-templates"
+  | "spreadsheets"
+  | "photos"
+  | "video"
+  | "audio-sound-effects";
 
 export type ProductState = "created" | "approved" | "rejected" | "updated";
 
@@ -13,9 +28,12 @@ export type ProductEvent = {
   userId: string;
 };
 
-export type Product = {
+export type ProductLink = {
   productType: ProductType;
   productId: string;
+};
+
+export type Product = ProductLink & {
   ownerId: string;
   title: string;
   description: string;

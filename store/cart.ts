@@ -1,5 +1,6 @@
-import { ProductLink } from "@/shared/types/types-user";
 import { atom } from "jotai";
+
+import type { ProductLink } from "@/shared/types/product.type";
 
 const cartAtom = atom<ProductLink[] | undefined>(undefined);
 

@@ -4,7 +4,7 @@ import { ArrowUp, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-import type { Product } from "@/shared/types/types-product";
+import type { Product } from "@/shared/types/product.type";
 
 type PropsType = {
   isPending: boolean;

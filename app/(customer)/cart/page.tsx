@@ -2,7 +2,7 @@
 
 import { Navbar } from "./_components/navbar";
 import { useEffect, useState, useTransition } from "react";
-import { CartProduct, Product } from "@/shared/types/types-product";
+import { CartProduct, Product } from "@/shared/types/product.type";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserById } from "@/data/user/user-by-id";
 import { getProductById } from "@/data/products/product-by-id";

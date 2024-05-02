@@ -3,12 +3,13 @@
 import { ProductItem } from "@/components/product/product-item";
 import { Navbar } from "../_components/navbar";
 import { useEffect, useState } from "react";
-import { Product } from "@/shared/types/types-product";
+import { Product } from "@/shared/types/product.type";
 import { getProductsByType } from "@/data/products/products-by-type";
 import { Separator } from "@/components/ui/separator";
 import { getProductsCountByType } from "@/data/products/products-count-by-type";
 import { ProductPagination } from "../_components/pagination-products";
-import { ProductLink } from "@/shared/types/types-user";
+
+import type { ProductLink } from "@/shared/types/product.type";
 
 type ParamsType = {
   params: {

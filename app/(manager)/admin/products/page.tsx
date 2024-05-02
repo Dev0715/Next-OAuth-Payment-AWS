@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/table";
 import { Navbar } from "../_components/navbar";
 
-import type { Product } from "@/shared/types/types-product";
+import type { Product } from "@/shared/types/product.type";
 
 export default function Approval() {
   const [isPending, startTransition] = useTransition();

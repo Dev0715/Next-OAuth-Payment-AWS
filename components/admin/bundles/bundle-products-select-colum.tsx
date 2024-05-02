@@ -3,7 +3,7 @@ import { ArrowUp, ArrowDown } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 
-import type { Product, ProductState } from "@/shared/types/types-product";
+import type { Product, ProductState } from "@/shared/types/product.type";
 import type { BadgeVariant } from "@/components/ui/badge";
 
 export const getColumnsForBundlesProductsSelectTable = () => {

@@ -2,7 +2,7 @@
 
 import db from "@/lib/db";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
-import { Product } from "@/shared/types/types-product";
+import { Product } from "@/shared/types/product.type";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 

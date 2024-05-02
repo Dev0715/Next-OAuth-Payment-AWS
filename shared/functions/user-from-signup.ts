@@ -1,7 +1,7 @@
 import { axiosClient, axiosConfig } from "@/lib/axios";
-import { User } from "../types/types-user";
+import { User } from "../types/user.type";
 import { v4 as uuidv4 } from "uuid";
-import { SignedUpData } from "../types/types-signup-data";
+import { SignedUpData } from "../types/signup-data.type";
 
 export const uploadImage = async (file: File, keyName: string) => {
   try {

@@ -2,7 +2,7 @@
 
 import { getUserById } from "@/data/user/user-by-id";
 import { updateUserPurchased } from "@/data/user/purchased-update";
-import { ProductLink } from "@/shared/types/types-user";
+import type { ProductLink } from "@/shared/types/product.type";
 
 type Params = {
   userId: string;

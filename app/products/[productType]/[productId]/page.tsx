@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { QuestionAlert } from "@/components/utils/question-alert";
-import { Product } from "@/shared/types/types-product";
+import { Product } from "@/shared/types/product.type";
 import { getProductById } from "@/data/products/product-by-id";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
@@ -24,7 +24,8 @@ import { useAtom } from "jotai";
 import { cartAtom } from "@/store/cart";
 import { orderListAtom } from "@/store/orderList";
 import { addProductToPurchased } from "@/actions/user/add-product-to-purchased";
-import { ProductLink } from "@/shared/types/types-user";
+
+import type { ProductLink } from "@/shared/types/product.type";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;
@@ -170,10 +171,13 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
 
   const onConfirmCart = () => {
     startTransition(() => {
+      if (!product) return;
+
       const newProductLink = {
-        productType: product?.productType as string,
-        productId: product?.productId as string
+        productType: product.productType,
+        productId: product.productId
       };
+
       addProductToCart({
         userId: user?.userId as string,
         product: newProductLink

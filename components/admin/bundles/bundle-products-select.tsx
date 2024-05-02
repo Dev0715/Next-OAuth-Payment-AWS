@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
-import { Product } from "@/shared/types/types-product";
+import { Product } from "@/shared/types/product.type";
 import { getColumnsForBundlesProductsSelectTable } from "./bundle-products-select-colum";
 import { getAllProducts } from "@/data/products/products-all";
 

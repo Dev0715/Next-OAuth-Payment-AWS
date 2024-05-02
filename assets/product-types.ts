@@ -1,21 +1,6 @@
-export type ProductType =
-  | "ui-kits"
-  | "dashboard-wireframes"
-  | "themes-spas"
-  | "plugins"
-  | "icon-sets-brushes-actions"
-  | "fonts"
-  | "mockups-posters"
-  | "scaffolding-starters"
-  | "3d-assets"
-  | "illustrations"
-  | "documents-page-templates"
-  | "spreadsheets"
-  | "photos"
-  | "video"
-  | "audio-sound-effects";
+import { ProductType } from "@/shared/types/product.type";
 
-export const PRODUCT_TYPE_DISPLAY_Text: Record<ProductType, string> = {
+export const PRODUCT_TYPE_DISPLAY_TEXT: Record<ProductType, string> = {
   "ui-kits": "UI Kits",
   "dashboard-wireframes": "Dashboard / Wireframes",
   "themes-spas": "Themes / SPAs",

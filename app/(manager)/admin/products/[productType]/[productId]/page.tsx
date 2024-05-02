@@ -6,17 +6,18 @@ import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { QuestionAlert } from "@/components/utils/question-alert";
-import { Product, ProductState } from "@/shared/types/types-product";
+import { Product, ProductState } from "@/shared/types/product.type";
 import { getProductById } from "@/data/products/product-by-id";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { ProductLink } from "@/shared/types/types-user";
 import { ProductHistory } from "@/components/product/product-history";
 import { Textarea } from "@/components/ui/textarea";
 import { updateProductApproval } from "@/data/products/product-approval-update";
 import { Navbar } from "../../../_components/navbar";
 import Link from "next/link";
+
+import type { ProductLink } from "@/shared/types/product.type";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;

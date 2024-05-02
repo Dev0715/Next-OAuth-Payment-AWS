@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { QuestionAlert } from "@/components/utils/question-alert";
-import { CartProduct, Product } from "@/shared/types/types-product";
+import { CartProduct, Product } from "@/shared/types/product.type";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

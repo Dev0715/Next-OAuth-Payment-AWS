@@ -1,4 +1,4 @@
-import { ProductLink } from "./types-user";
+import type { ProductLink } from "./product.type";
 
 export type BundleState = "editing" | "available";
 

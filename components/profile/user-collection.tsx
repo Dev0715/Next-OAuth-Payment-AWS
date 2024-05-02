@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { ProductItem } from "../product/product-item";
 import Link from "next/link";
-import { Product } from "@/shared/types/types-product";
+import { Product } from "@/shared/types/product.type";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
 type Props = {

@@ -14,7 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 
-import type { User } from "@/shared/types/types-user";
+import type { User } from "@/shared/types/user.type";
 
 type PropsType = {
   isPending: boolean;

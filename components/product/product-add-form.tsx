@@ -43,11 +43,11 @@ import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
 import { createProduct } from "@/data/products/product-create";
 import { addNewProduct } from "@/actions/user/new-product";
-import { PRODUCT_TYPE_DISPLAY_Text, ProductType } from "@/assets/product-types";
+import { PRODUCT_TYPE_DISPLAY_TEXT, ProductType } from "@/assets/product-types";
 
 export const ProductAddForm = () => {
   const user = useCurrentUser();
-  const productTypes = PRODUCT_TYPE_DISPLAY_Text;
+  const productTypes = PRODUCT_TYPE_DISPLAY_TEXT;
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");

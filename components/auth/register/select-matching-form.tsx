@@ -3,7 +3,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { SignedUpData } from "@/shared/types/types-signup-data";
+import { SignedUpData } from "@/shared/types/signup-data.type";
 import { Evanto } from "./matching-sites/evanto";
 import { Behance } from "./matching-sites/behance";
 import { ArtStation } from "./matching-sites/artstation";

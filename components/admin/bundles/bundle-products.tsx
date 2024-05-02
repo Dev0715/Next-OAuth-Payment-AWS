@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
-import { Product } from "@/shared/types/types-product";
+import { Product } from "@/shared/types/product.type";
 import { getColumnsForBundleProductsTable } from "@/components/admin/bundles/bundle-products-column";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { BundleProductSelect } from "./bundle-products-select";

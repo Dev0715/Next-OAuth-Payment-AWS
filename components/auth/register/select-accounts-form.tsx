@@ -17,7 +17,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { SelectAccountsSchema } from "@/schemas/auth/register";
 import { Switch } from "@/components/ui/switch";
-import { SignedUpData } from "@/shared/types/types-signup-data";
+import { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   userData: SignedUpData;

@@ -28,7 +28,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { Bundle } from "@/shared/types/types-bundles";
+import { Bundle } from "@/shared/types/bundles.type";
 import { getColumnsForBundlesTable } from "@/components/admin/bundles/bundles-colum";
 import { getAllBundles } from "@/data/bundles/bundles-all";
 import { Input } from "@/components/ui/input";
