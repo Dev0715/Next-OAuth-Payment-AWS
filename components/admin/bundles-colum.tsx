@@ -48,13 +48,13 @@ export const getColumnsForBundlesTable = ({ isPending }: PropsType) => {
       enableHiding: false
     },
     {
-      accessorKey: "creatorId",
+      accessorKey: "title",
       header: ({ column }) => (
         <button
           className="inline-flex items-center"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Creator
+          Title
           {column.getIsSorted() === "asc" ? (
             <ArrowUp className="ml-2 h-4 w-4" />
           ) : (
@@ -62,16 +62,16 @@ export const getColumnsForBundlesTable = ({ isPending }: PropsType) => {
           )}
         </button>
       ),
-      cell: (info) => info.getValue()
+      cell: (info) => <Badge variant="outline">{info.getValue()}</Badge>
     },
     {
-      accessorKey: "bundleType",
+      accessorKey: "userId",
       header: ({ column }) => (
         <button
           className="inline-flex items-center"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Bundle Type
+          User Id
           {column.getIsSorted() === "asc" ? (
             <ArrowUp className="ml-2 h-4 w-4" />
           ) : (
@@ -83,15 +83,20 @@ export const getColumnsForBundlesTable = ({ isPending }: PropsType) => {
     },
     {
       accessorKey: "bundleId",
-      header: () => "Bundle",
-      cell: (info) => <span className="font-medium">{info.getValue()}</span>
-    },
-    {
-      accessorKey: "title",
-      header: () => <div className="text-right">Title</div>,
-      cell: (info) => (
-        <div className="text-right font-medium">{info.getValue()}</div>
-      )
+      header: ({ column }) => (
+        <button
+          className="inline-flex items-center"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Bundle Id
+          {column.getIsSorted() === "asc" ? (
+            <ArrowUp className="ml-2 h-4 w-4" />
+          ) : (
+            <ArrowDown className="ml-2 h-4 w-4" />
+          )}
+        </button>
+      ),
+      cell: (info) => <Badge variant="outline">{info.getValue()}</Badge>
     },
     {
       accessorKey: "description",
