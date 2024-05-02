@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { FaUser } from "react-icons/fa";
 
 type Props = {
   link: string;
