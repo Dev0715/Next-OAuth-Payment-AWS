@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge, BadgeVariant } from "@/components/ui/badge";
 import { Bundle, BundleState } from "@/shared/types/types-bundles";
+import { QuestionAlert } from "@/components/utils/question-alert";
 
 const STATE_BADGE_VARIANT: Record<BundleState, BadgeVariant> = {
   editing: "default",
@@ -22,9 +23,13 @@ const STATE_BADGE_VARIANT: Record<BundleState, BadgeVariant> = {
 
 type PropsType = {
   isPending: boolean;
+  onDeleteBundle: (bundleId: string) => void;
 };
 
-export const getColumnsForBundlesTable = ({ isPending }: PropsType) => {
+export const getColumnsForBundlesTable = ({
+  isPending,
+  onDeleteBundle
+}: PropsType) => {
   const columns: ColumnDef<Bundle, string | string[]>[] = [
     {
       id: "select",
@@ -97,7 +102,7 @@ export const getColumnsForBundlesTable = ({ isPending }: PropsType) => {
       accessorKey: "price",
       header: () => <div className="text-center">Price</div>,
       cell: (info) => (
-        <div className="text-center font-medium">{info.getValue()}</div>
+        <div className="text-center font-medium">${info.getValue()}</div>
       )
     },
     {
@@ -142,7 +147,9 @@ export const getColumnsForBundlesTable = ({ isPending }: PropsType) => {
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem disabled>Copy Bundle ID</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem disabled>Delete Bundle</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onDeleteBundle(bundle.bundleId)}>
+                Delete Bundle
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href={`/admin/bundles/edit/${bundle.bundleId}`}>
                   Edit Bundle

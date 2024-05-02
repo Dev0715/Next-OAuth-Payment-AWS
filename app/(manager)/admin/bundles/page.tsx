@@ -35,6 +35,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
+import { deleteBundle } from "@/data/bundles/bundle-delete";
+import { toast } from "sonner";
 
 const ManagementBundles = () => {
   const [isPending, startTransition] = useTransition();
@@ -51,8 +53,19 @@ const ManagementBundles = () => {
     });
   }, []);
 
-  const columns = getColumnsForBundlesTable({ isPending });
+  const onDeleteBundle = (bundleId: string) => {
+    startTransition(() => {
+      deleteBundle(bundleId).then((res) => {
+        if (res?.success) {
+          setBundles(bundles.filter((bundle) => bundle.bundleId !== bundleId));
+        } else {
+          toast.error("Failed to delete bundle.");
+        }
+      });
+    });
+  };
 
+  const columns = getColumnsForBundlesTable({ isPending, onDeleteBundle });
   const table = useReactTable({
     data: bundles,
     columns,
