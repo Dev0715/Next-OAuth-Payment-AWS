@@ -143,7 +143,7 @@ export const BundleProducts = ({ isPending, products, setProducts }: Props) => {
             </TableBody>
           </Table>
         </div>
-        <div className="flex items-center justify-end space-x-2 pb-4">
+        <div className="flex items-center justify-end space-x-2">
           <div className="space-x-2">
             <Button
               variant="outline"

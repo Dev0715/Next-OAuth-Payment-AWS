@@ -6,11 +6,7 @@ import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_BUNDLES_TABLE_NAME;
 
-type ParamsType = {
-  bundle: Bundle;
-};
-
-export const updateProductApproval = async ({ bundle }: ParamsType) => {
+export const updateBundle = async (bundle: Bundle) => {
   const command = new UpdateCommand({
     TableName,
     Key: { bundleId: bundle.bundleId },
@@ -29,6 +25,7 @@ export const updateProductApproval = async ({ bundle }: ParamsType) => {
     const response = await db.send(command);
     return response.Attributes;
   } catch (error) {
+    console.error(error);
     return null;
   }
 };

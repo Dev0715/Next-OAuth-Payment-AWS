@@ -10,6 +10,10 @@ import { BundleProducts } from "@/components/admin/bundles/bundle-products";
 import { Product } from "@/shared/types/types-product";
 import { getProductById } from "@/data/products/product-by-id";
 import { ProductLink } from "@/shared/types/types-user";
+import { Button } from "@/components/ui/button";
+import { FaSave } from "react-icons/fa";
+import { updateBundle } from "@/data/bundles/bundle-update";
+import { Switch } from "@/components/ui/switch";
 
 type Props = {
   params: {
@@ -19,6 +23,7 @@ type Props = {
 
 export default function BundleEditPage({ params: { bundleId } }: Props) {
   const [isPending, startTransition] = useTransition();
+  const [isAvailable, setAvailable] = useState<boolean>(false);
 
   const [bundle, setBundle] = useState<Bundle>();
   const [description, setDescription] = useState<string>("");
@@ -27,24 +32,39 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    // getBundleById(bundleId).then((res) => {
-    //   if (res) {
-    //     setBundle(res);
-    //     if (res.products) {
-    //       Promise.all(
-    //         res.products.map(
-    //           async (product: ProductLink) =>
-    //             await getProductById(product.productType, product.productId)
-    //         )
-    //       ).then((products) => {
-    //         setProducts(
-    //           products.filter((product) => product !== null) as Product[]
-    //         );
-    //       });
-    //     }
-    //   }
-    // });
+    getBundleById(bundleId).then((res) => {
+      if (res) {
+        setBundle(res);
+        if (res.products) {
+          Promise.all(
+            res.products.map(
+              async (product: ProductLink) =>
+                await getProductById(product.productType, product.productId)
+            )
+          ).then((products) => {
+            setProducts(
+              products.filter((product) => product !== null) as Product[]
+            );
+          });
+        }
+      }
+    });
   }, []);
+
+  const onSave = () => {
+    startTransition(() => {
+      updateBundle({
+        ...bundle,
+        description,
+        price,
+        state: isAvailable ? "available" : "editing",
+        products: products.map((product) => ({
+          productType: product.productType,
+          productId: product.productId
+        }))
+      } as Bundle);
+    });
+  };
 
   return (
     <div className="w-full flex flex-col gap-y-6">
@@ -75,6 +95,21 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
           products={products}
           setProducts={setProducts}
         />
+        <div className="flex items-center gap-x-4 -mt-8 mb-4">
+          <p className="text-lg">Do you want to make this bundle available?</p>
+          <Switch
+            checked={isAvailable}
+            onCheckedChange={(checked) => setAvailable(checked)}
+          />
+        </div>
+        <Button
+          disabled={isPending}
+          className="w-64 flex items-center gap-x-2 rounded-none"
+          onClick={onSave}
+        >
+          <FaSave />
+          Save Product
+        </Button>
       </div>
     </div>
   );
