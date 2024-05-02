@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import { ProductLink } from "@/shared/types/types-user";
 import { Product } from "@/shared/types/types-product";
+import { getColumnsForBundlesProductsSelectTable } from "./bundles-products-select-colum";
 
 export const BundleProductSelect = () => {
   const [isPending, startTransition] = useTransition();
@@ -33,7 +34,7 @@ export const BundleProductSelect = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const columns = getColumnsForBundleProductsTable({ isPending });
+  const columns = getColumnsForBundlesProductsSelectTable({ isPending });
 
   const table = useReactTable({
     data: [],

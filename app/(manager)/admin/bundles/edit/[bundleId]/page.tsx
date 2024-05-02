@@ -58,7 +58,7 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
           <Textarea
             className="w-1/2"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(event) => setDescription(event.target.value)}
           />
         </div>
         <div className="flex flex-col gap-y-2">
@@ -66,7 +66,7 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
           <Input
             className="w-1/4"
             value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            onChange={(event) => setPrice(Number(event.target.value))}
             type="number"
           />
         </div>
