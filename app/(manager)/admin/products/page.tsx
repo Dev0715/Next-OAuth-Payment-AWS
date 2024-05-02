@@ -14,7 +14,7 @@ import {
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
 
-import { getAllProducts } from "@/data/products/all-products";
+import { getAllProducts } from "@/data/products/products-all";
 import { getColumnsForProductsTable } from "@/components/admin/products-column";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/table";
 import { Bundle } from "@/shared/types/types-bundles";
 import { getColumnsForBundlesTable } from "@/components/admin/bundles-colum";
-import { getAllBundles } from "@/data/bundles/all-bundles";
+import { getAllBundles } from "@/data/bundles/bundles-all";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
