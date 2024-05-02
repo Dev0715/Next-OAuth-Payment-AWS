@@ -128,26 +128,23 @@ const ManagementUsers = () => {
 
   const isNextAvailable = () => {
     const currentPageIndex = table.getState().pagination.pageIndex;
-  };
+    const pageCount = table.getPageCount();
 
-  const onPrevious = () => {
-    table.previousPage();
-    console.log(table.getPageCount());
+    return lastEvaluatedKey || currentPageIndex + 1 < pageCount;
   };
 
   const onNext = () => {
-    console.log();
-    table.nextPage();
-    // startTransition(() => {
-    //   if (lastEvaluatedKey) {
-    //     getAllUsers(ROWS_PER_PAGE, lastEvaluatedKey?.userId).then((res) => {
-    //       setUsers([...users, ...(res.items as User[])]);
-    //       setLastEvaluatedKey(res.lastEvaluatedKey);
-
-    //       table.nextPage();
-    //     });
-    //   }
-    // });
+    if (lastEvaluatedKey) {
+      startTransition(() => {
+        getAllUsers(ROWS_PER_PAGE, lastEvaluatedKey?.userId).then((res) => {
+          setUsers([...users, ...(res.items as User[])]);
+          setLastEvaluatedKey(res.lastEvaluatedKey);
+          table.nextPage();
+        });
+      });
+    } else {
+      table.nextPage();
+    }
   };
 
   return (
@@ -255,8 +252,8 @@ const ManagementUsers = () => {
             <Button
               variant="outline"
               size="sm"
-              onClick={onPrevious}
-              // disabled={!table.getCanPreviousPage()}
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
             >
               Previous
             </Button>
@@ -264,7 +261,7 @@ const ManagementUsers = () => {
               variant="outline"
               size="sm"
               onClick={onNext}
-              // disabled={!table.getCanNextPage()}
+              disabled={!isNextAvailable()}
             >
               Next
             </Button>
