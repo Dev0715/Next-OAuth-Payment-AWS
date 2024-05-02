@@ -1,4 +1,6 @@
-import { useState, useTransition } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 
 import {
   ColumnFiltersState,
@@ -11,7 +13,6 @@ import {
   getSortedRowModel,
   useReactTable
 } from "@tanstack/react-table";
-import { getColumnsForBundleProductsTable } from "@/components/admin/bundles/bundle-products-column";
 import {
   Table,
   TableBody,
@@ -22,13 +23,15 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
-import { ProductLink } from "@/shared/types/types-user";
 import { Product } from "@/shared/types/types-product";
 import { getColumnsForBundlesProductsSelectTable } from "./bundle-products-select-colum";
+import { getAllProducts } from "@/data/products/products-all";
 
-export const BundleProductSelect = () => {
-  const [isPending, startTransition] = useTransition();
+type Props = {
+  onAddNewProducts: (products: Product[]) => void;
+};
 
+export const BundleProductSelect = ({ onAddNewProducts }: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -36,8 +39,13 @@ export const BundleProductSelect = () => {
 
   const [products, setProducts] = useState<Product[]>([]);
 
-  const columns = getColumnsForBundlesProductsSelectTable({ isPending });
+  useEffect(() => {
+    getAllProducts().then((res) => {
+      setProducts(res.items);
+    });
+  }, []);
 
+  const columns = getColumnsForBundlesProductsSelectTable();
   const table = useReactTable({
     data: products,
     columns,
@@ -57,8 +65,11 @@ export const BundleProductSelect = () => {
     }
   });
 
+  const onAddProducts = () => {};
+
   return (
     <div className="w-full flex flex-col gap-y-4">
+      <p className="text-lg">Select products you want to put in bundle</p>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -107,7 +118,14 @@ export const BundleProductSelect = () => {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 pb-4">
+      <div className="flex items-center justify-between space-x-2">
+        <Button
+          className="h-8 flex gap-x-2 rounded-none"
+          onClick={onAddProducts}
+        >
+          <FaPlus />
+          Add Products
+        </Button>
         <div className="space-x-2">
           <Button
             variant="outline"
