@@ -39,7 +39,26 @@ export const BundleProducts = ({ isPending, products, setProducts }: Props) => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const columns = getColumnsForBundleProductsTable({ isPending });
+  const onAddNewProducts = (_products: Product[]) => {
+    setAddDlg(false);
+
+    const newProducts = _products.filter(
+      (_products) =>
+        products.findIndex(
+          (product) => product.productId === _products.productId
+        ) === -1
+    );
+    setProducts([...products, ...newProducts]);
+  };
+
+  const onProductDelete = (productId: string) => {
+    setProducts(products.filter((product) => product.productId !== productId));
+  };
+
+  const columns = getColumnsForBundleProductsTable({
+    isPending,
+    onProductDelete
+  });
   const table = useReactTable({
     data: products,
     columns,
@@ -58,8 +77,6 @@ export const BundleProducts = ({ isPending, products, setProducts }: Props) => {
       rowSelection
     }
   });
-
-  const onAddNewProducts = () => {};
 
   return (
     <div className="flex flex-col gap-y-2 pt-4">

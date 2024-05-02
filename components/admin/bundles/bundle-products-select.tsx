@@ -65,7 +65,12 @@ export const BundleProductSelect = ({ onAddNewProducts }: Props) => {
     }
   });
 
-  const onAddProducts = () => {};
+  const onAddProducts = () => {
+    const selectedProducts = Object.keys(rowSelection).map(
+      (index) => products[Number(index)]
+    );
+    onAddNewProducts(selectedProducts);
+  };
 
   return (
     <div className="w-full flex flex-col gap-y-4">

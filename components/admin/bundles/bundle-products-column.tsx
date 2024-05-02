@@ -2,16 +2,19 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUp, ArrowDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 
 import type { Product } from "@/shared/types/types-product";
 
 type PropsType = {
   isPending: boolean;
+  onProductDelete: (productId: string) => void;
 };
 
-export const getColumnsForBundleProductsTable = ({ isPending }: PropsType) => {
+export const getColumnsForBundleProductsTable = ({
+  isPending,
+  onProductDelete
+}: PropsType) => {
   const columns: ColumnDef<Product, string | string[]>[] = [
     {
       accessorKey: "ownerId",
@@ -30,7 +33,7 @@ export const getColumnsForBundleProductsTable = ({ isPending }: PropsType) => {
           </button>
         </div>
       ),
-      cell: (info) => info.getValue()
+      cell: (info) => <p className="text-center">{info.getValue()}</p>
     },
     {
       accessorKey: "productType",
@@ -81,7 +84,17 @@ export const getColumnsForBundleProductsTable = ({ isPending }: PropsType) => {
       header: () => <div className="text-center">Remove</div>,
       cell: ({ row }) => {
         const product = row.original;
-        return <Button>Remove</Button>;
+        return (
+          <div className="flex justify-center">
+            <Button
+              variant={"destructive"}
+              className="h-6 text-sm rounded-none"
+              onClick={() => onProductDelete(product.productId)}
+            >
+              Remove
+            </Button>
+          </div>
+        );
       }
     }
   ];
