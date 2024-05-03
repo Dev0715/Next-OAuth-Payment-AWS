@@ -33,7 +33,14 @@ export const BundleItem = ({ bundle }: Props) => {
   return (
     <Link href={`/bundles/${bundle.bundleId}`} passHref>
       <Card className="w-full pr-6 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:drop-shadow transition all ease-out cursor-pointer">
-        <CardHeader>{bundle.title}</CardHeader>
+        <CardHeader>
+          <div className="flex gap-x-4">
+            <p>{bundle.title} </p>
+            <strong>
+              ( {bundle.products?.length} / ${bundle.price} )
+            </strong>
+          </div>
+        </CardHeader>
         <CardContent className="max-w-full w-full flex gap-x-4 overflow-hidden">
           {products.map((product, index) =>
             index < 3 ? (
