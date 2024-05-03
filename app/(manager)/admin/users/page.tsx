@@ -134,7 +134,10 @@ const ManagementUsers = () => {
   };
 
   const onNext = () => {
-    if (lastEvaluatedKey) {
+    const currentPageIndex = table.getState().pagination.pageIndex;
+    const pageCount = table.getPageCount();
+
+    if (currentPageIndex + 1 === pageCount) {
       startTransition(() => {
         getAllUsers(ROWS_PER_PAGE, lastEvaluatedKey?.userId).then((res) => {
           setUsers([...users, ...(res.items as User[])]);
@@ -253,7 +256,7 @@ const ManagementUsers = () => {
               variant="outline"
               size="sm"
               onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
+              disabled={!table.getCanPreviousPage() || isPending}
             >
               Previous
             </Button>
@@ -261,7 +264,7 @@ const ManagementUsers = () => {
               variant="outline"
               size="sm"
               onClick={onNext}
-              disabled={!isNextAvailable()}
+              disabled={!isNextAvailable() || isPending}
             >
               Next
             </Button>
