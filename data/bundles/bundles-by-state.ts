@@ -1,6 +1,6 @@
 "use server";
 
-import { QueryCommand, QueryCommandInput } from "@aws-sdk/lib-dynamodb";
+import { ScanCommand, ScanCommandInput } from "@aws-sdk/lib-dynamodb";
 
 import db from "@/lib/db";
 
@@ -13,9 +13,9 @@ export const getAllBundlesByState = async (
   limit?: number,
   exclusiveStartKey?: string
 ) => {
-  const queryCommand: QueryCommandInput = {
+  const queryCommand: ScanCommandInput = {
     TableName,
-    KeyConditionExpression: "#state = :state",
+    FilterExpression: "#state = :state",
     ExpressionAttributeNames: {
       "#state": "state"
     },
@@ -34,15 +34,17 @@ export const getAllBundlesByState = async (
     };
   }
 
-  const command = new QueryCommand(queryCommand);
+  const command = new ScanCommand(queryCommand);
 
   try {
     const response = await db.send(command);
+    console.log(response);
     return {
       items: response.Items as Bundle[],
       lastEvaluatedKey: response.LastEvaluatedKey
     };
   } catch (error) {
+    console.error(error);
     return {
       items: []
     };
