@@ -1,7 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { FaCartArrowDown, FaToolbox, FaUser } from "react-icons/fa";
+import {
+  FaCartArrowDown,
+  FaLayerGroup,
+  FaToolbox,
+  FaUser
+} from "react-icons/fa";
 import {
   ExitIcon,
   MixerHorizontalIcon,
@@ -120,13 +125,22 @@ export const UserButton = () => {
             </>
           )}
           {userRole.isCustomer && (
-            <Link href="/user">
-              <DropdownMenuItem>
-                <MixerHorizontalIcon className="h-4 w-4 mr-3" />
-                <span>User Settings</span>
-              </DropdownMenuItem>
-            </Link>
+            <>
+              <Link href="/user">
+                <DropdownMenuItem>
+                  <MixerHorizontalIcon className="h-4 w-4 mr-3" />
+                  <span>User Settings</span>
+                </DropdownMenuItem>
+              </Link>
+              <Separator />
+            </>
           )}
+          <Link href="/bundles">
+            <DropdownMenuItem>
+              <FaLayerGroup className="h-4 w-4 mr-3" />
+              <span>Bundles</span>
+            </DropdownMenuItem>
+          </Link>
           <Link href="/cart">
             <DropdownMenuItem>
               <FaCartArrowDown className="h-4 w-4 mr-3" />
