@@ -80,11 +80,11 @@ export default function Products({ params }: ParamsType) {
       <div className="pt-4">
         <p className="text-xl font-semibold">{productCnt} Products</p>
       </div>
-      <div className="w-full flex flex-wrap gap-4 pt-6">
+      <div className="w-full flex flex-wrap pt-6">
         {[...Array(cntPerPage)].map((value, index) => {
           const _index = index + (selectedIndex - 1) * cntPerPage;
           return _index < products.length ? (
-            <div key={index} className="w-1/4">
+            <div key={index} className="w-1/4 p-2">
               <ProductItem product={products[_index]} />
             </div>
           ) : null;
