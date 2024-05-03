@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import {
   ColumnFiltersState,
   SortingState,
@@ -97,6 +97,8 @@ const ManagementUsers = () => {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    autoResetPageIndex: false,
+    autoResetExpanded: false,
     state: {
       sorting,
       columnFilters,
@@ -104,6 +106,17 @@ const ManagementUsers = () => {
       rowSelection
     }
   });
+
+  const isNextAvailable = useMemo(() => {
+    const currentPageIndex = table.getState().pagination.pageIndex;
+    const pageCount = table.getPageCount();
+
+    return lastEvaluatedKey || currentPageIndex + 1 < pageCount;
+  }, [
+    lastEvaluatedKey,
+    table.getState().pagination.pageIndex,
+    table.getPageCount()
+  ]);
 
   const onConfirmOK = () => {
     setConfirmAlert(false);
@@ -126,23 +139,21 @@ const ManagementUsers = () => {
     });
   };
 
-  const isNextAvailable = () => {
-    const currentPageIndex = table.getState().pagination.pageIndex;
-    const pageCount = table.getPageCount();
-
-    return lastEvaluatedKey || currentPageIndex + 1 < pageCount;
-  };
-
   const onNext = () => {
     const currentPageIndex = table.getState().pagination.pageIndex;
     const pageCount = table.getPageCount();
 
+    console.log("currentPageIndex", currentPageIndex);
+    console.log("pageCount", pageCount);
+
     if (currentPageIndex + 1 === pageCount) {
       startTransition(() => {
         getAllUsers(ROWS_PER_PAGE, lastEvaluatedKey?.userId).then((res) => {
-          setUsers([...users, ...(res.items as User[])]);
+          if (res.items?.length) {
+            setUsers([...users, ...(res.items as User[])]);
+            table.nextPage();
+          }
           setLastEvaluatedKey(res.lastEvaluatedKey);
-          table.nextPage();
         });
       });
     } else {
@@ -264,7 +275,7 @@ const ManagementUsers = () => {
               variant="outline"
               size="sm"
               onClick={onNext}
-              disabled={!isNextAvailable() || isPending}
+              disabled={!isNextAvailable || isPending}
             >
               Next
             </Button>
