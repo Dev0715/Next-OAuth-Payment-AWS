@@ -15,7 +15,7 @@ const BundlePage = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col gap-y-6 p-6">
+    <div className="w-full h-full flex flex-col gap-y-6 p-6 bg-gray-100">
       <p className="text-2xl font-semibold">Bundles</p>
       <div className="w-full flex flex-wrap">
         {bundles.map((bundle, index) => (
