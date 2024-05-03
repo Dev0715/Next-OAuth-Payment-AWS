@@ -69,7 +69,13 @@ export const getColumnsForBundlesTable = ({
           )}
         </button>
       ),
-      cell: (info) => <p>{info.getValue()}</p>
+      cell: (info) => (
+        <Button variant={"link"} asChild className="px-0">
+          <Link href={`/bundles/${info.row.original.bundleId}`}>
+            <p>{info.getValue()}</p>
+          </Link>
+        </Button>
+      )
     },
     {
       accessorKey: "userId",
