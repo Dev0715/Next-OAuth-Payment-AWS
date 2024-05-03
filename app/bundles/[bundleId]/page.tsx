@@ -1,5 +1,6 @@
 "use client";
 
+import { ProductItem } from "@/components/product/product-item";
 import { getBundleById } from "@/data/bundles/bundle-by-id";
 import { getProductById } from "@/data/products/product-by-id";
 import { Bundle } from "@/shared/types/bundles.type";
@@ -41,10 +42,26 @@ const BundleDetailPage = ({ params: { bundleId } }: Props) => {
   }
 
   return (
-    <div className="w-full flex flex-col p-6">
-      <p className="text-2xl font-semibold">{bundle.title}</p>
-      <p className="text-md">{bundle.description}</p>
-      {bundle.price && <p className="text-md">Price: ${bundle.price}</p>}
+    <div className="w-full flex flex-col gap-y-6 p-6">
+      <div className="flex flex-col gap-y-4">
+        <p className="text-2xl font-semibold">{bundle.title}</p>
+        <p className="w-1/2 text-md">{bundle.description}</p>
+        {bundle.price && (
+          <p className="text-md">
+            Price: <strong>${bundle.price}</strong>
+          </p>
+        )}
+      </div>
+      <div className="flex flex-col gap-y-4">
+        <p className="text-xl font-medium">Products in this bundel</p>
+        <div className="flex flex-wrap gap-4">
+          {products.map((product) => (
+            <div key={product.productId} className="w-1/4 flex">
+              <ProductItem product={product} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
