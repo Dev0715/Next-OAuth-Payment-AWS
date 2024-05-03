@@ -43,6 +43,8 @@ export const getAllBundlesByState = async (
       lastEvaluatedKey: response.LastEvaluatedKey
     };
   } catch (error) {
-    return [];
+    return {
+      items: []
+    };
   }
 };
