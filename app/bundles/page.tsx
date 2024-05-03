@@ -2,30 +2,68 @@
 
 import { BundleItem } from "@/components/bundles/bundle-item";
 import { Button } from "@/components/ui/button";
-import { getAllBundles } from "@/data/bundles/bundles-all";
+import { getAllBundlesByState } from "@/data/bundles/bundles-by-state";
 import { Bundle } from "@/shared/types/bundles.type";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
+const ROWS_PER_PAGE = 10;
+
 const BundlePage = () => {
+  const [isPending, startTransition] = useTransition();
+
+  const [pageIndex, setPageIndex] = useState<number>(0);
   const [bundles, setBundles] = useState<Bundle[]>([]);
+  const [lastEvaluatedKey, setLastEvaluatedKey] =
+    useState<Record<string, string>>();
 
   useEffect(() => {
-    getAllBundles().then((_bundles) => {
-      setBundles(_bundles);
+    getAllBundlesByState("available", ROWS_PER_PAGE).then((res) => {
+      setBundles(res.items as Bundle[]);
+      setLastEvaluatedKey(res.lastEvaluatedKey);
     });
   }, []);
+
+  const isNextAvailable = useMemo(() => {
+    return (
+      lastEvaluatedKey || pageIndex < Math.floor(bundles.length / ROWS_PER_PAGE)
+    );
+  }, [lastEvaluatedKey, pageIndex, bundles.length]);
+
+  const onNext = () => {
+    startTransition(() => {
+      getAllBundlesByState(
+        "available",
+        ROWS_PER_PAGE,
+        lastEvaluatedKey?.bundleId
+      ).then((res) => {
+        setBundles(res.items as Bundle[]);
+        setLastEvaluatedKey(res.lastEvaluatedKey);
+        setPageIndex(pageIndex + 1);
+      });
+    });
+  };
 
   return (
     <div className="w-full h-full flex flex-col gap-y-6 p-6 bg-gray-100">
       <div className="w-full flex justify-between">
         <p className="text-2xl font-semibold">Bundles</p>
         <div className="flex gap-x-4">
-          <Button variant={"outline"} className="flex gap-x-2">
+          <Button
+            variant={"outline"}
+            className="flex gap-x-2"
+            disabled={pageIndex === 0 || isPending}
+            onClick={() => setPageIndex(pageIndex - 1)}
+          >
             <FaArrowLeft />
             Previous
           </Button>
-          <Button variant={"outline"} className="flex gap-x-2">
+          <Button
+            variant={"outline"}
+            className="flex gap-x-2"
+            disabled={!isNextAvailable || isPending}
+            onClick={onNext}
+          >
             Next
             <FaArrowRight />
           </Button>
