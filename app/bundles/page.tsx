@@ -19,6 +19,7 @@ const BundlePage = () => {
 
   useEffect(() => {
     getAllBundlesByState("available", ROWS_PER_PAGE).then((res) => {
+      console.log(res);
       setBundles(res.items as Bundle[]);
       setLastEvaluatedKey(res.lastEvaluatedKey);
     });
@@ -31,17 +32,23 @@ const BundlePage = () => {
   }, [lastEvaluatedKey, pageIndex, bundles.length]);
 
   const onNext = () => {
-    startTransition(() => {
-      getAllBundlesByState(
-        "available",
-        ROWS_PER_PAGE,
-        lastEvaluatedKey?.bundleId
-      ).then((res) => {
-        setBundles(res.items as Bundle[]);
-        setLastEvaluatedKey(res.lastEvaluatedKey);
-        setPageIndex(pageIndex + 1);
+    if (pageIndex === Math.floor(bundles.length / ROWS_PER_PAGE)) {
+      startTransition(() => {
+        getAllBundlesByState(
+          "available",
+          ROWS_PER_PAGE,
+          lastEvaluatedKey?.bundleId
+        ).then((res) => {
+          if (res.items.length) {
+            setBundles([...bundles, ...(res.items as Bundle[])]);
+            setPageIndex(pageIndex + ROWS_PER_PAGE);
+          }
+          setLastEvaluatedKey(res.lastEvaluatedKey);
+        });
       });
-    });
+    } else {
+      setPageIndex(pageIndex + ROWS_PER_PAGE);
+    }
   };
 
   return (
