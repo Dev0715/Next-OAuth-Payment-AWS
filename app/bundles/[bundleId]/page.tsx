@@ -1,6 +1,7 @@
 "use client";
 
 import { getBundleById } from "@/data/bundles/bundle-by-id";
+import { getProductById } from "@/data/products/product-by-id";
 import { Bundle } from "@/shared/types/bundles.type";
 import { useEffect, useState } from "react";
 
@@ -16,6 +17,13 @@ const BundleDetailPage = ({ params: { bundleId } }: Props) => {
   useEffect(() => {
     getBundleById(bundleId).then((res) => {
       setBundle(res || undefined);
+      res?.products?.map((productLink) => {
+        getProductById(productLink.productType, productLink.productId).then(
+          (product) => {
+            console.log(product);
+          }
+        );
+      });
     });
   }, []);
 
@@ -25,7 +33,9 @@ const BundleDetailPage = ({ params: { bundleId } }: Props) => {
 
   return (
     <div className="w-full flex flex-col p-6">
-      <p>Bundle Detail Page</p>
+      <p className="text-2xl font-semibold">{bundle.title}</p>
+      <p className="text-md">{bundle.description}</p>
+      {bundle.price && <p className="text-md">Price: ${bundle.price}</p>}
     </div>
   );
 };
