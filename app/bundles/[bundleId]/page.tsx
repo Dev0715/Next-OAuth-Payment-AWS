@@ -3,6 +3,7 @@
 import { getBundleById } from "@/data/bundles/bundle-by-id";
 import { getProductById } from "@/data/products/product-by-id";
 import { Bundle } from "@/shared/types/bundles.type";
+import { Product } from "@/shared/types/product.type";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -13,17 +14,25 @@ type Props = {
 
 const BundleDetailPage = ({ params: { bundleId } }: Props) => {
   const [bundle, setBundle] = useState<Bundle>();
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     getBundleById(bundleId).then((res) => {
       setBundle(res || undefined);
-      res?.products?.map((productLink) => {
-        getProductById(productLink.productType, productLink.productId).then(
-          (product) => {
-            console.log(product);
-          }
-        );
-      });
+      if (res?.products?.length) {
+        Promise.all(
+          res.products.map(async (productLink) => {
+            return await getProductById(
+              productLink.productType,
+              productLink.productId
+            );
+          })
+        ).then((products) => {
+          setProducts(
+            products.filter((product) => product !== null) as Product[]
+          );
+        });
+      }
     });
   }, []);
 
