@@ -51,6 +51,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           ...token,
           email: token.email as string
         };
+        if (session.user.password) {
+          delete session.user.password;
+        }
+        if (session.user.verificationToken) {
+          delete session.user.verificationToken;
+        }
       }
       return session;
     },
