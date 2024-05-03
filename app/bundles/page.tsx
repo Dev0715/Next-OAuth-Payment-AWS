@@ -27,12 +27,13 @@ const BundlePage = () => {
 
   const isNextAvailable = useMemo(() => {
     return (
-      lastEvaluatedKey || pageIndex < Math.floor(bundles.length / ROWS_PER_PAGE)
+      lastEvaluatedKey ||
+      pageIndex + 1 < Math.ceil(bundles.length / ROWS_PER_PAGE)
     );
   }, [lastEvaluatedKey, pageIndex, bundles.length]);
 
   const onNext = () => {
-    if (pageIndex === Math.floor(bundles.length / ROWS_PER_PAGE)) {
+    if (pageIndex + 1 === Math.ceil(bundles.length / ROWS_PER_PAGE)) {
       startTransition(() => {
         getAllBundlesByState(
           "available",
@@ -41,13 +42,13 @@ const BundlePage = () => {
         ).then((res) => {
           if (res.items.length) {
             setBundles([...bundles, ...(res.items as Bundle[])]);
-            setPageIndex(pageIndex + ROWS_PER_PAGE);
+            setPageIndex(pageIndex + 1);
           }
           setLastEvaluatedKey(res.lastEvaluatedKey);
         });
       });
     } else {
-      setPageIndex(pageIndex + ROWS_PER_PAGE);
+      setPageIndex(pageIndex + 1);
     }
   };
 
@@ -77,14 +78,17 @@ const BundlePage = () => {
         </div>
       </div>
       <div className="w-full flex flex-wrap">
-        {bundles.map((bundle, index) => (
-          <div
-            className={`w-1/2 pb-6 ${index % 2 === 0 ? "pr-3" : "pl-3"}`}
-            key={bundle.bundleId}
-          >
-            <BundleItem bundle={bundle} />
-          </div>
-        ))}
+        {bundles.map((bundle, index) =>
+          index >= pageIndex * ROWS_PER_PAGE &&
+          index < (pageIndex + 1) * ROWS_PER_PAGE ? (
+            <div
+              className={`w-1/2 pb-6 ${index % 2 === 0 ? "pr-3" : "pl-3"}`}
+              key={bundle.bundleId}
+            >
+              <BundleItem bundle={bundle} />
+            </div>
+          ) : null
+        )}
       </div>
     </div>
   );
