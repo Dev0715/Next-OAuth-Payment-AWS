@@ -12,9 +12,10 @@ import type { Product, ProductState } from "@/shared/types/product.type";
 interface PropsParams {
   product: Product;
   _url?: string;
+  noBadge?: boolean;
 }
 
-export const ProductItem = ({ product, _url }: PropsParams) => {
+export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
   const [imagePath, setImagePath] = useState<string>("");
 
   useEffect(() => {
@@ -58,13 +59,15 @@ export const ProductItem = ({ product, _url }: PropsParams) => {
       className="w-full"
     >
       <Card className="relative w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100 hover:translate-x-[-1px] hover:translate-y-[-1px]">
-        <div className="absolute top-2 right-2 z-10">
-          <p
-            className={`text-sm px-2 bg-black/40 rounded-full ${stateClassName()}`}
-          >
-            {stateText()}
-          </p>
-        </div>
+        {!noBadge && (
+          <div className="absolute top-2 right-2 z-10">
+            <p
+              className={`text-sm px-2 bg-black/40 rounded-full ${stateClassName()}`}
+            >
+              {stateText()}
+            </p>
+          </div>
+        )}
         <CardContent className="w-full p-0 flex flex-col gap-y-4">
           <Avatar className="w-full h-56 rounded-none">
             <AvatarImage src={imagePath} className="object-fill aspect-auto" />
