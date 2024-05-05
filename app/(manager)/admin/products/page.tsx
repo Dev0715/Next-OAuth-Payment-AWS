@@ -33,12 +33,15 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { Navbar } from "../_components/navbar";
-
 import type { Product } from "@/shared/types/product.type";
+
+const ROWS_PER_PAGE = 10;
 
 export default function Approval() {
   const [isPending, startTransition] = useTransition();
   const [products, setProducts] = useState<Product[]>([]);
+  const [lastEvaluatedKey, setLastEvaluatedKey] =
+    useState<Record<string, string>>();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -46,13 +49,14 @@ export default function Approval() {
   const [rowSelection, setRowSelection] = useState({});
 
   useEffect(() => {
-    getAllProducts().then((res) => {
-      setProducts(res.items);
+    getAllProducts(ROWS_PER_PAGE).then((res) => {
+      setProducts(res.items as Product[]);
+      setLastEvaluatedKey(res.lastEvaluatedKey);
+      table.setPageSize(ROWS_PER_PAGE);
     });
   }, []);
 
   const columns = getColumnsForProductsTable({ isPending });
-
   const table = useReactTable({
     data: products,
     columns,
@@ -64,6 +68,8 @@ export default function Approval() {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    autoResetPageIndex: false,
+    autoResetExpanded: false,
     state: {
       sorting,
       columnFilters,
