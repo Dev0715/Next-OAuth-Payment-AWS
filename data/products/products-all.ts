@@ -38,7 +38,8 @@ export const getAllProducts = async (
   try {
     const response = await db.send(command);
     return {
-      items: response.Items as Product[]
+      items: response.Items as Product[],
+      lastEvaluatedKey: response.LastEvaluatedKey
     };
   } catch (error) {
     return {
