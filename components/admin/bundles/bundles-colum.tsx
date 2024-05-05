@@ -98,7 +98,9 @@ export const getColumnsForBundlesTable = ({
       accessorKey: "description",
       header: () => <div className="text-left">Description</div>,
       cell: (info) => (
-        <div className="text-left font-medium">{info.getValue()}</div>
+        <p className="h-5 text-left font-medium overflow-hidden text-ellipsis">
+          {info.getValue()}
+        </p>
       )
     },
     {
