@@ -3,13 +3,13 @@
 import { ScanCommand, ScanCommandInput } from "@aws-sdk/lib-dynamodb";
 
 import db from "@/lib/db";
-import type { Product } from "@/shared/types/product.type";
+import type { Product, ProductLink } from "@/shared/types/product.type";
 
 const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
 
 export const getAllProducts = async (
   limit?: number,
-  exclusiveStartKey?: string
+  exclusiveStartKey?: ProductLink
 ) => {
   const scanCommandInput: ScanCommandInput = {
     TableName
@@ -25,7 +25,7 @@ export const getAllProducts = async (
 
   if (exclusiveStartKey) {
     scanCommandInput.ExclusiveStartKey = {
-      bundleId: exclusiveStartKey as string
+      ...exclusiveStartKey
     };
   }
 
