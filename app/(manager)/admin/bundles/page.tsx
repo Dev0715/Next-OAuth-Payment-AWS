@@ -93,6 +93,36 @@ const ManagementBundles = () => {
     }
   });
 
+  const isNextAvailable = useMemo(() => {
+    const currentPageIndex = table.getState().pagination.pageIndex;
+    const pageCount = table.getPageCount();
+
+    return lastEvaluatedKey || currentPageIndex + 1 < pageCount;
+  }, [
+    lastEvaluatedKey,
+    table.getState().pagination.pageIndex,
+    table.getPageCount()
+  ]);
+
+  const onNext = () => {
+    const currentPageIndex = table.getState().pagination.pageIndex;
+    const pageCount = table.getPageCount();
+
+    if (currentPageIndex + 1 === pageCount) {
+      startTransition(() => {
+        getAllBundles(ROWS_PER_PAGE, lastEvaluatedKey?.bundleId).then((res) => {
+          if (res.items?.length) {
+            setBundles([...bundles, ...(res.items as Bundle[])]);
+            table.nextPage();
+          }
+          setLastEvaluatedKey(res.lastEvaluatedKey);
+        });
+      });
+    } else {
+      table.nextPage();
+    }
+  };
+
   return (
     <div className="w-full flex flex-col gap-y-6">
       <Navbar title="Bundles" content="You can manage bundles" />
