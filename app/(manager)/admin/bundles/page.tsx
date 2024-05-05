@@ -36,12 +36,15 @@ import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
 import { deleteBundle } from "@/data/bundles/bundle-delete";
 import { toast } from "sonner";
-
 import type { Bundle } from "@/shared/types/bundles.type";
+
+const ROWS_PER_PAGE = 10;
 
 const ManagementBundles = () => {
   const [isPending, startTransition] = useTransition();
   const [bundles, setBundles] = useState<Bundle[]>([]);
+  const [lastEvaluatedKey, setLastEvaluatedKey] =
+    useState<Record<string, string>>();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -49,8 +52,10 @@ const ManagementBundles = () => {
   const [rowSelection, setRowSelection] = useState({});
 
   useEffect(() => {
-    getAllBundles().then((res) => {
-      setBundles(res);
+    getAllBundles(ROWS_PER_PAGE).then((res) => {
+      setBundles(res.items as Bundle[]);
+      setLastEvaluatedKey(res.lastEvaluatedKey);
+      table.setPageSize(ROWS_PER_PAGE);
     });
   }, []);
 
