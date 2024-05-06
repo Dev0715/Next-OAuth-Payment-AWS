@@ -52,7 +52,7 @@ export type User = {
   userId: string;
   username: string;
   email: string;
-  password: string;
+  password?: string;
 
   firstname: string;
   lastname?: string;
