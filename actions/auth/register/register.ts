@@ -9,11 +9,13 @@ import bcrypt from "bcryptjs";
 export const register = async (values: any) => {
   // Check whether username selected is available
   const response = await getAllUsernames();
-  const similarId = response.items.find((item: { username: string }) =>
-    item.username.includes(values.username)
-  );
-  if (similarId) {
-    return { error: "Same Username Already Exists!" };
+  if (response.items) {
+    const similarId = response.items.find((item) =>
+      item.username.includes(values.username)
+    );
+    if (similarId) {
+      return { error: "Same Username Already Exists!" };
+    }
   }
 
   const { email, password } = values;
