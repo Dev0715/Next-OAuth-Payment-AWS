@@ -57,7 +57,7 @@ export const UserButton = () => {
     if (!cart) {
       getUserById(user.userId).then((res) => {
         if (res) {
-          setCart(res?.customer.cart || []);
+          setCart(res?.customer?.cart || []);
         }
       });
     }

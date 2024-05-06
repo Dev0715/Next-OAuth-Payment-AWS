@@ -220,7 +220,7 @@ export const ProductAddForm = () => {
       }
 
       const response = await addNewProduct(user?.userId as string, {
-        productType: form.getValues().productType,
+        productType: form.getValues().productType as ProductType,
         productId
       });
 
