@@ -33,7 +33,7 @@ import { orderListAtom } from "@/store/orderList";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 
-export const PaymentForm = ({ onCancel }: { onCancel: () => void }) => {
+export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
   const Option_Paypal = "option-paypal";
   const Option_Stripe = "option-stripe";
 

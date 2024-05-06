@@ -2,7 +2,14 @@
 
 import { Separator } from "@/components/ui/separator";
 import { Header } from "../_components/header";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel
+} from "@/components/ui/form";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,30 +22,27 @@ import { Button } from "@/components/ui/button";
 import { SwitchBox } from "@/components/utils/switch-box";
 
 const AffiliateSettings = () => {
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
+  // const [error, setError] = useState<string | undefined>("");
+  // const [success, setSuccess] = useState<string | undefined>("");
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [isPending, startTransition] = useTransition();
+  // const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof ProfileSchema>>({
-    resolver: zodResolver(ProfileSchema),
-    defaultValues: {
-      isCreator: false,
-      isAffiliate: false,
-      isCustomer: false,
-      username: "",
-      bio: "",
-    }
-  });
+  // const form = useForm<z.infer<typeof ProfileSchema>>({
+  //   resolver: zodResolver(ProfileSchema),
+  //   defaultValues: {
+  //     username: "",
+  //     bio: ""
+  //   }
+  // });
 
-  const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
-    setError("");
-    setSuccess("");
+  // const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
+  //   setError("");
+  //   setSuccess("");
 
-    startTransition(() => {
-      // save the user's profile
-    });
-  };
+  //   startTransition(() => {
+  //     // save the user's profile
+  //   });
+  // };
 
   return (
     <main className="w-full pl-8 flex flex-col gap-y-5">
@@ -48,10 +52,9 @@ const AffiliateSettings = () => {
         title="Start an Affiliate's life"
         content="You can join as an affiliate and get an extra benefits"
         isChecked={isChecked}
-        setIsChecked={setIsChecked}
       />
     </main>
-  )
+  );
 };
 
 export default AffiliateSettings;
