@@ -7,7 +7,6 @@ import { auth } from "@/auth";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "./_components/header";
-import { Footer } from "./_components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
