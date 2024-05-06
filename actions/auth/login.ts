@@ -34,6 +34,10 @@ export const login = async (
       expires: new Date(new Date().getTime() + 3600 * 1000)
     });
 
+    if (!updatedUser) {
+      return { error: "Could not update user!" };
+    }
+
     const response = await sendVerificationEmail(
       updatedUser.email,
       updatedUser.verificationToken
