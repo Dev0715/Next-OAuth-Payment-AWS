@@ -10,8 +10,7 @@ const dbClient = new DynamoDBClient({
 });
 const docClient = DynamoDBDocumentClient.from(dbClient);
 
-const db = (globalThis.docClient || docClient) as DynamoDBClient;
+// const db = (globalThis.docClient || docClient) as DynamoDBClient;
+// if (process.env.NODE_ENV !== "production") globalThis.docClient = docClient;
 
-if (process.env.NODE_ENV !== "production") globalThis.docClient = docClient;
-
-export default db;
+export default docClient;

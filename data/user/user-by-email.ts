@@ -20,7 +20,7 @@ export const getUserByEmail = async (email: string) => {
 
   try {
     const response = await db.send(command);
-    if (response.Count) return response.Items[0];
+    if (response.Count && response.Items) return response.Items[0];
     else return null;
   } catch (error) {
     return null;
