@@ -1,9 +1,14 @@
 import React from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <h2>You have no access to this page</h2>
+    <div className="w-full h-full flex flex-col items-center justify-center">
+      <h2 className="font-semibold">You are forbidden to access this page.</h2>
+      <Button variant={"link"}>
+        <Link href="/">Go back home</Link>
+      </Button>
     </div>
   );
 };
