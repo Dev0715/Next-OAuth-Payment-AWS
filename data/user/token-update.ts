@@ -28,10 +28,8 @@ export const updateUserToken = async (data: UserSetToken) => {
 
   try {
     const response = await db.send(command);
-    console.log("__updateUserToken__UpdateCommand__RESPONSE", response);
     return response.Attributes;
   } catch (error) {
-    console.log("__updateUserToken__UpdateCommand__ERROR", error);
     return null;
   }
 };
