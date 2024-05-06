@@ -15,7 +15,7 @@ export const addProductToCart = async ({ userId, product }: ParamsType) => {
     return { error: "Internal server error" };
   }
 
-  const products: ProductLink[] = existingUser.products || [];
+  const products: ProductLink[] = existingUser.creator?.products || [];
   const ownProduct = products.find(
     (_product) => _product.productId === product.productId
   );
@@ -23,7 +23,7 @@ export const addProductToCart = async ({ userId, product }: ParamsType) => {
     return { error: "You can't move your own product to your cart" };
   }
 
-  const cart: ProductLink[] = existingUser.cart || [];
+  const cart: ProductLink[] = existingUser.customer?.cart || [];
   const existingOne = cart.find(
     (_product) => _product.productId === product.productId
   );
@@ -31,7 +31,8 @@ export const addProductToCart = async ({ userId, product }: ParamsType) => {
     return { error: "It's already in your cart" };
   }
 
-  const purchasedProducts: ProductLink[] = existingUser.purchasedProducts || [];
+  const purchasedProducts: ProductLink[] =
+    existingUser.customer?.purchases || [];
   const existingProduct = purchasedProducts.find(
     (_product) => _product.productId === product.productId
   );
