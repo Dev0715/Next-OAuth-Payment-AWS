@@ -91,9 +91,9 @@ export const getColumnsForUsersTable = ({
         const user = row.original;
 
         const roles: string[] = [];
-        if (user.creator) roles.push("Creator");
-        if (user.customer) roles.push("Customer");
-        if (user.affiliate) roles.push("Affiliate");
+        if (user.creator?.isCreator) roles.push("Creator");
+        if (user.customer?.isCustomer) roles.push("Customer");
+        if (user.affiliate?.isAffiliate) roles.push("Affiliate");
 
         return (
           <div className="flex flex-wrap items-center justify-center gap-1">
