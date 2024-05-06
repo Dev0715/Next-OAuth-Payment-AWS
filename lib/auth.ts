@@ -9,5 +9,10 @@ export const currentUser = async () => {
 export const currentRole = async () => {
   const session = await auth();
 
-  return session?.user?.role;
+  return {
+    isManager: session?.user?.manager?.isManager || false,
+    isCreator: session?.user.creator?.isCreator || false,
+    isCustomer: session?.user.customer?.isCustomer || false,
+    isAffiliate: session?.user.affiliate?.isAffiliate || false
+  };
 };
