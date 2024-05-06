@@ -6,17 +6,15 @@ export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname;
   const role = await currentRole();
 
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    pathname.startsWith("/forbidden")
-  ) {
-    return NextResponse.next();
-  }
+  // if (isGlobalPath(pathname)) {
+  //   return NextResponse.next();
+  // }
 
-  if (pathname.startsWith("/admin") && !role.isManager) {
-    return NextResponse.redirect(new URL("/forbidden", request.url));
-  } else if (!pathname.startsWith("/admin") && role.isManager) {
+  if (
+    (isManagerPath(pathname) && !role.isManager) ||
+    (isCreatorPath(pathname) && !role.isCreator) ||
+    (isCustomerPath(pathname) && !role.isCustomer)
+  ) {
     return NextResponse.redirect(new URL("/forbidden", request.url));
   }
 
@@ -25,4 +23,28 @@ export const middleware = async (request: NextRequest) => {
 
 // export const config = {
 //   matcher: "/admin/:path*"
+// };
+
+// const isGlobalPath = (pathname: string) => {
+//   return (
+//     pathname.startsWith("/_next") ||
+//     pathname.startsWith("/api") ||
+//     pathname.startsWith("/forbidden")
+//   );
+// };
+
+const isManagerPath = (pathname: string) => {
+  return pathname.startsWith("/admin");
+};
+
+const isCreatorPath = (pathname: string) => {
+  return pathname.startsWith("/creator");
+};
+
+const isCustomerPath = (pathname: string) => {
+  return pathname.startsWith("/cart") || pathname.startsWith("/user");
+};
+
+// const isAffiliatePath = (pathname: string) => {
+//   return pathname.startsWith("/affiliate");
 // };
