@@ -34,9 +34,9 @@ export default function Products({ params }: ParamsType) {
       }
     });
     getProductsByType(params.productType, cntPerPage).then((res) => {
-      setProducts(res.items);
+      setProducts(res.items as Product[]);
       if (res.lastEvaluatedKey) {
-        setLastEvaluatedKey(res.lastEvaluatedKey);
+        setLastEvaluatedKey(res.lastEvaluatedKey as ProductLink);
       }
     });
   }, []);
@@ -51,9 +51,9 @@ export default function Products({ params }: ParamsType) {
     if (newIndex > products.length / cntPerPage) {
       getProductsByType(params.productType, cntPerPage, lastEvaluatedKey).then(
         (res) => {
-          setProducts([...products, ...res.items]);
+          setProducts([...products, ...(res.items as Product[])]);
           if (res.lastEvaluatedKey) {
-            setLastEvaluatedKey(res.lastEvaluatedKey);
+            setLastEvaluatedKey(res.lastEvaluatedKey as ProductLink);
           }
         }
       );
