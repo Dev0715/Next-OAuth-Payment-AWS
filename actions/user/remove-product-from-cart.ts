@@ -1,7 +1,6 @@
 "use server";
 
 import { getUserById } from "@/data/user/user-by-id";
-import { updateUserProducts } from "@/data/user/products-update";
 import { updateUserCart } from "@/data/user/cart-update";
 import type { ProductLink } from "@/shared/types/product.type";
 
@@ -19,7 +18,7 @@ export const removeProductFromCart = async ({
     return { error: "Internal server error" };
   }
 
-  const cart = existingUser.cart || [];
+  const cart = existingUser.customer?.cart || [];
   const newCart = cart.filter(
     (item: ProductLink) => item.productId !== product.productId
   );

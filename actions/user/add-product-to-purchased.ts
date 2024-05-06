@@ -15,7 +15,7 @@ export const addProductToPurchased = async ({ userId, products }: Params) => {
     return { error: "Internal server error" };
   }
 
-  const purchasedProducts = existingUser.purchasedProducts || [];
+  const purchasedProducts = existingUser.customer?.purchases || [];
 
   const response = await updateUserPurchased({
     userId,
