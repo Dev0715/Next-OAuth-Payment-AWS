@@ -18,6 +18,10 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/forbidden", request.url));
   }
 
+  if (isNotManagerPath(pathname) && role.isManager) {
+    return NextResponse.redirect(new URL("/forbidden", request.url));
+  }
+
   return NextResponse.next();
 };
 
@@ -37,6 +41,14 @@ const isManagerPath = (pathname: string) => {
   return pathname.startsWith("/admin");
 };
 
+const isNotManagerPath = (pathname: string) => {
+  return (
+    isCreatorPath(pathname) ||
+    isCustomerPath(pathname) ||
+    isAffiliatePath(pathname)
+  );
+};
+
 const isCreatorPath = (pathname: string) => {
   return pathname.startsWith("/creator");
 };
@@ -45,6 +57,7 @@ const isCustomerPath = (pathname: string) => {
   return pathname.startsWith("/cart") || pathname.startsWith("/user");
 };
 
-// const isAffiliatePath = (pathname: string) => {
-//   return pathname.startsWith("/affiliate");
-// };
+const isAffiliatePath = (pathname: string) => {
+  // return pathname.startsWith("/affiliate");
+  return false;
+};
