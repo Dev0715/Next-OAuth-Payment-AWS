@@ -27,7 +27,9 @@ export default async function RootLayout({
       <JotaiProvider>
         <html lang="en">
           <Toaster />
-          <body className={inter.className}>
+          <body
+            className={`${inter.className} w-full h-full flex flex-col items-center`}
+          >
             <Header />
             {children}
           </body>
