@@ -27,8 +27,8 @@ export default function Cart() {
   useEffect(() => {
     let ignore = false;
     getUserById(user?.userId as string).then((user) => {
-      if (!ignore && user && user.cart) {
-        user.cart.map((product: ProductInfo) => {
+      if (!ignore && user && user.customer?.cart) {
+        user.customer.cart.map((product: ProductInfo) => {
           getProductById(product.productType, product.productId).then((res) => {
             if (res) {
               setProducts((prev) => [...prev, { ...res, selected: false }]);
