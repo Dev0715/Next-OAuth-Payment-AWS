@@ -2,16 +2,16 @@
 
 import { getUserById } from "@/data/user/user-by-id";
 import { updateUserProducts } from "@/data/user/products-update";
+import { ProductLink } from "@/shared/types/product.type";
 
-type ParamsType = {
-  productType: string;
-  productId: string;
-};
-
-export const addNewProduct = async (userId: string, product: ParamsType) => {
+export const addNewProduct = async (userId: string, product: ProductLink) => {
   const existingUser = await getUserById(userId);
   if (!existingUser || !existingUser.email) {
     return { error: "Internal server error" };
+  }
+
+  if (!existingUser.creator) {
+    return { error: "User is not a creator" };
   }
 
   const creatorData = existingUser.creator;
