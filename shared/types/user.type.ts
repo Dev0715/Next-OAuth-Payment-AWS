@@ -63,7 +63,7 @@ export type User = {
   phone1?: string;
   phone2?: string;
 
-  address: Address;
+  address?: Address;
 
   creator?: CreatorData;
   customer?: CustomerData;
