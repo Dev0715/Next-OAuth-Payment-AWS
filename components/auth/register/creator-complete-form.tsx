@@ -84,20 +84,14 @@ export const CreatorCompleteForm = ({
       };
     }
 
-    try {
-      const response = await register(user);
-      setConfirmOpen(true);
-      if (response.success) {
-        setConfirmTitle("Success");
-        setConfirmMessage("A new creator was newly registerd!");
-      } else {
-        setConfirmTitle("Error");
-        setConfirmMessage(response.error as string);
-      }
-    } catch (error) {
-      setConfirmOpen(true);
+    const response = await register(user);
+    setConfirmOpen(true);
+    if (response.success) {
+      setConfirmTitle("Success");
+      setConfirmMessage("A new creator was newly registerd!");
+    } else {
       setConfirmTitle("Error");
-      setConfirmMessage("Internal Server Error!");
+      setConfirmMessage(response.error as string);
     }
   };
 
