@@ -45,17 +45,16 @@ export const SelectAccountsSchema = z.object({
 
 export const CreatorDetailsSchema = z.object({
   cover: z.instanceof(File).optional(),
-  bio: z
-    .string()
-    .min(6, "Bio should be at least 6 characters long")
-    .max(1024, "Bio must be a maximum of 1024 characters"),
+  bio: z.string().optional(),
+  // .min(6, "Bio should be at least 6 characters long")
+  // .max(1024, "Bio must be a maximum of 1024 characters"),
   jobTitle: z.string().min(1, "Type of user is required"),
   companyName: z.string().optional(),
   companyCountry: z.string().optional(),
-  companyWebsite: z.string().optional(),
-  website1: z.string().optional(),
-  website2: z.string().optional(),
-  website3: z.string().optional(),
-  website4: z.string().optional(),
-  website5: z.string().optional()
+  companyWebsite: z.string().optional()
+  // website1: z.string().optional(),
+  // website2: z.string().optional(),
+  // website3: z.string().optional(),
+  // website4: z.string().optional(),
+  // website5: z.string().optional()
 });
