@@ -13,7 +13,6 @@ import { FormSuccess } from "@/components/utils/form-success";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -34,7 +33,7 @@ export default function Profile() {
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
       username: "",
-      bio: "",
+      bio: ""
     }
   });
 
@@ -44,12 +43,16 @@ export default function Profile() {
 
     startTransition(() => {
       // save the user's profile
+      console.log(values);
     });
   };
 
   return (
     <main className="w-full pl-8 flex flex-col gap-y-5">
-      <Header title="General Profile" content="You can see your roles opened here" />
+      <Header
+        title="General Profile"
+        content="You can see your roles opened here"
+      />
       <Separator />
       <div className="w-full flex flex-col gap-y-4">
         <h3 className="text-base font-medium">Your roles opened</h3>
@@ -75,7 +78,10 @@ export default function Profile() {
         </div>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/2 flex flex-col gap-y-6">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-1/2 flex flex-col gap-y-6"
+        >
           <FormField
             control={form.control}
             name="username"
@@ -114,6 +120,6 @@ export default function Profile() {
           </Button>
         </form>
       </Form>
-    </main >
+    </main>
   );
-};
+}
