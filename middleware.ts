@@ -10,7 +10,7 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (!role.isAuthenticated && isRolePath(pathname)) {
+  if (!role.isAuthenticated && isAuthenticatedPath(pathname)) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
@@ -31,6 +31,15 @@ export const middleware = async (request: NextRequest) => {
 
 const isAuthPath = (pathname: string) => {
   return pathname.startsWith("/auth");
+};
+
+const isAuthenticatedPath = (pathname: string) => {
+  return isRolePath(pathname) || isUserPath(pathname);
+};
+
+// ## Authenticated User
+const isUserPath = (pathname: string) => {
+  return pathname.startsWith("/user");
 };
 
 const isRolePath = (pathname: string) => {
@@ -59,7 +68,7 @@ const isCreatorPath = (pathname: string) => {
 };
 
 const isCustomerPath = (pathname: string) => {
-  return pathname.startsWith("/cart") || pathname.startsWith("/user");
+  return pathname.startsWith("/cart");
 };
 
 const isAffiliatePath = (pathname: string) => {
