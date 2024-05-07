@@ -25,16 +25,16 @@ export const getUserFromGeneralDetails = async (
     email: generalDetails.email,
     password: generalDetails.password,
     firstname: generalDetails.firstname,
-    lastname: generalDetails.lastname,
-    address: {
-      address1: generalDetails.address1,
-      address2: generalDetails.address2,
-      city: generalDetails.city,
-      postal: generalDetails.postal,
-      country: generalDetails.country
-    },
-    phone1: generalDetails.phone1,
-    phone2: generalDetails.phone2
+    lastname: generalDetails.lastname
+    // address: {
+    //   address1: generalDetails.address1,
+    //   address2: generalDetails.address2,
+    //   city: generalDetails.city,
+    //   postal: generalDetails.postal,
+    //   country: generalDetails.country
+    // },
+    // phone1: generalDetails.phone1,
+    // phone2: generalDetails.phone2
   };
 
   if (generalDetails.avatar) {
