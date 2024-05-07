@@ -52,7 +52,7 @@ export default function EditCreator({
     ""
   );
 
-  const [cover, setCover] = useState<File | null>();
+  const [, setCover] = useState<File | null>();
   const [coverImagePath, setCoverImagePath] = useState<string | undefined>("");
 
   const isDisabled = () => {

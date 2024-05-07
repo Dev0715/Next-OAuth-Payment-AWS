@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaCcStripe, FaPaypal, FaStripe, FaUser } from "react-icons/fa";
+import { FaCcStripe, FaPaypal, FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/auth/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { useCurrentUser } from "@/hooks/use-current-user";
