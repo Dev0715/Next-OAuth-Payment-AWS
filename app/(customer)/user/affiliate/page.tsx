@@ -6,7 +6,7 @@ import { SwitchBox } from "@/components/utils/switch-box";
 const AffiliateSettings = () => {
   // const [error, setError] = useState<string | undefined>("");
   // const [success, setSuccess] = useState<string | undefined>("");
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked] = useState<boolean>(false);
   // const [isPending, startTransition] = useTransition();
 
   // const form = useForm<z.infer<typeof ProfileSchema>>({

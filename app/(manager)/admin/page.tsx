@@ -1,5 +1,3 @@
-import { SideNavBar } from "@/components/admin/utils/side-navbar";
-
 const AdminPanel = () => {
   return (
     <div className="w-fit h-full flex justify-start">
