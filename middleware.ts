@@ -6,9 +6,9 @@ export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname;
   const role = await currentRole();
 
-  // if (isGlobalPath(pathname)) {
-  //   return NextResponse.next();
-  // }
+  if (isRolePath(pathname) && !role.isAuthenticated) {
+    return NextResponse.redirect(new URL("/auth/login", request.url));
+  }
 
   if (
     (isManagerPath(pathname) && !role.isManager) ||
@@ -25,17 +25,14 @@ export const middleware = async (request: NextRequest) => {
   return NextResponse.next();
 };
 
-// export const config = {
-//   matcher: "/admin/:path*"
-// };
-
-// const isGlobalPath = (pathname: string) => {
-//   return (
-//     pathname.startsWith("/_next") ||
-//     pathname.startsWith("/api") ||
-//     pathname.startsWith("/forbidden")
-//   );
-// };
+const isRolePath = (pathname: string) => {
+  return (
+    isManagerPath(pathname) ||
+    isCreatorPath(pathname) ||
+    isCustomerPath(pathname) ||
+    isAffiliatePath(pathname)
+  );
+};
 
 const isManagerPath = (pathname: string) => {
   return pathname.startsWith("/admin");
