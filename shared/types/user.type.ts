@@ -13,7 +13,7 @@ export type Address = {
 };
 
 export type Company = {
-  name: string;
+  name?: string;
   country?: string;
   website?: string;
 };
@@ -22,7 +22,7 @@ export type CreatorData = {
   isCreator: boolean;
   creatorId: string;
   cover?: string;
-  bio: string;
+  bio?: string;
   jobTitle: string;
   company?: Company;
   websites?: string[];
