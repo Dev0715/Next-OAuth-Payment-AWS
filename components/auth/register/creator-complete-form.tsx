@@ -57,18 +57,18 @@ export const CreatorCompleteForm = ({
       };
     }
 
-    if (user.creator?.websites) {
-      if (userData.creatorDetails.website1)
-        user.creator.websites.push(userData.creatorDetails.website1);
-      if (userData.creatorDetails.website2)
-        user.creator.websites.push(userData.creatorDetails.website2);
-      if (userData.creatorDetails.website3)
-        user.creator.websites.push(userData.creatorDetails.website3);
-      if (userData.creatorDetails.website4)
-        user.creator.websites.push(userData.creatorDetails.website4);
-      if (userData.creatorDetails.website5)
-        user.creator.websites.push(userData.creatorDetails.website5);
-    }
+    // if (user.creator?.websites) {
+    //   if (userData.creatorDetails.website1)
+    //     user.creator.websites.push(userData.creatorDetails.website1);
+    //   if (userData.creatorDetails.website2)
+    //     user.creator.websites.push(userData.creatorDetails.website2);
+    //   if (userData.creatorDetails.website3)
+    //     user.creator.websites.push(userData.creatorDetails.website3);
+    //   if (userData.creatorDetails.website4)
+    //     user.creator.websites.push(userData.creatorDetails.website4);
+    //   if (userData.creatorDetails.website5)
+    //     user.creator.websites.push(userData.creatorDetails.website5);
+    // }
 
     if (userData.selectedAccounts.user) {
       user.customer = {
