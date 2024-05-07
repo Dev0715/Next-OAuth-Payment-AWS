@@ -10,6 +10,7 @@ export const currentRole = async () => {
   const session = await auth();
 
   return {
+    isAuthenticated: session?.user || false,
     isManager: session?.user?.manager?.isManager || false,
     isCreator: session?.user.creator?.isCreator || false,
     isCustomer: session?.user.customer?.isCustomer || false,
