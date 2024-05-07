@@ -6,23 +6,31 @@ export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname;
   const role = await currentRole();
 
-  if (isRolePath(pathname) && !role.isAuthenticated) {
+  if (role.isAuthenticated && isAuthPath(pathname)) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (!role.isAuthenticated && isRolePath(pathname)) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
   if (
-    (isManagerPath(pathname) && !role.isManager) ||
-    (isCreatorPath(pathname) && !role.isCreator) ||
-    (isCustomerPath(pathname) && !role.isCustomer)
+    (!role.isManager && isManagerPath(pathname)) ||
+    (!role.isCreator && isCreatorPath(pathname)) ||
+    (!role.isCustomer && isCustomerPath(pathname))
   ) {
     return NextResponse.redirect(new URL("/forbidden", request.url));
   }
 
-  if (isNotManagerPath(pathname) && role.isManager) {
+  if (role.isManager && isNotManagerPath(pathname)) {
     return NextResponse.redirect(new URL("/forbidden", request.url));
   }
 
   return NextResponse.next();
+};
+
+const isAuthPath = (pathname: string) => {
+  return pathname.startsWith("/auth");
 };
 
 const isRolePath = (pathname: string) => {
