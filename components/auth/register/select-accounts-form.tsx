@@ -81,7 +81,7 @@ export const SelectAccountsForm = ({
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">Creator Account</FormLabel>
                     <FormDescription>
-                      ** You can create creator's account **
+                      {`** You can create creator's account **`}
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -103,7 +103,7 @@ export const SelectAccountsForm = ({
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">User Account</FormLabel>
                     <FormDescription>
-                      ** You can create general user's account **
+                      {`** You can create general user's account **`}
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -127,7 +127,7 @@ export const SelectAccountsForm = ({
                       Affiliate Account
                     </FormLabel>
                     <FormDescription>
-                      ** You can create affiliate user's account **
+                      {`** You can create affiliate user's account **`}
                     </FormDescription>
                   </div>
                   <FormControl>

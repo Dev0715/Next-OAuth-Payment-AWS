@@ -44,7 +44,7 @@ export const BundleItem = ({ bundle }: Props) => {
         <CardContent className="max-w-full w-full flex gap-x-4 overflow-hidden">
           {products.map((product, index) =>
             index < 3 ? (
-              <div className="flex">
+              <div key={product.productId} className="flex">
                 <ProductImage product={product} />
               </div>
             ) : null

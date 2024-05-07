@@ -13,7 +13,7 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 type Props = {
   step: number;
   userData: SignedUpData;
-  setUserData: Dispatch<SetStateAction<SignedUpData>>;
+  setUserData?: Dispatch<SetStateAction<SignedUpData>>;
   moveStepForward: () => void;
   moveStepBackward: () => void;
 };
@@ -21,7 +21,7 @@ type Props = {
 export const UserCompleteForm = ({
   step,
   userData,
-  setUserData,
+  // setUserData,
   moveStepForward,
   moveStepBackward
 }: Props) => {
