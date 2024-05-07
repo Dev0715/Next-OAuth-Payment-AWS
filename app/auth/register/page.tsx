@@ -19,14 +19,7 @@ const RegisterPage = () => {
       email: "firstname@org.com",
       password: "123456",
       firstname: "firstname",
-      lastname: "lastname",
-      address1: "address 1",
-      address2: "address 2",
-      city: "city",
-      postal: "postal",
-      country: "country",
-      phone1: "",
-      phone2: ""
+      lastname: "lastname"
     },
     selectedAccounts: {
       creator: false,
