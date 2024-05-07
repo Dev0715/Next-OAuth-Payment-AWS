@@ -4,11 +4,8 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/utils/form-error";
-import { FormSuccess } from "@/components/utils/form-success";
 import {
   Form,
   FormControl,
@@ -28,8 +25,8 @@ import {
 } from "../ui/card";
 
 export const PaymentPrefForm = () => {
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
+  // const [error, setError] = useState<string | undefined>("");
+  // const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof PaymentPrefSchema>>({
@@ -46,10 +43,12 @@ export const PaymentPrefForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof PaymentPrefSchema>) => {
-    setError("");
-    setSuccess("");
+    // setError("");
+    // setSuccess("");
 
-    startTransition(() => {});
+    startTransition(() => {
+      console.log(values);
+    });
   };
 
   return (
