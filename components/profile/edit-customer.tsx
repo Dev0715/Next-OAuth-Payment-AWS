@@ -100,7 +100,7 @@ export default function EditCustomer({
         form.setValue("firstname", data.firstname);
         form.setValue("lastname", data.lastname || "");
         form.setValue("email", data.email);
-        form.setValue("address", data.address.address1);
+        form.setValue("address", data?.address?.address1 || "");
         form.setValue("phone1", data.phone1 || "");
         form.setValue("phone2", data.phone2 || "");
       });
