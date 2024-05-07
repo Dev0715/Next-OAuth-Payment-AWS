@@ -13,7 +13,7 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NewProductSchema } from "@/schemas/product";
-import { useRef, useState, useTransition } from "react";
+import { useRef, useState } from "react";
 import {
   Form,
   FormControl,
@@ -240,6 +240,8 @@ export const ProductAddForm = () => {
       );
       return;
     }
+
+    console.log(values);
 
     setError("");
     setSuccess("");

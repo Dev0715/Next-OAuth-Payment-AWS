@@ -11,7 +11,6 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
@@ -129,7 +128,7 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
           </TableHeader>
           <TableBody className="w-full">
             {orderList.map((product) => (
-              <TableRow className="w-full flex">
+              <TableRow key={product.productId} className="w-full flex">
                 <TableCell className="w-1/4 truncate font-medium">
                   {product.title}
                 </TableCell>
