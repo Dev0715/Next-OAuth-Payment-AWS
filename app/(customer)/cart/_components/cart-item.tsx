@@ -3,18 +3,13 @@
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import type { CartProduct, Product } from "@/shared/types/product.type";
+import type { CartProduct } from "@/shared/types/product.type";
 
 interface PropsParams {
   isPending: boolean;

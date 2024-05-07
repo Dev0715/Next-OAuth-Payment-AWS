@@ -9,7 +9,7 @@ import { CartItem } from "./_components/cart-item";
 import { removeProductFromCart } from "@/actions/user/remove-product-from-cart";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
-import type { CartProduct, Product } from "@/shared/types/product.type";
+import type { CartProduct } from "@/shared/types/product.type";
 
 type ProductInfo = {
   productType: string;
@@ -78,7 +78,7 @@ export default function Cart() {
             setRemoveConfirming(false);
           }
         })
-        .catch((error) => {
+        .catch(() => {
           setRemoveConfirming(false);
         });
     });
