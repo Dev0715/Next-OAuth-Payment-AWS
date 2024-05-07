@@ -30,7 +30,7 @@ export const AboutCreator = ({ creator }: PropsParams) => {
         <div className="w-full flex justify-between">
           <div className="w-1/2 flex flex-col gap-y-2">
             <p className="text-sky-700 font-medium">
-              /** Scraped data will be pre-populated here. **/
+              Scraped data will be pre-populated here.
             </p>
             <p>
               Name:{" "}
