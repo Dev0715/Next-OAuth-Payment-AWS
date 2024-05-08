@@ -15,16 +15,15 @@ const Account = () => {
       <div className="w-full flex gap-x-12">
         <div className="w-1/2 flex flex-col gap-y-12">
           <PasswordChangeForm />
-          <DonatePrefForm />
+          {/* <DonatePrefForm /> */}
         </div>
-        <div className="w-1/2 flex flex-col gap-y-12">
+        {/* <div className="w-1/2 flex flex-col gap-y-12">
           <PaymentPrefForm />
           <CryptoPrefForm />
-        </div>
+        </div> */}
       </div>
-
     </main>
-  )
+  );
 };
 
 export default Account;

@@ -2,7 +2,7 @@ import { PasswordChangeSchema } from "@/schemas/auth/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { set, z } from "zod";
 import {
   Card,
   CardContent,
@@ -22,11 +22,18 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { FaKey } from "react-icons/fa";
+import { FormSuccess } from "../utils/form-success";
+import { FormError } from "../utils/form-error";
+import { useAtom } from "jotai";
+import { userAtom } from "@/store/user";
+import { updatePassword } from "@/actions/auth/update-password";
 
 export const PasswordChangeForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+
+  const [user] = useAtom(userAtom);
 
   const form = useForm<z.infer<typeof PasswordChangeSchema>>({
     resolver: zodResolver(PasswordChangeSchema),
@@ -41,7 +48,17 @@ export const PasswordChangeForm = () => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {});
+    if (values.newPassword !== values.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    startTransition(() => {
+      updatePassword(user?.userId as string, values).then((response) => {
+        setSuccess(response.success);
+        setError(response.error);
+      });
+    });
   };
 
   return (
@@ -109,9 +126,16 @@ export const PasswordChangeForm = () => {
                 </FormItem>
               )}
             />
+            <FormSuccess message={success} />
+            <FormError message={error} />
           </CardContent>
-          <CardFooter className="self-end">
-            <Button type="submit" variant="default" className="w-64 gap-x-2">
+          <CardFooter>
+            <Button
+              disabled={isPending}
+              type="submit"
+              variant="default"
+              className="w-64 gap-x-2"
+            >
               <FaKey />
               Change Password
             </Button>

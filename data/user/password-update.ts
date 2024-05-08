@@ -28,10 +28,8 @@ export const updateUserPassword = async (data: UserSetPassword) => {
 
   try {
     const response = await db.send(command);
-    console.log("__updateUserPassword__UpdateCommand__RESPONSE", response);
     return response.Attributes;
   } catch (error) {
-    console.log("__updateUserPassword__UpdateCommand__ERROR", error);
     return null;
   }
 };
