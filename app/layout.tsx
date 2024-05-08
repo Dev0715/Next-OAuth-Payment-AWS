@@ -7,6 +7,7 @@ import { auth } from "@/auth";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "./_components/header";
+import LoadUser from "./_components/user-load";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default async function RootLayout({
           >
             <Header />
             {children}
+            <LoadUser />
           </body>
         </html>
       </JotaiProvider>

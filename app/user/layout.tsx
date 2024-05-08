@@ -1,11 +1,11 @@
 import { Navbar } from "./_components/navbar";
 import { Sdiebar } from "./_components/sidebar";
 
-interface ProtectedLayoutProps {
+interface UserLayoutProps {
   children: React.ReactNode;
 }
 
-const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
+const UserLayout = ({ children }: UserLayoutProps) => {
   return (
     <div className="w-full p-6 flex flex-col">
       <Navbar />
@@ -17,4 +17,4 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   );
 };
 
-export default ProtectedLayout;
+export default UserLayout;

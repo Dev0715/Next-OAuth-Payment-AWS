@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 
 import { UserButton } from "@/components/auth/user-button";
-import { Navbar } from "./navbar";
 
 export const Header = () => {
   const path = usePathname();
