@@ -31,9 +31,10 @@ export default async function RootLayout({
           <body
             className={`${inter.className} w-full h-full flex flex-col items-center`}
           >
-            <Header />
-            {children}
-            <LoadUser />
+            <LoadUser>
+              <Header />
+              {children}
+            </LoadUser>
           </body>
         </html>
       </JotaiProvider>
