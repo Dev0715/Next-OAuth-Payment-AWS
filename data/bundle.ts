@@ -10,17 +10,16 @@ import {
 } from "@aws-sdk/lib-dynamodb";
 
 import db from "@/lib/db";
+import { AWS_DYNAMO_TABLES } from "@/shared/constants/server.constant";
 
 import type { Bundle, BundleState } from "@/shared/types/bundles.type";
-
-const TableName = process.env.AWS_DYNAMODB_BUNDLES_TABLE_NAME;
 
 export const getAllBundles = async (
   limit?: number,
   exclusiveStartKey?: string
 ) => {
   const scanCommandInput: ScanCommandInput = {
-    TableName
+    TableName: AWS_DYNAMO_TABLES.BUNDLE
   };
 
   if (exclusiveStartKey) {
@@ -54,7 +53,7 @@ export const getAllBundlesByState = async (
   exclusiveStartKey?: string
 ) => {
   const queryCommand: ScanCommandInput = {
-    TableName,
+    TableName: AWS_DYNAMO_TABLES.BUNDLE,
     FilterExpression: "#state = :state",
     ExpressionAttributeNames: {
       "#state": "state"
@@ -94,7 +93,7 @@ export const getAllBundlesByState = async (
 export const getBundleById = async (bundleId: string) => {
   try {
     const command = new GetCommand({
-      TableName,
+      TableName: AWS_DYNAMO_TABLES.BUNDLE,
       Key: {
         bundleId
       }
@@ -110,7 +109,7 @@ export const getBundleById = async (bundleId: string) => {
 export const createBundle = async (data: Bundle) => {
   try {
     const command = new PutCommand({
-      TableName,
+      TableName: AWS_DYNAMO_TABLES.BUNDLE,
       Item: data
     });
 
@@ -124,7 +123,7 @@ export const createBundle = async (data: Bundle) => {
 export const deleteBundle = async (bundleId: string) => {
   try {
     const command = new DeleteCommand({
-      TableName,
+      TableName: AWS_DYNAMO_TABLES.BUNDLE,
       Key: {
         bundleId
       }
@@ -139,7 +138,7 @@ export const deleteBundle = async (bundleId: string) => {
 
 export const updateBundle = async (bundle: Bundle) => {
   const command = new UpdateCommand({
-    TableName,
+    TableName: AWS_DYNAMO_TABLES.BUNDLE,
     Key: { bundleId: bundle.bundleId },
     UpdateExpression:
       "SET description = :description, #state = :state, price = :price, products = :products",

@@ -11,6 +11,7 @@ import {
 } from "@aws-sdk/lib-dynamodb";
 
 import db from "@/lib/db";
+import { AWS_DYNAMO_TABLES } from "@/shared/constants/server.constant";
 
 import type {
   Product,
@@ -19,14 +20,12 @@ import type {
   ProductState
 } from "@/shared/types/product.type";
 
-const TableName = process.env.AWS_DYNAMODB_PRODUCTS_TABLE_NAME;
-
 export const getAllProducts = async (
   limit?: number,
   exclusiveStartKey?: ProductLink
 ) => {
   const scanCommandInput: ScanCommandInput = {
-    TableName
+    TableName: AWS_DYNAMO_TABLES.PRODUCT
     // ProjectionExpression: "username" // attr names to get
     // ProjectionExpression: "email, emailVerified, #name",
     // ExpressionAttributeNames: { "#name": "name" }, // for reserved attr names
@@ -68,7 +67,7 @@ export const getProductsByType = async (
   exclusiveStartKey?: ProductLink
 ) => {
   const queryCommand: QueryCommandInput = {
-    TableName,
+    TableName: AWS_DYNAMO_TABLES.PRODUCT,
     KeyConditionExpression: "productType = :productType",
     ExpressionAttributeValues: {
       ":productType": productType
@@ -97,7 +96,7 @@ export const getProductsByType = async (
 
 export const getProductsCountByType = async (productType: string) => {
   const queryCommand: QueryCommandInput = {
-    TableName,
+    TableName: AWS_DYNAMO_TABLES.PRODUCT,
     KeyConditionExpression: "productType = :productType",
     ExpressionAttributeValues: {
       ":productType": productType
@@ -124,7 +123,7 @@ export const getProductById = async (
   productId: string
 ) => {
   const command = new GetCommand({
-    TableName,
+    TableName: AWS_DYNAMO_TABLES.PRODUCT,
     Key: {
       productType,
       productId
@@ -144,7 +143,7 @@ export const getProductById = async (
 export const createProduct = async (data: Product) => {
   try {
     const command = new PutCommand({
-      TableName,
+      TableName: AWS_DYNAMO_TABLES.PRODUCT,
       Item: {
         ...data
       }
@@ -169,7 +168,7 @@ export const updateProductApproval = async ({
   approval
 }: ParamsType) => {
   const command = new UpdateCommand({
-    TableName,
+    TableName: AWS_DYNAMO_TABLES.PRODUCT,
     Key: { productType, productId },
     UpdateExpression: "SET approval = :approval",
     ExpressionAttributeValues: {
