@@ -6,7 +6,7 @@ import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getProductById } from "@/data/products/product-by-id";
+import { getProductById } from "@/data/product";
 import { getUserById } from "@/data/user/user-by-id";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";

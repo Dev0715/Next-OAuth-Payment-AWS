@@ -5,7 +5,7 @@ import { useEffect, useState, useTransition } from "react";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
 import { getUserById } from "@/data/user/user-by-id";
-import { getProductById } from "@/data/products/product-by-id";
+import { getProductById } from "@/data/product";
 import { CartItem } from "./_components/cart-item";
 import { removeProductFromCart } from "@/actions/user/remove-product-from-cart";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";

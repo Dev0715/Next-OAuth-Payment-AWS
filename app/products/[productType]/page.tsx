@@ -3,9 +3,8 @@
 import { ProductItem } from "@/components/product/product-item";
 import { Navbar } from "../_components/navbar";
 import { useEffect, useState } from "react";
-import { getProductsByType } from "@/data/products/products-by-type";
+import { getProductsByType, getProductsCountByType } from "@/data/product";
 import { Separator } from "@/components/ui/separator";
-import { getProductsCountByType } from "@/data/products/products-count-by-type";
 import { ProductPagination } from "../_components/pagination-products";
 
 import type { Product, ProductLink } from "@/shared/types/product.type";

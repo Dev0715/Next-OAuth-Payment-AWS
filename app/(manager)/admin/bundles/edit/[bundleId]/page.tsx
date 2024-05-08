@@ -6,7 +6,7 @@ import { getBundleById, updateBundle } from "@/data/bundle";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { BundleProducts } from "@/components/admin/bundles/bundle-products";
-import { getProductById } from "@/data/products/product-by-id";
+import { getProductById } from "@/data/product";
 import { Button } from "@/components/ui/button";
 import { FaSave } from "react-icons/fa";
 import { Switch } from "@/components/ui/switch";

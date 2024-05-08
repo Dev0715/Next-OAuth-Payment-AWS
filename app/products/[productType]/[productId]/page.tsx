@@ -15,7 +15,7 @@ import Link from "next/link";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
 import { QuestionAlert } from "@/components/utils/question-alert";
-import { getProductById } from "@/data/products/product-by-id";
+import { getProductById } from "@/data/product";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
 import { addProductToCart } from "@/actions/user/add-product-to-cart";

@@ -24,7 +24,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import { getColumnsForBundlesProductsSelectTable } from "./bundle-products-select-colum";
-import { getAllProducts } from "@/data/products/products-all";
+import { getAllProducts } from "@/data/product";
 
 import type { Product } from "@/shared/types/product.type";
 

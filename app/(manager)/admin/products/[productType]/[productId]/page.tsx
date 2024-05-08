@@ -7,13 +7,12 @@ import { Button } from "@/components/ui/button";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
 import { QuestionAlert } from "@/components/utils/question-alert";
-import { getProductById } from "@/data/products/product-by-id";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { ProductHistory } from "@/components/product/product-history";
 import { Textarea } from "@/components/ui/textarea";
-import { updateProductApproval } from "@/data/products/product-approval-update";
+import { getProductById, updateProductApproval } from "@/data/product";
 import { Navbar } from "../../../_components/navbar";
 import Link from "next/link";
 

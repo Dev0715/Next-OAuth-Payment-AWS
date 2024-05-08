@@ -2,7 +2,7 @@ import { Bundle } from "@/shared/types/bundles.type";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { useEffect, useState } from "react";
 import { Product } from "@/shared/types/product.type";
-import { getProductById } from "@/data/products/product-by-id";
+import { getProductById } from "@/data/product";
 import { ProductImage } from "./product-image";
 import Link from "next/link";
 

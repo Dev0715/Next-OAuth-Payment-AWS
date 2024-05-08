@@ -42,7 +42,7 @@ import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
-import { createProduct } from "@/data/products/product-create";
+import { createProduct } from "@/data/product";
 import { addNewProduct } from "@/actions/user/new-product";
 import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 
