@@ -143,11 +143,11 @@ export const createUser = async (data: any) => {
   }
 };
 
-interface UserSetToken {
+type UserSetToken = {
   userId: string;
   verificationToken: string;
   expires: Date;
-}
+};
 
 export const updateUserToken = async (data: UserSetToken) => {
   const command = new UpdateCommand({
@@ -218,12 +218,12 @@ export const updateGeneralProfile = async (
   }
 };
 
-type ParamsType = {
+type CreatorUpdateProduct = {
   userId: string;
   creator: CreatorData;
 };
 
-export const updateUserProducts = async (data: ParamsType) => {
+export const updateUserProducts = async (data: CreatorUpdateProduct) => {
   const command = new UpdateCommand({
     TableName: AWS_DYNAMO_TABLES.USER,
     Key: { userId: data.userId },
@@ -269,11 +269,11 @@ export const updateUserPurchased = async ({
   }
 };
 
-interface UserSetPassword {
+type UserSetPassword = {
   userId: string;
   password: string;
   emailVerified: Date;
-}
+};
 
 export const updateUserPassword = async (data: UserSetPassword) => {
   const command = new UpdateCommand({
