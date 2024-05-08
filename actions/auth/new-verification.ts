@@ -1,7 +1,6 @@
 "use server";
 
-import { getUserById } from "@/data/user/user-by-id";
-import { updateUserVerification } from "@/data/user/verification-update";
+import { getUserById, updateUserVerification } from "@/data/user";
 import { getUserIdFromToken } from "@/lib/tokens";
 
 export const newVerification = async (token: string) => {

@@ -1,7 +1,6 @@
 "use server";
 
-import { getAllUsernames } from "@/data/user/all-usernames";
-import { getUserByEmail } from "@/data/user/user-by-email";
+import { getAllUsernames, getUserByEmail } from "@/data/user";
 
 type Params = {
   username: string;

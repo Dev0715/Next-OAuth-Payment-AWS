@@ -15,8 +15,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 
-import { updateManagerProfile } from "@/data/user/manager-update";
-import { getAllUsers } from "@/data/user/users-all";
+import { getAllUsers, updateManagerProfile } from "@/data/user";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,

@@ -34,7 +34,7 @@ import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { getUserById } from "@/data/user/user-by-id";
+import { getUserById } from "@/data/user";
 import { JOB_TITLES } from "@/shared/constants/user.constant";
 
 export default function EditCreator({

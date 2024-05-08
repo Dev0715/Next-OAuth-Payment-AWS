@@ -29,7 +29,7 @@ import { useEffect, useState } from "react";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { useAtom } from "jotai";
 import { cartAtom } from "@/store/cart";
-import { getUserById } from "@/data/user/user-by-id";
+import { getUserById } from "@/data/user";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { useCurrentRole } from "@/hooks/use-current-role";

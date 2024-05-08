@@ -3,12 +3,11 @@
 import { z } from "zod";
 import { AuthError } from "next-auth";
 import { LoginSchema } from "@/schemas/auth/auth";
-import { getUserByEmail } from "@/data/user/user-by-email";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { sendVerificationEmail } from "@/lib/mail";
 import { signIn } from "@/auth";
 import { generateVerificationToken } from "@/lib/tokens";
-import { updateUserToken } from "@/data/user/token-update";
+import { getUserByEmail, updateUserToken } from "@/data/user";
 
 export const login = async (
   values: z.infer<typeof LoginSchema>,

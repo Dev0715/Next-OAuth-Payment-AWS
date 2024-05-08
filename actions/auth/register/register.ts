@@ -1,8 +1,6 @@
 "use server";
 
-import { getAllUsernames } from "@/data/user/all-usernames";
-import { getUserByEmail } from "@/data/user/user-by-email";
-import { createUser } from "@/data/user/user-create";
+import { getAllUsernames, getUserByEmail, createUser } from "@/data/user";
 import { sendVerificationEmail } from "@/lib/mail";
 import bcrypt from "bcryptjs";
 

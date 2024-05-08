@@ -1,7 +1,6 @@
 "use server";
 
-import { getUserById } from "@/data/user/user-by-id";
-import { updateUserCart } from "@/data/user/cart-update";
+import { getUserById, updateUserCart } from "@/data/user";
 import type { ProductLink } from "@/shared/types/product.type";
 
 type ParamsType = {

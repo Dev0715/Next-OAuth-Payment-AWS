@@ -1,7 +1,7 @@
 "use server";
 
-import { getUserById } from "@/data/user/user-by-id";
-import { updateUserPurchased } from "@/data/user/purchased-update";
+import { getUserById, updateUserPurchased } from "@/data/user";
+
 import type { ProductLink } from "@/shared/types/product.type";
 
 type Params = {

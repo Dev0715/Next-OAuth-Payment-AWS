@@ -1,7 +1,6 @@
 "use server";
 
-import { getUserById } from "@/data/user/user-by-id";
-import { updateUserProducts } from "@/data/user/products-update";
+import { getUserById, updateUserProducts } from "@/data/user";
 import { ProductLink } from "@/shared/types/product.type";
 
 export const addNewProduct = async (userId: string, product: ProductLink) => {

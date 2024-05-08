@@ -28,7 +28,7 @@ import { FaUser } from "react-icons/fa";
 import { ProfileSchema } from "@/schemas/user";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { uploadImage } from "@/shared/functions/upload-image";
-import { updateGeneralProfile } from "@/data/user/profile-update";
+import { updateGeneralProfile } from "@/data/user";
 import { User } from "@/shared/types/user.type";
 
 export default function Profile() {

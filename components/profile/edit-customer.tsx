@@ -23,7 +23,7 @@ import { registerUser } from "@/actions/auth/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { getUserById } from "@/data/user/user-by-id";
+import { getUserById } from "@/data/user";
 
 export default function EditCustomer({
   disabled = false

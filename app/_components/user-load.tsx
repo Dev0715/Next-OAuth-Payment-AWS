@@ -1,6 +1,6 @@
 "use client";
 
-import { getUserById } from "@/data/user/user-by-id";
+import { getUserById } from "@/data/user";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";

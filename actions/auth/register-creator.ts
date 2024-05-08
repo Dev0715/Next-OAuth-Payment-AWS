@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { CreatorRegisterSchema } from "@/schemas/auth/auth";
-import { updateCreatorProfile } from "@/data/user/creator-update";
+import { updateCreatorProfile } from "@/data/user";
 // import { generateVerificationToken } from "@/lib/tokens";
 
 export const registerCreator = async (
