@@ -29,7 +29,7 @@ import { usePathname } from "next/navigation";
 import { createOrder as createStripeOrder } from "@/actions/stripe/create-order";
 import { useAtom } from "jotai";
 import { orderListAtom } from "@/store/orderList";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 
 export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
@@ -37,7 +37,7 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
   const Option_Stripe = "option-stripe";
 
   const currentPath = usePathname();
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
 
   const [isPending, startTransition] = useTransition();
   const [paymentMethod, setPaymentMethod] = useState(Option_Paypal);

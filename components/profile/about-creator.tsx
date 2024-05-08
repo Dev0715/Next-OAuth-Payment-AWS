@@ -3,7 +3,8 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import Link from "next/link";
 import { LinkedSites } from "./linked-sites";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
+import { useAtom } from "jotai";
 
 import type { User } from "@/shared/types/user.type";
 
@@ -12,7 +13,7 @@ type PropsParams = {
 };
 
 export const AboutCreator = ({ creator }: PropsParams) => {
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
 
   return (
     <Card className="border-0 rounded-none">
@@ -34,7 +35,7 @@ export const AboutCreator = ({ creator }: PropsParams) => {
             </p>
             <p>
               Name:{" "}
-              <span className="font-semibold">{`${creator?.firstname} ${creator?.lastname}`}</span>
+              <span className="font-semibold">{`${creator?.firstname || ""} ${creator?.lastname || ""}`}</span>
             </p>
             <p>
               Description:{" "}

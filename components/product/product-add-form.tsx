@@ -36,7 +36,8 @@ import { ImagePreview } from "./image-preview";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { Dialog, DialogContent } from "../ui/dialog";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
+import { useAtom } from "jotai";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 import { Badge } from "../ui/badge";
@@ -48,7 +49,7 @@ import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 import type { ProductType } from "@/shared/types/product.type";
 
 export const ProductAddForm = () => {
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");

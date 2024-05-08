@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { LoginButton } from "./login-button";
 import { SignupButton } from "./signup-button";
@@ -35,7 +35,7 @@ import { Separator } from "../ui/separator";
 import { useCurrentRole } from "@/hooks/use-current-role";
 
 export const UserButton = () => {
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
   const userRole = useCurrentRole();
 
   const [avatarImage, setAvatarImage] = useState<string>("");

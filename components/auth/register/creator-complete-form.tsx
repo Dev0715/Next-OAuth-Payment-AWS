@@ -7,10 +7,8 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { SignedUpData } from "@/shared/types/signup-data.type";
 import { v4 as uuidv4 } from "uuid";
 import { register } from "@/actions/auth/register/register";
-import {
-  getUserFromGeneralDetails,
-  uploadImage
-} from "@/shared/functions/user-from-signup";
+import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
+import { uploadImage } from "@/shared/functions/upload-image";
 
 type Props = {
   userData: SignedUpData;
