@@ -89,7 +89,7 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
         {/* <p className="text-xl font-bold">@{userData?.username}</p> */}
         <p className="text-xl font-bold">@{userData?.userId}</p>
         <p className="text-xl font-bold text-rose-700">★ ★ ★ ★ ★</p>
-        <p className="text-lg font-semibold">{`${userData?.firstname} ${userData?.lastname}`}</p>
+        <p className="text-lg font-semibold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</p>
         <div className="flex gap-x-6">
           <Button
             variant="default"
