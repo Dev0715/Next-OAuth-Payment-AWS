@@ -27,6 +27,7 @@ import { FaUser } from "react-icons/fa";
 import { ProfileSchema } from "@/schemas/user";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { uploadImage } from "@/shared/functions/upload-image";
+import { updateGeneralProfile } from "@/data/user/profile-update";
 
 export default function Profile() {
   const user = useCurrentUser();
@@ -51,6 +52,9 @@ export default function Profile() {
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
+      setError("");
+      setSuccess("");
+
       setAvatarPath(URL.createObjectURL(e.target.files[0]));
       setAvatar(e?.target?.files?.[0]);
     }
@@ -76,6 +80,9 @@ export default function Profile() {
   };
 
   const isChanged = useMemo(() => {
+    setError("");
+    setSuccess("");
+
     return isFormChanged() || avatar;
   }, [
     avatar,
@@ -91,11 +98,18 @@ export default function Profile() {
         values.avatar = keyName;
       } else {
         setError("Failed to upload image");
-        return null;
+        return false;
       }
     }
 
-    console.log(values);
+    const reponse = await updateGeneralProfile(user?.userId as string, values);
+    if (reponse) {
+      setSuccess("Profile updated successfully");
+      return true;
+    } else {
+      setError("Failed to update profile");
+      return false;
+    }
   };
 
   const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
@@ -103,7 +117,7 @@ export default function Profile() {
     setSuccess("");
 
     setPending(true);
-    updateData(values).then((res) => {
+    updateData(values).then(() => {
       setPending(false);
     });
   };
