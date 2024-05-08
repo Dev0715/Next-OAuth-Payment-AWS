@@ -4,9 +4,8 @@ import * as z from "zod";
 import bcrypt from "bcryptjs";
 
 import { PasswordChangeSchema } from "@/schemas/auth/auth";
-import { updateUserPassword } from "@/data/user/password-update";
+import { getUserById, updateUserPassword } from "@/data/user";
 import { getUserIdFromToken } from "@/lib/tokens";
-import { getUserById } from "@/data/user/user-by-id";
 
 export const updatePassword = async (
   userId: string,
