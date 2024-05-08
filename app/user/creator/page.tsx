@@ -5,6 +5,8 @@ import { SwitchBox } from "@/components/utils/switch-box";
 import EditCreator from "@/components/profile/edit-creator";
 import { useAtom } from "jotai";
 import { userAtom } from "@/store/user";
+import { CreatorData } from "@/shared/types/user.type";
+import { updateCreatorData } from "@/data/user";
 
 const CreatorSettings = () => {
   const [user] = useAtom(userAtom);
@@ -13,7 +15,29 @@ const CreatorSettings = () => {
   );
 
   const onSwitch = () => {
-    setIsChecked((prevState) => !prevState);
+    const newState = !isChecked;
+    let creatorData = user?.creator;
+
+    if (newState && !creatorData) {
+      creatorData = {
+        creatorId: user?.userId as string,
+        isCreator: true
+      };
+    }
+
+    creatorData = {
+      ...creatorData,
+      isCreator: newState
+    } as CreatorData;
+
+    updateCreatorData({
+      userId: user?.userId as string,
+      creatorData
+    }).then((res) => {
+      if (res) {
+        setIsChecked(newState);
+      }
+    });
   };
 
   return (
