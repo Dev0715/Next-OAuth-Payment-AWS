@@ -12,7 +12,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { CreatorRegisterSchema } from "@/schemas/auth/auth";
+import { CreatorSettingsSchema } from "@/schemas/auth/auth";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
@@ -42,26 +42,29 @@ export default function EditCreator({
 }: {
   disabled?: boolean;
 }) {
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
-  const [isPending, startTransition] = useTransition();
-
   const [user] = useAtom(userAtom);
 
-  const [avatar, setAvatar] = useState<File | null>();
-  const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>(
-    ""
-  );
+  const [error, setError] = useState<string>();
+  const [success, setSuccess] = useState<string>();
+  const [isPending, startTransition] = useTransition();
 
-  const [, setCover] = useState<File | null>();
-  const [coverImagePath, setCoverImagePath] = useState<string | undefined>("");
+  const [cover, setCover] = useState<File>();
+  const [coverImagePath, setCoverImagePath] = useState<string>();
 
-  const isDisabled = () => {
-    return isPending || disabled;
+  const hiddenCoverFileIniput = useRef<HTMLInputElement>(null);
+  const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setCoverImagePath(URL.createObjectURL(e.target.files[0]));
+      setCover(e?.target?.files?.[0]);
+    }
   };
 
-  const form = useForm<z.infer<typeof CreatorRegisterSchema>>({
-    resolver: zodResolver(CreatorRegisterSchema),
+  const isDisabled = useMemo(() => {
+    return isPending || disabled;
+  }, [isPending, disabled]);
+
+  const form = useForm<z.infer<typeof CreatorSettingsSchema>>({
+    resolver: zodResolver(CreatorSettingsSchema),
     defaultValues: {
       username: "temp",
       firstname: "temp",
@@ -74,13 +77,11 @@ export default function EditCreator({
     }
   });
 
-  const onSubmit = (values: z.infer<typeof CreatorRegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof CreatorSettingsSchema>) => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {
-      values.avatar = "";
-    });
+    startTransition(() => {});
   };
 
   useEffect(() => {
@@ -112,7 +113,7 @@ export default function EditCreator({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col items-end gap-y-6"
+            className="flex flex-col gap-y-6"
           >
             <div className="w-full flex flex-col gap-y-6">
               <div className="flex flex-col gap-y-4">
@@ -123,44 +124,66 @@ export default function EditCreator({
                     <div className="w-full h-full bg-inherit"></div>
                   </AvatarFallback>
                 </Avatar>
+                <Button
+                  disabled={isDisabled}
+                  type="button"
+                  variant={"outline"}
+                  size={"sm"}
+                  className="w-32 rounded-none"
+                  onClick={() => hiddenCoverFileIniput.current?.click()}
+                >
+                  Upload New
+                </Button>
                 <Input
-                  disabled={isDisabled()}
+                  className="hidden"
                   type="file"
                   accept="image/*"
+                  ref={hiddenCoverFileIniput}
                   onChange={onCoverChanged}
                 />
               </div>
-              <div className="flex items-end space-x-4">
-                <Avatar className="w-24 h-24 rounded-xl">
-                  <AvatarImage src={avatarImagePath} />
-                  <AvatarFallback className="bg-sky-500">
-                    <FaUser className="text-white" />
-                  </AvatarFallback>
-                </Avatar>
-                <Input
-                  disabled={isDisabled()}
-                  type="file"
-                  accept="image/*"
-                  onChange={onAvatarChanged}
-                />
+              <div className="w-full flex items-end gap-x-6">
+                <div className="w-1/2">
+                  <FormField
+                    control={form.control}
+                    name="username"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Username</FormLabel>
+                        <FormControl>
+                          <Input
+                            disabled={isDisabled}
+                            placeholder="JohnDoe1234"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="w-1/2">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            disabled={isDisabled}
+                            placeholder="username@yemail.com"
+                            type="email"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={isDisabled}
-                        placeholder="JohnDoe1234"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+
               <FormField
                 control={form.control}
                 name="bio"
@@ -172,60 +195,6 @@ export default function EditCreator({
                         disabled={isDisabled}
                         placeholder="JohnDoe1234"
                         {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="flex gap-x-4">
-                <FormField
-                  control={form.control}
-                  name="firstname"
-                  render={({ field }) => (
-                    <FormItem className="w-1/2">
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          disabled={isDisabled}
-                          placeholder="John"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="lastname"
-                  render={({ field }) => (
-                    <FormItem className="w-1/2">
-                      <FormLabel>Last Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          disabled={isDisabled}
-                          placeholder="Doe"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isDisabled}
-                        placeholder="username@yemail.com"
-                        type="email"
                       />
                     </FormControl>
                     <FormMessage />
@@ -260,58 +229,83 @@ export default function EditCreator({
                   </FormItem>
                 )}
               />
+            </div>
+            <div className="w-full flex items-end gap-x-6">
+              <div className="w-1/2">
+                <FormField
+                  control={form.control}
+                  name="website1"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Personal Websites</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="Website 1" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="w-1/2">
+                <FormField
+                  control={form.control}
+                  name="website2"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormControl>
+                        <Input {...field} placeholder="Website 2" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <div className="w-full flex items-end gap-x-6">
+              <div className="w-1/2">
+                <FormField
+                  control={form.control}
+                  name="website3"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormControl>
+                        <Input {...field} placeholder="Website 3" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="w-1/2">
+                <FormField
+                  control={form.control}
+                  name="website4"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormControl>
+                        <Input {...field} placeholder="Website 4" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <div className="w-1/2 pr-3">
               <FormField
                 control={form.control}
-                name="address"
+                name="website5"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Address</FormLabel>
+                  <FormItem className="w-full">
                     <FormControl>
-                      <Input
-                        disabled={isDisabled}
-                        placeholder="Address"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phone1"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Number 1</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={isDisabled}
-                        placeholder="Phone Number"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phone2"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Number 2</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={isDisabled}
-                        placeholder="Phone Number"
-                        {...field}
-                      />
+                      <Input {...field} placeholder="Website 5" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
+
             <FormError message={error} />
             <FormSuccess message={success} />
             <Button disabled={isDisabled} className="w-64" type="submit">
