@@ -1,14 +1,14 @@
 "use server";
 
-import s3Client from "@/lib/s3";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
-const Bucket = process.env.AWS_BUCKET_NAME;
+import s3Client from "@/lib/s3";
+import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
 
 export const getLinkFromS3 = async (keyName: string) => {
   const command = new GetObjectCommand({
-    Bucket,
+    Bucket: AWS_S3_BUCKETS.UPLOAD,
     Key: keyName
   });
 

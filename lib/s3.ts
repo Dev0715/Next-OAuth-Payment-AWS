@@ -1,11 +1,13 @@
 import { S3Client } from "@aws-sdk/client-s3";
 
+import { AWS_CREDENTIAL } from "@/shared/constants/server.constant";
+
 const s3Client = new S3Client({
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string
+    accessKeyId: AWS_CREDENTIAL.ACCESS_KEY_ID,
+    secretAccessKey: AWS_CREDENTIAL.ACCESS_KEY
   },
-  region: process.env.AWS_REGION as string
+  region: AWS_CREDENTIAL.REGION
 });
 
 export default s3Client;

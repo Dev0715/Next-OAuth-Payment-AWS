@@ -1,15 +1,15 @@
 "use server";
 
-import s3Client from "@/lib/s3";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
-const Bucket = process.env.AWS_BUCKET_NAME;
+import s3Client from "@/lib/s3";
+import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
 
 export const uploadFileToS3 = async (file: File, keyName: string) => {
   const Body = Buffer.from(await file.arrayBuffer());
 
   const command = new PutObjectCommand({
-    Bucket,
+    Bucket: AWS_S3_BUCKETS.UPLOAD,
     Key: keyName,
     Body,
     ContentType: file.type

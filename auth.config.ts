@@ -7,25 +7,22 @@ import bcrypt from "bcryptjs";
 
 import type { NextAuthConfig } from "next-auth";
 import { getUserByEmail } from "./data/user";
+import { AUTH_CONFIG } from "./shared/constants/server.constant";
 
 export default {
-  secret: process.env.AUTH_SECRET,
+  secret: AUTH_CONFIG.SECRET,
   providers: [
-    //    Google({
-    //      clientId: process.env.GOOGLE_CLIENT_ID || "",
-    //      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
-    //    }),
     Github({
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string
+      clientId: AUTH_CONFIG.GITHUB.CLIENT_ID,
+      clientSecret: AUTH_CONFIG.GITHUB.CLIENT_SECRET
     }),
     Discord({
-      clientId: process.env.DISCORD_CLIENT_ID as string,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET as string
+      clientId: AUTH_CONFIG.DISCORD.CLIENT_ID,
+      clientSecret: AUTH_CONFIG.DISCORD.CLIENT_SECRET
     }),
     Apple({
-      clientId: process.env.APPLE_CLIENT_ID || "",
-      clientSecret: process.env.APPLE_CLIENT_SECRET || ""
+      clientId: AUTH_CONFIG.APPLE.CLIENT_ID || "",
+      clientSecret: AUTH_CONFIG.APPLE.CLIENT_SECRET || ""
     }),
     Credentials({
       credentials: {
@@ -50,11 +47,11 @@ export default {
       id: "adobe",
       name: "Adobe",
       type: "oauth",
-      clientId: process.env.ADOBE_CLIENT_ID,
-      clientSecret: process.env.ADOBE_CLIENT_SECRET,
+      clientId: AUTH_CONFIG.ADOBE.CLIENT_ID,
+      clientSecret: AUTH_CONFIG.ADOBE.CLIENT_SECRET,
       // authorization: { params: { scope: "openid email profile" } },
       // You'll need to specify the correct URLs for Adobe's OAuth service.
-      token: `https://ims-na1.adobelogin.com/ims/token/v3?client_id=${process.env.ADOBE_CLIENT_ID}`,
+      token: `https://ims-na1.adobelogin.com/ims/token/v3?client_id=${AUTH_CONFIG.ADOBE.CLIENT_ID}`,
       authorization:
         "https://ims-na1.adobelogin.com/ims/authorize/v3?scope=openid+email+profile",
       userinfo: "https://ims-na1.adobelogin.com/ims/userinfo/v3",
@@ -72,10 +69,10 @@ export default {
       id: "epicgames",
       name: "EpicGames",
       type: "oauth",
-      clientId: process.env.EPIC_CLIENT_ID,
-      clientSecret: process.env.EPIC_CLIENT_SECRET,
-      token: `https://api.epicgames.dev/epic/oauth/v2/token?client_id=${process.env.EPIC_CLIENT_ID}`,
-      authorization: `https://www.epicgames.com/id/authorize?client_id=${process.env.EPIC_CLIENT_ID}&response_type=code&scope=basic_profile`,
+      clientId: AUTH_CONFIG.EPIC.CLIENT_ID,
+      clientSecret: AUTH_CONFIG.EPIC.CLIENT_SECRET,
+      token: `https://api.epicgames.dev/epic/oauth/v2/token?client_id=${AUTH_CONFIG.EPIC.CLIENT_ID}`,
+      authorization: `https://www.epicgames.com/id/authorize?client_id=${AUTH_CONFIG.EPIC.CLIENT_ID}&response_type=code&scope=basic_profile`,
       userinfo: "https://api.epicgames.dev/epic/oauth/v2/userInfo",
       // A function that takes the token response and returns the profile
       profile: (profile) => {

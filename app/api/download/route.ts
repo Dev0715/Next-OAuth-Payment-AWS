@@ -1,10 +1,10 @@
 import archiver from "archiver";
 import { PassThrough, Readable } from "stream";
-import { GetObjectCommand } from "@aws-sdk/client-s3";
-import s3Client from "@/lib/s3";
 import { NextRequest } from "next/server";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
 
-const Bucket = process.env.AWS_BUCKET_NAME;
+import s3Client from "@/lib/s3";
+import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
 
 export const POST = async (req: NextRequest) => {
   const data = await req.json();
@@ -19,7 +19,10 @@ export const POST = async (req: NextRequest) => {
       const passThrough = new PassThrough();
 
       const file = fileList[i];
-      const command = new GetObjectCommand({ Bucket, Key: file.path });
+      const command = new GetObjectCommand({
+        Bucket: AWS_S3_BUCKETS.UPLOAD,
+        Key: file.path
+      });
 
       const item = await s3Client.send(command);
       (item.Body as Readable).pipe(passThrough);
@@ -68,7 +71,10 @@ export const GET = async () => {
       const passThrough = new PassThrough();
 
       const file = fileList[i];
-      const command = new GetObjectCommand({ Bucket, Key: file.path });
+      const command = new GetObjectCommand({
+        Bucket: AWS_S3_BUCKETS.UPLOAD,
+        Key: file.path
+      });
 
       const item = await s3Client.send(command);
       (item.Body as Readable).pipe(passThrough);
