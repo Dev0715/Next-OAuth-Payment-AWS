@@ -2,14 +2,17 @@ import * as z from "zod";
 
 // for `Profile Settings` Form
 export const ProfileSchema = z.object({
+  avatar: z.instanceof(File).optional(),
   username: z
     .string()
-    .min(1, "A name is required")
-    .max(72, "Name must be a maximum of 72 characters"),
-  bio: z
+    .min(1, "Username is required")
+    .max(72, "Username must be a maximum of 72 characters"),
+  firstname: z
     .string()
-    .min(10, { message: "Bio must be at least 10 characters long" })
-    .max(160, { message: "Bio must be a maximum of 160 characters" })
+    .min(1, "First name is required")
+    .max(72, "First name must be a maximum of 72 characters"),
+  lastname: z.string().optional(),
+  email: z.string().email({ message: "Please enter a valid email" })
 });
 
 // for 'Crypto Preference' Form
