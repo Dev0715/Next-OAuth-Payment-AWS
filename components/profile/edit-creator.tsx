@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -80,33 +80,6 @@ export default function EditCreator({
 
     startTransition(() => {
       values.avatar = "";
-
-      if (avatar) {
-        values.avatar = "USER_ID" + ".jpg";
-
-        const formData = new FormData();
-        formData.append("file", avatar);
-        formData.append("keyName", values.avatar);
-
-        axiosClient
-          .post("/upload", formData, axiosConfig)
-          .then((res) => res.data)
-          .then((data) => {
-            if (data.success) {
-              // const res = data.response;
-              // const metadata = res.$metadata;
-            }
-          })
-          .catch((error) => {
-            console.log("__uploadFile__ERROR", error);
-          });
-      }
-
-      if (user) {
-        registerCreator(user?.userId, values).then((data) => {
-          console.log("__registerCreator__RESULT", data);
-        });
-      }
     });
   };
 
@@ -127,32 +100,14 @@ export default function EditCreator({
     }
   }, []);
 
-  const onAgreeScrap = (checked: boolean) => {
-    console.log("AGREE SCRAP", checked);
-  };
-
-  const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setAvatarImagePath(URL.createObjectURL(e.target.files[0]));
-    }
-    setAvatar(e?.target?.files?.[0]);
-  };
-
-  const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setCoverImagePath(URL.createObjectURL(e.target.files[0]));
-    }
-    setCover(e?.target?.files?.[0]);
-  };
-
   return (
     <main className="w-full flex justify-between">
       <div className="w-1/2 flex flex-col gap-y-6">
         <div className="flex items-center gap-x-4">
-          <Button asChild variant="link">
+          <Button asChild variant="link" className="px-0">
             <Link href="/">Accept our standard Legal Agreements</Link>
           </Button>
-          <Switch disabled={isDisabled()} onCheckedChange={onAgreeScrap} />
+          <Switch disabled={isDisabled} />
         </div>
         <Form {...form}>
           <form
@@ -197,7 +152,7 @@ export default function EditCreator({
                     <FormLabel>Username</FormLabel>
                     <FormControl>
                       <Input
-                        disabled={isDisabled()}
+                        disabled={isDisabled}
                         placeholder="JohnDoe1234"
                         {...field}
                       />
@@ -214,7 +169,7 @@ export default function EditCreator({
                     <FormLabel>Bio</FormLabel>
                     <FormControl>
                       <Textarea
-                        disabled={isDisabled()}
+                        disabled={isDisabled}
                         placeholder="JohnDoe1234"
                         {...field}
                       />
@@ -232,7 +187,7 @@ export default function EditCreator({
                       <FormLabel>First Name</FormLabel>
                       <FormControl>
                         <Input
-                          disabled={isDisabled()}
+                          disabled={isDisabled}
                           placeholder="John"
                           {...field}
                         />
@@ -249,7 +204,7 @@ export default function EditCreator({
                       <FormLabel>Last Name</FormLabel>
                       <FormControl>
                         <Input
-                          disabled={isDisabled()}
+                          disabled={isDisabled}
                           placeholder="Doe"
                           {...field}
                         />
@@ -268,7 +223,7 @@ export default function EditCreator({
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isDisabled()}
+                        disabled={isDisabled}
                         placeholder="username@yemail.com"
                         type="email"
                       />
@@ -284,7 +239,7 @@ export default function EditCreator({
                   <FormItem>
                     <FormLabel>Type of User</FormLabel>
                     <Select
-                      disabled={isDisabled()}
+                      disabled={isDisabled}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
@@ -313,7 +268,7 @@ export default function EditCreator({
                     <FormLabel>Address</FormLabel>
                     <FormControl>
                       <Input
-                        disabled={isDisabled()}
+                        disabled={isDisabled}
                         placeholder="Address"
                         {...field}
                       />
@@ -330,7 +285,7 @@ export default function EditCreator({
                     <FormLabel>Phone Number 1</FormLabel>
                     <FormControl>
                       <Input
-                        disabled={isDisabled()}
+                        disabled={isDisabled}
                         placeholder="Phone Number"
                         {...field}
                       />
@@ -347,7 +302,7 @@ export default function EditCreator({
                     <FormLabel>Phone Number 2</FormLabel>
                     <FormControl>
                       <Input
-                        disabled={isDisabled()}
+                        disabled={isDisabled}
                         placeholder="Phone Number"
                         {...field}
                       />
@@ -359,7 +314,7 @@ export default function EditCreator({
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isDisabled()} className="w-64" type="submit">
+            <Button disabled={isDisabled} className="w-64" type="submit">
               Register
             </Button>
           </form>
@@ -369,7 +324,7 @@ export default function EditCreator({
         <p className="text-xl font-medium">
           Confirm your profiles on other Creative markets
         </p>
-        <LinkedSites disabled={isDisabled()} />
+        <LinkedSites disabled={isDisabled} />
       </div>
     </main>
   );
