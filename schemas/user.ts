@@ -2,7 +2,7 @@ import * as z from "zod";
 
 // for `Profile Settings` Form
 export const ProfileSchema = z.object({
-  avatar: z.instanceof(File).optional(),
+  avatar: z.string().optional(),
   username: z
     .string()
     .min(1, "Username is required")

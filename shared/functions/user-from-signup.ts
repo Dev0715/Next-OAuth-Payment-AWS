@@ -1,20 +1,8 @@
-import { axiosClient, axiosConfig } from "@/lib/axios";
 import { v4 as uuidv4 } from "uuid";
 
 import type { User } from "../types/user.type";
 import type { SignedUpData } from "../types/signup-data.type";
-
-export const uploadImage = async (file: File, keyName: string) => {
-  try {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("keyName", keyName);
-    const response = await axiosClient.post("/upload", formData, axiosConfig);
-    return response.data.success;
-  } catch (error) {
-    return false;
-  }
-};
+import { uploadImage } from "./upload-image";
 
 export const getUserFromGeneralDetails = async (
   generalDetails: SignedUpData["generalDetails"]
