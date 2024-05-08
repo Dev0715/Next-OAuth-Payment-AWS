@@ -20,5 +20,6 @@ export const getUserById = async (userId: string) => {
     return response.Item as User;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };

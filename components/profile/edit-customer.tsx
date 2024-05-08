@@ -21,7 +21,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaCcStripe, FaPaypal, FaUser } from "react-icons/fa";
 import { registerUser } from "@/actions/auth/register-user";
 import { axiosClient, axiosConfig } from "@/lib/axios";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
+import { useAtom } from "jotai";
 import { getUserById } from "@/data/user/user-by-id";
 
 export default function EditCustomer({
@@ -33,7 +34,7 @@ export default function EditCustomer({
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>(

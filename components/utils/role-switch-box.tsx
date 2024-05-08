@@ -11,7 +11,7 @@ export const RoleSwitchBox = ({ title, isChecked }: Props) => {
       <div className="space-y-0.5">
         <p className="text-black font-medium text-base">{title}</p>
       </div>
-      <Switch checked={isChecked} />
+      <Switch disabled checked={isChecked} />
     </div>
   );
 };

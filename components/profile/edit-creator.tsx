@@ -32,7 +32,8 @@ import { registerCreator } from "@/actions/auth/register-creator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
+import { useAtom } from "jotai";
 import { getUserById } from "@/data/user/user-by-id";
 import { JOB_TITLES } from "@/shared/constants/user.constant";
 
@@ -45,7 +46,7 @@ export default function EditCreator({
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
 
   const [avatar, setAvatar] = useState<File | null>();
   const [avatarImagePath, setAvatarImagePath] = useState<string | undefined>(
