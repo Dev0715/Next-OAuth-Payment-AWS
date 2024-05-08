@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -22,9 +22,10 @@ import { Separator } from "@/components/ui/separator";
 import { Header } from "./_components/header";
 import { RoleSwitchBox } from "@/components/utils/role-switch-box";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { GeneralDetailsSchema } from "@/schemas/auth/register";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
+import { ProfileSchema } from "@/schemas/user";
+import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 
 export default function Profile() {
   const user = useCurrentUser();
@@ -36,6 +37,16 @@ export default function Profile() {
   const [avatar, setAvatar] = useState<File>();
   const [avatarPath, setAvatarPath] = useState<string>();
 
+  useEffect(() => {
+    if (user?.avatar) {
+      getLinkFromS3(user.avatar).then((res) => {
+        if (res.success) {
+          setAvatarPath(res.response as string);
+        }
+      });
+    }
+  }, []);
+
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -44,18 +55,31 @@ export default function Profile() {
     }
   };
 
-  const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
-    resolver: zodResolver(GeneralDetailsSchema),
+  const form = useForm<z.infer<typeof ProfileSchema>>({
+    resolver: zodResolver(ProfileSchema),
     defaultValues: {
       username: user?.username,
       firstname: user?.firstname,
       lastname: user?.lastname,
-      email: user?.email,
-      password: user?.password
+      email: user?.email
     }
   });
 
-  const onSubmit = (values: z.infer<typeof GeneralDetailsSchema>) => {
+  const isChanged = useMemo(() => {
+    if (
+      user?.username !== form.getValues("username") ||
+      user.firstname !== form.getValues("firstname") ||
+      user.lastname !== form.getValues("lastname")
+    ) {
+      return true;
+    }
+  }, [
+    form.getValues("username"),
+    form.getValues("firstname"),
+    form.getValues("lastname")
+  ]);
+
+  const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
     setError("");
     setSuccess("");
 
@@ -69,7 +93,7 @@ export default function Profile() {
     <main className="w-full pl-8 flex flex-col gap-y-5">
       <Header
         title="General Profile"
-        content="You can see your roles opened here"
+        content="You can see your roles opened and update your profile information here."
       />
       <Separator />
       <div className="w-full flex flex-col gap-y-4">
@@ -123,25 +147,6 @@ export default function Profile() {
                 />
               </div>
             </div>
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Username*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="johndoe"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
           </div>
           <div className="w-full flex gap-x-6">
             <div className="w-1/2">
@@ -154,7 +159,7 @@ export default function Profile() {
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isPending}
+                        disabled
                         placeholder="username@mail.com"
                         type="email"
                       />
@@ -167,16 +172,15 @@ export default function Profile() {
             <div className="w-1/2">
               <FormField
                 control={form.control}
-                name="password"
+                name="username"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Password*</FormLabel>
+                    <FormLabel>Username*</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="******"
-                        type="password"
+                        placeholder="johndoe"
                       />
                     </FormControl>
                     <FormMessage />
@@ -227,7 +231,11 @@ export default function Profile() {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-64 self-end">
+          <Button
+            disabled={isPending || !isChanged}
+            type="submit"
+            className="w-64"
+          >
             Save Profile
           </Button>
         </form>
