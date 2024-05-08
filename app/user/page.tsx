@@ -74,17 +74,20 @@ export default function Profile() {
   });
 
   const isFormChanged = () => {
-    return (
+    const _changed =
       // user?.username !== form.getValues("username") ||
       user?.firstname !== form.getValues("firstname") ||
-      user?.lastname !== form.getValues("lastname")
-    );
+      user?.lastname !== form.getValues("lastname");
+
+    if (_changed) {
+      setError("");
+      setSuccess("");
+    }
+
+    return _changed;
   };
 
   const isChanged = useMemo(() => {
-    setError("");
-    setSuccess("");
-
     return isFormChanged() || avatar;
   }, [
     avatar,
