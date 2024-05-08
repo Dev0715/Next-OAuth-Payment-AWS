@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
 import { zodResolver } from "@hookform/resolvers/zod";
+import { v4 as uuidv4 } from "uuid";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -26,13 +26,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { ProfileSchema } from "@/schemas/user";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
+import { uploadImage } from "@/shared/functions/upload-image";
 
 export default function Profile() {
   const user = useCurrentUser();
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setPending] = useState<boolean>(false);
 
   const [avatar, setAvatar] = useState<File>();
   const [avatarPath, setAvatarPath] = useState<string>();
@@ -58,6 +59,7 @@ export default function Profile() {
   const form = useForm<z.infer<typeof ProfileSchema>>({
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
+      avatar: user?.avatar,
       username: user?.username,
       firstname: user?.firstname,
       lastname: user?.lastname,
@@ -65,27 +67,44 @@ export default function Profile() {
     }
   });
 
-  const isChanged = useMemo(() => {
-    if (
+  const isFormChanged = () => {
+    return (
       user?.username !== form.getValues("username") ||
       user.firstname !== form.getValues("firstname") ||
       user.lastname !== form.getValues("lastname")
-    ) {
-      return true;
-    }
+    );
+  };
+
+  const isChanged = useMemo(() => {
+    return isFormChanged() || avatar;
   }, [
+    avatar,
     form.getValues("username"),
     form.getValues("firstname"),
     form.getValues("lastname")
   ]);
 
+  const updateData = async (values: z.infer<typeof ProfileSchema>) => {
+    if (avatar) {
+      const keyName = `${user?.username}/${uuidv4()}`;
+      if (await uploadImage(avatar, keyName)) {
+        values.avatar = keyName;
+      } else {
+        setError("Failed to upload image");
+        return null;
+      }
+    }
+
+    console.log(values);
+  };
+
   const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {
-      // save the user's profile
-      console.log(values);
+    setPending(true);
+    updateData(values).then((res) => {
+      setPending(false);
     });
   };
 
