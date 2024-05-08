@@ -1,20 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { SwitchBox } from "@/components/utils/switch-box";
 import EditCreator from "@/components/profile/edit-creator";
 import { useAtom } from "jotai";
 import { userAtom } from "@/store/user";
-import { CreatorData } from "@/shared/types/user.type";
+import { CreatorData, User } from "@/shared/types/user.type";
 import { updateCreatorData } from "@/data/user";
 
 const CreatorSettings = () => {
-  const [user] = useAtom(userAtom);
+  const [user, setUser] = useAtom(userAtom);
+  const [isPending, startTransition] = useTransition();
   const [isChecked, setIsChecked] = useState<boolean>(
     user?.creator?.isCreator || false
   );
 
   const onSwitch = () => {
+    if (isPending) return;
+
     const newState = !isChecked;
     let creatorData = user?.creator;
 
@@ -30,19 +33,26 @@ const CreatorSettings = () => {
       isCreator: newState
     } as CreatorData;
 
-    updateCreatorData({
-      userId: user?.userId as string,
-      creatorData
-    }).then((res) => {
-      if (res) {
-        setIsChecked(newState);
-      }
+    startTransition(() => {
+      updateCreatorData({
+        userId: user?.userId as string,
+        creatorData
+      }).then((res) => {
+        if (res) {
+          setIsChecked(newState);
+          setUser({
+            ...user,
+            creator: creatorData
+          } as User);
+        }
+      });
     });
   };
 
   return (
     <main className="w-full pl-8 pb-6 flex flex-col gap-y-6">
       <SwitchBox
+        disabled={isPending}
         title="Creator's Profile"
         content="You can turn on or off your creator profile"
         isChecked={isChecked}
@@ -53,7 +63,7 @@ const CreatorSettings = () => {
             : "Are you sure to open creator account?"
         }
       />
-      <EditCreator disabled={!isChecked} />
+      <EditCreator disabled={!isChecked || isPending} />
     </main>
   );
 };
