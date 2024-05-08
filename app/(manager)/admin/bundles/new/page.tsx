@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa";
 import { useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { createBundle } from "@/data/bundles/bundle-create";
+import { createBundle } from "@/data/bundle";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";

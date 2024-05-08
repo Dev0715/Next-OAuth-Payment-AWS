@@ -1,7 +1,7 @@
 "use client";
 
 import { ProductItem } from "@/components/product/product-item";
-import { getBundleById } from "@/data/bundles/bundle-by-id";
+import { getBundleById } from "@/data/bundle";
 import { getProductById } from "@/data/products/product-by-id";
 import { Bundle } from "@/shared/types/bundles.type";
 import { Product } from "@/shared/types/product.type";

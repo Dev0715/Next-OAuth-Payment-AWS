@@ -1,6 +1,5 @@
 "use client";
 
-import { Navbar } from "../_components/navbar";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import {
   ColumnFiltersState,
@@ -14,6 +13,11 @@ import {
   useReactTable
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
+
+import { updateManagerProfile } from "@/data/user/manager-update";
+import { getAllUsers } from "@/data/user/users-all";
+import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -28,20 +32,25 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { getColumnsForBundlesTable } from "@/components/admin/bundles/bundles-colum";
-import { deleteBundle, getAllBundles } from "@/data/bundle";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FaPlus } from "react-icons/fa";
-import Link from "next/link";
-import { toast } from "sonner";
-import type { Bundle } from "@/shared/types/bundles.type";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { getColumnsForUsersTable } from "@/components/admin/users-column";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { Navbar } from "../_components/navbar";
+import type { ManagerData, User } from "@/shared/types/user.type";
 
-const ROWS_PER_PAGE = 10;
+const ROWS_PER_PAGE = 1;
 
-const ManagementBundles = () => {
+const AdminManagement = () => {
+  const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
-  const [bundles, setBundles] = useState<Bundle[]>([]);
+  const [editIndex, setEditIndex] = useState<number>(0);
+
+  const [isConfirmAlert, setConfirmAlert] = useState<boolean>(false);
+  const [confirmTitle, setConfirmTitle] = useState<string>("");
+  const [confirmMessage, setConfirmMessage] = useState<string>("");
+
+  const [users, setUsers] = useState<User[]>([]);
   const [lastEvaluatedKey, setLastEvaluatedKey] =
     useState<Record<string, string>>();
 
@@ -51,28 +60,34 @@ const ManagementBundles = () => {
   const [rowSelection, setRowSelection] = useState({});
 
   useEffect(() => {
-    getAllBundles(ROWS_PER_PAGE).then((res) => {
-      setBundles(res.items as Bundle[]);
+    getAllUsers(ROWS_PER_PAGE).then((res) => {
+      setUsers(res.items as User[]);
       setLastEvaluatedKey(res.lastEvaluatedKey);
       table.setPageSize(ROWS_PER_PAGE);
     });
   }, []);
 
-  const onDeleteBundle = (bundleId: string) => {
-    startTransition(() => {
-      deleteBundle(bundleId).then((res) => {
-        if (res?.success) {
-          setBundles(bundles.filter((bundle) => bundle.bundleId !== bundleId));
-        } else {
-          toast.error("Failed to delete bundle.");
-        }
-      });
-    });
+  const onCheckedChange = (checked: boolean, index: number) => {
+    setConfirmAlert(true);
+    setConfirmTitle("Update Manager Profile");
+    if (checked) {
+      setConfirmMessage("Are you sure you want to set this user as a manager?");
+    } else {
+      setConfirmMessage(
+        "Are you sure you want to get this user out of the manager role?"
+      );
+
+      setEditIndex(index);
+    }
   };
 
-  const columns = getColumnsForBundlesTable({ isPending, onDeleteBundle });
+  const columns = getColumnsForUsersTable({
+    isPending,
+    onCheckedChange
+  });
+
   const table = useReactTable({
-    data: bundles,
+    data: users,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -103,15 +118,36 @@ const ManagementBundles = () => {
     table.getPageCount()
   ]);
 
+  const onConfirmOK = () => {
+    setConfirmAlert(false);
+    const index = editIndex;
+    const checked = !(users[index].manager && users[index].manager?.isManager);
+
+    startTransition(() => {
+      const _manager: ManagerData = {
+        managerId: users[index].manager?.managerId || uuidv4(),
+        isManager: checked
+      };
+
+      updateManagerProfile(users[index].userId, _manager).then((res) => {
+        if (res) {
+          const _users = [...users];
+          _users[index].manager = _manager;
+          setUsers(_users);
+        }
+      });
+    });
+  };
+
   const onNext = () => {
     const currentPageIndex = table.getState().pagination.pageIndex;
     const pageCount = table.getPageCount();
 
     if (currentPageIndex + 1 === pageCount) {
       startTransition(() => {
-        getAllBundles(ROWS_PER_PAGE, lastEvaluatedKey?.bundleId).then((res) => {
+        getAllUsers(ROWS_PER_PAGE, lastEvaluatedKey?.userId).then((res) => {
           if (res.items?.length) {
-            setBundles([...bundles, ...(res.items as Bundle[])]);
+            setUsers([...users, ...(res.items as User[])]);
             table.nextPage();
           }
           setLastEvaluatedKey(res.lastEvaluatedKey);
@@ -124,33 +160,27 @@ const ManagementBundles = () => {
 
   return (
     <div className="w-full flex flex-col gap-y-6">
-      <Navbar title="Bundles" content="You can manage bundles" />
+      <ConfirmAlert
+        open={isConfirmAlert}
+        title={confirmTitle}
+        message={confirmMessage}
+        onOK={onConfirmOK}
+        onCancel={() => setConfirmAlert(false)}
+      />
+      <Navbar title="Managers" content="" />
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
-          <div className="flex gap-x-4">
-            <Input
-              disabled={isPending}
-              placeholder="Filter Title"
-              value={
-                (table.getColumn("title")?.getFilterValue() as string) ?? ""
-              }
-              onChange={(event) =>
-                table.getColumn("title")?.setFilterValue(event.target.value)
-              }
-              className="max-w-xs"
-            />
-            <Input
-              disabled={isPending}
-              placeholder="Filter User"
-              value={
-                (table.getColumn("userId")?.getFilterValue() as string) ?? ""
-              }
-              onChange={(event) =>
-                table.getColumn("userId")?.setFilterValue(event.target.value)
-              }
-              className="max-w-xs"
-            />
-          </div>
+          <Input
+            disabled={isPending}
+            placeholder="Filter User ID"
+            value={
+              (table.getColumn("userId")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("userId")?.setFilterValue(event.target.value)
+            }
+            className="max-w-xs"
+          />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
@@ -175,15 +205,6 @@ const ManagementBundles = () => {
                 ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button disabled={isPending}>
-            <Link
-              href="/admin/bundles/new"
-              className="flex items-center gap-x-2"
-            >
-              <FaPlus />
-              Add New
-            </Link>
-          </Button>
         </div>
         <div className="rounded-md border">
           <Table>
@@ -262,4 +283,4 @@ const ManagementBundles = () => {
   );
 };
 
-export default ManagementBundles;
+export default AdminManagement;

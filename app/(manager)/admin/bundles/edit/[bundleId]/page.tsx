@@ -2,14 +2,13 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { Navbar } from "../../../_components/navbar";
-import { getBundleById } from "@/data/bundles/bundle-by-id";
+import { getBundleById, updateBundle } from "@/data/bundle";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { BundleProducts } from "@/components/admin/bundles/bundle-products";
 import { getProductById } from "@/data/products/product-by-id";
 import { Button } from "@/components/ui/button";
 import { FaSave } from "react-icons/fa";
-import { updateBundle } from "@/data/bundles/bundle-update";
 import { Switch } from "@/components/ui/switch";
 import { useRouter } from "next/navigation";
 import { FormError } from "@/components/utils/form-error";
