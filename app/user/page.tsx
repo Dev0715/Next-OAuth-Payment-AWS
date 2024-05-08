@@ -29,9 +29,10 @@ import { ProfileSchema } from "@/schemas/user";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { uploadImage } from "@/shared/functions/upload-image";
 import { updateGeneralProfile } from "@/data/user/profile-update";
+import { User } from "@/shared/types/user.type";
 
 export default function Profile() {
-  const [user] = useAtom(userAtom);
+  const [user, updateUser] = useAtom(userAtom);
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -48,7 +49,7 @@ export default function Profile() {
         }
       });
     }
-  }, [user]);
+  }, []);
 
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +75,7 @@ export default function Profile() {
 
   const isFormChanged = () => {
     return (
-      user?.username !== form.getValues("username") ||
+      // user?.username !== form.getValues("username") ||
       user?.firstname !== form.getValues("firstname") ||
       user?.lastname !== form.getValues("lastname")
     );
@@ -87,7 +88,7 @@ export default function Profile() {
     return isFormChanged() || avatar;
   }, [
     avatar,
-    form.getValues("username"),
+    // form.getValues("username"),
     form.getValues("firstname"),
     form.getValues("lastname")
   ]);
@@ -99,17 +100,17 @@ export default function Profile() {
         values.avatar = keyName;
       } else {
         setError("Failed to upload image");
-        return false;
+        return null;
       }
     }
 
     const reponse = await updateGeneralProfile(user?.userId as string, values);
     if (reponse) {
       setSuccess("Profile updated successfully");
-      return true;
+      return values;
     } else {
       setError("Failed to update profile");
-      return false;
+      return null;
     }
   };
 
@@ -118,7 +119,14 @@ export default function Profile() {
     setSuccess("");
 
     setPending(true);
-    updateData(values).then(() => {
+    updateData(values).then((savedValues) => {
+      if (savedValues) {
+        updateUser({
+          ...user,
+          ...savedValues
+        } as User);
+      }
+      setAvatar(undefined);
       setPending(false);
     });
   };
@@ -211,11 +219,7 @@ export default function Profile() {
                   <FormItem className="w-full">
                     <FormLabel>Username*</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="johndoe"
-                      />
+                      <Input {...field} disabled placeholder="johndoe" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
