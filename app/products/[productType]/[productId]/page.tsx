@@ -12,14 +12,14 @@ import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-ord
 import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
+import { useAtom } from "jotai";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { getProductById } from "@/data/products/product-by-id";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
 import { addProductToCart } from "@/actions/user/add-product-to-cart";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { useAtom } from "jotai";
 import { cartAtom } from "@/store/cart";
 import { orderListAtom } from "@/store/orderList";
 import { addProductToPurchased } from "@/actions/user/add-product-to-purchased";
@@ -58,7 +58,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const Gateway_Cancelled = "cancelled";
 
   const searchParams = useSearchParams();
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
   const currentPath = usePathname();
 
   const [isPending, startTransition] = useTransition();

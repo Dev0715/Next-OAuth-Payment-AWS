@@ -2,7 +2,8 @@
 
 import { Navbar } from "./_components/navbar";
 import { useEffect, useState, useTransition } from "react";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
+import { useAtom } from "jotai";
 import { getUserById } from "@/data/user/user-by-id";
 import { getProductById } from "@/data/products/product-by-id";
 import { CartItem } from "./_components/cart-item";
@@ -17,7 +18,7 @@ type ProductInfo = {
 };
 
 export default function Cart() {
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
   const [isPending, startTransition] = useTransition();
   const [products, setProducts] = useState<CartProduct[]>([]);
   const [isConfirming, setConfirming] = useState<boolean>(false);

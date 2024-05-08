@@ -4,7 +4,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaDownload, FaRegUser } from "react-icons/fa";
 import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
+import { useAtom } from "jotai";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { getProductById } from "@/data/products/product-by-id";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
@@ -49,7 +50,7 @@ const Thumbnail = (props: {
 };
 
 export default function ProductDetails({ params }: { params: ProductLink }) {
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
 
   const [isPending, startTransition] = useTransition();
   const [isConfirming, setConfirming] = useState<boolean>(false);

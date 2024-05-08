@@ -21,7 +21,8 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Header } from "./_components/header";
 import { RoleSwitchBox } from "@/components/utils/role-switch-box";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
+import { useAtom } from "jotai";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { ProfileSchema } from "@/schemas/user";
@@ -30,7 +31,7 @@ import { uploadImage } from "@/shared/functions/upload-image";
 import { updateGeneralProfile } from "@/data/user/profile-update";
 
 export default function Profile() {
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -47,7 +48,7 @@ export default function Profile() {
         }
       });
     }
-  }, []);
+  }, [user]);
 
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,8 +75,8 @@ export default function Profile() {
   const isFormChanged = () => {
     return (
       user?.username !== form.getValues("username") ||
-      user.firstname !== form.getValues("firstname") ||
-      user.lastname !== form.getValues("lastname")
+      user?.firstname !== form.getValues("firstname") ||
+      user?.lastname !== form.getValues("lastname")
     );
   };
 

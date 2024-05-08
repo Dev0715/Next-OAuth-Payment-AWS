@@ -7,12 +7,13 @@ import { FaArrowRight } from "react-icons/fa";
 import { useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { createBundle } from "@/data/bundles/bundle-create";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { userAtom } from "@/store/user";
+import { useAtom } from "jotai";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { useRouter } from "next/navigation";
 
 const NewBundlePage = () => {
-  const user = useCurrentUser();
+  const [user] = useAtom(userAtom);
   const history = useRouter();
 
   const [isPending, startTransition] = useTransition();
