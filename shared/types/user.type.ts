@@ -23,7 +23,7 @@ export type CreatorData = {
   creatorId: string;
   cover?: string;
   bio?: string;
-  jobTitle: string;
+  jobTitle?: string;
   company?: Company;
   websites?: string[];
 
