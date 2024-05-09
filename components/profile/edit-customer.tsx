@@ -1,37 +1,13 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useEffect, useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "@/components/ui/form";
-import { CustomerRegisterSchema } from "@/schemas/auth/auth";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/utils/form-error";
-import { FormSuccess } from "@/components/utils/form-success";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaCcStripe, FaPaypal, FaUser } from "react-icons/fa";
-import { registerUser } from "@/actions/auth/register-user";
-import { axiosClient, axiosConfig } from "@/lib/axios";
-import { userAtom } from "@/store/user";
-import { useAtom } from "jotai";
-import { getUserById } from "@/data/user";
+import { FaCcStripe, FaPaypal } from "react-icons/fa";
+import { Button } from "../ui/button";
 
 export default function EditCustomer({
   disabled = false
 }: {
   disabled?: boolean;
 }) {
-  const [user] = useAtom(userAtom);
-
   return (
     <main className="w-full flex justify-between gap-x-6">
       <div className="w-2/5 flex flex-col gap-y-6">
