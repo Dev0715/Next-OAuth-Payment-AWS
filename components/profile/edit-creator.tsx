@@ -36,6 +36,7 @@ import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
 import { getUserById } from "@/data/user";
 import { JOB_TITLES } from "@/shared/constants/user.constant";
+import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 
 export default function EditCreator({
   disabled = false
@@ -50,6 +51,16 @@ export default function EditCreator({
 
   const [cover, setCover] = useState<File>();
   const [coverImagePath, setCoverImagePath] = useState<string>();
+
+  useEffect(() => {
+    if (user?.creator?.cover) {
+      getLinkFromS3(user.creator.cover).then((res) => {
+        if (res.success) {
+          setCoverImagePath(res.response as string);
+        }
+      });
+    }
+  }, []);
 
   const hiddenCoverFileIniput = useRef<HTMLInputElement>(null);
   const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,14 +77,19 @@ export default function EditCreator({
   const form = useForm<z.infer<typeof CreatorSettingsSchema>>({
     resolver: zodResolver(CreatorSettingsSchema),
     defaultValues: {
-      username: "temp",
-      firstname: "temp",
-      lastname: "temp",
-      email: "temp@gmail.com",
-      jobTitle: JOB_TITLES[0],
-      address: "temp",
-      phone1: "temp",
-      phone2: "temp"
+      cover: user?.creator?.bio,
+      username: user?.username,
+      email: user?.email,
+      bio: user?.creator?.bio,
+      jobTitle: user?.creator?.jobTitle,
+      companyTitle: user?.creator?.company?.name,
+      companyCountry: user?.creator?.company?.country,
+      companyWebsite: user?.creator?.company?.website,
+      website1: user?.creator?.websites?.[0],
+      website2: user?.creator?.websites?.[1],
+      website3: user?.creator?.websites?.[2],
+      website4: user?.creator?.websites?.[3],
+      website5: user?.creator?.websites?.[4]
     }
   });
 
