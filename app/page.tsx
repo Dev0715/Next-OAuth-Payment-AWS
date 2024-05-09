@@ -8,6 +8,7 @@ import { Services } from "@/components/landing/services";
 import { Featured } from "@/components/landing/featured";
 import { Finisher } from "@/components/landing/finisher";
 import { Footer } from "./_components/footer";
+import { cn } from "@/lib/utils";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -17,7 +18,7 @@ const font = Poppins({
 const Home = () => {
   return (
     <>
-      <main className="relative w-full">
+      <main className={cn("relative w-full", font.className)}>
         <Hero />
         <Services />
         <Featured />

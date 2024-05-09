@@ -3,9 +3,9 @@
 import { Separator } from "@/components/ui/separator";
 import { Header } from "../_components/header";
 import { PasswordChangeForm } from "@/components/auth/password-change-form";
-import { CryptoPrefForm } from "@/components/profile/cryptopref-form";
-import { PaymentPrefForm } from "@/components/profile/paymentpref-form";
-import { DonatePrefForm } from "@/components/profile/donatepref-form";
+// import { CryptoPrefForm } from "@/components/profile/cryptopref-form";
+// import { PaymentPrefForm } from "@/components/profile/paymentpref-form";
+// import { DonatePrefForm } from "@/components/profile/donatepref-form";
 
 const Account = () => {
   return (

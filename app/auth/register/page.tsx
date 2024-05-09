@@ -43,8 +43,6 @@ const RegisterPage = () => {
   });
 
   const [step, setStep] = useState<number>(0);
-  const [isPending, startTransition] = useTransition();
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   const moveStepForward = () => {
     setStep(step + 1);
@@ -52,10 +50,6 @@ const RegisterPage = () => {
 
   const moveStepBackward = () => {
     setStep(step - 1);
-  };
-
-  const isActive = () => {
-    return !isDisabled && !isPending;
   };
 
   const isCreatorStep = () => {
