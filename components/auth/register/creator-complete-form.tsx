@@ -19,7 +19,6 @@ type Props = {
 
 export const CreatorCompleteForm = ({
   userData,
-  setUserData,
   moveStepForward,
   moveStepBackward
 }: Props) => {
