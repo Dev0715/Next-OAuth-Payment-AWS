@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaCartArrowDown, FaDownload, FaRegUser } from "react-icons/fa";
 import { Navbar } from "../../_components/navbar";
 import { usePathname, useSearchParams } from "next/navigation";
-import { captureOrder as captureStripeOrder } from "@/actions/stripe/capture-order";
+// import { captureOrder as captureStripeOrder } from "@/actions/stripe/capture-order";
 import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
 import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
@@ -71,7 +71,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   const [cart, setCart] = useAtom(cartAtom);
-  const [orderList, setOrderList] = useAtom(orderListAtom);
+  const [, setOrderList] = useAtom(orderListAtom);
 
   useEffect(() => {
     let ignore = false; // # to prevent twice loading #
@@ -112,7 +112,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const setPurchasedErrorConfirming = () => {
     setConfirming(true);
     setConfirmingTitle("Failure");
-    setConfirmingMessage("Internal server error occured while purchasing");
+    setConfirmingMessage("Internal server error occurred while purchasing");
   };
 
   const onProductPurchased = () => {
@@ -132,7 +132,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           setPurchasedErrorConfirming();
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setPurchasedErrorConfirming();
       });
   };
@@ -141,12 +141,12 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     const gateway = searchParams.get("gateway");
     if (gateway === Gateway_Paypal) {
       const paymentId = String(searchParams.get("token"));
-      const payerId = searchParams.get("PayerID");
+      // const payerId = searchParams.get("PayerID");
       capturePaypalOrder({ paymentId });
       onProductPurchased();
     } else if (gateway === Gateway_Stripe) {
-      const paymentId = String(searchParams.get("session_id"));
-      const payerId = 0;
+      // const paymentId = String(searchParams.get("session_id"));
+      // const payerId = 0;
       // captureStripeOrder({ paymentId });
       onProductPurchased();
     } else if (gateway === Gateway_Cancelled) {
@@ -163,7 +163,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     } else {
       setConfirmingTitle("Failure");
       setConfirmingMessage(
-        message || "An error occured while moving product to your cart"
+        message || "An error occurred while moving product to your cart"
       );
     }
   };
@@ -193,7 +193,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
             setCartConfirming(false, res.error);
           }
         })
-        .catch((error) => {
+        .catch(() => {
           setCartConfirming(false);
         });
     });
@@ -203,7 +203,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     setConfirming(true);
     setConfirmingTitle("Failure");
     setConfirmingMessage(
-      "An internal server error occured while tyring to download"
+      "An internal server error occurred while trying to download"
     );
   };
 
@@ -224,10 +224,10 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         link.href = URL.createObjectURL(blob);
         link.click();
       })
-      .catch((error) => {
+      .catch(() => {
         setDownloadFailureConfirming();
       })
-      .catch((error) => {
+      .catch(() => {
         setDownloadFailureConfirming();
       });
   };
@@ -295,7 +295,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
               >
                 <Link href={`/profile/creator/${product?.ownerId}`}>
                   <FaRegUser className="text-green-700" />
-                  Go to Creator's Profile
+                  {`Go to Creator's Profile`}
                 </Link>
               </Button>
               <QuestionAlert
