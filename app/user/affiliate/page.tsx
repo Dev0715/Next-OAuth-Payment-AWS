@@ -5,12 +5,13 @@ import { SwitchBox } from "@/components/utils/switch-box";
 import { useAtom } from "jotai";
 import { userAtom } from "@/store/user";
 import { AffiliateData, User } from "@/shared/types/user.type";
+import { updateAffiliateData } from "@/data/user";
 
 const AffiliateSettings = () => {
   const [user, setUser] = useAtom(userAtom);
   const [isPending, startTransition] = useTransition();
   const [isChecked, setIsChecked] = useState<boolean>(
-    user?.customer?.isCustomer || false
+    user?.affiliate?.isAffiliate || false
   );
 
   const onSwitch = () => {
@@ -57,8 +58,8 @@ const AffiliateSettings = () => {
         onCheckedChange={onSwitch}
         alertTitle={
           isChecked
-            ? "Are you sure to close customer account?"
-            : "Are you sure to create customer account?"
+            ? "Are you sure to close affiliate account?"
+            : "Are you sure to create affiliate account?"
         }
       />
     </main>
