@@ -138,7 +138,7 @@ export const GeneralDetailsForm = ({
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="johndoe"
+                        placeholder="username"
                       />
                     </FormControl>
                     <FormMessage />
@@ -201,7 +201,7 @@ export const GeneralDetailsForm = ({
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="John"
+                        placeholder="firstname"
                       />
                     </FormControl>
                     <FormMessage />
@@ -220,7 +220,7 @@ export const GeneralDetailsForm = ({
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="Doe"
+                        placeholder="lastname"
                       />
                     </FormControl>
                     <FormMessage />
