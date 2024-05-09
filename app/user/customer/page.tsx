@@ -5,6 +5,8 @@ import EditCustomer from "@/components/profile/edit-customer";
 import { useState, useTransition } from "react";
 import { useAtom } from "jotai";
 import { userAtom } from "@/store/user";
+import { CustomerData, User } from "@/shared/types/user.type";
+import { updateCustomerData } from "@/data/user";
 
 const CustomerSettings = () => {
   const [user, setUser] = useAtom(userAtom);
@@ -15,6 +17,36 @@ const CustomerSettings = () => {
 
   const onSwitch = () => {
     if (isPending) return;
+
+    const newState = !isChecked;
+    let customerData = user?.customer;
+
+    if (newState && !customerData) {
+      customerData = {
+        customerId: user?.userId as string,
+        isCustomer: true
+      };
+    }
+
+    customerData = {
+      ...customerData,
+      isCustomer: newState
+    } as CustomerData;
+
+    startTransition(() => {
+      updateCustomerData({
+        userId: user?.userId as string,
+        customerData
+      }).then((res) => {
+        if (res) {
+          setIsChecked(newState);
+          setUser({
+            ...user,
+            customer: customerData
+          } as User);
+        }
+      });
+    });
   };
 
   return (
