@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -28,13 +28,12 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaUser } from "react-icons/fa";
-import { axiosClient, axiosConfig } from "@/lib/axios";
+
 import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { getUserById, updateCreatorData } from "@/data/user";
+import { updateCreatorData } from "@/data/user";
 import { JOB_TITLES } from "@/shared/constants/user.constant";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { uploadImage } from "@/shared/functions/upload-image";
@@ -64,7 +63,7 @@ export default function EditCreator({
     }
   }, []);
 
-  const hiddenCoverFileIniput = useRef<HTMLInputElement>(null);
+  const hiddenCoverFileInput = useRef<HTMLInputElement>(null);
   const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setCoverImagePath(URL.createObjectURL(e.target.files[0]));
@@ -165,12 +164,12 @@ export default function EditCreator({
       ]
     } as CreatorData;
 
-    const reponse = await updateCreatorData({
+    const response = await updateCreatorData({
       userId: user?.userId as string,
       creatorData
     });
 
-    if (reponse) {
+    if (response) {
       setSuccess("Profile updated successfully");
       return creatorData;
     } else {
@@ -225,7 +224,7 @@ export default function EditCreator({
                   variant={"outline"}
                   size={"sm"}
                   className="w-32 rounded-none"
-                  onClick={() => hiddenCoverFileIniput.current?.click()}
+                  onClick={() => hiddenCoverFileInput.current?.click()}
                 >
                   Upload New
                 </Button>
@@ -233,7 +232,7 @@ export default function EditCreator({
                   className="hidden"
                   type="file"
                   accept="image/*"
-                  ref={hiddenCoverFileIniput}
+                  ref={hiddenCoverFileInput}
                   onChange={onCoverChanged}
                 />
               </div>

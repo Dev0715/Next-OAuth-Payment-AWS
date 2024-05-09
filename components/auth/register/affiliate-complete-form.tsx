@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
@@ -20,7 +20,6 @@ type Props = {
 export const AffiliateCompleteForm = ({
   step,
   userData,
-  setUserData,
   moveStepForward,
   moveStepBackward
 }: Props) => {
@@ -41,7 +40,7 @@ export const AffiliateCompleteForm = ({
       setConfirmOpen(true);
       if (response.success) {
         setConfirmTitle("Success");
-        setConfirmMessage("A new affiliate was newly registerd!");
+        setConfirmMessage("A new affiliate was newly registered!");
       } else {
         setConfirmTitle("Error");
         setConfirmMessage(response.error as string);
@@ -57,7 +56,7 @@ export const AffiliateCompleteForm = ({
     if (userData.selectedAccounts.creator || userData.selectedAccounts.user) {
       setConfirmOpen(true);
       setConfirmTitle("Success");
-      setConfirmMessage("A new affiliate was newly registerd!");
+      setConfirmMessage("A new affiliate was newly registered!");
     } else {
       setDisabled(true);
       processUserData().then(() => {
