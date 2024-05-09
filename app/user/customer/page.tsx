@@ -54,7 +54,7 @@ const CustomerSettings = () => {
       <SwitchBox
         disabled={isPending}
         title="Customer Profile"
-        content="you can turn on or off your creator profile"
+        content="you can turn on or off your customer profile"
         isChecked={isChecked}
         onCheckedChange={onSwitch}
         alertTitle={
