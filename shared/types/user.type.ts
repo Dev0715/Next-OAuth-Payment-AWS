@@ -1,11 +1,11 @@
 import type { ProductLink } from "./product.type";
 
 export type Address = {
-  address1: string;
+  address1?: string;
   address2?: string;
-  city: string;
-  postal: string;
-  country: string;
+  city?: string;
+  postal?: string;
+  country?: string;
   geo?: {
     lat: number;
     lng: number;

@@ -191,20 +191,20 @@ export const updateUserVerification = async (userId: string) => {
   }
 };
 
-export const updateGeneralProfile = async (
-  userId: string,
-  values: z.infer<typeof ProfileSchema>
-) => {
+export const updateGeneralProfile = async (userId: string, userData: User) => {
   const command = new UpdateCommand({
     TableName: AWS_DYNAMO_TABLES.USER,
     Key: { userId },
     UpdateExpression:
-      "SET avatar = :avatar, username = :username, firstname = :firstname, lastname = :lastname",
+      "SET avatar = :avatar, username = :username, firstname = :firstname, lastname = :lastname, phone1 = :phone1, phone2 = :phone2, address = :address",
     ExpressionAttributeValues: {
-      ":avatar": values.avatar || "",
-      ":username": values.username,
-      ":firstname": values.firstname,
-      ":lastname": values.lastname
+      ":avatar": userData.avatar || "",
+      ":username": userData.username,
+      ":firstname": userData.firstname,
+      ":lastname": userData.lastname,
+      ":phone1": userData.phone1 || "",
+      ":phone2": userData.phone2 || "",
+      ":address": userData.address
     },
     ReturnValues: "ALL_NEW"
   });
