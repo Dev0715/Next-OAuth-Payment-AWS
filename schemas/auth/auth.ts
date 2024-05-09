@@ -41,41 +41,23 @@ export const PasswordChangeSchema = z.object({
 });
 
 // for `Creator Registration` Form
-export const CreatorRegisterSchema = z.object({
-  avatar: z.string().optional(),
+export const CreatorSettingsSchema = z.object({
+  cover: z.string().optional(),
   username: z
     .string()
     .min(1, "A name is required")
     .max(72, "Name must be a maximum of 72 characters"),
-  bio: z
-    .string()
-    .min(22, "Bio must be a minimum of 24 characters")
-    .max(2400, "Bio must be a maximum of 2400 characters"),
-  firstname: z
-    .string()
-    .min(1, "First name is required")
-    .max(72, "First name must be a maximum of 72 characters"),
-  lastname: z
-    .string()
-    .min(1, "Last name is required")
-    .max(72, "Last name must be a maximum of 72 characters"),
   email: z.string().email({ message: "Please enter a valid email" }),
-  jobTitle: z
-    .string()
-    .min(1, "A name is required")
-    .max(72, "Name must be a maximum of 72 characters"),
-  address: z
-    .string()
-    .min(1, "A name is required")
-    .max(72, "Name must be a maximum of 72 characters"),
-  phone1: z
-    .string()
-    .min(1, "A name is required")
-    .max(72, "Name must be a maximum of 72 characters"),
-  phone2: z
-    .string()
-    .min(1, "A name is required")
-    .max(72, "Name must be a maximum of 72 characters")
+  bio: z.string().optional(),
+  jobTitle: z.string().optional(),
+  companyTitle: z.string().optional(),
+  companyWebsite: z.string().optional(),
+  companyCountry: z.string().optional(),
+  website1: z.string().optional(),
+  website2: z.string().optional(),
+  website3: z.string().optional(),
+  website4: z.string().optional(),
+  website5: z.string().optional()
 });
 
 // for `User Registration` Form
