@@ -398,3 +398,29 @@ export const updateCustomerData = async ({
     return null;
   }
 };
+
+export const updateAffiliateData = async ({
+  userId,
+  affiliateData
+}: {
+  userId: string;
+  affiliateData: User["affiliate"];
+}) => {
+  const command = new UpdateCommand({
+    TableName: AWS_DYNAMO_TABLES.USER,
+    Key: { userId },
+    UpdateExpression: "SET affiliate = :affiliate",
+    ExpressionAttributeValues: {
+      ":affiliate": affiliateData
+    },
+    ReturnValues: "ALL_NEW"
+  });
+
+  try {
+    const response = await db.send(command);
+    return response.Attributes;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
