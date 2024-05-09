@@ -2,6 +2,7 @@ import { Switch } from "../ui/switch";
 import { QuestionAlert } from "./question-alert";
 
 type ParamsType = {
+  disabled?: boolean;
   title: string;
   content: string;
   isChecked: boolean;
@@ -11,6 +12,7 @@ type ParamsType = {
 };
 
 export const SwitchBox = ({
+  disabled,
   title,
   content,
   isChecked,
@@ -29,7 +31,7 @@ export const SwitchBox = ({
         message={alertMessage}
         onContinue={onCheckedChange}
       >
-        <Switch checked={isChecked} />
+        <Switch checked={isChecked} disabled={disabled} />
       </QuestionAlert>
     </div>
   );

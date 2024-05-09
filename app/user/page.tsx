@@ -54,11 +54,11 @@ export default function Profile() {
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setError("");
-      setSuccess("");
-
       setAvatarPath(URL.createObjectURL(e.target.files[0]));
       setAvatar(e?.target?.files?.[0]);
+
+      setError("");
+      setSuccess("");
     }
   };
 
