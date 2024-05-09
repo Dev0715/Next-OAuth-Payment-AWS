@@ -12,7 +12,7 @@ import { z } from "zod";
 import db from "@/lib/db";
 import { generateVerificationToken } from "@/lib/tokens";
 import { ProfileSchema } from "@/schemas/user";
-import { CreatorRegisterSchema } from "@/schemas/auth/auth";
+import { CreatorSettingsSchema } from "@/schemas/auth/auth";
 import { AWS_DYNAMO_TABLES } from "@/shared/constants/server.constant";
 
 import type { CreatorData, ManagerData, User } from "@/shared/types/user.type";
@@ -324,7 +324,7 @@ export const updateManagerProfile = async (
 
 export const updateCreatorProfile = async (
   userId: string,
-  values: z.infer<typeof CreatorRegisterSchema>
+  values: z.infer<typeof CreatorSettingsSchema>
 ) => {
   const command = new UpdateCommand({
     TableName: AWS_DYNAMO_TABLES.USER,
@@ -373,10 +373,34 @@ export const updateUserCart = async ({
 
   try {
     const response = await db.send(command);
-    console.log("__updateUserCart__UpdateCommand__RESPONSE", response);
     return response.Attributes;
   } catch (error) {
-    console.log("__updateUserCart__UpdateCommand__ERROR", error);
+    return null;
+  }
+};
+
+export const updateCreatorData = async ({
+  userId,
+  creatorData
+}: {
+  userId: string;
+  creatorData: User["creator"];
+}) => {
+  const command = new UpdateCommand({
+    TableName: AWS_DYNAMO_TABLES.USER,
+    Key: { userId },
+    UpdateExpression: "SET creator = :creator",
+    ExpressionAttributeValues: {
+      ":creator": creatorData
+    },
+    ReturnValues: "ALL_NEW"
+  });
+
+  try {
+    const response = await db.send(command);
+    return response.Attributes;
+  } catch (error) {
+    console.error(error);
     return null;
   }
 };
