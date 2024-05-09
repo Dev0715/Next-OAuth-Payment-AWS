@@ -15,11 +15,11 @@ import { TransitionInOut } from "@/components/utils/transition-in-out";
 const RegisterPage = () => {
   const [userData, setUserData] = useState<SignedUpData>({
     generalDetails: {
-      username: "firstnamelastname",
-      email: "firstname@org.com",
-      password: "123456",
-      firstname: "firstname",
-      lastname: "lastname"
+      username: "",
+      email: "",
+      password: "",
+      firstname: "",
+      lastname: ""
     },
     selectedAccounts: {
       creator: false,
@@ -27,8 +27,8 @@ const RegisterPage = () => {
       affiliate: false
     },
     creatorDetails: {
-      bio: "Description - Bio",
-      jobTitle: "Project Manager",
+      bio: "",
+      jobTitle: "",
       companyName: "",
       companyCountry: "",
       companyWebsite: ""
