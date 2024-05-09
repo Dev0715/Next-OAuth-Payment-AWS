@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export const Footer = () => {
   return (
@@ -28,7 +27,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap">
           <div className="w-full lg:w-6/12 px-4">
-            <h4 className="text-3xl font-semibold">Let's keep in touch!</h4>
+            <h4 className="text-3xl font-semibold">{`Let's keep in touch!`}</h4>
             <h5 className="text-lg mt-0 mb-2 text-gray-700">
               Find us on any of these platforms, we respond 1-2 business days.
             </h5>
@@ -49,7 +48,7 @@ export const Footer = () => {
                 className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
                 type="button"
               >
-                <i className="flex fab fa-dribbble"></i>
+                <i className="flex fab fa-dribble"></i>
               </button>
               <button
                 className="bg-white text-gray-900 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"

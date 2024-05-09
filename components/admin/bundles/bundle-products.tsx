@@ -26,12 +26,12 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { BundleProductSelect } from "./bundle-products-select";
 
 type Props = {
-  isPending: boolean;
+  isPending?: boolean;
   products: Product[];
   setProducts: Dispatch<SetStateAction<Product[]>>;
 };
 
-export const BundleProducts = ({ isPending, products, setProducts }: Props) => {
+export const BundleProducts = ({ products, setProducts }: Props) => {
   const [isAddDlg, setAddDlg] = useState<boolean>(false);
 
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -56,7 +56,6 @@ export const BundleProducts = ({ isPending, products, setProducts }: Props) => {
   };
 
   const columns = getColumnsForBundleProductsTable({
-    isPending,
     onProductDelete
   });
   const table = useReactTable({
