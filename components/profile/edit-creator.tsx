@@ -331,12 +331,16 @@ export default function EditCreator({
               <div className="w-1/2">
                 <FormField
                   control={form.control}
-                  name="username"
+                  name="companyTitle"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Your Company</FormLabel>
                       <FormControl>
-                        <Input disabled placeholder="JohnDoe1234" {...field} />
+                        <Input
+                          disabled={isDisabled}
+                          placeholder="Company title"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -346,15 +350,14 @@ export default function EditCreator({
               <div className="w-1/2">
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="companyWebsite"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
                         <Input
+                          disabled={isDisabled}
+                          placeholder="Company website"
                           {...field}
-                          disabled
-                          placeholder="username@yemail.com"
-                          type="email"
                         />
                       </FormControl>
                       <FormMessage />
@@ -366,15 +369,14 @@ export default function EditCreator({
             <div className="w-1/2 pr-3">
               <FormField
                 control={form.control}
-                name="email"
+                name="companyCountry"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
                       <Input
                         {...field}
-                        disabled
-                        placeholder="username@yemail.com"
-                        type="email"
+                        disabled={isDisabled}
+                        placeholder="Company country"
                       />
                     </FormControl>
                     <FormMessage />
