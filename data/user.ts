@@ -322,38 +322,6 @@ export const updateManagerProfile = async (
   }
 };
 
-export const updateCreatorProfile = async (
-  userId: string,
-  values: z.infer<typeof CreatorSettingsSchema>
-) => {
-  const command = new UpdateCommand({
-    TableName: AWS_DYNAMO_TABLES.USER,
-    Key: { userId },
-    UpdateExpression:
-      "SET username = :username, firstname = :firstname, lastname = :lastname, email = :email, jobTitle = :jobTitle, address = :address, phone1 = :phone1, phone2 = :phone2",
-    ExpressionAttributeValues: {
-      ":username": values.username,
-      ":firstname": values.firstname,
-      ":lastname": values.lastname,
-      ":email": values.email,
-      ":jobTitle": values.jobTitle,
-      ":address": values.address,
-      ":phone1": values.phone1,
-      ":phone2": values.phone2
-    },
-    ReturnValues: "ALL_NEW"
-  });
-
-  try {
-    const response = await db.send(command);
-    console.log("__updateUserVerification__UpdateCommand__RESPONSE", response);
-    return response.Attributes;
-  } catch (error) {
-    console.log("__updateUserVerification__UpdateCommand__ERROR", error);
-    return null;
-  }
-};
-
 export const updateUserCart = async ({
   userId,
   newCart
@@ -367,6 +335,31 @@ export const updateUserCart = async ({
     UpdateExpression: "SET cart = :cart",
     ExpressionAttributeValues: {
       ":cart": newCart
+    },
+    ReturnValues: "ALL_NEW"
+  });
+
+  try {
+    const response = await db.send(command);
+    return response.Attributes;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const updateCreatorData = async ({
+  userId,
+  creatorData
+}: {
+  userId: string;
+  creatorData: User["creator"];
+}) => {
+  const command = new UpdateCommand({
+    TableName: AWS_DYNAMO_TABLES.USER,
+    Key: { userId },
+    UpdateExpression: "SET creator = :creator",
+    ExpressionAttributeValues: {
+      ":creator": creatorData
     },
     ReturnValues: "ALL_NEW"
   });
