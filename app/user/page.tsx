@@ -84,7 +84,14 @@ export default function Profile() {
     const _changed =
       // user?.username !== form.getValues("username") ||
       user?.firstname !== form.getValues("firstname") ||
-      user?.lastname !== form.getValues("lastname");
+      user?.lastname !== form.getValues("lastname") ||
+      user?.phone1 !== form.getValues("phone1") ||
+      user?.phone2 !== form.getValues("phone2") ||
+      user?.address?.address1 !== form.getValues("address1") ||
+      user?.address?.address2 !== form.getValues("address2") ||
+      user?.address?.city !== form.getValues("city") ||
+      user?.address?.postal !== form.getValues("postal") ||
+      user?.address?.country !== form.getValues("country");
 
     if (_changed) {
       setError("");
@@ -100,7 +107,14 @@ export default function Profile() {
     avatar,
     // form.getValues("username"),
     form.getValues("firstname"),
-    form.getValues("lastname")
+    form.getValues("lastname"),
+    form.getValues("phone1"),
+    form.getValues("phone2"),
+    form.getValues("address1"),
+    form.getValues("address2"),
+    form.getValues("city"),
+    form.getValues("postal"),
+    form.getValues("country")
   ]);
 
   const updateData = async (values: z.infer<typeof ProfileSchema>) => {
@@ -114,10 +128,29 @@ export default function Profile() {
       }
     }
 
-    const reponse = await updateGeneralProfile(user?.userId as string, values);
-    if (reponse) {
+    const userData = {
+      avatar: values.avatar,
+      username: values.username,
+      firstname: values.firstname,
+      lastname: values.lastname,
+      phone1: values.phone1,
+      phone2: values.phone2,
+      address: {
+        address1: values.address1,
+        address2: values.address2,
+        city: values.city,
+        postal: values.postal,
+        country: values.country
+      }
+    } as User;
+
+    const response = await updateGeneralProfile(
+      user?.userId as string,
+      userData
+    );
+    if (response) {
       setSuccess("Profile updated successfully");
-      return values;
+      return userData;
     } else {
       setError("Failed to update profile");
       return null;
