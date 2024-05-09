@@ -7,12 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import type { Product } from "@/shared/types/product.type";
 
 type PropsType = {
-  isPending: boolean;
   onProductDelete: (productId: string) => void;
 };
 
 export const getColumnsForBundleProductsTable = ({
-  isPending,
   onProductDelete
 }: PropsType) => {
   const columns: ColumnDef<Product, string | string[]>[] = [

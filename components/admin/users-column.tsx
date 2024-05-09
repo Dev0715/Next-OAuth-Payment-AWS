@@ -124,7 +124,7 @@ export const getColumnsForUsersTable = ({
     {
       id: "actions",
       enableHiding: false,
-      cell: ({}) => {
+      cell: () => {
         // const customer = row.original;
         return (
           <DropdownMenu>

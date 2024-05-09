@@ -2,7 +2,7 @@ import { PasswordChangeSchema } from "@/schemas/auth/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { set, z } from "zod";
+import { z } from "zod";
 import {
   Card,
   CardContent,
@@ -66,7 +66,7 @@ export const PasswordChangeForm = () => {
       <CardHeader>
         <CardTitle>Change Password</CardTitle>
         <CardDescription>
-          It's recommended to update your password regularly for security
+          {`It's recommended to update your password regularly for security`}
         </CardDescription>
       </CardHeader>
       <Form {...form}>
