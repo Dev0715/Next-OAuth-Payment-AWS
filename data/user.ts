@@ -368,23 +368,24 @@ export const updateCreatorData = async ({
     const response = await db.send(command);
     return response.Attributes;
   } catch (error) {
+    console.error(error);
     return null;
   }
 };
 
-export const updateCreatorData = async ({
+export const updateCustomerData = async ({
   userId,
-  creatorData
+  customerData
 }: {
   userId: string;
-  creatorData: User["creator"];
+  customerData: User["customer"];
 }) => {
   const command = new UpdateCommand({
     TableName: AWS_DYNAMO_TABLES.USER,
     Key: { userId },
-    UpdateExpression: "SET creator = :creator",
+    UpdateExpression: "SET customer = :customer",
     ExpressionAttributeValues: {
-      ":creator": creatorData
+      ":customer": customerData
     },
     ReturnValues: "ALL_NEW"
   });
