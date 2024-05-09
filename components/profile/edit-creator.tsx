@@ -462,7 +462,11 @@ export default function EditCreator({
 
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isDisabled} className="w-64" type="submit">
+            <Button
+              disabled={isDisabled || !isChanged}
+              className="w-64"
+              type="submit"
+            >
               Save Profile
             </Button>
           </form>
