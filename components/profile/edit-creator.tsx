@@ -67,6 +67,9 @@ export default function EditCreator({
     if (e.target.files && e.target.files.length > 0) {
       setCoverImagePath(URL.createObjectURL(e.target.files[0]));
       setCover(e?.target?.files?.[0]);
+
+      setError("");
+      setSuccess("");
     }
   };
 
@@ -83,8 +86,8 @@ export default function EditCreator({
       bio: user?.creator?.bio,
       jobTitle: user?.creator?.jobTitle,
       companyTitle: user?.creator?.company?.name,
-      companyCountry: user?.creator?.company?.country,
       companyWebsite: user?.creator?.company?.website,
+      companyCountry: user?.creator?.company?.country,
       website1: user?.creator?.websites?.[0],
       website2: user?.creator?.websites?.[1],
       website3: user?.creator?.websites?.[2],
@@ -92,6 +95,43 @@ export default function EditCreator({
       website5: user?.creator?.websites?.[4]
     }
   });
+
+  const isFormChanged = () => {
+    const _changed =
+      user?.creator?.bio !== form.getValues("bio") ||
+      user?.creator?.jobTitle !== form.getValues("jobTitle") ||
+      user?.creator?.company?.name !== form.getValues("companyTitle") ||
+      user?.creator?.company?.website !== form.getValues("companyWebsite") ||
+      user?.creator?.company?.country !== form.getValues("companyCountry") ||
+      user?.creator?.websites?.[0] !== form.getValues("website1") ||
+      user?.creator?.websites?.[1] !== form.getValues("website2") ||
+      user?.creator?.websites?.[2] !== form.getValues("website3") ||
+      user?.creator?.websites?.[3] !== form.getValues("website4") ||
+      user?.creator?.websites?.[4] !== form.getValues("website5");
+
+    if (_changed) {
+      setError("");
+      setSuccess("");
+    }
+
+    return _changed;
+  };
+
+  const isChanged = useMemo(() => {
+    return isFormChanged() || cover;
+  }, [
+    cover,
+    form.getValues("bio"),
+    form.getValues("jobTitle"),
+    form.getValues("companyTitle"),
+    form.getValues("companyWebsite"),
+    form.getValues("companyCountry"),
+    form.getValues("website1"),
+    form.getValues("website2"),
+    form.getValues("website3"),
+    form.getValues("website4"),
+    form.getValues("website5")
+  ]);
 
   const onSubmit = (values: z.infer<typeof CreatorSettingsSchema>) => {
     setError("");
