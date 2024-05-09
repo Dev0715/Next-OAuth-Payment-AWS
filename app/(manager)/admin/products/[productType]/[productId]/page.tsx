@@ -105,10 +105,10 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         link.href = URL.createObjectURL(blob);
         link.click();
       })
-      .catch((error) => {
+      .catch(() => {
         setDownloadFailureConfirming();
       })
-      .catch((error) => {
+      .catch(() => {
         setDownloadFailureConfirming();
       });
 
@@ -223,7 +223,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
                 className="w-full border-green-700 gap-x-2"
               >
                 <FaRegUser className="text-green-700" />
-                Go to Creator's Profile
+                {`Go to Creator's Profile`}
               </Button>
             </Link>
             <Button
