@@ -152,7 +152,7 @@ export default function EditCreator({
                         <FormLabel>Username</FormLabel>
                         <FormControl>
                           <Input
-                            disabled={isDisabled}
+                            disabled
                             placeholder="JohnDoe1234"
                             {...field}
                           />
@@ -172,7 +172,7 @@ export default function EditCreator({
                         <FormControl>
                           <Input
                             {...field}
-                            disabled={isDisabled}
+                            disabled
                             placeholder="username@yemail.com"
                             type="email"
                           />
@@ -201,6 +201,7 @@ export default function EditCreator({
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="jobTitle"
@@ -230,6 +231,63 @@ export default function EditCreator({
                 )}
               />
             </div>
+
+            <div className="w-full flex items-end gap-x-6">
+              <div className="w-1/2">
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Your Company</FormLabel>
+                      <FormControl>
+                        <Input disabled placeholder="JohnDoe1234" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="w-1/2">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled
+                          placeholder="username@yemail.com"
+                          type="email"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <div className="w-1/2 pr-3">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled
+                        placeholder="username@yemail.com"
+                        type="email"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
             <div className="w-full flex items-end gap-x-6">
               <div className="w-1/2">
                 <FormField
