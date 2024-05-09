@@ -66,10 +66,17 @@ export default function Profile() {
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
       avatar: user?.avatar,
+      email: user?.email,
       username: user?.username,
       firstname: user?.firstname,
       lastname: user?.lastname,
-      email: user?.email
+      phone1: user?.phone1,
+      phone2: user?.phone2,
+      address1: user?.address?.address1,
+      address2: user?.address?.address2,
+      city: user?.address?.city,
+      postal: user?.address?.postal,
+      country: user?.address?.country
     }
   });
 

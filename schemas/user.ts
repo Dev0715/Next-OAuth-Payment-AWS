@@ -3,6 +3,7 @@ import * as z from "zod";
 // for `Profile Settings` Form
 export const ProfileSchema = z.object({
   avatar: z.string().optional(),
+  email: z.string().email({ message: "Please enter a valid email" }),
   username: z
     .string()
     .min(1, "Username is required")
@@ -12,7 +13,13 @@ export const ProfileSchema = z.object({
     .min(1, "First name is required")
     .max(72, "First name must be a maximum of 72 characters"),
   lastname: z.string().optional(),
-  email: z.string().email({ message: "Please enter a valid email" })
+  phone1: z.string().optional(),
+  phone2: z.string().optional(),
+  address1: z.string().optional(),
+  address2: z.string().optional(),
+  city: z.string().optional(),
+  postal: z.string().optional(),
+  country: z.string().optional()
 });
 
 // for 'Crypto Preference' Form
