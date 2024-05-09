@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { v4 as uuidv4 } from "uuid";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -28,26 +29,27 @@ import {
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
-import { registerCreator } from "@/actions/auth/register-creator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { LinkedSites } from "./linked-sites";
 import { Textarea } from "../ui/textarea";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { getUserById } from "@/data/user";
+import { getUserById, updateCreatorData } from "@/data/user";
 import { JOB_TITLES } from "@/shared/constants/user.constant";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
+import { uploadImage } from "@/shared/functions/upload-image";
+import { CreatorData, User } from "@/shared/types/user.type";
 
 export default function EditCreator({
   disabled = false
 }: {
   disabled?: boolean;
 }) {
-  const [user] = useAtom(userAtom);
+  const [user, setUser] = useAtom(userAtom);
 
   const [error, setError] = useState<string>();
   const [success, setSuccess] = useState<string>();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setPending] = useState<boolean>(false);
 
   const [cover, setCover] = useState<File>();
   const [coverImagePath, setCoverImagePath] = useState<string>();
@@ -133,29 +135,66 @@ export default function EditCreator({
     form.getValues("website5")
   ]);
 
+  const updateData = async (values: z.infer<typeof CreatorSettingsSchema>) => {
+    if (cover) {
+      const keyName = `${user?.username}/${uuidv4()}`;
+      if (await uploadImage(cover, keyName)) {
+        values.cover = keyName;
+      } else {
+        setError("Failed to upload image");
+        return null;
+      }
+    }
+
+    const creatorData = {
+      ...user?.creator,
+      cover: values.cover,
+      bio: values.bio,
+      jobTitle: values.jobTitle,
+      company: {
+        name: values.companyTitle,
+        website: values.companyWebsite,
+        country: values.companyCountry
+      },
+      websites: [
+        values.website1,
+        values.website2,
+        values.website3,
+        values.website4,
+        values.website5
+      ]
+    } as CreatorData;
+
+    const reponse = await updateCreatorData({
+      userId: user?.userId as string,
+      creatorData
+    });
+
+    if (reponse) {
+      setSuccess("Profile updated successfully");
+      return creatorData;
+    } else {
+      setError("Failed to update profile");
+      return null;
+    }
+  };
+
   const onSubmit = (values: z.infer<typeof CreatorSettingsSchema>) => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {});
+    setPending(true);
+    updateData(values).then((creatorData) => {
+      if (creatorData) {
+        setUser({
+          ...user,
+          creator: creatorData
+        } as User);
+      }
+      setCover(undefined);
+      setPending(false);
+    });
   };
-
-  useEffect(() => {
-    if (user) {
-      getUserById(user.userId).then((data) => {
-        if (!data) return;
-
-        form.setValue("username", data.username);
-        form.setValue("bio", data.creator?.bio || "");
-        form.setValue("firstname", data.firstname);
-        form.setValue("lastname", data.lastname || "");
-        form.setValue("email", data.email);
-        form.setValue("address", data?.address?.address1 || "");
-        form.setValue("phone1", data.phone1 || "");
-        form.setValue("phone2", data.phone2 || "");
-      });
-    }
-  }, []);
 
   return (
     <main className="w-full flex justify-between">
@@ -423,7 +462,7 @@ export default function EditCreator({
             <FormError message={error} />
             <FormSuccess message={success} />
             <Button disabled={isDisabled} className="w-64" type="submit">
-              Register
+              Save Profile
             </Button>
           </form>
         </Form>
