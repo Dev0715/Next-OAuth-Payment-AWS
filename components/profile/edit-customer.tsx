@@ -53,11 +53,11 @@ export default function EditCustomer({
             Join the Discord and follow notifications and news on our channel
           </p>
         </div>
-        <p className="text-2xl font-medium -rotate-3">SUBSCRIBE NOW!</p>
-        <div className="w-3/4 flex flex-col self-center gap-y-6">
+        <p className="text-xl font-medium">SUBSCRIBE NOW!</p>
+        <div className="w-3/4 flex flex-col gap-y-6">
           <Button
             variant="outline"
-            disabled={isDisabled()}
+            disabled={disabled}
             className="flex gap-x-2 border-green-700"
           >
             <FaPaypal />
@@ -65,7 +65,7 @@ export default function EditCustomer({
           </Button>
           <Button
             variant="outline"
-            disabled={isDisabled()}
+            disabled={disabled}
             className="flex gap-x-2 border-blue-700"
           >
             <FaCcStripe />
