@@ -126,7 +126,7 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
             <UserCollection products={products} userId={userId} />
           </TabsContent>
           <TabsContent value="About">
-            <AboutCreator creator={userData} />
+            <AboutCreator userData={userData} />
           </TabsContent>
           <TabsContent value="Announcements"></TabsContent>
           <TabsContent value="Reviews"></TabsContent>
