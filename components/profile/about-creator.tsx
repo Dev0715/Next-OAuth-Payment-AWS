@@ -6,6 +6,7 @@ import { LinkedSites } from "./linked-sites";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
 import type { Address, Company, User } from "@/shared/types/user.type";
+import { Separator } from "../ui/separator";
 
 type PropsParams = {
   userData: User | undefined;
@@ -30,25 +31,26 @@ export const AboutCreator = ({ userData }: PropsParams) => {
       <CardContent>
         <div className="w-full flex justify-between">
           <div className="w-1/2 flex flex-col gap-y-12">
-            <p className="text-sky-700 font-medium">
-              ** Scraped data will be pre-populated here. **
-            </p>
             <div className="flex flex-col gap-y-2">
+              <p className="text-sky-700 font-medium">
+                ** Scraped data will be pre-populated here. **
+              </p>
               <p>
                 creatorId:{" "}
                 <span className="font-semibold">
                   {creator?.creatorId || ""}
                 </span>
               </p>
-              <p>
-                Name:{" "}
-                <span className="font-semibold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</span>
-              </p>
+            </div>
+            <div className="flex flex-col gap-y-2">
+              <div className="flex gap-x-4 items-center">
+                <p className="font-semibold">
+                  {`${userData?.firstname || ""} ${userData?.lastname || ""}`}
+                </p>
+                <Separator orientation={"vertical"} />
+                <p className="font-semibold">{creator?.jobTitle}</p>
+              </div>
               <p className="text-gray-700">{creator?.bio}</p>
-              <p>
-                Specialization:{" "}
-                <span className="font-semibold">{creator?.jobTitle}</span>
-              </p>
             </div>
             <div className="flex flex-col gap-y-4">
               <p className="text-xl text-green-700 font-semibold">Contact</p>
