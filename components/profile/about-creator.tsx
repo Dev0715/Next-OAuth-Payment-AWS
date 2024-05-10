@@ -29,18 +29,26 @@ export const AboutCreator = ({ creator }: PropsParams) => {
       </CardHeader>
       <CardContent>
         <div className="w-full flex justify-between">
-          <div className="w-1/2 flex flex-col gap-y-2">
+          <div className="w-1/2 flex flex-col gap-y-4">
             <p className="text-sky-700 font-medium">
               Scraped data will be pre-populated here.
+            </p>
+            <p>
+              creatorId:{" "}
+              <span className="font-semibold">
+                {creator?.creator?.creatorId || ""}
+              </span>
             </p>
             <p>
               Name:{" "}
               <span className="font-semibold">{`${creator?.firstname || ""} ${creator?.lastname || ""}`}</span>
             </p>
-            <p>
-              Description:{" "}
-              <span className="font-semibold">{creator?.creator?.bio}</span>
-            </p>
+            <div className="flex flex-col gap-y-2">
+              <p>Description:</p>
+              <p>
+                <span className="font-semibold">{creator?.creator?.bio}</span>
+              </p>
+            </div>
             <p>Specialization: </p>
             <p>Contact: </p>
           </div>
