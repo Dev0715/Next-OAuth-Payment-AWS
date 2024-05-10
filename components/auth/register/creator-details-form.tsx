@@ -139,7 +139,9 @@ export const CreatorDetailsForm = ({
                     </FormControl>
                     <SelectContent>
                       {JOB_TITLES.map((type) => (
-                        <SelectItem value={type}>{type}</SelectItem>
+                        <SelectItem key={type} value={type}>
+                          {type}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
