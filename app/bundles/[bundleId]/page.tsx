@@ -53,7 +53,7 @@ const BundleDetailPage = ({ params: { bundleId } }: Props) => {
         )}
       </div>
       <div className="flex flex-col gap-y-4">
-        <p className="text-xl font-medium">Products in this bundel</p>
+        <p className="text-xl font-medium">Products in this bundle</p>
         <div className="flex flex-wrap gap-4">
           {products.map((product) => (
             <div key={product.productId} className="w-1/4 flex">

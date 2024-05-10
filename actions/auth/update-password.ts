@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs";
 
 import { PasswordChangeSchema } from "@/schemas/auth/auth";
 import { getUserById, updateUserPassword } from "@/data/user";
-import { getUserIdFromToken } from "@/lib/tokens";
 
 export const updatePassword = async (
   userId: string,

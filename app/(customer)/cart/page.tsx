@@ -56,7 +56,9 @@ export default function Cart() {
       setConfirmingMessage("1 product was removed successfully from your cart");
     } else {
       setConfirmingTitle("Failure");
-      setConfirmingMessage("An error occured while removing product from cart");
+      setConfirmingMessage(
+        "An error occurred while removing product from cart"
+      );
     }
   };
 

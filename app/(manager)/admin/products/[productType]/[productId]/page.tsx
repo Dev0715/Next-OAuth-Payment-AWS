@@ -91,7 +91,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     setConfirming(true);
     setConfirmingTitle("Failure");
     setConfirmingMessage(
-      "An internal server error occured while tyring to download"
+      "An internal server error occurred while trying to download"
     );
   };
 
