@@ -74,7 +74,7 @@ export const AboutCreator = ({ userData }: PropsParams) => {
           </div>
           <div className="w-2/5 flex flex-col gap-y-6">
             <p className="text-xl font-medium">
-              Creator's profiles on other Creative markets
+              {`Creator's profiles on other Creative markets`}
             </p>
             <LinkedSites disabled showButton={false} />
           </div>
