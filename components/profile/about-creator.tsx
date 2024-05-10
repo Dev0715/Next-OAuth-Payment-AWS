@@ -31,7 +31,7 @@ export const AboutCreator = ({ userData }: PropsParams) => {
       <CardContent>
         <div className="w-full flex justify-between">
           <div className="w-1/2 flex flex-col gap-y-12">
-            <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-y-4">
               <p className="text-sky-700 font-medium">
                 ** Scraped data will be pre-populated here. **
               </p>
@@ -42,7 +42,7 @@ export const AboutCreator = ({ userData }: PropsParams) => {
                 </span>
               </p>
             </div>
-            <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-y-4">
               <div className="flex gap-x-4 items-center">
                 <p className="font-semibold">
                   {`${userData?.firstname || ""} ${userData?.lastname || ""}`}
@@ -54,9 +54,21 @@ export const AboutCreator = ({ userData }: PropsParams) => {
             </div>
             <div className="flex flex-col gap-y-4">
               <p className="text-xl text-green-700 font-semibold">Contact</p>
-              <div className="flex flex-col gap-y-2">
+              <div className="flex flex-col gap-y-4">
                 <CompanyShow company={creator?.company} />
                 <AddressShow address={userData?.address} />
+                {userData?.phone1 && (
+                  <p>
+                    Phone 1:{" "}
+                    <span className="font-semibold">{userData.phone1}</span>
+                  </p>
+                )}
+                {userData?.phone2 && (
+                  <p>
+                    Phone 2:{" "}
+                    <span className="font-semibold">{userData.phone2}</span>
+                  </p>
+                )}
               </div>
             </div>
           </div>
