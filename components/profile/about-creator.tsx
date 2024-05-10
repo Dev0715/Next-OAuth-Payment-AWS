@@ -5,8 +5,7 @@ import Link from "next/link";
 import { LinkedSites } from "./linked-sites";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-
-import type { User } from "@/shared/types/user.type";
+import type { Address, Company, User } from "@/shared/types/user.type";
 
 type PropsParams = {
   userData: User | undefined;
@@ -30,32 +29,33 @@ export const AboutCreator = ({ userData }: PropsParams) => {
       </CardHeader>
       <CardContent>
         <div className="w-full flex justify-between">
-          <div className="w-1/2 flex flex-col gap-y-4">
+          <div className="w-1/2 flex flex-col gap-y-12">
             <p className="text-sky-700 font-medium">
-              Scraped data will be pre-populated here.
+              ** Scraped data will be pre-populated here. **
             </p>
-            <p>
-              creatorId:{" "}
-              <span className="font-semibold">{creator?.creatorId || ""}</span>
-            </p>
-            <p>
-              Name:{" "}
-              <span className="font-semibold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</span>
-            </p>
-            <p className="text-gray-700">{creator?.bio}</p>
-            <p>
-              Specialization:{" "}
-              <span className="font-semibold">{creator?.jobTitle}</span>
-            </p>
-            <p>Contact: </p>
-            <div className="flex items-center gap-x-4">
-              <p>Company:</p>
-              <Button variant="link" className="p-0 text-md">
-                <Link href={creator?.company?.website || ""}>
-                  {creator?.company?.name || ""}
-                </Link>
-              </Button>
-              ({creator?.company?.country || ""})
+            <div className="flex flex-col gap-y-2">
+              <p>
+                creatorId:{" "}
+                <span className="font-semibold">
+                  {creator?.creatorId || ""}
+                </span>
+              </p>
+              <p>
+                Name:{" "}
+                <span className="font-semibold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</span>
+              </p>
+              <p className="text-gray-700">{creator?.bio}</p>
+              <p>
+                Specialization:{" "}
+                <span className="font-semibold">{creator?.jobTitle}</span>
+              </p>
+            </div>
+            <div className="flex flex-col gap-y-4">
+              <p className="text-xl text-green-700 font-semibold">Contact</p>
+              <div className="flex flex-col gap-y-2">
+                <CompanyShow company={creator?.company} />
+                <AddressShow address={userData?.address} />
+              </div>
             </div>
           </div>
           <div className="w-2/5 flex flex-col gap-y-6">
