@@ -28,40 +28,38 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
 
   useEffect(() => {
     let ignore = false;
-    if (userId) {
-      getUserById(userId).then((_userData) => {
-        if (ignore) return;
 
-        if (_userData) {
-          setUserData(_userData);
-          if (_userData.avatar) {
-            getLinkFromS3(_userData.avatar).then((res) => {
-              if (res.success) {
-                setAvatarPath(res.response as string);
-              }
-            });
+    getUserById(userId).then((_userData) => {
+      if (ignore || !_userData) {
+        return;
+      }
+
+      setUserData(_userData);
+      if (_userData.avatar) {
+        getLinkFromS3(_userData.avatar).then((res) => {
+          if (res.success) {
+            setAvatarPath(res.response as string);
           }
-          if (_userData.creator?.cover) {
-            getLinkFromS3(_userData.creator.cover).then((res) => {
-              if (res.success) {
-                setCoverPath(res.response as string);
-              }
-            });
+        });
+      }
+      if (_userData.creator?.cover) {
+        getLinkFromS3(_userData.creator.cover).then((res) => {
+          if (res.success) {
+            setCoverPath(res.response as string);
           }
-          if (_userData.creator?.products) {
-            _userData.creator.products.map((item: ProductLink) => {
-              getProductById(item.productType, item.productId).then(
-                (_product) => {
-                  if (_product) {
-                    setProducts((prev) => [...prev, _product]);
-                  }
-                }
-              );
-            });
-          }
-        }
-      });
-    }
+        });
+      }
+      if (_userData.creator?.products) {
+        _userData.creator.products.map((item: ProductLink) => {
+          getProductById(item.productType, item.productId).then((_product) => {
+            if (_product) {
+              setProducts((prev) => [...prev, _product]);
+            }
+          });
+        });
+      }
+    });
+
     return () => {
       ignore = true;
     };
