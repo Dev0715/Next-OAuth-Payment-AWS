@@ -71,6 +71,25 @@ export const AboutCreator = ({ userData }: PropsParams) => {
   );
 };
 
+const AddressShow = ({ address }: { address: Address | undefined }) => {
+  if (!address) {
+    return null;
+  }
+
+  return (
+    <div className="flex gap-x-2">
+      <p>Address:</p>
+      <div className="flex gap-x-2 font-semibold">
+        <p>{`${address.address1},`}</p>
+        <p>{`${address.address2},`}</p>
+        <p>{`${address.city},`}</p>
+        <p>{`${address.postal},`}</p>
+        <p>{address.country}</p>
+      </div>
+    </div>
+  );
+};
+
 const CompanyShow = ({ company }: { company: Company | undefined }) => {
   if (!company) {
     return null;
