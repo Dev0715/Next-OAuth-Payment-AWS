@@ -9,17 +9,18 @@ import { useAtom } from "jotai";
 import type { User } from "@/shared/types/user.type";
 
 type PropsParams = {
-  creator: User | undefined;
+  userData: User | undefined;
 };
 
-export const AboutCreator = ({ creator }: PropsParams) => {
+export const AboutCreator = ({ userData }: PropsParams) => {
   const [user] = useAtom(userAtom);
+  const creator = userData?.creator;
 
   return (
     <Card className="border-0 rounded-none">
       <CardHeader className="flex flex-row items-end justify-between">
         <p className="text-xl font-bold">About the Creator</p>
-        {user?.userId === creator?.userId && (
+        {user?.userId === userData?.userId && (
           <Button variant="default" asChild>
             <Link href="/user/creator" className="flex gap-x-1">
               <FaEdit /> Edit
@@ -35,22 +36,27 @@ export const AboutCreator = ({ creator }: PropsParams) => {
             </p>
             <p>
               creatorId:{" "}
-              <span className="font-semibold">
-                {creator?.creator?.creatorId || ""}
-              </span>
+              <span className="font-semibold">{creator?.creatorId || ""}</span>
             </p>
             <p>
               Name:{" "}
-              <span className="font-semibold">{`${creator?.firstname || ""} ${creator?.lastname || ""}`}</span>
+              <span className="font-semibold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</span>
             </p>
-            <p className="text-gray-700">{creator?.creator?.bio}</p>
+            <p className="text-gray-700">{creator?.bio}</p>
             <p>
               Specialization:{" "}
-              <span className="font-semibold">
-                {creator?.creator?.jobTitle}
-              </span>
+              <span className="font-semibold">{creator?.jobTitle}</span>
             </p>
             <p>Contact: </p>
+            <div className="flex items-center gap-x-4">
+              <p>Company:</p>
+              <Button variant="link" className="p-0 text-md">
+                <Link href={creator?.company?.website || ""}>
+                  {creator?.company?.name || ""}
+                </Link>
+              </Button>
+              ({creator?.company?.country || ""})
+            </div>
           </div>
           <div className="w-2/5 flex flex-col gap-y-6">
             <p className="text-xl font-medium">
