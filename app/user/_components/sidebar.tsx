@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 
-export const Sdiebar = () => {
+export const Sidebar = () => {
   const pathName = usePathname();
 
   const sidebarItems = [

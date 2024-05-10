@@ -1,5 +1,5 @@
 import { Navbar } from "./_components/navbar";
-import { Sdiebar } from "./_components/sidebar";
+import { Sidebar } from "./_components/sidebar";
 
 interface UserLayoutProps {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     <div className="w-full p-6 flex flex-col">
       <Navbar />
       <div className="w-full flex">
-        <Sdiebar />
+        <Sidebar />
         {children}
       </div>
     </div>

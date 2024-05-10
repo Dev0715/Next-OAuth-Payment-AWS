@@ -262,7 +262,7 @@ export default function Profile() {
                   <FormItem className="w-full">
                     <FormLabel>Username*</FormLabel>
                     <FormControl>
-                      <Input {...field} disabled placeholder="johndoe" />
+                      <Input {...field} disabled placeholder="username" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -282,7 +282,7 @@ export default function Profile() {
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="John"
+                        placeholder="firstname"
                       />
                     </FormControl>
                     <FormMessage />
@@ -301,7 +301,7 @@ export default function Profile() {
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="Doe"
+                        placeholder="lastname"
                       />
                     </FormControl>
                     <FormMessage />
