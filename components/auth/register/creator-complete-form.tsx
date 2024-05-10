@@ -39,12 +39,12 @@ export const CreatorCompleteForm = ({
       websites: []
     };
 
-    if (userData.creatorDetails.cover) {
-      const keyName = `${userData.generalDetails.username}/${uuidv4()}`;
-      if (await uploadImage(userData.creatorDetails.cover, keyName)) {
-        if (user.creator) user.creator.cover = keyName;
-      }
-    }
+    // if (userData.creatorDetails.cover) {
+    //   const keyName = `${userData.generalDetails.username}/${uuidv4()}`;
+    //   if (await uploadImage(userData.creatorDetails.cover, keyName)) {
+    //     if (user.creator) user.creator.cover = keyName;
+    //   }
+    // }
 
     if (user.creator && userData.creatorDetails.companyName) {
       user.creator["company"] = {
