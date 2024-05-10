@@ -45,18 +45,18 @@ export const GeneralDetailsForm = ({
   const [isError, setError] = useState<boolean>(false);
   const [errMsg, setErrMsg] = useState<string>("");
 
-  const [avatar, setAvatar] = useState<File | undefined>(defaultData.avatar);
-  const [avatarPath, setAvatarPath] = useState<string>(
-    defaultData.avatar ? URL.createObjectURL(defaultData.avatar) : ""
-  );
+  // const [avatar, setAvatar] = useState<File | undefined>(defaultData.avatar);
+  // const [avatarPath, setAvatarPath] = useState<string>(
+  //   defaultData.avatar ? URL.createObjectURL(defaultData.avatar) : ""
+  // );
 
-  const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
-  const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setAvatarPath(URL.createObjectURL(e.target.files[0]));
-      setAvatar(e?.target?.files?.[0]);
-    }
-  };
+  // const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
+  // const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     setAvatarPath(URL.createObjectURL(e.target.files[0]));
+  //     setAvatar(e?.target?.files?.[0]);
+  //   }
+  // };
 
   const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
     resolver: zodResolver(GeneralDetailsSchema),
@@ -72,7 +72,8 @@ export const GeneralDetailsForm = ({
         email: values.email
       }).then((data) => {
         if (data.success) {
-          setUserData({ ...userData, generalDetails: { ...values, avatar } });
+          setUserData({ ...userData, generalDetails: { ...values } });
+          // setUserData({ ...userData, generalDetails: { ...values, avatar } });
           moveStepForward();
         } else {
           setErrMsg(data.error as string);
@@ -99,7 +100,7 @@ export const GeneralDetailsForm = ({
           className="w-full flex flex-col gap-y-6"
         >
           <div className="w-full flex items-end gap-x-6">
-            <div className="w-1/2 flex flex-col items-start gap-y-4">
+            {/* <div className="w-1/2 flex flex-col items-start gap-y-4">
               <FormLabel>Avatar Image</FormLabel>
               <div className="flex items-end gap-x-6">
                 <Avatar className="w-24 h-24 rounded-sm">
@@ -126,8 +127,8 @@ export const GeneralDetailsForm = ({
                   onChange={onAvatarChanged}
                 />
               </div>
-            </div>
-            <div className="w-1/2">
+            </div> */}
+            <div className="w-1/2 pr-3">
               <FormField
                 control={form.control}
                 name="username"
