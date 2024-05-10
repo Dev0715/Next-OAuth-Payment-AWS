@@ -44,18 +44,18 @@ export const CreatorDetailsForm = ({
 }: Props) => {
   const defaultData = userData.creatorDetails;
 
-  const [cover, setCover] = useState<File | undefined>(defaultData.cover);
-  const [coverImagePath, setCoverImagePath] = useState<string>(
-    defaultData.cover ? URL.createObjectURL(defaultData.cover) : ""
-  );
+  // const [cover, setCover] = useState<File | undefined>(defaultData.cover);
+  // const [coverImagePath, setCoverImagePath] = useState<string>(
+  //   defaultData.cover ? URL.createObjectURL(defaultData.cover) : ""
+  // );
 
-  const hiddenCoverFileInput = useRef<HTMLInputElement>(null);
-  const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setCoverImagePath(URL.createObjectURL(e.target.files[0]));
-      setCover(e?.target?.files?.[0]);
-    }
-  };
+  // const hiddenCoverFileInput = useRef<HTMLInputElement>(null);
+  // const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     setCoverImagePath(URL.createObjectURL(e.target.files[0]));
+  //     setCover(e?.target?.files?.[0]);
+  //   }
+  // };
 
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
     resolver: zodResolver(CreatorDetailsSchema),
@@ -68,8 +68,8 @@ export const CreatorDetailsForm = ({
     setUserData({
       ...userData,
       creatorDetails: {
-        ...values,
-        cover
+        ...values
+        // cover
       }
     });
     moveStepForward();
@@ -79,8 +79,8 @@ export const CreatorDetailsForm = ({
     setUserData({
       ...userData,
       creatorDetails: {
-        ...form.getValues(),
-        cover
+        ...form.getValues()
+        // cover
       }
     });
     moveStepBackward();
@@ -96,7 +96,7 @@ export const CreatorDetailsForm = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-y-6"
         >
-          <div className="flex flex-col gap-y-4">
+          {/* <div className="flex flex-col gap-y-4">
             <FormLabel>Cover Image</FormLabel>
             <Avatar className="w-full h-28 rounded-sm">
               <AvatarImage src={coverImagePath} className="object-cover" />
@@ -120,7 +120,7 @@ export const CreatorDetailsForm = ({
               ref={hiddenCoverFileInput}
               onChange={onCoverChanged}
             />
-          </div>
+          </div> */}
           <div className="w-full">
             <FormField
               control={form.control}
