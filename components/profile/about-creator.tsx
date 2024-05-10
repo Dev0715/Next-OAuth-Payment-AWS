@@ -70,3 +70,30 @@ export const AboutCreator = ({ userData }: PropsParams) => {
     </Card>
   );
 };
+
+const CompanyShow = ({ company }: { company: Company | undefined }) => {
+  if (!company) {
+    return null;
+  }
+
+  return (
+    <div className="flex items-center gap-x-4">
+      <p>Company:</p>
+      {company.website ? (
+        <Button variant="link" className="p-0 text-md">
+          <Link href={company.website}>
+            {company.name ? company.name : company.website}
+          </Link>
+        </Button>
+      ) : (
+        <p className="font-semibold">{company.name || ""}</p>
+      )}
+      {company.country && (
+        <div className="flex gap-x-2">
+          <p>in</p>
+          <p>{company.country}</p>
+        </div>
+      )}
+    </div>
+  );
+};
