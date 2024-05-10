@@ -43,18 +43,18 @@ export const AboutCreator = ({ creator }: PropsParams) => {
               Name:{" "}
               <span className="font-semibold">{`${creator?.firstname || ""} ${creator?.lastname || ""}`}</span>
             </p>
-            <div className="flex flex-col gap-y-2">
-              <p>Description:</p>
-              <p>
-                <span className="font-semibold">{creator?.creator?.bio}</span>
-              </p>
-            </div>
-            <p>Specialization: </p>
+            <p className="text-gray-700">{creator?.creator?.bio}</p>
+            <p>
+              Specialization:{" "}
+              <span className="font-semibold">
+                {creator?.creator?.jobTitle}
+              </span>
+            </p>
             <p>Contact: </p>
           </div>
           <div className="w-2/5 flex flex-col gap-y-6">
             <p className="text-xl font-medium">
-              Your profiles on other Creative markets
+              Creator's profiles on other Creative markets
             </p>
             <LinkedSites disabled showButton={false} />
           </div>
