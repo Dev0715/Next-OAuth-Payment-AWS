@@ -49,7 +49,7 @@ export const CreatorDetailsForm = ({
     defaultData.cover ? URL.createObjectURL(defaultData.cover) : ""
   );
 
-  const hiddenCoverFileIniput = useRef<HTMLInputElement>(null);
+  const hiddenCoverFileInput = useRef<HTMLInputElement>(null);
   const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setCoverImagePath(URL.createObjectURL(e.target.files[0]));
@@ -109,7 +109,7 @@ export const CreatorDetailsForm = ({
               variant={"outline"}
               size={"sm"}
               className="w-32 rounded-none"
-              onClick={() => hiddenCoverFileIniput.current?.click()}
+              onClick={() => hiddenCoverFileInput.current?.click()}
             >
               Upload New
             </Button>
@@ -117,7 +117,7 @@ export const CreatorDetailsForm = ({
               className="hidden"
               type="file"
               accept="image/*"
-              ref={hiddenCoverFileIniput}
+              ref={hiddenCoverFileInput}
               onChange={onCoverChanged}
             />
           </div>
