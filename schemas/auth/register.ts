@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const GeneralDetailsSchema = z.object({
-  avatar: z.instanceof(File).optional(),
+  // avatar: z.instanceof(File).optional(),
   username: z
     .string()
     .min(1, "Username is required")
@@ -44,7 +44,7 @@ export const SelectAccountsSchema = z.object({
 });
 
 export const CreatorDetailsSchema = z.object({
-  cover: z.instanceof(File).optional(),
+  // cover: z.instanceof(File).optional(),
   bio: z.string().optional(),
   // .min(6, "Bio should be at least 6 characters long")
   // .max(1024, "Bio must be a maximum of 1024 characters"),

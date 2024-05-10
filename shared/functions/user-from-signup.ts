@@ -25,12 +25,12 @@ export const getUserFromGeneralDetails = async (
     // phone2: generalDetails.phone2
   };
 
-  if (generalDetails.avatar) {
-    const keyName = `${generalDetails.username}/${uuidv4()}`;
-    if (await uploadImage(generalDetails.avatar, keyName)) {
-      user.avatar = keyName;
-    }
-  }
+  // if (generalDetails.avatar) {
+  //   const keyName = `${generalDetails.username}/${uuidv4()}`;
+  //   if (await uploadImage(generalDetails.avatar, keyName)) {
+  //     user.avatar = keyName;
+  //   }
+  // }
 
   return user;
 };
