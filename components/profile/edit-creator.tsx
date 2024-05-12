@@ -182,6 +182,7 @@ export default function EditCreator({
       }
       setCover(undefined);
       setPending(false);
+      setChanged(false);
     });
   };
 
