@@ -8,7 +8,7 @@ import { SignedUpData } from "@/shared/types/signup-data.type";
 import { v4 as uuidv4 } from "uuid";
 import { register } from "@/actions/auth/register/register";
 import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
-import { uploadImage } from "@/shared/functions/upload-image";
+// import { uploadImage } from "@/shared/functions/upload-image";
 
 type Props = {
   userData: SignedUpData;
@@ -85,7 +85,7 @@ export const CreatorCompleteForm = ({
     setConfirmOpen(true);
     if (response.success) {
       setConfirmTitle("Success");
-      setConfirmMessage("A new creator was newly registerd!");
+      setConfirmMessage("A new creator was newly registered!");
     } else {
       setConfirmTitle("Error");
       setConfirmMessage(response.error as string);
@@ -99,7 +99,7 @@ export const CreatorCompleteForm = ({
     });
   };
 
-  const onConfimred = () => {
+  const onConfirmed = () => {
     setConfirmOpen(false);
     if (confirmTitle === "Success") {
       moveStepForward();
@@ -116,7 +116,7 @@ export const CreatorCompleteForm = ({
         open={isConfirmOpen}
         title={confirmTitle}
         message={confirmMessage}
-        onOK={onConfimred}
+        onOK={onConfirmed}
       />
       <p className="text-xl text-green-700">
         5. Complete registration for a creator.
