@@ -49,6 +49,7 @@ export default function EditCreator({
   const [error, setError] = useState<string>();
   const [success, setSuccess] = useState<string>();
   const [isPending, setPending] = useState<boolean>(false);
+  const [isChanged, setChanged] = useState<boolean>(false);
 
   const [cover, setCover] = useState<File>();
   const [coverImagePath, setCoverImagePath] = useState<string>();
@@ -71,6 +72,7 @@ export default function EditCreator({
 
       setError("");
       setSuccess("");
+      setChanged(true);
     }
   };
 
@@ -118,21 +120,9 @@ export default function EditCreator({
     return _changed;
   };
 
-  const isChanged = useMemo(() => {
-    return isFormChanged() || cover;
-  }, [
-    cover,
-    form.getValues("bio"),
-    form.getValues("jobTitle"),
-    form.getValues("companyTitle"),
-    form.getValues("companyWebsite"),
-    form.getValues("companyCountry"),
-    form.getValues("website1"),
-    form.getValues("website2"),
-    form.getValues("website3"),
-    form.getValues("website4"),
-    form.getValues("website5")
-  ]);
+  form.watch(() => {
+    setChanged(isFormChanged() || !!cover);
+  });
 
   const updateData = async (values: z.infer<typeof CreatorSettingsSchema>) => {
     if (cover) {
