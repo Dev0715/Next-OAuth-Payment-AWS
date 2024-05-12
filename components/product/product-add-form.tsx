@@ -47,6 +47,7 @@ import { addNewProduct } from "@/actions/user/new-product";
 import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 
 import type { ProductType } from "@/shared/types/product.type";
+import Image from "next/image";
 
 export const ProductAddForm = () => {
   const [user] = useAtom(userAtom);
@@ -273,9 +274,10 @@ export const ProductAddForm = () => {
           </DialogHeader> */}
           <div className="max-w-full max-h-full w-fit h-fit overflow-hidden">
             {isPreviewing && (
-              <img
+              <Image
                 src={URL.createObjectURL(previewFiles[previewIndex as number])}
                 className="max-w-full max-h-full object-fill"
+                alt=""
               />
             )}
           </div>
