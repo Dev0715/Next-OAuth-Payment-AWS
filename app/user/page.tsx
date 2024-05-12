@@ -37,6 +37,7 @@ export default function Profile() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setPending] = useState<boolean>(false);
+  const [isChanged, setChanged] = useState<boolean>(false);
 
   const [avatar, setAvatar] = useState<File>();
   const [avatarPath, setAvatarPath] = useState<string>();
@@ -101,21 +102,9 @@ export default function Profile() {
     return _changed;
   };
 
-  const isChanged = useMemo(() => {
-    return isFormChanged() || avatar;
-  }, [
-    avatar,
-    // form.getValues("username"),
-    form.getValues("firstname"),
-    form.getValues("lastname"),
-    form.getValues("phone1"),
-    form.getValues("phone2"),
-    form.getValues("address1"),
-    form.getValues("address2"),
-    form.getValues("city"),
-    form.getValues("postal"),
-    form.getValues("country")
-  ]);
+  form.watch(() => {
+    setChanged(isFormChanged() || !!avatar);
+  });
 
   const updateData = async (values: z.infer<typeof ProfileSchema>) => {
     if (avatar) {
