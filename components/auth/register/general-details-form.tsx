@@ -2,13 +2,7 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Dispatch,
-  SetStateAction,
-  useRef,
-  useState,
-  useTransition
-} from "react";
+import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -24,7 +18,6 @@ import { GeneralDetailsSchema } from "@/schemas/auth/register";
 import { FaArrowRight, FaUser } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
@@ -39,8 +32,6 @@ export const GeneralDetailsForm = ({
   setUserData,
   moveStepForward
 }: Props) => {
-  const defaultData = userData.generalDetails;
-
   const [isPending, startTransition] = useTransition();
   const [isError, setError] = useState<boolean>(false);
   const [errMsg, setErrMsg] = useState<string>("");
