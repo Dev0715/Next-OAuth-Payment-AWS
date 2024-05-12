@@ -62,7 +62,7 @@ export default function EditCreator({
         }
       });
     }
-  }, []);
+  }, [user?.creator?.cover]);
 
   const hiddenCoverFileInput = useRef<HTMLInputElement>(null);
   const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
