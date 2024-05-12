@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 type PropsParams = {
   disabled: boolean;
@@ -22,7 +23,7 @@ export const ImagePreview = ({
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
     >
-      <img src={src} className="h-28" />
+      <Image src={src} className="h-28" alt="" />
       <div
         className={`absolute top-0 right-0 z-10 w-full h-full flex items-center justify-center bg-gray-700/70 ${!isHover && "hidden"}`}
       >
