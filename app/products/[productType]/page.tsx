@@ -38,7 +38,7 @@ export default function Products({ params }: ParamsType) {
         setLastEvaluatedKey(res.lastEvaluatedKey as ProductLink);
       }
     });
-  }, []);
+  }, [params.productType]);
 
   const onPreviousPage = () => {
     setSelectedIndex(selectedIndex > 1 ? selectedIndex - 1 : 1);
