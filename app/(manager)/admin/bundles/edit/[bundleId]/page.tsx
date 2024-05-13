@@ -60,7 +60,7 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
         }
       }
     });
-  }, []);
+  }, [bundleId]);
 
   const onSave = () => {
     startTransition(() => {
