@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const Services = () => (
   <section className="pb-20 bg-gray-300 -mt-24">
     <div className="container mx-auto px-4">
@@ -69,7 +71,7 @@ export const Services = () => (
 
         <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
           <div className="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded-lg bg-pink-600">
-            <img
+            <Image
               alt="..."
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
               className="w-full align-middle rounded-t-lg"
