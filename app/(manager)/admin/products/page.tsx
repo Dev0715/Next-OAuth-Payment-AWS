@@ -47,14 +47,6 @@ export default function Approval() {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  useEffect(() => {
-    getAllProducts(ROWS_PER_PAGE).then((res) => {
-      setProducts(res.items as Product[]);
-      setLastEvaluatedKey(res.lastEvaluatedKey as ProductLink);
-      table.setPageSize(ROWS_PER_PAGE);
-    });
-  }, []);
-
   const columns = getColumnsForProductsTable({ isPending });
   const table = useReactTable({
     data: products,
@@ -76,6 +68,14 @@ export default function Approval() {
       rowSelection
     }
   });
+
+  useEffect(() => {
+    getAllProducts(ROWS_PER_PAGE).then((res) => {
+      setProducts(res.items as Product[]);
+      setLastEvaluatedKey(res.lastEvaluatedKey as ProductLink);
+      table.setPageSize(ROWS_PER_PAGE);
+    });
+  }, [table]);
 
   const isNextAvailable = useMemo(() => {
     const currentPageIndex = table.getState().pagination.pageIndex;
