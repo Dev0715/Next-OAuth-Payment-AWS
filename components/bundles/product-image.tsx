@@ -16,7 +16,7 @@ export const ProductImage = ({ product }: Props) => {
         setImage(res.response as string);
       }
     });
-  }, []);
+  }, [product.previewList]);
 
   return (
     <Avatar className="w-72 h-48 rounded-xl">

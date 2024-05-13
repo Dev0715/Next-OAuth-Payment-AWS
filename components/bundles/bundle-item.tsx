@@ -28,7 +28,7 @@ export const BundleItem = ({ bundle }: Props) => {
         );
       });
     }
-  }, []);
+  }, [bundle.products]);
 
   return (
     <Link href={`/bundles/${bundle.bundleId}`} passHref>
