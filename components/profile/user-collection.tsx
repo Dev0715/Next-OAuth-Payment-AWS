@@ -21,7 +21,7 @@ export const UserCollection = ({ products, userId }: Props) => {
         <p className="text-xl font-bold">Your Collections</p>
         {user?.userId === userId && (
           <Button variant="default" asChild className="w-48 flex gap-x-2">
-            <Link href="/products/new">
+            <Link href="/creator/new-product">
               <FaPlus /> Add
             </Link>
           </Button>
