@@ -1,12 +1,5 @@
-// module.exports = {
-//   async redirects() {
-//     return [
-//       // Basic redirect
-//       {
-//         source: "/",
-//         destination: "/dashboard",
-//         permanent: true
-//       }
-//     ];
-//   }
-// };
+module.exports = {
+  images: {
+    domains: ["images.unsplash.com"]
+  }
+};
