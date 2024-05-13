@@ -56,14 +56,6 @@ const ManagementUsers = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  useEffect(() => {
-    getAllUsers(ROWS_PER_PAGE).then((res) => {
-      setUsers(res.items as User[]);
-      setLastEvaluatedKey(res.lastEvaluatedKey);
-      table.setPageSize(ROWS_PER_PAGE);
-    });
-  }, []);
-
   const onCheckedChange = (checked: boolean, index: number) => {
     setConfirmAlert(true);
     setConfirmTitle("Update Manager Profile");
@@ -103,6 +95,14 @@ const ManagementUsers = () => {
       rowSelection
     }
   });
+
+  useEffect(() => {
+    getAllUsers(ROWS_PER_PAGE).then((res) => {
+      setUsers(res.items as User[]);
+      setLastEvaluatedKey(res.lastEvaluatedKey);
+      table.setPageSize(ROWS_PER_PAGE);
+    });
+  }, [table]);
 
   const isNextAvailable = useMemo(() => {
     const currentPageIndex = table.getState().pagination.pageIndex;
