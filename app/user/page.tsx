@@ -50,7 +50,7 @@ export default function Profile() {
         }
       });
     }
-  }, []);
+  }, [user?.avatar]);
 
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +60,7 @@ export default function Profile() {
 
       setError("");
       setSuccess("");
+      setChanged(true);
     }
   };
 
@@ -160,6 +161,7 @@ export default function Profile() {
       }
       setAvatar(undefined);
       setPending(false);
+      setChanged(false);
     });
   };
 
