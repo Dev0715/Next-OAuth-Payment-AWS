@@ -15,7 +15,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { GeneralDetailsSchema } from "@/schemas/auth/register";
-import { FaArrowRight, FaUser } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 
