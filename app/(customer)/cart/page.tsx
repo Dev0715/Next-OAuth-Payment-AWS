@@ -41,7 +41,7 @@ export default function Cart() {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [user?.userId]);
 
   const onSelected = (index: number, checked: boolean) => {
     const newList = [...products];

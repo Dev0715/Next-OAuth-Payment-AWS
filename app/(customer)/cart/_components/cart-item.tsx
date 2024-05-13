@@ -33,7 +33,7 @@ export const CartItem = ({
         setImagePath(res.response as string);
       }
     });
-  }, []);
+  }, [product.previewList]);
 
   return (
     <Card className="w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100">
