@@ -26,7 +26,7 @@ export default function LoadUser({ children }: { children: React.ReactNode }) {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [sessionUser, user, setUser]);
 
   if (sessionUser && !user) return <Loading />;
 
