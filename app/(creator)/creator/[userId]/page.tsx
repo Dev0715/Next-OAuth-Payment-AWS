@@ -63,8 +63,7 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
     return () => {
       ignore = true;
     };
-    // eslint-ignore-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userId]);
 
   const onFollow = () => {};
 
