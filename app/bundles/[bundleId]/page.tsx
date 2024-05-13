@@ -35,7 +35,7 @@ const BundleDetailPage = ({ params: { bundleId } }: Props) => {
         });
       }
     });
-  }, []);
+  }, [bundleId]);
 
   if (!bundle) {
     return <div className="w-full p-6">Loading...</div>;
