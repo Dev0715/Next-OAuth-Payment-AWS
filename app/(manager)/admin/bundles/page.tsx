@@ -50,14 +50,6 @@ const ManagementBundles = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  useEffect(() => {
-    getAllBundles(ROWS_PER_PAGE).then((res) => {
-      setBundles(res.items as Bundle[]);
-      setLastEvaluatedKey(res.lastEvaluatedKey);
-      table.setPageSize(ROWS_PER_PAGE);
-    });
-  }, []);
-
   const onDeleteBundle = (bundleId: string) => {
     startTransition(() => {
       deleteBundle(bundleId).then((res) => {
@@ -91,6 +83,14 @@ const ManagementBundles = () => {
       rowSelection
     }
   });
+
+  useEffect(() => {
+    getAllBundles(ROWS_PER_PAGE).then((res) => {
+      setBundles(res.items as Bundle[]);
+      setLastEvaluatedKey(res.lastEvaluatedKey);
+      table.setPageSize(ROWS_PER_PAGE);
+    });
+  }, [table]);
 
   const isNextAvailable = useMemo(() => {
     const currentPageIndex = table.getState().pagination.pageIndex;
