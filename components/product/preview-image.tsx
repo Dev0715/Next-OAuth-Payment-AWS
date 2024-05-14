@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { FileOrString } from "@/shared/types/file-or-string";
+import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { Avatar } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 
 type Props = {
   disabled: boolean;
-  image: string;
+  image: FileOrString;
   onPreview: () => void;
   onDelete: () => void;
 };
@@ -17,6 +19,19 @@ export const ImagePreview = ({
   onDelete
 }: Props) => {
   const [isHover, setHover] = useState<boolean>(false);
+  const [imageURL, setImageURL] = useState<string>("");
+
+  useEffect(() => {
+    if (image instanceof File) {
+      setImageURL(URL.createObjectURL(image));
+    } else {
+      getLinkFromS3(image as string).then((res) => {
+        if (res.success) {
+          setImageURL(res.response as string);
+        }
+      });
+    }
+  }, [image]);
 
   return (
     <div
@@ -25,7 +40,7 @@ export const ImagePreview = ({
       onMouseOut={() => setHover(false)}
     >
       <Avatar className="w-auto h-28 rounded-none">
-        <AvatarImage src={image} className="object-fill aspect-ratio" />
+        <AvatarImage src={imageURL} className="object-fill aspect-ratio" />
       </Avatar>
 
       <div
