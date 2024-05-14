@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 
-type PropsParams = {
+type Props = {
   disabled: boolean;
   image: File;
   onPreview: () => void;
@@ -14,9 +14,8 @@ export const ImagePreview = ({
   image,
   onPreview,
   onDelete
-}: PropsParams) => {
+}: Props) => {
   const [isHover, setHover] = useState<boolean>(false);
-
   const [imageURL, setImageURL] = useState<string>("");
   const [imageDimensions, setImageDimensions] = useState({
     width: 0,
@@ -46,11 +45,11 @@ export const ImagePreview = ({
     >
       <Image
         src={imageURL}
-        className="h-28"
-        alt=""
+        className="w-auto h-28"
         width={imageDimensions.width}
         height={imageDimensions.height}
         onLoad={handleImageLoad}
+        alt={image.name}
       />
 
       <div
