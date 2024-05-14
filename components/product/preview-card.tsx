@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { ImagePreview } from "./image-preview";
+import { ImagePreview } from "./preview-image";
 
 type Props = {
   previewFiles: File[];
