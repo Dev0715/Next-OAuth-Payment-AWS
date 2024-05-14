@@ -30,7 +30,11 @@ export const UserCollection = ({ products, userId }: Props) => {
       <CardContent className="flex flex-wrap">
         {products.map((product, index) => (
           <div key={product.productId} className="w-1/4 p-4">
-            <ProductItem key={index} product={product} />
+            <ProductItem
+              key={index}
+              product={product}
+              _url={`/creator/${product.productType}/${product.productId}`}
+            />
           </div>
         ))}
       </CardContent>
