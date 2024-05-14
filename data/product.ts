@@ -1,6 +1,7 @@
 "use server";
 
 import {
+  DeleteCommand,
   GetCommand,
   PutCommand,
   QueryCommand,
@@ -182,5 +183,23 @@ export const updateProductApproval = async ({
     return response.Attributes;
   } catch (error) {
     return null;
+  }
+};
+
+export const deleteProduct = async (productType: string, productId: string) => {
+  const command = new DeleteCommand({
+    TableName: AWS_DYNAMO_TABLES.PRODUCT,
+    Key: { productType, productId }
+  });
+
+  try {
+    const response = await db.send(command);
+    console.log(response);
+    return {
+      success: true
+    };
+  } catch (error) {
+    console.error(error);
+    return { error: true };
   }
 };
