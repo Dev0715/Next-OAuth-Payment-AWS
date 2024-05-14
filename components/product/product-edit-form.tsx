@@ -48,6 +48,7 @@ import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 import type { Product, ProductType } from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
 import { PreviewDialog } from "./preview-dialog";
+import { FileOrString } from "@/shared/types/file-or-string";
 
 export const ProductEditForm = ({ product }: { product: Product }) => {
   const [user] = useAtom(userAtom);
@@ -56,7 +57,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setPending] = useState<boolean>(false);
 
-  const [previewFiles, setPreviewFiles] = useState<File[]>([]);
+  const [previewFiles, setPreviewFiles] = useState<FileOrString[]>([]);
   const [previewIndex, setPreviewIndex] = useState<number>();
   const [isPreviewing, setPreviewing] = useState<boolean>(false);
   const hiddenPreviewInput = useRef<HTMLInputElement>(null);
@@ -69,6 +70,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
 
   useEffect(() => {
     setSelectedKeywords(product.keywords);
+    setPreviewFiles(product.previewList);
   }, [product]);
 
   const onAddNewKeyword = () => {
@@ -126,6 +128,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         (newFile) =>
           !previewFiles.find(
             (savedFile) =>
+              savedFile instanceof File &&
               savedFile.name === newFile.name &&
               savedFile.size === newFile.size &&
               savedFile.lastModified === newFile.lastModified
@@ -159,7 +162,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     }
   });
 
-  const getPathList = async (fileList: File[]) => {
+  const getPathList = async (fileList: FileOrString[]) => {
     const formData = new FormData();
     formData.append("username", user?.username as string);
     fileList.forEach((file) => {
