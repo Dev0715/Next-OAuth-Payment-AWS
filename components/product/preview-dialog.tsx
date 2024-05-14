@@ -3,6 +3,7 @@ import { Dialog, DialogContent } from "../ui/dialog";
 import Image from "next/image";
 import { FileOrString } from "@/shared/types/file-or-string";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
+import { Avatar, AvatarImage } from "../ui/avatar";
 
 type Props = {
   isPreviewing: boolean;
@@ -16,19 +17,12 @@ export const PreviewDialog = ({
   image
 }: Props) => {
   const [imageURL, setImageURL] = useState<string>("");
-  const [imageDimensions, setImageDimensions] = useState({
-    width: 0,
-    height: 0
-  });
 
   useEffect(() => {
     if (!image) return;
+
     if (image instanceof File) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageURL(reader.result as string);
-      };
-      reader.readAsDataURL(image);
+      setImageURL(URL.createObjectURL(image));
     } else {
       getLinkFromS3(image as string).then((res) => {
         if (res.success) {
@@ -38,34 +32,15 @@ export const PreviewDialog = ({
     }
   }, [image]);
 
-  const handleImageLoad = (event: any) => {
-    setImageDimensions({
-      width: event.target.naturalWidth,
-      height: event.target.naturalHeight
-    });
-  };
-
   return (
     <Dialog
       open={isPreviewing}
       onOpenChange={(isOpen) => setPreviewing(isOpen)}
     >
-      <DialogContent className="max-w-[90%] max-h-[90%]">
-        {/* <DialogHeader>
-          <DialogTitle>{files[previewIndex as number]?.name}</DialogTitle>
-        </DialogHeader> */}
-        <div className="max-w-full max-h-full w-full h-fit overflow-hidden">
-          {isPreviewing && (
-            <Image
-              src={imageURL}
-              className="max-w-full w-full max-h-full object-fill"
-              width={imageDimensions.width}
-              height={imageDimensions.height}
-              onLoad={handleImageLoad}
-              alt="Loading..."
-            />
-          )}
-        </div>
+      <DialogContent className="max-w-[90%] max-h-[90%] h-fit">
+        <Avatar className="w-full h-auto rounded-none">
+          <AvatarImage src={imageURL} className="object-fill aspect-ratio" />
+        </Avatar>
       </DialogContent>
     </Dialog>
   );
