@@ -34,7 +34,6 @@ import {
 import { FaFileUpload, FaPlus } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
-import { Dialog, DialogContent } from "../ui/dialog";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
 import { FormError } from "../utils/form-error";
@@ -46,8 +45,8 @@ import { addNewProduct } from "@/actions/user/new-product";
 import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 
 import type { ProductType } from "@/shared/types/product.type";
-import Image from "next/image";
 import { PreviewCard } from "./preview-card";
+import { PreviewDialog } from "./preview-dialog";
 
 export const ProductAddForm = () => {
   const [user] = useAtom(userAtom);
@@ -262,25 +261,11 @@ export const ProductAddForm = () => {
   return (
     <Card className="w-full flex rounded-none">
       {/** Preview is not working with images whose width < height  */}
-      <Dialog
-        open={isPreviewing}
-        onOpenChange={(isOpen) => setPreviewing(isOpen)}
-      >
-        <DialogContent className="max-w-[90%] max-h-[90%]">
-          {/* <DialogHeader>
-            <DialogTitle>{files[previewIndex as number]?.name}</DialogTitle>
-          </DialogHeader> */}
-          <div className="max-w-full max-h-full w-fit h-fit overflow-hidden">
-            {isPreviewing && (
-              <Image
-                src={URL.createObjectURL(previewFiles[previewIndex as number])}
-                className="max-w-full max-h-full object-fill"
-                alt=""
-              />
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
+      <PreviewDialog
+        isPreviewing={isPreviewing}
+        setPreviewing={setPreviewing}
+        image={previewFiles[previewIndex as number]}
+      />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
