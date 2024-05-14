@@ -32,7 +32,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { FaFileUpload, FaPlus } from "react-icons/fa";
+import { FaFileUpload, FaPlus, FaSave } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { userAtom } from "@/store/user";
@@ -49,6 +49,7 @@ import type { Product, ProductType } from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
 import { PreviewDialog } from "./preview-dialog";
 import { FileOrString } from "@/shared/types/file-or-string";
+import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 
 export const ProductEditForm = ({ product }: { product: Product }) => {
   const [user] = useAtom(userAtom);
@@ -70,7 +71,16 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
 
   useEffect(() => {
     setSelectedKeywords(product.keywords);
-    setPreviewFiles(product.previewList);
+    Promise.all(
+      product.previewList.map(async (path) => {
+        const res = await getLinkFromS3(path);
+        if (res.success) {
+          return res.response;
+        }
+      })
+    ).then((response) => {
+      setPreviewFiles(response as FileOrString[]);
+    });
   }, [product]);
 
   const onAddNewKeyword = () => {
@@ -423,7 +433,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
                 You can set as many keywords as you want to improve chance of
                 your product to be found out
               </FormDescription>
-              <div className="w-full grid grid-cols-[1fr_auto] gap-2">
+              <div className="w-full grid grid-cols-[1fr_auto] gap-4">
                 <Input
                   disabled={isPending}
                   className=""
@@ -442,7 +452,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
                   Add
                 </Button>
 
-                <div className="flex flex-wrap col-span-2">
+                <div className="flex flex-wrap gap-2 col-span-2">
                   {selectedKeywords.map((keyword, index) => (
                     <Badge
                       key={keyword}
@@ -486,8 +496,8 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
               type="submit"
               className="w-full gap-x-2"
             >
-              <FaPlus />
-              Register
+              <FaSave />
+              Save
             </Button>
             <FormError message={error} />
             <FormSuccess message={success} />
