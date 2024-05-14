@@ -3,7 +3,6 @@ import { ImagePreview } from "./image-preview";
 
 type Props = {
   previewFiles: File[];
-  previewPaths: string[];
   isPending: boolean;
   onPreviewFile: (index: number) => void;
   onDeletePreviewFile: (index: number) => void;
@@ -11,7 +10,6 @@ type Props = {
 
 export const PreviewCard = ({
   previewFiles,
-  previewPaths,
   isPending,
   onPreviewFile,
   onDeletePreviewFile
@@ -28,7 +26,7 @@ export const PreviewCard = ({
             <ImagePreview
               key={file.name}
               disabled={isPending}
-              src={previewPaths[index]}
+              image={file}
               onPreview={() => onPreviewFile(index)}
               onDelete={() => onDeletePreviewFile(index)}
             />
