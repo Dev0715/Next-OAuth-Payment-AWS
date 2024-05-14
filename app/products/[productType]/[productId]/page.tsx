@@ -153,6 +153,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
       setPurchasedConfirming(false);
     }
     window.history.replaceState(null, "", currentPath);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   const setCartConfirming = (success: boolean, message?: string) => {

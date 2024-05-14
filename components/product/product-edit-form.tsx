@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle
 } from "../ui/card";
@@ -248,7 +247,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     }
   };
 
-  const onSubmit = (values: z.infer<typeof NewProductSchema>) => {
+  const onSubmit = () => {
     if (creativeFiles.length === 0 || previewFiles.length === 0) {
       setSuccess("");
       setError(

@@ -108,11 +108,7 @@ const AdminManagement = () => {
     const pageCount = table.getPageCount();
 
     return lastEvaluatedKey || currentPageIndex + 1 < pageCount;
-  }, [
-    lastEvaluatedKey,
-    table.getState().pagination.pageIndex,
-    table.getPageCount()
-  ]);
+  }, [lastEvaluatedKey, table]);
 
   const onConfirmOK = () => {
     setConfirmAlert(false);

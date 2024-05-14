@@ -82,11 +82,7 @@ export default function Approval() {
     const pageCount = table.getPageCount();
 
     return lastEvaluatedKey || currentPageIndex + 1 < pageCount;
-  }, [
-    lastEvaluatedKey,
-    table.getState().pagination.pageIndex,
-    table.getPageCount()
-  ]);
+  }, [lastEvaluatedKey, table]);
 
   const onNext = () => {
     const currentPageIndex = table.getState().pagination.pageIndex;
