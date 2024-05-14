@@ -33,7 +33,7 @@ export const UserCollection = ({ products, userId }: Props) => {
             <ProductItem
               key={index}
               product={product}
-              _url={`/creator/${product.productType}/${product.productId}`}
+              _url={`/creator/edit-product/${product.productType}/${product.productId}`}
             />
           </div>
         ))}
