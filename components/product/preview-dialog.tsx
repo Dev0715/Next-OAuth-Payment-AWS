@@ -54,15 +54,15 @@ export const PreviewDialog = ({
         {/* <DialogHeader>
           <DialogTitle>{files[previewIndex as number]?.name}</DialogTitle>
         </DialogHeader> */}
-        <div className="max-w-full max-h-full w-fit h-fit overflow-hidden">
+        <div className="max-w-full max-h-full w-full h-fit overflow-hidden">
           {isPreviewing && (
             <Image
               src={imageURL}
-              className="max-w-full max-h-full object-fill"
+              className="max-w-full w-full max-h-full object-fill"
               width={imageDimensions.width}
               height={imageDimensions.height}
               onLoad={handleImageLoad}
-              alt="Preview Image"
+              alt="Loading..."
             />
           )}
         </div>
