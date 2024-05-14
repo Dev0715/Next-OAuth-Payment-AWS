@@ -4,18 +4,19 @@ import Image from "next/image";
 
 type PropsParams = {
   disabled: boolean;
-  src: File;
+  image: File;
   onPreview: () => void;
   onDelete: () => void;
 };
 
 export const ImagePreview = ({
   disabled,
-  src,
+  image,
   onPreview,
   onDelete
 }: PropsParams) => {
   const [isHover, setHover] = useState<boolean>(false);
+
   const [imageURL, setImageURL] = useState<string>("");
   const [imageDimensions, setImageDimensions] = useState({
     width: 0,
@@ -27,8 +28,8 @@ export const ImagePreview = ({
     reader.onload = () => {
       setImageURL(reader.result as string);
     };
-    reader.readAsDataURL(src);
-  }, []);
+    reader.readAsDataURL(image);
+  }, [image]);
 
   const handleImageLoad = (event: any) => {
     setImageDimensions({
@@ -45,8 +46,10 @@ export const ImagePreview = ({
     >
       <Image
         src={imageURL}
-        className="h-28 w-auto"
+        className="h-28"
         alt=""
+        width={imageDimensions.width}
+        height={imageDimensions.height}
         onLoad={handleImageLoad}
       />
 
