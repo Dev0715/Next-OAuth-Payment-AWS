@@ -20,6 +20,7 @@ export const PreviewDialog = ({
   });
 
   useEffect(() => {
+    if (!image) return;
     const reader = new FileReader();
     reader.onload = () => {
       setImageURL(reader.result as string);
