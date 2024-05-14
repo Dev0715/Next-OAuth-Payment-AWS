@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "../ui/button";
-import Image from "next/image";
+import { Avatar } from "../ui/avatar";
+import { AvatarImage } from "@radix-ui/react-avatar";
 
 type Props = {
   disabled: boolean;
-  image: File;
+  image: string;
   onPreview: () => void;
   onDelete: () => void;
 };
@@ -16,41 +17,16 @@ export const ImagePreview = ({
   onDelete
 }: Props) => {
   const [isHover, setHover] = useState<boolean>(false);
-  const [imageURL, setImageURL] = useState<string>("");
-  const [imageDimensions, setImageDimensions] = useState({
-    width: 0,
-    height: 0
-  });
-
-  useEffect(() => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImageURL(reader.result as string);
-    };
-    reader.readAsDataURL(image);
-  }, [image]);
-
-  const handleImageLoad = (event: any) => {
-    setImageDimensions({
-      width: event.target.naturalWidth,
-      height: event.target.naturalHeight
-    });
-  };
 
   return (
     <div
-      className="relative cursor-pointer"
+      className="relative h-fit cursor-pointer"
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
     >
-      <Image
-        src={imageURL}
-        className="w-auto h-28"
-        width={imageDimensions.width}
-        height={imageDimensions.height}
-        onLoad={handleImageLoad}
-        alt={image.name}
-      />
+      <Avatar className="w-auto h-28 rounded-none">
+        <AvatarImage src={image} className="object-fill aspect-ratio" />
+      </Avatar>
 
       <div
         className={`absolute top-0 right-0 z-10 w-full h-full flex items-center justify-center bg-gray-700/70 ${!isHover && "hidden"}`}
