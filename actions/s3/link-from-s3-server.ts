@@ -16,6 +16,6 @@ export const getLinkFromS3Server = async (keyName: string) => {
     const response = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
     return { success: true, response };
   } catch (error) {
-    return { success: false, error };
+    return { success: false };
   }
 };
