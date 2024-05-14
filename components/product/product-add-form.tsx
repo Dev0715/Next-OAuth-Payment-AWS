@@ -32,7 +32,6 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { FaFileUpload, FaPlus } from "react-icons/fa";
-import { ImagePreview } from "./image-preview";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { Dialog, DialogContent } from "../ui/dialog";
@@ -48,6 +47,7 @@ import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 
 import type { ProductType } from "@/shared/types/product.type";
 import Image from "next/image";
+import { PreviewCard } from "./preview-card";
 
 export const ProductAddForm = () => {
   const [user] = useAtom(userAtom);
@@ -57,7 +57,6 @@ export const ProductAddForm = () => {
   const [isPending, setPending] = useState<boolean>(false);
 
   const [previewFiles, setPreviewFiles] = useState<File[]>([]);
-  const [previewPaths, setPreviewPaths] = useState<string[]>([]);
   const [previewIndex, setPreviewIndex] = useState<number>();
   const [isPreviewing, setPreviewing] = useState<boolean>(false);
   const hiddenPreviewInput = useRef<HTMLInputElement>(null);
@@ -130,7 +129,6 @@ export const ProductAddForm = () => {
       );
       const newPaths = newFiles.map((file) => URL.createObjectURL(file));
       setPreviewFiles((prev) => [...prev, ...newFiles]);
-      setPreviewPaths((prev) => [...prev, ...newPaths]);
     }
     if (hiddenPreviewInput.current) {
       hiddenPreviewInput.current.value = "";
@@ -519,30 +517,12 @@ export const ProductAddForm = () => {
             </div>
           </CardContent>
         </Card>
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle>Preview Images</CardTitle>
-            {/* <CardDescription>You can preview your creative works</CardDescription> */}
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-row flex-wrap gap-4">
-              {previewFiles.map((file, index) => (
-                <ImagePreview
-                  key={file.name}
-                  disabled={isPending}
-                  src={previewPaths[index]}
-                  onPreview={() => onPreviewFile(index)}
-                  onDelete={() => onDeletePreviewFile(index)}
-                />
-              ))}
-              {previewFiles.length === 0 && (
-                <div className="w-full h-64 flex items-center justify-center">
-                  <p>No Preview Images selected</p>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+        <PreviewCard
+          previewFiles={previewFiles}
+          isPending={isPending}
+          onPreviewFile={onPreviewFile}
+          onDeletePreviewFile={onDeletePreviewFile}
+        />
       </div>
     </Card>
   );
