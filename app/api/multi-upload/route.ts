@@ -23,6 +23,6 @@ export const POST = async (req: NextRequest) => {
 
     return NextResponse.json({ success: true, pathList }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ success: false, error }, { status: 500 });
+    return NextResponse.json({ success: false }, { status: 500 });
   }
 };
