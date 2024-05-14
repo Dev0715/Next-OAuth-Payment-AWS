@@ -25,7 +25,11 @@ export const ImagePreview = ({
     if (image instanceof File) {
       setImageURL(URL.createObjectURL(image));
     } else {
-      setImageURL(image);
+      getLinkFromS3(image).then((res) => {
+        if (res.success) {
+          setImageURL(res.response as string);
+        }
+      });
     }
   }, [image]);
 
