@@ -44,105 +44,27 @@ import { createProduct } from "@/data/product";
 import { addNewProduct } from "@/actions/user/new-product";
 import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 
-import type { ProductType } from "@/shared/types/product.type";
+import type { Product, ProductType } from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
 import { PreviewDialog } from "./preview-dialog";
+import { FilesCard } from "./files-card";
+import { DetailsCard } from "./details-card";
+import {
+  FileOrCreativeFile,
+  FileOrString
+} from "@/shared/types/file-preview-types";
+import { newProduct } from "@/actions/product/new-product";
 
 export const ProductAddForm = () => {
   const [user] = useAtom(userAtom);
 
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setPending] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
-  const [previewFiles, setPreviewFiles] = useState<File[]>([]);
-  const [previewIndex, setPreviewIndex] = useState<number>();
-  const [isPreviewing, setPreviewing] = useState<boolean>(false);
-  const hiddenPreviewInput = useRef<HTMLInputElement>(null);
-
-  const [creativeFiles, setCreativeFiles] = useState<File[]>([]);
-  const hiddenCreativeFileInput = useRef<HTMLInputElement>(null);
-
-  const [newKeywordVal, setNewKeywordVal] = useState<string>("");
+  const [previewFiles, setPreviewFiles] = useState<FileOrString[]>([]);
+  const [creativeFiles, setCreativeFiles] = useState<FileOrCreativeFile[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-
-  const onAddNewKeyword = () => {
-    if (newKeywordVal === "") return;
-
-    const existingOne = selectedKeywords.find(
-      (keyword) => keyword === newKeywordVal
-    );
-    if (!existingOne) setSelectedKeywords((prev) => [...prev, newKeywordVal]);
-
-    setNewKeywordVal("");
-  };
-
-  const onDeleteKeyword = (index: number) => {
-    const newKeywords = [...selectedKeywords];
-    newKeywords.splice(index, 1);
-    setSelectedKeywords(newKeywords); // # Show Duplication Error? #
-  };
-
-  const onCreativeFileBrowse = () => {
-    hiddenCreativeFileInput.current?.click();
-  };
-
-  const onCreativeFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const newFiles = Array.from(event.target.files).filter(
-        (newFile) =>
-          !creativeFiles.find(
-            (savedFile) =>
-              savedFile.name === newFile.name &&
-              savedFile.size === newFile.size &&
-              savedFile.lastModified === newFile.lastModified
-          )
-      );
-      setCreativeFiles((prev) => [...prev, ...newFiles]);
-    }
-    if (hiddenCreativeFileInput.current) {
-      hiddenCreativeFileInput.current.value = "";
-    }
-  };
-
-  const onDeleteCreativeFile = (index: number) => {
-    const updatedFiles = [...creativeFiles];
-    updatedFiles.splice(index, 1);
-    setCreativeFiles(updatedFiles);
-  };
-
-  const onPreviewFileBrowse = () => {
-    hiddenPreviewInput.current?.click();
-  };
-
-  const onPreviewFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const newFiles = Array.from(event.target.files).filter(
-        (newFile) =>
-          !previewFiles.find(
-            (savedFile) =>
-              savedFile.name === newFile.name &&
-              savedFile.size === newFile.size &&
-              savedFile.lastModified === newFile.lastModified
-          )
-      );
-      setPreviewFiles((prev) => [...prev, ...newFiles]);
-    }
-    if (hiddenPreviewInput.current) {
-      hiddenPreviewInput.current.value = "";
-    }
-  };
-
-  const onPreviewFile = (index: number) => {
-    setPreviewing(true);
-    setPreviewIndex(index);
-  };
-
-  const onDeletePreviewFile = (index: number) => {
-    const updatedFiles = [...previewFiles];
-    updatedFiles.splice(index, 1);
-    setPreviewFiles(updatedFiles);
-  };
 
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
