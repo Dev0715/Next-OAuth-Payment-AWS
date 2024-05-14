@@ -17,6 +17,7 @@ import { useRef, useState } from "react";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -239,8 +240,6 @@ export const ProductAddForm = () => {
       return;
     }
 
-    console.log(values);
-
     setError("");
     setSuccess("");
     setPending(true);
@@ -258,71 +257,78 @@ export const ProductAddForm = () => {
   };
 
   return (
-    <Card className="w-full flex rounded-none">
+    <Card className="w-full rounded-none">
       {/** Preview is not working with images whose width < height  */}
       <PreviewDialog
         isPreviewing={isPreviewing}
         setPreviewing={setPreviewing}
         image={previewFiles[previewIndex as number]}
       />
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-1/2 flex flex-col"
-        >
-          <CardHeader>
-            <CardTitle className="text-4xl font-medium">
-              Add a new Product
-            </CardTitle>
-            <CardDescription>
-              You can register your product and our admin users will check it
-              and publish soon!
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-y-4">
-            <FormLabel>Upload your creative work</FormLabel>
-            <div className="w-full flex gap-x-4">
-              <div className="w-1/2">
-                <Button
-                  disabled={isPending}
-                  onClick={onCreativeFileBrowse}
-                  variant="outline"
-                  type="button"
-                  className="w-full h-16 flex gap-x-2 border-green-700"
-                >
-                  <FaFileUpload />
-                  Upload your creative work
-                </Button>
-                <Input
-                  className="hidden"
-                  type="file"
-                  // accept="image/*"
-                  multiple
-                  ref={hiddenCreativeFileInput}
-                  onChange={onCreativeFileAdded}
-                />
+      <CardHeader>
+        <CardTitle className="text-4xl font-medium">
+          Add a new Product
+        </CardTitle>
+        <CardDescription>
+          You can register your product and our admin users will check it and
+          publish soon!
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent className="grid grid-cols-2 gap-4">
+        <div className="">
+          <Card className="mb-4 w-full">
+            <CardHeader className="flex-row items-center justify-between space-y-0">
+              <CardTitle>Creative Works</CardTitle>
+              <Button
+                type="button"
+                className="gap-x-2 border-green-700"
+                variant="outline"
+                size="sm"
+                disabled={isPending}
+                onClick={onCreativeFileBrowse}
+              >
+                <FaFileUpload />
+                Upload
+              </Button>
+            </CardHeader>
+            <CardContent>
+              <div className="min-h-32 flex flex-wrap gap-4">
+                {creativeFiles.map((file, index) => (
+                  <Badge
+                    key={index}
+                    className="h-8 flex gap-x-2 px-4 rounded-full"
+                  >
+                    <p>{file.name}</p>
+                    <Button
+                      // asChild
+                      disabled={isPending}
+                      variant="link"
+                      className="p-0 text-base text-black cursor-pointer"
+                      onClick={() => onDeleteCreativeFile(index)}
+                    >
+                      <MdClose />
+                    </Button>
+                  </Badge>
+                ))}
+                {creativeFiles.length === 0 && (
+                  <div className="w-full flex items-center justify-center">
+                    <p>No Creative Files selected</p>
+                  </div>
+                )}
               </div>
-              <div className="w-1/2">
-                <Button
-                  disabled={isPending}
-                  onClick={onPreviewFileBrowse}
-                  variant="outline"
-                  type="button"
-                  className="w-full h-16 flex gap-x-2 border-green-700"
-                >
-                  <FaFileUpload />
-                  Add images for preview
-                </Button>
-                <Input
-                  className="hidden"
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  ref={hiddenPreviewInput}
-                  onChange={onPreviewFileAdded}
-                />
-              </div>
-            </div>
+            </CardContent>
+          </Card>
+          <PreviewCard
+            previewFiles={previewFiles}
+            isPending={isPending}
+            onPreviewFileBrowse={onPreviewFileBrowse}
+            onPreviewFile={onPreviewFile}
+            onDeletePreviewFile={onDeletePreviewFile}
+          />
+        </div>
+
+        <Form {...form}>
+          <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name="productType"
@@ -406,108 +412,83 @@ export const ProductAddForm = () => {
                 </FormItem>
               )}
             />
-            <Card>
-              <CardHeader>
-                <CardTitle>Keywords</CardTitle>
-                <CardDescription>
-                  You can set as many keywords as you want to improve chance of
-                  your product to be found out
-                </CardDescription>
-                <div className="w-full flex gap-x-4 pt-2">
-                  <Input
-                    disabled={isPending}
-                    className="max-w-60"
-                    type="text"
-                    value={newKeywordVal}
-                    onChange={(e) => setNewKeywordVal(e.target.value)}
-                  />
-                  <Button
-                    disabled={isPending}
-                    type="button"
-                    variant="link"
-                    className="flex gap-x-2 text-sm"
-                    onClick={onAddNewKeyword}
-                  >
-                    <FaPlus />
-                    Add a new Keyword
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-4">
-                {selectedKeywords.map((keyword, index) => (
-                  <Badge
-                    key={keyword}
-                    className="h-8 flex gap-x-2 px-4 rounded-full"
-                  >
-                    <p>{keyword}</p>
-                    <Button
-                      // asChild
-                      disabled={isPending}
-                      variant="link"
-                      className="p-0 text-base text-black cursor-pointer"
-                      onClick={() => onDeleteKeyword(index)}
+            <FormItem>
+              <FormLabel>Keywords</FormLabel>
+              <FormDescription>
+                You can set as many keywords as you want to improve chance of
+                your product to be found out
+              </FormDescription>
+              <div className="w-full grid grid-cols-[1fr_auto] gap-2">
+                <Input
+                  disabled={isPending}
+                  className=""
+                  type="text"
+                  value={newKeywordVal}
+                  onChange={(e) => setNewKeywordVal(e.target.value)}
+                />
+                <Button
+                  disabled={isPending}
+                  type="button"
+                  variant="link"
+                  className="flex gap-x-2 text-sm"
+                  onClick={onAddNewKeyword}
+                >
+                  <FaPlus />
+                  Add
+                </Button>
+
+                <div className="flex flex-wrap col-span-2">
+                  {selectedKeywords.map((keyword, index) => (
+                    <Badge
+                      key={keyword}
+                      className="h-8 flex gap-x-2 px-2 rounded-full"
                     >
-                      <MdClose />
-                    </Button>
-                  </Badge>
-                ))}
-              </CardContent>
-            </Card>
-            <FormError message={error} />
-            <FormSuccess message={success} />
-          </CardContent>
-          <CardFooter className="self-end">
+                      <p>{keyword}</p>
+                      <Button
+                        // asChild
+                        disabled={isPending}
+                        variant="link"
+                        className="p-0 text-base text-black cursor-pointer"
+                        onClick={() => onDeleteKeyword(index)}
+                      >
+                        <MdClose />
+                      </Button>
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </FormItem>
+            <div className="w-full flex gap-x-4">
+              <Input
+                className="hidden"
+                type="file"
+                // accept="image/*"
+                multiple
+                ref={hiddenCreativeFileInput}
+                onChange={onCreativeFileAdded}
+              />
+              <Input
+                className="hidden"
+                type="file"
+                accept="image/*"
+                multiple
+                ref={hiddenPreviewInput}
+                onChange={onPreviewFileAdded}
+              />
+            </div>
             <Button
               disabled={isPending}
               type="submit"
-              className="w-48 flex gap-x-2"
+              className="w-full gap-x-2"
             >
               <FaPlus />
               Register
             </Button>
-          </CardFooter>
-        </form>
-      </Form>
-      <div className="w-1/2 flex flex-col gap-y-6 p-4 pt-24">
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle>Creative Works</CardTitle>
-            {/* <CardDescription>You can preview your creative works</CardDescription> */}
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-row flex-wrap gap-4">
-              {creativeFiles.map((file, index) => (
-                <Badge
-                  key={index}
-                  className="h-8 flex gap-x-2 px-4 rounded-full"
-                >
-                  <p>{file.name}</p>
-                  <Button
-                    // asChild
-                    disabled={isPending}
-                    variant="link"
-                    className="p-0 text-base text-black cursor-pointer"
-                    onClick={() => onDeleteCreativeFile(index)}
-                  >
-                    <MdClose />
-                  </Button>
-                </Badge>
-              ))}
-              {creativeFiles.length === 0 && (
-                <div className="w-full h-64 flex items-center justify-center">
-                  <p>No Creative Files selected</p>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-        <PreviewCard
-          previewFiles={previewFiles}
-          isPending={isPending}
-          onPreviewFile={onPreviewFile}
-          onDeletePreviewFile={onDeletePreviewFile}
-        />
-      </div>
+            <FormError message={error} />
+            <FormSuccess message={success} />
+          </form>
+        </Form>
+      </CardContent>
     </Card>
   );
 };
