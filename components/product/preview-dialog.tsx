@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Dialog, DialogContent } from "../ui/dialog";
 import Image from "next/image";
+import { FileOrString } from "@/shared/types/file-or-string";
+import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 
 type Props = {
   isPreviewing: boolean;
   setPreviewing: (isPreviewing: boolean) => void;
-  image: File;
+  image: FileOrString;
 };
 
 export const PreviewDialog = ({
@@ -21,11 +23,19 @@ export const PreviewDialog = ({
 
   useEffect(() => {
     if (!image) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImageURL(reader.result as string);
-    };
-    reader.readAsDataURL(image);
+    if (image instanceof File) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageURL(reader.result as string);
+      };
+      reader.readAsDataURL(image);
+    } else {
+      getLinkFromS3(image as string).then((res) => {
+        if (res.success) {
+          setImageURL(res.response as string);
+        }
+      });
+    }
   }, [image]);
 
   const handleImageLoad = (event: any) => {
@@ -52,7 +62,7 @@ export const PreviewDialog = ({
               width={imageDimensions.width}
               height={imageDimensions.height}
               onLoad={handleImageLoad}
-              alt={image.name}
+              alt="Preview Image"
             />
           )}
         </div>
