@@ -24,11 +24,7 @@ export const PreviewDialog = ({
     if (image instanceof File) {
       setImageURL(URL.createObjectURL(image));
     } else {
-      getLinkFromS3(image as string).then((res) => {
-        if (res.success) {
-          setImageURL(res.response as string);
-        }
-      });
+      setImageURL(image);
     }
   }, [image]);
 
@@ -38,7 +34,7 @@ export const PreviewDialog = ({
       onOpenChange={(isOpen) => setPreviewing(isOpen)}
     >
       <DialogContent className="max-w-[90%] max-h-[90%] h-fit">
-        <Avatar className="w-full h-auto rounded-none">
+        <Avatar className="w-full h-full rounded-none">
           <AvatarImage src={imageURL} className="object-fill aspect-ratio" />
         </Avatar>
       </DialogContent>
