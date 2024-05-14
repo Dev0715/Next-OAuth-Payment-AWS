@@ -51,7 +51,7 @@ export const PreviewDialog = ({
               width={imageDimensions.width}
               height={imageDimensions.height}
               onLoad={handleImageLoad}
-              alt=""
+              alt={image.name}
             />
           )}
         </div>
