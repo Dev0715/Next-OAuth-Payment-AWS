@@ -293,7 +293,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
                 variant="outline"
                 className="border-green-700 gap-x-2"
               >
-                <Link href={`/profile/creator/${product?.ownerId}`}>
+                <Link href={`/creator/${product?.ownerId}`}>
                   <FaRegUser className="text-green-700" />
                   {`Go to Creator's Profile`}
                 </Link>
