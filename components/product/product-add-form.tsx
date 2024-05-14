@@ -437,7 +437,7 @@ export const ProductAddForm = () => {
                   Add
                 </Button>
 
-                <div className="flex flex-wrap col-span-2">
+                <div className="flex flex-wrap gap-2 col-span-2">
                   {selectedKeywords.map((keyword, index) => (
                     <Badge
                       key={keyword}
