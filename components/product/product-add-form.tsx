@@ -126,7 +126,6 @@ export const ProductAddForm = () => {
               savedFile.lastModified === newFile.lastModified
           )
       );
-      const newPaths = newFiles.map((file) => URL.createObjectURL(file));
       setPreviewFiles((prev) => [...prev, ...newFiles]);
     }
     if (hiddenPreviewInput.current) {
