@@ -5,7 +5,7 @@ const ProductAdd = () => {
     <main className="w-full py-6">
       <ProductAddForm />
     </main>
-  )
-}
+  );
+};
 
 export default ProductAdd;
