@@ -13,7 +13,7 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NewProductSchema } from "@/schemas/product";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Form,
   FormControl,
@@ -45,11 +45,11 @@ import { createProduct } from "@/data/product";
 import { addNewProduct } from "@/actions/user/new-product";
 import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 
-import type { ProductType } from "@/shared/types/product.type";
+import type { Product, ProductType } from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
 import { PreviewDialog } from "./preview-dialog";
 
-export const ProductEditForm = () => {
+export const ProductEditForm = ({ product }: { product: Product }) => {
   const [user] = useAtom(userAtom);
 
   const [error, setError] = useState<string | undefined>("");
@@ -66,6 +66,10 @@ export const ProductEditForm = () => {
 
   const [newKeywordVal, setNewKeywordVal] = useState<string>("");
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+
+  useEffect(() => {
+    setSelectedKeywords(product.keywords);
+  }, [product]);
 
   const onAddNewKeyword = () => {
     if (newKeywordVal === "") return;
@@ -148,10 +152,10 @@ export const ProductEditForm = () => {
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
     defaultValues: {
-      productType: "",
-      title: "",
-      description: "",
-      price: 0
+      productType: product.productType,
+      title: product.title,
+      description: product.description,
+      price: product.price
     }
   });
 
@@ -265,18 +269,16 @@ export const ProductEditForm = () => {
         image={previewFiles[previewIndex as number]}
       />
       <CardHeader>
-        <CardTitle className="text-4xl font-medium">
-          Add a new Product
-        </CardTitle>
+        <CardTitle className="text-4xl font-medium">Edit a Product</CardTitle>
         <CardDescription>
-          You can register your product and our admin users will check it and
+          You can edit your product and our admin users will check it and
           publish soon!
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="grid grid-cols-2 gap-4">
+      <CardContent className="grid grid-cols-2 gap-6">
         <div className="">
-          <Card className="mb-4 w-full">
+          <Card className="mb-6 w-full">
             <CardHeader className="flex-row items-center justify-between space-y-0">
               <CardTitle>Creative Works</CardTitle>
               <Button
