@@ -274,9 +274,9 @@ export const ProductAddForm = () => {
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="grid grid-cols-2 gap-4">
+      <CardContent className="grid grid-cols-2 gap-6">
         <div className="">
-          <Card className="mb-4 w-full">
+          <Card className="mb-6 w-full">
             <CardHeader className="flex-row items-center justify-between space-y-0">
               <CardTitle>Creative Works</CardTitle>
               <Button
@@ -418,7 +418,7 @@ export const ProductAddForm = () => {
                 You can set as many keywords as you want to improve chance of
                 your product to be found out
               </FormDescription>
-              <div className="w-full grid grid-cols-[1fr_auto] gap-2">
+              <div className="w-full grid grid-cols-[1fr_auto] gap-4">
                 <Input
                   disabled={isPending}
                   className=""
