@@ -188,142 +188,20 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
       if (file instanceof File) formData.append(uuidv4(), file);
     });
 
-    const response = await axiosClient.post(
-      "/multi-upload",
-      formData,
-      axiosConfig
-    );
-    const data = response.data;
-
-    if (data.success) {
-      return data.pathList;
-    } else {
+    try {
+      const response = await axiosClient.post(
+        "/multi-upload",
+        formData,
+        axiosConfig
+      );
+      return response.data.pathList;
+    } catch (error) {
       return [];
     }
   };
 
-  const submitProduct = async () => {
-    try {
-      const [_pathList, _previewList] = await Promise.all([
-        getPathList(creativeFiles),
-        getPathList(previewFiles)
-      ]);
-
-      const _creativeFiles = creativeFiles.filter(
-        (item) => item instanceof File
-      );
-
-      const productType = form.getValues().productType as ProductType;
-      const productId = uuidv4();
-      const pathList = _pathList.map((path: string, index: number) => ({
-        name: _creativeFiles[index].name,
-        path
-      }));
-
-      const previewList = [
-        ..._previewList,
-        ...previewFiles.filter((item) => !(item instanceof File))
-      ];
-
-      const fileList = [
-        ...pathList,
-        ...creativeFiles.filter((item) => !(item instanceof File))
-      ];
-
-      if (previewList.length === 0 || fileList.length === 0) {
-        throw new Error("Failed to upload images.");
-      }
-
-      const res = await createProduct({
-        ...form.getValues(),
-        productType,
-        productId,
-        ownerId: user?.userId as string,
-        fileList,
-        previewList: previewList,
-        keywords: selectedKeywords,
-        approval: {
-          state: "updated",
-          history: [
-            ...product.approval.history,
-            {
-              state: "updated",
-              comment: "Newly updated and deployed, waiting for approval.",
-              userId: user?.userId as string
-            }
-          ]
-        }
-      });
-
-      if (!res.success) {
-        throw new Error("Failed to create product. Please try again.");
-      }
-
-      const response = await addNewProduct(user?.userId as string, {
-        productType: form.getValues().productType as ProductType,
-        productId
-      });
-
-      if (response.error) {
-        throw new Error("Failed to save products into user information.");
-      }
-
-      const res_delete = await deleteProduct(
-        product.productType,
-        product.productId
-      );
-
-      if (!res_delete.success) {
-        throw new Error("Failed to delete the old product.");
-      }
-
-      const response_delete = await deleteProductFromCreator(
-        user?.userId as string,
-        product.productId
-      );
-
-      if (response_delete.error) {
-        throw new Error("Failed to delete the old product from creator.");
-      }
-    } catch (error) {
-      console.error(error);
-      throw new Error("Internal Server Error");
-    }
-  };
-
-  const onSubmit = () => {
-    if (creativeFiles.length === 0 || previewFiles.length === 0) {
-      setSuccess("");
-      setError(
-        "Please upload at least one creative file and one preview image"
-      );
-      return;
-    }
-
-    setError("");
-    setSuccess("");
-    setPending(true);
-
-    submitProduct()
-      .then(() => {
-        setSuccess("Product updated successfully!");
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
-        setPending(false);
-      });
-  };
-
   return (
     <Card className="w-full rounded-none">
-      {/** Preview is not working with images whose width < height  */}
-      <PreviewDialog
-        isPreviewing={isPreviewing}
-        setPreviewing={setPreviewing}
-        image={previewFiles[previewIndex as number]}
-      />
       <CardHeader>
         <CardTitle className="text-4xl font-medium">Edit a Product</CardTitle>
         <CardDescription>
