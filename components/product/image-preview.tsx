@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 
 type PropsParams = {
   disabled: boolean;
-  src: string;
+  src: File;
   onPreview: () => void;
   onDelete: () => void;
 };
@@ -16,6 +16,26 @@ export const ImagePreview = ({
   onDelete
 }: PropsParams) => {
   const [isHover, setHover] = useState<boolean>(false);
+  const [imageURL, setImageURL] = useState<string>("");
+  const [imageDimensions, setImageDimensions] = useState({
+    width: 0,
+    height: 0
+  });
+
+  useEffect(() => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageURL(reader.result as string);
+    };
+    reader.readAsDataURL(src);
+  }, []);
+
+  const handleImageLoad = (event: any) => {
+    setImageDimensions({
+      width: event.target.naturalWidth,
+      height: event.target.naturalHeight
+    });
+  };
 
   return (
     <div
@@ -23,7 +43,13 @@ export const ImagePreview = ({
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
     >
-      <Image src={src} className="h-28" alt="" />
+      <Image
+        src={imageURL}
+        className="h-28 w-auto"
+        alt=""
+        onLoad={handleImageLoad}
+      />
+
       <div
         className={`absolute top-0 right-0 z-10 w-full h-full flex items-center justify-center bg-gray-700/70 ${!isHover && "hidden"}`}
       >
