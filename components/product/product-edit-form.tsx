@@ -47,7 +47,7 @@ import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 import type { Product, ProductType } from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
 import { PreviewDialog } from "./preview-dialog";
-import { FileOrString } from "@/shared/types/file-or-string";
+import { FileOrString } from "@/shared/types/file-preview-types";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 
 export const ProductEditForm = ({ product }: { product: Product }) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { FileOrString } from "@/shared/types/file-or-string";
+import { FileOrString } from "@/shared/types/file-preview-types";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { Avatar } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";

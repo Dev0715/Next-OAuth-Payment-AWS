@@ -3,7 +3,7 @@ import { FaFileUpload } from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { ImagePreview } from "./preview-image";
-import { FileOrString } from "@/shared/types/file-or-string";
+import { FileOrString } from "@/shared/types/file-preview-types";
 
 type Props = {
   previewFiles: FileOrString[];

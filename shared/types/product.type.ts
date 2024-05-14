@@ -17,7 +17,7 @@ export type ProductType =
 
 export type ProductState = "created" | "approved" | "rejected" | "updated";
 
-type CreativeFile = {
+export type CreativeFile = {
   name: string;
   path: string;
 };

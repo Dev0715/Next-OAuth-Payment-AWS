@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Dialog, DialogContent } from "../ui/dialog";
-import { FileOrString } from "@/shared/types/file-or-string";
+import { FileOrString } from "@/shared/types/file-preview-types";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
