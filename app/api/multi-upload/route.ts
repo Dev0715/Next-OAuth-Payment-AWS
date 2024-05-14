@@ -21,14 +21,7 @@ export const POST = async (req: NextRequest) => {
       })
     );
 
-    if (pathList.length === 0) {
-      return NextResponse.json(
-        { success: false, error: "Failed to upload images" },
-        { status: 500 }
-      );
-    } else {
-      return NextResponse.json({ success: true, pathList }, { status: 200 });
-    }
+    return NextResponse.json({ success: true, pathList }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ success: false, error }, { status: 500 });
   }

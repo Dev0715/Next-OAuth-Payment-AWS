@@ -209,10 +209,6 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         getPathList(previewFiles)
       ]);
 
-      if (_pathList.length === 0 || _previewList.length === 0) {
-        throw new Error("Failed to upload images.");
-      }
-
       const _creativeFiles = creativeFiles.filter(
         (item) => item instanceof File
       );
@@ -233,6 +229,10 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         ...pathList,
         ...creativeFiles.filter((item) => !(item instanceof File))
       ];
+
+      if (previewList.length === 0 || fileList.length === 0) {
+        throw new Error("Failed to upload images.");
+      }
 
       const res = await createProduct({
         ...form.getValues(),
@@ -286,6 +286,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         throw new Error("Failed to delete the old product from creator.");
       }
     } catch (error) {
+      console.error(error);
       throw new Error("Internal Server Error");
     }
   };
