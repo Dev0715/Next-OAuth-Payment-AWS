@@ -133,10 +133,8 @@ export const getProductById = async (
 
   try {
     const response = await db.send(command);
-    console.log("__getProductById__GetCommand__RESPONSE", response);
     return response.Item as Product;
   } catch (error) {
-    console.log("__getProductById__GetCommand__ERROR", error);
     return null;
   }
 };
@@ -153,7 +151,7 @@ export const createProduct = async (data: Product) => {
     await db.send(command);
     return { success: true };
   } catch (error) {
-    return { success: false, error };
+    return { success: false };
   }
 };
 
