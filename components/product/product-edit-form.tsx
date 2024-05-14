@@ -40,15 +40,20 @@ import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
-import { createProduct } from "@/data/product";
+import { createProduct, deleteProduct } from "@/data/product";
 import { addNewProduct } from "@/actions/user/new-product";
 import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 
 import type { Product, ProductType } from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
 import { PreviewDialog } from "./preview-dialog";
-import { FileOrString } from "@/shared/types/file-preview-types";
+import {
+  FileOrCreativeFile,
+  FileOrString
+} from "@/shared/types/file-preview-types";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
+import { deleteProductFromCreator } from "@/actions/user/delete-product";
+import { ProductHistory } from "./product-history";
 
 export const ProductEditForm = ({ product }: { product: Product }) => {
   const [user] = useAtom(userAtom);
@@ -62,7 +67,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
   const [isPreviewing, setPreviewing] = useState<boolean>(false);
   const hiddenPreviewInput = useRef<HTMLInputElement>(null);
 
-  const [creativeFiles, setCreativeFiles] = useState<File[]>([]);
+  const [creativeFiles, setCreativeFiles] = useState<FileOrCreativeFile[]>([]);
   const hiddenCreativeFileInput = useRef<HTMLInputElement>(null);
 
   const [newKeywordVal, setNewKeywordVal] = useState<string>("");
@@ -70,16 +75,18 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
 
   useEffect(() => {
     setSelectedKeywords(product.keywords);
-    Promise.all(
-      product.previewList.map(async (path) => {
-        const res = await getLinkFromS3(path);
-        if (res.success) {
-          return res.response;
-        }
-      })
-    ).then((response) => {
-      setPreviewFiles(response as FileOrString[]);
-    });
+    setCreativeFiles(product.fileList);
+    // Promise.all(
+    //   product.previewList.map(async (path) => {
+    //     const res = await getLinkFromS3(path);
+    //     if (res.success) {
+    //       return res.response;
+    //     }
+    //   })
+    // ).then((response) => {
+    //   setPreviewFiles(response as FileOrString[]);
+    // });
+    setPreviewFiles(product.previewList);
   }, [product]);
 
   const onAddNewKeyword = () => {
@@ -109,6 +116,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         (newFile) =>
           !creativeFiles.find(
             (savedFile) =>
+              savedFile instanceof File &&
               savedFile.name === newFile.name &&
               savedFile.size === newFile.size &&
               savedFile.lastModified === newFile.lastModified
@@ -171,11 +179,13 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     }
   });
 
-  const getPathList = async (fileList: FileOrString[]) => {
+  const getPathList = async (
+    fileList: FileOrString[] | FileOrCreativeFile[]
+  ) => {
     const formData = new FormData();
     formData.append("username", user?.username as string);
     fileList.forEach((file) => {
-      formData.append(uuidv4(), file);
+      if (file instanceof File) formData.append(uuidv4(), file);
     });
 
     const response = await axiosClient.post(
@@ -194,21 +204,31 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
 
   const submitProduct = async () => {
     try {
-      const [pathList, previewList] = await Promise.all([
+      const [_pathList, _previewList] = await Promise.all([
         getPathList(creativeFiles),
         getPathList(previewFiles)
       ]);
 
-      if (pathList.length === 0 || previewList.length === 0) {
+      if (_pathList.length === 0 || _previewList.length === 0) {
         throw new Error("Failed to upload images.");
       }
 
       const productType = form.getValues().productType as ProductType;
       const productId = uuidv4();
-      const fileList = pathList.map((path: string, index: number) => ({
+      const pathList = _pathList.map((path: string, index: number) => ({
         name: creativeFiles[index].name,
         path
       }));
+
+      const previewList = [
+        ..._previewList,
+        ...previewFiles.filter((item) => !(item instanceof File))
+      ];
+
+      const fileList = [
+        ...pathList,
+        ...creativeFiles.filter((item) => !(item instanceof File))
+      ];
 
       const res = await createProduct({
         ...form.getValues(),
@@ -216,14 +236,15 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         productId,
         ownerId: user?.userId as string,
         fileList,
-        previewList,
+        previewList: previewList,
         keywords: selectedKeywords,
         approval: {
-          state: "created",
+          state: "updated",
           history: [
+            ...product.approval.history,
             {
-              state: "created",
-              comment: "Newly created and deployed, waiting for approval.",
+              state: "updated",
+              comment: "Newly updated and deployed, waiting for approval.",
               userId: user?.userId as string
             }
           ]
@@ -241,6 +262,24 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
 
       if (response.error) {
         throw new Error("Failed to save products into user information.");
+      }
+
+      const res_delete = await deleteProduct(
+        product.productType,
+        product.productId
+      );
+
+      if (!res_delete.success) {
+        throw new Error("Failed to delete the old product.");
+      }
+
+      const response_delete = await deleteProductFromCreator(
+        user?.userId as string,
+        product.productId
+      );
+
+      if (response_delete.error) {
+        throw new Error("Failed to delete the old product from creator.");
       }
     } catch (error) {
       throw new Error("Internal Server Error");
@@ -262,7 +301,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
 
     submitProduct()
       .then(() => {
-        setSuccess("Product registered successfully!");
+        setSuccess("Product updated successfully!");
       })
       .catch((error) => {
         setError(error.message);
@@ -288,8 +327,10 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="grid grid-cols-2 gap-6">
-        <div className="">
+      <CardContent className="flex flex-col gap-y-4">
+        <div className="w-full flex"></div>
+        <ProductHistory history={product.approval.history} />
+        <div className="flex flex">
           <Card className="mb-6 w-full">
             <CardHeader className="flex-row items-center justify-between space-y-0">
               <CardTitle>Creative Works</CardTitle>
