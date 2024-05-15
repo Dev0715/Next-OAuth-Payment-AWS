@@ -1,21 +1,18 @@
-"use server";
+import { getLinkFromS3Server } from "./link-from-s3-server";
 
-import { GetObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-
-import s3Client from "@/lib/s3";
-import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
-
-export const getLinkFromS3 = async (keyName: string) => {
-  const command = new GetObjectCommand({
-    Bucket: AWS_S3_BUCKETS.UPLOAD,
-    Key: keyName
-  });
-
-  try {
-    const response = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
-    return { success: true, response };
-  } catch (error) {
-    return { success: false, error };
+export const getLinkFromS3 = async (
+  keyName: string,
+  s3Link?: Record<string, string>,
+  setS3Link?: (_s3Link: Record<string, string>) => void
+) => {
+  if (s3Link && s3Link[keyName]) {
+    return { success: true, response: s3Link[keyName] };
   }
+
+  const response = await getLinkFromS3Server(keyName);
+  if (setS3Link && response.success) {
+    setS3Link({ ...s3Link, [keyName]: response.response as string });
+  }
+
+  return response;
 };
