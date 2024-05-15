@@ -65,98 +65,20 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     // ).then((response) => {
     //   setPreviewFiles(response as FileOrString[]);
     // });
-    setPreviewFiles(product.previewList);
   }, [product]);
 
-  const onAddNewKeyword = () => {
-    if (newKeywordVal === "") return;
-
-    const existingOne = selectedKeywords.find(
-      (keyword) => keyword === newKeywordVal
-    );
-    if (!existingOne) setSelectedKeywords((prev) => [...prev, newKeywordVal]);
-
-    setNewKeywordVal("");
-  };
-
-  const onDeleteKeyword = (index: number) => {
-    const newKeywords = [...selectedKeywords];
-    newKeywords.splice(index, 1);
-    setSelectedKeywords(newKeywords); // # Show Duplication Error? #
-  };
-
-  const onCreativeFileBrowse = () => {
-    hiddenCreativeFileInput.current?.click();
-  };
-
-  const onCreativeFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const newFiles = Array.from(event.target.files).filter(
-        (newFile) =>
-          !creativeFiles.find(
-            (savedFile) =>
-              savedFile instanceof File &&
-              savedFile.name === newFile.name &&
-              savedFile.size === newFile.size &&
-              savedFile.lastModified === newFile.lastModified
-          )
-      );
-      setCreativeFiles((prev) => [...prev, ...newFiles]);
+  const onSubmit = () => {
+    if (creativeFiles.length === 0 || previewFiles.length === 0) {
+      setSuccess("");
+      setError("creative files and one preview images can't be empty!");
+      return;
     }
-    if (hiddenCreativeFileInput.current) {
-      hiddenCreativeFileInput.current.value = "";
-    }
-  };
+    setSuccess("");
+    setError("");
+    setPending(true);
 
-  const onDeleteCreativeFile = (index: number) => {
-    const updatedFiles = [...creativeFiles];
-    updatedFiles.splice(index, 1);
-    setCreativeFiles(updatedFiles);
+    submitProduct();
   };
-
-  const onPreviewFileBrowse = () => {
-    hiddenPreviewInput.current?.click();
-  };
-
-  const onPreviewFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const newFiles = Array.from(event.target.files).filter(
-        (newFile) =>
-          !previewFiles.find(
-            (savedFile) =>
-              savedFile instanceof File &&
-              savedFile.name === newFile.name &&
-              savedFile.size === newFile.size &&
-              savedFile.lastModified === newFile.lastModified
-          )
-      );
-      setPreviewFiles((prev) => [...prev, ...newFiles]);
-    }
-    if (hiddenPreviewInput.current) {
-      hiddenPreviewInput.current.value = "";
-    }
-  };
-
-  const onPreviewFile = (index: number) => {
-    setPreviewing(true);
-    setPreviewIndex(index);
-  };
-
-  const onDeletePreviewFile = (index: number) => {
-    const updatedFiles = [...previewFiles];
-    updatedFiles.splice(index, 1);
-    setPreviewFiles(updatedFiles);
-  };
-
-  const form = useForm<z.infer<typeof NewProductSchema>>({
-    resolver: zodResolver(NewProductSchema),
-    defaultValues: {
-      productType: product.productType,
-      title: product.title,
-      description: product.description,
-      price: product.price
-    }
-  });
 
   const getPathList = async (
     fileList: FileOrString[] | FileOrCreativeFile[]
