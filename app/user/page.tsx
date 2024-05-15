@@ -30,9 +30,11 @@ import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { uploadImage } from "@/shared/functions/upload-image";
 import { updateGeneralProfile } from "@/data/user";
 import { User } from "@/shared/types/user.type";
+import { s3LinkAtom } from "@/store/s3-link";
 
 export default function Profile() {
   const [user, updateUser] = useAtom(userAtom);
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -44,7 +46,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (user?.avatar) {
-      getLinkFromS3(user.avatar).then((res) => {
+      getLinkFromS3(user.avatar, s3Link, setS3Link).then((res) => {
         if (res.success) {
           setAvatarPath(res.response as string);
         }
