@@ -39,18 +39,20 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
 
       setUserData(_userData);
       if (_userData.avatar) {
-        getLinkFromS3(_userData.avatar).then((res) => {
+        getLinkFromS3(_userData.avatar, s3Link, setS3Link).then((res) => {
           if (res.success) {
             setAvatarPath(res.response as string);
           }
         });
       }
       if (_userData.creator?.cover) {
-        getLinkFromS3(_userData.creator.cover).then((res) => {
-          if (res.success) {
-            setCoverPath(res.response as string);
+        getLinkFromS3(_userData.creator.cover, s3Link, setS3Link).then(
+          (res) => {
+            if (res.success) {
+              setCoverPath(res.response as string);
+            }
           }
-        });
+        );
       }
       if (_userData.creator?.products) {
         _userData.creator.products.map((item: ProductLink) => {
