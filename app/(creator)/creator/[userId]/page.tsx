@@ -13,6 +13,8 @@ import { FaUser } from "react-icons/fa";
 
 import type { Product, ProductLink } from "@/shared/types/product.type";
 import type { User } from "@/shared/types/user.type";
+import { useAtom } from "jotai";
+import { s3LinkAtom } from "@/store/s3-link";
 
 interface PropsParams {
   params: {
@@ -21,6 +23,7 @@ interface PropsParams {
 }
 
 export default function CreatorProfile({ params: { userId } }: PropsParams) {
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
   const [userData, setUserData] = useState<User>();
   const [avatarPath, setAvatarPath] = useState<string>("");
   const [coverPath, setCoverPath] = useState<string>("");
