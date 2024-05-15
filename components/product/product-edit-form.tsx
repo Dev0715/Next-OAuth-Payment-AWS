@@ -80,6 +80,56 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     submitProduct();
   };
 
+  const submitProduct = async () => {
+    const [_pathList, _previewList] = await Promise.all([
+      getPathList(creativeFiles),
+      getPathList(previewFiles)
+    ]);
+
+    const _creativeFiles = creativeFiles.filter((item) => item instanceof File);
+    const _fileList = _pathList.map((path: string, index: number) => ({
+      name: _creativeFiles[index].name,
+      path
+    }));
+
+    const fileList = [
+      ...creativeFiles.filter((item) => !(item instanceof File)),
+      ..._fileList
+    ];
+    const previewList = [
+      ...previewFiles.filter((item) => !(item instanceof File)),
+      ..._previewList
+    ];
+
+    if (previewList.length === 0 || fileList.length === 0) {
+      throw new Error("Failed to upload images.");
+    }
+
+    const updatedProduct = {
+      ...form.getValues(),
+      productId: uuidv4(),
+      ownerId: user?.userId as string,
+      fileList,
+      previewList,
+      keywords: selectedKeywords,
+      approval: {
+        state: "updated",
+        history: [
+          ...product.approval.history,
+          {
+            state: "updated",
+            comment: "Newly updated and deployed, waiting for approval.",
+            userId: user?.userId as string
+          }
+        ]
+      }
+    } as Product;
+    updateProduct(updatedProduct).then((res) => {
+      setSuccess(res.success || "");
+      setError(res.error || "");
+    });
+  };
+
   const getPathList = async (
     fileList: FileOrString[] | FileOrCreativeFile[]
   ) => {
