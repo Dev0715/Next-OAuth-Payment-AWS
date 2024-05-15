@@ -21,6 +21,7 @@ import type {
   ProductLink,
   ProductState
 } from "@/shared/types/product.type";
+import { s3LinkAtom } from "@/store/s3-link";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;
@@ -50,6 +51,7 @@ const Thumbnail = (props: {
 
 export default function ProductDetails({ params }: { params: ProductLink }) {
   const [user] = useAtom(userAtom);
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   const [isPending, startTransition] = useTransition();
   const [isConfirming, setConfirming] = useState<boolean>(false);
@@ -69,7 +71,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         if (!ignore && response) {
           setProduct(response);
           response?.previewList.map((path: string) => {
-            getLinkFromS3(path).then((res) => {
+            getLinkFromS3(path, s3Link, setS3Link).then((res) => {
               if (res.success) {
                 setImageList((prev) => [...prev, res.response as string]);
               }
