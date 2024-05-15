@@ -3,6 +3,8 @@ import { Dialog, DialogContent } from "../ui/dialog";
 import { FileOrString } from "@/shared/types/file-preview-types";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { Avatar, AvatarImage } from "../ui/avatar";
+import { useAtom } from "jotai";
+import { s3LinkAtom } from "@/store/s3-link";
 
 type Props = {
   isPreviewing: boolean;
@@ -16,6 +18,7 @@ export const PreviewDialog = ({
   image
 }: Props) => {
   const [imageURL, setImageURL] = useState<string>("");
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   useEffect(() => {
     if (!image) return;
@@ -23,7 +26,7 @@ export const PreviewDialog = ({
     if (image instanceof File) {
       setImageURL(URL.createObjectURL(image));
     } else {
-      getLinkFromS3(image).then((res) => {
+      getLinkFromS3(image, s3Link, setS3Link).then((res) => {
         if (res.success) {
           setImageURL(res.response as string);
         }
