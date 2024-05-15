@@ -101,14 +101,47 @@ export const ProductAddForm = () => {
       });
   };
 
+  const submitProduct = async () => {
+    const [pathList, previewList] = await Promise.all([
+      getPathList(creativeFiles as File[]),
+      getPathList(previewFiles as File[])
+    ]);
+
+    if (pathList.length === 0 || previewList.length === 0) {
+      throw new Error("Failed to upload images.");
+    }
+
+    const fileList = pathList.map((path: string, index: number) => ({
+      name: creativeFiles[index].name,
+      path
+    }));
+
+    const _product = {
+      ...form.getValues(),
+      productId: uuidv4(),
+      ownerId: user?.userId as string,
+      fileList,
+      previewList,
+      keywords: selectedKeywords,
+      approval: {
+        state: "created",
+        history: [
+          {
+            state: "created",
+            comment: "Newly created and deployed, waiting for approval.",
+            userId: user?.userId as string
+          }
+        ]
+      }
+    } as Product;
+    newProduct(_product).then((res) => {
+      setSuccess(res.success || "");
+      setError(res.error || "");
+    });
+  };
+
   return (
     <Card className="w-full rounded-none">
-      {/** Preview is not working with images whose width < height  */}
-      <PreviewDialog
-        isPreviewing={isPreviewing}
-        setPreviewing={setPreviewing}
-        image={previewFiles[previewIndex as number]}
-      />
       <CardHeader>
         <CardTitle className="text-4xl font-medium">
           Add a new Product
