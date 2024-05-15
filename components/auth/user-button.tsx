@@ -33,9 +33,11 @@ import { getUserById } from "@/data/user";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { useCurrentRole } from "@/hooks/use-current-role";
+import { s3LinkAtom } from "@/store/s3-link";
 
 export const UserButton = () => {
   const [user] = useAtom(userAtom);
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
   const userRole = useCurrentRole();
 
   const [avatarImage, setAvatarImage] = useState<string>("");
@@ -48,7 +50,7 @@ export const UserButton = () => {
       if (user.image) {
         setAvatarImage(user.image);
       } else if (user.avatar) {
-        getLinkFromS3(user.avatar).then((res) => {
+        getLinkFromS3(user.avatar, s3Link, setS3Link).then((res) => {
           if (res.success) setAvatarImage(res.response as string);
         });
       }
