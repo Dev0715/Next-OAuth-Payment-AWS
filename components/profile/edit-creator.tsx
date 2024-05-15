@@ -38,6 +38,7 @@ import { JOB_TITLES } from "@/shared/constants/user.constant";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { uploadImage } from "@/shared/functions/upload-image";
 import { CreatorData, User } from "@/shared/types/user.type";
+import { s3LinkAtom } from "@/store/s3-link";
 
 export default function EditCreator({
   disabled = false
@@ -45,6 +46,7 @@ export default function EditCreator({
   disabled?: boolean;
 }) {
   const [user, setUser] = useAtom(userAtom);
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   const [error, setError] = useState<string>();
   const [success, setSuccess] = useState<string>();
@@ -56,7 +58,7 @@ export default function EditCreator({
 
   useEffect(() => {
     if (user?.creator?.cover) {
-      getLinkFromS3(user.creator.cover).then((res) => {
+      getLinkFromS3(user.creator.cover, s3Link, setS3Link).then((res) => {
         if (res.success) {
           setCoverImagePath(res.response as string);
         }
