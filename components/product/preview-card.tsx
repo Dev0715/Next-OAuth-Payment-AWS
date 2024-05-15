@@ -19,6 +19,33 @@ export const PreviewCard = ({
   previewFiles,
   setPreviewFiles
 }: Props) => {
+  const [previewIndex, setPreviewIndex] = useState<number>();
+  const [isPreviewing, setPreviewing] = useState<boolean>(false);
+  const hiddenPreviewInput = useRef<HTMLInputElement>(null);
+
+  const onPreviewFileBrowse = () => {
+    hiddenPreviewInput.current?.click();
+  };
+
+  const onPreviewFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const newFiles = Array.from(event.target.files).filter(
+        (newFile) =>
+          !previewFiles.find(
+            (savedFile) =>
+              savedFile instanceof File &&
+              savedFile.name === newFile.name &&
+              savedFile.size === newFile.size &&
+              savedFile.lastModified === newFile.lastModified
+          )
+      );
+      setPreviewFiles((prev) => [...prev, ...newFiles]);
+    }
+    if (hiddenPreviewInput.current) {
+      hiddenPreviewInput.current.value = "";
+    }
+  };
+
   return (
     <Card className="w-full">
       {/** Preview is not working with images whose width < height  */}
