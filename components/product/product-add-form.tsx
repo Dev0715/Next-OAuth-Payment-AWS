@@ -140,6 +140,25 @@ export const ProductAddForm = () => {
     });
   };
 
+  const getPathList = async (fileList: File[]) => {
+    const formData = new FormData();
+    formData.append("username", user?.username as string);
+    fileList.forEach((file) => {
+      formData.append(uuidv4(), file);
+    });
+
+    try {
+      const response = await axiosClient.post(
+        "/multi-upload",
+        formData,
+        axiosConfig
+      );
+      return response.data.pathList;
+    } catch (error) {
+      return [];
+    }
+  };
+
   return (
     <Card className="w-full rounded-none">
       <CardHeader>
