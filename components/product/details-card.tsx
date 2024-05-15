@@ -1,7 +1,6 @@
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -15,19 +14,10 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { FaFileUpload, FaPlus, FaSave } from "react-icons/fa";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { FaSave } from "react-icons/fa";
 import { Button } from "../ui/button";
-import { ImagePreview } from "./preview-image";
-import {
-  FileOrCreativeFile,
-  FileOrString
-} from "@/shared/types/file-preview-types";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Input } from "../ui/input";
-import { Badge } from "../ui/badge";
-import { MdClose } from "react-icons/md";
-import { UseFormReturn } from "react-hook-form";
 import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
