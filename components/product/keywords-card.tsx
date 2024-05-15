@@ -25,6 +25,25 @@ export const KeywordsCard = ({
   selectedKeywords,
   setSelectedKeywords
 }: Props) => {
+  const [newKeywordVal, setNewKeywordVal] = useState<string>("");
+
+  const onAddNewKeyword = () => {
+    if (newKeywordVal === "") return;
+
+    const existingOne = selectedKeywords.find(
+      (keyword) => keyword === newKeywordVal
+    );
+    if (!existingOne) setSelectedKeywords((prev) => [...prev, newKeywordVal]);
+
+    setNewKeywordVal("");
+  };
+
+  const onDeleteKeyword = (index: number) => {
+    const newKeywords = [...selectedKeywords];
+    newKeywords.splice(index, 1);
+    setSelectedKeywords(newKeywords); // # Show Duplication Error? #
+  };
+
   return (
     <FormItem>
       <FormLabel>Keywords</FormLabel>
