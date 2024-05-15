@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
+import { useAtom } from "jotai";
+import { s3LinkAtom } from "@/store/s3-link";
 
 interface PropsParams {
   product: Product;
@@ -17,10 +19,11 @@ interface PropsParams {
 
 export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
   const [imagePath, setImagePath] = useState<string>("");
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   useEffect(() => {
-    const s3Link = product.previewList[0];
-    getLinkFromS3(s3Link).then((res) => {
+    const s3Path = product.previewList[0];
+    getLinkFromS3(s3Path, s3Link, setS3Link).then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }
