@@ -10,6 +10,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import type { CartProduct } from "@/shared/types/product.type";
+import { useAtom } from "jotai";
+import { s3LinkAtom } from "@/store/s3-link";
 
 interface PropsParams {
   isPending: boolean;
@@ -24,11 +26,12 @@ export const CartItem = ({
   onSelected,
   onRemoveItem
 }: PropsParams) => {
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
   const [imagePath, setImagePath] = useState<string>("");
 
   useEffect(() => {
     const s3Link = product.previewList[0];
-    getLinkFromS3(s3Link).then((res) => {
+    getLinkFromS3(s3Link, s3Link, setS3Link).then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }
