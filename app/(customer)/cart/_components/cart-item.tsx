@@ -30,8 +30,8 @@ export const CartItem = ({
   const [imagePath, setImagePath] = useState<string>("");
 
   useEffect(() => {
-    const s3Link = product.previewList[0];
-    getLinkFromS3(s3Link, s3Link, setS3Link).then((res) => {
+    const _s3Link = product.previewList[0];
+    getLinkFromS3(_s3Link, s3Link, setS3Link).then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }
