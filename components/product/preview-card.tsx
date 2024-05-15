@@ -46,6 +46,17 @@ export const PreviewCard = ({
     }
   };
 
+  const onDeletePreviewFile = (index: number) => {
+    const updatedFiles = [...previewFiles];
+    updatedFiles.splice(index, 1);
+    setPreviewFiles(updatedFiles);
+  };
+
+  const onPreviewFile = (index: number) => {
+    setPreviewing(true);
+    setPreviewIndex(index);
+  };
+
   return (
     <Card className="w-full">
       {/** Preview is not working with images whose width < height  */}
