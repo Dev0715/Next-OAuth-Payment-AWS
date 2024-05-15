@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -9,73 +8,53 @@ import {
   CardHeader,
   CardTitle
 } from "../ui/card";
-import { z } from "zod";
+import { set, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NewProductSchema } from "@/schemas/product";
-import { useEffect, useRef, useState } from "react";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
-import { FaFileUpload, FaPlus, FaSave } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { FormError } from "../utils/form-error";
-import { FormSuccess } from "../utils/form-success";
-import { Badge } from "../ui/badge";
-import { MdClose } from "react-icons/md";
 import { createProduct, deleteProduct } from "@/data/product";
 import { addNewProduct } from "@/actions/user/new-product";
-import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
-
 import type { Product, ProductType } from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
-import { PreviewDialog } from "./preview-dialog";
 import {
   FileOrCreativeFile,
   FileOrString
 } from "@/shared/types/file-preview-types";
-import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { deleteProductFromCreator } from "@/actions/user/delete-product";
 import { ProductHistory } from "./product-history";
+import { FilesCard } from "./files-card";
+import { DetailsCard } from "./details-card";
+import { updateProduct } from "@/actions/product/update-product";
 
 export const ProductEditForm = ({ product }: { product: Product }) => {
   const [user] = useAtom(userAtom);
 
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setPending] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
   const [previewFiles, setPreviewFiles] = useState<FileOrString[]>([]);
-  const [previewIndex, setPreviewIndex] = useState<number>();
-  const [isPreviewing, setPreviewing] = useState<boolean>(false);
-  const hiddenPreviewInput = useRef<HTMLInputElement>(null);
-
   const [creativeFiles, setCreativeFiles] = useState<FileOrCreativeFile[]>([]);
-  const hiddenCreativeFileInput = useRef<HTMLInputElement>(null);
-
-  const [newKeywordVal, setNewKeywordVal] = useState<string>("");
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+
+  const form = useForm<z.infer<typeof NewProductSchema>>({
+    resolver: zodResolver(NewProductSchema),
+    defaultValues: {
+      productType: product.productType,
+      title: product.title,
+      description: product.description,
+      price: product.price
+    }
+  });
 
   useEffect(() => {
     setSelectedKeywords(product.keywords);
     setCreativeFiles(product.fileList);
+    setPreviewFiles(product.previewList);
     // Promise.all(
     //   product.previewList.map(async (path) => {
     //     const res = await getLinkFromS3(path);
