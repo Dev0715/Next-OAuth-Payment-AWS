@@ -23,6 +23,37 @@ export const FilesCard = ({
   creativeFiles,
   setCreativeFiles
 }: Props) => {
+  const hiddenCreativeFileInput = useRef<HTMLInputElement>(null);
+
+  const onCreativeFileBrowse = () => {
+    hiddenCreativeFileInput.current?.click();
+  };
+
+  const onCreativeFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const newFiles = Array.from(event.target.files).filter(
+        (newFile) =>
+          !creativeFiles.find(
+            (savedFile) =>
+              savedFile instanceof File &&
+              savedFile.name === newFile.name &&
+              savedFile.size === newFile.size &&
+              savedFile.lastModified === newFile.lastModified
+          )
+      );
+      setCreativeFiles((prev) => [...prev, ...newFiles]);
+    }
+    if (hiddenCreativeFileInput.current) {
+      hiddenCreativeFileInput.current.value = "";
+    }
+  };
+
+  const onDeleteCreativeFile = (index: number) => {
+    const updatedFiles = [...creativeFiles];
+    updatedFiles.splice(index, 1);
+    setCreativeFiles(updatedFiles);
+  };
+
   return (
     <Card className="mb-6 w-full">
       <CardHeader className="flex-row items-center justify-between space-y-0">
