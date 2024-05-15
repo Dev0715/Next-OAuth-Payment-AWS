@@ -4,6 +4,8 @@ import { FileOrString } from "@/shared/types/file-preview-types";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { Avatar } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
+import { useAtom } from "jotai";
+import { s3LinkAtom } from "@/store/s3-link";
 
 type Props = {
   disabled: boolean;
@@ -20,12 +22,13 @@ export const ImagePreview = ({
 }: Props) => {
   const [isHover, setHover] = useState<boolean>(false);
   const [imageURL, setImageURL] = useState<string>("");
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   useEffect(() => {
     if (image instanceof File) {
       setImageURL(URL.createObjectURL(image));
     } else {
-      getLinkFromS3(image).then((res) => {
+      getLinkFromS3(image, s3Link, setS3Link).then((res) => {
         if (res.success) {
           setImageURL(res.response as string);
         }
