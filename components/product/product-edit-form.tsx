@@ -55,16 +55,6 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     setSelectedKeywords(product.keywords);
     setCreativeFiles(product.fileList);
     setPreviewFiles(product.previewList);
-    // Promise.all(
-    //   product.previewList.map(async (path) => {
-    //     const res = await getLinkFromS3(path);
-    //     if (res.success) {
-    //       return res.response;
-    //     }
-    //   })
-    // ).then((response) => {
-    //   setPreviewFiles(response as FileOrString[]);
-    // });
   }, [product]);
 
   const onSubmit = () => {
