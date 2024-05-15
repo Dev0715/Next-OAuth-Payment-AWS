@@ -31,6 +31,7 @@ import { useAtom } from "jotai";
 import { orderListAtom } from "@/store/orderList";
 import { userAtom } from "@/store/user";
 import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
+import { s3LinkAtom } from "@/store/s3-link";
 
 export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
   const Option_Paypal = "option-paypal";
@@ -38,6 +39,7 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
 
   const currentPath = usePathname();
   const [user] = useAtom(userAtom);
+  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   const [isPending, startTransition] = useTransition();
   const [paymentMethod, setPaymentMethod] = useState(Option_Paypal);
@@ -62,7 +64,11 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
         }
       } else {
         const product = orderList[0];
-        const res = await getLinkFromS3(product.previewList[0]);
+        const res = await getLinkFromS3(
+          product.previewList[0],
+          s3Link,
+          setS3Link
+        );
         const imageLink = res.success ? res.response : "";
 
         const response = await createStripeOrder({
@@ -71,7 +77,9 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
           product: {
             name: orderList.length === 1 ? product.title : "Products",
             description:
-              orderList.length === 1 ? product.description : "Muiple products",
+              orderList.length === 1
+                ? product.description
+                : "Multiple products",
             images: [imageLink as string]
           },
           amount: getTotalPrice()
@@ -133,7 +141,7 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
                   {product.title}
                 </TableCell>
                 <TableCell className="w-7/12 truncate">
-                  {product.description}sdafsadfdsafsdafdsaf
+                  {product.description}
                 </TableCell>
                 <TableCell className="w-1/6 truncate text-right">
                   ${product.price}
