@@ -5,10 +5,15 @@ import { Button } from "../ui/button";
 type Props = {
   disabled: boolean;
   children: React.ReactNode;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const FileUploadButton = ({}) => {
+export const FileUploadButton = ({ disabled, children, onChange }: Props) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
+
+  const onFileBrowse = () => {
+    hiddenFileInput.current?.click();
+  };
 
   return (
     <>
@@ -18,18 +23,17 @@ export const FileUploadButton = ({}) => {
         accept="image/*"
         multiple
         ref={hiddenFileInput}
-        onChange={onPreviewFileAdded}
+        onChange={onChange}
       />
       <Button
         type="button"
         className="gap-x-2 border-green-700 rounded-none"
         variant="outline"
         size="sm"
-        disabled={isPending}
-        onClick={onPreviewFileBrowse}
+        disabled={disabled}
+        onClick={onFileBrowse}
       >
-        <FaFileUpload className="text-green-700 text-sm" />
-        Upload
+        {children}
       </Button>
     </>
   );
