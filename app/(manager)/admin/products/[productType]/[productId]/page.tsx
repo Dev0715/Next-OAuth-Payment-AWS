@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
 import { QuestionAlert } from "@/components/utils/question-alert";
-import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { ProductHistory } from "@/components/product/product-history";
@@ -21,7 +20,7 @@ import type {
   ProductLink,
   ProductState
 } from "@/shared/types/product.type";
-import { s3LinkAtom } from "@/store/s3-link";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;
@@ -51,7 +50,7 @@ const Thumbnail = (props: {
 
 export default function ProductDetails({ params }: { params: ProductLink }) {
   const [user] = useAtom(userAtom);
-  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
+  const { getLinkFromS3 } = useLinkFromS3();
 
   const [isPending, startTransition] = useTransition();
   const [isConfirming, setConfirming] = useState<boolean>(false);
@@ -65,15 +64,13 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const [comment, setComment] = useState<string>("");
 
   useEffect(() => {
-    if (!params || !s3Link || !setS3Link) return;
-
     let ignore = false; // # to prevent twice loading #
     if (params.productType && params.productId) {
       getProductById(params.productType, params.productId).then((response) => {
         if (!ignore && response) {
           setProduct(response);
           response?.previewList.map((path: string) => {
-            getLinkFromS3(path, s3Link, setS3Link).then((res) => {
+            getLinkFromS3(path).then((res) => {
               if (res.success) {
                 setImageList((prev) => [...prev, res.response as string]);
               }
@@ -85,7 +82,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     return () => {
       ignore = true;
     };
-  }, [params, s3Link, setS3Link]);
+  }, [params]);
 
   const onItemSelected = (index: number) => {
     setSelectedIndex(index);
