@@ -23,8 +23,6 @@ export const ImagePreview = ({
   const { getLinkFromS3 } = useLinkFromS3();
 
   useEffect(() => {
-    if (!image || !getLinkFromS3) return;
-
     if (image instanceof File) {
       setImageURL(URL.createObjectURL(image));
     } else {
@@ -34,7 +32,7 @@ export const ImagePreview = ({
         }
       });
     }
-  }, [image, getLinkFromS3]);
+  }, []);
 
   return (
     <div
