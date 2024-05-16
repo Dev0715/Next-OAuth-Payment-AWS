@@ -24,7 +24,6 @@ import { orderListAtom } from "@/store/orderList";
 import { addProductToPurchased } from "@/actions/user/add-product-to-purchased";
 
 import type { Product, ProductLink } from "@/shared/types/product.type";
-import { s3LinkAtom } from "@/store/s3-link";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
@@ -76,7 +75,9 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const [, setOrderList] = useAtom(orderListAtom);
 
   useEffect(() => {
+    if (!getLinkFromS3) return;
     let ignore = false; // # to prevent twice loading #
+
     if (params.productType && params.productId) {
       getProductById(params.productType, params.productId).then((response) => {
         if (!ignore && response) {
@@ -94,7 +95,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     return () => {
       ignore = true;
     };
-  }, [params]);
+  }, [params, getLinkFromS3]);
 
   const onItemSelected = (index: number) => {
     setSelectedIndex(index);
