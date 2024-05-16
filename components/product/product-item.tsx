@@ -22,13 +22,15 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
   const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   useEffect(() => {
+    if (!product || !s3Link || !setS3Link) return;
+
     const s3Path = product.previewList[0];
     getLinkFromS3(s3Path, s3Link, setS3Link).then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }
     });
-  }, [product]);
+  }, [product, s3Link, setS3Link]);
 
   const stateText = () => {
     const _state: ProductState = product.approval.state;
