@@ -25,6 +25,8 @@ export const ImagePreview = ({
   const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   useEffect(() => {
+    if (!s3Link || !setS3Link) return;
+
     if (image instanceof File) {
       setImageURL(URL.createObjectURL(image));
     } else {
@@ -34,7 +36,7 @@ export const ImagePreview = ({
         }
       });
     }
-  }, [image]);
+  }, [image, s3Link, setS3Link]);
 
   return (
     <div

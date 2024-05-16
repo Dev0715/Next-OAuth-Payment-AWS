@@ -21,7 +21,7 @@ export const PreviewDialog = ({
   const [s3Link, setS3Link] = useAtom(s3LinkAtom);
 
   useEffect(() => {
-    if (!image) return;
+    if (!image || !s3Link || !setS3Link) return;
 
     if (image instanceof File) {
       setImageURL(URL.createObjectURL(image));
@@ -32,7 +32,7 @@ export const PreviewDialog = ({
         }
       });
     }
-  }, [image]);
+  }, [image, s3Link, setS3Link]);
 
   return (
     <Dialog
