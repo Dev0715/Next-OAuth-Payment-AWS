@@ -65,6 +65,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const [comment, setComment] = useState<string>("");
 
   useEffect(() => {
+    if (!params || !s3Link || !setS3Link) return;
+
     let ignore = false; // # to prevent twice loading #
     if (params.productType && params.productId) {
       getProductById(params.productType, params.productId).then((response) => {
@@ -83,7 +85,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     return () => {
       ignore = true;
     };
-  }, [params]);
+  }, [params, s3Link, setS3Link]);
 
   const onItemSelected = (index: number) => {
     setSelectedIndex(index);
