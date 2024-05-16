@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle
 } from "../ui/card";
-import { set, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NewProductSchema } from "@/schemas/product";
 import { useEffect, useState } from "react";
@@ -16,15 +16,12 @@ import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { createProduct, deleteProduct } from "@/data/product";
-import { addNewProduct } from "@/actions/user/new-product";
-import type { Product, ProductType } from "@/shared/types/product.type";
+import type { Product } from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
 import {
   FileOrCreativeFile,
   FileOrString
 } from "@/shared/types/file-preview-types";
-import { deleteProductFromCreator } from "@/actions/user/delete-product";
 import { ProductHistory } from "./product-history";
 import { FilesCard } from "./files-card";
 import { DetailsCard } from "./details-card";
