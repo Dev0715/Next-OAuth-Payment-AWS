@@ -45,6 +45,8 @@ export default function Profile() {
   const [avatarPath, setAvatarPath] = useState<string>();
 
   useEffect(() => {
+    if (!user || !s3Link || !setS3Link) return;
+
     if (user?.avatar) {
       getLinkFromS3(user.avatar, s3Link, setS3Link).then((res) => {
         if (res.success) {
@@ -52,7 +54,7 @@ export default function Profile() {
         }
       });
     }
-  }, [user?.avatar]);
+  }, [user, s3Link, setS3Link]);
 
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
