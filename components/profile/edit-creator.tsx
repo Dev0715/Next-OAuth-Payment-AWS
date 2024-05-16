@@ -35,10 +35,9 @@ import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
 import { updateCreatorData } from "@/data/user";
 import { JOB_TITLES } from "@/shared/constants/user.constant";
-import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { uploadImage } from "@/shared/functions/upload-image";
 import { CreatorData, User } from "@/shared/types/user.type";
-import { s3LinkAtom } from "@/store/s3-link";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 export default function EditCreator({
   disabled = false
@@ -46,7 +45,7 @@ export default function EditCreator({
   disabled?: boolean;
 }) {
   const [user, setUser] = useAtom(userAtom);
-  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
+  const { getLinkFromS3 } = useLinkFromS3();
 
   const [error, setError] = useState<string>();
   const [success, setSuccess] = useState<string>();
@@ -57,16 +56,16 @@ export default function EditCreator({
   const [coverImagePath, setCoverImagePath] = useState<string>();
 
   useEffect(() => {
-    if (!user || !s3Link || !setS3Link) return;
+    if (!user) return;
 
     if (user?.creator?.cover) {
-      getLinkFromS3(user.creator.cover, s3Link, setS3Link).then((res) => {
+      getLinkFromS3(user.creator.cover).then((res) => {
         if (res.success) {
           setCoverImagePath(res.response as string);
         }
       });
     }
-  }, [user, s3Link, setS3Link]);
+  }, [user]);
 
   const hiddenCoverFileInput = useRef<HTMLInputElement>(null);
   const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
