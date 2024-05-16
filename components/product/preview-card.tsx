@@ -77,13 +77,13 @@ export const PreviewCard = ({
         />
         <Button
           type="button"
-          className="gap-x-2 border-green-700"
+          className="gap-x-2 border-green-700 rounded-none"
           variant="outline"
           size="sm"
           disabled={isPending}
           onClick={onPreviewFileBrowse}
         >
-          <FaFileUpload />
+          <FaFileUpload className="text-green-700 text-sm" />
           Upload
         </Button>
         {/* <CardDescription>You can preview your creative works</CardDescription> */}
