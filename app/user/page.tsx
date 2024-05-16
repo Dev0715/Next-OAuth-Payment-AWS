@@ -26,15 +26,14 @@ import { useAtom } from "jotai";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { ProfileSchema } from "@/schemas/user";
-import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { uploadImage } from "@/shared/functions/upload-image";
 import { updateGeneralProfile } from "@/data/user";
 import { User } from "@/shared/types/user.type";
-import { s3LinkAtom } from "@/store/s3-link";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 export default function Profile() {
   const [user, updateUser] = useAtom(userAtom);
-  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
+  const { getLinkFromS3 } = useLinkFromS3();
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -45,16 +44,14 @@ export default function Profile() {
   const [avatarPath, setAvatarPath] = useState<string>();
 
   useEffect(() => {
-    if (!user || !s3Link || !setS3Link) return;
-
     if (user?.avatar) {
-      getLinkFromS3(user.avatar, s3Link, setS3Link).then((res) => {
+      getLinkFromS3(user.avatar).then((res) => {
         if (res.success) {
           setAvatarPath(res.response as string);
         }
       });
     }
-  }, [user, s3Link, setS3Link]);
+  }, [user]);
 
   const hiddenAvatarFileInput = useRef<HTMLInputElement>(null);
   const onAvatarChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
