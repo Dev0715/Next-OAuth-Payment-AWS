@@ -61,9 +61,9 @@ export const KeywordsCard = ({
           <FaPlus />
           Add
         </Button>
-        <div className="flex flex-wrap gap-2 col-span-2">
+        <div className="flex flex-wrap gap-4 col-span-2">
           {selectedKeywords.map((keyword, index) => (
-            <Badge key={keyword} className="h-8 flex gap-x-2 px-2 rounded-full">
+            <Badge key={keyword} className="h-8 flex gap-x-4 px-4 rounded-full">
               <p>{keyword}</p>
               <Button
                 // asChild
