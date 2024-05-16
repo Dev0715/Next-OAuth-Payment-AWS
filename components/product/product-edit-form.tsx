@@ -26,6 +26,10 @@ import { ProductHistory } from "./product-history";
 import { FilesCard } from "./files-card";
 import { DetailsCard } from "./details-card";
 import { updateProduct } from "@/actions/product/update-product";
+import { Button } from "../ui/button";
+import { FaUpload } from "react-icons/fa";
+import { FormError } from "../utils/form-error";
+import { FormSuccess } from "../utils/form-success";
 
 export const ProductEditForm = ({ product }: { product: Product }) => {
   const [user] = useAtom(userAtom);
@@ -140,13 +144,27 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
 
   return (
     <div className="w-full">
-      <CardHeader>
-        <CardTitle className="text-4xl font-medium">Edit a Product</CardTitle>
-        <CardDescription>
-          You can edit your product and our admin users will check it and
-          publish soon!
-        </CardDescription>
+      <CardHeader className="w-full flex flex-row items-end justify-between">
+        <div className="flex flex-col">
+          <CardTitle className="text-4xl font-medium">Edit a Product</CardTitle>
+          <CardDescription>
+            You can edit your product and our admin users will check it and
+            publish soon!
+          </CardDescription>
+        </div>
+        <Button
+          disabled={isPending}
+          className="w-64 gap-x-4 rounded-none"
+          onClick={form.handleSubmit(onSubmit)}
+        >
+          <FaUpload />
+          Resubmit
+        </Button>
       </CardHeader>
+      <div className="px-6 pb-6">
+        <FormError message={error} />
+        <FormSuccess message={success} />
+      </div>
       <CardContent className="flex flex-col gap-y-8">
         <Card className="w-full p-6 flex flex-col gap-y-4">
           <p className="text-xl font-semibold">Product History</p>
@@ -171,9 +189,6 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
               form={form}
               selectedKeywords={selectedKeywords}
               setSelectedKeywords={setSelectedKeywords}
-              onSubmit={onSubmit}
-              error={error}
-              success={success}
             />
           </div>
         </div>
