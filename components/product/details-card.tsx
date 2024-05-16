@@ -22,6 +22,9 @@ import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 import { KeywordsCard } from "./keywords-card";
+import { UseFormReturn } from "react-hook-form";
+import { NewProductSchema } from "@/schemas/product";
+import { z } from "zod";
 
 type Props = {
   isPending: boolean;
@@ -29,7 +32,7 @@ type Props = {
   success: string;
   selectedKeywords: string[];
   setSelectedKeywords: Dispatch<SetStateAction<string[]>>;
-  form: any;
+  form: UseFormReturn<z.infer<typeof NewProductSchema>>;
   onSubmit: () => void;
 };
 
