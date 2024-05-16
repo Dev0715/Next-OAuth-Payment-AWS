@@ -44,7 +44,7 @@ export const UserButton = () => {
   const [cart, setCart] = useAtom(cartAtom);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !s3Link || !setS3Link) return;
 
     if (!avatarImage) {
       if (user.image) {
@@ -63,7 +63,7 @@ export const UserButton = () => {
         }
       });
     }
-  }, [user, avatarImage, cart, setCart]);
+  }, [user, avatarImage, cart, setCart, s3Link, setS3Link]);
 
   if (!user)
     return (
