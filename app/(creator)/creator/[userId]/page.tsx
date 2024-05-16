@@ -28,6 +28,8 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    if (!getLinkFromS3) return;
+
     let ignore = false;
 
     getUserById(userId).then((_userData) => {
@@ -64,7 +66,7 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
     return () => {
       ignore = true;
     };
-  }, [userId]);
+  }, [userId, getLinkFromS3]);
 
   const onFollow = () => {};
 
