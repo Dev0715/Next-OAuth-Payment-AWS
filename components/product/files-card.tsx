@@ -2,12 +2,8 @@ import { FaFileUpload } from "react-icons/fa";
 
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
-import { ImagePreview } from "./preview-image";
-import {
-  FileOrCreativeFile,
-  FileOrString
-} from "@/shared/types/file-preview-types";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { FileOrCreativeFile } from "@/shared/types/file-preview-types";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { Input } from "../ui/input";
 import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
