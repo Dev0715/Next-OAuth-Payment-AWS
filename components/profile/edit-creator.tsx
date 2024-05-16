@@ -56,7 +56,7 @@ export default function EditCreator({
   const [coverImagePath, setCoverImagePath] = useState<string>();
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !getLinkFromS3) return;
 
     if (user?.creator?.cover) {
       getLinkFromS3(user.creator.cover).then((res) => {
@@ -65,7 +65,7 @@ export default function EditCreator({
         }
       });
     }
-  }, [user]);
+  }, [user, getLinkFromS3]);
 
   const hiddenCoverFileInput = useRef<HTMLInputElement>(null);
   const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {

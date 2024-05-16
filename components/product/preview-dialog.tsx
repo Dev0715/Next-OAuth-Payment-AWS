@@ -19,7 +19,7 @@ export const PreviewDialog = ({
   const [imageURL, setImageURL] = useState<string>("");
 
   useEffect(() => {
-    if (!image) return;
+    if (!image || !getLinkFromS3) return;
 
     if (image instanceof File) {
       setImageURL(URL.createObjectURL(image));
@@ -30,7 +30,7 @@ export const PreviewDialog = ({
         }
       });
     }
-  }, [image]);
+  }, [image, getLinkFromS3]);
 
   return (
     <Dialog
