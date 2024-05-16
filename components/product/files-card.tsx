@@ -51,7 +51,7 @@ export const FilesCard = ({
   };
 
   return (
-    <Card className="mb-6 w-full">
+    <Card className="w-full">
       <CardHeader className="flex-row items-center justify-between space-y-0">
         <CardTitle>Creative Works</CardTitle>
         <Input
@@ -64,13 +64,13 @@ export const FilesCard = ({
         />
         <Button
           type="button"
-          className="gap-x-2 border-green-700"
+          className="flex gap-x-2 border-green-700 rounded-none"
           variant="outline"
           size="sm"
           disabled={isPending}
           onClick={onCreativeFileBrowse}
         >
-          <FaFileUpload />
+          <FaFileUpload className="text-green-700 text-sm" />
           Upload
         </Button>
       </CardHeader>
