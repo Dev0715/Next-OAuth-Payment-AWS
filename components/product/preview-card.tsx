@@ -3,7 +3,7 @@ import { FaFileUpload } from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { ImagePreview } from "./preview-image";
 import { FileOrString } from "@/shared/types/file-preview-types";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { PreviewDialog } from "./preview-dialog";
 import { FileUploadButton } from "../utils/file-upload-button";
 
@@ -20,7 +20,6 @@ export const PreviewCard = ({
 }: Props) => {
   const [previewIndex, setPreviewIndex] = useState<number>();
   const [isPreviewing, setPreviewing] = useState<boolean>(false);
-  const hiddenPreviewInput = useRef<HTMLInputElement>(null);
 
   const onPreviewFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -35,9 +34,6 @@ export const PreviewCard = ({
           )
       );
       setPreviewFiles((prev) => [...prev, ...newFiles]);
-    }
-    if (hiddenPreviewInput.current) {
-      hiddenPreviewInput.current.value = "";
     }
   };
 
