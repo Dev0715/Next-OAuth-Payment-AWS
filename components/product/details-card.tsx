@@ -25,6 +25,7 @@ import { KeywordsCard } from "./keywords-card";
 import { UseFormReturn } from "react-hook-form";
 import { NewProductSchema } from "@/schemas/product";
 import { z } from "zod";
+import { Card } from "../ui/card";
 
 type Props = {
   isPending: boolean;
@@ -46,103 +47,108 @@ export const DetailsCard = ({
   onSubmit
 }: Props) => {
   return (
-    <Form {...form}>
-      <form className="w-full space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="productType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Product Type</FormLabel>
-              <Select
-                disabled={isPending}
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              >
+    <Card className="w-full p-6">
+      <Form {...form}>
+        <form
+          className="w-full space-y-4"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <FormField
+            control={form.control}
+            name="productType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Product Type</FormLabel>
+                <Select
+                  disabled={isPending}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a product type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {Object.entries(PRODUCT_TYPE_DISPLAY_TEXT).map(
+                      ([productType, text]) => (
+                        <SelectItem key={productType} value={productType}>
+                          {text}
+                        </SelectItem>
+                      )
+                    )}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Title for Product</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a product type" />
-                  </SelectTrigger>
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder="Product Name"
+                  />
                 </FormControl>
-                <SelectContent>
-                  {Object.entries(PRODUCT_TYPE_DISPLAY_TEXT).map(
-                    ([productType, text]) => (
-                      <SelectItem key={productType} value={productType}>
-                        {text}
-                      </SelectItem>
-                    )
-                  )}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Title for Product</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  disabled={isPending}
-                  placeholder="Product Name"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description for Product</FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  disabled={isPending}
-                  placeholder="Product Description..."
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="price"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Price for Product</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  disabled={isPending}
-                  placeholder="Product Price"
-                  type="number"
-                  onChange={(event) => field.onChange(+event.target.value)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <KeywordsCard
-          isPending={isPending}
-          selectedKeywords={selectedKeywords}
-          setSelectedKeywords={setSelectedKeywords}
-        />
-        <FormError message={error} />
-        <FormSuccess message={success} />
-        <Button disabled={isPending} type="submit" className="w-full gap-x-2">
-          <FaSave />
-          Save
-        </Button>
-      </form>
-    </Form>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description for Product</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    disabled={isPending}
+                    placeholder="Product Description..."
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="price"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Price for Product</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder="Product Price"
+                    type="number"
+                    onChange={(event) => field.onChange(+event.target.value)}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <KeywordsCard
+            isPending={isPending}
+            selectedKeywords={selectedKeywords}
+            setSelectedKeywords={setSelectedKeywords}
+          />
+          <FormError message={error} />
+          <FormSuccess message={success} />
+          <Button disabled={isPending} type="submit" className="w-full gap-x-2">
+            <FaSave />
+            Save
+          </Button>
+        </form>
+      </Form>
+    </Card>
   );
 };
