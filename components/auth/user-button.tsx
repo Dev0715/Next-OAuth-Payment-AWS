@@ -26,31 +26,30 @@ import { LogoutButton } from "@/components/auth/logout-button";
 import { LoginButton } from "./login-button";
 import { SignupButton } from "./signup-button";
 import { useEffect, useState } from "react";
-import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { useAtom } from "jotai";
 import { cartAtom } from "@/store/cart";
 import { getUserById } from "@/data/user";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { useCurrentRole } from "@/hooks/use-current-role";
-import { s3LinkAtom } from "@/store/s3-link";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 export const UserButton = () => {
   const [user] = useAtom(userAtom);
-  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
   const userRole = useCurrentRole();
+  const { getLinkFromS3 } = useLinkFromS3();
 
   const [avatarImage, setAvatarImage] = useState<string>("");
   const [cart, setCart] = useAtom(cartAtom);
 
   useEffect(() => {
-    if (!user || !s3Link || !setS3Link) return;
+    if (!user) return;
 
     if (!avatarImage) {
       if (user.image) {
         setAvatarImage(user.image);
       } else if (user.avatar) {
-        getLinkFromS3(user.avatar, s3Link, setS3Link).then((res) => {
+        getLinkFromS3(user.avatar).then((res) => {
           if (res.success) setAvatarImage(res.response as string);
         });
       }
@@ -63,7 +62,7 @@ export const UserButton = () => {
         }
       });
     }
-  }, [user, avatarImage, cart, setCart, s3Link, setS3Link]);
+  }, [user, avatarImage, cart, setCart]);
 
   if (!user)
     return (
