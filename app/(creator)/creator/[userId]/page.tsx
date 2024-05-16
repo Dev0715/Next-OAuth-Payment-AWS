@@ -1,6 +1,5 @@
 "use client";
 
-import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { AboutCreator } from "@/components/profile/about-creator";
 import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -13,8 +12,7 @@ import { FaUser } from "react-icons/fa";
 
 import type { Product, ProductLink } from "@/shared/types/product.type";
 import type { User } from "@/shared/types/user.type";
-import { useAtom } from "jotai";
-import { s3LinkAtom } from "@/store/s3-link";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 interface PropsParams {
   params: {
@@ -23,15 +21,13 @@ interface PropsParams {
 }
 
 export default function CreatorProfile({ params: { userId } }: PropsParams) {
-  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
+  const { getLinkFromS3 } = useLinkFromS3();
   const [userData, setUserData] = useState<User>();
   const [avatarPath, setAvatarPath] = useState<string>("");
   const [coverPath, setCoverPath] = useState<string>("");
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    if (!userId || !s3Link || !setS3Link) return;
-
     let ignore = false;
 
     getUserById(userId).then((_userData) => {
@@ -41,20 +37,18 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
 
       setUserData(_userData);
       if (_userData.avatar) {
-        getLinkFromS3(_userData.avatar, s3Link, setS3Link).then((res) => {
+        getLinkFromS3(_userData.avatar).then((res) => {
           if (res.success) {
             setAvatarPath(res.response as string);
           }
         });
       }
       if (_userData.creator?.cover) {
-        getLinkFromS3(_userData.creator.cover, s3Link, setS3Link).then(
-          (res) => {
-            if (res.success) {
-              setCoverPath(res.response as string);
-            }
+        getLinkFromS3(_userData.creator.cover).then((res) => {
+          if (res.success) {
+            setCoverPath(res.response as string);
           }
-        );
+        });
       }
       if (_userData.creator?.products) {
         _userData.creator.products.map((item: ProductLink) => {
@@ -70,7 +64,7 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
     return () => {
       ignore = true;
     };
-  }, [userId, s3Link, setS3Link]);
+  }, [userId]);
 
   const onFollow = () => {};
 
