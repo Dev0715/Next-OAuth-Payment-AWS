@@ -28,7 +28,7 @@ export const PreviewDialog = ({
         }
       });
     }
-  }, []);
+  }, [image]);
 
   return (
     <Dialog
