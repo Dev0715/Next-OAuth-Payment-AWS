@@ -1,11 +1,9 @@
 import { FaFileUpload } from "react-icons/fa";
 
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
 import { ImagePreview } from "./preview-image";
 import { FileOrString } from "@/shared/types/file-preview-types";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import { Input } from "../ui/input";
 import { PreviewDialog } from "./preview-dialog";
 import { FileUploadButton } from "../utils/file-upload-button";
 
@@ -23,10 +21,6 @@ export const PreviewCard = ({
   const [previewIndex, setPreviewIndex] = useState<number>();
   const [isPreviewing, setPreviewing] = useState<boolean>(false);
   const hiddenPreviewInput = useRef<HTMLInputElement>(null);
-
-  const onPreviewFileBrowse = () => {
-    hiddenPreviewInput.current?.click();
-  };
 
   const onPreviewFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -72,26 +66,6 @@ export const PreviewCard = ({
           <FaFileUpload className="text-green-700 text-sm" />
           Upload
         </FileUploadButton>
-        {/* <Input
-          className="hidden"
-          type="file"
-          accept="image/*"
-          multiple
-          ref={hiddenPreviewInput}
-          onChange={onPreviewFileAdded}
-        />
-        <Button
-          type="button"
-          className="gap-x-2 border-green-700 rounded-none"
-          variant="outline"
-          size="sm"
-          disabled={isPending}
-          onClick={onPreviewFileBrowse}
-        >
-          <FaFileUpload className="text-green-700 text-sm" />
-          Upload
-        </Button> */}
-        {/* <CardDescription>You can preview your creative works</CardDescription> */}
       </CardHeader>
       <CardContent>
         <div className="min-h-32 flex flex-row flex-wrap gap-4">
