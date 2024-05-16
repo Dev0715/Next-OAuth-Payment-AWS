@@ -28,12 +28,12 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    if (!getLinkFromS3) return;
+    initialize();
+  }, []);
 
-    let ignore = false;
-
+  const initialize = () => {
     getUserById(userId).then((_userData) => {
-      if (ignore || !_userData) {
+      if (!_userData) {
         return;
       }
 
@@ -62,11 +62,7 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
         });
       }
     });
-
-    return () => {
-      ignore = true;
-    };
-  }, [userId, getLinkFromS3]);
+  };
 
   const onFollow = () => {};
 
