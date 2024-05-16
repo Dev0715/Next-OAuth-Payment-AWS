@@ -139,7 +139,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
   };
 
   return (
-    <Card className="w-full rounded-none">
+    <div className="w-full">
       <CardHeader>
         <CardTitle className="text-4xl font-medium">Edit a Product</CardTitle>
         <CardDescription>
@@ -148,10 +148,10 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-8">
-        <div className="w-full flex flex-col gap-y-4">
+        <Card className="w-full p-6 flex flex-col gap-y-4">
           <p className="text-xl font-semibold">Product History</p>
           <ProductHistory history={product.approval.history} />
-        </div>
+        </Card>
         <div className="w-full flex gap-x-6">
           <div className="w-1/2 flex flex-col gap-x-6">
             <FilesCard
@@ -178,6 +178,6 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
           </div>
         </div>
       </CardContent>
-    </Card>
+    </div>
   );
 };
