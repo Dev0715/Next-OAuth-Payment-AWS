@@ -14,13 +14,9 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { FaSave } from "react-icons/fa";
-import { Button } from "../ui/button";
 import { Dispatch, SetStateAction } from "react";
 import { Input } from "../ui/input";
 import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
-import { FormError } from "../utils/form-error";
-import { FormSuccess } from "../utils/form-success";
 import { KeywordsCard } from "./keywords-card";
 import { UseFormReturn } from "react-hook-form";
 import { NewProductSchema } from "@/schemas/product";
@@ -29,30 +25,21 @@ import { Card } from "../ui/card";
 
 type Props = {
   isPending: boolean;
-  error: string;
-  success: string;
   selectedKeywords: string[];
   setSelectedKeywords: Dispatch<SetStateAction<string[]>>;
   form: UseFormReturn<z.infer<typeof NewProductSchema>>;
-  onSubmit: () => void;
 };
 
 export const DetailsCard = ({
   isPending,
-  error,
-  success,
   selectedKeywords,
   setSelectedKeywords,
-  form,
-  onSubmit
+  form
 }: Props) => {
   return (
     <Card className="w-full p-6">
       <Form {...form}>
-        <form
-          className="w-full space-y-4"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
+        <form className="w-full space-y-4">
           <FormField
             control={form.control}
             name="productType"
@@ -141,12 +128,6 @@ export const DetailsCard = ({
             selectedKeywords={selectedKeywords}
             setSelectedKeywords={setSelectedKeywords}
           />
-          <FormError message={error} />
-          <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-full gap-x-2">
-            <FaSave />
-            Save
-          </Button>
         </form>
       </Form>
     </Card>
