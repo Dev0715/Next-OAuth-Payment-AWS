@@ -30,13 +30,15 @@ export const CartItem = ({
   const [imagePath, setImagePath] = useState<string>("");
 
   useEffect(() => {
+    if (!product.previewList || !s3Link || !setS3Link) return;
+
     const _s3Link = product.previewList[0];
     getLinkFromS3(_s3Link, s3Link, setS3Link).then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }
     });
-  }, [product.previewList]);
+  }, [product.previewList, s3Link, setS3Link]);
 
   return (
     <Card className="w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100">
