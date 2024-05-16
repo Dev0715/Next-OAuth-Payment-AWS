@@ -12,7 +12,7 @@ export const useLinkFromS3 = () => {
 
     const res = await getLinkFromS3Server(keyName);
     if (setS3Link && res.success) {
-      setS3Link({ ...s3Link, [keyName]: res.response as string });
+      setS3Link((prev) => ({ ...prev, [keyName]: res.response as string }));
     }
 
     return res;
