@@ -152,8 +152,8 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
           <p className="text-xl font-semibold">Product History</p>
           <ProductHistory history={product.approval.history} />
         </Card>
-        <div className="w-full flex gap-x-6">
-          <div className="w-1/2 flex flex-col gap-x-6">
+        <div className="w-full flex gap-x-8">
+          <div className="w-1/2 flex flex-col gap-y-8">
             <FilesCard
               isPending={isPending}
               creativeFiles={creativeFiles}
