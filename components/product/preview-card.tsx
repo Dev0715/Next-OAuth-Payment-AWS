@@ -7,6 +7,7 @@ import { FileOrString } from "@/shared/types/file-preview-types";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { Input } from "../ui/input";
 import { PreviewDialog } from "./preview-dialog";
+import { FileUploadButton } from "../utils/file-upload-button";
 
 type Props = {
   isPending: boolean;
@@ -67,7 +68,11 @@ export const PreviewCard = ({
       />
       <CardHeader className="flex-row items-center justify-between space-y-0">
         <CardTitle>Preview Images</CardTitle>
-        <Input
+        <FileUploadButton disabled={isPending} onChange={onPreviewFileAdded}>
+          <FaFileUpload className="text-green-700 text-sm" />
+          Upload
+        </FileUploadButton>
+        {/* <Input
           className="hidden"
           type="file"
           accept="image/*"
@@ -85,7 +90,7 @@ export const PreviewCard = ({
         >
           <FaFileUpload className="text-green-700 text-sm" />
           Upload
-        </Button>
+        </Button> */}
         {/* <CardDescription>You can preview your creative works</CardDescription> */}
       </CardHeader>
       <CardContent>
