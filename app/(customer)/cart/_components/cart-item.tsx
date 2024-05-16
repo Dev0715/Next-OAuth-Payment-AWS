@@ -1,6 +1,5 @@
 "use client";
 
-import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,8 +9,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import type { CartProduct } from "@/shared/types/product.type";
-import { useAtom } from "jotai";
-import { s3LinkAtom } from "@/store/s3-link";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 interface PropsParams {
   isPending: boolean;
@@ -26,19 +24,19 @@ export const CartItem = ({
   onSelected,
   onRemoveItem
 }: PropsParams) => {
-  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
   const [imagePath, setImagePath] = useState<string>("");
+  const { getLinkFromS3 } = useLinkFromS3();
 
   useEffect(() => {
-    if (!product.previewList || !s3Link || !setS3Link) return;
+    if (!product.previewList) return;
 
     const _s3Link = product.previewList[0];
-    getLinkFromS3(_s3Link, s3Link, setS3Link).then((res) => {
+    getLinkFromS3(_s3Link).then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }
     });
-  }, [product.previewList, s3Link, setS3Link]);
+  }, [product.previewList, getLinkFromS3]);
 
   return (
     <Card className="w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100">
