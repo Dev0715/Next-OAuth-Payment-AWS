@@ -30,8 +30,7 @@ import { createOrder as createStripeOrder } from "@/actions/stripe/create-order"
 import { useAtom } from "jotai";
 import { orderListAtom } from "@/store/orderList";
 import { userAtom } from "@/store/user";
-import { getLinkFromS3 } from "@/actions/s3/link-from-s3";
-import { s3LinkAtom } from "@/store/s3-link";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
   const Option_Paypal = "option-paypal";
@@ -39,7 +38,7 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
 
   const currentPath = usePathname();
   const [user] = useAtom(userAtom);
-  const [s3Link, setS3Link] = useAtom(s3LinkAtom);
+  const { getLinkFromS3 } = useLinkFromS3();
 
   const [isPending, startTransition] = useTransition();
   const [paymentMethod, setPaymentMethod] = useState(Option_Paypal);
@@ -64,11 +63,7 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
         }
       } else {
         const product = orderList[0];
-        const res = await getLinkFromS3(
-          product.previewList[0],
-          s3Link,
-          setS3Link
-        );
+        const res = await getLinkFromS3(product.previewList[0]);
         const imageLink = res.success ? res.response : "";
 
         const response = await createStripeOrder({
