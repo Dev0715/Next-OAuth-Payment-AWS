@@ -12,14 +12,14 @@ export const ProductImage = ({ product }: Props) => {
   const { getLinkFromS3 } = useLinkFromS3();
 
   useEffect(() => {
-    if (!product.previewList) return;
+    if (!product.previewList || !getLinkFromS3) return;
 
     getLinkFromS3(product.previewList[0]).then((res) => {
       if (res.success) {
         setImage(res.response as string);
       }
     });
-  }, [product.previewList]);
+  }, [product.previewList, getLinkFromS3]);
 
   return (
     <Avatar className="w-72 h-48 rounded-xl">

@@ -62,7 +62,7 @@ export const UserButton = () => {
         }
       });
     }
-  }, [user, avatarImage, cart, setCart]);
+  }, [user, avatarImage, cart, setCart, getLinkFromS3]);
 
   if (!user)
     return (
