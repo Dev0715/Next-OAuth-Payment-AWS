@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -12,41 +11,13 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NewProductSchema } from "@/schemas/product";
-import { useRef, useState } from "react";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
-import { FaFileUpload, FaPlus } from "react-icons/fa";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { FormError } from "../utils/form-error";
-import { FormSuccess } from "../utils/form-success";
-import { Badge } from "../ui/badge";
-import { MdClose } from "react-icons/md";
-import { createProduct } from "@/data/product";
-import { addNewProduct } from "@/actions/user/new-product";
-import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
-
-import type { Product, ProductType } from "@/shared/types/product.type";
+import type { Product } from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
-import { PreviewDialog } from "./preview-dialog";
 import { FilesCard } from "./files-card";
 import { DetailsCard } from "./details-card";
 import {
