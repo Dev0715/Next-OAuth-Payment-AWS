@@ -120,10 +120,6 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     updateProduct(updatedProduct, product).then((res) => {
       setSuccess(res.success || "");
       setError(res.error || "");
-
-      if (res.success) {
-        history.back();
-      }
     });
   };
 
