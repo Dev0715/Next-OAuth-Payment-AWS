@@ -25,8 +25,10 @@ import {
   FileOrString
 } from "@/shared/types/file-preview-types";
 import { newProduct } from "@/actions/product/new-product";
+import { useRouter } from "next/navigation";
 
 export const ProductAddForm = () => {
+  const history = useRouter();
   const [user] = useAtom(userAtom);
 
   const [isPending, setPending] = useState<boolean>(false);
@@ -88,9 +90,12 @@ export const ProductAddForm = () => {
     }));
 
     const _product = {
-      ...form.getValues(),
+      productType: form.getValues("productType"),
       productId: uuidv4(),
       ownerId: user?.userId as string,
+      title: form.getValues("title"),
+      description: form.getValues("description"),
+      price: form.getValues("price"),
       fileList,
       previewList,
       keywords: selectedKeywords,
@@ -99,8 +104,9 @@ export const ProductAddForm = () => {
         history: [
           {
             state: "created",
-            comment: "Newly created and deployed, waiting for approval.",
-            userId: user?.userId as string
+            comment: form.getValues("submitComment"),
+            userId: user?.userId as string,
+            time: new Date().toISOString()
           }
         ]
       }
@@ -108,6 +114,16 @@ export const ProductAddForm = () => {
     newProduct(_product).then((res) => {
       setSuccess(res.success || "");
       setError(res.error || "");
+
+      if (res.success) {
+        setTimeout(() => {
+          history.replace(
+            `/creator/edit-product/${_product.productType}/${_product.productId}`
+          );
+        }, 1000);
+      } else {
+        setPending(false);
+      }
     });
   };
 
@@ -160,9 +176,6 @@ export const ProductAddForm = () => {
             form={form}
             selectedKeywords={selectedKeywords}
             setSelectedKeywords={setSelectedKeywords}
-            onSubmit={onSubmit}
-            error={error}
-            success={success}
           />
         </div>
       </CardContent>
