@@ -14,11 +14,16 @@ export const ProductEventCard = ({ event }: Props) => {
         <Badge variant={PRODUCT_STATE_BADGE_VARIANT[event.state]}>
           {event.state}
         </Badge>
-        <p>
-          by <span className="font-semibold">{event.userId}</span>
+        <p className="text-gray-500 text-sm">by</p>
+        <p className="font-semibold">{event.userId}</p>
+        <p className="text-gray-500 text-sm">at</p>
+        <p className="text-gray-500 text-sm font-medium">
+          {`${new Date(event.time).toLocaleDateString()} ${new Date(event.time).toLocaleTimeString()}`}
         </p>
       </div>
-      <p className="text-sm text-gray-700">{event.comment}</p>
+      <div className="pl-2">
+        <pre className="text-sm text-gray-700">{event.comment}</pre>
+      </div>
     </div>
   );
 };
