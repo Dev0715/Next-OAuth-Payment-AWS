@@ -64,14 +64,11 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const [comment, setComment] = useState<string>("");
 
   useEffect(() => {
-    if (!getLinkFromS3) return;
-    let ignore = false; // # to prevent twice loading #
-
     if (params.productType && params.productId) {
-      getProductById(params.productType, params.productId).then((response) => {
-        if (!ignore && response) {
-          setProduct(response);
-          response?.previewList.map((path: string) => {
+      getProductById(params.productType, params.productId).then((_product) => {
+        if (_product) {
+          setProduct(_product);
+          _product?.previewList.map((path: string) => {
             getLinkFromS3(path).then((res) => {
               if (res.success) {
                 setImageList((prev) => [...prev, res.response as string]);
@@ -81,10 +78,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         }
       });
     }
-    return () => {
-      ignore = true;
-    };
-  }, [params, getLinkFromS3]);
+  }, [params]);
 
   const onItemSelected = (index: number) => {
     setSelectedIndex(index);
@@ -162,6 +156,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
       });
     });
   };
+
+  if (!product) return;
 
   return (
     <div className="w-full flex flex-col gap-y-8">
