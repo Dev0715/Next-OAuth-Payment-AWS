@@ -42,15 +42,15 @@ export const DetailsCard = ({
         <form className="w-full space-y-4">
           <FormField
             control={form.control}
-            name="resubmitComment"
+            name="submitComment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Comment for resubmit</FormLabel>
+                <FormLabel>Comment for submit</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
                     disabled={isPending}
-                    placeholder="Resubmit comment..."
+                    placeholder="Submit comment..."
                   />
                 </FormControl>
                 <FormMessage />
