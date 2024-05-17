@@ -141,7 +141,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
       history.push({
         state,
         comment,
-        userId: user?.userId as string
+        userId: user?.userId as string,
+        time: new Date().toISOString()
       });
       const approval = { state, history };
       updateProductApproval({
