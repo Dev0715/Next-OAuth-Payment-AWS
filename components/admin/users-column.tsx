@@ -20,7 +20,7 @@ type PropsType = {
   isPending: boolean;
   onCheckedChange: (checked: boolean, index: number) => void;
   onDeleteUser: (index: number) => void;
-  onDisableUser: (index: number) => void;
+  onDisableUser: (disabled: boolean, index: number) => void;
 };
 
 export const getColumnsForUsersTable = ({
@@ -147,11 +147,13 @@ export const getColumnsForUsersTable = ({
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem disabled>Copy User Email</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => onDeleteUser(customer.userId)}>
+              <DropdownMenuItem onClick={() => onDeleteUser(row.index)}>
                 Delete User
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onDisableUser(customer.userId)}>
-                Disable User
+              <DropdownMenuItem
+                onClick={() => onDisableUser(!!customer.disabled, row.index)}
+              >
+                {customer.disabled ? "Enable User" : "Disable User"}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
