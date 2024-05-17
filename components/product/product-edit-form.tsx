@@ -30,8 +30,10 @@ import { Button } from "../ui/button";
 import { FaUpload } from "react-icons/fa";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
+import { useRouter } from "next/navigation";
 
 export const ProductEditForm = ({ product }: { product: Product }) => {
+  const history = useRouter();
   const [user] = useAtom(userAtom);
 
   const [isPending, setPending] = useState<boolean>(false);
@@ -118,6 +120,10 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     updateProduct(updatedProduct, product).then((res) => {
       setSuccess(res.success || "");
       setError(res.error || "");
+
+      if (res.success) {
+        history.back();
+      }
     });
   };
 
