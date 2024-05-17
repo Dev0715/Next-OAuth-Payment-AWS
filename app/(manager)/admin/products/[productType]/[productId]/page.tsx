@@ -21,6 +21,7 @@ import type {
   ProductState
 } from "@/shared/types/product.type";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { Card } from "@/components/ui/card";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;
@@ -238,10 +239,12 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           </div>
         </div>
       </div>
-      <div className="w-full flex flex-col gap-y-4">
-        <p className="text-2xl font-semibold">Product History</p>
-        <ProductHistory history={product?.approval.history || []} />
-      </div>
+      <Card className="p-6 rounded-none">
+        <div className="w-full flex flex-col gap-y-4">
+          <p className="text-2xl font-semibold">Product History</p>
+          <ProductHistory history={product?.approval.history || []} />
+        </div>
+      </Card>
       <div className="w-full flex flex-col gap-y-4">
         <p className="text-2xl font-semibold">Product Approvement</p>
         <div className="flex flex-col gap-y-1">
