@@ -114,8 +114,9 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
           ...product.approval.history,
           {
             state: "updated",
-            comment: form.getValues("resubmitComment"),
-            userId: user?.userId as string
+            comment: form.getValues("submitComment"),
+            userId: user?.userId as string,
+            time: new Date().toISOString()
           }
         ]
       }
