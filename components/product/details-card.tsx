@@ -37,9 +37,26 @@ export const DetailsCard = ({
   form
 }: Props) => {
   return (
-    <Card className="w-full p-6">
+    <Card className="w-full h-fit p-6">
       <Form {...form}>
         <form className="w-full space-y-4">
+          <FormField
+            control={form.control}
+            name="resubmitComment"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Comment for resubmit</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    disabled={isPending}
+                    placeholder="Resubmit comment..."
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="productType"
