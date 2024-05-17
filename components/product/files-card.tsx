@@ -4,9 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { FileOrCreativeFile } from "@/shared/types/file-preview-types";
 import { Dispatch, SetStateAction, useRef } from "react";
-import { Input } from "../ui/input";
 import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
+import { FileUploadButton } from "../utils/file-upload-button";
 
 type Props = {
   isPending: boolean;
@@ -20,10 +20,6 @@ export const FilesCard = ({
   setCreativeFiles
 }: Props) => {
   const hiddenCreativeFileInput = useRef<HTMLInputElement>(null);
-
-  const onCreativeFileBrowse = () => {
-    hiddenCreativeFileInput.current?.click();
-  };
 
   const onCreativeFileAdded = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -54,25 +50,10 @@ export const FilesCard = ({
     <Card className="w-full">
       <CardHeader className="flex-row items-center justify-between space-y-0">
         <CardTitle>Creative Works</CardTitle>
-        <Input
-          className="hidden"
-          type="file"
-          // accept="image/*"
-          multiple
-          ref={hiddenCreativeFileInput}
-          onChange={onCreativeFileAdded}
-        />
-        <Button
-          type="button"
-          className="flex gap-x-2 border-green-700 rounded-none"
-          variant="outline"
-          size="sm"
-          disabled={isPending}
-          onClick={onCreativeFileBrowse}
-        >
+        <FileUploadButton disabled={isPending} onChange={onCreativeFileAdded}>
           <FaFileUpload className="text-green-700 text-sm" />
           Upload
-        </Button>
+        </FileUploadButton>
       </CardHeader>
       <CardContent>
         <div className="min-h-32 flex flex-wrap gap-4">
