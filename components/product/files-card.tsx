@@ -49,7 +49,7 @@ export const FilesCard = ({
   return (
     <Card className="w-full">
       <CardHeader className="flex-row items-center justify-between space-y-0">
-        <CardTitle>Creative Works</CardTitle>
+        <CardTitle>Creative Works ({creativeFiles.length})</CardTitle>
         <FileUploadButton disabled={isPending} onChange={onCreativeFileAdded}>
           <FaFileUpload className="text-green-700 text-sm" />
           Upload
