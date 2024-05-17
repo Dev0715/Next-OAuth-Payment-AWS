@@ -37,11 +37,35 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Navbar } from "../_components/navbar";
 import type { ManagerData, User } from "@/shared/types/user.type";
 
+type ACTION_TYPE =
+  | "delete"
+  | "disable"
+  | "enable"
+  | "make-manager"
+  | "delete-manager";
+
+const DIALOG_TITLE: Record<ACTION_TYPE, string> = {
+  delete: "Delete User",
+  disable: "Disable User",
+  enable: "Enable User",
+  "make-manager": "Make Manager",
+  "delete-manager": "Delete Manager"
+};
+
+const DIALOG_MESSAGE: Record<ACTION_TYPE, string> = {
+  delete: "Are you sure you want to delete this user?",
+  disable: "Are you sure you want to disable this user?",
+  enable: "Are you sure you want to enable this user?",
+  "make-manager": "Are you sure you want to make this user a manager?",
+  "delete-manager": "Are you sure you want to take out manager's role?"
+};
+
 const ROWS_PER_PAGE = 10;
 
 const ManagementUsers = () => {
   const [isPending, startTransition] = useTransition();
-  const [editIndex, setEditIndex] = useState<number>(0);
+  const [editIndex, setEditIndex] = useState<number>(-1);
+  const [editAction, setEditAction] = useState<ACTION_TYPE>();
 
   const [isConfirmAlert, setConfirmAlert] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
@@ -56,23 +80,25 @@ const ManagementUsers = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const onCheckedChange = (checked: boolean, index: number) => {
+  const setAction = (action: ACTION_TYPE, index: number) => {
+    setEditAction(action);
+    setEditIndex(index);
     setConfirmAlert(true);
-    setConfirmTitle("Update Manager Profile");
-    if (checked) {
-      setConfirmMessage("Are you sure you want to set this user as a manager?");
-    } else {
-      setConfirmMessage(
-        "Are you sure you want to get this user out of the manager role?"
-      );
-
-      setEditIndex(index);
-    }
+    setConfirmTitle(DIALOG_TITLE[action]);
+    setConfirmMessage(DIALOG_MESSAGE[action]);
   };
 
-  const onDeleteUser = (index: number) => {};
+  const onCheckedChange = (checked: boolean, index: number) => {
+    setAction(checked ? "make-manager" : "delete-manager", index);
+  };
 
-  const onDisableUser = (index: number) => {};
+  const onDeleteUser = (index: number) => {
+    setAction("delete", index);
+  };
+
+  const onDisableUser = (disabled: boolean, index: number) => {
+    setAction(disabled ? "enable" : "disable", index);
+  };
 
   const columns = getColumnsForUsersTable({
     isPending,
@@ -117,27 +143,6 @@ const ManagementUsers = () => {
     return lastEvaluatedKey || currentPageIndex + 1 < pageCount;
   }, [lastEvaluatedKey, table]);
 
-  const onConfirmOK = () => {
-    setConfirmAlert(false);
-    const index = editIndex;
-    const checked = !(users[index].manager && users[index].manager?.isManager);
-
-    startTransition(() => {
-      const _manager: ManagerData = {
-        managerId: users[index].manager?.managerId || uuidv4(),
-        isManager: checked
-      };
-
-      updateManagerProfile(users[index].userId, _manager).then((res) => {
-        if (res) {
-          const _users = [...users];
-          _users[index].manager = _manager;
-          setUsers(_users);
-        }
-      });
-    });
-  };
-
   const onNext = () => {
     const currentPageIndex = table.getState().pagination.pageIndex;
     const pageCount = table.getPageCount();
@@ -158,6 +163,27 @@ const ManagementUsers = () => {
     } else {
       table.nextPage();
     }
+  };
+
+  const onConfirmOK = () => {
+    setConfirmAlert(false);
+    const index = editIndex;
+    const checked = !(users[index].manager && users[index].manager?.isManager);
+
+    startTransition(() => {
+      const _manager: ManagerData = {
+        managerId: users[index].manager?.managerId || uuidv4(),
+        isManager: checked
+      };
+
+      updateManagerProfile(users[index].userId, _manager).then((res) => {
+        if (res) {
+          const _users = [...users];
+          _users[index].manager = _manager;
+          setUsers(_users);
+        }
+      });
+    });
   };
 
   return (
