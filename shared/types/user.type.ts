@@ -73,4 +73,7 @@ export type User = {
   verificationToken?: string;
   expires?: string;
   emailVerified?: string;
+
+  disabled?: boolean;
+  deleted?: boolean;
 };
