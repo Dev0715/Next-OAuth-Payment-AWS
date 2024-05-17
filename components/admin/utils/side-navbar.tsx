@@ -4,7 +4,7 @@ import { MenuItem } from "./menu-item";
 
 export const SideNavBar = () => {
   return (
-    <div className="w-60 min-h-full flex flex-col gap-y-1 px-4 py-6 bg-white drop-shadow">
+    <div className="w-60 h-full min-h-full flex flex-col gap-y-1 px-4 py-6 bg-white drop-shadow">
       <MenuItem
         link="/admin/managers"
         title="Managers"
