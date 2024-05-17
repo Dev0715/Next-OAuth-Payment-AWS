@@ -26,6 +26,7 @@ export type ProductEvent = {
   state: ProductState;
   comment: string;
   userId: string;
+  time: string;
 };
 
 export type ProductLink = {
