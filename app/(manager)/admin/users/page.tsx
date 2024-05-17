@@ -165,9 +165,13 @@ const ManagementUsers = () => {
     }
   };
 
-  const onConfirmOK = () => {
-    setConfirmAlert(false);
-    const index = editIndex;
+  const deleteUser = (index: number) => {};
+
+  const disableUser = (index: number) => {};
+
+  const enableUser = (index: number) => {};
+
+  const makeManager = (index: number) => {
     const checked = !(users[index].manager && users[index].manager?.isManager);
 
     startTransition(() => {
@@ -184,6 +188,15 @@ const ManagementUsers = () => {
         }
       });
     });
+  };
+
+  const onConfirmOK = () => {
+    setConfirmAlert(false);
+
+    if (editAction === "delete") deleteUser(editIndex);
+    else if (editAction === "disable") disableUser(editIndex);
+    else if (editAction === "enable") enableUser(editIndex);
+    else makeManager(editIndex);
   };
 
   return (
