@@ -70,9 +70,15 @@ const ManagementUsers = () => {
     }
   };
 
+  const onDeleteUser = (index: number) => {};
+
+  const onDisableUser = (index: number) => {};
+
   const columns = getColumnsForUsersTable({
     isPending,
-    onCheckedChange
+    onCheckedChange,
+    onDeleteUser,
+    onDisableUser
   });
 
   const table = useReactTable({
