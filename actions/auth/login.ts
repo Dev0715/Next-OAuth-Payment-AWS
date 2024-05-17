@@ -24,30 +24,30 @@ export const login = async (
     return { error: "Email does not exist!" };
   }
 
-  if (!existingUser.emailVerified) {
-    const verificationToken = generateVerificationToken(existingUser.userId);
+  // if (!existingUser.emailVerified) {
+  //   const verificationToken = generateVerificationToken(existingUser.userId);
 
-    const updatedUser = await updateUserToken({
-      userId: existingUser.userId,
-      verificationToken,
-      expires: new Date(new Date().getTime() + 3600 * 1000)
-    });
+  //   const updatedUser = await updateUserToken({
+  //     userId: existingUser.userId,
+  //     verificationToken,
+  //     expires: new Date(new Date().getTime() + 3600 * 1000)
+  //   });
 
-    if (!updatedUser) {
-      return { error: "Could not update user!" };
-    }
+  //   if (!updatedUser) {
+  //     return { error: "Could not update user!" };
+  //   }
 
-    const response = await sendVerificationEmail(
-      updatedUser.email,
-      updatedUser.verificationToken
-    );
+  //   const response = await sendVerificationEmail(
+  //     updatedUser.email,
+  //     updatedUser.verificationToken
+  //   );
 
-    if (response.error) {
-      return { error: response.error.name };
-    }
+  //   if (response.error) {
+  //     return { error: response.error.name };
+  //   }
 
-    return { success: "Confirmation email sent!" };
-  }
+  //   return { success: "Confirmation email sent!" };
+  // }
 
   let callbackLink = callbackUrl || DEFAULT_LOGIN_REDIRECT;
   if (existingUser.manager && existingUser.manager.isManager) {
