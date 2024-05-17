@@ -56,7 +56,7 @@ export const FilesCard = ({
         </FileUploadButton>
       </CardHeader>
       <CardContent>
-        <div className="min-h-32 flex flex-wrap gap-4">
+        <div className="min-h-32 flex flex-wrap content-start gap-4">
           {creativeFiles.map((file, index) => (
             <Badge key={index} className="h-8 flex gap-x-2 px-4 rounded-full">
               <p>{file.name}</p>
