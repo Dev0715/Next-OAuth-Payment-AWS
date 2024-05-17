@@ -162,7 +162,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     <div className="w-full">
       <CardHeader className="w-full flex flex-row items-end justify-between">
         <div className="flex flex-col">
-          <CardTitle className="text-4xl font-medium">Edit a Product</CardTitle>
+          <CardTitle className="text-2xl font-medium">Edit a Product</CardTitle>
           <CardDescription>
             You can edit your product and our admin users will check it and
             publish soon!

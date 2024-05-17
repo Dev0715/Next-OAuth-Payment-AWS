@@ -23,5 +23,5 @@ export const PRODUCT_STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
   created: "default",
   approved: "success",
   rejected: "destructive",
-  updated: "secondary"
+  updated: "default"
 };
