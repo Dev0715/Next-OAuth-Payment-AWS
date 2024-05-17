@@ -99,9 +99,12 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     }
 
     const updatedProduct = {
-      ...form.getValues(),
+      productType: form.getValues("productType"),
       productId: uuidv4(),
       ownerId: user?.userId as string,
+      title: form.getValues("title"),
+      description: form.getValues("description"),
+      price: form.getValues("price"),
       fileList,
       previewList,
       keywords: selectedKeywords,
@@ -111,7 +114,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
           ...product.approval.history,
           {
             state: "updated",
-            comment: "Newly updated and deployed, waiting for approval.",
+            comment: form.getValues("resubmitComment"),
             userId: user?.userId as string
           }
         ]
@@ -169,7 +172,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
       </div>
       <CardContent className="flex flex-col gap-y-8">
         <Card className="w-full p-6 flex flex-col gap-y-4">
-          <p className="text-xl font-semibold">Product History</p>
+          <p className="text-xl font-semibold">Product Approval Status</p>
           <ProductHistory history={product.approval.history} />
         </Card>
         <div className="w-full flex gap-x-8">
