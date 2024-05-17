@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const NewProductSchema = z.object({
-  resubmitComment: z.string().min(1, "Resubmit comment is required"),
+  submitComment: z.string().min(1, "Submit comment is required"),
   productType: z.string().min(1, "Product type is required"),
   title: z
     .string()
