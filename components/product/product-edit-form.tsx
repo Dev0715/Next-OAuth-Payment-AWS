@@ -115,7 +115,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         ]
       }
     } as Product;
-    updateProduct(updatedProduct).then((res) => {
+    updateProduct(updatedProduct, product).then((res) => {
       setSuccess(res.success || "");
       setError(res.error || "");
     });
