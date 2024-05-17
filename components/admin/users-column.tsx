@@ -19,11 +19,15 @@ import type { User } from "@/shared/types/user.type";
 type PropsType = {
   isPending: boolean;
   onCheckedChange: (checked: boolean, index: number) => void;
+  onDeleteUser: (index: number) => void;
+  onDisableUser: (index: number) => void;
 };
 
 export const getColumnsForUsersTable = ({
   isPending,
-  onCheckedChange
+  onCheckedChange,
+  onDeleteUser,
+  onDisableUser
 }: PropsType) => {
   const columns: ColumnDef<User, string>[] = [
     {
@@ -124,8 +128,9 @@ export const getColumnsForUsersTable = ({
     {
       id: "actions",
       enableHiding: false,
-      cell: () => {
-        // const customer = row.original;
+      cell: ({ row }) => {
+        const customer = row.original;
+
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -142,8 +147,12 @@ export const getColumnsForUsersTable = ({
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem disabled>Copy User Email</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem disabled>Delete User</DropdownMenuItem>
-              <DropdownMenuItem disabled>Edit User</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onDeleteUser(customer.userId)}>
+                Delete User
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onDisableUser(customer.userId)}>
+                Disable User
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );
