@@ -40,14 +40,11 @@ export const ConfirmAlert = ({
         </AlertDialogHeader>
         <AlertDialogFooter className="flex gap-x-4">
           {onCancel && (
-            <AlertDialogCancel
-              className="w-24 py-0 border border-red-700 rounded-none"
-              onClick={onCancel}
-            >
+            <AlertDialogCancel className="w-24" onClick={onCancel}>
               Cancel
             </AlertDialogCancel>
           )}
-          <AlertDialogAction className="w-24 rounded-none" onClick={onOK}>
+          <AlertDialogAction className="w-24" onClick={onOK}>
             OK
           </AlertDialogAction>
         </AlertDialogFooter>
