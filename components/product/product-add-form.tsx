@@ -26,6 +26,10 @@ import {
 } from "@/shared/types/file-preview-types";
 import { newProduct } from "@/actions/product/new-product";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import { FaUpload } from "react-icons/fa";
+import { FormError } from "../utils/form-error";
+import { FormSuccess } from "../utils/form-success";
 
 export const ProductAddForm = () => {
   const history = useRouter();
@@ -57,21 +61,11 @@ export const ProductAddForm = () => {
       );
       return;
     }
-
     setError("");
     setSuccess("");
     setPending(true);
 
-    submitProduct()
-      .then(() => {
-        setSuccess("Product registered successfully!");
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
-        setPending(false);
-      });
+    submitProduct();
   };
 
   const submitProduct = async () => {
@@ -117,9 +111,7 @@ export const ProductAddForm = () => {
 
       if (res.success) {
         setTimeout(() => {
-          history.replace(
-            `/creator/edit-product/${_product.productType}/${_product.productId}`
-          );
+          history.replace(`/creator/${user?.userId as string}`);
         }, 1000);
       } else {
         setPending(false);
@@ -147,18 +139,32 @@ export const ProductAddForm = () => {
   };
 
   return (
-    <Card className="w-full rounded-none">
-      <CardHeader>
-        <CardTitle className="text-4xl font-medium">
-          Add a new Product
-        </CardTitle>
-        <CardDescription>
-          You can register your product and our admin users will check it and
-          publish soon!
-        </CardDescription>
+    <div className="w-full">
+      <CardHeader className="w-full flex flex-row items-end justify-between">
+        <div className="flex flex-col">
+          <CardTitle className="text-2xl font-medium">
+            Add a new Product
+          </CardTitle>
+          <CardDescription>
+            You can register your product and our admin users will check it and
+            publish soon!
+          </CardDescription>
+        </div>
+        <Button
+          disabled={isPending}
+          className="w-64 gap-x-4 rounded-none"
+          onClick={form.handleSubmit(onSubmit)}
+        >
+          <FaUpload />
+          Submit
+        </Button>
       </CardHeader>
-      <CardContent className="w-full flex gap-x-6">
-        <div className="w-1/2 flex flex-col gap-x-6">
+      <div className="px-6 pb-6">
+        <FormError message={error} />
+        <FormSuccess message={success} />
+      </div>
+      <CardContent className="w-full flex gap-x-8">
+        <div className="w-1/2 flex flex-col gap-y-8">
           <FilesCard
             isPending={isPending}
             creativeFiles={creativeFiles}
@@ -179,6 +185,6 @@ export const ProductAddForm = () => {
           />
         </div>
       </CardContent>
-    </Card>
+    </div>
   );
 };
