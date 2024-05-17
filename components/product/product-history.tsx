@@ -18,8 +18,8 @@ export const ProductHistory = ({ history }: Props) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-y-4">
-      <div className="w-full flex items-end justify-between">
+    <div className="w-full flex flex-col gap-y-6">
+      <div className="w-full flex items-start justify-between">
         <ProductEventCard event={_history[0]} />
         <Button
           variant={"outline"}
@@ -29,11 +29,13 @@ export const ProductHistory = ({ history }: Props) => {
           Show {showMore ? "Less" : "More"}
         </Button>
       </div>
-      <div className="w-full flex flex-col gap-y-4">
-        {_history.map((event, index) =>
-          index > 0 ? <ProductEventCard key={index} event={event} /> : null
-        )}
-      </div>
+      {showMore ? (
+        <div className="w-full flex flex-col gap-y-6">
+          {_history.map((event, index) =>
+            index > 0 ? <ProductEventCard key={index} event={event} /> : null
+          )}
+        </div>
+      ) : null}
     </div>
   );
 };
