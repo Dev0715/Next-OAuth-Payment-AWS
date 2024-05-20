@@ -123,7 +123,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     return true;
   };
 
-  const onCommentProduct = (isApprove: boolean, comment: string) => {
+  const onCommentProduct = (isApprove: boolean) => {
     if (!checkComment()) {
       return;
     }
