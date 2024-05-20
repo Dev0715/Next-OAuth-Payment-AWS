@@ -19,6 +19,18 @@ export const PRODUCT_TYPE_DISPLAY_TEXT: Record<ProductType, string> = {
   "audio-sound-effects": "Audio / Sound Effects"
 };
 
+export const PRODUCT_STATE_BADGE_VARIANT_ADMIN: Record<
+  ProductState,
+  BadgeVariant
+> = {
+  created: "secondary",
+  updated: "secondary",
+  submitted: "default",
+  resubmitted: "default",
+  approved: "success",
+  rejected: "destructive"
+};
+
 export const PRODUCT_STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
   created: "default",
   approved: "success",
