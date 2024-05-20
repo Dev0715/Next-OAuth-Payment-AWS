@@ -36,6 +36,7 @@ import { getColumnsForUsersTable } from "@/components/admin/users-column";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Navbar } from "../_components/navbar";
 import type { ManagerData, User } from "@/shared/types/user.type";
+import { toast } from "sonner";
 
 type ACTION_TYPE =
   | "delete"
@@ -165,19 +166,23 @@ const ManagementUsers = () => {
     }
   };
 
-  const deleteUser = (index: number) => {};
-
-  const disableUser = (index: number) => {
+  const deleteUser = (index: number) => {
     const userId = users[index].userId;
 
     startTransition(() => {
       deleteUserById(userId).then((res) => {
         if (res.success) {
+          const _users = [...users];
+          _users.splice(index, 1);
+          setUsers(_users);
         } else {
+          toast.error("Failed to delete user");
         }
       });
     });
   };
+
+  const disableUser = (index: number) => {};
 
   const enableUser = (index: number) => {};
 
