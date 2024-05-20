@@ -32,6 +32,8 @@ import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 import { useRouter } from "next/navigation";
 
+type STATUS = "modified" | "saved" | "completed";
+
 export const ProductEditForm = ({ product }: { product: Product }) => {
   const history = useRouter();
   const [user] = useAtom(userAtom);
@@ -44,6 +46,8 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
   const [creativeFiles, setCreativeFiles] = useState<FileOrCreativeFile[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
+  const [status, setStatus] = useState<STATUS>("completed");
+
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
     defaultValues: {
@@ -53,6 +57,8 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
       price: product.price
     }
   });
+
+  // form.formState.isDirty
 
   useEffect(() => {
     setSelectedKeywords(product.keywords);
@@ -170,7 +176,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         </div>
         <div className="flex gap-x-6 items-end">
           <Button
-            disabled={isPending}
+            disabled={isPending || status !== "modified"}
             variant={"outline"}
             className="w-64 gap-x-4 rounded-none border-green-700"
             onClick={form.handleSubmit(onSubmit)}
@@ -179,7 +185,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
             Save
           </Button>
           <Button
-            disabled={isPending}
+            disabled={isPending || status !== "saved"}
             className="w-64 gap-x-4 rounded-none"
             onClick={form.handleSubmit(onSubmit)}
           >
