@@ -126,6 +126,22 @@ export const getColumnsForUsersTable = ({
       }
     },
     {
+      accessorKey: "disabled",
+      header: () => <div className="text-center">Status</div>,
+      cell: (info) => {
+        // const user = row.original;
+        return (
+          <div className="text-center font-medium">
+            {info.getValue() ? (
+              <Badge variant={"destructive"}>Disabled</Badge>
+            ) : (
+              <Badge variant={"success"}>Opened</Badge>
+            )}
+          </div>
+        );
+      }
+    },
+    {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
