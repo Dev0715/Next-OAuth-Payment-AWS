@@ -20,6 +20,7 @@ import type {
 } from "@/shared/types/product.type";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { Card } from "@/components/ui/card";
+import { ProductApprovement } from "@/components/admin/product-approvement";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;
@@ -151,6 +152,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
             return prev;
           });
         }
+        setComment("");
       });
     });
   };
@@ -242,6 +244,12 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           <ProductHistory history={product?.approval.history || []} />
         </div>
       </Card>
+      <ProductApprovement
+        isPending={isPending}
+        comment={comment}
+        setComment={setComment}
+        onCommentProduct={onCommentProduct}
+      />
     </div>
   );
 }
