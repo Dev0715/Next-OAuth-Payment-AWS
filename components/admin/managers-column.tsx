@@ -4,15 +4,16 @@ import { ArrowUp, ArrowDown } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import type { User } from "@/shared/types/user.type";
+import { Button } from "../ui/button";
 
 type PropsType = {
   isPending: boolean;
-  onCheckedChange: (checked: boolean, index: number) => void;
+  onDelete: (index: number) => void;
 };
 
 export const getColumnsForMangersTable = ({
   isPending,
-  onCheckedChange
+  onDelete
 }: PropsType) => {
   const columns: ColumnDef<User, string>[] = [
     {
@@ -72,6 +73,15 @@ export const getColumnsForMangersTable = ({
       accessorKey: "email",
       header: () => "Email",
       cell: (info) => <span className="font-medium">{info.getValue()}</span>
+    },
+    {
+      id: "delete",
+      header: () => "Delete",
+      cell: ({ row }) => (
+        <Button variant={"destructive"} onClick={() => onDelete(row.index)}>
+          Delete
+        </Button>
+      )
     }
   ];
 
