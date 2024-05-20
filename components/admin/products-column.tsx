@@ -13,15 +13,17 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { PRODUCT_STATE_BADGE_VARIANT } from "@/shared/constants/product.constant";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
+import { PRODUCT_STATE_BADGE_VARIANT_ADMIN } from "@/shared/constants/product.constant";
 
 const STATE_DISPLAY_TEXT: Record<ProductState, string> = {
   created: "Created",
+  updated: "Updated",
+  submitted: "Submitted",
+  resubmitted: "Resubmitted",
   approved: "Approved",
-  rejected: "Rejected",
-  updated: "Updated"
+  rejected: "Rejected"
 };
 
 type PropsType = {
