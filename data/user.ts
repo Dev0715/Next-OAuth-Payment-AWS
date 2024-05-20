@@ -423,7 +423,7 @@ export const updateAffiliateData = async ({
   }
 };
 
-export const deleteUser = async (userId: string) => {
+export const deleteUserById = async (userId: string) => {
   const command = new DeleteCommand({
     TableName: AWS_DYNAMO_TABLES.USER,
     Key: { userId }
