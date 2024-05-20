@@ -45,7 +45,7 @@ export const DetailsCard = ({
             name="submitComment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Comment for submit</FormLabel>
+                <FormLabel>Comment for action</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
