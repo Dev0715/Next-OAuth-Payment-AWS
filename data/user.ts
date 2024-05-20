@@ -1,18 +1,16 @@
 "use server";
 
 import {
+  DeleteCommand,
   GetCommand,
   PutCommand,
   ScanCommand,
   UpdateCommand,
   type ScanCommandInput
 } from "@aws-sdk/lib-dynamodb";
-import { z } from "zod";
 
 import db from "@/lib/db";
 import { generateVerificationToken } from "@/lib/tokens";
-import { ProfileSchema } from "@/schemas/user";
-import { CreatorSettingsSchema } from "@/schemas/auth/auth";
 import { AWS_DYNAMO_TABLES } from "@/shared/constants/server.constant";
 
 import type { CreatorData, ManagerData, User } from "@/shared/types/user.type";
@@ -422,5 +420,23 @@ export const updateAffiliateData = async ({
   } catch (error) {
     console.error(error);
     return null;
+  }
+};
+
+export const deleteUser = async (userId: string) => {
+  const command = new DeleteCommand({
+    TableName: AWS_DYNAMO_TABLES.USER,
+    Key: { userId }
+  });
+
+  try {
+    await db.send(command);
+    return {
+      success: true
+    };
+  } catch (error) {
+    return {
+      error: true
+    };
   }
 };
