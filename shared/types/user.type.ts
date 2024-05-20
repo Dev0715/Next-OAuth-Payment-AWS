@@ -75,5 +75,4 @@ export type User = {
   emailVerified?: string;
 
   disabled?: boolean;
-  deleted?: boolean;
 };
