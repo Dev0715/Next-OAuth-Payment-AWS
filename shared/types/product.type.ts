@@ -16,7 +16,7 @@ export type ProductType =
   | "audio-sound-effects";
 
 export type ProductState =
-  | "draft"
+  | "created"
   | "updated"
   | "submitted"
   | "resubmitted"
