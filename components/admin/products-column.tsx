@@ -176,7 +176,7 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
                 <Link
                   href={`/admin/products/${product.productType}/${product.productId}`}
                 >
-                  Edit Product
+                  Approval Page
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
