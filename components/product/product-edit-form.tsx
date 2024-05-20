@@ -27,7 +27,7 @@ import { FilesCard } from "./files-card";
 import { DetailsCard } from "./details-card";
 import { updateProduct } from "@/actions/product/update-product";
 import { Button } from "../ui/button";
-import { FaUpload } from "react-icons/fa";
+import { FaSave, FaUpload } from "react-icons/fa";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 import { useRouter } from "next/navigation";
@@ -168,14 +168,25 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
             publish soon!
           </CardDescription>
         </div>
-        <Button
-          disabled={isPending}
-          className="w-64 gap-x-4 rounded-none"
-          onClick={form.handleSubmit(onSubmit)}
-        >
-          <FaUpload />
-          Resubmit
-        </Button>
+        <div className="flex gap-x-6 items-end">
+          <Button
+            disabled={isPending}
+            variant={"outline"}
+            className="w-64 gap-x-4 rounded-none border-green-700"
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            <FaSave />
+            Save
+          </Button>
+          <Button
+            disabled={isPending}
+            className="w-64 gap-x-4 rounded-none"
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            <FaUpload />
+            Resubmit
+          </Button>
+        </div>
       </CardHeader>
       <div className="px-6 pb-6">
         <FormError message={error} />
