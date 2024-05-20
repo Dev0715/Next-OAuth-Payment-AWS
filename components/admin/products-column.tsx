@@ -133,7 +133,9 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
           <div className="text-center">
             <Badge
               variant={
-                PRODUCT_STATE_BADGE_VARIANT[info.getValue() as ProductState]
+                PRODUCT_STATE_BADGE_VARIANT_ADMIN[
+                  info.getValue() as ProductState
+                ]
               }
             >
               {STATE_DISPLAY_TEXT[info.getValue() as ProductState]}
