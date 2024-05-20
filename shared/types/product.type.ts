@@ -15,7 +15,13 @@ export type ProductType =
   | "video"
   | "audio-sound-effects";
 
-export type ProductState = "created" | "approved" | "rejected" | "updated";
+export type ProductState =
+  | "draft"
+  | "updated"
+  | "submitted"
+  | "resubmitted"
+  | "approved"
+  | "rejected";
 
 export type CreativeFile = {
   name: string;
