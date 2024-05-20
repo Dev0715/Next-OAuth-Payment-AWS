@@ -15,7 +15,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 
-import { getAllUsers, updateManagerProfile } from "@/data/user";
+import { deleteUserById, getAllUsers, updateManagerProfile } from "@/data/user";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -167,7 +167,17 @@ const ManagementUsers = () => {
 
   const deleteUser = (index: number) => {};
 
-  const disableUser = (index: number) => {};
+  const disableUser = (index: number) => {
+    const userId = users[index].userId;
+
+    startTransition(() => {
+      deleteUserById(userId).then((res) => {
+        if (res.success) {
+        } else {
+        }
+      });
+    });
+  };
 
   const enableUser = (index: number) => {};
 
