@@ -1,18 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUp, ArrowDown, MoreHorizontal } from "lucide-react";
+import { ArrowUp, ArrowDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
 
 import type { User } from "@/shared/types/user.type";
 
@@ -83,59 +72,6 @@ export const getColumnsForMangersTable = ({
       accessorKey: "email",
       header: () => "Email",
       cell: (info) => <span className="font-medium">{info.getValue()}</span>
-    },
-    {
-      id: "Roles",
-      header: () => <div className="text-center">Roles</div>,
-      cell: ({ row }) => {
-        const user = row.original;
-
-        const roles: string[] = [];
-        if (user.creator?.isCreator) roles.push("Creator");
-        if (user.customer?.isCustomer) roles.push("Customer");
-        if (user.affiliate?.isAffiliate) roles.push("Affiliate");
-
-        return (
-          <div className="flex flex-wrap items-center justify-center gap-1">
-            {roles.map((role) => (
-              <Badge key={role} className="cursor-pointer">
-                {role}
-              </Badge>
-            ))}
-          </div>
-        );
-      }
-    },
-    {
-      id: "Manager",
-      header: () => <div className="text-center">Manager</div>,
-      cell: ({ row }) => {
-        const user = row.original;
-        return (
-          <div className="text-center font-medium">
-            <Switch
-              checked={user.manager && user.manager.isManager}
-              onCheckedChange={(checked) => onCheckedChange(checked, row.index)}
-            />
-          </div>
-        );
-      }
-    },
-    {
-      accessorKey: "disabled",
-      header: () => <div className="text-center">Status</div>,
-      cell: (info) => {
-        // const user = row.original;
-        return (
-          <div className="text-center font-medium">
-            {info.getValue() ? (
-              <Badge variant={"destructive"}>Disabled</Badge>
-            ) : (
-              <Badge variant={"success"}>Opened</Badge>
-            )}
-          </div>
-        );
-      }
     }
   ];
 
