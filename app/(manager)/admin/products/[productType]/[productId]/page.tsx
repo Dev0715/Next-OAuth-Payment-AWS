@@ -2,7 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaDownload, FaRegUser } from "react-icons/fa";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
@@ -58,6 +58,13 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
       });
     }
   }, [params]);
+
+  const isApproval = useMemo(() => {
+    return (
+      product?.approval.state === "submitted" ||
+      product?.approval.state === "resubmitted"
+    );
+  }, [product]);
 
   const onItemSelected = (index: number) => {
     setSelectedIndex(index);
@@ -223,12 +230,14 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           <ProductHistory history={product?.approval.history || []} />
         </div>
       </Card>
-      <ProductApprovement
-        isPending={isPending}
-        comment={comment}
-        setComment={setComment}
-        onCommentProduct={onCommentProduct}
-      />
+      {isApproval ? (
+        <ProductApprovement
+          isPending={isPending}
+          comment={comment}
+          setComment={setComment}
+          onCommentProduct={onCommentProduct}
+        />
+      ) : null}
     </div>
   );
 }
