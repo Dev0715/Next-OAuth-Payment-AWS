@@ -440,3 +440,26 @@ export const deleteUserById = async (userId: string) => {
     };
   }
 };
+
+export const updateUserEnabled = async (userId: string, enabled: boolean) => {
+  const command = new UpdateCommand({
+    TableName: AWS_DYNAMO_TABLES.USER,
+    Key: { userId },
+    UpdateExpression: "SET disabled = :disabled",
+    ExpressionAttributeValues: {
+      ":disabled": !enabled
+    },
+    ReturnValues: "ALL_NEW"
+  });
+
+  try {
+    await db.send(command);
+    return {
+      success: true
+    };
+  } catch (error) {
+    return {
+      error: true
+    };
+  }
+};
