@@ -18,6 +18,15 @@ const ClassName_Text: Record<ProductState, string> = {
   rejected: "text-red-400"
 };
 
+const DisplayName_Text: Record<ProductState, string> = {
+  created: "Created",
+  updated: "Updated",
+  submitted: "Submitted, waiting for approval",
+  resubmitted: "Resubmitted, waiting for approval",
+  approved: "Approved",
+  rejected: "Rejected"
+};
+
 type PropsParams = {
   product: Product;
   _url?: string;
@@ -29,6 +38,7 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
   const { getLinkFromS3 } = useLinkFromS3();
 
   const stateClassName = ClassName_Text[product.approval.state];
+  const stateText = DisplayName_Text[product.approval.state];
 
   useEffect(() => {
     if (!product || !getLinkFromS3) return;
@@ -41,19 +51,6 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
     });
   }, [product, getLinkFromS3]);
 
-  const stateText = () => {
-    const _state: ProductState = product.approval.state;
-    if (_state === "created") {
-      return "Created, waiting for approval";
-    } else if (_state === "approved") {
-      return "Approved";
-    } else if (_state === "rejected") {
-      return "Rejected";
-    } else if (_state === "updated") {
-      return "Updated, waiting for approval";
-    }
-  };
-
   return (
     <Link
       href={`${_url ? _url : "/products"}/${product.productType}/${product.productId}`}
@@ -65,7 +62,7 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
             <p
               className={`text-sm px-2 bg-black/40 rounded-full ${stateClassName}`}
             >
-              {stateText()}
+              {stateText}
             </p>
           </div>
         )}
