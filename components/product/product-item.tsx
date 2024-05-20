@@ -9,15 +9,26 @@ import { Card, CardContent } from "@/components/ui/card";
 import type { Product, ProductState } from "@/shared/types/product.type";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
-interface PropsParams {
+const ClassName_Text: Record<ProductState, string> = {
+  created: "text-white",
+  updated: "text-white",
+  submitted: "text-blue-500",
+  resubmitted: "text-blue-500",
+  approved: "text-green-500 font-semibold",
+  rejected: "text-red-400"
+};
+
+type PropsParams = {
   product: Product;
   _url?: string;
   noBadge?: boolean;
-}
+};
 
 export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
   const [imagePath, setImagePath] = useState<string>("");
   const { getLinkFromS3 } = useLinkFromS3();
+
+  const stateClassName = ClassName_Text[product.approval.state];
 
   useEffect(() => {
     if (!product || !getLinkFromS3) return;
@@ -43,19 +54,6 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
     }
   };
 
-  const stateClassName = () => {
-    const _state: ProductState = product.approval.state;
-    if (_state === "created") {
-      return "text-white";
-    } else if (_state === "approved") {
-      return "text-green-500 font-semibold";
-    } else if (_state === "rejected") {
-      return "text-red-400 font-semibold";
-    } else if (_state === "updated") {
-      return "text-white";
-    }
-  };
-
   return (
     <Link
       href={`${_url ? _url : "/products"}/${product.productType}/${product.productId}`}
@@ -65,7 +63,7 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
         {!noBadge && (
           <div className="absolute top-2 right-2 z-10">
             <p
-              className={`text-sm px-2 bg-black/40 rounded-full ${stateClassName()}`}
+              className={`text-sm px-2 bg-black/40 rounded-full ${stateClassName}`}
             >
               {stateText()}
             </p>
