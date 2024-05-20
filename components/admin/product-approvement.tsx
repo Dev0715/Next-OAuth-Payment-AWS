@@ -1,7 +1,12 @@
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 
-export const ProductApprovement = () => {
+type Props = {
+  isPending: boolean;
+};
+
+export const ProductApprovement = ({ isPending }: Props) => {
   return (
     <div className="w-full flex flex-col gap-y-4">
       <p className="text-2xl font-semibold">Product Approvement</p>
