@@ -152,7 +152,8 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
 
     {
       id: "actions",
-      enableHiding: false,
+      // enableHiding: false,
+      header: () => "Actions",
       cell: ({ row }) => {
         const product = row.original;
         return (
@@ -176,7 +177,7 @@ export const getColumnsForProductsTable = ({ isPending }: PropsType) => {
                 <Link
                   href={`/admin/products/${product.productType}/${product.productId}`}
                 >
-                  Approval Page
+                  See detail
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
