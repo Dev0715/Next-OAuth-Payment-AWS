@@ -33,7 +33,9 @@ export const PRODUCT_STATE_BADGE_VARIANT_ADMIN: Record<
 
 export const PRODUCT_STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
   created: "default",
+  updated: "default",
+  submitted: "default",
+  resubmitted: "default",
   approved: "success",
-  rejected: "destructive",
-  updated: "default"
+  rejected: "destructive"
 };
