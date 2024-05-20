@@ -6,11 +6,9 @@ import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { QuestionAlert } from "@/components/utils/question-alert";
 import { axiosClient, blobConfig } from "@/lib/axios";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { ProductHistory } from "@/components/product/product-history";
-import { Textarea } from "@/components/ui/textarea";
 import { getProductById, updateProductApproval } from "@/data/product";
 import { Navbar } from "../../../_components/navbar";
 import Link from "next/link";
@@ -125,7 +123,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     return true;
   };
 
-  const onCommentProduct = (isApprove: boolean) => {
+  const onCommentProduct = (isApprove: boolean, comment: string) => {
     if (!checkComment()) {
       return;
     }
@@ -153,7 +151,6 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
             return prev;
           });
         }
-        setComment("");
       });
     });
   };
@@ -245,38 +242,6 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           <ProductHistory history={product?.approval.history || []} />
         </div>
       </Card>
-      <div className="w-full flex flex-col gap-y-4">
-        <p className="text-2xl font-semibold">Product Approvement</p>
-        <div className="flex flex-col gap-y-1">
-          <p>Your Comment</p>
-          <Textarea
-            disabled={isPending}
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            className="w-1/2"
-          />
-        </div>
-        <div className="flex items-center gap-x-4">
-          <QuestionAlert
-            title="Approve Product"
-            message="Are you sure to approve this product?"
-            onContinue={() => onCommentProduct(true)}
-          >
-            <Button disabled={isPending} variant={"default"}>
-              Approve
-            </Button>
-          </QuestionAlert>
-          <QuestionAlert
-            title="Reject Product"
-            message="Are you sure to reject this product?"
-            onContinue={() => onCommentProduct(false)}
-          >
-            <Button disabled={isPending} variant={"destructive"}>
-              Reject
-            </Button>
-          </QuestionAlert>
-        </div>
-      </div>
     </div>
   );
 }
