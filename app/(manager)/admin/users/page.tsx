@@ -15,7 +15,12 @@ import {
 import { ChevronDown } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 
-import { deleteUserById, getAllUsers, updateManagerProfile } from "@/data/user";
+import {
+  deleteUserById,
+  getAllUsers,
+  updateManagerProfile,
+  updateUserEnabled
+} from "@/data/user";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -182,9 +187,16 @@ const ManagementUsers = () => {
     });
   };
 
-  const disableUser = (index: number) => {};
+  const setUserEnabled = (index: number, enabled: boolean) => {
+    const userId = users[index].userId;
 
-  const enableUser = (index: number) => {};
+    startTransition(() => {
+      updateUserEnabled(userId, enabled).then((res) => {
+        if (res.success) {
+        }
+      });
+    });
+  };
 
   const makeManager = (index: number) => {
     const checked = !(users[index].manager && users[index].manager?.isManager);
@@ -209,8 +221,8 @@ const ManagementUsers = () => {
     setConfirmAlert(false);
 
     if (editAction === "delete") deleteUser(editIndex);
-    else if (editAction === "disable") disableUser(editIndex);
-    else if (editAction === "enable") enableUser(editIndex);
+    else if (editAction === "disable") setUserEnabled(editIndex, false);
+    else if (editAction === "enable") setUserEnabled(editIndex, true);
     else makeManager(editIndex);
   };
 
