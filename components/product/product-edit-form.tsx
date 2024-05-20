@@ -16,7 +16,11 @@ import { v4 as uuidv4 } from "uuid";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import type { Product } from "@/shared/types/product.type";
+import type {
+  Product,
+  ProductEvent,
+  ProductState
+} from "@/shared/types/product.type";
 import { PreviewCard } from "./preview-card";
 import {
   FileOrCreativeFile,
@@ -60,7 +64,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     setPreviewFiles(product.previewList);
   }, [product]);
 
-  const onSubmit = () => {
+  const onSubmit = (action: ProductState) => {
     if (creativeFiles.length === 0 || previewFiles.length === 0) {
       setSuccess("");
       setError("creative files and one preview images can't be empty!");
@@ -70,10 +74,10 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     setError("");
     setPending(true);
 
-    submitProduct();
+    submitProduct(action);
   };
 
-  const submitProduct = async () => {
+  const submitProduct = async (action: ProductState) => {
     const [_pathList, _previewList] = await Promise.all([
       getPathList(creativeFiles),
       getPathList(previewFiles)
@@ -109,11 +113,11 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
       previewList,
       keywords: selectedKeywords,
       approval: {
-        state: "updated",
+        state: action,
         history: [
           ...product.approval.history,
           {
-            state: "updated",
+            state: action,
             comment: form.getValues("submitComment"),
             userId: user?.userId as string,
             time: new Date().toISOString()
@@ -173,7 +177,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
             disabled={isPending}
             variant={"outline"}
             className="w-64 gap-x-4 rounded-none border-green-700"
-            onClick={form.handleSubmit(onSubmit)}
+            onClick={form.handleSubmit(() => onSubmit("updated"))}
           >
             <FaSave />
             Save
@@ -181,7 +185,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
           <Button
             disabled={isPending}
             className="w-64 gap-x-4 rounded-none"
-            onClick={form.handleSubmit(onSubmit)}
+            onClick={form.handleSubmit(() => onSubmit("resubmitted"))}
           >
             <FaUpload />
             Resubmit
