@@ -15,7 +15,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 
-import { getAllUsers, updateManagerProfile } from "@/data/user";
+import { deleteUserById, getAllUsers, updateManagerProfile } from "@/data/user";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -56,23 +56,19 @@ const AdminManagement = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const onCheckedChange = (checked: boolean, index: number) => {
+  const onDelete = (index: number) => {
     setConfirmAlert(true);
     setConfirmTitle("Update Manager Profile");
-    if (checked) {
-      setConfirmMessage("Are you sure you want to set this user as a manager?");
-    } else {
-      setConfirmMessage(
-        "Are you sure you want to get this user out of the manager role?"
-      );
+    setConfirmMessage(
+      "Are you sure you want to get this user out of the manager role?"
+    );
 
-      setEditIndex(index);
-    }
+    setEditIndex(index);
   };
 
   const columns = getColumnsForMangersTable({
     isPending,
-    onCheckedChange
+    onDelete
   });
   const table = useReactTable({
     data: users,
@@ -121,8 +117,8 @@ const AdminManagement = () => {
         isManager: checked
       };
 
-      updateManagerProfile(users[index].userId, _manager).then((res) => {
-        if (res) {
+      deleteUserById(users[index].userId).then((res) => {
+        if (res.success) {
           const _users = [...users];
           _users[index].manager = _manager;
           setUsers(_users);
