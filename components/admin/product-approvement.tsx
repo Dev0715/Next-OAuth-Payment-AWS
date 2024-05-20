@@ -1,12 +1,21 @@
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { Button } from "../ui/button";
 
 type Props = {
   isPending: boolean;
+  comment: string;
+  setComment: Dispatch<SetStateAction<string>>;
+  onCommentProduct: (isApproved: boolean) => void;
 };
 
-export const ProductApprovement = ({ isPending }: Props) => {
+export const ProductApprovement = ({
+  isPending,
+  comment,
+  setComment,
+  onCommentProduct
+}: Props) => {
   return (
     <div className="w-full flex flex-col gap-y-4">
       <p className="text-2xl font-semibold">Product Approvement</p>
