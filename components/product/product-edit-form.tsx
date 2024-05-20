@@ -48,6 +48,8 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
   const [creativeFiles, setCreativeFiles] = useState<FileOrCreativeFile[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
+  const isApproved = product.approval.state === "approved";
+
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
     defaultValues: {
@@ -182,14 +184,21 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
             <FaSave />
             Save
           </Button>
-          <Button
-            disabled={isPending}
-            className="w-64 gap-x-4 rounded-none"
-            onClick={form.handleSubmit(() => onSubmit("resubmitted"))}
-          >
-            <FaUpload />
-            Resubmit
-          </Button>
+          {isApproved ? (
+            <Button disabled={isPending} className="w-64 gap-x-4 rounded-none">
+              <FaUpload />
+              Publish
+            </Button>
+          ) : (
+            <Button
+              disabled={isPending}
+              className="w-64 gap-x-4 rounded-none"
+              onClick={form.handleSubmit(() => onSubmit("resubmitted"))}
+            >
+              <FaUpload />
+              Resubmit
+            </Button>
+          )}
         </div>
       </CardHeader>
       <div className="px-6 pb-6">
