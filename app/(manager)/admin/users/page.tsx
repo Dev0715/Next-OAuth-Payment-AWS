@@ -194,7 +194,7 @@ const ManagementUsers = () => {
       updateUserEnabled(userId, enabled).then((res) => {
         if (res.success) {
           const _users = [...users];
-          _users[index].disabled = enabled;
+          _users[index].disabled = !enabled;
           setUsers(_users);
         }
       });
