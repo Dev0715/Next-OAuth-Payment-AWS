@@ -56,7 +56,8 @@ export const getAllManagers = async (
   exclusiveStartKey?: string
 ) => {
   const scanCommandInput: ScanCommandInput = {
-    TableName: AWS_DYNAMO_TABLES.USER
+    TableName: AWS_DYNAMO_TABLES.USER,
+    FilterExpression: "manager.isManager = true"
   };
 
   if (exclusiveStartKey) {

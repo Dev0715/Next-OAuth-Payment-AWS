@@ -33,7 +33,12 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { deleteUserById, getAllUsers, updateManagerProfile } from "@/data/user";
+import {
+  deleteUserById,
+  getAllManagers,
+  getAllUsers,
+  updateManagerProfile
+} from "@/data/user";
 
 import { Navbar } from "../_components/navbar";
 
@@ -94,7 +99,7 @@ const AdminManagement = () => {
   });
 
   useEffect(() => {
-    getAllUsers(ROWS_PER_PAGE).then((res) => {
+    getAllManagers(ROWS_PER_PAGE).then((res) => {
       setUsers(res.items as User[]);
       setLastEvaluatedKey(res.lastEvaluatedKey);
       table.setPageSize(ROWS_PER_PAGE);
