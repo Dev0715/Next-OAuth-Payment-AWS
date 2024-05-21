@@ -73,7 +73,13 @@ export default function Approval() {
 
   useEffect(() => {
     getAllProducts(ROWS_PER_PAGE).then((res) => {
-      setProducts(res.items as Product[]);
+      setProducts(
+        res.items.filter(
+          (item) =>
+            item.approval.state === "submitted" ||
+            item.approval.state === "resubmitted"
+        ) as Product[]
+      );
       setLastEvaluatedKey(res.lastEvaluatedKey as ProductLink);
       table.setPageSize(ROWS_PER_PAGE);
     });
