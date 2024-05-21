@@ -58,7 +58,7 @@ const AdminManagement = () => {
 
   const onDelete = (index: number) => {
     setConfirmAlert(true);
-    setConfirmTitle("Update Manager Profile");
+    setConfirmTitle("Delete a Manager Profile");
     setConfirmMessage(
       "Are you sure you want to get this user out of the manager role?"
     );
