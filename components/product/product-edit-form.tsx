@@ -164,6 +164,17 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     }
   };
 
+  const onDelete = () => {
+    deleteProduct(product.productType, product.productId).then((res) => {
+      if (res.success) {
+        setSuccess("Product deleted successfully");
+        setTimeout(() => {
+          history.replace(`/creator/${user?.userId}`);
+        }, 1000);
+      }
+    });
+  };
+
   return (
     <div className="w-full">
       <CardHeader className="w-full flex flex-row items-end justify-between">
@@ -193,11 +204,29 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
             <Button
               disabled={isPending}
               className="w-64 gap-x-4 rounded-none"
-              onClick={form.handleSubmit(() => onSubmit("resubmitted"))}
+              onClick={form.handleSubmit(() =>
+                onSubmit(isResubmitted ? "resubmitted" : "submitted")
+              )}
             >
               <FaUpload />
-              Resubmit
+              {isResubmitted ? "Resubmit" : "Submit"}
             </Button>
+          )}
+          {!isEverSubmitted && (
+            <QuestionAlert
+              title="Confirmation"
+              message="Are you sure want to delete this item?"
+              onContinue={onDelete}
+            >
+              <Button
+                disabled={isPending}
+                variant={"destructive"}
+                className="w-64 gap-x-4 rounded-none border-green-700"
+              >
+                <FaRecycle />
+                Delete
+              </Button>
+            </QuestionAlert>
           )}
         </div>
       </CardHeader>
