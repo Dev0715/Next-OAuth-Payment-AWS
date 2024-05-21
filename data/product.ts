@@ -62,6 +62,43 @@ export const getAllProducts = async (
   }
 };
 
+export const getAllSubmittedProducts = async (
+  limit?: number,
+  exclusiveStartKey?: ProductLink
+) => {
+  const scanCommandInput: ScanCommandInput = {
+    TableName: AWS_DYNAMO_TABLES.PRODUCT
+    // FilterExpression: "email = :email",
+    // ExpressionAttributeValues: {
+    // ":email": email
+    // }
+  };
+
+  if (exclusiveStartKey) {
+    scanCommandInput.ExclusiveStartKey = {
+      ...exclusiveStartKey
+    };
+  }
+
+  if (limit) {
+    scanCommandInput.Limit = limit;
+  }
+
+  const command = new ScanCommand(scanCommandInput);
+
+  try {
+    const response = await db.send(command);
+    return {
+      items: response.Items as Product[],
+      lastEvaluatedKey: response.LastEvaluatedKey
+    };
+  } catch (error) {
+    return {
+      items: []
+    };
+  }
+};
+
 export const getProductsByType = async (
   productType: string,
   limit: number,
