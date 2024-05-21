@@ -35,7 +35,7 @@ import type { Product, ProductLink } from "@/shared/types/product.type";
 const ROWS_PER_PAGE = 10;
 
 type Props = {
-  getAllProducts: (
+  getProductsAll: (
     limit?: number,
     exclusiveStartKey?: ProductLink
   ) => Promise<
@@ -50,7 +50,7 @@ type Props = {
   >;
 };
 
-export const ProductsTable = ({ getAllProducts }: Props) => {
+export const ProductsTable = ({ getProductsAll }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [products, setProducts] = useState<Product[]>([]);
   const [lastEvaluatedKey, setLastEvaluatedKey] = useState<ProductLink>();
@@ -83,7 +83,7 @@ export const ProductsTable = ({ getAllProducts }: Props) => {
   });
 
   useEffect(() => {
-    getAllProducts(ROWS_PER_PAGE).then((res) => {
+    getProductsAll(ROWS_PER_PAGE).then((res) => {
       setProducts(
         res.items.filter(
           (item) =>
@@ -109,7 +109,7 @@ export const ProductsTable = ({ getAllProducts }: Props) => {
 
     if (currentPageIndex + 1 === pageCount) {
       startTransition(() => {
-        getAllProducts(ROWS_PER_PAGE, lastEvaluatedKey).then((res) => {
+        getProductsAll(ROWS_PER_PAGE, lastEvaluatedKey).then((res) => {
           if (res.items?.length) {
             setProducts([...products, ...(res.items as Product[])]);
             table.nextPage();
