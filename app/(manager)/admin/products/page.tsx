@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  getAllApprovedProducts,
   getAllRejectedProducts,
   getAllSubmittedProducts
 } from "@/data/product";
@@ -32,7 +33,9 @@ export default function Approval() {
         <TabsContent value="Submitted">
           <ProductsTable getProductsAll={getAllSubmittedProducts} />
         </TabsContent>
-        <TabsContent value="Approved"></TabsContent>
+        <TabsContent value="Approved">
+          <ProductsTable getProductsAll={getAllApprovedProducts} />
+        </TabsContent>
         <TabsContent value="Rejected">
           <ProductsTable getProductsAll={getAllRejectedProducts} />
         </TabsContent>
