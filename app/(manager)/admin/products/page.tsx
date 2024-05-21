@@ -8,8 +8,7 @@ import {
 
 import { Navbar } from "../_components/navbar";
 import { ProductsTable } from "@/components/admin/products-table";
-import { Tabs, TabsList } from "@/components/ui/tabs";
-import { TabsContent, TabsTrigger } from "@radix-ui/react-tabs";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Approval() {
   return (
@@ -18,7 +17,7 @@ export default function Approval() {
         title="All Products"
         content="You can check and approve or reject products"
       />
-      <Tabs defaultValue="Submitted" className="w-full flex flex-col gap-y-6">
+      <Tabs defaultValue="Submitted" className="w-full flex flex-col gap-y-2">
         <TabsList className="px-6 w-full h-fit flex justify-start gap-x-6">
           <TabsTrigger value="Submitted">
             <p className="text-base">Review</p>
