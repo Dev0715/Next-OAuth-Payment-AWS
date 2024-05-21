@@ -4,6 +4,8 @@ import {
   DeleteCommand,
   GetCommand,
   PutCommand,
+  QueryCommand,
+  QueryCommandInput,
   ScanCommand,
   UpdateCommand,
   type ScanCommandInput
@@ -35,6 +37,39 @@ export const getAllUsers = async (
   }
 
   const command = new ScanCommand(scanCommandInput);
+
+  try {
+    const response = await db.send(command);
+    return {
+      items: response.Items,
+      lastEvaluatedKey: response.LastEvaluatedKey
+    };
+  } catch (error) {
+    return {
+      items: []
+    };
+  }
+};
+
+export const getAllManagers = async (
+  limit?: number,
+  exclusiveStartKey?: string
+) => {
+  const queryCommandInput: QueryCommandInput = {
+    TableName: AWS_DYNAMO_TABLES.USER
+  };
+
+  if (exclusiveStartKey) {
+    queryCommandInput.ExclusiveStartKey = {
+      userId: exclusiveStartKey as string
+    };
+  }
+
+  if (limit) {
+    queryCommandInput.Limit = limit;
+  }
+
+  const command = new QueryCommand(queryCommandInput);
 
   try {
     const response = await db.send(command);
