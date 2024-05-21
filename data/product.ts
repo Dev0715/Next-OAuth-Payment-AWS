@@ -69,7 +69,10 @@ export const getAllSubmittedProducts = async (
   const scanCommandInput: ScanCommandInput = {
     TableName: AWS_DYNAMO_TABLES.PRODUCT,
     FilterExpression:
-      "approval.state = :submitted or approval.state = :resubmitted",
+      "approval.#state = :submitted or approval.#state = :resubmitted",
+    ExpressionAttributeNames: {
+      "#state": "state"
+    },
     ExpressionAttributeValues: {
       ":submitted": "submitted",
       ":resubmitted": "resubmitted"
@@ -90,11 +93,13 @@ export const getAllSubmittedProducts = async (
 
   try {
     const response = await db.send(command);
+    console.log(response);
     return {
       items: response.Items as Product[],
       lastEvaluatedKey: response.LastEvaluatedKey
     };
   } catch (error) {
+    console.log("Error", error);
     return {
       items: []
     };
