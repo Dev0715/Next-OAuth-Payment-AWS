@@ -75,6 +75,15 @@ export const getColumnsForMangersTable = ({
       cell: (info) => <span className="font-medium">{info.getValue()}</span>
     },
     {
+      accessorKey: "emailVerified",
+      header: () => "Created",
+      cell: (info) => (
+        <span className="font-medium">
+          {new Date(info.getValue()).toLocaleString()}
+        </span>
+      )
+    },
+    {
       id: "delete",
       header: () => "Delete",
       cell: ({ row }) => (
