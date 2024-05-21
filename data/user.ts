@@ -55,21 +55,21 @@ export const getAllManagers = async (
   limit?: number,
   exclusiveStartKey?: string
 ) => {
-  const queryCommandInput: QueryCommandInput = {
+  const scanCommandInput: ScanCommandInput = {
     TableName: AWS_DYNAMO_TABLES.USER
   };
 
   if (exclusiveStartKey) {
-    queryCommandInput.ExclusiveStartKey = {
+    scanCommandInput.ExclusiveStartKey = {
       userId: exclusiveStartKey as string
     };
   }
 
   if (limit) {
-    queryCommandInput.Limit = limit;
+    scanCommandInput.Limit = limit;
   }
 
-  const command = new QueryCommand(queryCommandInput);
+  const command = new ScanCommand(scanCommandInput);
 
   try {
     const response = await db.send(command);
