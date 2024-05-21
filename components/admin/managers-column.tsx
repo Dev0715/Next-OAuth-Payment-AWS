@@ -78,7 +78,11 @@ export const getColumnsForMangersTable = ({
       id: "delete",
       header: () => "Delete",
       cell: ({ row }) => (
-        <Button variant={"destructive"} onClick={() => onDelete(row.index)}>
+        <Button
+          variant={"destructive"}
+          className="h-6 rounded-none"
+          onClick={() => onDelete(row.index)}
+        >
           Delete
         </Button>
       )
