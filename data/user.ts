@@ -57,7 +57,10 @@ export const getAllManagers = async (
 ) => {
   const scanCommandInput: ScanCommandInput = {
     TableName: AWS_DYNAMO_TABLES.USER,
-    FilterExpression: "manager.isManager = true"
+    FilterExpression: "manager.isManager = :isManager",
+    ExpressionAttributeValues: {
+      ":isManager": true
+    }
   };
 
   if (exclusiveStartKey) {
@@ -79,6 +82,7 @@ export const getAllManagers = async (
       lastEvaluatedKey: response.LastEvaluatedKey
     };
   } catch (error) {
+    console.error(error);
     return {
       items: []
     };
