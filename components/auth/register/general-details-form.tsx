@@ -1,10 +1,12 @@
 "use client";
 
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
+import { FaArrowRight } from "react-icons/fa";
+import * as z from "zod";
+
+import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,10 +16,9 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { GeneralDetailsSchema } from "@/schemas/auth/register";
-import { FaArrowRight } from "react-icons/fa";
+import { Input } from "@/components/ui/input";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
+import { GeneralDetailsSchema } from "@/schemas/auth/register";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 

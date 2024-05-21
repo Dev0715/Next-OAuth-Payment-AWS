@@ -1,10 +1,11 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { SiAdobe, SiDiscord, SiEpicgames } from "react-icons/si";
-import { FaGithub } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { FaGithub } from "react-icons/fa";
+import { SiAdobe, SiDiscord, SiEpicgames } from "react-icons/si";
+
+import { Button } from "@/components/ui/button";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 export const Social = () => {

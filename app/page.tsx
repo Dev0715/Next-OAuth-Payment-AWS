@@ -1,14 +1,16 @@
 "use client";
 
-import React from "react";
 import { Poppins } from "next/font/google";
+import React from "react";
 
-import { Hero } from "@/components/landing/hero";
-import { Services } from "@/components/landing/services";
 import { Featured } from "@/components/landing/featured";
 import { Finisher } from "@/components/landing/finisher";
-import { Footer } from "./_components/footer";
+import { Hero } from "@/components/landing/hero";
+import { Services } from "@/components/landing/services";
+
 import { cn } from "@/lib/utils";
+
+import { Footer } from "./_components/footer";
 
 const font = Poppins({
   subsets: ["latin"],

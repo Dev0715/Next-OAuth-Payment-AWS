@@ -1,15 +1,15 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { FaUser } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
+import * as z from "zod";
 
-import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/utils/form-error";
-import { FormSuccess } from "@/components/utils/form-success";
 import {
   Form,
   FormControl,
@@ -18,18 +18,19 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Header } from "./_components/header";
+import { FormError } from "@/components/utils/form-error";
+import { FormSuccess } from "@/components/utils/form-success";
 import { RoleSwitchBox } from "@/components/utils/role-switch-box";
-import { userAtom } from "@/store/user";
-import { useAtom } from "jotai";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaUser } from "react-icons/fa";
+import { updateGeneralProfile } from "@/data/user";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { ProfileSchema } from "@/schemas/user";
 import { uploadImage } from "@/shared/functions/upload-image";
-import { updateGeneralProfile } from "@/data/user";
 import { User } from "@/shared/types/user.type";
-import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { userAtom } from "@/store/user";
+
+import { Header } from "./_components/header";
 
 export default function Profile() {
   const [user, updateUser] = useAtom(userAtom);

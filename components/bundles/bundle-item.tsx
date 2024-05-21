@@ -1,10 +1,12 @@
-import { Bundle } from "@/shared/types/bundles.type";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { useEffect, useState } from "react";
-import { Product } from "@/shared/types/product.type";
-import { getProductById } from "@/data/product";
-import { ProductImage } from "./product-image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { getProductById } from "@/data/product";
+import { Bundle } from "@/shared/types/bundles.type";
+import { Product } from "@/shared/types/product.type";
+
+import { ProductImage } from "./product-image";
 
 type Props = {
   bundle: Bundle;

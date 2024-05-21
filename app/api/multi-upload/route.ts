@@ -1,6 +1,7 @@
-import { uploadFileToS3 } from "@/actions/s3/upload-file";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
+
+import { uploadFileToS3 } from "@/actions/s3/upload-file";
 
 export const POST = async (req: NextRequest) => {
   try {

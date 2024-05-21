@@ -1,5 +1,6 @@
 import { FaCartPlus, FaLayerGroup, FaUser } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
+
 import { MenuItem } from "./menu-item";
 
 export const SideNavBar = () => {

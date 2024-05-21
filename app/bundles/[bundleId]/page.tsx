@@ -1,11 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { ProductItem } from "@/components/product/product-item";
 import { getBundleById } from "@/data/bundle";
 import { getProductById } from "@/data/product";
 import { Bundle } from "@/shared/types/bundles.type";
 import { Product } from "@/shared/types/product.type";
-import { useEffect, useState } from "react";
 
 type Props = {
   params: {

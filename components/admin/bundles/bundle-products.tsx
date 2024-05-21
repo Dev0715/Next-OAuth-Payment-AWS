@@ -1,15 +1,20 @@
-import { Dispatch, SetStateAction, useState } from "react";
 import {
   ColumnFiltersState,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable
+  SortingState,
+  useReactTable,
+  VisibilityState
 } from "@tanstack/react-table";
+import { Dispatch, SetStateAction, useState } from "react";
+import { FaPlus } from "react-icons/fa";
+
+import { getColumnsForBundleProductsTable } from "@/components/admin/bundles/bundle-products-column";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Table,
   TableBody,
@@ -18,11 +23,8 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { FaPlus } from "react-icons/fa";
 import { Product } from "@/shared/types/product.type";
-import { getColumnsForBundleProductsTable } from "@/components/admin/bundles/bundle-products-column";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+
 import { BundleProductSelect } from "./bundle-products-select";
 
 type Props = {

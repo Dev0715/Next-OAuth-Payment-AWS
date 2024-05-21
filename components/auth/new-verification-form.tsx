@@ -1,8 +1,8 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { useSearchParams } from "next/navigation";
 
 import { newVerification } from "@/actions/auth/new-verification";
 import { CardWrapper } from "@/components/auth/card-wrapper";

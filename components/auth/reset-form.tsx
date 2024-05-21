@@ -1,12 +1,13 @@
 "use client";
 
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
-import { ResetSchema } from "@/schemas/auth/auth";
-import { Input } from "@/components/ui/input";
+import { reset } from "@/actions/auth/reset";
+import { CardWrapper } from "@/components/auth/card-wrapper";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -15,11 +16,10 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { CardWrapper } from "@/components/auth/card-wrapper";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
-import { reset } from "@/actions/auth/reset";
+import { ResetSchema } from "@/schemas/auth/auth";
 
 export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>("");

@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Button } from "../ui/button";
+
+import { Button } from "@/components/ui/button";
+
 import { ProductEventCard } from "./product-event";
 
 import type { ProductEvent } from "@/shared/types/product.type";

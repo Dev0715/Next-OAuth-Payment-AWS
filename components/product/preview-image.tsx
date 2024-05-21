@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
-import { FileOrString } from "@/shared/types/file-preview-types";
-import { Avatar } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
+import { useEffect, useState } from "react";
+
+import { Avatar } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { FileOrString } from "@/shared/types/file-preview-types";
 
 type Props = {
   disabled: boolean;

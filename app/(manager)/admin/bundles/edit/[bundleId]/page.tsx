@@ -1,17 +1,19 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
-import { Navbar } from "../../../_components/navbar";
-import { getBundleById, updateBundle } from "@/data/bundle";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { BundleProducts } from "@/components/admin/bundles/bundle-products";
-import { getProductById } from "@/data/product";
-import { Button } from "@/components/ui/button";
-import { FaSave } from "react-icons/fa";
-import { Switch } from "@/components/ui/switch";
 import { useRouter } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
+import { FaSave } from "react-icons/fa";
+
+import { BundleProducts } from "@/components/admin/bundles/bundle-products";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import { FormError } from "@/components/utils/form-error";
+import { getBundleById, updateBundle } from "@/data/bundle";
+import { getProductById } from "@/data/product";
+
+import { Navbar } from "../../../_components/navbar";
 
 import type { Bundle } from "@/shared/types/bundles.type";
 import type { Product, ProductLink } from "@/shared/types/product.type";

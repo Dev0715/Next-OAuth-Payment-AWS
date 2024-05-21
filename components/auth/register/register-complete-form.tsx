@@ -1,8 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FaKey } from "react-icons/fa";
+
+import { Button } from "@/components/ui/button";
 
 type Props = {
   step: number;

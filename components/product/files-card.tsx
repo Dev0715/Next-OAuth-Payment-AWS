@@ -1,11 +1,12 @@
-import { FaFileUpload } from "react-icons/fa";
-
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { FileOrCreativeFile } from "@/shared/types/file-preview-types";
 import { Dispatch, SetStateAction, useRef } from "react";
-import { Badge } from "../ui/badge";
+import { FaFileUpload } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { FileOrCreativeFile } from "@/shared/types/file-preview-types";
+
 import { FileUploadButton } from "../utils/file-upload-button";
 
 type Props = {

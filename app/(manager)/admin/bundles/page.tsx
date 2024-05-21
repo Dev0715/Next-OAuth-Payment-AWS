@@ -1,25 +1,31 @@
 "use client";
 
-import { Navbar } from "../_components/navbar";
-import { useEffect, useMemo, useState, useTransition } from "react";
 import {
   ColumnFiltersState,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable
+  SortingState,
+  useReactTable,
+  VisibilityState
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useMemo, useState, useTransition } from "react";
+import { FaPlus } from "react-icons/fa";
+import { toast } from "sonner";
+
+import { getColumnsForBundlesTable } from "@/components/admin/bundles/bundles-colum";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -28,13 +34,10 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { getColumnsForBundlesTable } from "@/components/admin/bundles/bundles-colum";
 import { deleteBundle, getAllBundles } from "@/data/bundle";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { FaPlus } from "react-icons/fa";
-import Link from "next/link";
-import { toast } from "sonner";
+
+import { Navbar } from "../_components/navbar";
+
 import type { Bundle } from "@/shared/types/bundles.type";
 
 const ROWS_PER_PAGE = 10;

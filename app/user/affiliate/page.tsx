@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { SwitchBox } from "@/components/utils/switch-box";
 import { useAtom } from "jotai";
-import { userAtom } from "@/store/user";
-import { AffiliateData, User } from "@/shared/types/user.type";
+import { useState, useTransition } from "react";
+
+import { SwitchBox } from "@/components/utils/switch-box";
 import { updateAffiliateData } from "@/data/user";
+import { AffiliateData, User } from "@/shared/types/user.type";
+import { userAtom } from "@/store/user";
 
 const AffiliateSettings = () => {
   const [user, setUser] = useAtom(userAtom);

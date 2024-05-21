@@ -1,10 +1,13 @@
 "use client";
 
+import { useAtom } from "jotai";
+
+import { useEffect } from "react";
+
 import { getUserById } from "@/data/user";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { userAtom } from "@/store/user";
-import { useAtom } from "jotai";
-import { useEffect } from "react";
+
 import { Loading } from "./loading";
 
 export default function LoadUser({ children }: { children: React.ReactNode }) {

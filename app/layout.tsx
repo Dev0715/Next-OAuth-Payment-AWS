@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+import { Provider as JotaiProvider } from "jotai";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
-import { Provider as JotaiProvider } from "jotai";
 
 import { auth } from "@/auth";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+
 import { Header } from "./_components/header";
 import LoadUser from "./_components/user-load";
+
+import type { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 

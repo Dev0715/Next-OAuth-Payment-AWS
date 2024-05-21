@@ -1,11 +1,12 @@
 "use client";
 
 import { Dispatch, SetStateAction, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
-import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { v4 as uuidv4 } from "uuid";
+
 import { register } from "@/actions/auth/register/register";
+import { Button } from "@/components/ui/button";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";

@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { PaymentForm } from "@/components/payment/payment-form";
 import { useState } from "react";
+
+import { PaymentForm } from "@/components/payment/payment-form";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 interface PaymentButtonProps {
   children: React.ReactNode;
@@ -17,20 +17,22 @@ export const PaymentButton = ({
   children,
   mode = "redirect",
   asChild,
-  disabled,
+  disabled
 }: PaymentButtonProps) => {
   const router = useRouter();
 
   const onClick = () => {
-    router.push("/payment/pay");    // payment page
+    router.push("/payment/pay"); // payment page
   };
 
   const [opened, setOpened] = useState(false);
 
   if (mode === "modal") {
     return (
-      <Dialog open={opened} onOpenChange={open => setOpened(open)}>
-        <DialogTrigger disabled={disabled} asChild={asChild}>{children}</DialogTrigger>
+      <Dialog open={opened} onOpenChange={(open) => setOpened(open)}>
+        <DialogTrigger disabled={disabled} asChild={asChild}>
+          {children}
+        </DialogTrigger>
         <DialogContent className="p-0 w-auto bg-transparent border-none">
           <PaymentForm onCancel={() => setOpened(false)} />
         </DialogContent>

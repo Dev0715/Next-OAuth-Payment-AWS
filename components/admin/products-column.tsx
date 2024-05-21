@@ -1,7 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUp, ArrowDown, MoreHorizontal } from "lucide-react";
+import { ArrowDown, ArrowUp, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -12,10 +13,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
+import { PRODUCT_STATE_BADGE_VARIANT_ADMIN } from "@/shared/constants/product.constant";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
-import { PRODUCT_STATE_BADGE_VARIANT_ADMIN } from "@/shared/constants/product.constant";
 
 const STATE_DISPLAY_TEXT: Record<ProductState, string> = {
   created: "Created",

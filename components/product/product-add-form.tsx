@@ -1,35 +1,39 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaUpload } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
+import { z } from "zod";
+
+import { newProduct } from "@/actions/product/new-product";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle
-} from "../ui/card";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { NewProductSchema } from "@/schemas/product";
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+} from "@/components/ui/card";
 import { axiosClient, axiosConfig } from "@/lib/axios";
-import { userAtom } from "@/store/user";
-import { useAtom } from "jotai";
-import type { Product } from "@/shared/types/product.type";
-import { PreviewCard } from "./preview-card";
-import { FilesCard } from "./files-card";
-import { DetailsCard } from "./details-card";
+import { NewProductSchema } from "@/schemas/product";
 import {
   FileOrCreativeFile,
   FileOrString
 } from "@/shared/types/file-preview-types";
-import { newProduct } from "@/actions/product/new-product";
-import { useRouter } from "next/navigation";
-import { Button } from "../ui/button";
-import { FaUpload } from "react-icons/fa";
+import { userAtom } from "@/store/user";
+
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
+
+import { DetailsCard } from "./details-card";
+import { FilesCard } from "./files-card";
+import { PreviewCard } from "./preview-card";
+
+import type { Product } from "@/shared/types/product.type";
 
 export const ProductAddForm = () => {
   const history = useRouter();

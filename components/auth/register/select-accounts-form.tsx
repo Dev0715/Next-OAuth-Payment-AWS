@@ -1,9 +1,11 @@
 "use client";
 
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import * as z from "zod";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,10 +15,9 @@ import {
   FormItem,
   FormLabel
 } from "@/components/ui/form";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { Switch } from "@/components/ui/switch";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { SelectAccountsSchema } from "@/schemas/auth/register";
-import { Switch } from "@/components/ui/switch";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 

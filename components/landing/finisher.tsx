@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 
 export const Finisher = () => (
   <section className="pb-20 relative block bg-gray-900">

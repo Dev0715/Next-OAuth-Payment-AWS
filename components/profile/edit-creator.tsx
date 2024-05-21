@@ -1,10 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { v4 as uuidv4 } from "uuid";
+import { useAtom } from "jotai";
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
+import { z } from "zod";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,13 +18,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { CreatorSettingsSchema } from "@/schemas/auth/auth";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/utils/form-error";
-import { FormSuccess } from "@/components/utils/form-success";
-import Link from "next/link";
 import {
   Select,
   SelectContent,
@@ -27,17 +26,19 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-import { LinkedSites } from "./linked-sites";
-import { Textarea } from "../ui/textarea";
-import { userAtom } from "@/store/user";
-import { useAtom } from "jotai";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { FormError } from "@/components/utils/form-error";
+import { FormSuccess } from "@/components/utils/form-success";
 import { updateCreatorData } from "@/data/user";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { CreatorSettingsSchema } from "@/schemas/auth/auth";
 import { JOB_TITLES } from "@/shared/constants/user.constant";
 import { uploadImage } from "@/shared/functions/upload-image";
 import { CreatorData, User } from "@/shared/types/user.type";
-import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { userAtom } from "@/store/user";
+
+import { LinkedSites } from "./linked-sites";
 
 export default function EditCreator({
   disabled = false

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Dialog, DialogContent } from "../ui/dialog";
-import { FileOrString } from "@/shared/types/file-preview-types";
-import { Avatar, AvatarImage } from "../ui/avatar";
+
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { FileOrString } from "@/shared/types/file-preview-types";
 
 type Props = {
   isPreviewing: boolean;

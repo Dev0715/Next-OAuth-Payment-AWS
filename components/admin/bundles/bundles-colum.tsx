@@ -1,7 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUp, ArrowDown, MoreHorizontal } from "lucide-react";
+import { ArrowDown, ArrowUp, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
+import { Badge, BadgeVariant } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -12,8 +13,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Badge, BadgeVariant } from "@/components/ui/badge";
-import { Bundle, BundleState } from "@/shared/types/bundles.type";
+
+import type { Bundle, BundleState } from "@/shared/types/bundles.type";
 
 const STATE_BADGE_VARIANT: Record<BundleState, BadgeVariant> = {
   editing: "default",

@@ -1,10 +1,14 @@
 "use client";
 
-import { ProductItem } from "@/components/product/product-item";
-import { Navbar } from "../_components/navbar";
 import { useEffect, useState } from "react";
-import { getProductsByType, getProductsCountByType } from "@/data/product";
+
+import { ProductItem } from "@/components/product/product-item";
+
 import { Separator } from "@/components/ui/separator";
+import { getProductsByType, getProductsCountByType } from "@/data/product";
+
+import { Navbar } from "../_components/navbar";
+
 import { ProductPagination } from "../_components/pagination-products";
 
 import type { Product, ProductLink } from "@/shared/types/product.type";

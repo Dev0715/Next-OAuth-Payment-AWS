@@ -1,11 +1,18 @@
-import { FaPlus } from "react-icons/fa";
-import { Button } from "../ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import { ProductItem } from "../product/product-item";
+import { useAtom } from "jotai";
 import Link from "next/link";
+import { FaPlus } from "react-icons/fa";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader
+} from "@/components/ui/card";
 import { Product } from "@/shared/types/product.type";
 import { userAtom } from "@/store/user";
-import { useAtom } from "jotai";
+
+import { ProductItem } from "../product/product-item";
 
 type Props = {
   products: Product[];

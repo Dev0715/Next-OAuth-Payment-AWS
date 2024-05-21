@@ -1,18 +1,22 @@
 "use client";
 
+import {
+  ExitIcon,
+  MixerHorizontalIcon,
+  PersonIcon
+} from "@radix-ui/react-icons";
+import { useAtom } from "jotai";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   FaCartArrowDown,
   FaLayerGroup,
   FaToolbox,
   FaUser
 } from "react-icons/fa";
-import {
-  ExitIcon,
-  MixerHorizontalIcon,
-  PersonIcon
-} from "@radix-ui/react-icons";
 
+import { LogoutButton } from "@/components/auth/logout-button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,19 +24,20 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { userAtom } from "@/store/user";
-import { LogoutButton } from "@/components/auth/logout-button";
-import { LoginButton } from "./login-button";
-import { SignupButton } from "./signup-button";
-import { useEffect, useState } from "react";
-import { useAtom } from "jotai";
-import { cartAtom } from "@/store/cart";
 import { getUserById } from "@/data/user";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
 import { useCurrentRole } from "@/hooks/use-current-role";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { cartAtom } from "@/store/cart";
+import { userAtom } from "@/store/user";
+
+import { Button } from "../ui/button";
+
+import { Separator } from "../ui/separator";
+
+import { LoginButton } from "./login-button";
+import { SignupButton } from "./signup-button";
+
+
 
 export const UserButton = () => {
   const [user] = useAtom(userAtom);

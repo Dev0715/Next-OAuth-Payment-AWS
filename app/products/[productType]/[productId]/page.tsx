@@ -1,31 +1,33 @@
 "use client";
 
-import { PaymentButton } from "@/components/payment/payment-button";
-import { WrappedButton } from "@/components/utils/wrapped-button";
-import { AiFillCreditCard } from "react-icons/ai";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaCartArrowDown, FaDownload, FaRegUser } from "react-icons/fa";
-import { Navbar } from "../../_components/navbar";
-import { usePathname, useSearchParams } from "next/navigation";
-// import { captureOrder as captureStripeOrder } from "@/actions/stripe/capture-order";
-import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
-import { useEffect, useState, useTransition } from "react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { QuestionAlert } from "@/components/utils/question-alert";
-import { getProductById } from "@/data/product";
-import { axiosClient, blobConfig } from "@/lib/axios";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
+import { AiFillCreditCard } from "react-icons/ai";
+import { FaCartArrowDown, FaDownload, FaRegUser } from "react-icons/fa";
+
+import { captureOrder as capturePaypalOrder } from "@/actions/paypal/capture-order";
 import { addProductToCart } from "@/actions/user/add-product-to-cart";
+import { addProductToPurchased } from "@/actions/user/add-product-to-purchased";
+import { PaymentButton } from "@/components/payment/payment-button";
+import { Thumbnail } from "@/components/product/thumbnail";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { QuestionAlert } from "@/components/utils/question-alert";
+import { WrappedButton } from "@/components/utils/wrapped-button";
+import { getProductById } from "@/data/product";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { axiosClient, blobConfig } from "@/lib/axios";
 import { cartAtom } from "@/store/cart";
 import { orderListAtom } from "@/store/orderList";
-import { addProductToPurchased } from "@/actions/user/add-product-to-purchased";
+import { userAtom } from "@/store/user";
+
+import { Navbar } from "../../_components/navbar";
 
 import type { Product, ProductLink } from "@/shared/types/product.type";
-import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
-import { Thumbnail } from "@/components/product/thumbnail";
+
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;

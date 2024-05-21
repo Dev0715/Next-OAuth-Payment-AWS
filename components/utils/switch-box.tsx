@@ -1,4 +1,5 @@
-import { Switch } from "../ui/switch";
+import { Switch } from "@/components/ui/switch";
+
 import { QuestionAlert } from "./question-alert";
 
 type ParamsType = {

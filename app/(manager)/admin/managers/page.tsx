@@ -1,28 +1,29 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
 import {
   ColumnFiltersState,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable
+  SortingState,
+  useReactTable,
+  VisibilityState
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { deleteUserById, getAllUsers, updateManagerProfile } from "@/data/user";
-import { Input } from "@/components/ui/input";
+import { getColumnsForMangersTable } from "@/components/admin/managers-column";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -31,11 +32,12 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { deleteUserById, getAllUsers, updateManagerProfile } from "@/data/user";
+
 import { Navbar } from "../_components/navbar";
+
 import type { ManagerData, User } from "@/shared/types/user.type";
-import { getColumnsForMangersTable } from "@/components/admin/managers-column";
 
 const ROWS_PER_PAGE = 1;
 

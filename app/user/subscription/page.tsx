@@ -1,8 +1,9 @@
 "use client";
 
-import { Separator } from "@/components/ui/separator";
-import { Header } from "../_components/header";
 import { PaymentForm } from "@/components/payment/payment-form";
+import { Separator } from "@/components/ui/separator";
+
+import { Header } from "../_components/header";
 
 const Subscription = () => {
   return (

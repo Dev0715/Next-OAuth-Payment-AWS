@@ -1,8 +1,9 @@
 "use client";
 
+import { FaArrowRight } from "react-icons/fa";
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { FaArrowRight } from "react-icons/fa";
 
 interface PropsParams {
   isPending: boolean;

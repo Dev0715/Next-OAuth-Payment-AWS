@@ -1,8 +1,19 @@
-import { PasswordChangeSchema } from "@/schemas/auth/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useAtom } from "jotai";
 import { useState, useTransition } from "react";
+
 import { useForm } from "react-hook-form";
+
+import { FaKey } from "react-icons/fa";
 import { z } from "zod";
+
+import { updatePassword } from "@/actions/auth/update-password";
+import { PasswordChangeSchema } from "@/schemas/auth/auth";
+
+import { userAtom } from "@/store/user";
+
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -19,14 +30,12 @@ import {
   FormLabel,
   FormMessage
 } from "../ui/form";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { FaKey } from "react-icons/fa";
-import { FormSuccess } from "../utils/form-success";
+
+
 import { FormError } from "../utils/form-error";
-import { useAtom } from "jotai";
-import { userAtom } from "@/store/user";
-import { updatePassword } from "@/actions/auth/update-password";
+import { FormSuccess } from "../utils/form-success";
+
 
 export const PasswordChangeForm = () => {
   const [error, setError] = useState<string | undefined>("");

@@ -1,15 +1,16 @@
 "use client";
 
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { QuestionAlert } from "@/components/utils/question-alert";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 import type { CartProduct } from "@/shared/types/product.type";
-import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 interface PropsParams {
   isPending: boolean;

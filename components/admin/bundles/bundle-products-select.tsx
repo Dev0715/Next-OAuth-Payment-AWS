@@ -1,18 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import {
   ColumnFiltersState,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable
+  SortingState,
+  useReactTable,
+  VisibilityState
 } from "@tanstack/react-table";
+import { useEffect, useState } from "react";
+
+import { FaPlus } from "react-icons/fa";
+
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -21,10 +24,10 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { FaPlus } from "react-icons/fa";
-import { getColumnsForBundlesProductsSelectTable } from "./bundle-products-select-colum";
+
 import { getAllProducts } from "@/data/product";
+
+import { getColumnsForBundlesProductsSelectTable } from "./bundle-products-select-colum";
 
 import type { Product } from "@/shared/types/product.type";
 

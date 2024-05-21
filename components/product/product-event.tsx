@@ -1,5 +1,5 @@
+import { Badge } from "@/components/ui/badge";
 import { PRODUCT_STATE_BADGE_VARIANT } from "@/shared/constants/product.constant";
-import { Badge } from "../ui/badge";
 
 import type { ProductEvent } from "@/shared/types/product.type";
 

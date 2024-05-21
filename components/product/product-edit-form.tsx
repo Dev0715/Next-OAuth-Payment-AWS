@@ -1,40 +1,40 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaSave, FaUpload } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
+import { z } from "zod";
+
+import { updateProduct } from "@/actions/product/update-product";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle
-} from "../ui/card";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { NewProductSchema } from "@/schemas/product";
-import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+} from "@/components/ui/card";
 import { axiosClient, axiosConfig } from "@/lib/axios";
-import { userAtom } from "@/store/user";
-import { useAtom } from "jotai";
-import type {
-  Product,
-  ProductEvent,
-  ProductState
-} from "@/shared/types/product.type";
-import { PreviewCard } from "./preview-card";
+import { NewProductSchema } from "@/schemas/product";
 import {
   FileOrCreativeFile,
   FileOrString
 } from "@/shared/types/file-preview-types";
-import { ProductHistory } from "./product-history";
-import { FilesCard } from "./files-card";
-import { DetailsCard } from "./details-card";
-import { updateProduct } from "@/actions/product/update-product";
-import { Button } from "../ui/button";
-import { FaSave, FaUpload } from "react-icons/fa";
+import { userAtom } from "@/store/user";
+
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
-import { useRouter } from "next/navigation";
+
+import { DetailsCard } from "./details-card";
+import { FilesCard } from "./files-card";
+import { PreviewCard } from "./preview-card";
+import { ProductHistory } from "./product-history";
+
+import type { Product, ProductState } from "@/shared/types/product.type";
 
 export const ProductEditForm = ({ product }: { product: Product }) => {
   const history = useRouter();

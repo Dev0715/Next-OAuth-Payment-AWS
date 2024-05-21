@@ -1,7 +1,8 @@
-import { QuestionAlert } from "@/components/utils/question-alert";
-import { Textarea } from "@/components/ui/textarea";
 import { Dispatch, SetStateAction } from "react";
-import { Button } from "../ui/button";
+
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { QuestionAlert } from "@/components/utils/question-alert";
 
 type Props = {
   isPending: boolean;

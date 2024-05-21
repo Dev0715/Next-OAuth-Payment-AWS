@@ -1,16 +1,17 @@
 "use client";
 
+import { useState } from "react";
+
+import { AffiliateCompleteForm } from "@/components/auth/register/affiliate-complete-form";
 import { CreatorCompleteForm } from "@/components/auth/register/creator-complete-form";
 import { CreatorDetailsForm } from "@/components/auth/register/creator-details-form";
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
+import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
 import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
 import { SelectMatchingForm } from "@/components/auth/register/select-matching-form";
 import { UserCompleteForm } from "@/components/auth/register/user-complete-form";
-import { SignedUpData } from "@/shared/types/signup-data.type";
-import { useState } from "react";
-import { AffiliateCompleteForm } from "@/components/auth/register/affiliate-complete-form";
-import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
+import { SignedUpData } from "@/shared/types/signup-data.type";
 
 const RegisterPage = () => {
   const [userData, setUserData] = useState<SignedUpData>({

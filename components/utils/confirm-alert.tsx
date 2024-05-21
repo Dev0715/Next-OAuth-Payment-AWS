@@ -1,5 +1,7 @@
 "use client";
 
+import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,7 +11,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from "@/components/ui/alert-dialog";
-import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
 
 interface LoginButtonProps {
   open: boolean;

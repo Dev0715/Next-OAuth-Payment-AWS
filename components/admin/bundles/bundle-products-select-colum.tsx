@@ -1,7 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUp, ArrowDown } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { ArrowDown, ArrowUp } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 
 import type { Product } from "@/shared/types/product.type";
 

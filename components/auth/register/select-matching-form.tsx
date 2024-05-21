@@ -1,13 +1,15 @@
 "use client";
 
 import { Dispatch, SetStateAction, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { Evanto } from "./matching-sites/evanto";
-import { Behance } from "./matching-sites/behance";
+
+import { Button } from "@/components/ui/button";
+
 import { ArtStation } from "./matching-sites/artstation";
-import { Dribble } from "./matching-sites/dribble";
+import { Behance } from "./matching-sites/behance";
 import { CreativeMarket } from "./matching-sites/creative-market";
+import { Dribble } from "./matching-sites/dribble";
+import { Evanto } from "./matching-sites/evanto";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 

@@ -1,10 +1,11 @@
-import { FormDescription, FormItem, FormLabel } from "../ui/form";
 import { Dispatch, SetStateAction, useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { FaPlus } from "react-icons/fa";
-import { Badge } from "../ui/badge";
 import { MdClose } from "react-icons/md";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { FormDescription, FormItem, FormLabel } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 type Props = {
   isPending: boolean;

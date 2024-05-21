@@ -1,6 +1,7 @@
 "use client";
 
 import { FaCcStripe, FaPaypal } from "react-icons/fa";
+
 import { Button } from "../ui/button";
 
 export default function EditCustomer({

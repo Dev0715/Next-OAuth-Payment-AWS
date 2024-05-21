@@ -1,10 +1,11 @@
 "use client";
 
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import * as z from "zod";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,9 +15,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { CreatorDetailsSchema } from "@/schemas/auth/register";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -24,6 +23,8 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { CreatorDetailsSchema } from "@/schemas/auth/register";
 import { JOB_TITLES } from "@/shared/constants/user.constant";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";

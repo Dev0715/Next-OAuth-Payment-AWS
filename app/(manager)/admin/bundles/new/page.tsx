@@ -1,16 +1,18 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Navbar } from "../../_components/navbar";
-import { Button } from "@/components/ui/button";
-import { FaArrowRight } from "react-icons/fa";
+import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { FaArrowRight } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { createBundle } from "@/data/bundle";
 import { userAtom } from "@/store/user";
-import { useAtom } from "jotai";
-import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { useRouter } from "next/navigation";
+
+import { Navbar } from "../../_components/navbar";
 
 const NewBundlePage = () => {
   const [user] = useAtom(userAtom);

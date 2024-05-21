@@ -1,10 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUp, ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import type { User } from "@/shared/types/user.type";
-import { Button } from "../ui/button";
 
 type PropsType = {
   isPending: boolean;

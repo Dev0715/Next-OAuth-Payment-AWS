@@ -1,14 +1,16 @@
 "use client";
 
-import { Navbar } from "./_components/navbar";
-import { useEffect, useState, useTransition } from "react";
-import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { getUserById } from "@/data/user";
-import { getProductById } from "@/data/product";
-import { CartItem } from "./_components/cart-item";
+import { useEffect, useState, useTransition } from "react";
+
 import { removeProductFromCart } from "@/actions/user/remove-product-from-cart";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { getProductById } from "@/data/product";
+import { getUserById } from "@/data/user";
+import { userAtom } from "@/store/user";
+
+import { CartItem } from "./_components/cart-item";
+import { Navbar } from "./_components/navbar";
 
 import type { CartProduct } from "@/shared/types/product.type";
 

@@ -1,27 +1,30 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaDownload, FaRegUser } from "react-icons/fa";
-import { useEffect, useMemo, useState, useTransition } from "react";
-import { Button } from "@/components/ui/button";
-import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
-import { axiosClient, blobConfig } from "@/lib/axios";
-import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { ProductHistory } from "@/components/product/product-history";
-import { getProductById, updateProductApproval } from "@/data/product";
-import { Navbar } from "../../../_components/navbar";
 import Link from "next/link";
+import { useEffect, useMemo, useState, useTransition } from "react";
+import { FaDownload, FaRegUser } from "react-icons/fa";
+
+import { ProductApprovement } from "@/components/admin/product-approvement";
+import { ProductHistory } from "@/components/product/product-history";
+import { Thumbnail } from "@/components/product/thumbnail";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { getProductById, updateProductApproval } from "@/data/product";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { axiosClient, blobConfig } from "@/lib/axios";
+import { userAtom } from "@/store/user";
+
+import { Navbar } from "../../../_components/navbar";
 
 import type {
   Product,
   ProductLink,
   ProductState
 } from "@/shared/types/product.type";
-import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
-import { Card } from "@/components/ui/card";
-import { ProductApprovement } from "@/components/admin/product-approvement";
-import { Thumbnail } from "@/components/product/thumbnail";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;

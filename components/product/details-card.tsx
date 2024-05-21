@@ -1,3 +1,9 @@
+import { Dispatch, SetStateAction } from "react";
+import { UseFormReturn } from "react-hook-form";
+import { z } from "zod";
+
+
+import { Card } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -5,8 +11,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from "../ui/form";
-import { Textarea } from "../ui/textarea";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -14,14 +20,11 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { Dispatch, SetStateAction } from "react";
-import { Input } from "../ui/input";
-import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
-import { KeywordsCard } from "./keywords-card";
-import { UseFormReturn } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
 import { NewProductSchema } from "@/schemas/product";
-import { z } from "zod";
-import { Card } from "../ui/card";
+import { PRODUCT_TYPE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
+
+import { KeywordsCard } from "./keywords-card";
 
 type Props = {
   isPending: boolean;

@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
-import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 const ClassName_Text: Record<ProductState, string> = {
   created: "text-white",

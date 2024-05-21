@@ -1,11 +1,12 @@
 "use client";
 
+import { useEffect, useMemo, useState, useTransition } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+
 import { BundleItem } from "@/components/bundles/bundle-item";
 import { Button } from "@/components/ui/button";
 import { getAllBundlesByState } from "@/data/bundle";
 import { Bundle } from "@/shared/types/bundles.type";
-import { useEffect, useMemo, useState, useTransition } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const ROWS_PER_PAGE = 10;
 

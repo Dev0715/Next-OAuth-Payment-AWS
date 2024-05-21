@@ -1,29 +1,28 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
 import {
   ColumnFiltersState,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable
+  SortingState,
+  useReactTable,
+  VisibilityState
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 
-import { getAllProducts } from "@/data/product";
 import { getColumnsForProductsTable } from "@/components/admin/products-column";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -32,7 +31,10 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { getAllProducts } from "@/data/product";
+
 import { Navbar } from "../_components/navbar";
+
 import type { Product, ProductLink } from "@/shared/types/product.type";
 
 const ROWS_PER_PAGE = 10;

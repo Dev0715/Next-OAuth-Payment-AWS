@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { SwitchBox } from "@/components/utils/switch-box";
-import EditCreator from "@/components/profile/edit-creator";
 import { useAtom } from "jotai";
-import { userAtom } from "@/store/user";
-import { CreatorData, User } from "@/shared/types/user.type";
+import { useState, useTransition } from "react";
+
+import EditCreator from "@/components/profile/edit-creator";
+import { SwitchBox } from "@/components/utils/switch-box";
 import { updateCreatorData } from "@/data/user";
+import { CreatorData, User } from "@/shared/types/user.type";
+import { userAtom } from "@/store/user";
 
 const CreatorSettings = () => {
   const [user, setUser] = useAtom(userAtom);

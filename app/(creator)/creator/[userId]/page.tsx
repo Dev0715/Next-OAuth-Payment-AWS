@@ -1,5 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+import { FaUser } from "react-icons/fa";
+
 import { AboutCreator } from "@/components/profile/about-creator";
 import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -7,12 +11,11 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProductById } from "@/data/product";
 import { getUserById } from "@/data/user";
-import { useEffect, useState } from "react";
-import { FaUser } from "react-icons/fa";
+
+import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 import type { Product, ProductLink } from "@/shared/types/product.type";
 import type { User } from "@/shared/types/user.type";
-import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 interface PropsParams {
   params: {

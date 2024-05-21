@@ -1,7 +1,8 @@
-import { Product } from "@/shared/types/product.type";
 import { useEffect, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { Product } from "@/shared/types/product.type";
 
 type Props = {
   product: Product;

@@ -1,12 +1,13 @@
 "use client";
 
-import { SwitchBox } from "@/components/utils/switch-box";
-import EditCustomer from "@/components/profile/edit-customer";
-import { useState, useTransition } from "react";
 import { useAtom } from "jotai";
-import { userAtom } from "@/store/user";
-import { CustomerData, User } from "@/shared/types/user.type";
+import { useState, useTransition } from "react";
+
+import EditCustomer from "@/components/profile/edit-customer";
+import { SwitchBox } from "@/components/utils/switch-box";
 import { updateCustomerData } from "@/data/user";
+import { CustomerData, User } from "@/shared/types/user.type";
+import { userAtom } from "@/store/user";
 
 const CustomerSettings = () => {
   const [user, setUser] = useAtom(userAtom);

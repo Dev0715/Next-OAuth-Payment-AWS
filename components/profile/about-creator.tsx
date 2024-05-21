@@ -1,12 +1,20 @@
-import { FaEdit } from "react-icons/fa";
-import { Button } from "../ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import Link from "next/link";
-import { LinkedSites } from "./linked-sites";
-import { userAtom } from "@/store/user";
 import { useAtom } from "jotai";
+import Link from "next/link";
+import { FaEdit } from "react-icons/fa";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { userAtom } from "@/store/user";
+
+import { LinkedSites } from "./linked-sites";
+
 import type { Address, Company, User } from "@/shared/types/user.type";
-import { Separator } from "../ui/separator";
 
 type PropsParams = {
   userData: User | undefined;
