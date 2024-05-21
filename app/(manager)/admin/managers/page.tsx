@@ -44,7 +44,7 @@ import { Navbar } from "../_components/navbar";
 
 import type { ManagerData, User } from "@/shared/types/user.type";
 
-const ROWS_PER_PAGE = 1;
+const ROWS_PER_PAGE = 10;
 
 const AdminManagement = () => {
   const [isPending, startTransition] = useTransition();
