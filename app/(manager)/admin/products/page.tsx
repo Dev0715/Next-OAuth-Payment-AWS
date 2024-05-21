@@ -31,7 +31,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { getAllProducts } from "@/data/product";
+import { getAllSubmittedProducts } from "@/data/product";
 
 import { Navbar } from "../_components/navbar";
 
@@ -72,7 +72,7 @@ export default function Approval() {
   });
 
   useEffect(() => {
-    getAllProducts(ROWS_PER_PAGE).then((res) => {
+    getAllSubmittedProducts(ROWS_PER_PAGE).then((res) => {
       setProducts(
         res.items.filter(
           (item) =>
@@ -98,7 +98,7 @@ export default function Approval() {
 
     if (currentPageIndex + 1 === pageCount) {
       startTransition(() => {
-        getAllProducts(ROWS_PER_PAGE, lastEvaluatedKey).then((res) => {
+        getAllSubmittedProducts(ROWS_PER_PAGE, lastEvaluatedKey).then((res) => {
           if (res.items?.length) {
             setProducts([...products, ...(res.items as Product[])]);
             table.nextPage();
