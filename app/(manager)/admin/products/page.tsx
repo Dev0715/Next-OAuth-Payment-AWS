@@ -5,7 +5,7 @@ import { getAllSubmittedProducts } from "@/data/product";
 import { Navbar } from "../_components/navbar";
 import { ProductsTable } from "@/components/admin/products-table";
 import { Tabs, TabsList } from "@/components/ui/tabs";
-import { TabsTrigger } from "@radix-ui/react-tabs";
+import { TabsContent, TabsTrigger } from "@radix-ui/react-tabs";
 
 export default function Approval() {
   return (
@@ -22,12 +22,11 @@ export default function Approval() {
           <TabsTrigger value="Rejected">
             <p className="text-base">Rejected</p>
           </TabsTrigger>
-          <TabsTrigger value="Submitted">
-            <p className="text-base">Submitted</p>
-          </TabsTrigger>
         </TabsList>
+        <TabsContent value="Submitted">
+          <ProductsTable getProductsAll={getAllSubmittedProducts} />
+        </TabsContent>
       </Tabs>
-      <ProductsTable getProductsAll={getAllSubmittedProducts} />
     </main>
   );
 }
