@@ -14,8 +14,8 @@ export default function Approval() {
         title="All Products"
         content="You can check and approve or reject products"
       />
-      <Tabs defaultValue="Submitted" className="w-full">
-        <TabsList className="w-full h-fit flex gap-x-16">
+      <Tabs defaultValue="Submitted" className="w-full flex flex-col gap-y-6">
+        <TabsList className="px-6 w-full h-fit flex justify-start gap-x-6">
           <TabsTrigger value="Submitted">
             <p className="text-base">Review</p>
           </TabsTrigger>
