@@ -14,10 +14,13 @@ export default function Approval() {
         title="All Products"
         content="You can check and approve or reject products"
       />
-      <Tabs defaultValue="Submitted">
+      <Tabs defaultValue="Submitted" className="w-full">
         <TabsList className="w-full h-fit flex gap-x-16">
           <TabsTrigger value="Submitted">
-            <p className="text-base">Submitted</p>
+            <p className="text-base">Review</p>
+          </TabsTrigger>
+          <TabsTrigger value="Approved">
+            <p className="text-base">Approved</p>
           </TabsTrigger>
           <TabsTrigger value="Rejected">
             <p className="text-base">Rejected</p>
@@ -26,6 +29,8 @@ export default function Approval() {
         <TabsContent value="Submitted">
           <ProductsTable getProductsAll={getAllSubmittedProducts} />
         </TabsContent>
+        <TabsContent value="Approved"></TabsContent>
+        <TabsContent value="Rejected"></TabsContent>
       </Tabs>
     </main>
   );
