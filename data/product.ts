@@ -101,6 +101,43 @@ export const getAllSubmittedProducts = async (
   }
 };
 
+export const getAllApprovedProducts = async (
+  limit?: number,
+  exclusiveStartKey?: ProductLink
+) => {
+  const scanCommandInput: ScanCommandInput = {
+    TableName: AWS_DYNAMO_TABLES.PRODUCT,
+    FilterExpression: "approval.state = :approved",
+    ExpressionAttributeValues: {
+      ":approved": "approved"
+    }
+  };
+
+  if (exclusiveStartKey) {
+    scanCommandInput.ExclusiveStartKey = {
+      ...exclusiveStartKey
+    };
+  }
+
+  if (limit) {
+    scanCommandInput.Limit = limit;
+  }
+
+  const command = new ScanCommand(scanCommandInput);
+
+  try {
+    const response = await db.send(command);
+    return {
+      items: response.Items as Product[],
+      lastEvaluatedKey: response.LastEvaluatedKey
+    };
+  } catch (error) {
+    return {
+      items: []
+    };
+  }
+};
+
 export const getAllRejectedProducts = async (
   limit?: number,
   exclusiveStartKey?: ProductLink
