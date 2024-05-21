@@ -33,12 +33,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import {
-  deleteUserById,
-  getAllManagers,
-  getAllUsers,
-  updateManagerProfile
-} from "@/data/user";
+import { deleteUserById, getAllManagers } from "@/data/user";
 
 import { Navbar } from "../_components/navbar";
 
@@ -140,7 +135,7 @@ const AdminManagement = () => {
 
     if (currentPageIndex + 1 === pageCount) {
       startTransition(() => {
-        getAllUsers(ROWS_PER_PAGE, lastEvaluatedKey?.userId).then((res) => {
+        getAllManagers(ROWS_PER_PAGE, lastEvaluatedKey?.userId).then((res) => {
           if (res.items?.length) {
             setUsers([...users, ...(res.items as User[])]);
             table.nextPage();
