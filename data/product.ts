@@ -67,11 +67,13 @@ export const getAllSubmittedProducts = async (
   exclusiveStartKey?: ProductLink
 ) => {
   const scanCommandInput: ScanCommandInput = {
-    TableName: AWS_DYNAMO_TABLES.PRODUCT
-    // FilterExpression: "email = :email",
-    // ExpressionAttributeValues: {
-    // ":email": email
-    // }
+    TableName: AWS_DYNAMO_TABLES.PRODUCT,
+    FilterExpression:
+      "approval.state = :submitted or approval.state = :resubmitted",
+    ExpressionAttributeValues: {
+      ":submitted": "submitted",
+      ":resubmitted": "resubmitted"
+    }
   };
 
   if (exclusiveStartKey) {
