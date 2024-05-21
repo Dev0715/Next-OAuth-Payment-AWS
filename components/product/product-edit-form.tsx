@@ -3,9 +3,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaSave, FaUpload } from "react-icons/fa";
+import { FaRecycle, FaSave, FaUpload } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
@@ -35,6 +35,8 @@ import { PreviewCard } from "./preview-card";
 import { ProductHistory } from "./product-history";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
+import { deleteProduct } from "@/data/product";
+import { QuestionAlert } from "../utils/question-alert";
 
 export const ProductEditForm = ({ product }: { product: Product }) => {
   const history = useRouter();
@@ -49,6 +51,18 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
   const isApproved = product.approval.state === "approved";
+
+  const isEverSubmitted = useMemo(() => {
+    return !!product.approval.history.find(
+      (item) => item.state === "submitted" || item.state === "resubmitted"
+    );
+  }, [product]);
+
+  const isResubmitted = useMemo(() => {
+    return !!product.approval.history.find(
+      (item) => item.state === "submitted"
+    );
+  }, [product]);
 
   const form = useForm<z.infer<typeof NewProductSchema>>({
     resolver: zodResolver(NewProductSchema),
@@ -193,7 +207,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
             onClick={form.handleSubmit(() => onSubmit("updated"))}
           >
             <FaSave />
-            Save
+            Update
           </Button>
           {isApproved ? (
             <Button disabled={isPending} className="w-64 gap-x-4 rounded-none">
