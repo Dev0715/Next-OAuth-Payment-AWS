@@ -84,13 +84,7 @@ export const ProductsTable = ({ getProductsAll }: Props) => {
 
   useEffect(() => {
     getProductsAll(ROWS_PER_PAGE).then((res) => {
-      setProducts(
-        res.items.filter(
-          (item) =>
-            item.approval.state === "submitted" ||
-            item.approval.state === "resubmitted"
-        ) as Product[]
-      );
+      setProducts(res.items as Product[]);
       setLastEvaluatedKey(res.lastEvaluatedKey as ProductLink);
       table.setPageSize(ROWS_PER_PAGE);
     });
