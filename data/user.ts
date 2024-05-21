@@ -77,6 +77,7 @@ export const getAllManagers = async (
 
   try {
     const response = await db.send(command);
+    console.log(response);
     return {
       items: response.Items,
       lastEvaluatedKey: response.LastEvaluatedKey
