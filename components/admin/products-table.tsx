@@ -30,7 +30,98 @@ import {
   TableRow
 } from "@/components/ui/table";
 
-export const ProductsTable = () => {
+import type { Product, ProductLink } from "@/shared/types/product.type";
+
+const ROWS_PER_PAGE = 10;
+
+type Props = {
+  getAllProducts: (
+    limit?: number,
+    exclusiveStartKey?: ProductLink
+  ) => Promise<
+    | {
+        items: Product[];
+        lastEvaluatedKey: Record<string, any> | undefined;
+      }
+    | {
+        items: never[];
+        lastEvaluatedKey?: undefined;
+      }
+  >;
+};
+
+export const ProductsTable = ({ getAllProducts }: Props) => {
+  const [isPending, startTransition] = useTransition();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [lastEvaluatedKey, setLastEvaluatedKey] = useState<ProductLink>();
+
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
+
+  const columns = getColumnsForProductsTable({ isPending });
+  const table = useReactTable({
+    data: products,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    autoResetPageIndex: false,
+    autoResetExpanded: false,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection
+    }
+  });
+
+  useEffect(() => {
+    getAllProducts(ROWS_PER_PAGE).then((res) => {
+      setProducts(
+        res.items.filter(
+          (item) =>
+            item.approval.state === "submitted" ||
+            item.approval.state === "resubmitted"
+        ) as Product[]
+      );
+      setLastEvaluatedKey(res.lastEvaluatedKey as ProductLink);
+      table.setPageSize(ROWS_PER_PAGE);
+    });
+  }, [table]);
+
+  const isNextAvailable = useMemo(() => {
+    const currentPageIndex = table.getState().pagination.pageIndex;
+    const pageCount = table.getPageCount();
+
+    return lastEvaluatedKey || currentPageIndex + 1 < pageCount;
+  }, [lastEvaluatedKey, table]);
+
+  const onNext = () => {
+    const currentPageIndex = table.getState().pagination.pageIndex;
+    const pageCount = table.getPageCount();
+
+    if (currentPageIndex + 1 === pageCount) {
+      startTransition(() => {
+        getAllProducts(ROWS_PER_PAGE, lastEvaluatedKey).then((res) => {
+          if (res.items?.length) {
+            setProducts([...products, ...(res.items as Product[])]);
+            table.nextPage();
+          }
+          setLastEvaluatedKey(res.lastEvaluatedKey as ProductLink);
+        });
+      });
+    } else {
+      table.nextPage();
+    }
+  };
+
   return (
     <div className="w-full flex flex-col gap-y-4">
       <div className="flex items-center gap-x-4">
