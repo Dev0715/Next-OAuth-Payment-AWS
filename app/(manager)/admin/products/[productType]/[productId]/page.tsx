@@ -1,21 +1,15 @@
 "use client";
 
 import { useAtom } from "jotai";
-import Link from "next/link";
 import { useEffect, useMemo, useState, useTransition } from "react";
-import { FaDownload, FaRegUser } from "react-icons/fa";
 
 import { ProductApprovement } from "@/components/admin/products/product-approvement";
 import { ProductHistory } from "@/components/product/product-history";
-import { Thumbnail } from "@/components/product/thumbnail";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { getProductById, updateProductApproval } from "@/data/product";
-import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
-import { axiosClient, blobConfig } from "@/lib/axios";
+
 import { userAtom } from "@/store/user";
 
 import { Navbar } from "../../../_components/navbar";
@@ -25,14 +19,10 @@ import type {
   ProductLink,
   ProductState
 } from "@/shared/types/product.type";
-
-const Bold = ({ children }: { children: React.ReactNode }) => {
-  return <span className="font-bold text-xl">{children}</span>;
-};
+import { ProductInfo } from "@/components/product/product-info";
 
 export default function ProductDetails({ params }: { params: ProductLink }) {
   const [user] = useAtom(userAtom);
-  const { getLinkFromS3 } = useLinkFromS3();
 
   const [isPending, startTransition] = useTransition();
   const [isConfirming, setConfirming] = useState<boolean>(false);
@@ -40,24 +30,12 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const [confirmingMessage, setConfirmingMessage] = useState<string>("");
 
   const [product, setProduct] = useState<Product>();
-  const [imageList, setImageList] = useState<string[]>([]);
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
-
   const [comment, setComment] = useState<string>("");
 
   useEffect(() => {
     if (params.productType && params.productId) {
       getProductById(params.productType, params.productId).then((_product) => {
-        if (_product) {
-          setProduct(_product);
-          _product?.previewList.map((path: string) => {
-            getLinkFromS3(path).then((res) => {
-              if (res.success) {
-                setImageList((prev) => [...prev, res.response as string]);
-              }
-            });
-          });
-        }
+        setProduct(_product);
       });
     }
   }, [params]);
@@ -68,38 +46,6 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
       product?.approval.state === "resubmitted"
     );
   }, [product]);
-
-  const onItemSelected = (index: number) => {
-    setSelectedIndex(index);
-  };
-
-  const setDownloadFailureConfirming = () => {
-    setConfirming(true);
-    setConfirmingTitle("Failure");
-    setConfirmingMessage(
-      "An internal server error occurred while trying to download"
-    );
-  };
-
-  const onDownloadCreativeFiles = () => {
-    axiosClient
-      .post("/download", { fileList: product?.fileList }, blobConfig)
-      .then((response) => response.data)
-      .then((blob) => {
-        const link = document.createElement("a");
-        link.download = `${product?.title}.zip`;
-        link.href = URL.createObjectURL(blob);
-        link.click();
-      })
-      .catch(() => {
-        setDownloadFailureConfirming();
-      })
-      .catch(() => {
-        setDownloadFailureConfirming();
-      });
-
-    // fetch('/api/download').then(response => response.blob()).then(blob => { ... })
-  };
 
   const checkComment = () => {
     if (comment.length < 10) {
@@ -160,73 +106,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         title={`Approval for Product - ${product?.title}`}
         content="You can check the details of product and approve it"
       />
-      <div className="w-full flex gap-x-8">
-        <div className="w-3/4 flex flex-col gap-y-4">
-          <Avatar className="w-full h-[480px] rounded-none">
-            <AvatarImage
-              src={imageList[selectedIndex]}
-              className="object-cover"
-            />
-            <AvatarFallback className="bg-sky-500">
-              <div className="w-full h-full bg-inherit"></div>
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex gap-x-4">
-            {imageList.map((path, index) => (
-              <Thumbnail
-                key={index}
-                path={path}
-                focused={index === selectedIndex}
-                onItemSelected={() => onItemSelected(index)}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="w-1/4 flex flex-col gap-y-12">
-          <div className="w-full flex flex-col gap-y-4">
-            <div className="w-full flex justify-between">
-              <p>Price:</p>
-              <Bold>${product?.price}</Bold>
-            </div>
-            <div className="w-full flex justify-between">
-              <p>Categories:</p>
-              <p className="text-lg font-medium">
-                {product?.productType as unknown as string}
-              </p>
-            </div>
-            <div className="w-full flex justify-between">
-              <p>Creator:</p>
-              <p className="text-lg font-medium">{product?.ownerId}</p>
-            </div>
-          </div>
-          <div className="w-full flex flex-col">
-            <p className="text-lg font-semibold mb-4">About the Product</p>
-            <p>{product?.description}</p>
-            <p>...</p>
-          </div>
-          <div className="flex flex-col gap-y-4">
-            <Link href={`/creator/${product?.ownerId}`}>
-              <Button
-                disabled={isPending}
-                variant="outline"
-                className="w-full border-green-700 gap-x-2"
-              >
-                <FaRegUser className="text-green-700" />
-                {`Go to Creator's Profile`}
-              </Button>
-            </Link>
-            <Button
-              disabled={isPending}
-              onClick={onDownloadCreativeFiles}
-              variant="outline"
-              className="w-full border-green-700 gap-x-2"
-            >
-              <FaDownload className="text-green-700" />
-              Download Creative Files
-            </Button>
-          </div>
-        </div>
-      </div>
+      <ProductInfo product={product} isPending={isPending} />
       <Card className="p-6 rounded-none">
         <div className="w-full flex flex-col gap-y-4">
           <p className="text-2xl font-semibold">Product History</p>
