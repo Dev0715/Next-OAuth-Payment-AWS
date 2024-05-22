@@ -32,7 +32,7 @@ import { FormSuccess } from "../../utils/form-success";
 import { QuestionAlert } from "../../utils/question-alert";
 
 import { DetailsCard } from "./details-card";
-import { FilesCard } from "../../product/files-card";
+import { FilesCard } from "./files-card";
 import { PreviewCard } from "./preview-card";
 import { ProductHistory } from "../../product/product-history";
 

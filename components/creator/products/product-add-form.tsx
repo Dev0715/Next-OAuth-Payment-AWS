@@ -29,7 +29,7 @@ import { FormError } from "../../utils/form-error";
 import { FormSuccess } from "../../utils/form-success";
 
 import { DetailsCard } from "./details-card";
-import { FilesCard } from "../../product/files-card";
+import { FilesCard } from "./files-card";
 import { PreviewCard } from "./preview-card";
 
 import type { Product, ProductState } from "@/shared/types/product.type";

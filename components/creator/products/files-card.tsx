@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileOrCreativeFile } from "@/shared/types/file-preview-types";
 
-import { FileUploadButton } from "../utils/file-upload-button";
+import { FileUploadButton } from "../../utils/file-upload-button";
 
 type Props = {
   isPending: boolean;

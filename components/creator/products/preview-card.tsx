@@ -7,7 +7,7 @@ import { FileOrString } from "@/shared/types/file-preview-types";
 import { FileUploadButton } from "../../utils/file-upload-button";
 
 import { PreviewDialog } from "./preview-dialog";
-import { ImagePreview } from "../../product/preview-image";
+import { ImagePreview } from "./preview-image";
 
 type Props = {
   isPending: boolean;
