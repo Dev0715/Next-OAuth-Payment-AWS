@@ -5,11 +5,11 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 
 import { ProductApprovement } from "@/components/admin/products/product-approvement";
 import { ProductHistory } from "@/components/product/product-history";
-
+import { ProductInfo } from "@/components/product/product-info";
 import { Card } from "@/components/ui/card";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { getProductById, updateProductApproval } from "@/data/product";
 
+import { getProductById, updateProductApproval } from "@/data/product";
 import { userAtom } from "@/store/user";
 
 import { Navbar } from "../../../_components/navbar";
@@ -19,7 +19,6 @@ import type {
   ProductLink,
   ProductState
 } from "@/shared/types/product.type";
-import { ProductInfo } from "@/components/product/product-info";
 
 export default function ProductDetails({ params }: { params: ProductLink }) {
   const [user] = useAtom(userAtom);
@@ -113,14 +112,14 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           <ProductHistory history={product?.approval.history || []} />
         </div>
       </Card>
-      {/* {isApproval ? ( */}
-      <ProductApprovement
-        isPending={isPending}
-        comment={comment}
-        setComment={setComment}
-        onCommentProduct={onCommentProduct}
-      />
-      {/* ) : null} */}
+      {isApproval ? (
+        <ProductApprovement
+          isPending={isPending}
+          comment={comment}
+          setComment={setComment}
+          onCommentProduct={onCommentProduct}
+        />
+      ) : null}
     </div>
   );
 }
