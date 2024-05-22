@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+import { deleteProduct } from "@/data/product";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { NewProductSchema } from "@/schemas/product";
 import {
@@ -29,14 +30,13 @@ import { userAtom } from "@/store/user";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 
+import { QuestionAlert } from "../utils/question-alert";
 import { DetailsCard } from "./details-card";
 import { FilesCard } from "./files-card";
 import { PreviewCard } from "./preview-card";
 import { ProductHistory } from "./product-history";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
-import { deleteProduct } from "@/data/product";
-import { QuestionAlert } from "../utils/question-alert";
 
 type Props = {
   product: Product;

@@ -12,7 +12,6 @@ import { z } from "zod";
 import { newProduct } from "@/actions/product/new-product";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
   CardContent,
   CardDescription,
   CardHeader,
