@@ -12,7 +12,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import { useEffect, useMemo, useState, useTransition } from "react";
 
-import { getColumnsForProductsTable } from "@/components/admin/products-column";
+import { getColumnsForProductsTable } from "@/components/admin/products/products-column";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

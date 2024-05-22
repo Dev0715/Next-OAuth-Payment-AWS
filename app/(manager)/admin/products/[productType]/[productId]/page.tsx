@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { FaDownload, FaRegUser } from "react-icons/fa";
 
-import { ProductApprovement } from "@/components/admin/product-approvement";
+import { ProductApprovement } from "@/components/admin/products/product-approvement";
 import { ProductHistory } from "@/components/product/product-history";
 import { Thumbnail } from "@/components/product/thumbnail";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
