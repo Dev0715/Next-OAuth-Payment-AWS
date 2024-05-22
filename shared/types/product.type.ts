@@ -21,7 +21,9 @@ export type ProductState =
   | "submitted"
   | "resubmitted"
   | "approved"
-  | "rejected";
+  | "rejected"
+  | "applied"
+  | "published";
 
 export type CreativeFile = {
   name: string;
