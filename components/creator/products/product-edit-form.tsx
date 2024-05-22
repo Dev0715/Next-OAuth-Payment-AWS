@@ -27,6 +27,7 @@ import {
 } from "@/shared/types/file-preview-types";
 import { userAtom } from "@/store/user";
 
+import { ProductHistory } from "../../product/product-history";
 import { FormError } from "../../utils/form-error";
 import { FormSuccess } from "../../utils/form-success";
 import { QuestionAlert } from "../../utils/question-alert";
@@ -34,7 +35,6 @@ import { QuestionAlert } from "../../utils/question-alert";
 import { DetailsCard } from "./details-card";
 import { FilesCard } from "./files-card";
 import { PreviewCard } from "./preview-card";
-import { ProductHistory } from "../../product/product-history";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
 
