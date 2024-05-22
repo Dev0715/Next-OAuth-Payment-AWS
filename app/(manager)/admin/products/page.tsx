@@ -1,10 +1,10 @@
 "use client";
 
+import { ProductsTable } from "@/components/admin/products/products-table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProductsByState, getSubmittedProducts } from "@/data/product";
 
 import { Navbar } from "../_components/navbar";
-import { ProductsTable } from "@/components/admin/products/products-table";
-import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Approval() {
   return (
