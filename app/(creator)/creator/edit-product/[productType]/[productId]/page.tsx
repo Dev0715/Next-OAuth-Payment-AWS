@@ -23,7 +23,7 @@ const ProductEdit = ({ params }: { params: ProductLink }) => {
 
   return (
     <main className="w-full p-6">
-      <ProductEditForm product={product} />
+      <ProductEditForm product={product} setProduct={setProduct} />
     </main>
   );
 };
