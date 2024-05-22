@@ -23,7 +23,9 @@ const STATE_DISPLAY_TEXT: Record<ProductState, string> = {
   submitted: "Submitted",
   resubmitted: "Resubmitted",
   approved: "Approved",
-  rejected: "Rejected"
+  rejected: "Rejected",
+  applied: "Applied", // Applied to be published
+  published: "Published"
 };
 
 type PropsType = {
