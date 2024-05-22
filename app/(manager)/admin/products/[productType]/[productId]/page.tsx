@@ -233,14 +233,14 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           <ProductHistory history={product?.approval.history || []} />
         </div>
       </Card>
-      {isApproval ? (
-        <ProductApprovement
-          isPending={isPending}
-          comment={comment}
-          setComment={setComment}
-          onCommentProduct={onCommentProduct}
-        />
-      ) : null}
+      {/* {isApproval ? ( */}
+      <ProductApprovement
+        isPending={isPending}
+        comment={comment}
+        setComment={setComment}
+        onCommentProduct={onCommentProduct}
+      />
+      {/* ) : null} */}
     </div>
   );
 }
