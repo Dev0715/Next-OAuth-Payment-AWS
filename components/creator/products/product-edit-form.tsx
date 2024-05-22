@@ -194,66 +194,7 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
   };
 
   return (
-    <div className="w-full">
-      <CardHeader className="w-full flex flex-row items-end justify-between">
-        <div className="flex flex-col">
-          <CardTitle className="text-2xl font-medium">Edit a Product</CardTitle>
-          <CardDescription>
-            You can edit your product and our admin users will check it and
-            publish soon!
-          </CardDescription>
-        </div>
-        <div className="flex gap-x-6 items-end">
-          <Button
-            disabled={isPending}
-            variant={"outline"}
-            className="w-64 gap-x-4 rounded-none border-green-700"
-            onClick={form.handleSubmit(() => onSubmit("updated"))}
-          >
-            <FaSave />
-            Update Product
-          </Button>
 
-          {isApproved ? (
-            <Button
-              disabled={isPending}
-              className="w-64 gap-x-4 rounded-none"
-              onClick={onPublish}
-            >
-              <FaUpload />
-              Publish
-            </Button>
-          ) : (
-            <Button
-              disabled={isPending}
-              className="w-64 gap-x-4 rounded-none"
-              onClick={form.handleSubmit(() =>
-                onSubmit(isResubmitted ? "resubmitted" : "submitted")
-              )}
-            >
-              <FaUpload />
-              {isResubmitted ? "Resubmit" : "Submit"}
-            </Button>
-          )}
-
-          {!isEverSubmitted && (
-            <QuestionAlert
-              title="Confirmation"
-              message="Are you sure want to delete this item?"
-              onContinue={onDelete}
-            >
-              <Button
-                disabled={isPending}
-                variant={"destructive"}
-                className="w-64 gap-x-4 rounded-none border-green-700"
-              >
-                <FaRecycle />
-                Delete Product
-              </Button>
-            </QuestionAlert>
-          )}
-        </div>
-      </CardHeader>
       <div className="px-6 pb-6">
         <FormError message={error} />
         <FormSuccess message={success} />
@@ -287,6 +228,5 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
           </div>
         </div>
       </CardContent>
-    </div>
   );
 };
