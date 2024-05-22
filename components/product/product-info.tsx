@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import { FaDownload, FaRegUser } from "react-icons/fa";
 
 import { toast } from "sonner";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Thumbnail } from "@/components/product/thumbnail";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import { Button } from "@/components/ui/button";
 
-import { axiosClient, blobConfig } from "@/lib/axios";
 import { getProductById } from "@/data/product";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
+import { axiosClient, blobConfig } from "@/lib/axios";
 import { Product } from "@/shared/types/product.type";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
