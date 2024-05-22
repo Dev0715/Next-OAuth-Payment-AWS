@@ -41,7 +41,10 @@ type Props = {
   ) => Promise<
     | {
         items: Product[];
-        lastEvaluatedKey: Record<string, any> | undefined;
+        lastEvaluatedKey:
+          | Record<string, string>
+          | Record<string, ProductLink>
+          | undefined;
       }
     | {
         items: never[];
