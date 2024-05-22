@@ -151,11 +151,6 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
       setError(res.error || "");
 
       if (res.success) {
-        // setTimeout(() => {
-        //   history.replace(
-        //     `/creator/edit-product/${updatedProduct.productType}/${updatedProduct.productId}`
-        //   );
-        // }, 1000);
         setProduct(updatedProduct);
       }
       setPending(false);
