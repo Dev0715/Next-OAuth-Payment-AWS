@@ -85,17 +85,25 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
     setPreviewFiles(product.previewList);
   }, [product]);
 
-  const onSubmit = (action: ProductState) => {
-    if (creativeFiles.length === 0 || previewFiles.length === 0) {
-      setSuccess("");
-      setError("creative files and one preview images can't be empty!");
-      return;
-    }
-    setSuccess("");
-    setError("");
-    setPending(true);
+  const getPathList = async (
+    fileList: FileOrString[] | FileOrCreativeFile[]
+  ) => {
+    const formData = new FormData();
+    formData.append("username", user?.username as string);
+    fileList.forEach((file) => {
+      if (file instanceof File) formData.append(uuidv4(), file);
+    });
 
-    submitProduct(action);
+    try {
+      const response = await axiosClient.post(
+        "/multi-upload",
+        formData,
+        axiosConfig
+      );
+      return response.data.pathList;
+    } catch (error) {
+      return [];
+    }
   };
 
   const submitProduct = async (action: ProductState) => {
@@ -157,27 +165,6 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
     });
   };
 
-  const getPathList = async (
-    fileList: FileOrString[] | FileOrCreativeFile[]
-  ) => {
-    const formData = new FormData();
-    formData.append("username", user?.username as string);
-    fileList.forEach((file) => {
-      if (file instanceof File) formData.append(uuidv4(), file);
-    });
-
-    try {
-      const response = await axiosClient.post(
-        "/multi-upload",
-        formData,
-        axiosConfig
-      );
-      return response.data.pathList;
-    } catch (error) {
-      return [];
-    }
-  };
-
   const onDelete = () => {
     deleteProduct(product.productType, product.productId).then((res) => {
       if (res.success) {
@@ -187,6 +174,19 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
         }, 1000);
       }
     });
+  };
+
+  const onSubmit = (action: ProductState) => {
+    if (creativeFiles.length === 0 || previewFiles.length === 0) {
+      setSuccess("");
+      setError("creative files and one preview images can't be empty!");
+      return;
+    }
+    setSuccess("");
+    setError("");
+    setPending(true);
+
+    submitProduct(action);
   };
 
   const onPublish = () => {
