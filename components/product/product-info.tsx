@@ -13,6 +13,7 @@ import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { Product } from "@/shared/types/product.type";
 
 import { axiosClient, blobConfig } from "@/lib/axios";
+import { toast } from "sonner";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;
@@ -25,10 +26,6 @@ type Props = {
 
 export const ProductInfo = ({ product, isPending }: Props) => {
   const { getLinkFromS3 } = useLinkFromS3();
-
-  const [isConfirming, setConfirming] = useState<boolean>(false);
-  const [confirmingTitle, setConfirmingTitle] = useState<string>("");
-  const [confirmingMessage, setConfirmingMessage] = useState<string>("");
 
   const [imageList, setImageList] = useState<string[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
@@ -55,14 +52,6 @@ export const ProductInfo = ({ product, isPending }: Props) => {
     setSelectedIndex(index);
   };
 
-  const setDownloadFailureConfirming = () => {
-    setConfirming(true);
-    setConfirmingTitle("Failure");
-    setConfirmingMessage(
-      "An internal server error occurred while trying to download"
-    );
-  };
-
   const onDownloadCreativeFiles = () => {
     axiosClient
       .post("/download", { fileList: product?.fileList }, blobConfig)
@@ -74,11 +63,9 @@ export const ProductInfo = ({ product, isPending }: Props) => {
         link.click();
       })
       .catch(() => {
-        setDownloadFailureConfirming();
+        toast.error("Failed to download the creative files");
       })
-      .catch(() => {
-        setDownloadFailureConfirming();
-      });
+      .finally(() => {});
 
     // fetch('/api/download').then(response => response.blob()).then(blob => { ... })
   };
