@@ -13,7 +13,7 @@ export default function Approval() {
         title="All Products"
         content="You can check and approve or reject products"
       />
-      <Tabs defaultValue="Submitted" className="w-full flex flex-col gap-y-2">
+      <Tabs defaultValue="Applied" className="w-full flex flex-col gap-y-2">
         <TabsList className="px-4 py-2 w-full h-fit flex justify-start gap-x-6">
           <TabsTrigger value="Applied">
             <p className="text-base">Review for Publish</p>
