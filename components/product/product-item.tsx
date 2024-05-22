@@ -10,19 +10,19 @@ import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import type { Product, ProductState } from "@/shared/types/product.type";
 
 const ClassName_Text: Record<ProductState, string> = {
-  created: "text-white",
-  updated: "text-white",
-  submitted: "text-blue-500",
-  resubmitted: "text-blue-500",
-  approved: "text-green-500 font-semibold",
-  rejected: "text-red-400"
+  created: "text-green-700 font-semibold bg-white",
+  updated: "text-blue-700 font-semibold bg-white",
+  submitted: "text-white bg-blue-700",
+  resubmitted: "text-yellow-200 bg-green-700",
+  approved: "text-green-400 font-semibold bg-black/100",
+  rejected: "text-red-400 font-semibold bg-black/100"
 };
 
 const DisplayName_Text: Record<ProductState, string> = {
   created: "Created",
   updated: "Updated",
-  submitted: "Submitted, waiting for approval",
-  resubmitted: "Resubmitted, waiting for approval",
+  submitted: "Submitted",
+  resubmitted: "Resubmitted",
   approved: "Approved",
   rejected: "Rejected"
 };
