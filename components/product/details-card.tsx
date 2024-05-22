@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
-
 import { Card } from "@/components/ui/card";
 import {
   Form,
@@ -28,6 +27,7 @@ import { KeywordsCard } from "./keywords-card";
 
 type Props = {
   isPending: boolean;
+  isUpdating: boolean;
   selectedKeywords: string[];
   setSelectedKeywords: Dispatch<SetStateAction<string[]>>;
   form: UseFormReturn<z.infer<typeof NewProductSchema>>;
@@ -35,6 +35,7 @@ type Props = {
 
 export const DetailsCard = ({
   isPending,
+  isUpdating,
   selectedKeywords,
   setSelectedKeywords,
   form
@@ -67,7 +68,7 @@ export const DetailsCard = ({
               <FormItem>
                 <FormLabel>Product Type</FormLabel>
                 <Select
-                  disabled={isPending}
+                  disabled={isPending || isUpdating}
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
