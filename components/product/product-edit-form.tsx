@@ -190,9 +190,7 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
   };
 
   const onPublish = () => {
-    form.handleSubmit(() =>
-      onSubmit("applied");
-    )
+    form.handleSubmit(() => onSubmit("applied"));
   };
 
   return (
