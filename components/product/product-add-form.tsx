@@ -28,7 +28,7 @@ import { userAtom } from "@/store/user";
 import { FormError } from "../utils/form-error";
 import { FormSuccess } from "../utils/form-success";
 
-import { DetailsCard } from "./details-card";
+import { DetailsCard } from "../creator/products/details-card";
 import { FilesCard } from "./files-card";
 import { PreviewCard } from "./preview-card";
 
