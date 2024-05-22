@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaUpload } from "react-icons/fa";
+import { FaSave, FaUpload } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
@@ -33,7 +33,7 @@ import { DetailsCard } from "./details-card";
 import { FilesCard } from "./files-card";
 import { PreviewCard } from "./preview-card";
 
-import type { Product } from "@/shared/types/product.type";
+import type { Product, ProductState } from "@/shared/types/product.type";
 
 export const ProductAddForm = () => {
   const history = useRouter();
@@ -57,7 +57,7 @@ export const ProductAddForm = () => {
     }
   });
 
-  const onSubmit = () => {
+  const onSubmit = (action: ProductState) => {
     if (creativeFiles.length === 0 || previewFiles.length === 0) {
       setSuccess("");
       setError(
@@ -69,10 +69,10 @@ export const ProductAddForm = () => {
     setSuccess("");
     setPending(true);
 
-    submitProduct();
+    submitProduct(action);
   };
 
-  const submitProduct = async () => {
+  const submitProduct = async (action: ProductState) => {
     const [pathList, previewList] = await Promise.all([
       getPathList(creativeFiles as File[]),
       getPathList(previewFiles as File[])
@@ -98,10 +98,10 @@ export const ProductAddForm = () => {
       previewList,
       keywords: selectedKeywords,
       approval: {
-        state: "created",
+        state: action,
         history: [
           {
-            state: "created",
+            state: action,
             comment: form.getValues("submitComment"),
             userId: user?.userId as string,
             time: new Date().toISOString()
@@ -154,14 +154,25 @@ export const ProductAddForm = () => {
             publish soon!
           </CardDescription>
         </div>
-        <Button
-          disabled={isPending}
-          className="w-64 gap-x-4 rounded-none"
-          onClick={form.handleSubmit(onSubmit)}
-        >
-          <FaUpload />
-          Submit
-        </Button>
+        <div className="flex gap-x-6 items-end">
+          <Button
+            disabled={isPending}
+            variant={"outline"}
+            className="w-64 gap-x-4 rounded-none border-green-700"
+            onClick={form.handleSubmit(() => onSubmit("created"))}
+          >
+            <FaSave />
+            Save
+          </Button>
+          <Button
+            disabled={isPending}
+            className="w-64 gap-x-4 rounded-none"
+            onClick={form.handleSubmit(() => onSubmit("submitted"))}
+          >
+            <FaUpload />
+            Submit
+          </Button>
+        </div>
       </CardHeader>
       <div className="px-6 pb-6">
         <FormError message={error} />
