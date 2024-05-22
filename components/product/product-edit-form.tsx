@@ -189,7 +189,11 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
     });
   };
 
-  const onPublish = () => {};
+  const onPublish = () => {
+    form.handleSubmit(() =>
+      onSubmit("applied");
+    )
+  };
 
   return (
     <div className="w-full">
