@@ -120,7 +120,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
 
     const updatedProduct = {
       productType: form.getValues("productType"),
-      productId: uuidv4(),
+      productId: product.productId,
       ownerId: user?.userId as string,
       title: form.getValues("title"),
       description: form.getValues("description"),
@@ -141,7 +141,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
         ]
       }
     } as Product;
-    updateProduct(updatedProduct, product).then((res) => {
+    updateProduct(updatedProduct).then((res) => {
       setSuccess(res.success || "");
       setError(res.error || "");
 
@@ -277,6 +277,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
           <div className="w-1/2 flex">
             <DetailsCard
               isPending={isPending}
+              isUpdating={true}
               form={form}
               selectedKeywords={selectedKeywords}
               setSelectedKeywords={setSelectedKeywords}
