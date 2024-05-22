@@ -4,10 +4,10 @@ import { FaFileUpload } from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileOrString } from "@/shared/types/file-preview-types";
 
-import { FileUploadButton } from "../utils/file-upload-button";
+import { FileUploadButton } from "../../utils/file-upload-button";
 
 import { PreviewDialog } from "./preview-dialog";
-import { ImagePreview } from "./preview-image";
+import { ImagePreview } from "../../product/preview-image";
 
 type Props = {
   isPending: boolean;
