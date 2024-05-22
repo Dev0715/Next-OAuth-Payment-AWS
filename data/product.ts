@@ -154,7 +154,10 @@ export const getAllRejectedProducts = async (
 ) => {
   const scanCommandInput: ScanCommandInput = {
     TableName: AWS_DYNAMO_TABLES.PRODUCT,
-    FilterExpression: "approval.state = :rejected",
+    FilterExpression: "approval.#state = :rejected",
+    ExpressionAttributeNames: {
+      "#state": "state"
+    },
     ExpressionAttributeValues: {
       ":rejected": "rejected"
     }
