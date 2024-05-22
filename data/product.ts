@@ -222,7 +222,7 @@ export const getProductById = async (
     const response = await db.send(command);
     return response.Item as Product;
   } catch (error) {
-    return null;
+    return undefined;
   }
 };
 
