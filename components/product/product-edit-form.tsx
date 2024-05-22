@@ -189,6 +189,8 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
     });
   };
 
+  const onPublish = () => {};
+
   return (
     <div className="w-full">
       <CardHeader className="w-full flex flex-row items-end justify-between">
@@ -207,10 +209,15 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
             onClick={form.handleSubmit(() => onSubmit("updated"))}
           >
             <FaSave />
-            Update
+            Update Product
           </Button>
+
           {isApproved ? (
-            <Button disabled={isPending} className="w-64 gap-x-4 rounded-none">
+            <Button
+              disabled={isPending}
+              className="w-64 gap-x-4 rounded-none"
+              onClick={onPublish}
+            >
               <FaUpload />
               Publish
             </Button>
@@ -226,6 +233,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
               {isResubmitted ? "Resubmit" : "Submit"}
             </Button>
           )}
+
           {!isEverSubmitted && (
             <QuestionAlert
               title="Confirmation"
@@ -238,7 +246,7 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
                 className="w-64 gap-x-4 rounded-none border-green-700"
               >
                 <FaRecycle />
-                Delete
+                Delete Product
               </Button>
             </QuestionAlert>
           )}
