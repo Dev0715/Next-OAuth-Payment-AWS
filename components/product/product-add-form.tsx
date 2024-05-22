@@ -170,7 +170,7 @@ export const ProductAddForm = () => {
             onClick={form.handleSubmit(() => onSubmit("submitted"))}
           >
             <FaUpload />
-            Submit
+            Direct Submit
           </Button>
         </div>
       </CardHeader>
