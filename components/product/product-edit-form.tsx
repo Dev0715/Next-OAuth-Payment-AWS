@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRecycle, FaSave, FaUpload } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
@@ -38,7 +38,12 @@ import type { Product, ProductState } from "@/shared/types/product.type";
 import { deleteProduct } from "@/data/product";
 import { QuestionAlert } from "../utils/question-alert";
 
-export const ProductEditForm = ({ product }: { product: Product }) => {
+type Props = {
+  product: Product;
+  setProduct: Dispatch<SetStateAction<Product | undefined>>;
+};
+
+export const ProductEditForm = ({ product, setProduct }: Props) => {
   const history = useRouter();
   const [user] = useAtom(userAtom);
 
@@ -146,14 +151,14 @@ export const ProductEditForm = ({ product }: { product: Product }) => {
       setError(res.error || "");
 
       if (res.success) {
-        setTimeout(() => {
-          history.replace(
-            `/creator/edit-product/${updatedProduct.productType}/${updatedProduct.productId}`
-          );
-        }, 1000);
-      } else {
-        setPending(false);
+        // setTimeout(() => {
+        //   history.replace(
+        //     `/creator/edit-product/${updatedProduct.productType}/${updatedProduct.productId}`
+        //   );
+        // }, 1000);
+        setProduct(updatedProduct);
       }
+      setPending(false);
     });
   };
 
