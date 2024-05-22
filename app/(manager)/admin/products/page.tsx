@@ -28,6 +28,9 @@ export default function Approval() {
             <p className="text-base">Rejected</p>
           </TabsTrigger>
         </TabsList>
+        <TabsContent value="Applied">
+          <ProductsTable getProductsAll={() => getProductsByState("applied")} />
+        </TabsContent>
         <TabsContent value="Submitted">
           <ProductsTable getProductsAll={getSubmittedProducts} />
         </TabsContent>
