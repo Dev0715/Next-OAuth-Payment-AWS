@@ -27,7 +27,7 @@ import { KeywordsCard } from "./keywords-card";
 
 type Props = {
   isPending: boolean;
-  isUpdating: boolean;
+  isUpdating?: boolean;
   selectedKeywords: string[];
   setSelectedKeywords: Dispatch<SetStateAction<string[]>>;
   form: UseFormReturn<z.infer<typeof NewProductSchema>>;
