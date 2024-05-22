@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  getAllApprovedProducts,
-  getAllRejectedProducts,
-  getAllSubmittedProducts
-} from "@/data/product";
+import { getProductsByState, getSubmittedProducts } from "@/data/product";
 
 import { Navbar } from "../_components/navbar";
 import { ProductsTable } from "@/components/admin/products-table";
@@ -33,13 +29,17 @@ export default function Approval() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="Submitted">
-          <ProductsTable getProductsAll={getAllSubmittedProducts} />
+          <ProductsTable getProductsAll={getSubmittedProducts} />
         </TabsContent>
         <TabsContent value="Approved">
-          <ProductsTable getProductsAll={getAllApprovedProducts} />
+          <ProductsTable
+            getProductsAll={() => getProductsByState("approved")}
+          />
         </TabsContent>
         <TabsContent value="Rejected">
-          <ProductsTable getProductsAll={getAllRejectedProducts} />
+          <ProductsTable
+            getProductsAll={() => getProductsByState("rejected")}
+          />
         </TabsContent>
       </Tabs>
     </main>
