@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FaDownload, FaRegUser } from "react-icons/fa";
 
 import { toast } from "sonner";
+
 import { Thumbnail } from "@/components/product/thumbnail";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
