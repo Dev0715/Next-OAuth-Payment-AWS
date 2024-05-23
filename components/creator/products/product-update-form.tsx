@@ -2,8 +2,8 @@
 
 import { ProductHistory } from "@/components/product/product-history";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Product } from "@/shared/types/product.type";
-import { Dispatch, SetStateAction } from "react";
+import { Product, ProductState } from "@/shared/types/product.type";
+import { Dispatch, SetStateAction, useState } from "react";
 import { ProductEditForm } from "./product-edit-form";
 import { ProductApplyCard } from "./product-apply-card";
 
@@ -13,8 +13,11 @@ type Props = {
 };
 
 export const ProductUpdateForm = ({ product, setProduct }: Props) => {
-  const isApproved = product.approval.state === "approved";
-  const isApplied = product.approval.state === "applied";
+  const [state, setState] = useState<ProductState>(product.approval.state);
+
+  const onUpdateMore = () => {
+    setState("updated");
+  };
 
   return (
     <div className="w-full">
@@ -30,8 +33,8 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
           <p className="text-xl font-semibold">Product Approval Status</p>
           <ProductHistory history={product.approval.history} />
         </Card>
-        {isApproved ? (
-          <ProductApplyCard product={product} />
+        {state === "approved" ? (
+          <ProductApplyCard product={product} onUpdateMore={onUpdateMore} />
         ) : (
           <ProductEditForm product={product} setProduct={setProduct} />
         )}
