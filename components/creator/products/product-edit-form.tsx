@@ -265,7 +265,7 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
           )}
         </div>
 
-        <div className="w-full flex gap-x-4">
+        <div className="w-full h-full flex gap-x-4">
           <div className="w-1/2 flex flex-col gap-y-4">
             <FilesCard
               isPending={isPending}
@@ -279,7 +279,7 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
               setPreviewFiles={setPreviewFiles}
             />
           </div>
-          <Separator orientation="vertical" />
+          <div className="w-[1px] h-full flex"></div>
           <div className="w-1/2 flex">
             <DetailsCard
               isPending={isPending}
