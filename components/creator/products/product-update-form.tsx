@@ -12,22 +12,26 @@ type Props = {
 };
 
 export const ProductUpdateForm = ({ product, setProduct }: Props) => {
+  const isApproved = product.approval.state === "approved";
+  const isApplied = product.approval.state === "applied";
+
   return (
     <div className="w-full">
       <CardHeader className="w-full flex flex-row items-end justify-between">
-        <div className="flex flex-col">
-          <CardTitle className="text-2xl font-medium">
-            Update a Product
+        <div className="w-full flex flex-col">
+          <CardTitle className="w-full p-2 text-2xl font-medium bg-gray-100 rounded-lg">
+            {`${product.productType} / ${product.title}`}
           </CardTitle>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col items-end gap-y-8">
+      <CardContent className="flex flex-col gap-y-8">
         <Card className="w-full p-6 flex flex-col gap-y-4">
           <p className="text-xl font-semibold">Product Approval Status</p>
           <ProductHistory history={product.approval.history} />
         </Card>
+        {isApproved ? <div>Congratulations</div> : null}
+        <ProductEditForm product={product} setProduct={setProduct} />
       </CardContent>
-      <ProductEditForm product={product} setProduct={setProduct} />
     </div>
   );
 };
