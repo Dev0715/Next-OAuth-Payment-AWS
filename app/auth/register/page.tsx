@@ -6,8 +6,8 @@ import { register } from "@/actions/auth/register/register";
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
-import { SignedUpData } from "@/shared/types/signup-data.type";
 import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
+import { SignedUpData } from "@/shared/types/signup-data.type";
 
 const RegisterPage = () => {
   const [step, setStep] = useState<number>(0);

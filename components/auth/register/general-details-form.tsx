@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dispatch, SetStateAction, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
@@ -62,7 +62,7 @@ export const GeneralDetailsForm = ({ onSubmit }: Props) => {
       <Form {...form}>
         <form
           className="grid grid-cols-2 gap-4"
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(handleSubmit)}
         >
           <FormField
             control={form.control}
