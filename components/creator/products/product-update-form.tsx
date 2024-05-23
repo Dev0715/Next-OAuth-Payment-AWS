@@ -13,6 +13,7 @@ import { userAtom } from "@/store/user";
 
 import { ProductApplyCard } from "./product-apply-card";
 import { ProductEditForm } from "./product-edit-form";
+import { ProductPublishCard } from "./product-publish-card";
 
 type Props = {
   product: Product;
@@ -67,6 +68,12 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
         </Card>
         {state === "approved" ? (
           <ProductApplyCard
+            product={product}
+            onUpdateMore={onUpdateMore}
+            onApply={onApply}
+          />
+        ) : state === "applied" ? (
+          <ProductPublishCard
             product={product}
             onUpdateMore={onUpdateMore}
             onApply={onApply}
