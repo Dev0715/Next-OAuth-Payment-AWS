@@ -50,7 +50,7 @@ export const UserCompleteForm = ({
       setConfirmOpen(true);
       if (response.success) {
         setConfirmTitle("Success");
-        setConfirmMessage("A new user was newly registerd!");
+        setConfirmMessage("A new user was newly registered!");
       } else {
         setConfirmTitle("Error");
         setConfirmMessage(response.error as string);
@@ -66,7 +66,7 @@ export const UserCompleteForm = ({
     if (userData.selectedAccounts.creator) {
       setConfirmOpen(true);
       setConfirmTitle("Success");
-      setConfirmMessage("A new user was newly registerd!");
+      setConfirmMessage("A new user was newly registered!");
     } else {
       setDisabled(true);
       processUserData().then(() => {
