@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { ProductInfo } from "@/components/product/product-info";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -5,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { Product } from "@/shared/types/product.type";
-import { useState } from "react";
 
 type Props = {
   product: Product;

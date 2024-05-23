@@ -1,11 +1,13 @@
 "use client";
 
+import { Dispatch, SetStateAction, useState } from "react";
+
 import { ProductHistory } from "@/components/product/product-history";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Product, ProductState } from "@/shared/types/product.type";
-import { Dispatch, SetStateAction, useState } from "react";
-import { ProductEditForm } from "./product-edit-form";
+
 import { ProductApplyCard } from "./product-apply-card";
+import { ProductEditForm } from "./product-edit-form";
 
 type Props = {
   product: Product;

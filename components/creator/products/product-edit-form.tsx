@@ -12,6 +12,7 @@ import { z } from "zod";
 import { updateProduct } from "@/actions/product/update-product";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { deleteProduct } from "@/data/product";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { NewProductSchema } from "@/schemas/product";
@@ -30,7 +31,6 @@ import { FilesCard } from "./files-card";
 import { PreviewCard } from "./preview-card";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
-import { Separator } from "@/components/ui/separator";
 
 type Props = {
   product: Product;
