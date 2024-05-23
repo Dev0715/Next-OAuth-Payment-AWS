@@ -265,9 +265,13 @@ export const updateProductApproval = async ({
 
   try {
     const response = await db.send(command);
-    return response.Attributes;
+    return {
+      success: true
+    };
   } catch (error) {
-    return null;
+    return {
+      error: true
+    };
   }
 };
 

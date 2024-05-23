@@ -11,14 +11,15 @@ import { Product } from "@/shared/types/product.type";
 type Props = {
   product: Product;
   onUpdateMore: () => void;
+  onApply: () => void;
 };
 
-export const ProductApplyCard = ({ product, onUpdateMore }: Props) => {
+export const ProductApplyCard = ({ product, onUpdateMore, onApply }: Props) => {
   const [isPreview, setPreview] = useState<boolean>(false);
 
   return (
     <div className="flex flex-col gap-y-6">
-      <div className="text-lg">
+      <div className="text-base">
         <p>Congratulations!</p>
         <p>Your product is approved.</p>
         <p>You can apply for this product to publish.</p>
@@ -26,7 +27,7 @@ export const ProductApplyCard = ({ product, onUpdateMore }: Props) => {
 
       <div className="w-full flex justify-between">
         <div className="flex gap-x-4">
-          <Button className="w-64 flex gap-x-4 rounded-none">
+          <Button className="w-64 flex gap-x-4 rounded-none" onClick={onApply}>
             Apply for publish
           </Button>
           <QuestionAlert

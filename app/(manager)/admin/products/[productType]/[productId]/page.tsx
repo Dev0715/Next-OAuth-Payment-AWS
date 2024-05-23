@@ -78,7 +78,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         productId: params.productId,
         approval
       }).then((res) => {
-        if (res) {
+        if (res.success) {
           setProduct((prev) => {
             if (prev) {
               return { ...prev, approval };

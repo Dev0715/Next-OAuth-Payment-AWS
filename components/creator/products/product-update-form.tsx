@@ -1,10 +1,15 @@
 "use client";
 
+import { useAtom } from "jotai";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { ProductHistory } from "@/components/product/product-history";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import { updateProductApproval } from "@/data/product";
 import { Product, ProductState } from "@/shared/types/product.type";
+
+import { userAtom } from "@/store/user";
 
 import { ProductApplyCard } from "./product-apply-card";
 import { ProductEditForm } from "./product-edit-form";
@@ -15,10 +20,35 @@ type Props = {
 };
 
 export const ProductUpdateForm = ({ product, setProduct }: Props) => {
+  const [user] = useAtom(userAtom);
   const [state, setState] = useState<ProductState>(product.approval.state);
 
   const onUpdateMore = () => {
     setState("updated");
+  };
+
+  const onApply = () => {
+    const updatedProduct = {
+      ...product,
+      approval: {
+        state: "applied",
+        history: [
+          ...product.approval.history,
+          {
+            state: "applied",
+            comment: "Product applied for publish",
+            userId: user?.userId,
+            time: new Date().toISOString()
+          }
+        ]
+      }
+    } as Product;
+
+    updateProductApproval(updatedProduct).then((res) => {
+      if (res.success) {
+        setProduct(updatedProduct);
+      }
+    });
   };
 
   return (
@@ -36,7 +66,11 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
           <ProductHistory history={product.approval.history} />
         </Card>
         {state === "approved" ? (
-          <ProductApplyCard product={product} onUpdateMore={onUpdateMore} />
+          <ProductApplyCard
+            product={product}
+            onUpdateMore={onUpdateMore}
+            onApply={onApply}
+          />
         ) : (
           <ProductEditForm product={product} setProduct={setProduct} />
         )}
