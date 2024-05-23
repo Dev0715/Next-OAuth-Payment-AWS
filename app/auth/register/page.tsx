@@ -2,164 +2,33 @@
 
 import { useState } from "react";
 
-import { AffiliateCompleteForm } from "@/components/auth/register/affiliate-complete-form";
-import { CreatorCompleteForm } from "@/components/auth/register/creator-complete-form";
-import { CreatorDetailsForm } from "@/components/auth/register/creator-details-form";
+import { register } from "@/actions/auth/register/register";
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
-import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
-import { SelectMatchingForm } from "@/components/auth/register/select-matching-form";
-import { UserCompleteForm } from "@/components/auth/register/user-complete-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
 import { SignedUpData } from "@/shared/types/signup-data.type";
+import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
 
 const RegisterPage = () => {
-  const [userData, setUserData] = useState<SignedUpData>({
-    generalDetails: {
-      username: "",
-      email: "",
-      password: "",
-      firstname: "",
-      lastname: ""
-    },
-    selectedAccounts: {
-      creator: false,
-      user: false,
-      affiliate: false
-    },
-    creatorDetails: {
-      bio: "",
-      jobTitle: "",
-      companyName: "",
-      companyCountry: "",
-      companyWebsite: ""
-    },
-    creatorMatchings: {
-      env: false,
-      beh: false,
-      art: false,
-      drb: false,
-      cmk: false
-    }
-  });
-
   const [step, setStep] = useState<number>(0);
 
-  const moveStepForward = () => {
-    setStep(step + 1);
-  };
+  const handleSubmit = async (details: SignedUpData["generalDetails"]) => {
+    const user = await getUserFromGeneralDetails(details);
 
-  const moveStepBackward = () => {
-    setStep(step - 1);
-  };
-
-  const isCreatorStep = () => {
-    return userData.selectedAccounts.creator && step === 2;
-  };
-
-  const isMatchingStep = () => {
-    return userData.selectedAccounts.creator && step === 3;
-  };
-
-  const isCreatorCompleteStep = () => {
-    return userData.selectedAccounts.creator && step === 4;
-  };
-
-  const isUserStep = () => {
-    let _step = 2;
-    if (userData.selectedAccounts.creator) {
-      _step += 3;
+    const response = await register(user);
+    if (response.success) {
+      setStep(1);
+    } else {
+      // TODO: handle error
     }
-
-    return userData.selectedAccounts.user && step === _step;
-  };
-
-  const isAffiliateStep = () => {
-    let _step = 2;
-    if (userData.selectedAccounts.creator) {
-      _step += 3;
-    }
-    if (userData.selectedAccounts.user) {
-      _step += 1;
-    }
-
-    return userData.selectedAccounts.affiliate && step === _step;
-  };
-
-  const isRegisterCompleteStep = () => {
-    let _step = 2;
-    if (userData.selectedAccounts.creator) {
-      _step += 3;
-    }
-    if (userData.selectedAccounts.user) {
-      _step += 1;
-    }
-    if (userData.selectedAccounts.affiliate) {
-      _step += 1;
-    }
-    return step === _step;
   };
 
   return (
     <div className="w-[640px] flex flex-col pt-6">
       <TransitionInOut condition={step === 0}>
-        <GeneralDetailsForm
-          userData={userData}
-          setUserData={setUserData}
-          moveStepForward={moveStepForward}
-        />
+        <GeneralDetailsForm onSubmit={handleSubmit} />
       </TransitionInOut>
       <TransitionInOut condition={step === 1}>
-        <SelectAccountsForm
-          userData={userData}
-          setUserData={setUserData}
-          moveStepForward={moveStepForward}
-          moveStepBackward={moveStepBackward}
-        />
-      </TransitionInOut>
-      <TransitionInOut condition={isCreatorStep()}>
-        <CreatorDetailsForm
-          userData={userData}
-          setUserData={setUserData}
-          moveStepForward={moveStepForward}
-          moveStepBackward={moveStepBackward}
-        />
-      </TransitionInOut>
-      <TransitionInOut condition={isMatchingStep()}>
-        <SelectMatchingForm
-          userData={userData}
-          setUserData={setUserData}
-          moveStepForward={moveStepForward}
-          moveStepBackward={moveStepBackward}
-        />
-      </TransitionInOut>
-      <TransitionInOut condition={isCreatorCompleteStep()}>
-        <CreatorCompleteForm
-          userData={userData}
-          setUserData={setUserData}
-          moveStepForward={moveStepForward}
-          moveStepBackward={moveStepBackward}
-        />
-      </TransitionInOut>
-      <TransitionInOut condition={isUserStep()}>
-        <UserCompleteForm
-          step={step}
-          userData={userData}
-          setUserData={setUserData}
-          moveStepForward={moveStepForward}
-          moveStepBackward={moveStepBackward}
-        />
-      </TransitionInOut>
-      <TransitionInOut condition={isAffiliateStep()}>
-        <AffiliateCompleteForm
-          step={step}
-          userData={userData}
-          setUserData={setUserData}
-          moveStepForward={moveStepForward}
-          moveStepBackward={moveStepBackward}
-        />
-      </TransitionInOut>
-      <TransitionInOut condition={isRegisterCompleteStep()}>
         <RegisterCompleteForm step={step} />
       </TransitionInOut>
     </div>

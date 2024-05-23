@@ -20,38 +20,33 @@ import { Input } from "@/components/ui/input";
 import { FormError } from "@/components/utils/form-error";
 import { GeneralDetailsSchema } from "@/schemas/auth/register";
 
-import type { SignedUpData } from "@/shared/types/signup-data.type";
-
 type Props = {
-  userData: SignedUpData;
-  setUserData: Dispatch<SetStateAction<SignedUpData>>;
-  moveStepForward: () => void;
+  onSubmit: (data: z.infer<typeof GeneralDetailsSchema>) => void;
 };
 
-export const GeneralDetailsForm = ({
-  userData,
-  setUserData,
-  moveStepForward
-}: Props) => {
+export const GeneralDetailsForm = ({ onSubmit }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [errMsg, setErrMsg] = useState<string>("");
 
   const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
     resolver: zodResolver(GeneralDetailsSchema),
     defaultValues: {
-      ...userData.generalDetails
+      username: "",
+      email: "",
+      password: "",
+      firstname: "",
+      lastname: ""
     }
   });
 
-  const onSubmit = (values: z.infer<typeof GeneralDetailsSchema>) => {
+  const handleSubmit = (values: z.infer<typeof GeneralDetailsSchema>) => {
     startTransition(() => {
       checkGeneralDetails({
         username: values.username,
         email: values.email
       }).then((data) => {
         if (data.success) {
-          setUserData({ ...userData, generalDetails: { ...values } });
-          moveStepForward();
+          onSubmit(values);
         } else {
           setErrMsg(data.error as string);
         }
