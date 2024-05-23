@@ -13,7 +13,6 @@ import {
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useMemo, useState, useTransition } from "react";
-import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 
 import { getColumnsForUsersTable } from "@/components/admin/users-column";
@@ -34,6 +33,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { useToast } from "@/components/ui/use-toast";
 import {
   deleteUserById,
   getAllUsers,
@@ -72,6 +72,8 @@ const ROWS_PER_PAGE = 10;
 
 const ManagementUsers = () => {
   const [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
+
   const [editIndex, setEditIndex] = useState<number>(-1);
   const [editAction, setEditAction] = useState<ACTION_TYPE>();
 
@@ -183,7 +185,7 @@ const ManagementUsers = () => {
           _users.splice(index, 1);
           setUsers(_users);
         } else {
-          toast.error("Failed to delete user");
+          toast({ title: "Failed to delete user", variant: "destructive" });
         }
       });
     });

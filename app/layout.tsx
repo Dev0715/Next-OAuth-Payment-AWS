@@ -4,7 +4,7 @@ import { SessionProvider } from "next-auth/react";
 
 import { auth } from "@/auth";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
 
 import { Header } from "./_components/header";
 import LoadUser from "./_components/user-load";
