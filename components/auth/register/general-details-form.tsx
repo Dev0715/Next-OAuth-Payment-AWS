@@ -17,7 +17,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { FormError } from "@/components/utils/form-error";
 import { GeneralDetailsSchema } from "@/schemas/auth/register";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
@@ -34,7 +34,6 @@ export const GeneralDetailsForm = ({
   moveStepForward
 }: Props) => {
   const [isPending, startTransition] = useTransition();
-  const [isError, setError] = useState<boolean>(false);
   const [errMsg, setErrMsg] = useState<string>("");
 
   const form = useForm<z.infer<typeof GeneralDetailsSchema>>({
@@ -52,11 +51,9 @@ export const GeneralDetailsForm = ({
       }).then((data) => {
         if (data.success) {
           setUserData({ ...userData, generalDetails: { ...values } });
-          // setUserData({ ...userData, generalDetails: { ...values, avatar } });
           moveStepForward();
         } else {
           setErrMsg(data.error as string);
-          setError(true);
         }
       });
     });
@@ -167,14 +164,10 @@ export const GeneralDetailsForm = ({
             <FaArrowRight />
             Next
           </Button>
+
+          {errMsg ? <FormError message={errMsg} /> : null}
         </form>
       </Form>
-      <ConfirmAlert
-        open={isError}
-        title="Error"
-        message={errMsg}
-        onOK={() => setError(false)}
-      />
     </div>
   );
 };

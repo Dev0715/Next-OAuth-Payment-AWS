@@ -16,7 +16,7 @@ import {
   FormLabel
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
-import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { FormError } from "@/components/utils/form-error";
 import { SelectAccountsSchema } from "@/schemas/auth/register";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
@@ -58,104 +58,94 @@ export const SelectAccountsForm = ({
   };
 
   return (
-    <div className="w-full flex flex-col gap-y-6">
-      <ConfirmAlert
-        open={isErr}
-        title="Error"
-        message="Please select at least one account type to create!"
-        onOK={() => setErr(false)}
-      />
-      <p className="text-xl text-green-700">
+    <div className="w-[480px] m-auto">
+      <p className="mb-6 text-xl text-green-700">
         2. Please select accounts you want to create.
       </p>
       <Form {...form}>
         <form
+          className="w-full space-y-4"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full flex flex-col gap-y-6"
         >
-          <div className="w-full">
-            <FormField
-              control={form.control}
-              name="creator"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">Creator Account</FormLabel>
-                    <FormDescription>
-                      {`** You can create creator's account **`}
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="w-full">
-            <FormField
-              control={form.control}
-              name="user"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">User Account</FormLabel>
-                    <FormDescription>
-                      {`** You can create general user's account **`}
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="w-full">
-            <FormField
-              control={form.control}
-              name="affiliate"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">
-                      Affiliate Account
-                    </FormLabel>
-                    <FormDescription>
-                      {`** You can create affiliate user's account **`}
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="w-full flex items-center justify-between mt-4">
+          <FormField
+            control={form.control}
+            name="creator"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">Creator Account</FormLabel>
+                  <FormDescription>
+                    {`** You can create creator's account **`}
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="user"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">User Account</FormLabel>
+                  <FormDescription>
+                    {`** You can create general user's account **`}
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="affiliate"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">Affiliate Account</FormLabel>
+                  <FormDescription>
+                    ** You can create affiliate user's account **
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <div className="!mt-8 flex justify-between items-center">
             <Button
               type="button"
-              variant={"outline"}
-              className="w-64 flex gap-x-4 border-red-700"
+              className="gap-x-4 border-red-700"
+              variant="outline"
               onClick={onBackClicked}
             >
               <FaArrowLeft />
               Back
             </Button>
-            <Button type="submit" className="w-64 flex gap-x-4">
-              <FaArrowRight />
+            <Button type="submit" className="gap-x-4">
               Next
+              <FaArrowRight />
             </Button>
           </div>
+
+          {isErr ? (
+            <FormError message="Please select at least one account type to create!" />
+          ) : null}
         </form>
       </Form>
     </div>

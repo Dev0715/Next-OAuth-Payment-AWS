@@ -17,7 +17,7 @@ export const TransitionInOut = ({ children, condition }: Props) => {
       leaveTo="opacity-0 scale-95"
     >
       <div className="w-full flex flex-col gap-y-12">
-        <p className="text-4xl font-semibold">{`Let's get you started`}</p>
+        <p className="text-4xl text-center font-semibold">{`Let's get you started`}</p>
         {children}
       </div>
     </Transition>
