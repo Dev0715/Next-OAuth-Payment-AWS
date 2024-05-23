@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="relative bg-gray-300 pt-8 pb-6">
+    <footer className="relative w-full bg-gray-300 pt-8 pb-6">
       <div
         className="bottom-auto top-px left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
         style={{ height: "80px" }}
