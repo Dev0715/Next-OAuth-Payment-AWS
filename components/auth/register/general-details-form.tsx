@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
 
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
@@ -57,7 +56,7 @@ export const GeneralDetailsForm = ({ onSubmit }: Props) => {
   return (
     <div className="w-[480px] m-auto">
       <p className="mb-6 text-xl text-green-700">
-        1. Please provide your general details.
+        Please provide your personal information.
       </p>
       <Form {...form}>
         <form
@@ -156,8 +155,7 @@ export const GeneralDetailsForm = ({ onSubmit }: Props) => {
             type="submit"
             className="col-span-2 mt-4"
           >
-            <FaArrowRight />
-            Next
+            Register
           </Button>
 
           {errMsg ? <FormError message={errMsg} /> : null}

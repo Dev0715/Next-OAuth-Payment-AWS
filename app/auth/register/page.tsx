@@ -1,35 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { register } from "@/actions/auth/register/register";
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
-import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
+import { useToast } from "@/components/ui/use-toast";
 import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
 import { SignedUpData } from "@/shared/types/signup-data.type";
 
 const RegisterPage = () => {
-  const [step, setStep] = useState<number>(0);
+  const history = useRouter();
+  const { toast } = useToast();
 
   const handleSubmit = async (details: SignedUpData["generalDetails"]) => {
     const user = await getUserFromGeneralDetails(details);
 
     const response = await register(user);
     if (response.success) {
-      setStep(1);
+      toast({
+        title: "Congratulations!",
+        description: "You have completed sign up"
+      });
+      history.push("/auth/login");
     } else {
-      // TODO: handle error
+      toast({ title: "Error while sign up..", variant: "destructive" });
     }
   };
 
   return (
-    <div className="w-[640px] flex flex-col pt-6">
-      <TransitionInOut condition={step === 0}>
+    <div className="w-[640px]">
+      <TransitionInOut condition>
         <GeneralDetailsForm onSubmit={handleSubmit} />
-      </TransitionInOut>
-      <TransitionInOut condition={step === 1}>
-        <RegisterCompleteForm step={step} />
       </TransitionInOut>
     </div>
   );

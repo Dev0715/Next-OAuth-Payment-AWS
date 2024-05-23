@@ -11,7 +11,7 @@ type Props = {
 
 export const RegisterCompleteForm = ({ step }: Props) => {
   return (
-    <div className="w-full flex flex-col gap-y-6">
+    <div className="w-[480px] m-auto space-y-6">
       <p className="text-xl text-green-700">
         {step + 1}. Complete registration.
       </p>
