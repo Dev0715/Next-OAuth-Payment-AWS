@@ -52,6 +52,8 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
     });
   };
 
+  const onWithdrawFromApplied = () => {};
+
   return (
     <div className="w-full">
       <CardHeader className="w-full flex flex-row items-end justify-between">
@@ -75,8 +77,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
         ) : state === "applied" ? (
           <ProductPublishCard
             product={product}
-            onUpdateMore={onUpdateMore}
-            onApply={onApply}
+            onWithdrawFromApplied={onWithdrawFromApplied}
           />
         ) : (
           <ProductEditForm product={product} setProduct={setProduct} />
