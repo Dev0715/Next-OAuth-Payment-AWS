@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 import { Loading } from "@/app/_components/loading";
-import { ProductEditForm } from "@/components/creator/products/product-edit-form";
 
 import { getProductById } from "@/data/product";
 import { Product, ProductLink } from "@/shared/types/product.type";
+import { ProductUpdateForm } from "@/components/creator/products/product-update-form";
 
 const ProductEdit = ({ params }: { params: ProductLink }) => {
   const [product, setProduct] = useState<Product>();
@@ -24,7 +24,7 @@ const ProductEdit = ({ params }: { params: ProductLink }) => {
 
   return (
     <main className="w-full p-6">
-      <ProductEditForm product={product} setProduct={setProduct} />
+      <ProductUpdateForm product={product} setProduct={setProduct} />
     </main>
   );
 };
