@@ -51,7 +51,7 @@ export const PreviewCard = ({
   };
 
   return (
-    <Card className="w-full">
+    <Card className="w-full rounded-none">
       {/** Preview is not working with images whose width < height  */}
       <PreviewDialog
         isPreviewing={isPreviewing}

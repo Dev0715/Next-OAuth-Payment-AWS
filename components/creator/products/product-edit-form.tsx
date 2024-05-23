@@ -11,13 +11,7 @@ import { z } from "zod";
 
 import { updateProduct } from "@/actions/product/update-product";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { deleteProduct } from "@/data/product";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { NewProductSchema } from "@/schemas/product";
@@ -203,11 +197,6 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
           </CardTitle>
         </div>
       </CardHeader>
-      <div className="px-6 pb-6">
-        <FormError message={error} />
-        <FormSuccess message={success} />
-      </div>
-
       <CardContent className="flex flex-col items-end gap-y-8">
         <Card className="w-full p-6 flex flex-col gap-y-4">
           <p className="text-xl font-semibold">Product Approval Status</p>
@@ -265,6 +254,13 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
               </QuestionAlert>
             )}
           </div>
+
+          {success || error ? (
+            <div className="w-full">
+              <FormError message={error} />
+              <FormSuccess message={success} />
+            </div>
+          ) : null}
 
           <Separator orientation="horizontal" />
 
