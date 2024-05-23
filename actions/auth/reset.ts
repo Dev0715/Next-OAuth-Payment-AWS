@@ -39,7 +39,7 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
   );
 
   if (response.error) {
-    return { error: response.error.name };
+    return { error: "Error occurred while sending reset email" };
   }
 
   return { success: "Reset email sent!" };
