@@ -50,7 +50,29 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
     });
   };
 
-  const onWithdrawFromApplied = () => {};
+  const onWithdrawFromApplied = () => {
+    const updatedProduct = {
+      ...product,
+      approval: {
+        state: "withdrawn-applied",
+        history: [
+          ...product.approval.history,
+          {
+            state: "withdrawn-applied",
+            comment: "Product withdrawn from applied state",
+            userId: user?.userId,
+            time: new Date().toISOString()
+          }
+        ]
+      }
+    } as Product;
+
+    updateProductApproval(updatedProduct).then((res) => {
+      if (res.success) {
+        setProduct(updatedProduct);
+      }
+    });
+  };
 
   return (
     <div className="w-full">

@@ -30,7 +30,9 @@ export const PRODUCT_STATE_BADGE_VARIANT_ADMIN: Record<
   approved: "success",
   rejected: "destructive",
   applied: "default",
-  published: "success"
+  published: "success",
+  "withdrawn-applied": "destructive",
+  "withdrawn-published": "destructive"
 };
 
 export const PRODUCT_STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
@@ -41,5 +43,7 @@ export const PRODUCT_STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
   approved: "success",
   rejected: "destructive",
   applied: "default",
-  published: "success"
+  published: "success",
+  "withdrawn-applied": "destructive",
+  "withdrawn-published": "destructive"
 };

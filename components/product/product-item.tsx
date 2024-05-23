@@ -17,7 +17,9 @@ const ClassName_Text: Record<ProductState, string> = {
   approved: "text-green-400 font-semibold bg-black/100",
   rejected: "text-red-400 font-semibold bg-black/100",
   applied: "text-yellow-400 font-semibold bg-black/100",
-  published: "text-green-400 font-semibold bg-black/100"
+  published: "text-green-400 font-semibold bg-black/100",
+  "withdrawn-applied": "text-red-400 font-semibold bg-black/100",
+  "withdrawn-published": "text-red-400 font-semibold bg-black/100"
 };
 
 const DisplayName_Text: Record<ProductState, string> = {
@@ -28,7 +30,9 @@ const DisplayName_Text: Record<ProductState, string> = {
   approved: "Approved",
   rejected: "Rejected",
   applied: "Applied",
-  published: "Published"
+  published: "Published",
+  "withdrawn-applied": "Withdrawn from applied",
+  "withdrawn-published": "Withdrawn from published"
 };
 
 type PropsParams = {

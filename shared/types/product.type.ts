@@ -23,7 +23,9 @@ export type ProductState =
   | "approved"
   | "rejected"
   | "applied"
-  | "published";
+  | "published"
+  | "withdrawn-applied"
+  | "withdrawn-published";
 
 export type CreativeFile = {
   name: string;

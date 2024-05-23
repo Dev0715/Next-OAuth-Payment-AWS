@@ -25,7 +25,9 @@ const STATE_DISPLAY_TEXT: Record<ProductState, string> = {
   approved: "Approved",
   rejected: "Rejected",
   applied: "Applied", // Applied to be published
-  published: "Published"
+  published: "Published",
+  "withdrawn-applied": "Withdrawn from applied",
+  "withdrawn-published": "Withdrawn from published"
 };
 
 type PropsType = {
