@@ -3,9 +3,18 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { QuestionAlert } from "@/components/utils/question-alert";
 import { Product } from "@/shared/types/product.type";
+import { useState } from "react";
 
-export const ProductApplyCard = ({ product }: { product: Product }) => {
+type Props = {
+  product: Product;
+  onUpdateMore: () => void;
+};
+
+export const ProductApplyCard = ({ product, onUpdateMore }: Props) => {
+  const [isPreview, setPreview] = useState<boolean>(false);
+
   return (
     <div className="flex flex-col gap-y-6">
       <div className="text-lg">
@@ -16,20 +25,37 @@ export const ProductApplyCard = ({ product }: { product: Product }) => {
 
       <div className="w-full flex justify-between">
         <div className="flex gap-x-4">
-          <Button className="w-64 gap-x-4 rounded-none">
+          <Button className="w-64 flex gap-x-4 rounded-none">
             Apply for publish
           </Button>
-          <Button className="w-64 gap-x-4 rounded-none">Update more</Button>
+          <QuestionAlert
+            title="Update"
+            message="Are you sure want to update more?"
+            onContinue={onUpdateMore}
+          >
+            <Button
+              variant={"outline"}
+              className="w-64 flex gap-x-4 border-green-700 rounded-none"
+            >
+              Update more
+            </Button>
+          </QuestionAlert>
         </div>
         <div className="flex items-center space-x-2">
-          <Switch id="show-details" />
+          <Switch
+            id="show-details"
+            checked={isPreview}
+            onCheckedChange={(checked) => setPreview(checked)}
+          />
           <Label htmlFor="show-details">Product Preview</Label>
         </div>
       </div>
 
-      <Card className="p-6 rounded-none">
-        <ProductInfo product={product} isPending />
-      </Card>
+      {isPreview ? (
+        <Card className="p-6 rounded-none">
+          <ProductInfo product={product} isPending />
+        </Card>
+      ) : null}
     </div>
   );
 };
