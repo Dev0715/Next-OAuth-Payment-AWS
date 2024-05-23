@@ -37,6 +37,7 @@ import { PreviewCard } from "./preview-card";
 import { ProductHistory } from "../../product/product-history";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
+import { Separator } from "@/components/ui/separator";
 
 type Props = {
   product: Product;
@@ -201,6 +202,18 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
             Update a Product
           </CardTitle>
         </div>
+      </CardHeader>
+      <div className="px-6 pb-6">
+        <FormError message={error} />
+        <FormSuccess message={success} />
+      </div>
+
+      <CardContent className="flex flex-col items-end gap-y-8">
+        <Card className="w-full p-6 flex flex-col gap-y-4">
+          <p className="text-xl font-semibold">Product Approval Status</p>
+          <ProductHistory history={product.approval.history} />
+        </Card>
+
         <div className="flex gap-x-6 items-end">
           <Button
             disabled={isPending}
@@ -251,29 +264,22 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
             </QuestionAlert>
           )}
         </div>
-      </CardHeader>
-      <div className="px-6 pb-6">
-        <FormError message={error} />
-        <FormSuccess message={success} />
-      </div>
-      <CardContent className="flex flex-col gap-y-8">
-        <Card className="w-full p-6 flex flex-col gap-y-4">
-          <p className="text-xl font-semibold">Product Approval Status</p>
-          <ProductHistory history={product.approval.history} />
-        </Card>
-        <div className="w-full flex gap-x-8">
-          <div className="w-1/2 flex flex-col gap-y-8">
+
+        <div className="w-full flex gap-x-4">
+          <div className="w-1/2 flex flex-col gap-y-4">
             <FilesCard
               isPending={isPending}
               creativeFiles={creativeFiles}
               setCreativeFiles={setCreativeFiles}
             />
+            <Separator orientation="horizontal" />
             <PreviewCard
               isPending={isPending}
               previewFiles={previewFiles}
               setPreviewFiles={setPreviewFiles}
             />
           </div>
+          <Separator orientation="vertical" />
           <div className="w-1/2 flex">
             <DetailsCard
               isPending={isPending}
