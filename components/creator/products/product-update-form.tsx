@@ -5,8 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Product } from "@/shared/types/product.type";
 import { Dispatch, SetStateAction } from "react";
 import { ProductEditForm } from "./product-edit-form";
-import { ProductInfo } from "@/components/product/product-info";
-import { Button } from "@/components/ui/button";
+import { ProductApplyCard } from "./product-apply-card";
 
 type Props = {
   product: Product;
@@ -32,23 +31,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
           <ProductHistory history={product.approval.history} />
         </Card>
         {isApproved ? (
-          <div className="flex flex-col gap-y-4">
-            <div className="text-lg">
-              <p>Congratulations!</p>
-              <p>Your product is approved.</p>
-              <p>You can apply for this product to publish.</p>
-            </div>
-
-            <div className="flex gap-x-4">
-              <Button className="w-64 gap-x-4 rounded-none">
-                Apply for publish
-              </Button>
-            </div>
-
-            <Card className="p-6 rounded-none">
-              <ProductInfo product={product} isPending />
-            </Card>
-          </div>
+          <ProductApplyCard product={product} />
         ) : (
           <ProductEditForm product={product} setProduct={setProduct} />
         )}
