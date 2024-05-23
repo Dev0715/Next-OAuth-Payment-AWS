@@ -27,7 +27,6 @@ import {
 } from "@/shared/types/file-preview-types";
 import { userAtom } from "@/store/user";
 
-import { ProductHistory } from "../../product/product-history";
 import { FormError } from "../../utils/form-error";
 import { FormSuccess } from "../../utils/form-success";
 import { QuestionAlert } from "../../utils/question-alert";
@@ -35,6 +34,7 @@ import { QuestionAlert } from "../../utils/question-alert";
 import { DetailsCard } from "./details-card";
 import { FilesCard } from "./files-card";
 import { PreviewCard } from "./preview-card";
+import { ProductHistory } from "../../product/product-history";
 
 import type { Product, ProductState } from "@/shared/types/product.type";
 
@@ -194,7 +194,64 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
   };
 
   return (
+    <div className="w-full">
+      <CardHeader className="w-full flex flex-row items-end justify-between">
+        <div className="flex flex-col">
+          <CardTitle className="text-2xl font-medium">
+            Update a Product
+          </CardTitle>
+        </div>
+        <div className="flex gap-x-6 items-end">
+          <Button
+            disabled={isPending}
+            variant={"outline"}
+            className="w-64 gap-x-4 rounded-none border-green-700"
+            onClick={form.handleSubmit(() => onSubmit("updated"))}
+          >
+            <FaSave />
+            Update Product
+          </Button>
 
+          {isApproved ? (
+            <Button
+              disabled={isPending}
+              className="w-64 gap-x-4 rounded-none"
+              onClick={onPublish}
+            >
+              <FaUpload />
+              Publish
+            </Button>
+          ) : (
+            <Button
+              disabled={isPending}
+              className="w-64 gap-x-4 rounded-none"
+              onClick={form.handleSubmit(() =>
+                onSubmit(isResubmitted ? "resubmitted" : "submitted")
+              )}
+            >
+              <FaUpload />
+              {isResubmitted ? "Resubmit" : "Submit"}
+            </Button>
+          )}
+
+          {!isEverSubmitted && (
+            <QuestionAlert
+              title="Confirmation"
+              message="Are you sure want to delete this item?"
+              onContinue={onDelete}
+            >
+              <Button
+                disabled={isPending}
+                variant={"destructive"}
+                className="w-64 gap-x-4 rounded-none border-green-700"
+              >
+                <FaRecycle />
+                Delete Product
+              </Button>
+            </QuestionAlert>
+          )}
+        </div>
+      </CardHeader>
       <div className="px-6 pb-6">
         <FormError message={error} />
         <FormSuccess message={success} />
@@ -228,5 +285,6 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
           </div>
         </div>
       </CardContent>
+    </div>
   );
 };
