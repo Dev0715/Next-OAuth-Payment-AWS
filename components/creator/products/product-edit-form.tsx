@@ -214,82 +214,84 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
           <ProductHistory history={product.approval.history} />
         </Card>
 
-        <div className="flex gap-x-6 items-end">
-          <Button
-            disabled={isPending}
-            variant={"outline"}
-            className="w-64 gap-x-4 rounded-none border-green-700"
-            onClick={form.handleSubmit(() => onSubmit("updated"))}
-          >
-            <FaSave />
-            Update Product
-          </Button>
-
-          {isApproved ? (
+        <Card className="w-full p-6 flex flex-col items-end gap-y-4 rounded-none">
+          <div className="flex gap-x-6 items-end">
             <Button
               disabled={isPending}
-              className="w-64 gap-x-4 rounded-none"
-              onClick={onPublish}
+              variant={"outline"}
+              className="w-64 gap-x-4 rounded-none border-green-700"
+              onClick={form.handleSubmit(() => onSubmit("updated"))}
             >
-              <FaUpload />
-              Publish
+              <FaSave />
+              Update Product
             </Button>
-          ) : (
-            <Button
-              disabled={isPending}
-              className="w-64 gap-x-4 rounded-none"
-              onClick={form.handleSubmit(() =>
-                onSubmit(isResubmitted ? "resubmitted" : "submitted")
-              )}
-            >
-              <FaUpload />
-              {isResubmitted ? "Resubmit" : "Submit"}
-            </Button>
-          )}
 
-          {!isEverSubmitted && (
-            <QuestionAlert
-              title="Confirmation"
-              message="Are you sure want to delete this item?"
-              onContinue={onDelete}
-            >
+            {isApproved ? (
               <Button
                 disabled={isPending}
-                variant={"destructive"}
-                className="w-64 gap-x-4 rounded-none border-green-700"
+                className="w-64 gap-x-4 rounded-none"
+                onClick={onPublish}
               >
-                <FaRecycle />
-                Delete Product
+                <FaUpload />
+                Publish
               </Button>
-            </QuestionAlert>
-          )}
-        </div>
+            ) : (
+              <Button
+                disabled={isPending}
+                className="w-64 gap-x-4 rounded-none"
+                onClick={form.handleSubmit(() =>
+                  onSubmit(isResubmitted ? "resubmitted" : "submitted")
+                )}
+              >
+                <FaUpload />
+                {isResubmitted ? "Resubmit" : "Submit"}
+              </Button>
+            )}
 
-        <div className="w-full h-full flex gap-x-4">
-          <div className="w-1/2 flex flex-col gap-y-4">
-            <FilesCard
-              isPending={isPending}
-              creativeFiles={creativeFiles}
-              setCreativeFiles={setCreativeFiles}
-            />
-            <Separator orientation="horizontal" />
-            <PreviewCard
-              isPending={isPending}
-              previewFiles={previewFiles}
-              setPreviewFiles={setPreviewFiles}
-            />
+            {!isEverSubmitted && (
+              <QuestionAlert
+                title="Confirmation"
+                message="Are you sure want to delete this item?"
+                onContinue={onDelete}
+              >
+                <Button
+                  disabled={isPending}
+                  variant={"destructive"}
+                  className="w-64 gap-x-4 rounded-none border-green-700"
+                >
+                  <FaRecycle />
+                  Delete Product
+                </Button>
+              </QuestionAlert>
+            )}
           </div>
-          <div className="w-[1px] h-full flex"></div>
-          <div className="w-1/2 flex">
-            <DetailsCard
-              isPending={isPending}
-              isUpdating={true}
-              form={form}
-              selectedKeywords={selectedKeywords}
-              setSelectedKeywords={setSelectedKeywords}
-            />
+
+          <Separator orientation="horizontal" />
+
+          <div className="w-full h-full flex gap-x-8">
+            <div className="w-1/2 flex flex-col gap-y-8">
+              <FilesCard
+                isPending={isPending}
+                creativeFiles={creativeFiles}
+                setCreativeFiles={setCreativeFiles}
+              />
+              <PreviewCard
+                isPending={isPending}
+                previewFiles={previewFiles}
+                setPreviewFiles={setPreviewFiles}
+              />
+            </div>
+            <div className="w-1/2 flex">
+              <DetailsCard
+                isPending={isPending}
+                isUpdating={true}
+                form={form}
+                selectedKeywords={selectedKeywords}
+                setSelectedKeywords={setSelectedKeywords}
+              />
+            </div>
           </div>
-        </div>
+        </Card>
       </CardContent>
     </div>
   );
