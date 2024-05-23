@@ -54,7 +54,7 @@ export const ProductApplyCard = ({ product, onUpdateMore }: Props) => {
 
       {isPreview ? (
         <Card className="p-6 rounded-none">
-          <ProductInfo product={product} isPending />
+          <ProductInfo product={product} isPending={true} />
         </Card>
       ) : null}
     </div>
