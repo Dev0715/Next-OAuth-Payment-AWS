@@ -1,8 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-
 import type { User } from "../types/user.type";
 import type { SignedUpData } from "../types/signup-data.type";
-import { uploadImage } from "./upload-image";
 
 export const getUserFromGeneralDetails = async (
   generalDetails: SignedUpData["generalDetails"]

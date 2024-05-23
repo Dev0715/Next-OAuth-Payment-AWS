@@ -1,17 +1,15 @@
 import { useRouter } from "next/navigation";
-
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 
 import { ProductInfo } from "@/components/product/product-info";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { QuestionAlert } from "@/components/utils/question-alert";
 
-import { Product } from "@/shared/types/product.type";
+import type { Product } from "@/shared/types/product.type";
 
 type Props = {
   product: Product;

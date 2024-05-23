@@ -4,8 +4,6 @@ import {
   DeleteCommand,
   GetCommand,
   PutCommand,
-  QueryCommand,
-  QueryCommandInput,
   ScanCommand,
   UpdateCommand,
   type ScanCommandInput

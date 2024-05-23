@@ -17,27 +17,22 @@ import {
 
 import { LogoutButton } from "@/components/auth/logout-button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-
+import { Separator } from "@/components/ui/separator";
 import { getUserById } from "@/data/user";
 import { useCurrentRole } from "@/hooks/use-current-role";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { cartAtom } from "@/store/cart";
 import { userAtom } from "@/store/user";
 
-import { Button } from "../ui/button";
-
-import { Separator } from "../ui/separator";
-
 import { LoginButton } from "./login-button";
 import { SignupButton } from "./signup-button";
-
-
 
 export const UserButton = () => {
   const [user] = useAtom(userAtom);

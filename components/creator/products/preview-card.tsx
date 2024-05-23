@@ -2,9 +2,8 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { FaFileUpload } from "react-icons/fa";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { FileUploadButton } from "@/components/utils/file-upload-button";
 import { FileOrString } from "@/shared/types/file-preview-types";
-
-import { FileUploadButton } from "../../utils/file-upload-button";
 
 import { PreviewDialog } from "./preview-dialog";
 import { ImagePreview } from "./preview-image";

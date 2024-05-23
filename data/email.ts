@@ -1,7 +1,8 @@
 "use server";
 
-import sesClient from "@/lib/ses";
 import { SendEmailCommand } from "@aws-sdk/client-ses";
+
+import sesClient from "@/lib/ses";
 
 type Params = {
   from: string;

@@ -16,7 +16,6 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { FaPlus } from "react-icons/fa";
 
-import { useToast } from "@/components/ui/use-toast";
 import { getColumnsForBundlesTable } from "@/components/admin/bundles/bundles-colum";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,6 +33,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { useToast } from "@/components/ui/use-toast";
 import { deleteBundle, getAllBundles } from "@/data/bundle";
 
 import { Navbar } from "../_components/navbar";

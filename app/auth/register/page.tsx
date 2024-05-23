@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 
 import { register } from "@/actions/auth/register/register";
 import { GeneralDetailsForm } from "@/components/auth/register/general-details-form";
-import { TransitionInOut } from "@/components/utils/transition-in-out";
 import { useToast } from "@/components/ui/use-toast";
+import { TransitionInOut } from "@/components/utils/transition-in-out";
 import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
 import { SignedUpData } from "@/shared/types/signup-data.type";
 

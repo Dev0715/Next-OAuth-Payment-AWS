@@ -32,8 +32,8 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { useToast } from "@/components/ui/use-toast";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import {
   deleteUserById,
   getAllUsers,
