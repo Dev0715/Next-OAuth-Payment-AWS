@@ -15,8 +15,8 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { FaPlus } from "react-icons/fa";
-import { toast } from "sonner";
 
+import { useToast } from "@/components/ui/use-toast";
 import { getColumnsForBundlesTable } from "@/components/admin/bundles/bundles-colum";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,6 +44,8 @@ const ROWS_PER_PAGE = 10;
 
 const ManagementBundles = () => {
   const [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
+
   const [bundles, setBundles] = useState<Bundle[]>([]);
   const [lastEvaluatedKey, setLastEvaluatedKey] =
     useState<Record<string, string>>();
@@ -59,7 +61,7 @@ const ManagementBundles = () => {
         if (res?.success) {
           setBundles(bundles.filter((bundle) => bundle.bundleId !== bundleId));
         } else {
-          toast.error("Failed to delete bundle.");
+          toast({ title: "Failed to delete bundle.", variant: "destructive" });
         }
       });
     });

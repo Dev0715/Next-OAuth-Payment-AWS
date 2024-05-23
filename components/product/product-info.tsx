@@ -1,15 +1,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
 import { FaDownload, FaRegUser } from "react-icons/fa";
-
-import { toast } from "sonner";
 
 import { Thumbnail } from "@/components/product/thumbnail";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 import { Button } from "@/components/ui/button";
-
+import { useToast } from "@/components/ui/use-toast";
 import { getProductById } from "@/data/product";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
@@ -26,6 +22,7 @@ type Props = {
 
 export const ProductInfo = ({ product, isPending }: Props) => {
   const { getLinkFromS3 } = useLinkFromS3();
+  const { toast } = useToast();
 
   const [imageList, setImageList] = useState<string[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
@@ -63,7 +60,10 @@ export const ProductInfo = ({ product, isPending }: Props) => {
         link.click();
       })
       .catch(() => {
-        toast.error("Failed to download the creative files");
+        toast({
+          title: "Failed to download the creative files",
+          variant: "destructive"
+        });
       })
       .finally(() => {});
 
