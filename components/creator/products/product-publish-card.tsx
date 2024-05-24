@@ -50,7 +50,7 @@ export const ProductPublishCard = ({
               variant={"outline"}
               className="w-64 flex gap-x-4 border-green-700 rounded-none"
             >
-              Withdraw from publish
+              Withdraw from Applied
             </Button>
           </QuestionAlert>
         </div>

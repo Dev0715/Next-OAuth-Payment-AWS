@@ -88,7 +88,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
           <p className="text-xl font-semibold">Product Approval Status</p>
           <ProductHistory history={product.approval.history} />
         </Card>
-        {state === "approved" ? (
+        {state === "approved" || state === "withdrawn-applied" ? (
           <ProductApplyCard
             product={product}
             onUpdateMore={onUpdateMore}
