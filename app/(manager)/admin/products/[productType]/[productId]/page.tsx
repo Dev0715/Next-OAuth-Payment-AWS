@@ -5,8 +5,9 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 
 import { ProductApprovement } from "@/components/admin/products/product-approvement";
 import { ProductHistory } from "@/components/product/product-history";
+
 import { ProductInfo } from "@/components/product/product-info";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 import { getProductById, updateProductApproval } from "@/data/product";
@@ -31,6 +32,13 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const [product, setProduct] = useState<Product>();
   const [comment, setComment] = useState<string>("");
 
+  const isApproval = useMemo(() => {
+    return (
+      product?.approval.state === "submitted" ||
+      product?.approval.state === "resubmitted"
+    );
+  }, [product]);
+
   useEffect(() => {
     if (params.productType && params.productId) {
       getProductById(params.productType, params.productId).then((_product) => {
@@ -38,13 +46,6 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
       });
     }
   }, [params]);
-
-  const isApproval = useMemo(() => {
-    return (
-      product?.approval.state === "submitted" ||
-      product?.approval.state === "resubmitted"
-    );
-  }, [product]);
 
   const checkComment = () => {
     if (comment.length < 10) {
@@ -101,10 +102,13 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         message={confirmingMessage}
         onOK={() => setConfirming(false)}
       />
-      <Navbar
-        title={`Approval for Product - ${product?.title}`}
-        content="You can check the details of product and approve it"
-      />
+      <CardHeader className="w-full flex flex-row items-end justify-between">
+        <div className="w-full flex flex-col">
+          <CardTitle className="w-full p-2 text-2xl font-medium bg-gray-100 rounded-lg">
+            {`${product.productType} / ${product.title}`}
+          </CardTitle>
+        </div>
+      </CardHeader>
       <ProductInfo product={product} isPending={isPending} />
       <Card className="p-6 rounded-none">
         <div className="w-full flex flex-col gap-y-4">
