@@ -47,3 +47,16 @@ export const PRODUCT_STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
   "withdrawn-applied": "destructive",
   "withdrawn-published": "destructive"
 };
+
+export const STATE_DISPLAY_TEXT: Record<ProductState, string> = {
+  created: "Created",
+  updated: "Updated",
+  submitted: "Submitted",
+  resubmitted: "Resubmitted",
+  approved: "Approved",
+  rejected: "Rejected",
+  applied: "Applied", // Applied to be published
+  published: "Published",
+  "withdrawn-applied": "Withdrawn from applied",
+  "withdrawn-published": "Withdrawn from published"
+};

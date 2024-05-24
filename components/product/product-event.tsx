@@ -1,5 +1,8 @@
 import { Badge } from "@/components/ui/badge";
-import { PRODUCT_STATE_BADGE_VARIANT } from "@/shared/constants/product.constant";
+import {
+  PRODUCT_STATE_BADGE_VARIANT,
+  STATE_DISPLAY_TEXT
+} from "@/shared/constants/product.constant";
 
 import type { ProductEvent } from "@/shared/types/product.type";
 
@@ -12,7 +15,7 @@ export const ProductEventCard = ({ event }: Props) => {
     <div className="w-full flex flex-col gap-y-2">
       <div className="flex items-center gap-x-2">
         <Badge variant={PRODUCT_STATE_BADGE_VARIANT[event.state]}>
-          {event.state}
+          {STATE_DISPLAY_TEXT[event.state]}
         </Badge>
         <p className="text-gray-500 text-sm">by</p>
         <p className="font-semibold">{event.userId}</p>
