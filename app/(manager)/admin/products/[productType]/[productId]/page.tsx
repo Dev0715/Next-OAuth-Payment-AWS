@@ -3,6 +3,7 @@
 import { useAtom } from "jotai";
 import { useEffect, useMemo, useState, useTransition } from "react";
 
+import { ProductApply } from "@/components/admin/products/product-apply";
 import { ProductApprovement } from "@/components/admin/products/product-approvement";
 import { ProductHistory } from "@/components/product/product-history";
 
@@ -18,7 +19,6 @@ import type {
   ProductLink,
   ProductState
 } from "@/shared/types/product.type";
-import { ProductApply } from "@/components/admin/products/product-apply";
 
 export default function ProductDetails({ params }: { params: ProductLink }) {
   const [user] = useAtom(userAtom);
@@ -50,6 +50,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     }
   }, [params]);
 
+  if (!product) return;
+
   const checkComment = () => {
     if (comment.length < 10) {
       setConfirming(true);
@@ -63,41 +65,59 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   };
 
   const onCommentProduct = (isApprove: boolean) => {
-    if (!checkComment()) {
-      return;
-    }
-
-    startTransition(() => {
-      const history = [...(product?.approval.history || [])];
-      const state: ProductState = isApprove ? "approved" : "rejected";
-      history.push({
-        state,
-        comment,
-        userId: user?.userId as string,
-        time: new Date().toISOString()
+    if (checkComment()) {
+      startTransition(() => {
+        const newState: ProductState = isApprove ? "approved" : "rejected";
+        const updatedProduct = {
+          ...product,
+          approval: {
+            state: newState,
+            history: [
+              ...product.approval.history,
+              {
+                state: newState,
+                comment,
+                userId: user?.userId as string,
+                time: new Date().toISOString()
+              }
+            ]
+          }
+        };
+        updateProductApproval(updatedProduct).then((res) => {
+          if (res.success) {
+            setProduct(updatedProduct);
+          }
+          setComment("");
+        });
       });
-      const approval = { state, history };
-      updateProductApproval({
-        productType: params.productType,
-        productId: params.productId,
-        approval
-      }).then((res) => {
-        if (res.success) {
-          setProduct((prev) => {
-            if (prev) {
-              return { ...prev, approval };
+    }
+  };
+
+  const onPublish = () => {
+    startTransition(() => {
+      const newState: ProductState = "published";
+      const updatedProduct = {
+        ...product,
+        approval: {
+          state: newState,
+          history: [
+            ...product.approval.history,
+            {
+              state: newState,
+              comment: "Published",
+              userId: user?.userId as string,
+              time: new Date().toISOString()
             }
-            return prev;
-          });
+          ]
         }
-        setComment("");
+      };
+      updateProductApproval(updatedProduct).then((res) => {
+        if (res.success) {
+          setProduct(updatedProduct);
+        }
       });
     });
   };
-
-  const onPublish = () => {};
-
-  if (!product) return;
 
   return (
     <div className="w-full flex flex-col gap-y-8">

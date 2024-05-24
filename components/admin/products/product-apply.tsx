@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { QuestionAlert } from "@/components/utils/question-alert";
 import { Card } from "@/components/ui/card";
+
+import { QuestionAlert } from "@/components/utils/question-alert";
 
 type Props = {
   isPending: boolean;
@@ -10,12 +11,17 @@ type Props = {
 export const ProductApply = ({ isPending, onPublish }: Props) => {
   return (
     <Card className="w-full p-6 flex flex-col gap-y-4">
-      <p className="text-2xl font-semibold">Product Approvement</p>
+      <div className="flex flex-col">
+        <p className="text-2xl font-semibold">Publish Product</p>
+        <p className="text-lg text-gray-500">
+          You can publish this product so that users can see it.
+        </p>
+      </div>
       <div className="w-full flex items-end justify-between gap-x-8">
         <div className="flex items-center gap-x-4">
           <QuestionAlert
-            title="Approve Product"
-            message="Are you sure to approve this product?"
+            title="Publish Product"
+            message="Are you sure to publish this product?"
             onContinue={() => onPublish()}
           >
             <Button
@@ -23,7 +29,7 @@ export const ProductApply = ({ isPending, onPublish }: Props) => {
               variant={"default"}
               className="w-32 rounded-none"
             >
-              Approve
+              Publish
             </Button>
           </QuestionAlert>
         </div>

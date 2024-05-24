@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+
 import { Textarea } from "@/components/ui/textarea";
 import { QuestionAlert } from "@/components/utils/question-alert";
-import { Card } from "@/components/ui/card";
 
 type Props = {
   isPending: boolean;
