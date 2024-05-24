@@ -17,6 +17,7 @@ import { QuestionAlert } from "../../utils/question-alert";
 import { ProductApplyCard } from "./product-apply-card";
 import { ProductEditForm } from "./product-edit-form";
 import { ProductPublishCard } from "./product-publish-card";
+import { ProductWithdrawCard } from "./product-withdraw-card";
 
 type Props = {
   product: Product;
@@ -85,6 +86,32 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
     });
   };
 
+  const onWithdrawFromPublished = () => {
+    const newState: ProductState = "withdrawn-published";
+    const updatedProduct = {
+      ...product,
+      approval: {
+        state: newState,
+        history: [
+          ...product.approval.history,
+          {
+            state: newState,
+            comment: "Product removed from sale",
+            userId: user?.userId,
+            time: new Date().toISOString()
+          }
+        ]
+      }
+    } as Product;
+
+    updateProductApproval(updatedProduct).then((res) => {
+      if (res.success) {
+        setProduct(updatedProduct);
+        setState(newState);
+      }
+    });
+  };
+
   return (
     <div className="w-full">
       <CardHeader className="w-full flex flex-row items-end justify-between">
@@ -127,6 +154,11 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
           <ProductPublishCard
             product={product}
             onWithdrawFromApplied={onWithdrawFromApplied}
+          />
+        ) : state === "published" ? (
+          <ProductWithdrawCard
+            product={product}
+            onWithdrawFromPublished={onWithdrawFromPublished}
           />
         ) : (
           <ProductEditForm product={product} setProduct={setProduct} />
