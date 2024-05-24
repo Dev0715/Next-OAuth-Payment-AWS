@@ -64,10 +64,9 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     return true;
   };
 
-  const onCommentProduct = (isApprove: boolean) => {
+  const onCommentProduct = (newState: ProductState) => {
     if (checkComment()) {
       startTransition(() => {
-        const newState: ProductState = isApprove ? "approved" : "rejected";
         const updatedProduct = {
           ...product,
           approval: {

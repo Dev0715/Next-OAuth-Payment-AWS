@@ -5,12 +5,13 @@ import { Card } from "@/components/ui/card";
 
 import { Textarea } from "@/components/ui/textarea";
 import { QuestionAlert } from "@/components/utils/question-alert";
+import { ProductState } from "@/shared/types/product.type";
 
 type Props = {
   isPending: boolean;
   comment: string;
   setComment: Dispatch<SetStateAction<string>>;
-  onCommentProduct: (isApproved: boolean) => void;
+  onCommentProduct: (action: ProductState) => void;
 };
 
 export const ProductApprovement = ({
@@ -35,7 +36,7 @@ export const ProductApprovement = ({
           <QuestionAlert
             title="Approve Product"
             message="Are you sure to approve this product?"
-            onContinue={() => onCommentProduct(true)}
+            onContinue={() => onCommentProduct("approved")}
           >
             <Button
               disabled={isPending}
@@ -48,7 +49,7 @@ export const ProductApprovement = ({
           <QuestionAlert
             title="Reject Product"
             message="Are you sure to reject this product?"
-            onContinue={() => onCommentProduct(false)}
+            onContinue={() => onCommentProduct("rejected")}
           >
             <Button
               disabled={isPending}
