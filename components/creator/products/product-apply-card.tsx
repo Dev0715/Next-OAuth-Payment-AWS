@@ -36,9 +36,15 @@ export const ProductApplyCard = ({ product, onUpdateMore, onApply }: Props) => {
 
       <div className="w-full flex justify-between">
         <div className="flex gap-x-4">
-          <Button className="w-64 flex gap-x-4 rounded-none" onClick={onApply}>
-            Apply for publish
-          </Button>
+          <QuestionAlert
+            title="Apply"
+            message="Are you sure want to apply for publish?"
+            onContinue={onApply}
+          >
+            <Button className="w-64 flex gap-x-4 rounded-none">
+              Apply for publish
+            </Button>
+          </QuestionAlert>
           <QuestionAlert
             title="Update"
             message="Are you sure want to update more?"
