@@ -88,10 +88,6 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-8">
-        <Card className="w-full p-6 flex flex-col gap-y-4">
-          <p className="text-xl font-semibold">Product Approval Status</p>
-          <ProductHistory history={product.approval.history} />
-        </Card>
         {state === "approved" || state === "withdrawn-applied" ? (
           <ProductApplyCard
             product={product}
@@ -106,6 +102,10 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
         ) : (
           <ProductEditForm product={product} setProduct={setProduct} />
         )}
+        <Card className="w-full p-6 flex flex-col gap-y-4">
+          <p className="text-xl font-semibold">Product Approval Status</p>
+          <ProductHistory history={product.approval.history} />
+        </Card>
       </CardContent>
     </div>
   );

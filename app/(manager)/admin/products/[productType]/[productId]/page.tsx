@@ -107,13 +107,15 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         </CardTitle>
       </div>
 
-      <ProductInfo product={product} isPending={isPending} />
       <Card className="p-6 rounded-none">
         <div className="w-full flex flex-col gap-y-4">
-          <p className="text-2xl font-semibold">Product History</p>
+          <p className="text-2xl font-semibold">Product State</p>
           <ProductHistory history={product?.approval.history || []} />
         </div>
       </Card>
+
+      <ProductInfo product={product} isPending={isPending} />
+
       {isApproval ? (
         <ProductApprovement
           isPending={isPending}
