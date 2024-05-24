@@ -7,13 +7,11 @@ import { ProductApprovement } from "@/components/admin/products/product-approvem
 import { ProductHistory } from "@/components/product/product-history";
 
 import { ProductInfo } from "@/components/product/product-info";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardTitle } from "@/components/ui/card";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 import { getProductById, updateProductApproval } from "@/data/product";
 import { userAtom } from "@/store/user";
-
-import { Navbar } from "../../../_components/navbar";
 
 import type {
   Product,
@@ -102,13 +100,13 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         message={confirmingMessage}
         onOK={() => setConfirming(false)}
       />
-      <CardHeader className="w-full flex flex-row items-end justify-between">
-        <div className="w-full flex flex-col">
-          <CardTitle className="w-full p-2 text-2xl font-medium bg-gray-100 rounded-lg">
-            {`${product.productType} / ${product.title}`}
-          </CardTitle>
-        </div>
-      </CardHeader>
+
+      <div className="w-full flex flex-col">
+        <CardTitle className="w-full p-2 text-2xl font-medium bg-gray-100 rounded-lg">
+          {`${product.productType} / ${product.title}`}
+        </CardTitle>
+      </div>
+
       <ProductInfo product={product} isPending={isPending} />
       <Card className="p-6 rounded-none">
         <div className="w-full flex flex-col gap-y-4">
