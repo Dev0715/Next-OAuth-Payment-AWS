@@ -3,6 +3,8 @@
 import { useAtom } from "jotai";
 import { useEffect, useMemo, useState, useTransition } from "react";
 
+import { Loading } from "@/app/_components/loading";
+
 import { ProductApply } from "@/components/admin/products/product-apply";
 import { ProductApprovement } from "@/components/admin/products/product-approvement";
 import { ProductHistory } from "@/components/product/product-history";
@@ -50,7 +52,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     }
   }, [params]);
 
-  if (!product) return;
+  if (!product) return <Loading />;
 
   const checkComment = () => {
     if (comment.length < 10) {
