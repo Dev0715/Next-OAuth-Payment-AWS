@@ -3,11 +3,16 @@
 import { useAtom } from "jotai";
 import { Dispatch, SetStateAction, useState } from "react";
 
+import { FaTrash } from "react-icons/fa";
+
 import { ProductHistory } from "@/components/product/product-history";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { updateProductApproval } from "@/data/product";
 import { Product, ProductState } from "@/shared/types/product.type";
 import { userAtom } from "@/store/user";
+
+import { QuestionAlert } from "../../utils/question-alert";
 
 import { ProductApplyCard } from "./product-apply-card";
 import { ProductEditForm } from "./product-edit-form";
@@ -90,10 +95,28 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-8">
-        <Card className="w-full p-6 flex flex-col gap-y-4">
-          <p className="text-xl font-semibold">Product Approval Status</p>
-          <ProductHistory history={product.approval.history} />
-        </Card>
+        <div
+          className="flex flex-col items-end
+         gap-y-4"
+        >
+          <QuestionAlert
+            title="Confirmation"
+            message="Are you sure want to delete this item?"
+            onContinue={onDelete}
+          >
+            <Button
+              variant={"destructive"}
+              className="w-64 gap-x-4 rounded-none border-green-700"
+            >
+              <FaTrash />
+              Delete Product
+            </Button>
+          </QuestionAlert>
+          <Card className="w-full p-6 flex flex-col gap-y-4">
+            <p className="text-xl font-semibold">Product Approval Status</p>
+            <ProductHistory history={product.approval.history} />
+          </Card>
+        </div>
         {state === "approved" || state === "withdrawn-applied" ? (
           <ProductApplyCard
             product={product}
@@ -106,11 +129,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
             onWithdrawFromApplied={onWithdrawFromApplied}
           />
         ) : (
-          <ProductEditForm
-            product={product}
-            setProduct={setProduct}
-            onDelete={onDelete}
-          />
+          <ProductEditForm product={product} setProduct={setProduct} />
         )}
       </CardContent>
     </div>

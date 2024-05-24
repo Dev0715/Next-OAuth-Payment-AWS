@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaSave, FaTrash, FaUpload } from "react-icons/fa";
+import { FaSave, FaUpload } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
@@ -22,7 +22,6 @@ import { userAtom } from "@/store/user";
 
 import { FormError } from "../../utils/form-error";
 import { FormSuccess } from "../../utils/form-success";
-import { QuestionAlert } from "../../utils/question-alert";
 
 import { DetailsCard } from "./details-card";
 import { FilesCard } from "./files-card";
@@ -33,10 +32,9 @@ import type { Product, ProductState } from "@/shared/types/product.type";
 type Props = {
   product: Product;
   setProduct: Dispatch<SetStateAction<Product | undefined>>;
-  onDelete: () => void;
 };
 
-export const ProductEditForm = ({ product, setProduct, onDelete }: Props) => {
+export const ProductEditForm = ({ product, setProduct }: Props) => {
   const [user] = useAtom(userAtom);
 
   const [isPending, setPending] = useState<boolean>(false);
@@ -185,21 +183,6 @@ export const ProductEditForm = ({ product, setProduct, onDelete }: Props) => {
           <FaUpload />
           {isResubmitted ? "Resubmit" : "Submit"}
         </Button>
-
-        <QuestionAlert
-          title="Confirmation"
-          message="Are you sure want to delete this item?"
-          onContinue={onDelete}
-        >
-          <Button
-            disabled={isPending}
-            variant={"destructive"}
-            className="w-64 gap-x-4 rounded-none border-green-700"
-          >
-            <FaTrash />
-            Delete Product
-          </Button>
-        </QuestionAlert>
       </div>
 
       {success || error ? (
