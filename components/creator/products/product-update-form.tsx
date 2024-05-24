@@ -27,14 +27,15 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
   };
 
   const onApply = () => {
+    const newState: ProductState = "applied";
     const updatedProduct = {
       ...product,
       approval: {
-        state: "applied",
+        state: newState,
         history: [
           ...product.approval.history,
           {
-            state: "applied",
+            state: newState,
             comment: "Product applied for publish",
             userId: user?.userId,
             time: new Date().toISOString()
@@ -46,19 +47,21 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
     updateProductApproval(updatedProduct).then((res) => {
       if (res.success) {
         setProduct(updatedProduct);
+        setState(newState);
       }
     });
   };
 
   const onWithdrawFromApplied = () => {
+    const newState: ProductState = "withdrawn-applied";
     const updatedProduct = {
       ...product,
       approval: {
-        state: "withdrawn-applied",
+        state: newState,
         history: [
           ...product.approval.history,
           {
-            state: "withdrawn-applied",
+            state: newState,
             comment: "Product withdrawn from applied state",
             userId: user?.userId,
             time: new Date().toISOString()
@@ -70,6 +73,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
     updateProductApproval(updatedProduct).then((res) => {
       if (res.success) {
         setProduct(updatedProduct);
+        setState(newState);
       }
     });
   };
