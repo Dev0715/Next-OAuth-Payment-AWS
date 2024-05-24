@@ -18,6 +18,7 @@ import type {
   ProductLink,
   ProductState
 } from "@/shared/types/product.type";
+import { ProductApply } from "@/components/admin/products/product-apply";
 
 export default function ProductDetails({ params }: { params: ProductLink }) {
   const [user] = useAtom(userAtom);
@@ -30,11 +31,15 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
   const [product, setProduct] = useState<Product>();
   const [comment, setComment] = useState<string>("");
 
-  const isApproval = useMemo(() => {
+  const isSubmitted = useMemo(() => {
     return (
       product?.approval.state === "submitted" ||
       product?.approval.state === "resubmitted"
     );
+  }, [product]);
+
+  const isApplied = useMemo(() => {
+    return product?.approval.state === "applied";
   }, [product]);
 
   useEffect(() => {
@@ -90,6 +95,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
     });
   };
 
+  const onPublish = () => {};
+
   if (!product) return;
 
   return (
@@ -114,13 +121,15 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         </div>
       </Card>
 
-      {isApproval ? (
+      {isSubmitted ? (
         <ProductApprovement
           isPending={isPending}
           comment={comment}
           setComment={setComment}
           onCommentProduct={onCommentProduct}
         />
+      ) : isApplied ? (
+        <ProductApply isPending={isPending} onPublish={onPublish} />
       ) : null}
 
       <ProductInfo product={product} isPending={isPending} />
