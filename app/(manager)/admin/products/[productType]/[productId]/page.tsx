@@ -114,8 +114,6 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         </div>
       </Card>
 
-      <ProductInfo product={product} isPending={isPending} />
-
       {isApproval ? (
         <ProductApprovement
           isPending={isPending}
@@ -124,6 +122,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           onCommentProduct={onCommentProduct}
         />
       ) : null}
+
+      <ProductInfo product={product} isPending={isPending} />
     </div>
   );
 }
