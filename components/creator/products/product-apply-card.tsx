@@ -17,13 +17,22 @@ type Props = {
 export const ProductApplyCard = ({ product, onUpdateMore, onApply }: Props) => {
   const [isPreview, setPreview] = useState<boolean>(false);
 
+  const productState = product.approval.state;
+
   return (
     <div className="flex flex-col gap-y-6">
-      <div className="text-base">
-        <p>Congratulations!</p>
-        <p>Your product is approved.</p>
-        <p>You can apply for this product to publish.</p>
-      </div>
+      {productState === "applied" ? (
+        <div className="text-base">
+          <p>Congratulations!</p>
+          <p>Your product is approved.</p>
+          <p>You can apply for this product to publish.</p>
+        </div>
+      ) : (
+        <div className="text-base">
+          <p>You have withdrawn your product from queue for publish.</p>
+          <p>You can publish again directly or update product and resubmit.</p>
+        </div>
+      )}
 
       <div className="w-full flex justify-between">
         <div className="flex gap-x-4">
@@ -55,7 +64,7 @@ export const ProductApplyCard = ({ product, onUpdateMore, onApply }: Props) => {
 
       {isPreview ? (
         <Card className="p-6 rounded-none">
-          <ProductInfo product={product} isPending={true} />
+          <ProductInfo product={product} isPending={false} />
         </Card>
       ) : null}
     </div>
