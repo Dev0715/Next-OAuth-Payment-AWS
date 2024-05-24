@@ -26,6 +26,8 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
     setState("updated");
   };
 
+  const onDelete = () => {};
+
   const onApply = () => {
     const newState: ProductState = "applied";
     const updatedProduct = {
@@ -98,13 +100,17 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
             onUpdateMore={onUpdateMore}
             onApply={onApply}
           />
-        ) : state === "applied" ? (
+        ) : state === "applied" || state === "withdrawn-published" ? (
           <ProductPublishCard
             product={product}
             onWithdrawFromApplied={onWithdrawFromApplied}
           />
         ) : (
-          <ProductEditForm product={product} setProduct={setProduct} />
+          <ProductEditForm
+            product={product}
+            setProduct={setProduct}
+            onDelete={onDelete}
+          />
         )}
       </CardContent>
     </div>

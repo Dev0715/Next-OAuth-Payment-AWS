@@ -2,10 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaRecycle, FaSave, FaUpload } from "react-icons/fa";
+import { FaSave, FaTrash, FaUpload } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
@@ -13,7 +12,6 @@ import { updateProduct } from "@/actions/product/update-product";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { deleteProduct } from "@/data/product";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { NewProductSchema } from "@/schemas/product";
 import {
@@ -35,10 +33,10 @@ import type { Product, ProductState } from "@/shared/types/product.type";
 type Props = {
   product: Product;
   setProduct: Dispatch<SetStateAction<Product | undefined>>;
+  onDelete: () => void;
 };
 
-export const ProductEditForm = ({ product, setProduct }: Props) => {
-  const history = useRouter();
+export const ProductEditForm = ({ product, setProduct, onDelete }: Props) => {
   const [user] = useAtom(userAtom);
 
   const [isPending, setPending] = useState<boolean>(false);
@@ -48,14 +46,6 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
   const [previewFiles, setPreviewFiles] = useState<FileOrString[]>([]);
   const [creativeFiles, setCreativeFiles] = useState<FileOrCreativeFile[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-
-  const isApproved = product.approval.state === "approved";
-
-  const isEverSubmitted = useMemo(() => {
-    return !!product.approval.history.find(
-      (item) => item.state === "submitted" || item.state === "resubmitted"
-    );
-  }, [product]);
 
   const isResubmitted = useMemo(() => {
     return !!product.approval.history.find(
@@ -159,17 +149,6 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
     });
   };
 
-  const onDelete = () => {
-    deleteProduct(product.productType, product.productId).then((res) => {
-      if (res.success) {
-        setSuccess("Product deleted successfully");
-        setTimeout(() => {
-          history.replace(`/creator/${user?.userId}`);
-        }, 1000);
-      }
-    });
-  };
-
   const onSubmit = (action: ProductState) => {
     if (creativeFiles.length === 0 || previewFiles.length === 0) {
       setSuccess("");
@@ -181,10 +160,6 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
     setPending(true);
 
     submitProduct(action);
-  };
-
-  const onPublish = () => {
-    form.handleSubmit(() => onSubmit("applied"));
   };
 
   return (
@@ -200,44 +175,31 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
           Update Product
         </Button>
 
-        {isApproved ? (
-          <Button
-            disabled={isPending}
-            className="w-64 gap-x-4 rounded-none"
-            onClick={onPublish}
-          >
-            <FaUpload />
-            Publish
-          </Button>
-        ) : (
-          <Button
-            disabled={isPending}
-            className="w-64 gap-x-4 rounded-none"
-            onClick={form.handleSubmit(() =>
-              onSubmit(isResubmitted ? "resubmitted" : "submitted")
-            )}
-          >
-            <FaUpload />
-            {isResubmitted ? "Resubmit" : "Submit"}
-          </Button>
-        )}
+        <Button
+          disabled={isPending}
+          className="w-64 gap-x-4 rounded-none"
+          onClick={form.handleSubmit(() =>
+            onSubmit(isResubmitted ? "resubmitted" : "submitted")
+          )}
+        >
+          <FaUpload />
+          {isResubmitted ? "Resubmit" : "Submit"}
+        </Button>
 
-        {!isEverSubmitted && (
-          <QuestionAlert
-            title="Confirmation"
-            message="Are you sure want to delete this item?"
-            onContinue={onDelete}
+        <QuestionAlert
+          title="Confirmation"
+          message="Are you sure want to delete this item?"
+          onContinue={onDelete}
+        >
+          <Button
+            disabled={isPending}
+            variant={"destructive"}
+            className="w-64 gap-x-4 rounded-none border-green-700"
           >
-            <Button
-              disabled={isPending}
-              variant={"destructive"}
-              className="w-64 gap-x-4 rounded-none border-green-700"
-            >
-              <FaRecycle />
-              Delete Product
-            </Button>
-          </QuestionAlert>
-        )}
+            <FaTrash />
+            Delete Product
+          </Button>
+        </QuestionAlert>
       </div>
 
       {success || error ? (
