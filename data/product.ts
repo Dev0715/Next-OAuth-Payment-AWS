@@ -248,7 +248,7 @@ type ParamsType = {
   approval: { state: ProductState; history: ProductEvent[] };
 };
 
-export const updateProductApproval = async ({
+export const updateProductState = async ({
   productType,
   productId,
   approval
@@ -264,7 +264,7 @@ export const updateProductApproval = async ({
   });
 
   try {
-    const response = await db.send(command);
+    await db.send(command);
     return {
       success: true
     };

@@ -13,7 +13,7 @@ import { ProductInfo } from "@/components/product/product-info";
 import { Card, CardTitle } from "@/components/ui/card";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
-import { getProductById, updateProductApproval } from "@/data/product";
+import { getProductById, updateProductState } from "@/data/product";
 import { userAtom } from "@/store/user";
 
 import type {
@@ -84,7 +84,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
             ]
           }
         };
-        updateProductApproval(updatedProduct).then((res) => {
+        updateProductState(updatedProduct).then((res) => {
           if (res.success) {
             setProduct(updatedProduct);
           }
@@ -112,7 +112,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
           ]
         }
       };
-      updateProductApproval(updatedProduct).then((res) => {
+      updateProductState(updatedProduct).then((res) => {
         if (res.success) {
           setProduct(updatedProduct);
         }

@@ -13,7 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
 
-import { deleteProduct, updateProductApproval } from "@/data/product";
+import { deleteProduct, updateProductState } from "@/data/product";
 import { Product, ProductState } from "@/shared/types/product.type";
 import { userAtom } from "@/store/user";
 
@@ -81,7 +81,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
       }
     } as Product;
 
-    updateProductApproval(updatedProduct).then((res) => {
+    updateProductState(updatedProduct).then((res) => {
       if (res.success) {
         setProduct(updatedProduct);
         setState(newState);
@@ -107,7 +107,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
       }
     } as Product;
 
-    updateProductApproval(updatedProduct).then((res) => {
+    updateProductState(updatedProduct).then((res) => {
       if (res.success) {
         setProduct(updatedProduct);
         setState(newState);
@@ -133,7 +133,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
       }
     } as Product;
 
-    updateProductApproval(updatedProduct).then((res) => {
+    updateProductState(updatedProduct).then((res) => {
       if (res.success) {
         setProduct(updatedProduct);
         setState(newState);
