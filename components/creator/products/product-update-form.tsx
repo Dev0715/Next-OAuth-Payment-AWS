@@ -1,6 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { FaTrash } from "react-icons/fa";
@@ -8,7 +9,11 @@ import { FaTrash } from "react-icons/fa";
 import { ProductHistory } from "@/components/product/product-history";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { updateProductApproval } from "@/data/product";
+
+import { FormError } from "@/components/utils/form-error";
+import { FormSuccess } from "@/components/utils/form-success";
+
+import { deleteProduct, updateProductApproval } from "@/data/product";
 import { Product, ProductState } from "@/shared/types/product.type";
 import { userAtom } from "@/store/user";
 
@@ -17,6 +22,7 @@ import { QuestionAlert } from "../../utils/question-alert";
 import { ProductApplyCard } from "./product-apply-card";
 import { ProductEditForm } from "./product-edit-form";
 import { ProductPublishCard } from "./product-publish-card";
+
 import { ProductWithdrawCard } from "./product-withdraw-card";
 
 type Props = {
@@ -25,14 +31,37 @@ type Props = {
 };
 
 export const ProductUpdateForm = ({ product, setProduct }: Props) => {
+  const history = useRouter();
+
   const [user] = useAtom(userAtom);
   const [state, setState] = useState<ProductState>(product.approval.state);
+  const [success, setSuccess] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const onUpdateMore = () => {
     setState("updated");
   };
 
-  const onDelete = () => {};
+  const onDelete = () => {
+    const isEverSubmitted = !!product.approval.history.find(
+      (item) => item.state === "submitted" || item.state === "resubmitted"
+    );
+
+    if (isEverSubmitted) {
+      setError("Product is already submitted for approval");
+    } else {
+      deleteProduct(product.productType, product.productId).then((res) => {
+        if (res.success) {
+          setSuccess("Product deleted successfully");
+          setTimeout(() => {
+            history.push(`/creator/${user?.userId}`);
+          }, 1000);
+        } else {
+          setError("Failed to delete product");
+        }
+      });
+    }
+  };
 
   const onApply = () => {
     const newState: ProductState = "applied";
@@ -123,7 +152,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
       </CardHeader>
       <CardContent className="flex flex-col gap-y-8">
         <div
-          className="flex flex-col items-end
+          className="w-full flex flex-col items-end
          gap-y-4"
         >
           <QuestionAlert
@@ -139,6 +168,12 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
               Delete Product
             </Button>
           </QuestionAlert>
+
+          <div className="w-full">
+            {success && <FormSuccess message={success} />}
+            {error && <FormError message={error} />}
+          </div>
+
           <Card className="w-full p-6 flex flex-col gap-y-4">
             <p className="text-xl font-semibold">Product Approval Status</p>
             <ProductHistory history={product.approval.history} />
