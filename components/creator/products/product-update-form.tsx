@@ -144,13 +144,15 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
             <ProductHistory history={product.approval.history} />
           </Card>
         </div>
-        {state === "approved" || state === "withdrawn-applied" ? (
+        {state === "approved" ||
+        state === "withdrawn-applied" ||
+        state === "withdrawn-published" ? (
           <ProductApplyCard
             product={product}
             onUpdateMore={onUpdateMore}
             onApply={onApply}
           />
-        ) : state === "applied" || state === "withdrawn-published" ? (
+        ) : state === "applied" ? (
           <ProductPublishCard
             product={product}
             onWithdrawFromApplied={onWithdrawFromApplied}
