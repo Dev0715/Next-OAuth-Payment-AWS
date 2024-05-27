@@ -23,6 +23,7 @@ import { ProductApplyCard } from "./product-apply-card";
 import { ProductEditForm } from "./product-edit-form";
 import { ProductPublishCard } from "./product-publish-card";
 
+import { ProductRestoreCard } from "./product-restore-card";
 import { ProductWithdrawCard } from "./product-withdraw-card";
 
 type Props = {
@@ -43,24 +44,86 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
   };
 
   const onDelete = () => {
+    if (product.approval.state === "archived") {
+      setError("Product is already archived");
+    }
+
     const isEverSubmitted = !!product.approval.history.find(
       (item) => item.state === "submitted" || item.state === "resubmitted"
     );
 
     if (isEverSubmitted) {
-      setError("Product is already submitted for approval");
+      const newState: ProductState = "archived";
+      const updatedProduct = {
+        ...product,
+        approval: {
+          state: newState,
+          history: [
+            ...product.approval.history,
+            {
+              state: newState,
+              comment: "Product archived",
+              userId: user?.userId,
+              time: new Date().toISOString()
+            }
+          ]
+        }
+      } as Product;
+
+      updateProductState(updatedProduct).then((res) => {
+        if (res.success) {
+          setProduct(updatedProduct);
+          setState(newState);
+        }
+      });
     } else {
       deleteProduct(product.productType, product.productId).then((res) => {
         if (res.success) {
           setSuccess("Product deleted successfully");
+          setError("");
+
           setTimeout(() => {
             history.push(`/creator/${user?.userId}`);
           }, 1000);
         } else {
+          setSuccess("");
           setError("Failed to delete product");
         }
       });
     }
+  };
+
+  const onRestoreFromArchived = () => {
+    const newState: ProductState =
+      product.approval.history[product.approval.history.length - 2].state;
+    const updatedProduct = {
+      ...product,
+      approval: {
+        state: newState,
+        history: [
+          ...product.approval.history,
+          {
+            state: newState,
+            comment: "Product restored from archived",
+            userId: user?.userId,
+            time: new Date().toISOString()
+          }
+        ]
+      }
+    } as Product;
+
+    updateProductState(updatedProduct).then((res) => {
+      if (res.success) {
+        setProduct(updatedProduct);
+        setState(newState);
+
+        setSuccess("Product restored from archived");
+        setError("");
+      } else {
+        setSuccess("");
+        setError("Failed to restore product");
+      }
+    });
   };
 
   const onApply = () => {
@@ -196,6 +259,11 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
           <ProductWithdrawCard
             product={product}
             onWithdrawFromPublished={onWithdrawFromPublished}
+          />
+        ) : state === "archived" ? (
+          <ProductRestoreCard
+            product={product}
+            onRestoreFromArchived={onRestoreFromArchived}
           />
         ) : (
           <ProductEditForm product={product} setProduct={setProduct} />
