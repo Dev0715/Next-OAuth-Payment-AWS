@@ -4,7 +4,9 @@ import { useAtom } from "jotai";
 
 import { useEffect } from "react";
 
+import { logout } from "@/actions/auth/logout";
 import { getUserById } from "@/data/user";
+
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { userAtom } from "@/store/user";
 
@@ -19,6 +21,8 @@ export default function LoadUser({ children }: { children: React.ReactNode }) {
       getUserById(sessionUser.userId).then((_user) => {
         if (_user) {
           setUser(_user);
+        } else {
+          logout();
         }
       });
     }

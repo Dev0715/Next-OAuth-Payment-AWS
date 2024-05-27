@@ -26,7 +26,7 @@ export const updatePassword = async (
   const passwordsMatch = _hashedPassword === (existingUser.password as string);
 
   if (!passwordsMatch) {
-    return { error: "Please input correct current password." };
+    return { error: "Current password is incorrect." };
   }
 
   const hashedPassword = await crypto.SHA256(newPassword).toString();
