@@ -25,7 +25,8 @@ export type ProductState =
   | "applied"
   | "published"
   | "withdrawn-applied"
-  | "withdrawn-published";
+  | "withdrawn-published"
+  | "archived";
 
 export type CreativeFile = {
   name: string;

@@ -7,6 +7,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
+import { STATE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
+
 import type { Product, ProductState } from "@/shared/types/product.type";
 
 const ClassName_Text: Record<ProductState, string> = {
@@ -19,20 +21,8 @@ const ClassName_Text: Record<ProductState, string> = {
   applied: "text-yellow-400 font-semibold bg-black/100",
   published: "text-green-400 font-semibold bg-black/100",
   "withdrawn-applied": "text-red-400 font-semibold bg-black/100",
-  "withdrawn-published": "text-red-400 font-semibold bg-black/100"
-};
-
-const DisplayName_Text: Record<ProductState, string> = {
-  created: "Created",
-  updated: "Updated",
-  submitted: "Submitted",
-  resubmitted: "Resubmitted",
-  approved: "Approved",
-  rejected: "Rejected",
-  applied: "Applied",
-  published: "Published",
-  "withdrawn-applied": "Withdrawn from applied",
-  "withdrawn-published": "Withdrawn from published"
+  "withdrawn-published": "text-red-400 font-semibold bg-black/100",
+  archived: "text-red-400 font-semibold bg-black/100"
 };
 
 type PropsParams = {
@@ -46,7 +36,7 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
   const { getLinkFromS3 } = useLinkFromS3();
 
   const stateClassName = ClassName_Text[product.approval.state];
-  const stateText = DisplayName_Text[product.approval.state];
+  const stateText = STATE_DISPLAY_TEXT[product.approval.state];
 
   useEffect(() => {
     if (!product || !getLinkFromS3) return;

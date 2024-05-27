@@ -32,7 +32,8 @@ export const PRODUCT_STATE_BADGE_VARIANT_ADMIN: Record<
   applied: "default",
   published: "success",
   "withdrawn-applied": "destructive",
-  "withdrawn-published": "destructive"
+  "withdrawn-published": "destructive",
+  archived: "destructive"
 };
 
 export const PRODUCT_STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
@@ -45,7 +46,8 @@ export const PRODUCT_STATE_BADGE_VARIANT: Record<ProductState, BadgeVariant> = {
   applied: "default",
   published: "success",
   "withdrawn-applied": "destructive",
-  "withdrawn-published": "destructive"
+  "withdrawn-published": "destructive",
+  archived: "destructive"
 };
 
 export const STATE_DISPLAY_TEXT: Record<ProductState, string> = {
@@ -58,5 +60,6 @@ export const STATE_DISPLAY_TEXT: Record<ProductState, string> = {
   applied: "Applied", // Applied to be published
   published: "Published",
   "withdrawn-applied": "Withdrawn from applied",
-  "withdrawn-published": "Withdrawn from published"
+  "withdrawn-published": "Withdrawn from published",
+  archived: "Archived"
 };
