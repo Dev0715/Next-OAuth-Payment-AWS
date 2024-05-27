@@ -1,7 +1,7 @@
 "use server";
 
 import * as z from "zod";
-import bcrypt from "bcryptjs";
+import crypto from "crypto-js";
 
 import { PasswordChangeSchema } from "@/schemas/auth/auth";
 import { getUserById, updateUserPassword } from "@/data/user";
@@ -22,16 +22,14 @@ export const updatePassword = async (
 
   const { password, newPassword } = validatedFields.data;
 
-  const passwordsMatch = await bcrypt.compare(
-    password,
-    existingUser.password as string
-  );
+  const _hashedPassword = crypto.SHA256(password).toString();
+  const passwordsMatch = _hashedPassword === (existingUser.password as string);
 
   if (!passwordsMatch) {
     return { error: "Please input correct current password." };
   }
 
-  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  const hashedPassword = await crypto.SHA256(newPassword).toString();
   const updatedUser = await updateUserPassword({
     userId,
     password: hashedPassword,

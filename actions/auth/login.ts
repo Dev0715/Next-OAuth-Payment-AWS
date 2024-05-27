@@ -4,10 +4,8 @@ import { z } from "zod";
 import { AuthError } from "next-auth";
 import { LoginSchema } from "@/schemas/auth/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { sendVerificationEmail } from "@/lib/mail";
 import { signIn } from "@/auth";
-import { generateVerificationToken } from "@/lib/tokens";
-import { getUserByEmail, updateUserToken } from "@/data/user";
+import { getUserByEmail } from "@/data/user";
 
 export const login = async (
   values: z.infer<typeof LoginSchema>,
@@ -23,31 +21,6 @@ export const login = async (
   if (!existingUser || !existingUser.email) {
     return { error: "Email does not exist!" };
   }
-
-  // if (!existingUser.emailVerified) {
-  //   const verificationToken = generateVerificationToken(existingUser.userId);
-
-  //   const updatedUser = await updateUserToken({
-  //     userId: existingUser.userId,
-  //     verificationToken,
-  //     expires: new Date(new Date().getTime() + 3600 * 1000)
-  //   });
-
-  //   if (!updatedUser) {
-  //     return { error: "Could not update user!" };
-  //   }
-
-  //   const response = await sendVerificationEmail(
-  //     updatedUser.email,
-  //     updatedUser.verificationToken
-  //   );
-
-  //   if (response.error) {
-  //     return { error: response.error.name };
-  //   }
-
-  //   return { success: "Confirmation email sent!" };
-  // }
 
   let callbackLink = callbackUrl || DEFAULT_LOGIN_REDIRECT;
   if (existingUser.manager && existingUser.manager.isManager) {
@@ -82,3 +55,28 @@ export const login = async (
     success: "Data is Valid, Message Received!"
   };
 };
+
+// if (!existingUser.emailVerified) {
+//   const verificationToken = generateVerificationToken(existingUser.userId);
+
+//   const updatedUser = await updateUserToken({
+//     userId: existingUser.userId,
+//     verificationToken,
+//     expires: new Date(new Date().getTime() + 3600 * 1000)
+//   });
+
+//   if (!updatedUser) {
+//     return { error: "Could not update user!" };
+//   }
+
+//   const response = await sendVerificationEmail(
+//     updatedUser.email,
+//     updatedUser.verificationToken
+//   );
+
+//   if (response.error) {
+//     return { error: response.error.name };
+//   }
+
+//   return { success: "Confirmation email sent!" };
+// }

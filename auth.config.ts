@@ -1,9 +1,8 @@
 import Credentials from "next-auth/providers/credentials";
 import Github from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
 import Discord from "next-auth/providers/discord";
 import Apple from "next-auth/providers/apple";
-import bcrypt from "bcryptjs";
+import crypto from "crypto-js";
 
 import type { NextAuthConfig } from "next-auth";
 import { getUserByEmail } from "./data/user";
@@ -33,13 +32,11 @@ export default {
         const { email, password } = credentials;
         const user = await getUserByEmail(email as string);
         if (!user || !user.password) return null;
-        const passwordsMatch = await bcrypt.compare(
-          password as string,
-          user.password
-        );
+        const hashedPassword = crypto.SHA256(password as string).toString();
+        const passwordMatch = hashedPassword === user.password;
         // !Important: this sets token's `sub` as userId on `jwt` func
         user.id = user.userId;
-        if (passwordsMatch) return user;
+        if (passwordMatch) return user;
         else return null; // You can also reject this callback for detailed error
       }
     }),

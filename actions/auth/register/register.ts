@@ -2,7 +2,7 @@
 
 import { getAllUsernames, getUserByEmail, createUser } from "@/data/user";
 import { sendVerificationEmail } from "@/lib/mail";
-import bcrypt from "bcryptjs";
+import crypto from "crypto-js";
 
 export const register = async (values: any) => {
   // Check whether username selected is available
@@ -17,7 +17,7 @@ export const register = async (values: any) => {
   }
 
   const { email, password } = values;
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await crypto.SHA256(password).toString();
   const existingUser = await getUserByEmail(email);
 
   if (existingUser) {

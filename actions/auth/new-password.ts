@@ -1,7 +1,8 @@
 "use server";
 
 import * as z from "zod";
-import bcrypt from "bcryptjs";
+
+import crypto from "crypto-js";
 
 import { NewPasswordSchema } from "@/schemas/auth/auth";
 import { getUserIdFromToken } from "@/lib/tokens";
@@ -37,7 +38,7 @@ export const newPassword = async (
   }
 
   const { password } = validatedFields.data;
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = crypto.SHA256(password).toString();
   const updatedUser = await updateUserPassword({
     userId,
     password: hashedPassword,
