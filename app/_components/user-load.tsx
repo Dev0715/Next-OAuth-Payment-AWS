@@ -15,21 +15,14 @@ export default function LoadUser({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useAtom(userAtom);
 
   useEffect(() => {
-    let ignore = false;
-
     if (sessionUser && !user) {
       getUserById(sessionUser.userId).then((_user) => {
-        if (ignore || !_user) {
-          return;
+        if (_user) {
+          setUser(_user);
         }
-        setUser(_user);
       });
     }
-
-    return () => {
-      ignore = true;
-    };
-  }, [sessionUser, user, setUser]);
+  }, [sessionUser]);
 
   if (sessionUser && !user) return <Loading />;
 

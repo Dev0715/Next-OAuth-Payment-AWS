@@ -64,7 +64,7 @@ export const UserButton = () => {
     }
   }, [user, avatarImage, cart, setCart, getLinkFromS3]);
 
-  if (!user)
+  if (!user) {
     return (
       <div className="flex items-center gap-x-2">
         <LoginButton>
@@ -78,6 +78,7 @@ export const UserButton = () => {
         </SignupButton>
       </div>
     );
+  }
 
   return (
     <div className="flex items-center gap-x-4">
