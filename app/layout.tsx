@@ -30,20 +30,20 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <SessionProvider session={session}>
-      <JotaiProvider>
-        <html lang="en">
-          <Toaster />
-          <body
-            className={`${inter.className} w-full h-auto p-12 flex flex-col items-center`}
-          >
+    <html lang="en">
+      <body
+        className={`${inter.className} w-full h-auto p-12 flex flex-col items-center`}
+      >
+        <SessionProvider session={session}>
+          <JotaiProvider>
+            <Toaster />
             <LoadUser>
               <Header />
               {children}
             </LoadUser>
-          </body>
-        </html>
-      </JotaiProvider>
-    </SessionProvider>
+          </JotaiProvider>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }
