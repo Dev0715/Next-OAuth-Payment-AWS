@@ -6,9 +6,9 @@ import { CreatorSignUp } from "@/components/landing/creator-singup";
 import { Featured } from "@/components/landing/featured";
 import { Finisher } from "@/components/landing/finisher";
 import { Hero } from "@/components/landing/hero";
-import { MemberSignUp } from "@/components/landing/member-signup";
 
-import { Footer } from "./_components/footer";
+import { LandingFooter } from "@/components/landing/landing-footer";
+import { MemberSignUp } from "@/components/landing/member-signup";
 
 const Home = () => {
   return (
@@ -22,7 +22,7 @@ const Home = () => {
         <Featured />
         <Finisher />
       </main>
-      <Footer />
+      <LandingFooter />
     </div>
   );
 };
