@@ -10,7 +10,7 @@ export const Services = () => (
         <GradientParagraph className="text-3xl font-semibold leading-tight">
           The only asset library membership you’ll ever need.
         </GradientParagraph>
-        <p className="text-[22px] text-[#757575] font-semibold leading-tight">
+        <p className="font-firs text-[22px] text-[#757575] font-semibold leading-tight">
           KRE8TIVE will offer a treasure trove of premium curated digital assets
           , priced to make your wallet smile.
         </p>

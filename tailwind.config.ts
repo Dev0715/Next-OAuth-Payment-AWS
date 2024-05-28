@@ -10,6 +10,10 @@ const config = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      firs: ["TTFirsNeue"],
+      haas: ["NeueHaasUnicaPro", "ui-sans-serif", "system-ui"]
+    },
     container: {
       center: true,
       padding: "2rem",
