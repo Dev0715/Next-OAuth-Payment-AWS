@@ -7,6 +7,7 @@ import {
 } from "@radix-ui/react-icons";
 import { useAtom } from "jotai";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   FaCartArrowDown,
@@ -31,9 +32,10 @@ import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { cartAtom } from "@/store/cart";
 import { userAtom } from "@/store/user";
 
-import { GradientButton } from "../utils/gradient-button";
+import { AuthButton } from "./auth-button";
 
 export const UserButton = () => {
+  const history = useRouter();
   const [user] = useAtom(userAtom);
   const userRole = useCurrentRole();
   const { getLinkFromS3 } = useLinkFromS3();
@@ -63,11 +65,27 @@ export const UserButton = () => {
     }
   }, [user, avatarImage, cart, setCart, getLinkFromS3]);
 
+  const onSignUp = () => {
+    history.push("/signup");
+  };
+
+  const onLogin = () => {
+    history.push("/login");
+  };
+
   if (!user) {
     return (
-      <div className="flex items-center gap-x-2">
-        <GradientButton label="Signup" />
-        <GradientButton label="Login" />
+      <div className="flex items-center gap-x-10">
+        <AuthButton
+          comment="Become a member!"
+          label="Signup"
+          onClick={onSignUp}
+        />
+        <AuthButton
+          comment="Existing members:"
+          label="Login"
+          onClick={onLogin}
+        />
       </div>
     );
   }
