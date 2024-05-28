@@ -5,7 +5,6 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
 import "./globals.css";
-import "../styles/fonts.css";
 
 import { Toaster } from "@/components/ui/toaster";
 
