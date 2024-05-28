@@ -20,7 +20,7 @@ const font = Poppins({
 const Home = () => {
   return (
     <>
-      <main className={cn("relative w-full", font.className)}>
+      <main className={cn("w-full", font.className)}>
         <Hero />
         <Services />
         <Featured />

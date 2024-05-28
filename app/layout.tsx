@@ -15,7 +15,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Welcome to Kre8tive.io",
-  description: "Kre8tive.io | Premier Digital Asset Marketplace | by 2Advanced Studios"
+  description:
+    "Kre8tive.io | Premier Digital Asset Marketplace | by 2Advanced Studios"
 };
 
 export default async function RootLayout({
@@ -31,7 +32,7 @@ export default async function RootLayout({
         <html lang="en">
           <Toaster />
           <body
-            className={`${inter.className} w-full h-full p-12 flex flex-col items-center bg-gradient-to-r from-[#BD99C9] to-[#4AA8FE]`}
+            className={`${inter.className} w-full h-auto p-12 pb-6 flex flex-col items-center bg-gradient-to-r from-[#BD99C9] to-[#4AA8FE]`}
           >
             <LoadUser>
               <Header />

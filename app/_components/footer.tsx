@@ -8,7 +8,7 @@ import { GradientButton } from "@/components/utils/gradient-button";
 
 export const Footer = () => {
   return (
-    <footer className="w-full flex flex-col">
+    <footer className="w-full flex flex-col items-center gap-y-6">
       <div className="w-full px-14 py-6 rounded-[40px] flex justify-between bg-white/30">
         <div className="flex flex-col gap-y-6">
           <p className="text-lg font-semibold text-[]">Links</p>
@@ -126,6 +126,16 @@ export const Footer = () => {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="flex gap-x-4 text-sm">
+        <p className="text-black">
+          Copyright © 2024 KRE8TIVE, LLC. All rights reserved.
+        </p>
+        <div className="flex gap-x-4 text-[#3054B0]">
+          <Link href="/">Terms of Use</Link>
+          <Link href="/">Privacy Policy</Link>
+          <Link href="/">Cookie Policy</Link>
         </div>
       </div>
     </footer>
