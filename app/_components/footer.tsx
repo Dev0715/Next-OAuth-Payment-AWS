@@ -5,14 +5,17 @@ import Link from "next/link";
 
 import { Input } from "@/components/ui/input";
 import { GradientButton } from "@/components/utils/gradient-button";
+import { GradientParagraph } from "@/components/utils/gradient-paragraph";
 
 export const Footer = () => {
   return (
     <footer className="w-full flex flex-col items-center gap-y-6">
       <div className="w-full px-14 py-6 rounded-[40px] flex justify-between bg-white/30">
         <div className="flex flex-col gap-y-6">
-          <p className="text-lg font-semibold text-[]">Links</p>
-          <div className="flex gap-x-12 text-sm text-[#3054B0] font-bold">
+          <GradientParagraph className="text-lg font-semibold">
+            Links
+          </GradientParagraph>
+          <div className="flex gap-x-12 text-sm text-[#3054B0] font-haas font-bold">
             <div className="flex flex-col gap-y-3">
               <Link href="/">Sign up for Membership</Link>
               <Link href="/">Login</Link>
@@ -30,7 +33,9 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col gap-y-6">
-          <p className="text-lg font-semibold text-[]">Trusted & Secure</p>
+          <GradientParagraph className="text-lg font-semibold">
+            Trusted & Secure
+          </GradientParagraph>
           <div className="flex gap-x-12">
             <div className="flex flex-col gap-y-3">
               <Image
@@ -42,13 +47,13 @@ export const Footer = () => {
             </div>
             <div className="flex flex-col gap-y-3">
               <Image
-                src="./footer/trustpilot-logo.svg"
+                src="./footer/Norton Secure Seal 1.svg"
                 width={96}
                 height={46}
                 alt="TrustPilot"
               />
               <Image
-                src="./footer/Norton Secure Seal 1.svg"
+                src="./footer/trustpilot-logo.svg"
                 width={96}
                 height={46}
                 alt="TrustPilot"
@@ -56,10 +61,12 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-y-16">
+        <div className="flex flex-col gap-y-8">
           <div className="flex flex-col gap-y-6">
-            <p className="text-lg font-semibold text-[]">Join Our Newsletter</p>
-            <div className="flex items-center gap-x-3">
+            <GradientParagraph className="text-lg font-semibold">
+              Join Our Newsletter
+            </GradientParagraph>
+            <div className="flex items-center gap-x-6">
               <Image
                 src="./footer/newsletter.svg"
                 width={46}
@@ -67,14 +74,20 @@ export const Footer = () => {
                 alt="newsletter"
               />
               <Input
-                className="w-60 h-[35px] bg-[#E6CCE8]"
+                className="w-60 h-[35px] bg-[#E6CCE8] border-white rounded-[9px]"
                 placeholder="Enter your email address"
               />
-              <GradientButton label="Subscribe" onClick={() => {}} />
+              <GradientButton
+                className="font-firs text-[15px]"
+                label="Subscribe"
+                onClick={() => {}}
+              />
             </div>
           </div>
-          <div className="flex flex-col gap-y-6">
-            <p className="text-lg font-semibold text-[]">Social</p>
+          <div className="flex flex-col gap-y-3">
+            <GradientParagraph className="text-lg font-semibold">
+              Social
+            </GradientParagraph>
             <div className="flex items-center gap-x-16">
               <Link href="/">
                 <Image
@@ -128,7 +141,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-x-4 text-sm">
+      <div className="flex gap-x-4 font-haas text-sm">
         <p className="text-black">
           Copyright © 2024 KRE8TIVE, LLC. All rights reserved.
         </p>

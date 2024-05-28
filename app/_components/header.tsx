@@ -24,7 +24,7 @@ export const Header = () => {
             />
           </Link>
         </div>
-        <div className="flex flex-col gap-y-3">
+        <div className="flex flex-col gap-y-3 font-firs">
           <div className="flex flex-col items-center text-[15px] leading-tight font-semibold">
             <p>KRE8TIVE is ushering in a vast library of specially-curated</p>
             <p>premium digital assets for designers & developers.</p>

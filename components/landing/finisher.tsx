@@ -1,9 +1,13 @@
 import Image from "next/image";
 
+import { GradientParagraph } from "../utils/gradient-paragraph";
+
 export const Finisher = () => (
   <section className="w-full py-12 flex flex-col items-center">
     <div className="flex items-center mb-4">
-      <p className="text-3xl">For the Community</p>
+      <GradientParagraph className="text-3xl font-firs">
+        For the Community
+      </GradientParagraph>
       <Image
         src="./landing/Heart Seal.svg"
         width={77}
@@ -12,7 +16,7 @@ export const Finisher = () => (
       />
     </div>
     <div className="w-[70%]">
-      <p className="text-xl text-center leading-normal mb-10">
+      <p className="text-xl text-center font-haas font-normal leading-normal mb-10">
         {`As fellow creators immersed in the world of design and code, we've endured
       the pain of sifting through an ocean of mediocre assets that blend
       together in a sea of sameness or simply fail to make the grade. That's why
@@ -21,7 +25,9 @@ export const Finisher = () => (
       own lofty expectations, ensuring you have access to the cream of the crop.`}
       </p>
     </div>
-    <p className="text-2xl text-[#2A2A2A] mb-4">100% Curated With Love by</p>
+    <p className="font-firs text-2xl text-[#2A2A2A] mb-4">
+      100% Curated With Love by
+    </p>
     <Image
       src="./2advanced logo.svg"
       width={233}

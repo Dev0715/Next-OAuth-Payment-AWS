@@ -66,11 +66,11 @@ export const UserButton = () => {
   }, [user, avatarImage, cart, setCart, getLinkFromS3]);
 
   const onSignUp = () => {
-    history.push("/signup");
+    history.push("/auth/signup");
   };
 
   const onLogin = () => {
-    history.push("/login");
+    history.push("/auth/login");
   };
 
   if (!user) {

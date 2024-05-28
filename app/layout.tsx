@@ -35,7 +35,7 @@ export default async function RootLayout({
         <html lang="en">
           <Toaster />
           <body
-            className={`${inter.className} w-full h-auto p-12 pb-6 flex flex-col items-center bg-gradient-to-r from-[#BD99C9] to-[#4AA8FE]`}
+            className={`${inter.className} w-full h-auto p-12 pb-6 flex flex-col items-center bg-[linear-gradient(90deg,rgba(86,63,121,0.4)_0%,rgba(49,131,207,0.4)_26%,rgba(204,155,201,0.4)_67%,rgba(92,68,101,0.4)_100%)]`}
           >
             <LoadUser>
               <Header />
