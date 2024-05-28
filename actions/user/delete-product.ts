@@ -1,7 +1,6 @@
 "use server";
 
 import { getUserById, updateUserProducts } from "@/data/user";
-import { ProductLink } from "@/shared/types/product.type";
 
 export const deleteProductFromCreator = async (
   userId: string,
