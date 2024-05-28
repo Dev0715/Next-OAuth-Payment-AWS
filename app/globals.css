@@ -55,7 +55,6 @@ body,
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -63,4 +62,24 @@ body,
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.landing-bg::before {
+  content: " ";
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  opacity: 0.4;
+  z-index: -1;
+
+  opacity: 0.4;
+  background: linear-gradient(
+    90deg,
+    rgba(86, 63, 121, 1) 0%,
+    rgba(49, 131, 207, 1) 26%,
+    rgba(204, 155, 201, 1) 67%,
+    rgba(92, 68, 101, 1) 100%
+  );
 }
