@@ -31,8 +31,7 @@ import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { cartAtom } from "@/store/cart";
 import { userAtom } from "@/store/user";
 
-import { LoginButton } from "./login-button";
-import { SignupButton } from "./signup-button";
+import { GradientButton } from "../utils/gradient-button";
 
 export const UserButton = () => {
   const [user] = useAtom(userAtom);
@@ -67,15 +66,8 @@ export const UserButton = () => {
   if (!user) {
     return (
       <div className="flex items-center gap-x-2">
-        <LoginButton>
-          {/* <WrappedButton variant="default" size="lg"> */}
-          <p className="text-md font-medium">Log in</p>
-          {/* </WrappedButton> */}
-        </LoginButton>
-        <p className="text-gray-400">|</p>
-        <SignupButton>
-          <p className="text-md font-medium">Sign up</p>
-        </SignupButton>
+        <GradientButton label="Signup" />
+        <GradientButton label="Login" />
       </div>
     );
   }
