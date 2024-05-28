@@ -77,7 +77,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
         }
       });
     } else {
-      deleteProduct(product.productType, product.productId).then((res) => {
+      deleteProduct(product).then((res) => {
         if (res.success) {
           setSuccess("Product deleted successfully");
           setError("");

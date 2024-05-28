@@ -1,9 +1,8 @@
 "use server";
 
-import { createProduct, deleteProduct } from "@/data/product";
+import { createProduct } from "@/data/product";
 import { Product } from "@/shared/types/product.type";
 import { addNewProduct } from "../user/new-product";
-import { deleteProductFromCreator } from "../user/delete-product";
 
 export const newProduct = async (product: Product) => {
   const res_create = await createProduct(product);

@@ -1,15 +1,10 @@
 "use server";
 
 import { createProduct, deleteProduct } from "@/data/product";
-import { Product, ProductLink } from "@/shared/types/product.type";
-import { addNewProduct } from "../user/new-product";
-import { deleteProductFromCreator } from "../user/delete-product";
+import { Product } from "@/shared/types/product.type";
 
 export const updateProduct = async (product: Product) => {
-  const res_delete = await deleteProduct(
-    product.productType,
-    product.productId
-  );
+  const res_delete = await deleteProduct(product);
   if (res_delete.error) {
     return { error: "Failed to remove original product" };
   }

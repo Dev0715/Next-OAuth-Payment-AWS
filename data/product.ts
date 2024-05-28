@@ -275,7 +275,9 @@ export const updateProductState = async ({
   }
 };
 
-export const deleteProduct = async (productType: string, productId: string) => {
+export const deleteProduct = async (product: Product) => {
+  const { productType, productId } = product;
+
   const command = new DeleteCommand({
     TableName: AWS_DYNAMO_TABLES.PRODUCT,
     Key: { productType, productId }
