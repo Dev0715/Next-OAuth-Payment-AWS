@@ -78,7 +78,7 @@ export const LandingFooter = () => {
                 placeholder="Enter your email address"
               />
               <GradientButton
-                className="font-firs text-[15px]"
+                className="font-firs text-[15px] leading-none py-2"
                 label="Subscribe"
                 onClick={() => {}}
               />

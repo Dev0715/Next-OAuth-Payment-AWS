@@ -8,12 +8,12 @@ type Props = {
 
 export const AuthButton = ({ comment, label, onClick }: Props) => {
   return (
-    <div className="text-center space-y-1">
+    <div className="text-center flex flex-col items-center gap-y-1">
       <p className="font-firs text-sm text-[#543E77] font-semibold">
         {comment}
       </p>
       <GradientButton
-        className="font-firs text-xl pt-[6px] pb-[9px]"
+        className="font-firs leading-none text-xl pt-[6px] pb-[9px]"
         label={label}
         onClick={onClick}
       />
