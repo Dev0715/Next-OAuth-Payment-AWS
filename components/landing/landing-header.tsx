@@ -22,9 +22,7 @@ export const LandingHeader = () => {
       <div className="w-full flex flex-wrap items-center justify-between">
         <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
           <Link
-            className={
-              " text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-            }
+            className="text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
             href="/"
           >
             <Image
@@ -35,12 +33,12 @@ export const LandingHeader = () => {
             />
           </Link>
         </div>
-        <div className="flex flex-col gap-y-3 font-firs">
-          <div className="flex flex-col items-center text-[15px] leading-tight font-semibold">
+        <div className="text-center font-firs">
+          <div className="text-[15px] text-black leading-[18px] font-semibold">
             <p>KRE8TIVE is ushering in a vast library of specially-curated</p>
             <p>premium digital assets for designers & developers.</p>
           </div>
-          <div className="flex flex-col items-center text-[14px] text-[#3C58A0] leading-tight font-semibold">
+          <div className="mt-3.5 text-[14px] text-[#3C58A0] leading-[15px] font-semibold">
             <p>
               The Most Permissive Industry Use Licenses + Highly Flexible
               Pricing Model
