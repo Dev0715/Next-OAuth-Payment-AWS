@@ -2,10 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { UserButton } from "@/components/auth/user-button";
+import { AuthButton } from "../auth/auth-button";
 
 export const LandingHeader = () => {
+  const history = useRouter();
+
+  const onSignUp = () => {
+    history.push("/auth/register");
+  };
+
+  const onLogin = () => {
+    history.push("/auth/login");
+  };
+
   return (
     <nav className="w-full pb-10 flex flex-wrap items-center justify-between">
       <div className="w-full flex flex-wrap items-center justify-between">
@@ -41,7 +52,18 @@ export const LandingHeader = () => {
           </div>
         </div>
         <div>
-          <UserButton />
+          <div className="flex items-center gap-x-10">
+            <AuthButton
+              comment="Become a member!"
+              label="Signup"
+              onClick={onSignUp}
+            />
+            <AuthButton
+              comment="Existing members:"
+              label="Login"
+              onClick={onLogin}
+            />
+          </div>
         </div>
       </div>
     </nav>
