@@ -23,16 +23,13 @@ export const Header = () => {
       <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
         <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
           <Link
-            className={
-              (isLandingPage ? "text-white" : "text-gray-800") +
-              " text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-            }
+            className="text-gray-800 text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
             href="/"
           >
             Kre8tive
           </Link>
         </div>
-        <div className={isLandingPage ? "text-white" : "text-gray-800"}>
+        <div className="text-gray-800">
           <UserButton />
         </div>
       </div>
