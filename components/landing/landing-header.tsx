@@ -18,7 +18,7 @@ export const LandingHeader = () => {
   };
 
   return (
-    <nav className="container p-[50px] pb-0 flex flex-wrap items-center justify-between">
+    <nav className="container p-4 lg:p-[50px] lg:pb-0 flex flex-wrap items-center justify-between">
       <div className="w-full flex flex-wrap items-center justify-between">
         <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
           <Link

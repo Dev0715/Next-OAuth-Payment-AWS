@@ -9,7 +9,7 @@ import { MemberSignUp } from "@/components/landing/member-signup";
 
 const Home = () => {
   return (
-    <div className="container px-[50px] py-10 landing-bg">
+    <div className="container px-4 lg:px-[50px] py-10 landing-bg">
       <main className="space-y-6">
         <MemberSignUp />
         <CreatorSignUp />

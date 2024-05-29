@@ -2,8 +2,8 @@ import { GradientButton } from "../utils/gradient-button";
 import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export const CreatorSignUp = () => (
-  <div className="w-full p-[6px] grid grid-cols-2 rounded-[54px] bg-white">
-    <div className="rounded-[54px] overflow-hidden bg-[url('/landing/CreatorPreview.svg')] bg-no-repeat bg-center bg-cover"></div>
+  <div className="w-full p-[6px] grid grid-cols-1 xl:grid-cols-2 rounded-[54px] bg-white">
+    <div className="min-h-[350px] rounded-[54px] overflow-hidden bg-[url('/landing/CreatorPreview.svg')] bg-no-repeat bg-center bg-cover"></div>
     <div className="px-14 py-6 space-y-6 text-right">
       <GradientParagraph className="text-3xl font-firs font-semibold leading-tight">
         Attention all asset creators!

@@ -4,8 +4,8 @@ import { GradientButton } from "../utils/gradient-button";
 import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export const MemberSignUp = () => (
-  <div className="w-full p-[6px] grid grid-cols-2 gap-3 rounded-[54px] bg-white">
-    <div className="px-14 py-6 flex flex-col">
+  <div className="w-full p-[6px] grid grid-cols-1 xl:grid-cols-2 gap-3 rounded-[54px] bg-white">
+    <div className="px-4 lg:px-14 py-6">
       <div className="space-y-4">
         <GradientParagraph className="text-3xl leading-8 font-firs font-semibold">
           The only asset library membership you’ll ever need.
@@ -40,6 +40,6 @@ export const MemberSignUp = () => (
         />
       </div>
     </div>
-    <div className="rounded-[54px] overflow-hidden bg-[url('/landing/MembershipPreview.svg')] bg-no-repeat bg-center bg-cover"></div>
+    <div className="min-h-[350px] rounded-[54px] overflow-hidden bg-[url('/landing/MembershipPreview.svg')] bg-no-repeat bg-center bg-cover"></div>
   </div>
 );
