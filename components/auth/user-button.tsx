@@ -7,7 +7,6 @@ import {
 } from "@radix-ui/react-icons";
 import { useAtom } from "jotai";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   FaCartArrowDown,
@@ -32,10 +31,10 @@ import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { cartAtom } from "@/store/cart";
 import { userAtom } from "@/store/user";
 
-import { AuthButton } from "./auth-button";
+import { LoginButton } from "./login-button";
+import { SignupButton } from "./signup-button";
 
 export const UserButton = () => {
-  const history = useRouter();
   const [user] = useAtom(userAtom);
   const userRole = useCurrentRole();
   const { getLinkFromS3 } = useLinkFromS3();
@@ -65,27 +64,18 @@ export const UserButton = () => {
     }
   }, [user, avatarImage, cart, setCart, getLinkFromS3]);
 
-  const onSignUp = () => {
-    history.push("/auth/signup");
-  };
-
-  const onLogin = () => {
-    history.push("/auth/login");
-  };
-
   if (!user) {
     return (
-      <div className="flex items-center gap-x-10">
-        <AuthButton
-          comment="Become a member!"
-          label="Signup"
-          onClick={onSignUp}
-        />
-        <AuthButton
-          comment="Existing members:"
-          label="Login"
-          onClick={onLogin}
-        />
+      <div className="flex items-center gap-x-2">
+        <LoginButton>
+          {/* <WrappedButton variant="default" size="lg"> */}
+          <p className="text-md font-medium">Log in</p>
+          {/* </WrappedButton> */}
+        </LoginButton>
+        <p className="text-gray-400">|</p>
+        <SignupButton>
+          <p className="text-md font-medium">Sign up</p>
+        </SignupButton>
       </div>
     );
   }
