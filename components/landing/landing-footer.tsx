@@ -10,12 +10,12 @@ import { GradientParagraph } from "@/components/utils/gradient-paragraph";
 export const LandingFooter = () => {
   return (
     <footer className="w-full flex flex-col items-center gap-y-6">
-      <div className="w-full px-14 pt-[27px] pb-10 rounded-[40px] flex justify-between bg-white/30">
-        <div className="flex flex-col gap-y-6">
+      <div className="w-full p-4 lg:px-14 lg:pt-[27px] lg:pb-10 rounded-3xl lg:rounded-[40px] lg:flex justify-between space-y-6 lg:space-y-0 bg-white/30">
+        <div>
           <GradientParagraph className="text-lg font-semibold">
             Links
           </GradientParagraph>
-          <div className="flex gap-x-12 text-sm text-[#3054B0] font-haas font-bold">
+          <div className="mt-2 lg:mt-6 flex gap-x-12 text-sm text-[#3054B0] font-haas font-bold">
             <div className="flex flex-col gap-y-3">
               <Link href="/">Sign up for Membership</Link>
               <Link href="/">Login</Link>
@@ -32,11 +32,11 @@ export const LandingFooter = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-y-6">
+        <div>
           <GradientParagraph className="text-lg font-semibold">
             Trusted & Secure
           </GradientParagraph>
-          <div className="flex gap-x-12">
+          <div className="mt-4 lg:mt-6 flex gap-x-12">
             <div className="flex flex-col items-center gap-y-9">
               <Image
                 src="./footer/TrustmarkEngagement.svg"
@@ -84,11 +84,11 @@ export const LandingFooter = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-y-3">
+          <div>
             <GradientParagraph className="text-lg font-semibold">
               Social
             </GradientParagraph>
-            <div className="flex items-center gap-x-16">
+            <div className="mt-4 flex items-center gap-x-4 lg:gap-x-16">
               <Link href="/">
                 <Image
                   src="./social/linkedin.svg"

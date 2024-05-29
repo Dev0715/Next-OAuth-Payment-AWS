@@ -3,8 +3,8 @@ import Image from "next/image";
 import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export const Finisher = () => (
-  <section className="w-full py-12 flex flex-col items-center">
-    <div className="flex items-center mb-4">
+  <section className="w-full p-4 lg:py-12 flex flex-col items-center">
+    <div className="lg:mb-4 flex items-center">
       <GradientParagraph className="text-3xl font-firs font-semibold">
         For the Community
       </GradientParagraph>
@@ -15,7 +15,7 @@ export const Finisher = () => (
         alt="heart seal"
       />
     </div>
-    <div className="w-[70%]">
+    <div className="lg:w-[70%]">
       <p className="text-[19px] text-center font-haas font-normal leading-normal mb-10">
         As fellow creators immersed in the world of design and code, we&apos;ve
         endured the pain of sifting through an ocean of mediocre assets that
