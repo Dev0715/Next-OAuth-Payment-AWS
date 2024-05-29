@@ -18,11 +18,11 @@ export const LandingHeader = () => {
   };
 
   return (
-    <nav className="container p-4 lg:p-[50px] lg:pb-0 flex flex-wrap items-center justify-between">
+    <nav className="container p-4 lg:p-[50px] lg:pb-0">
       <div className="w-full flex flex-wrap items-center justify-between">
-        <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+        <div className="relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
           <Link
-            className="text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+            className="text-2xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase"
             href="/"
           >
             <Image
@@ -33,20 +33,16 @@ export const LandingHeader = () => {
             />
           </Link>
         </div>
-        <div className="text-center font-firs">
-          <div className="text-[15px] text-black leading-[18px] font-semibold">
-            <p>KRE8TIVE is ushering in a vast library of specially-curated</p>
-            <p>premium digital assets for designers & developers.</p>
+        <div className="hidden xl:block text-center font-firs">
+          <div className="max-w-[480px] m-auto text-[15px] text-black leading-[18px] font-semibold">
+            KRE8TIVE is ushering in a vast library of specially-curated Premium
+            digital assets for designers & developers.
           </div>
-          <div className="mt-3.5 text-[14px] text-[#3C58A0] leading-[15px] font-semibold">
-            <p>
-              The Most Permissive Industry Use Licenses + Highly Flexible
-              Pricing Model
-            </p>
-            <p>
-              + A.I. Driven Search + Weekly/Monthly Deals to Save + Real Human
-              Support 27/7/365
-            </p>
+          <div className="max-w-[600px] mt-3.5 mx-auto text-[14px] text-[#3C58A0] leading-[15px] font-semibold">
+            The Most Permissive Industry Use Licenses + Highly Flexible Pricing
+            Model
+            <br />+ A.I. Driven Search + Weekly/Monthly Deals to Save + Real
+            Human Support 27/7/365
           </div>
         </div>
         <div>
@@ -62,6 +58,17 @@ export const LandingHeader = () => {
               onClick={onLogin}
             />
           </div>
+        </div>
+      </div>
+      <div className="mt-6 block xl:hidden text-center font-firs">
+        <div className="m-auto text-[15px] text-black leading-[18px] font-semibold">
+          KRE8TIVE is ushering in a vast library of specially-curated Premium
+          digital assets for designers & developers.
+        </div>
+        <div className="mt-2 max-w-[650px] mx-auto text-[14px] text-[#3C58A0] leading-[15px] font-semibold">
+          The Most Permissive Industry Use Licenses + Highly Flexible Pricing
+          Model + A.I. Driven Search + Weekly/Monthly Deals to Save + Real Human
+          Support 27/7/365
         </div>
       </div>
     </nav>
