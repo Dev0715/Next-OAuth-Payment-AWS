@@ -16,7 +16,7 @@ export const Finisher = () => (
       />
     </div>
     <div className="w-[70%]">
-      <p className="text-xl text-center font-haas font-normal leading-normal mb-10">
+      <p className="text-[19px] text-center font-haas font-normal leading-normal mb-10">
         As fellow creators immersed in the world of design and code, we&apos;ve
         endured the pain of sifting through an ocean of mediocre assets that
         blend together in a sea of sameness or simply fail to make the grade.
