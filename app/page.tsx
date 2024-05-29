@@ -10,7 +10,7 @@ import { MemberSignUp } from "@/components/landing/member-signup";
 
 const Home = () => {
   return (
-    <div className="w-full landing-bg">
+    <div className="container landing-bg">
       <main>
         <section className="w-full flex flex-col gap-y-6">
           <MemberSignUp />

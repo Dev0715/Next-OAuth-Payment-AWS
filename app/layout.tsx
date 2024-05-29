@@ -31,7 +31,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} w-full h-auto p-12 flex flex-col items-center`}
+        className={`${inter.className} w-full h-auto p-[50px] flex flex-col items-center container`}
       >
         <SessionProvider session={session}>
           <JotaiProvider>
