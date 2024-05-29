@@ -8,7 +8,7 @@ type Props = {
 
 export const AuthButton = ({ comment, label, onClick }: Props) => {
   return (
-    <div className="flex flex-col items-center gap-y-1">
+    <div className="text-center space-y-1">
       <p className="font-firs text-sm text-[#543E77] font-semibold">
         {comment}
       </p>
