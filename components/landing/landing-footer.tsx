@@ -39,7 +39,7 @@ export const LandingFooter = () => {
           <div className="flex gap-x-12">
             <div className="flex flex-col gap-y-3">
               <Image
-                src="./footer/trustmark_x2F_engagement_x2F_certified.svg"
+                src="./footer/TrustmarkEngagement.svg"
                 width={121}
                 height={51}
                 alt="TrustedSite"
@@ -47,13 +47,13 @@ export const LandingFooter = () => {
             </div>
             <div className="flex flex-col items-start gap-y-10">
               <Image
-                src="./footer/Norton Secure Seal 1.svg"
+                src="./footer/NortonSecureSeal.svg"
                 width={114}
                 height={63}
                 alt="TrustPilot"
               />
               <Image
-                src="./footer/trustpilot-logo.svg"
+                src="./footer/TrustpilotLogo.svg"
                 width={96}
                 height={46}
                 alt="TrustPilot"
@@ -61,7 +61,7 @@ export const LandingFooter = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-y-8">
+        <div className="flex flex-col gap-y-10">
           <div className="flex flex-col gap-y-6">
             <GradientParagraph className="text-lg font-semibold">
               Join Our Newsletter

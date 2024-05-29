@@ -9,7 +9,7 @@ export const Finisher = () => (
         For the Community
       </GradientParagraph>
       <Image
-        src="./landing/Heart Seal.svg"
+        src="./landing/HeartSeal.svg"
         width={77}
         height={77}
         alt="heart seal"
@@ -29,7 +29,7 @@ export const Finisher = () => (
       100% Curated With Love by
     </p>
     <Image
-      src="./2advanced logo.svg"
+      src="./2AdvancedLogo.svg"
       width={233}
       height={111}
       alt="2advanced logo"

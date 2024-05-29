@@ -31,7 +31,7 @@ export const MemberSignUp = () => (
           />
         </div>
         <Image
-          src="./landing/Tout Image -Bundle Box.svg"
+          src="./landing/ToutImageBundleBox.svg"
           width={160}
           height={178}
           alt="Tout"
@@ -41,7 +41,7 @@ export const MemberSignUp = () => (
     <div className="w-1/2 flex rounded-[54px] overflow-hidden">
       <Image
         className="w-full"
-        src="./landing/membership-preview.svg"
+        src="./landing/MembershipPreview.svg"
         width={661}
         height={368}
         alt="membership"

@@ -28,7 +28,7 @@ export const LandingHeader = () => {
             href="/"
           >
             <Image
-              src="/Kre8tive Branding.svg"
+              src="/Kre8tiveBranding.svg"
               width={366}
               height={53}
               alt="logo"

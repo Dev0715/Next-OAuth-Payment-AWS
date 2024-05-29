@@ -8,7 +8,7 @@ export const CreatorSignUp = () => (
     <div className="w-1/2 flex rounded-[54px] overflow-hidden">
       <Image
         className="w-full"
-        src="./landing/creator-preview.svg"
+        src="./landing/CreatorPreview.svg"
         width={661}
         height={368}
         alt="membership"
