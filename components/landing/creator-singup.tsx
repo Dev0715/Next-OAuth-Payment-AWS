@@ -1,20 +1,10 @@
-import Image from "next/image";
-
 import { GradientButton } from "../utils/gradient-button";
 import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export const CreatorSignUp = () => (
-  <div className="w-full p-[6px] flex rounded-[54px] bg-white">
-    <div className="w-1/2 flex rounded-[54px] overflow-hidden">
-      <Image
-        className="w-full"
-        src="./landing/CreatorPreview.svg"
-        width={661}
-        height={368}
-        alt="membership"
-      />
-    </div>
-    <div className="w-1/2 px-9 py-6 flex flex-col gap-y-6 text-right">
+  <div className="w-full p-[6px] grid grid-cols-2 rounded-[54px] bg-white">
+    <div className="rounded-[54px] overflow-hidden bg-[url('/landing/CreatorPreview.svg')] bg-no-repeat bg-center bg-cover"></div>
+    <div className="px-14 py-6 space-y-6 text-right">
       <GradientParagraph className="text-3xl font-firs font-semibold leading-tight">
         Attention all asset creators!
       </GradientParagraph>
@@ -43,7 +33,7 @@ export const CreatorSignUp = () => (
           </div>
         </div>
         <GradientButton
-          className="font-firs text-xl leading-normal py-[6px]"
+          className="font-firs text-xl py-[6px] font-semibold"
           label="Creator Signup"
           onClick={() => {}}
         />

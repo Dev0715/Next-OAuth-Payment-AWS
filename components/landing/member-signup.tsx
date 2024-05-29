@@ -4,9 +4,9 @@ import { GradientButton } from "../utils/gradient-button";
 import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export const MemberSignUp = () => (
-  <div className="w-full p-[6px] grid grid-cols-2 rounded-[54px] bg-white">
-    <div className="px-12 py-6 flex flex-col">
-      <div className="flex flex-col gap-y-4">
+  <div className="w-full p-[6px] grid grid-cols-2 gap-3 rounded-[54px] bg-white">
+    <div className="px-14 py-6 flex flex-col">
+      <div className="space-y-4">
         <GradientParagraph className="text-3xl leading-8 font-firs font-semibold">
           The only asset library membership you’ll ever need.
         </GradientParagraph>
@@ -16,16 +16,18 @@ export const MemberSignUp = () => (
         </p>
       </div>
       <div className="flex gap-x-6 -mt-6">
-        <div className="flex flex-col font-haas text-[#4F4F4F] mt-10">
-          <p className="text-xl font-normal">Sign up today and receive our</p>
-          <p className="text-[21px] font-bold leading-normal mb-2">
+        <div className="mt-10 font-haas text-[#4F4F4F]">
+          <p className="text-xl font-normal leading-[25px]">
+            Sign up today and receive our
+          </p>
+          <p className="mb-2 text-[21px] font-bold leading-[25px]">
             Free Exclusive Pre-Launch Bundle
           </p>
-          <p className="text-[13px] font-normal text-[#B9B9B9] italic mb-4">
+          <p className="mb-4 ml-0.5 text-[13px] font-normal text-[#B9B9B9] italic">
             [Offer Expires 07/01/2024]
           </p>
           <GradientButton
-            className="font-firs text-xl leading-normal py-[6px]"
+            className="font-firs text-xl py-[6px] font-semibold"
             label="Member Signup"
             onClick={() => {}}
           />
