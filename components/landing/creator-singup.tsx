@@ -36,7 +36,7 @@ export const CreatorSignUp = () => (
           <div className="w-[80%] h-full rounded-full overflow-hidden bg-gradient-to-r from-[#702B69] to-[#2B7AC3]">
             <div
               className="w-full h-full bg-[linear-gradient(-45deg,#777_25%,transparent_25%,transparent_50%,#777_50%,#777_75%,transparent_75%,transparent)] 
-                        bg-[length:20px_20px] bg-[position:0_0,10px_10px] text-white px-4 flex items-center justify-end"
+                        bg-[length:20px_20px] bg-[position:0_0,10px_10px] italic text-white px-4 flex items-center justify-end"
             >
               80%+ Payouts!
             </div>
