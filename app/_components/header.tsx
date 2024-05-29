@@ -1,46 +1,38 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 
 import { UserButton } from "@/components/auth/user-button";
+import { LandingHeader } from "@/components/landing/landing-header";
 
 export const Header = () => {
+  const path = usePathname();
+
+  const isLandingPage = useMemo(() => {
+    return path === "/";
+  }, [path]);
+
+  if (isLandingPage) {
+    return <LandingHeader />;
+  }
+
   return (
-    <nav className="w-full pb-10 flex flex-wrap items-center justify-between">
-      <div className="w-full flex flex-wrap items-center justify-between">
+    <nav className="relative bg-white shadow-lg w-full flex flex-wrap items-center justify-between px-2 py-3">
+      <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
         <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
           <Link
             className={
+              (isLandingPage ? "text-white" : "text-gray-800") +
               " text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
             }
             href="/"
           >
-            <Image
-              src="/Kre8tive Branding.svg"
-              width={366}
-              height={53}
-              alt="logo"
-            />
+            Kre8tive
           </Link>
         </div>
-        <div className="flex flex-col gap-y-3 font-firs">
-          <div className="flex flex-col items-center text-[15px] leading-tight font-semibold">
-            <p>KRE8TIVE is ushering in a vast library of specially-curated</p>
-            <p>premium digital assets for designers & developers.</p>
-          </div>
-          <div className="flex flex-col items-center text-[14px] text-[#3C58A0] leading-tight font-semibold">
-            <p>
-              The Most Permissive Industry Use Licenses + Highly Flexible
-              Pricing Model
-            </p>
-            <p>
-              + A.I. Driven Search + Weekly/Monthly Deals to Save + Real Human
-              Support 27/7/365
-            </p>
-          </div>
-        </div>
-        <div>
+        <div className={isLandingPage ? "text-white" : "text-gray-800"}>
           <UserButton />
         </div>
       </div>
