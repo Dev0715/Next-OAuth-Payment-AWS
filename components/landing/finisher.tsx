@@ -5,7 +5,7 @@ import { GradientParagraph } from "../utils/gradient-paragraph";
 export const Finisher = () => (
   <section className="w-full py-12 flex flex-col items-center">
     <div className="flex items-center mb-4">
-      <GradientParagraph className="text-3xl font-firs">
+      <GradientParagraph className="text-3xl font-firs font-semibold">
         For the Community
       </GradientParagraph>
       <Image
@@ -25,7 +25,7 @@ export const Finisher = () => (
       own lofty expectations, ensuring you have access to the cream of the crop.`}
       </p>
     </div>
-    <p className="font-firs text-2xl text-[#2A2A2A] mb-4">
+    <p className="font-firs font-semibold text-2xl text-[#2A2A2A] mb-4">
       100% Curated With Love by
     </p>
     <Image

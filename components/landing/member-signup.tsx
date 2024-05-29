@@ -33,7 +33,7 @@ export const MemberSignUp = () => (
         <Image
           src="./landing/ToutImageBundleBox.svg"
           width={160}
-          height={178}
+          height={166}
           alt="Tout"
         />
       </div>
