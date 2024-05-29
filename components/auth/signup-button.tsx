@@ -4,17 +4,17 @@ import { useRouter } from "next/navigation";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
-interface SignupButtonProps {
+interface SignUpButtonProps {
   children: React.ReactNode;
   mode?: "modal" | "redirect";
   asChild?: boolean;
 }
 
-export const SignupButton = ({
+export const SignUpButton = ({
   children,
   mode = "redirect",
   asChild
-}: SignupButtonProps) => {
+}: SignUpButtonProps) => {
   const router = useRouter();
 
   const onClick = () => {

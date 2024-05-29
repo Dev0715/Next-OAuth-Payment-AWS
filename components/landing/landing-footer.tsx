@@ -10,7 +10,7 @@ import { GradientParagraph } from "@/components/utils/gradient-paragraph";
 export const LandingFooter = () => {
   return (
     <footer className="w-full flex flex-col items-center gap-y-6">
-      <div className="w-full px-14 py-6 rounded-[40px] flex justify-between bg-white/30">
+      <div className="w-full px-14 py-[27px] rounded-[40px] flex justify-between bg-white/30">
         <div className="flex flex-col gap-y-6">
           <GradientParagraph className="text-lg font-semibold">
             Links
@@ -45,11 +45,11 @@ export const LandingFooter = () => {
                 alt="TrustedSite"
               />
             </div>
-            <div className="flex flex-col gap-y-3">
+            <div className="flex flex-col items-start gap-y-10">
               <Image
                 src="./footer/Norton Secure Seal 1.svg"
-                width={96}
-                height={46}
+                width={114}
+                height={63}
                 alt="TrustPilot"
               />
               <Image
@@ -68,7 +68,7 @@ export const LandingFooter = () => {
             </GradientParagraph>
             <div className="flex items-center gap-x-6">
               <Image
-                src="./footer/newsletter.svg"
+                src="./footer/NewsLetter.svg"
                 width={46}
                 height={35}
                 alt="newsletter"

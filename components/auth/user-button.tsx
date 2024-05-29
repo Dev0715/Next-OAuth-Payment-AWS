@@ -32,7 +32,7 @@ import { cartAtom } from "@/store/cart";
 import { userAtom } from "@/store/user";
 
 import { LoginButton } from "./login-button";
-import { SignupButton } from "./signup-button";
+import { SignUpButton } from "./signup-button";
 
 export const UserButton = () => {
   const [user] = useAtom(userAtom);
@@ -73,9 +73,9 @@ export const UserButton = () => {
           {/* </WrappedButton> */}
         </LoginButton>
         <p className="text-gray-400">|</p>
-        <SignupButton>
+        <SignUpButton>
           <p className="text-md font-medium">Sign up</p>
-        </SignupButton>
+        </SignUpButton>
       </div>
     );
   }

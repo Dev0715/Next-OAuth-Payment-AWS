@@ -11,7 +11,7 @@ const config = {
   prefix: "",
   theme: {
     fontFamily: {
-      firs: ["TTFirsNeue"],
+      firs: ["TTFirsNeue", "ui-sans-serif", "system-ui"],
       haas: ["NeueHaasUnicaPro", "ui-sans-serif", "system-ui"]
     },
     container: {
