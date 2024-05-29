@@ -78,7 +78,7 @@ export const Footer = () => {
                 placeholder="Enter your email address"
               />
               <GradientButton
-                className="font-firs text-[15px]"
+                className="font-firs leading-none text-[15px]"
                 label="Subscribe"
                 onClick={() => {}}
               />
