@@ -10,8 +10,8 @@ import { GradientParagraph } from "@/components/utils/gradient-paragraph";
 export const LandingFooter = () => {
   return (
     <footer className="w-full flex flex-col items-center gap-y-6">
-      <div className="w-full p-4 lg:px-14 lg:pt-[27px] lg:pb-10 rounded-3xl lg:rounded-[40px] lg:flex justify-between space-y-6 lg:space-y-0 bg-white/30">
-        <div>
+      <div className="w-full p-8 lg:px-14 lg:pt-[27px] lg:pb-10 rounded-3xl lg:rounded-[40px] grid md:grid-cols-2 xl:grid-cols-[2fr_2fr_3fr] gap-4 bg-white/30">
+        <div className="row-span-2">
           <GradientParagraph className="text-lg font-semibold">
             Links
           </GradientParagraph>
@@ -32,7 +32,7 @@ export const LandingFooter = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="row-span-2">
           <GradientParagraph className="text-lg font-semibold">
             Trusted & Secure
           </GradientParagraph>
@@ -61,91 +61,90 @@ export const LandingFooter = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-y-10">
-          <div className="flex flex-col gap-y-3">
-            <GradientParagraph className="text-lg font-semibold">
-              Join Our Newsletter
-            </GradientParagraph>
-            <div className="flex items-center gap-x-6">
-              <Image
-                src="./footer/NewsLetter.svg"
-                width={46}
-                height={35}
-                alt="newsletter"
-              />
-              <Input
-                className="w-60 h-[35px] bg-[#E6CCE8] border-white rounded-[9px]"
-                placeholder="Enter your email address"
-              />
-              <GradientButton
-                className="font-firs text-[15px] leading-none py-2"
-                label="Subscribe"
-                onClick={() => {}}
-              />
-            </div>
+        <div className="">
+          <GradientParagraph className="text-lg font-semibold">
+            Join Our Newsletter
+          </GradientParagraph>
+          <div className="mt-4 lg:mt-6 flex items-center flex-wrap gap-x-2 lg:gap-x-6">
+            <Image
+              className="hidden lg:block"
+              src="./footer/NewsLetter.svg"
+              width={46}
+              height={35}
+              alt="newsletter"
+            />
+            <Input
+              className="w-32 md:w-48 xl:w-60 h-[35px] bg-[#E6CCE8] border-white rounded-[9px]"
+              placeholder="Enter your email address"
+            />
+            <GradientButton
+              className="font-firs text-[15px] leading-none py-2"
+              label="Subscribe"
+              onClick={() => {}}
+            />
           </div>
-          <div>
-            <GradientParagraph className="text-lg font-semibold">
-              Social
-            </GradientParagraph>
-            <div className="mt-4 flex items-center gap-x-4 lg:gap-x-16">
-              <Link href="/">
-                <Image
-                  src="./social/linkedin.svg"
-                  width={26}
-                  height={26}
-                  alt="linkedin"
-                />
-              </Link>
-              <Link href="/">
-                <Image
-                  src="./social/x.svg"
-                  width={27}
-                  height={27}
-                  alt="linkedin"
-                />
-              </Link>
-              <Link href="/">
-                <Image
-                  src="./social/facebook.svg"
-                  width={26}
-                  height={26}
-                  alt="linkedin"
-                />
-              </Link>
-              <Link href="/">
-                <Image
-                  src="./social/youtube.svg"
-                  width={29}
-                  height={20}
-                  alt="linkedin"
-                />
-              </Link>
-              <Link href="/">
-                <Image
-                  src="./social/instagram.svg"
-                  width={25}
-                  height={25}
-                  alt="linkedin"
-                />
-              </Link>
-              <Link href="/">
-                <Image
-                  src="./social/pinterest.svg"
-                  width={24}
-                  height={24}
-                  alt="linkedin"
-                />
-              </Link>
-            </div>
+        </div>
+        <div>
+          <GradientParagraph className="text-lg font-semibold">
+            Social
+          </GradientParagraph>
+          <div className="mt-4 lg:mt-6 flex items-center gap-4 md:justify-between">
+            <Link href="/">
+              <Image
+                src="./social/linkedin.svg"
+                width={26}
+                height={26}
+                alt="linkedin"
+              />
+            </Link>
+            <Link href="/">
+              <Image
+                src="./social/x.svg"
+                width={27}
+                height={27}
+                alt="linkedin"
+              />
+            </Link>
+            <Link href="/">
+              <Image
+                src="./social/facebook.svg"
+                width={26}
+                height={26}
+                alt="linkedin"
+              />
+            </Link>
+            <Link href="/">
+              <Image
+                src="./social/youtube.svg"
+                width={29}
+                height={20}
+                alt="linkedin"
+              />
+            </Link>
+            <Link href="/">
+              <Image
+                src="./social/instagram.svg"
+                width={25}
+                height={25}
+                alt="linkedin"
+              />
+            </Link>
+            <Link href="/">
+              <Image
+                src="./social/pinterest.svg"
+                width={24}
+                height={24}
+                alt="linkedin"
+              />
+            </Link>
           </div>
         </div>
       </div>
-      <div className="flex gap-x-4 font-haas text-sm">
+      <div className="md:flex md:gap-x-4 font-haas text-sm text-center">
         <p className="text-black">
           Copyright © 2024 KRE8TIVE, LLC. All rights reserved.
         </p>
-        <div className="flex gap-x-4 text-[#3054B0]">
+        <div className="mt-4 sm:mt-0 grid grid-cols-1 sm:grid-cols-3 gap-4 text-[#3054B0]">
           <Link href="/">Terms of Use</Link>
           <Link href="/">Privacy Policy</Link>
           <Link href="/">Cookie Policy</Link>
