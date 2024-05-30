@@ -5,7 +5,7 @@ import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export const MemberSignUp = () => (
   <div className="w-full p-[6px] grid grid-cols-1 xl:grid-cols-2 gap-3 rounded-3xl md:rounded-[54px] bg-white">
-    <div className="p-4 md:px-14 md:py-6">
+    <div className="p-4 space-y-4 sm:space-y-0 md:px-14 md:py-6">
       <div className="space-y-4 text-center md:text-left">
         <GradientParagraph className="text-xl md:text-3xl leading-8 font-firs font-semibold">
           The only asset library membership you’ll ever need.
@@ -15,7 +15,7 @@ export const MemberSignUp = () => (
           , priced to make your wallet smile.
         </p>
       </div>
-      <div className="flex items-center justify-center flex-wrap md:justify-start gap-6">
+      <div className="flex items-center justify-center md:justify-start gap-6">
         <div className="font-haas text-[#4F4F4F] text-center md:text-left">
           <p className="text-md lg:text-xl font-normal leading-[25px]">
             Sign up today and receive our
