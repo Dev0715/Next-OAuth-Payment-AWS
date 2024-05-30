@@ -15,8 +15,8 @@ export const MemberSignUp = () => (
           , priced to make your wallet smile.
         </p>
       </div>
-      <div className="flex gap-x-6 -mt-6">
-        <div className="mt-10 font-haas text-[#4F4F4F]">
+      <div className="flex items-center gap-x-6">
+        <div className="font-haas text-[#4F4F4F]">
           <p className="text-md lg:text-xl font-normal leading-[25px]">
             Sign up today and receive our
           </p>
@@ -35,7 +35,7 @@ export const MemberSignUp = () => (
         <Image
           src="./landing/ToutImageBundleBox.svg"
           width={160}
-          height={178}
+          height={166}
           alt="Tout"
         />
       </div>
