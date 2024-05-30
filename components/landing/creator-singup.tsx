@@ -8,7 +8,7 @@ export const CreatorSignUp = () => (
       <GradientParagraph className="text-xl md:text-3xl font-firs font-semibold leading-tight">
         Attention all asset creators!
       </GradientParagraph>
-      <div className="flex flex-col xl:items-end gap-y-8">
+      <div className="flex flex-col xl:items-end gap-y-6 md:gap-y-8">
         <p className="font-haas font-normal text-md lg:text-[19px] text-[#757575] leading-normal">
           {`It's time to recognize the `}
           <span className="font-bold">true worth</span>
