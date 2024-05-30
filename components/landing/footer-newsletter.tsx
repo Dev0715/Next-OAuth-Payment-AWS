@@ -10,7 +10,7 @@ export const FooterNewsletter = () => (
     <GradientParagraph className="text-lg font-semibold">
       Join Our Newsletter
     </GradientParagraph>
-    <div className="mt-4 lg:mt-6 flex items-center flex-wrap gap-x-2 lg:gap-x-6">
+    <div className="mt-4 lg:mt-6 flex items-center gap-x-4 xl:gap-x-6">
       <Image
         className="hidden lg:block"
         src="./footer/NewsLetter.svg"
