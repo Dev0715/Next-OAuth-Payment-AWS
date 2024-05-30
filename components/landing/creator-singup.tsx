@@ -2,13 +2,13 @@ import { GradientButton } from "../utils/gradient-button";
 import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export const CreatorSignUp = () => (
-  <div className="w-full p-[6px] grid grid-cols-1 xl:grid-cols-2 rounded-3xl lg:rounded-[54px] bg-white">
-    <div className="min-h-[350px] rounded-3xl lg:rounded-[54px] overflow-hidden bg-[url('/landing/CreatorPreview.svg')] bg-no-repeat bg-center bg-cover"></div>
-    <div className="p-4 lg:px-14 lg:py-6 space-y-6 lg:text-right">
-      <GradientParagraph className="text-xl lg:text-3xl font-firs font-semibold leading-tight">
+  <div className="w-full p-[6px] grid grid-cols-1 xl:grid-cols-2 rounded-3xl md:rounded-[54px] bg-white">
+    <div className="row-start-2 xl:row-start-auto col min-h-[350px] rounded-3xl md:rounded-[54px] overflow-hidden bg-[url('/landing/CreatorPreview.svg')] bg-no-repeat bg-center bg-cover"></div>
+    <div className="row-start-1 xl:row-start-auto p-4 md:px-14 md:py-6 space-y-6 text-center md:text-left xl:text-right">
+      <GradientParagraph className="text-xl md:text-3xl font-firs font-semibold leading-tight">
         Attention all asset creators!
       </GradientParagraph>
-      <div className="flex flex-col items-end gap-y-8">
+      <div className="flex flex-col xl:items-end gap-y-8">
         <p className="font-haas font-normal text-md lg:text-[19px] text-[#757575] leading-normal">
           {`It's time to recognize the `}
           <span className="font-bold">true worth</span>

@@ -4,19 +4,19 @@ import { GradientButton } from "../utils/gradient-button";
 import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export const MemberSignUp = () => (
-  <div className="w-full p-[6px] grid grid-cols-1 xl:grid-cols-2 gap-3 rounded-3xl lg:rounded-[54px] bg-white">
-    <div className="p-4 lg:px-14 lg:py-6">
-      <div className="space-y-4">
-        <GradientParagraph className="text-xl lg:text-3xl leading-8 font-firs font-semibold">
+  <div className="w-full p-[6px] grid grid-cols-1 xl:grid-cols-2 gap-3 rounded-3xl md:rounded-[54px] bg-white">
+    <div className="p-4 md:px-14 md:py-6">
+      <div className="space-y-4 text-center md:text-left">
+        <GradientParagraph className="text-xl md:text-3xl leading-8 font-firs font-semibold">
           The only asset library membership you’ll ever need.
         </GradientParagraph>
-        <p className="font-firs text-md lg:text-[22px] text-[#757575] font-semibold leading-snug">
+        <p className="font-firs text-md md:text-[22px] text-[#757575] font-semibold leading-snug">
           KRE8TIVE will offer a treasure trove of premium curated digital assets
           , priced to make your wallet smile.
         </p>
       </div>
-      <div className="flex items-center gap-x-6">
-        <div className="font-haas text-[#4F4F4F]">
+      <div className="flex items-center justify-center flex-wrap md:justify-start gap-6">
+        <div className="font-haas text-[#4F4F4F] text-center md:text-left">
           <p className="text-md lg:text-xl font-normal leading-[25px]">
             Sign up today and receive our
           </p>
@@ -27,12 +27,13 @@ export const MemberSignUp = () => (
             [Offer Expires 07/01/2024]
           </p>
           <GradientButton
-            className="font-firs text-xl py-[6px] font-semibold"
+            className="font-firs text-md md:text-xl py-[6px] font-semibold"
             label="Member Signup"
             onClick={() => {}}
           />
         </div>
         <Image
+          className="hidden sm:block"
           src="./landing/ToutImageBundleBox.svg"
           width={160}
           height={166}
