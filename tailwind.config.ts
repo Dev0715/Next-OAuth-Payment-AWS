@@ -1,3 +1,4 @@
+import defaultTheme from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -15,10 +16,11 @@ const config = {
       haas: ["NeueHaasUnicaPro", "ui-sans-serif", "system-ui"]
     },
     container: {
-      center: true,
-      screens: {
-        "2xl": "1440px"
-      }
+      center: true
+    },
+    screens: {
+      ...defaultTheme.screens,
+      "2xl": "1440px"
     },
     extend: {
       colors: {
