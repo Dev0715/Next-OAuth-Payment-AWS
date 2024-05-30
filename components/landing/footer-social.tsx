@@ -8,7 +8,7 @@ export const FooterSocial = () => (
     <GradientParagraph className="text-lg font-semibold">
       Social
     </GradientParagraph>
-    <div className="mt-4 lg:mt-6 flex items-center gap-4 md:justify-between">
+    <div className="mt-4 lg:mt-6 flex items-center gap-4 justify-between">
       <Link href="/">
         <Image
           src="./social/linkedin.svg"

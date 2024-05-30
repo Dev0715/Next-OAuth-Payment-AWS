@@ -10,16 +10,16 @@ export const FooterNewsletter = () => (
     <GradientParagraph className="text-lg font-semibold">
       Join Our Newsletter
     </GradientParagraph>
-    <div className="mt-4 lg:mt-6 flex items-center gap-x-4 xl:gap-x-6">
+    <div className="mt-4 lg:mt-6 flex items-center gap-x-6 md:gap-x-4 xl:gap-x-6">
       <Image
-        className="hidden lg:block"
+        className="md:hidden lg:block"
         src="./footer/NewsLetter.svg"
         width={46}
         height={35}
         alt="newsletter"
       />
       <Input
-        className="w-32 md:w-48 xl:w-60 h-[35px] bg-[#E6CCE8] border-white rounded-[9px]"
+        className="max-w-60 md:w-48 xl:w-60 h-[35px] bg-[#E6CCE8] border-white rounded-[9px]"
         placeholder="Enter your email address"
       />
       <GradientButton

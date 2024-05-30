@@ -16,7 +16,7 @@ export const Footer3rdParty = () => (
           alt="TrustedSite"
         />
       </div>
-      <div className="flex flex-col items-center gap-y-9">
+      <div className="flex flex-1 flex-wrap items-center md:flex-col md:items-start gap-9">
         <Image
           src="./footer/NortonSecureSeal.svg"
           width={114}
