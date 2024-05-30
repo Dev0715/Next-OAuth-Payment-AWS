@@ -18,21 +18,16 @@ export const LandingHeader = () => {
   };
 
   return (
-    <nav className="container p-4 lg:p-[50px] lg:pb-0">
-      <div className="w-full flex flex-wrap items-center justify-between">
-        <div className="relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-          <Link
-            className="text-2xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase"
-            href="/"
-          >
-            <Image
-              src="/Kre8tiveBranding.svg"
-              width={366}
-              height={53}
-              alt="logo"
-            />
-          </Link>
-        </div>
+    <nav className="container p-4 md:p-8 lg:p-[50px] lg:pb-0">
+      <div className="w-full flex flex-wrap items-center justify-center md:justify-between gap-4">
+        <Link className="mr-1" href="/">
+          <Image
+            src="/Kre8tiveBranding.svg"
+            width={366}
+            height={53}
+            alt="logo"
+          />
+        </Link>
         <div className="hidden xl:block text-center font-firs">
           <div className="max-w-[480px] m-auto text-[15px] text-black leading-[18px] font-semibold">
             KRE8TIVE is ushering in a vast library of specially-curated Premium
@@ -46,7 +41,7 @@ export const LandingHeader = () => {
           </div>
         </div>
         <div>
-          <div className="flex items-center gap-x-10">
+          <div className="flex items-center gap-x-4 md:gap-x-10">
             <AuthButton
               comment="Become a member!"
               label="Signup"
