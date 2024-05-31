@@ -21,7 +21,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
+
 import { LoginSchema } from "@/schemas/auth/auth";
+
+import { GradientButton } from "../utils/gradient-button";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -116,9 +119,13 @@ export const LoginForm = () => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isPending} type="submit" className="w-full">
+            <GradientButton
+              disabled={isPending}
+              type="submit"
+              className="w-full font-firs"
+            >
               Login
-            </Button>
+            </GradientButton>
           </form>
         </Form>
       </CardWrapper>

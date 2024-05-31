@@ -69,12 +69,12 @@ export const UserButton = () => {
       <div className="flex items-center gap-x-2">
         <LoginButton>
           {/* <WrappedButton variant="default" size="lg"> */}
-          <p className="text-md font-medium">Log in</p>
+          <p className="text-md font-medium font-firs">Log in</p>
           {/* </WrappedButton> */}
         </LoginButton>
         <p className="text-gray-400">|</p>
         <SignUpButton>
-          <p className="text-md font-medium">Sign up</p>
+          <p className="text-md font-medium font-firs">Sign up</p>
         </SignUpButton>
       </div>
     );

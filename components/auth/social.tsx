@@ -6,6 +6,7 @@ import { FaGithub } from "react-icons/fa";
 import { SiAdobe, SiDiscord, SiEpicgames } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
+
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 export const Social = () => {
