@@ -33,7 +33,7 @@ export const CreatorSignUp = () => (
           </div>
         </div>
         <GradientButton
-          className="font-firs text-xl py-[6px] font-semibold"
+          className="w-fit font-firs text-xl py-[6px] font-semibold"
           onClick={() => {}}
         >
           Creator Signup

@@ -23,7 +23,7 @@ export const FooterNewsletter = () => (
         placeholder="Enter your email address"
       />
       <GradientButton
-        className="font-firs text-[15px] leading-none py-2"
+        className="w-fit font-firs text-[15px] leading-none py-2"
         onClick={() => {}}
       >
         Subscribe

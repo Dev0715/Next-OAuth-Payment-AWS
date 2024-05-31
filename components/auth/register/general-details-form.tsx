@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { checkGeneralDetails } from "@/actions/auth/register/check-general-details";
-import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormControl,
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FormError } from "@/components/utils/form-error";
+import { GradientButton } from "@/components/utils/gradient-button";
 import { GeneralDetailsSchema } from "@/schemas/auth/register";
 
 type Props = {
@@ -60,7 +61,7 @@ export const GeneralDetailsForm = ({ onSubmit }: Props) => {
       </p>
       <Form {...form}>
         <form
-          className="grid grid-cols-2 gap-4"
+          className="w-full grid grid-cols-2 gap-4"
           onSubmit={form.handleSubmit(handleSubmit)}
         >
           <FormField
@@ -150,13 +151,13 @@ export const GeneralDetailsForm = ({ onSubmit }: Props) => {
               </FormItem>
             )}
           />
-          <Button
+          <GradientButton
             disabled={isPending}
             type="submit"
-            className="col-span-2 mt-4"
+            className="w-full col-span-2 mt-4 font-firs text-[15px] leading-tight py-2"
           >
             Register
-          </Button>
+          </GradientButton>
 
           {errMsg ? <FormError message={errMsg} /> : null}
         </form>

@@ -27,7 +27,7 @@ export const MemberSignUp = () => (
             [Offer Expires 07/01/2024]
           </p>
           <GradientButton
-            className="font-firs text-md md:text-xl py-[6px] font-semibold"
+            className="w-fit font-firs text-md md:text-xl py-[6px] font-semibold"
             onClick={() => {}}
           >
             Member Signup
