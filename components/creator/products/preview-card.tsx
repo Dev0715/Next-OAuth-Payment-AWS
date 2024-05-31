@@ -60,7 +60,7 @@ export const PreviewCard = ({
       <CardHeader className="flex-row items-center justify-between space-y-0">
         <CardTitle>Preview Images ({previewFiles.length})</CardTitle>
         <FileUploadButton disabled={isPending} onChange={onPreviewFileAdded}>
-          <FaFileUpload className="text-green-700 text-sm" />
+          <FaFileUpload className="text-sm" />
           Upload
         </FileUploadButton>
       </CardHeader>

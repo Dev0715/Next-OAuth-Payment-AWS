@@ -54,7 +54,7 @@ export const DetailsCard = ({
                   <Textarea
                     {...field}
                     disabled={isPending}
-                    placeholder="Submit comment..."
+                    placeholder="Action comment..."
                   />
                 </FormControl>
                 <FormMessage />
