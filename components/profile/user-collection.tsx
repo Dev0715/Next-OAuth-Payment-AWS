@@ -2,7 +2,6 @@ import { useAtom } from "jotai";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,6 +12,8 @@ import { Product } from "@/shared/types/product.type";
 import { userAtom } from "@/store/user";
 
 import { ProductItem } from "../product/product-item";
+import { GradientButton } from "../utils/gradient-button";
+import { GradientParagraph } from "../utils/gradient-paragraph";
 
 type Props = {
   products: Product[];
@@ -25,13 +26,19 @@ export const UserCollection = ({ products, userId }: Props) => {
   return (
     <Card className="border-0 rounded-none">
       <CardHeader className="flex flex-row items-center justify-between">
-        <p className="text-xl font-bold">Your Collections</p>
+        <GradientParagraph className="text-xl font-bold">
+          Your Collections
+        </GradientParagraph>
         {user?.userId === userId && (
-          <Button variant="default" asChild className="w-48 flex gap-x-2">
+          <GradientButton
+            variant="default"
+            asChild
+            className="w-48 flex gap-x-2"
+          >
             <Link href="/creator/new-product">
               <FaPlus /> Add
             </Link>
-          </Button>
+          </GradientButton>
         )}
       </CardHeader>
       <CardContent className="flex flex-wrap">

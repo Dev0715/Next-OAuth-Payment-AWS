@@ -9,6 +9,8 @@ import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GradientParagraph } from "@/components/utils/gradient-paragraph";
+
 import { getProductById } from "@/data/product";
 import { getUserById } from "@/data/user";
 
@@ -85,9 +87,11 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
           </AvatarFallback>
         </Avatar>
       </div>
-      <div className="w-full flex flex-col items-center gap-y-3">
+      <div className="w-full flex flex-col items-center gap-y-3 font-firs">
         {/* <p className="text-xl font-bold">@{userData?.username}</p> */}
-        <p className="text-xl font-bold">@{userData?.userId}</p>
+        <GradientParagraph className="text-xl font-bold">
+          @{userData?.userId}
+        </GradientParagraph>
         <p className="text-xl font-bold text-rose-700">★ ★ ★ ★ ★</p>
         <p className="text-lg font-semibold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</p>
         <div className="flex gap-x-6">
