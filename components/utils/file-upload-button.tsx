@@ -1,7 +1,8 @@
 import { useRef } from "react";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+
+import { GradientButton } from "./gradient-button";
 
 type Props = {
   disabled: boolean;
@@ -26,16 +27,15 @@ export const FileUploadButton = ({ disabled, children, onChange }: Props) => {
         ref={hiddenFileInput}
         onChange={onChange}
       />
-      <Button
+      <GradientButton
         type="button"
-        className="gap-x-2 border-green-700 rounded-none"
-        variant="outline"
+        className="gap-x-2 py-2"
         size="sm"
         disabled={disabled}
         onClick={onFileBrowse}
       >
         {children}
-      </Button>
+      </GradientButton>
     </>
   );
 };

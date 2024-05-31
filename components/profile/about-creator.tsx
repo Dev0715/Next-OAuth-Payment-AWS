@@ -12,6 +12,9 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { userAtom } from "@/store/user";
 
+import { GradientButton } from "../utils/gradient-button";
+import { GradientParagraph } from "../utils/gradient-paragraph";
+
 import { LinkedSites } from "./linked-sites";
 
 import type { Address, Company, User } from "@/shared/types/user.type";
@@ -27,13 +30,15 @@ export const AboutCreator = ({ userData }: PropsParams) => {
   return (
     <Card className="border-0 rounded-none">
       <CardHeader className="flex flex-row items-end justify-between">
-        <p className="text-xl font-bold">About the Creator</p>
+        <GradientParagraph className="text-xl font-bold">
+          About the Creator
+        </GradientParagraph>
         {user?.userId === userData?.userId && (
-          <Button variant="default" asChild>
+          <GradientButton variant="default" asChild>
             <Link href="/user/creator" className="flex gap-x-1">
               <FaEdit /> Edit
             </Link>
-          </Button>
+          </GradientButton>
         )}
       </CardHeader>
       <CardContent>
@@ -81,9 +86,9 @@ export const AboutCreator = ({ userData }: PropsParams) => {
             </div>
           </div>
           <div className="w-2/5 flex flex-col gap-y-6">
-            <p className="text-xl font-medium">
+            <GradientParagraph className="text-xl font-medium">
               {`Creator's profiles on other Creative markets`}
-            </p>
+            </GradientParagraph>
             <LinkedSites disabled showButton={false} />
           </div>
         </div>

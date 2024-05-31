@@ -52,7 +52,7 @@ export const FilesCard = ({
       <CardHeader className="flex-row items-center justify-between space-y-0">
         <CardTitle>Creative Works ({creativeFiles.length})</CardTitle>
         <FileUploadButton disabled={isPending} onChange={onCreativeFileAdded}>
-          <FaFileUpload className="text-green-700 text-sm" />
+          <FaFileUpload className="text-sm" />
           Upload
         </FileUploadButton>
       </CardHeader>

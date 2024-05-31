@@ -10,13 +10,15 @@ import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
 import { newProduct } from "@/actions/product/new-product";
-import { Button } from "@/components/ui/button";
 import {
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+import { GradientButton } from "@/components/utils/gradient-button";
+import { GradientParagraph } from "@/components/utils/gradient-paragraph";
+
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { NewProductSchema } from "@/schemas/product";
 import {
@@ -144,9 +146,11 @@ export const ProductAddForm = () => {
   return (
     <div className="w-full">
       <CardHeader className="w-full flex flex-row items-end justify-between">
-        <div className="flex flex-col">
-          <CardTitle className="text-2xl font-medium">
-            Add a new Product
+        <div className="flex flex-col font-firs">
+          <CardTitle>
+            <GradientParagraph className="text-2xl font-semibold">
+              Add a new Product
+            </GradientParagraph>
           </CardTitle>
           <CardDescription>
             You can register your product and our admin users will check it and
@@ -154,23 +158,22 @@ export const ProductAddForm = () => {
           </CardDescription>
         </div>
         <div className="flex gap-x-6 items-end">
-          <Button
+          <GradientButton
             disabled={isPending}
-            variant={"outline"}
             className="w-64 gap-x-4 rounded-none border-green-700"
             onClick={form.handleSubmit(() => onSubmit("created"))}
           >
             <FaSave />
             Save
-          </Button>
-          <Button
+          </GradientButton>
+          <GradientButton
             disabled={isPending}
             className="w-64 gap-x-4 rounded-none"
             onClick={form.handleSubmit(() => onSubmit("submitted"))}
           >
             <FaUpload />
             Direct Submit
-          </Button>
+          </GradientButton>
         </div>
       </CardHeader>
       <div className="px-6 pb-6">
