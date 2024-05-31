@@ -38,6 +38,9 @@ import { uploadImage } from "@/shared/functions/upload-image";
 import { CreatorData, User } from "@/shared/types/user.type";
 import { userAtom } from "@/store/user";
 
+import { GradientButton } from "../utils/gradient-button";
+import { GradientParagraph } from "../utils/gradient-paragraph";
+
 import { LinkedSites } from "./linked-sites";
 
 export default function EditCreator({
@@ -457,20 +460,20 @@ export default function EditCreator({
 
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button
+            <GradientButton
               disabled={isDisabled || !isChanged}
               className="w-64"
               type="submit"
             >
               Save Profile
-            </Button>
+            </GradientButton>
           </form>
         </Form>
       </div>
       <div className="w-2/5 flex flex-col gap-y-6">
-        <p className="text-xl font-medium">
+        <GradientParagraph className="font-firs text-xl font-medium">
           Confirm your profiles on other Creative markets
-        </p>
+        </GradientParagraph>
         <LinkedSites disabled={isDisabled} />
       </div>
     </main>

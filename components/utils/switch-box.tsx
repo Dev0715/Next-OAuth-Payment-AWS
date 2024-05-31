@@ -1,5 +1,6 @@
 import { Switch } from "@/components/ui/switch";
 
+import { GradientParagraph } from "./gradient-paragraph";
 import { QuestionAlert } from "./question-alert";
 
 type ParamsType = {
@@ -22,9 +23,11 @@ export const SwitchBox = ({
   alertMessage
 }: ParamsType) => {
   return (
-    <div className="w-full flex items-center justify-between rounded-lg border p-4">
+    <div className="w-full flex items-center justify-between rounded-lg border p-4 font-firs">
       <div className="space-y-0.5">
-        <p className={`text-black font-medium text-xl`}>{title}</p>
+        <GradientParagraph className={`text-black font-medium text-xl`}>
+          {title}
+        </GradientParagraph>
         <p className="text-sm text-gray-500">{content}</p>
       </div>
       <QuestionAlert

@@ -2,7 +2,8 @@
 
 import { FaCcStripe, FaPaypal } from "react-icons/fa";
 
-import { Button } from "../ui/button";
+import { GradientButton } from "../utils/gradient-button";
+import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export default function EditCustomer({
   disabled = false
@@ -11,8 +12,10 @@ export default function EditCustomer({
 }) {
   return (
     <main className="w-full flex justify-between gap-x-6">
-      <div className="w-2/5 flex flex-col gap-y-6">
-        <p className="text-xl font-medium">For First CUSTOMERs!</p>
+      <div className="w-2/5 flex flex-col gap-y-6 font-firs">
+        <GradientParagraph className="text-xl font-medium">
+          For First CUSTOMERs!
+        </GradientParagraph>
         <div>
           <p>
             Be the earliest users to get the latest updates and news from us!
@@ -30,24 +33,26 @@ export default function EditCustomer({
             Join the Discord and follow notifications and news on our channel
           </p>
         </div>
-        <p className="text-xl font-medium">SUBSCRIBE NOW!</p>
+        <GradientParagraph className="text-xl font-medium">
+          SUBSCRIBE NOW!
+        </GradientParagraph>
         <div className="w-3/4 flex flex-col gap-y-6">
-          <Button
+          <GradientButton
             variant="outline"
             disabled={disabled}
             className="flex gap-x-2 border-green-700"
           >
             <FaPaypal />
             Subscribe with Paypal
-          </Button>
-          <Button
+          </GradientButton>
+          <GradientButton
             variant="outline"
             disabled={disabled}
             className="flex gap-x-2 border-blue-700"
           >
             <FaCcStripe />
             Subscribe with Stripe
-          </Button>
+          </GradientButton>
         </div>
       </div>
     </main>
