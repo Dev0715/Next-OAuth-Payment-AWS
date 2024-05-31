@@ -80,7 +80,8 @@ export const ProductAddForm = () => {
     ]);
 
     if (pathList.length === 0 || previewList.length === 0) {
-      throw new Error("Failed to upload images.");
+      setError("Error uploading files");
+      return;
     }
 
     const fileList = pathList.map((path: string, index: number) => ({
