@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
+import { GradientButton } from "@/components/utils/gradient-button";
 import { RoleSwitchBox } from "@/components/utils/role-switch-box";
 import { updateGeneralProfile } from "@/data/user";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
@@ -170,14 +171,14 @@ export default function Profile() {
   };
 
   return (
-    <main className="w-full pl-8 flex flex-col gap-y-5">
+    <main className="w-full pl-8 flex flex-col gap-y-6">
       <Header
         title="General Profile"
         content="You can see your roles opened and update your profile information here."
       />
       <Separator />
       <div className="w-full flex flex-col gap-y-4">
-        <h3 className="text-base font-medium">Your roles opened</h3>
+        <h3 className="text-base font-firs font-medium">Your roles opened</h3>
         <div className="w-1/2 grid grid-cols-3 gap-x-6">
           <RoleSwitchBox
             title="Creator"
@@ -447,13 +448,13 @@ export default function Profile() {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button
+          <GradientButton
             disabled={isPending || !isChanged}
             type="submit"
             className="w-64"
           >
             Save Profile
-          </Button>
+          </GradientButton>
         </form>
       </Form>
     </main>

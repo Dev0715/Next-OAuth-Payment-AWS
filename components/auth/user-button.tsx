@@ -126,17 +126,15 @@ export const UserButton = () => {
               <Separator />
             </>
           )}
-          {userRole.isCustomer && (
-            <>
-              <Link href="/user">
-                <DropdownMenuItem>
-                  <MixerHorizontalIcon className="h-4 w-4 mr-3" />
-                  <span>User Settings</span>
-                </DropdownMenuItem>
-              </Link>
-              <Separator />
-            </>
-          )}
+          <>
+            <Link href="/user">
+              <DropdownMenuItem>
+                <MixerHorizontalIcon className="h-4 w-4 mr-3" />
+                <span>User Settings</span>
+              </DropdownMenuItem>
+            </Link>
+            <Separator />
+          </>
           <Link href="/bundles">
             <DropdownMenuItem>
               <FaLayerGroup className="h-4 w-4 mr-3" />
