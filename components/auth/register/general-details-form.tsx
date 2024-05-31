@@ -55,7 +55,7 @@ export const GeneralDetailsForm = ({ onSubmit }: Props) => {
 
   return (
     <div className="w-[480px] m-auto">
-      <p className="mb-6 text-xl text-green-700">
+      <p className="mb-6 font-firs font-medium text-[22px] text-[#757575]">
         Please provide your personal information.
       </p>
       <Form {...form}>
