@@ -26,7 +26,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import { getUserById } from "@/data/user";
-import { useCurrentRole } from "@/hooks/use-current-role";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { cartAtom } from "@/store/cart";
 import { userAtom } from "@/store/user";
@@ -36,7 +35,6 @@ import { SignUpButton } from "./signup-button";
 
 export const UserButton = () => {
   const [user] = useAtom(userAtom);
-  const userRole = useCurrentRole();
   const { getLinkFromS3 } = useLinkFromS3();
 
   const [avatarImage, setAvatarImage] = useState<string>("");
@@ -104,7 +102,7 @@ export const UserButton = () => {
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48" align="end">
-          {userRole.isManager && (
+          {user.manager && user.manager.isManager && (
             <>
               <Link href={`/admin`}>
                 <DropdownMenuItem>
@@ -115,7 +113,7 @@ export const UserButton = () => {
               <Separator />
             </>
           )}
-          {userRole.isCreator && (
+          {user.creator && user.creator.isCreator && (
             <>
               <Link href={`/creator/${user.userId}`}>
                 <DropdownMenuItem>
