@@ -28,9 +28,10 @@ export const MemberSignUp = () => (
           </p>
           <GradientButton
             className="font-firs text-md md:text-xl py-[6px] font-semibold"
-            label="Member Signup"
             onClick={() => {}}
-          />
+          >
+            Member Signup
+          </GradientButton>
         </div>
         <Image
           className="hidden sm:block"

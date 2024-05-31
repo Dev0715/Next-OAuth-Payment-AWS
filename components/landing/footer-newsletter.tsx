@@ -24,9 +24,10 @@ export const FooterNewsletter = () => (
       />
       <GradientButton
         className="font-firs text-[15px] leading-none py-2"
-        label="Subscribe"
         onClick={() => {}}
-      />
+      >
+        Subscribe
+      </GradientButton>
     </div>
   </div>
 );

@@ -14,9 +14,10 @@ export const AuthButton = ({ comment, label, onClick }: Props) => {
       </p>
       <GradientButton
         className="font-firs leading-none text-lg md:text-xl pt-[6px] pb-[9px] font-semibold"
-        label={label}
         onClick={onClick}
-      />
+      >
+        {label}
+      </GradientButton>
     </div>
   );
 };

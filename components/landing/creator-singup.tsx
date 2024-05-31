@@ -34,9 +34,10 @@ export const CreatorSignUp = () => (
         </div>
         <GradientButton
           className="font-firs text-xl py-[6px] font-semibold"
-          label="Creator Signup"
           onClick={() => {}}
-        />
+        >
+          Creator Signup
+        </GradientButton>
       </div>
     </div>
   </div>
