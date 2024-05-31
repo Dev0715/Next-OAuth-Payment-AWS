@@ -7,7 +7,6 @@ import { FaKey } from "react-icons/fa";
 import { z } from "zod";
 
 import { updatePassword } from "@/actions/auth/update-password";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -29,6 +28,8 @@ import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
 import { PasswordChangeSchema } from "@/schemas/auth/auth";
 import { userAtom } from "@/store/user";
+
+import { GradientButton } from "../utils/gradient-button";
 
 export const PasswordChangeForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -64,7 +65,7 @@ export const PasswordChangeForm = () => {
   };
 
   return (
-    <Card className="w-full h-fit rounded-none">
+    <Card className="w-full h-fit rounded-none font-firs">
       <CardHeader>
         <CardTitle>Change Password</CardTitle>
         <CardDescription>
@@ -132,7 +133,7 @@ export const PasswordChangeForm = () => {
             <FormError message={error} />
           </CardContent>
           <CardFooter>
-            <Button
+            <GradientButton
               disabled={isPending}
               type="submit"
               variant="default"
@@ -140,7 +141,7 @@ export const PasswordChangeForm = () => {
             >
               <FaKey />
               Change Password
-            </Button>
+            </GradientButton>
           </CardFooter>
         </form>
       </Form>

@@ -2,7 +2,7 @@ import { Button, ButtonProps } from "../ui/button";
 
 type Props = {
   className?: string;
-  children: string;
+  children: React.ReactNode;
 } & ButtonProps;
 
 export const GradientButton = ({ className, children, ...props }: Props) => {

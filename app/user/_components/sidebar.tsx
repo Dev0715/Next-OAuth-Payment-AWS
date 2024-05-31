@@ -36,7 +36,7 @@ export const Sidebar = () => {
   ];
 
   return (
-    <div className="w-72 flex flex-col gap-y-2 items-start">
+    <div className="w-72 flex flex-col gap-y-2 items-start font-firs">
       {sidebarItems.map((item) =>
         pathName === item.path ? (
           <Button
