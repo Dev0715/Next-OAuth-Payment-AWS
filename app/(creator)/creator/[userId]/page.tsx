@@ -7,8 +7,8 @@ import { FaUser } from "react-icons/fa";
 import { AboutCreator } from "@/components/profile/about-creator";
 import { UserCollection } from "@/components/profile/user-collection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GradientButton } from "@/components/utils/gradient-button";
 import { GradientParagraph } from "@/components/utils/gradient-paragraph";
 
 import { getProductById } from "@/data/product";
@@ -95,19 +95,19 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
         <p className="text-xl font-bold text-rose-700">★ ★ ★ ★ ★</p>
         <p className="text-lg font-semibold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</p>
         <div className="flex gap-x-6">
-          <Button
+          <GradientButton
             variant="default"
             className="w-24 rounded-none"
             onClick={onFollow}
           >
             Follow
-          </Button>
-          <Button
+          </GradientButton>
+          <GradientButton
             variant="outline"
             className="w-24 border-green-700 rounded-none"
           >
             Message
-          </Button>
+          </GradientButton>
         </div>
       </div>
       <div className="w-full flex flex-col items-center pt-6">
