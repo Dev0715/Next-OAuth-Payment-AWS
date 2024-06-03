@@ -63,7 +63,7 @@ export default function EditCreator({
     if (!user || !getLinkFromS3) return;
 
     if (user?.creator?.cover) {
-      getLinkFromS3(user.creator.cover).then((res) => {
+      getLinkFromS3(user.creator.cover, "LISTING").then((res) => {
         if (res.success) {
           setCoverImagePath(res.response as string);
         }

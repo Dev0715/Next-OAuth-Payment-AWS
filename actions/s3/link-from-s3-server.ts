@@ -5,10 +5,14 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 import s3Client from "@/lib/s3";
 import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
+import { BucketType } from "./upload-file";
 
-export const getLinkFromS3Server = async (keyName: string) => {
+export const getLinkFromS3Server = async (
+  keyName: string,
+  bucketType: BucketType
+) => {
   const command = new GetObjectCommand({
-    Bucket: AWS_S3_BUCKETS.DOWNLOAD,
+    Bucket: AWS_S3_BUCKETS[bucketType] as string,
     Key: keyName
   });
 

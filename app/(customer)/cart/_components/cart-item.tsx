@@ -32,7 +32,7 @@ export const CartItem = ({
     if (!product.previewList) return;
 
     const _s3Link = product.previewList[0];
-    getLinkFromS3(_s3Link).then((res) => {
+    getLinkFromS3(_s3Link, "LISTING").then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }

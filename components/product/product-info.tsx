@@ -33,7 +33,7 @@ export const ProductInfo = ({ product, isPending }: Props) => {
         (_product) => {
           if (_product) {
             _product?.previewList.map((path: string) => {
-              getLinkFromS3(path).then((res) => {
+              getLinkFromS3(path, "LISTING").then((res) => {
                 if (res.success) {
                   setImageList((prev) => [...prev, res.response as string]);
                 }

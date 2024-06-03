@@ -62,7 +62,7 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
         }
       } else {
         const product = orderList[0];
-        const res = await getLinkFromS3(product.previewList[0]);
+        const res = await getLinkFromS3(product.previewList[0], "LISTING");
         const imageLink = res.success ? res.response : "";
 
         const response = await createStripeOrder({

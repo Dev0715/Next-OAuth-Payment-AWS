@@ -27,7 +27,7 @@ export const ImagePreview = ({
     if (image instanceof File) {
       setImageURL(URL.createObjectURL(image));
     } else {
-      getLinkFromS3(image).then((res) => {
+      getLinkFromS3(image, "LISTING").then((res) => {
         if (res.success) {
           setImageURL(res.response as string);
         }

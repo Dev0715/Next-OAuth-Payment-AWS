@@ -47,7 +47,7 @@ export const UserButton = () => {
       if (user.image) {
         setAvatarImage(user.image);
       } else if (user.avatar) {
-        getLinkFromS3(user.avatar).then((res) => {
+        getLinkFromS3(user.avatar, "LISTING").then((res) => {
           if (res.success) setAvatarImage(res.response as string);
         });
       }

@@ -15,7 +15,7 @@ export const ProductImage = ({ product }: Props) => {
   useEffect(() => {
     if (!product.previewList || !getLinkFromS3) return;
 
-    getLinkFromS3(product.previewList[0]).then((res) => {
+    getLinkFromS3(product.previewList[0], "LISTING").then((res) => {
       if (res.success) {
         setImage(res.response as string);
       }

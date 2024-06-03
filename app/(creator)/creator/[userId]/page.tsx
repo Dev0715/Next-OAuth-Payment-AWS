@@ -44,14 +44,14 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
 
       setUserData(_userData);
       if (_userData.avatar) {
-        getLinkFromS3(_userData.avatar).then((res) => {
+        getLinkFromS3(_userData.avatar, "LISTING").then((res) => {
           if (res.success) {
             setAvatarPath(res.response as string);
           }
         });
       }
       if (_userData.creator?.cover) {
-        getLinkFromS3(_userData.creator.cover).then((res) => {
+        getLinkFromS3(_userData.creator.cover, "LISTING").then((res) => {
           if (res.success) {
             setCoverPath(res.response as string);
           }

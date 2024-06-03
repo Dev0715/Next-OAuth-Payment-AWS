@@ -42,7 +42,7 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
     if (!product || !getLinkFromS3) return;
 
     const s3Path = product.previewList[0];
-    getLinkFromS3(s3Path).then((res) => {
+    getLinkFromS3(s3Path, "LISTING").then((res) => {
       if (res.success) {
         setImagePath(res.response as string);
       }

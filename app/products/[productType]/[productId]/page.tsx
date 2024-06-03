@@ -28,7 +28,6 @@ import { Navbar } from "../../_components/navbar";
 
 import type { Product, ProductLink } from "@/shared/types/product.type";
 
-
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;
 };
@@ -64,7 +63,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         if (!ignore && response) {
           setProduct(response);
           response?.previewList.map((path: string) => {
-            getLinkFromS3(path).then((res) => {
+            getLinkFromS3(path, "LISTING").then((res) => {
               if (res.success) {
                 setImageList((prev) => [...prev, res.response as string]);
               }
