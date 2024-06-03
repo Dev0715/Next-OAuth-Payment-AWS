@@ -34,6 +34,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { useToast } from "@/components/ui/use-toast";
+import { GradientButton } from "@/components/utils/gradient-button";
 import { deleteBundle, getAllBundles } from "@/data/bundle";
 
 import { Navbar } from "../_components/navbar";
@@ -176,7 +177,7 @@ const ManagementBundles = () => {
                 ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button disabled={isPending}>
+          <GradientButton disabled={isPending}>
             <Link
               href="/admin/bundles/new"
               className="flex items-center gap-x-2"
@@ -184,7 +185,7 @@ const ManagementBundles = () => {
               <FaPlus />
               Add New
             </Link>
-          </Button>
+          </GradientButton>
         </div>
         <div className="rounded-md border">
           <Table>
@@ -240,22 +241,18 @@ const ManagementBundles = () => {
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
+            <GradientButton
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage() || isPending}
             >
               Previous
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
+            </GradientButton>
+            <GradientButton
               onClick={onNext}
               disabled={!isNextAvailable || isPending}
             >
               Next
-            </Button>
+            </GradientButton>
           </div>
         </div>
       </div>

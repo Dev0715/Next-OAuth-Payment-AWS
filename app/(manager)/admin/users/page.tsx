@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/table";
 import { useToast } from "@/components/ui/use-toast";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { GradientButton } from "@/components/utils/gradient-button";
 import {
   deleteUserById,
   getAllUsers,
@@ -335,22 +336,18 @@ const ManagementUsers = () => {
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
+            <GradientButton
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage() || isPending}
             >
               Previous
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
+            </GradientButton>
+            <GradientButton
               onClick={onNext}
               disabled={!isNextAvailable || isPending}
             >
               Next
-            </Button>
+            </GradientButton>
           </div>
         </div>
       </div>

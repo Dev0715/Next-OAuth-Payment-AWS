@@ -5,11 +5,12 @@ import { useEffect, useState, useTransition } from "react";
 import { FaSave } from "react-icons/fa";
 
 import { BundleProducts } from "@/components/admin/bundles/bundle-products";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { FormError } from "@/components/utils/form-error";
+
+import { GradientButton } from "@/components/utils/gradient-button";
 import { getBundleById, updateBundle } from "@/data/bundle";
 import { getProductById } from "@/data/product";
 
@@ -124,14 +125,14 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
         {isServerError && (
           <FormError message="Internal Server Error occurred while saving this bundle" />
         )}
-        <Button
+        <GradientButton
           disabled={isPending}
           className="w-64 flex items-center gap-x-2 rounded-none"
           onClick={onSave}
         >
           <FaSave />
           Save
-        </Button>
+        </GradientButton>
       </div>
     </div>
   );

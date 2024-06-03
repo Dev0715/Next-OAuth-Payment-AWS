@@ -33,6 +33,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { GradientButton } from "@/components/utils/gradient-button";
 import { deleteUserById, getAllManagers } from "@/data/user";
 
 import { Navbar } from "../_components/navbar";
@@ -250,22 +251,18 @@ const AdminManagement = () => {
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
+            <GradientButton
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage() || isPending}
             >
               Previous
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
+            </GradientButton>
+            <GradientButton
               onClick={onNext}
               disabled={!isNextAvailable || isPending}
             >
               Next
-            </Button>
+            </GradientButton>
           </div>
         </div>
       </div>

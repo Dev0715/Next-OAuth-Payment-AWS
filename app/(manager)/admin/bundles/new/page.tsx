@@ -6,9 +6,10 @@ import { useState, useTransition } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+
+import { GradientButton } from "@/components/utils/gradient-button";
 import { createBundle } from "@/data/bundle";
 import { userAtom } from "@/store/user";
 
@@ -77,14 +78,14 @@ const NewBundlePage = () => {
             </p>
           )}
         </div>
-        <Button
+        <GradientButton
           disabled={isPending}
           className="w-48 flex gap-x-2 rounded-none"
           onClick={onCreateBundle}
         >
           <FaArrowRight />
           Create
-        </Button>
+        </GradientButton>
       </div>
     </div>
   );
