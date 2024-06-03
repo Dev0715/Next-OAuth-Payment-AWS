@@ -11,6 +11,8 @@ export const uploadFileToS3 = async (
 ) => {
   const Body = Buffer.from(await file.arrayBuffer());
 
+  console.log("BUCKET, KEY", bucketName, keyName);
+
   const command = new PutObjectCommand({
     Bucket: bucketName,
     Key: keyName,

@@ -4,8 +4,9 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 import { BundleItem } from "@/components/bundles/bundle-item";
-import { Button } from "@/components/ui/button";
+import { GradientButton } from "@/components/utils/gradient-button";
 import { getAllBundlesByState } from "@/data/bundle";
+
 import { Bundle } from "@/shared/types/bundles.type";
 
 const ROWS_PER_PAGE = 10;
@@ -58,7 +59,7 @@ const BundlePage = () => {
       <div className="w-full flex justify-between">
         <p className="text-2xl font-semibold">Bundles</p>
         <div className="flex gap-x-4">
-          <Button
+          <GradientButton
             variant={"outline"}
             className="flex gap-x-2"
             disabled={pageIndex === 0 || isPending}
@@ -66,8 +67,8 @@ const BundlePage = () => {
           >
             <FaArrowLeft />
             Previous
-          </Button>
-          <Button
+          </GradientButton>
+          <GradientButton
             variant={"outline"}
             className="flex gap-x-2"
             disabled={!isNextAvailable || isPending}
@@ -75,7 +76,7 @@ const BundlePage = () => {
           >
             Next
             <FaArrowRight />
-          </Button>
+          </GradientButton>
         </div>
       </div>
       <div className="w-full flex flex-wrap">

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { Button } from "@/components/ui/button";
+import { GradientButton } from "@/components/utils/gradient-button";
 
 type ErrorProps = {
   error: Error & { digest?: string };
@@ -21,9 +21,9 @@ export default function Error({ error, reset }: ErrorProps) {
           <p>Something went wrong!</p>
           <p>You can check console tab for more details.</p>
         </div>
-        <Button variant={"link"} onClick={reset} className="text-md">
+        <GradientButton variant={"link"} onClick={reset} className="text-md">
           Try again
-        </Button>
+        </GradientButton>
       </div>
     </div>
   );
