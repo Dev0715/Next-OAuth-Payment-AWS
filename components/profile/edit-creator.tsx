@@ -216,16 +216,13 @@ export default function EditCreator({
                     <div className="w-full h-full bg-inherit"></div>
                   </AvatarFallback>
                 </Avatar>
-                <Button
-                  disabled={isDisabled}
-                  type="button"
-                  variant={"outline"}
-                  size={"sm"}
-                  className="w-32 rounded-none"
+                <GradientButton
+                  disabled={isPending}
+                  className="py-1"
                   onClick={() => hiddenCoverFileInput.current?.click()}
                 >
                   Upload New
-                </Button>
+                </GradientButton>
                 <Input
                   className="hidden"
                   type="file"

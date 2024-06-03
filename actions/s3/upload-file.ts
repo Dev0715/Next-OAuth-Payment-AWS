@@ -22,6 +22,7 @@ export const uploadFileToS3 = async (
     const response = await s3Client.send(command);
     return { success: true, response };
   } catch (error) {
+    console.error(error);
     return { success: false, error };
   }
 };

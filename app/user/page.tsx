@@ -9,7 +9,6 @@ import { v4 as uuidv4 } from "uuid";
 import * as z from "zod";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -209,16 +208,13 @@ export default function Profile() {
                     <FaUser className="text-white" />
                   </AvatarFallback>
                 </Avatar>
-                <Button
+                <GradientButton
                   disabled={isPending}
-                  type="button"
-                  variant={"outline"}
-                  size={"sm"}
-                  className="rounded-none"
+                  className="py-1"
                   onClick={() => hiddenAvatarFileInput.current?.click()}
                 >
                   Upload New
-                </Button>
+                </GradientButton>
                 <Input
                   className="hidden"
                   type="file"
