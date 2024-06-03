@@ -21,6 +21,7 @@ import { GradientParagraph } from "@/components/utils/gradient-paragraph";
 
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { NewProductSchema } from "@/schemas/product";
+import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
 import {
   FileOrCreativeFile,
   FileOrString
@@ -75,8 +76,8 @@ export const ProductAddForm = () => {
 
   const submitProduct = async (action: ProductState) => {
     const [pathList, previewList] = await Promise.all([
-      getPathList(creativeFiles as File[]),
-      getPathList(previewFiles as File[])
+      getPathList(creativeFiles as File[], AWS_S3_BUCKETS.DOWNLOAD as string),
+      getPathList(previewFiles as File[], AWS_S3_BUCKETS.LISTING as string)
     ]);
 
     if (pathList.length === 0 || previewList.length === 0) {
@@ -125,9 +126,10 @@ export const ProductAddForm = () => {
     });
   };
 
-  const getPathList = async (fileList: File[]) => {
+  const getPathList = async (fileList: File[], bucket: string) => {
     const formData = new FormData();
     formData.append("username", user?.username as string);
+    formData.append("bucket", bucket);
     fileList.forEach((file) => {
       formData.append(uuidv4(), file);
     });

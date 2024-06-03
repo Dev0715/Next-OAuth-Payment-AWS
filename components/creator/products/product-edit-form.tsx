@@ -14,6 +14,7 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { NewProductSchema } from "@/schemas/product";
+import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
 import {
   FileOrCreativeFile,
   FileOrString
@@ -68,10 +69,12 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
   }, [product]);
 
   const getPathList = async (
-    fileList: FileOrString[] | FileOrCreativeFile[]
+    fileList: FileOrString[] | FileOrCreativeFile[],
+    bucket: string
   ) => {
     const formData = new FormData();
     formData.append("username", user?.username as string);
+    formData.append("bucket", bucket);
     fileList.forEach((file) => {
       if (file instanceof File) formData.append(uuidv4(), file);
     });
@@ -90,8 +93,8 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
 
   const submitProduct = async (action: ProductState) => {
     const [_pathList, _previewList] = await Promise.all([
-      getPathList(creativeFiles),
-      getPathList(previewFiles)
+      getPathList(creativeFiles, AWS_S3_BUCKETS.DOWNLOAD as string),
+      getPathList(previewFiles, AWS_S3_BUCKETS.LISTING as string)
     ]);
 
     const _creativeFiles = creativeFiles.filter((item) => item instanceof File);

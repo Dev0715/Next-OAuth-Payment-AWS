@@ -7,6 +7,7 @@ export const POST = async (req: NextRequest) => {
   try {
     const formData = await req.formData();
     const username = formData.get("username") as string;
+    const bucketName = formData.get("bucket") as string;
     const formDataEntryValues = Array.from(formData.values());
 
     const pathList: string[] = [];
@@ -14,7 +15,7 @@ export const POST = async (req: NextRequest) => {
       formDataEntryValues.map(async (value) => {
         if (value instanceof File) {
           const keyName = `${username}/${uuidv4()}`;
-          const response = await uploadFileToS3(value, keyName);
+          const response = await uploadFileToS3(value, bucketName, keyName);
           if (response.success) {
             pathList.push(keyName);
           }

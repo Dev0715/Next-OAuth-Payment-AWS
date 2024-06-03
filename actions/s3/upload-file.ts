@@ -3,13 +3,16 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 import s3Client from "@/lib/s3";
-import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
 
-export const uploadFileToS3 = async (file: File, keyName: string) => {
+export const uploadFileToS3 = async (
+  file: File,
+  bucketName: string,
+  keyName: string
+) => {
   const Body = Buffer.from(await file.arrayBuffer());
 
   const command = new PutObjectCommand({
-    Bucket: AWS_S3_BUCKETS.DOWNLOAD,
+    Bucket: bucketName,
     Key: keyName,
     Body,
     ContentType: file.type

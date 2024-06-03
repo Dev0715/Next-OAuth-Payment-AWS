@@ -6,6 +6,7 @@ export const POST = async (req: NextRequest) => {
   try {
     const formData = await req.formData();
     const file = formData.get("file") as File;
+    const bucketName = formData.get("bucket") as string;
     const keyName = formData.get("keyName") as string;
 
     if (!file) {
@@ -15,7 +16,7 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const response = await uploadFileToS3(file, keyName);
+    const response = await uploadFileToS3(file, bucketName, keyName);
 
     if (response.success) {
       return NextResponse.json(response, { status: 200 });
