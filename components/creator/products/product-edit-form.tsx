@@ -9,12 +9,12 @@ import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
 import { updateProduct } from "@/actions/product/update-product";
+import { BucketType } from "@/actions/s3/upload-file";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { NewProductSchema } from "@/schemas/product";
-import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
 import {
   FileOrCreativeFile,
   FileOrString
@@ -70,11 +70,11 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
 
   const getPathList = async (
     fileList: FileOrString[] | FileOrCreativeFile[],
-    bucket: string
+    bucket: BucketType
   ) => {
     const formData = new FormData();
     formData.append("username", user?.username as string);
-    formData.append("bucket", bucket);
+    formData.append("bucketType", bucket);
     fileList.forEach((file) => {
       if (file instanceof File) formData.append(uuidv4(), file);
     });
@@ -93,8 +93,8 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
 
   const submitProduct = async (action: ProductState) => {
     const [_pathList, _previewList] = await Promise.all([
-      getPathList(creativeFiles, AWS_S3_BUCKETS.DOWNLOAD as string),
-      getPathList(previewFiles, AWS_S3_BUCKETS.LISTING as string)
+      getPathList(creativeFiles, "DOWNLOAD"),
+      getPathList(previewFiles, "LISTING")
     ]);
 
     const _creativeFiles = creativeFiles.filter((item) => item instanceof File);

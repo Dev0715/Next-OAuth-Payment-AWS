@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { uploadFileToS3 } from "@/actions/s3/upload-file";
+import { BucketType, uploadFileToS3 } from "@/actions/s3/upload-file";
 
 export const POST = async (req: NextRequest) => {
   try {
     const formData = await req.formData();
     const file = formData.get("file") as File;
-    const bucketName = formData.get("bucket") as string;
+    const bucketType = formData.get("bucketType") as BucketType;
     const keyName = formData.get("keyName") as string;
 
     if (!file) {
@@ -16,7 +16,7 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const response = await uploadFileToS3(file, bucketName, keyName);
+    const response = await uploadFileToS3(file, bucketType, keyName);
 
     if (response.success) {
       return NextResponse.json(response, { status: 200 });

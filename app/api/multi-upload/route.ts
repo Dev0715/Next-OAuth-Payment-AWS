@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
-import { uploadFileToS3 } from "@/actions/s3/upload-file";
+import { BucketType, uploadFileToS3 } from "@/actions/s3/upload-file";
 
 export const POST = async (req: NextRequest) => {
   try {
     const formData = await req.formData();
     const username = formData.get("username") as string;
-    const bucketName = formData.get("bucket") as string;
+    const bucketType = formData.get("bucketType") as BucketType;
     const formDataEntryValues = Array.from(formData.values());
 
     const pathList: string[] = [];
@@ -15,7 +15,7 @@ export const POST = async (req: NextRequest) => {
       formDataEntryValues.map(async (value) => {
         if (value instanceof File) {
           const keyName = `${username}/${uuidv4()}`;
-          const response = await uploadFileToS3(value, bucketName, keyName);
+          const response = await uploadFileToS3(value, bucketType, keyName);
           if (response.success) {
             pathList.push(keyName);
           }
