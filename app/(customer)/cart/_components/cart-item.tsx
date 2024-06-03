@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
+import { GradientButton } from "@/components/utils/gradient-button";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
@@ -58,7 +58,7 @@ export const CartItem = ({
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-6">
-              <Button
+              <GradientButton
                 asChild
                 disabled={isPending}
                 variant={"link"}
@@ -70,19 +70,19 @@ export const CartItem = ({
                 >
                   Details
                 </Link>
-              </Button>
+              </GradientButton>
               <QuestionAlert
                 title="Warning"
                 message="Are you sure to remove this product from your cart?"
                 onContinue={onRemoveItem}
               >
-                <Button
+                <GradientButton
                   disabled={isPending}
                   variant={"link"}
                   className="p-0 text-red-700"
                 >
                   Remove
-                </Button>
+                </GradientButton>
               </QuestionAlert>
             </div>
             <Switch
