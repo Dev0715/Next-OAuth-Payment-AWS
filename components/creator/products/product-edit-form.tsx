@@ -10,9 +10,10 @@ import { z } from "zod";
 
 import { updateProduct } from "@/actions/product/update-product";
 import { BucketType } from "@/actions/s3/upload-file";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+
+import { GradientButton } from "@/components/utils/gradient-button";
 import { axiosClient, axiosConfig } from "@/lib/axios";
 import { NewProductSchema } from "@/schemas/product";
 import {
@@ -166,7 +167,7 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
   return (
     <Card className="w-full p-6 flex flex-col items-end gap-y-4 rounded-none">
       <div className="flex gap-x-6 items-end">
-        <Button
+        <GradientButton
           disabled={isPending}
           variant={"outline"}
           className="w-64 gap-x-4 rounded-none border-green-700"
@@ -174,9 +175,9 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
         >
           <FaSave />
           Update Product
-        </Button>
+        </GradientButton>
 
-        <Button
+        <GradientButton
           disabled={isPending}
           className="w-64 gap-x-4 rounded-none"
           onClick={form.handleSubmit(() =>
@@ -185,7 +186,7 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
         >
           <FaUpload />
           {isResubmitted ? "Resubmit" : "Submit"}
-        </Button>
+        </GradientButton>
       </div>
 
       {success || error ? (

@@ -7,11 +7,12 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 
 import { ProductHistory } from "@/components/product/product-history";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
+
+import { GradientButton } from "@/components/utils/gradient-button";
 
 import { deleteProduct, updateProductState } from "@/data/product";
 import { Product, ProductState } from "@/shared/types/product.type";
@@ -223,13 +224,13 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
             message="Are you sure want to delete this item?"
             onContinue={onDelete}
           >
-            <Button
+            <GradientButton
               variant={"destructive"}
               className="w-64 gap-x-4 rounded-none border-green-700"
             >
               <FaTrash />
               Delete Product
-            </Button>
+            </GradientButton>
           </QuestionAlert>
 
           <div className="w-full">
