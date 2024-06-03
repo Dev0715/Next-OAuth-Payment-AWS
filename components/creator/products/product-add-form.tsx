@@ -75,9 +75,6 @@ export const ProductAddForm = () => {
   };
 
   const submitProduct = async (action: ProductState) => {
-    console.log("Bucket Name", AWS_S3_BUCKETS.DOWNLOAD);
-    console.log("Bucket Name", AWS_S3_BUCKETS.LISTING);
-
     const [pathList, previewList] = await Promise.all([
       getPathList(creativeFiles as File[], AWS_S3_BUCKETS.DOWNLOAD as string),
       getPathList(previewFiles as File[], AWS_S3_BUCKETS.LISTING as string)
