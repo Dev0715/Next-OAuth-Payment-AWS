@@ -11,7 +11,8 @@ export const AWS_DYNAMO_TABLES = {
 };
 
 export const AWS_S3_BUCKETS = {
-  UPLOAD: process.env.AWS_BUCKET_NAME
+  DOWNLOAD: process.env.AWS_BUCKET_NAME,
+  LISTING: process.env.AWS_BUCKET_NAME
 };
 
 export const AUTH_CONFIG = {

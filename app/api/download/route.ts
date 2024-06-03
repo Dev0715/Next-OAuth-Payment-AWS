@@ -21,7 +21,7 @@ export const POST = async (req: NextRequest) => {
 
       const file = fileList[i];
       const command = new GetObjectCommand({
-        Bucket: AWS_S3_BUCKETS.UPLOAD,
+        Bucket: AWS_S3_BUCKETS.DOWNLOAD,
         Key: file.path
       });
 
@@ -73,7 +73,7 @@ export const GET = async () => {
 
       const file = fileList[i];
       const command = new GetObjectCommand({
-        Bucket: AWS_S3_BUCKETS.UPLOAD,
+        Bucket: AWS_S3_BUCKETS.DOWNLOAD,
         Key: file.path
       });
 

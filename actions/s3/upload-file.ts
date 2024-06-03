@@ -9,7 +9,7 @@ export const uploadFileToS3 = async (file: File, keyName: string) => {
   const Body = Buffer.from(await file.arrayBuffer());
 
   const command = new PutObjectCommand({
-    Bucket: AWS_S3_BUCKETS.UPLOAD,
+    Bucket: AWS_S3_BUCKETS.DOWNLOAD,
     Key: keyName,
     Body,
     ContentType: file.type

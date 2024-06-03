@@ -8,7 +8,7 @@ import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
 
 export const getLinkFromS3Server = async (keyName: string) => {
   const command = new GetObjectCommand({
-    Bucket: AWS_S3_BUCKETS.UPLOAD,
+    Bucket: AWS_S3_BUCKETS.DOWNLOAD,
     Key: keyName
   });
 
