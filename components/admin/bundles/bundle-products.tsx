@@ -23,6 +23,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { GradientButton } from "@/components/utils/gradient-button";
 import { Product } from "@/shared/types/product.type";
 
 import { BundleProductSelect } from "./bundle-products-select";
@@ -146,22 +147,22 @@ export const BundleProducts = ({ products, setProducts }: Props) => {
         </div>
         <div className="flex items-center justify-end space-x-2">
           <div className="space-x-2">
-            <Button
+            <GradientButton
               variant="outline"
               size="sm"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
               Previous
-            </Button>
-            <Button
+            </GradientButton>
+            <GradientButton
               variant="outline"
               size="sm"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
               Next
-            </Button>
+            </GradientButton>
           </div>
         </div>
       </div>

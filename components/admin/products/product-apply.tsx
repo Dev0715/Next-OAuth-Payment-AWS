@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { GradientButton } from "@/components/utils/gradient-button";
 
 import { QuestionAlert } from "@/components/utils/question-alert";
 
@@ -24,13 +24,13 @@ export const ProductApply = ({ isPending, onPublish }: Props) => {
             message="Are you sure to publish this product?"
             onContinue={() => onPublish()}
           >
-            <Button
+            <GradientButton
               disabled={isPending}
               variant={"default"}
               className="w-32 rounded-none"
             >
               Publish
-            </Button>
+            </GradientButton>
           </QuestionAlert>
         </div>
       </div>

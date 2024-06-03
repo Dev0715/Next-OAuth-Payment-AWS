@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 import { Textarea } from "@/components/ui/textarea";
+import { GradientButton } from "@/components/utils/gradient-button";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { ProductState } from "@/shared/types/product.type";
 
@@ -38,26 +38,18 @@ export const ProductApprovement = ({
             message="Are you sure to approve this product?"
             onContinue={() => onCommentProduct("approved")}
           >
-            <Button
-              disabled={isPending}
-              variant={"default"}
-              className="w-32 rounded-none"
-            >
+            <GradientButton disabled={isPending} className="w-32 rounded-none">
               Approve
-            </Button>
+            </GradientButton>
           </QuestionAlert>
           <QuestionAlert
             title="Reject Product"
             message="Are you sure to reject this product?"
             onContinue={() => onCommentProduct("rejected")}
           >
-            <Button
-              disabled={isPending}
-              variant={"destructive"}
-              className="w-32 rounded-none"
-            >
+            <GradientButton disabled={isPending} className="w-32 rounded-none">
               Reject
-            </Button>
+            </GradientButton>
           </QuestionAlert>
         </div>
       </div>
