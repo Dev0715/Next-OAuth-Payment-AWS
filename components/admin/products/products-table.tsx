@@ -14,6 +14,7 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 
 import { getColumnsForProductsTable } from "@/components/admin/products/products-column";
 import { Button } from "@/components/ui/button";
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -29,6 +30,8 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+
+import { GradientButton } from "@/components/utils/gradient-button";
 
 import type { Product, ProductLink } from "@/shared/types/product.type";
 
@@ -221,22 +224,22 @@ export const ProductsTable = ({ getProductsAll }: Props) => {
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
-          <Button
+          <GradientButton
             variant="outline"
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage() || isPending}
           >
             Previous
-          </Button>
-          <Button
+          </GradientButton>
+          <GradientButton
             variant="outline"
             size="sm"
             onClick={onNext}
             disabled={!isNextAvailable || isPending}
           >
             Next
-          </Button>
+          </GradientButton>
         </div>
       </div>
     </div>
