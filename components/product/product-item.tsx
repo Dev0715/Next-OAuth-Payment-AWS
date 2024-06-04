@@ -73,7 +73,7 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
           </Avatar>
           <div className="flex flex-col px-4 pb-4 font-firs">
             <div className="flex items-center justify-between">
-              <p>{product.title}</p>
+              <p className="truncate">{product.title}</p>
               <p className="text-base text-black font-medium">
                 ${product.price}
               </p>
