@@ -111,7 +111,7 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
         </div>
       </div>
       <div className="w-full flex flex-col items-center pt-6">
-        <Tabs defaultValue="Collection" className="w-full">
+        <Tabs defaultValue="Collection" className="w-full font-firs">
           <TabsList className="w-full px-6 py-2 h-fit flex justify-start gap-x-16">
             <TabsTrigger value="Collection">
               <p className="text-base">Collection</p>
