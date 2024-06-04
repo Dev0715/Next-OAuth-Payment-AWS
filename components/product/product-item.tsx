@@ -65,18 +65,20 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
           </div>
         )}
         <CardContent className="w-full p-0 flex flex-col gap-y-4">
-          <Avatar className="w-full h-56 rounded-none">
+          <Avatar className="w-full h-auto rounded-none">
             <AvatarImage src={imagePath} className="object-fill aspect-auto" />
             <AvatarFallback className="bg-transparent">
               <div className="w-full h-full bg-transparent"></div>
             </AvatarFallback>
           </Avatar>
-          <div className="flex flex-col px-4 pb-4">
-            <div className="flex gap-4">
+          <div className="flex flex-col px-4 pb-4 font-firs">
+            <div className="flex items-center justify-between">
               <p>{product.title}</p>
-              <p className="text-base text-black">Price: ${product.price}</p>
+              <p className="text-base text-black font-medium">
+                ${product.price}
+              </p>
             </div>
-            <p className="text-base text-gray-700 drop-shadow-md">
+            <p className="text-base text-gray-700 truncate drop-shadow-md">
               {product.description}
             </p>
           </div>
