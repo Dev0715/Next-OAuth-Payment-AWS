@@ -48,7 +48,7 @@ export const FilesCard = ({
   };
 
   return (
-    <Card className="w-full rounded-none">
+    <Card className="w-full rounded-none font-firs">
       <CardHeader className="flex-row items-center justify-between space-y-0">
         <CardTitle>Creative Works ({creativeFiles.length})</CardTitle>
         <FileUploadButton disabled={isPending} onChange={onCreativeFileAdded}>

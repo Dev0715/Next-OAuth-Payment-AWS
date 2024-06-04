@@ -20,12 +20,12 @@ export const ProductHistory = ({ history }: Props) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-y-6 font-firs">
+    <div className="w-full flex flex-col gap-y-6">
       <div className="w-full flex items-start justify-between">
         <ProductEventCard event={_history[0]} />
         <GradientButton
           variant={"outline"}
-          className="h-8 border border-green-700 rounded-none"
+          className="h-8 border border-green-700 rounded-none font-firs"
           onClick={onShowMore}
         >
           Show {showMore ? "Less" : "More"}

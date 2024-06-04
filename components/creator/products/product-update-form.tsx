@@ -211,7 +211,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
     <div className="w-full">
       <CardHeader className="w-full flex flex-row items-end justify-between">
         <div className="w-full flex flex-col">
-          <CardTitle className="w-full p-2 text-2xl font-medium bg-gray-100 rounded-lg">
+          <CardTitle className="w-full p-2 text-2xl font-firs font-medium bg-gray-100 rounded-lg">
             {`${product.productType} / ${product.title}`}
           </CardTitle>
         </div>

@@ -13,9 +13,9 @@ type Props = {
 export const ProductEventCard = ({ event }: Props) => {
   return (
     <div className="w-full flex flex-col gap-y-2">
-      <div className="flex items-center gap-x-2">
+      <div className="flex items-center gap-x-2 font-firs">
         <Badge variant={PRODUCT_STATE_BADGE_VARIANT[event.state]}>
-          {STATE_DISPLAY_TEXT[event.state]}
+          <p className="font-firs">{STATE_DISPLAY_TEXT[event.state]}</p>
         </Badge>
         <p className="text-gray-500 text-sm">by</p>
         <p className="font-semibold">{event.userId}</p>

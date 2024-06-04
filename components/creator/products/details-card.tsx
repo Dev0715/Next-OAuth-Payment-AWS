@@ -41,7 +41,7 @@ export const DetailsCard = ({
   form
 }: Props) => {
   return (
-    <Card className="w-full h-fit p-6 rounded-none">
+    <Card className="w-full h-fit p-6 rounded-none font-firs">
       <Form {...form}>
         <form className="w-full space-y-4">
           <FormField
