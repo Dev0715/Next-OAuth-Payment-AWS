@@ -80,12 +80,14 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
             <div className="w-full h-full bg-inherit"></div>
           </AvatarFallback>
         </Avatar>
-        <Avatar className="absolute bottom-[-48px] w-24 h-24 border-4 border-white">
-          <AvatarImage src={avatarPath} />
-          <AvatarFallback className="bg-sky-500">
-            <FaUser className="text-white" />
-          </AvatarFallback>
-        </Avatar>
+        <div className="absolute w-24 h-24 bottom-[-48px] border-4 border-white bg-white rounded-full">
+          <Avatar className="w-full h-full">
+            <AvatarImage src={avatarPath} />
+            <AvatarFallback className="bg-sky-500">
+              <FaUser className="text-white" />
+            </AvatarFallback>
+          </Avatar>
+        </div>
       </div>
       <div className="w-full flex flex-col items-center gap-y-3 font-firs">
         {/* <p className="text-xl font-bold">@{userData?.username}</p> */}
