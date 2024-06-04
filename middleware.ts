@@ -10,6 +10,15 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
+  if (role.isAuthenticated && pathname === "/") {
+    const redirectUrl = role.isManager
+      ? "/admin"
+      : role.isCreator
+        ? `/creator/${role.userId}`
+        : "/user";
+    return NextResponse.redirect(new URL(redirectUrl, request.url));
+  }
+
   if (!role.isAuthenticated && isAuthenticatedPath(pathname)) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
