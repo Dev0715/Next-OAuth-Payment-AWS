@@ -14,6 +14,7 @@ export const currentRole = async () => {
     isManager: session?.user?.manager?.isManager || false,
     isCreator: session?.user.creator?.isCreator || false,
     isCustomer: session?.user.customer?.isCustomer || false,
-    isAffiliate: session?.user.affiliate?.isAffiliate || false
+    isAffiliate: session?.user.affiliate?.isAffiliate || false,
+    userId: session?.user.userId || ""
   };
 };
