@@ -30,6 +30,8 @@ import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { cartAtom } from "@/store/cart";
 import { userAtom } from "@/store/user";
 
+import { GradientParagraph } from "../utils/gradient-paragraph";
+
 import { LoginButton } from "./login-button";
 import { SignUpButton } from "./signup-button";
 
@@ -67,12 +69,16 @@ export const UserButton = () => {
       <div className="flex items-center gap-x-2">
         <LoginButton>
           {/* <WrappedButton variant="default" size="lg"> */}
-          <p className="text-md font-medium font-firs">Log in</p>
+          <GradientParagraph className="text-md font-medium font-firs">
+            Log in
+          </GradientParagraph>
           {/* </WrappedButton> */}
         </LoginButton>
         <p className="text-gray-400">|</p>
         <SignUpButton>
-          <p className="text-md font-medium font-firs">Sign up</p>
+          <GradientParagraph className="text-md font-medium font-firs">
+            Sign up
+          </GradientParagraph>
         </SignUpButton>
       </div>
     );

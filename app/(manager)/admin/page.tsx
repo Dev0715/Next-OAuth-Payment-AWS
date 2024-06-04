@@ -1,7 +1,11 @@
+import { GradientParagraph } from "@/components/utils/gradient-paragraph";
+
 const AdminPanel = () => {
   return (
     <div className="w-fit h-full flex justify-start">
-      <p className="text-xl">Admin Panel</p>
+      <GradientParagraph className="text-xl font-firs">
+        Admin Panel
+      </GradientParagraph>
     </div>
   );
 };
