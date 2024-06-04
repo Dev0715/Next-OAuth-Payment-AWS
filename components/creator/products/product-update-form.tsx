@@ -80,11 +80,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
         }
       });
     } else {
-      const _product = {
-        productType: "ui-kits",
-        productId: "55dc5dee-1f33-4e6a-8426-be4276c3c3d2"
-      } as Product;
-      removeProduct(_product, user?.userId as string).then((res) => {
+      removeProduct(product, user?.userId as string).then((res) => {
         if (res.success) {
           setSuccess("Product deleted successfully");
           setError("");
