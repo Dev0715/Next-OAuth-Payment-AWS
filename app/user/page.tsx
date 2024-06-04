@@ -194,7 +194,7 @@ export default function Profile() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-1/2 flex flex-col gap-y-6"
+          className="w-1/2 flex flex-col gap-y-6 font-firs"
         >
           <div className="w-full flex items-end gap-x-6">
             <div className="w-1/2 flex flex-col items-start gap-y-4">

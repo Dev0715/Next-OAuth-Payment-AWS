@@ -31,6 +31,8 @@ import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { orderListAtom } from "@/store/orderList";
 import { userAtom } from "@/store/user";
 
+import { GradientButton } from "../utils/gradient-button";
+
 export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
   const Option_Paypal = "option-paypal";
   const Option_Stripe = "option-stripe";
@@ -161,18 +163,18 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
             disabled={isPending}
             onClick={onCancel}
             variant="destructive"
-            className="flex gap-x-2"
+            className="flex gap-x-2 rounded-full font-firs"
           >
             <MdCancel /> Cancel {/** Not Working Now */}
           </Button>
-          <Button
+          <GradientButton
             className="flex gap-x-2"
             disabled={isPending}
             onClick={onPurchase}
           >
             <AiFillCreditCard />
             Purchase
-          </Button>
+          </GradientButton>
         </div>
       </CardFooter>
     </Card>

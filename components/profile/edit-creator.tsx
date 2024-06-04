@@ -205,7 +205,7 @@ export default function EditCreator({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-y-6"
+            className="flex flex-col gap-y-6 font-firs"
           >
             <div className="w-full flex flex-col gap-y-6">
               <div className="flex flex-col gap-y-4">
@@ -218,7 +218,7 @@ export default function EditCreator({
                 </Avatar>
                 <GradientButton
                   disabled={isPending}
-                  className="py-1"
+                  className="py-1 w-fit"
                   onClick={() => hiddenCoverFileInput.current?.click()}
                 >
                   Upload New
