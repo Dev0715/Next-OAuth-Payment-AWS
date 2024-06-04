@@ -8,7 +8,6 @@ import * as z from "zod";
 
 import { newPassword } from "@/actions/auth/new-password";
 import { CardWrapper } from "@/components/auth/card-wrapper";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -21,6 +20,8 @@ import { Input } from "@/components/ui/input";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
 import { NewPasswordSchema } from "@/schemas/auth/auth";
+
+import { GradientButton } from "../utils/gradient-button";
 
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();
@@ -79,9 +80,9 @@ export const NewPasswordForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-full">
+          <GradientButton disabled={isPending} type="submit" className="w-full">
             Reset password
-          </Button>
+          </GradientButton>
         </form>
       </Form>
     </CardWrapper>
