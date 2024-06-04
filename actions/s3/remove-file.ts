@@ -3,11 +3,10 @@
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 import s3Client from "@/lib/s3";
-import { AWS_S3_BUCKETS } from "@/shared/constants/server.constant";
 
-export const removeFileFromS3 = async (keyName: string) => {
+export const removeFileFromS3 = async (keyName: string, bucketName: string) => {
   const command = new DeleteObjectCommand({
-    Bucket: AWS_S3_BUCKETS.DOWNLOAD,
+    Bucket: bucketName,
     Key: keyName
   });
 
