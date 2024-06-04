@@ -15,6 +15,6 @@ export const removeFileFromS3 = async (keyName: string) => {
     const response = await s3Client.send(command);
     return { success: true, response };
   } catch (error) {
-    return { success: false, error };
+    return { error: true };
   }
 };

@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 import { FaTrash } from "react-icons/fa";
 
+import { removeProduct } from "@/actions/product/remove-product";
 import { ProductHistory } from "@/components/product/product-history";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -14,7 +15,7 @@ import { FormSuccess } from "@/components/utils/form-success";
 
 import { GradientButton } from "@/components/utils/gradient-button";
 
-import { deleteProduct, updateProductState } from "@/data/product";
+import { updateProductState } from "@/data/product";
 import { Product, ProductState } from "@/shared/types/product.type";
 import { userAtom } from "@/store/user";
 
@@ -25,6 +26,7 @@ import { ProductEditForm } from "./product-edit-form";
 import { ProductPublishCard } from "./product-publish-card";
 
 import { ProductRestoreCard } from "./product-restore-card";
+
 import { ProductWithdrawCard } from "./product-withdraw-card";
 
 type Props = {
@@ -78,7 +80,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
         }
       });
     } else {
-      deleteProduct(product).then((res) => {
+      removeProduct(product, user?.userId as string).then((res) => {
         if (res.success) {
           setSuccess("Product deleted successfully");
           setError("");
@@ -88,7 +90,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
           }, 1000);
         } else {
           setSuccess("");
-          setError("Failed to delete product");
+          setError(res.error || "Failed to delete product");
         }
       });
     }
