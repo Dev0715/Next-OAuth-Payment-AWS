@@ -5,7 +5,7 @@ import { GradientButton } from "@/components/utils/gradient-button";
 
 const NotFound = () => {
   return (
-    <div className="w-full h-full pt-12 flex flex-col items-center justify-center">
+    <div className="w-full h-full pt-24 flex flex-col items-center justify-center gap-y-2">
       <h2 className="font-semibold">You are forbidden to access this page.</h2>
       <GradientButton variant={"link"}>
         <Link href="/">Go back home</Link>

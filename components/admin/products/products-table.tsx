@@ -225,16 +225,12 @@ export const ProductsTable = ({ getProductsAll }: Props) => {
         </div>
         <div className="space-x-2">
           <GradientButton
-            variant="outline"
-            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage() || isPending}
           >
             Previous
           </GradientButton>
           <GradientButton
-            variant="outline"
-            size="sm"
             onClick={onNext}
             disabled={!isNextAvailable || isPending}
           >
