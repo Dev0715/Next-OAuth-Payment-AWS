@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
@@ -12,17 +12,13 @@ import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
-  step: number;
   userData: SignedUpData;
-  setUserData?: Dispatch<SetStateAction<SignedUpData>>;
   moveStepForward: () => void;
   moveStepBackward: () => void;
 };
 
 export const UserCompleteForm = ({
-  step,
   userData,
-  // setUserData,
   moveStepForward,
   moveStepBackward
 }: Props) => {
@@ -103,7 +99,7 @@ export const UserCompleteForm = ({
         onOK={onConfirmed}
       />
       <p className="text-xl text-green-700">
-        {step + 1}. Complete registration for a user.
+        Complete registration for a user.
       </p>
       <div className="flex flex-col">
         <p>Congratulations!</p>
