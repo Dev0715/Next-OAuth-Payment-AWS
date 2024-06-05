@@ -179,9 +179,9 @@ export const createUser = async (data: any) => {
 
   try {
     await db.send(command);
-    return verificationToken;
+    return { success: true, verificationToken };
   } catch (error) {
-    return null;
+    return { error: true };
   }
 };
 

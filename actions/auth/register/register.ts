@@ -24,13 +24,13 @@ export const register = async (values: any) => {
     return { error: "Email already in use!" };
   }
 
-  const verificationToken = await createUser({
+  const res_create = await createUser({
     ...values,
     password: hashedPassword
   });
 
-  if (verificationToken) {
-    await sendVerificationEmail(email, verificationToken);
+  if (res_create.success) {
+    await sendVerificationEmail(email, res_create.verificationToken);
     return {
       success: "New user registered, Check your mailbox!"
     };
