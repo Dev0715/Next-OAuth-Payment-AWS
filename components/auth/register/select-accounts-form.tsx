@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
@@ -22,38 +22,34 @@ import { SelectAccountsSchema } from "@/schemas/auth/register";
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
-  userData: SignedUpData;
-  setUserData: Dispatch<SetStateAction<SignedUpData>>;
+  setUserData: (data: Partial<SignedUpData>) => void;
   moveStepForward: () => void;
   moveStepBackward: () => void;
 };
 
-export const SelectAccountsForm = ({
-  userData,
+export function SelectAccountsForm({
   setUserData,
   moveStepForward,
   moveStepBackward
-}: Props) => {
+}: Props) {
   const [isErr, setErr] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof SelectAccountsSchema>>({
     resolver: zodResolver(SelectAccountsSchema),
-    defaultValues: {
-      ...userData.selectedAccounts
-    }
+    defaultValues: {}
   });
 
   const onSubmit = (values: z.infer<typeof SelectAccountsSchema>) => {
     if (!values.creator && !values.user && !values.affiliate) {
       setErr(true);
     } else {
-      setUserData({ ...userData, selectedAccounts: values });
+      setUserData({ selectedAccounts: values });
       moveStepForward();
     }
   };
 
   const onBackClicked = () => {
-    setUserData({ ...userData, selectedAccounts: form.getValues() });
+    setUserData({ selectedAccounts: form.getValues() });
     moveStepBackward();
   };
 
@@ -150,4 +146,4 @@ export const SelectAccountsForm = ({
       </Form>
     </div>
   );
-};
+}

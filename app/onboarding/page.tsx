@@ -10,7 +10,7 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 const OnboardingPage = () => {
   // affiliate, creator, user forms
 
-  const [userData, setUserData] = useState<SignedUpData>({
+  const [, setUserData] = useState<SignedUpData>({
     generalDetails: {
       username: "",
       email: "",
@@ -96,12 +96,15 @@ const OnboardingPage = () => {
   //   return step === _step;
   // };
 
+  const handleUpdateUserData = (data: Partial<SignedUpData>) => {
+    setUserData((prev) => ({ ...prev, ...data }));
+  };
+
   return (
     <div className="w-[640px]">
       <TransitionInOut condition={step === 1}>
         <SelectAccountsForm
-          userData={userData}
-          setUserData={setUserData}
+          setUserData={handleUpdateUserData}
           moveStepForward={moveStepForward}
           moveStepBackward={moveStepBackward}
         />

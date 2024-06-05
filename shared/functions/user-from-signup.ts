@@ -1,5 +1,5 @@
-import type { User } from "../types/user.type";
 import type { SignedUpData } from "../types/signup-data.type";
+import type { User } from "../types/user.type";
 
 export const getUserFromGeneralDetails = async (
   generalDetails: SignedUpData["generalDetails"]
