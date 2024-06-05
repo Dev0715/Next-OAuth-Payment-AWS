@@ -350,12 +350,15 @@ export const updateManagerProfile = async (
   });
 
   try {
-    const response = await db.send(command);
-    console.log(response);
-    return response.Attributes;
+    await db.send(command);
+    return {
+      success: true
+    };
   } catch (error) {
     console.error(error);
-    return null;
+    return {
+      error: true
+    };
   }
 };
 

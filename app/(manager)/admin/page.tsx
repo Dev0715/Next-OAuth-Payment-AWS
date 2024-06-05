@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/table";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { GradientButton } from "@/components/utils/gradient-button";
-import { deleteUserById, getAllManagers } from "@/data/user";
+import { getAllManagers, updateManagerProfile } from "@/data/user";
 
 import { Navbar } from "./_components/navbar";
 
@@ -120,7 +120,7 @@ const AdminManagement = () => {
         isManager: checked
       };
 
-      deleteUserById(users[index].userId).then((res) => {
+      updateManagerProfile(users[index].userId, _manager).then((res) => {
         if (res.success) {
           const _users = [...users];
           _users[index].manager = _manager;

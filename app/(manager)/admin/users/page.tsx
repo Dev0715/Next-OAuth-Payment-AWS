@@ -216,7 +216,7 @@ const ManagementUsers = () => {
       };
 
       updateManagerProfile(users[index].userId, _manager).then((res) => {
-        if (res) {
+        if (res.success) {
           const _users = [...users];
           _users[index].manager = _manager;
           setUsers(_users);
