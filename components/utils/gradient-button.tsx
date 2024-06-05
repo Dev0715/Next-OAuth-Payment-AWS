@@ -6,9 +6,14 @@ type Props = {
 } & ButtonProps;
 
 export const GradientButton = ({ className, children, ...props }: Props) => {
+  const bgClassName =
+    props.variant === "destructive"
+      ? "bg-destructive text-destructive-foreground"
+      : "bg-gradient-to-r from-[#BD99C9] to-[#4AA8FE] hover:from-[#4AA8FE] hover:to-[#BD99C9]";
+
   return (
     <Button
-      className={`${className} h-fit px-5 bg-gradient-to-r from-[#BD99C9] to-[#4AA8FE] border-[2px] border-white rounded-full font-firs text-white hover:from-[#4AA8FE] hover:to-[#BD99C9] transition-all duration-300 ease-in-out shadow-md cursor-pointer`}
+      className={`${className} h-fit px-5 border-[2px] border-white rounded-full font-firs text-white transition-all duration-300 ease-in-out shadow-md cursor-pointer ${bgClassName}`}
       {...props}
     >
       {children}

@@ -159,14 +159,13 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
       </CardContent>
       <CardFooter className="flex flex-col">
         <div className="w-full flex justify-between">
-          <Button
+          <GradientButton
             disabled={isPending}
-            onClick={onCancel}
             variant="destructive"
-            className="h-fit flex gap-x-2 rounded-full border-[2px] border-white shadow-md font-firs"
+            onClick={onCancel}
           >
             <MdCancel /> Cancel {/** Not Working Now */}
-          </Button>
+          </GradientButton>
           <GradientButton
             className="flex gap-x-2"
             disabled={isPending}
