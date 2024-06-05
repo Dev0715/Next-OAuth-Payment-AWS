@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -23,6 +22,8 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+
+import { GradientButton } from "@/components/utils/gradient-button";
 import { CreatorDetailsSchema } from "@/schemas/auth/register";
 import { JOB_TITLES } from "@/shared/constants/user.constant";
 
@@ -153,19 +154,18 @@ export const CreatorDetailsForm = ({ onUpdate, onNext, onBack }: Props) => {
             )}
           />
           <div className="w-full col-span-2 flex items-center justify-between mt-4">
-            <Button
-              type="button"
-              variant="outline"
+            <GradientButton
+              variant="destructive"
               className="flex gap-x-4 border-red-700"
               onClick={onBackClicked}
             >
               <FaArrowLeft />
               Back
-            </Button>
-            <Button type="submit" className="flex gap-x-4">
+            </GradientButton>
+            <GradientButton type="submit" className="flex gap-x-4">
               <FaArrowRight />
               Next
-            </Button>
+            </GradientButton>
           </div>
         </form>
       </Form>
