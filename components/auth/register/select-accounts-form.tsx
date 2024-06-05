@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -17,6 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
 import { FormError } from "@/components/utils/form-error";
+
+import { GradientButton } from "@/components/utils/gradient-button";
 import { SelectAccountsSchema } from "@/schemas/auth/register";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
@@ -116,10 +117,10 @@ export function SelectAccountsForm({ onUpdate }: Props) {
             )}
           />
           <div className="!mt-8 text-center">
-            <Button type="submit" className="gap-x-4">
+            <GradientButton type="submit" className="gap-x-4">
               Next
               <FaArrowRight />
-            </Button>
+            </GradientButton>
           </div>
 
           {isErr ? (
