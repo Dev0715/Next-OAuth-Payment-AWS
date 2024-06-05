@@ -1,10 +1,9 @@
 "use client";
 
-import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
-
 import {
   AlertDialog,
   AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
