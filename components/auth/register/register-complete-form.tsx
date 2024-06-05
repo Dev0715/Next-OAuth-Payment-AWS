@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FaKey } from "react-icons/fa";
 
-import { Button } from "@/components/ui/button";
+import { GradientButton } from "@/components/utils/gradient-button";
 
 export const RegisterCompleteForm = () => {
   return (
@@ -16,12 +16,12 @@ export const RegisterCompleteForm = () => {
         </p>
       </div>
       <div className="w-full mt-4">
-        <Button asChild className="w-64 flex gap-x-4 border-red-700">
+        <GradientButton asChild className="w-64 flex gap-x-4 border-red-700">
           <Link href="/">
             <FaKey />
             Browse Products
           </Link>
-        </Button>
+        </GradientButton>
       </div>
     </div>
   );
