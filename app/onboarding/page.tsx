@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { CreatorDetailsForm } from "@/components/auth/register/creator-details-form";
 import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
 
@@ -10,14 +11,7 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 const OnboardingPage = () => {
   // affiliate, creator, user forms
 
-  const [, setUserData] = useState<SignedUpData>({
-    generalDetails: {
-      username: "",
-      email: "",
-      password: "",
-      firstname: "",
-      lastname: ""
-    },
+  const [, setUserData] = useState<Omit<SignedUpData, "generalDetails">>({
     selectedAccounts: {
       creator: false,
       user: false,
@@ -41,9 +35,13 @@ const OnboardingPage = () => {
 
   const [step, setStep] = useState<number>(0);
 
-  // const moveStepBackward = () => {
-  //   setStep(step - 1);
-  // };
+  const handleNext = () => {
+    setStep((step) => step + 1);
+  };
+
+  const handleBack = () => {
+    setStep((step) => step - 1);
+  };
 
   // const isCreatorStep = () => {
   //   return userData.selectedAccounts.creator && step === 2;
@@ -101,6 +99,13 @@ const OnboardingPage = () => {
     <div className="mt-16 w-[640px]">
       <TransitionInOut condition={step === 0}>
         <SelectAccountsForm onUpdate={handleUpdateUserData} />
+      </TransitionInOut>
+      <TransitionInOut condition={step === 1}>
+        <CreatorDetailsForm
+          onUpdate={handleUpdateUserData}
+          onNext={handleNext}
+          onBack={handleBack}
+        />
       </TransitionInOut>
     </div>
   );

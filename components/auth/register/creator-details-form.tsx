@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
@@ -30,97 +29,50 @@ import { JOB_TITLES } from "@/shared/constants/user.constant";
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
-  userData: SignedUpData;
-  setUserData: Dispatch<SetStateAction<SignedUpData>>;
-  moveStepForward: () => void;
-  moveStepBackward: () => void;
+  onUpdate: (data: Partial<SignedUpData>) => void;
+  onNext: () => void;
+  onBack: () => void;
 };
 
-export const CreatorDetailsForm = ({
-  userData,
-  setUserData,
-  moveStepForward,
-  moveStepBackward
-}: Props) => {
-  const defaultData = userData.creatorDetails;
-
-  // const [cover, setCover] = useState<File | undefined>(defaultData.cover);
-  // const [coverImagePath, setCoverImagePath] = useState<string>(
-  //   defaultData.cover ? URL.createObjectURL(defaultData.cover) : ""
-  // );
-
-  // const hiddenCoverFileInput = useRef<HTMLInputElement>(null);
-  // const onCoverChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files && e.target.files.length > 0) {
-  //     setCoverImagePath(URL.createObjectURL(e.target.files[0]));
-  //     setCover(e?.target?.files?.[0]);
-  //   }
-  // };
-
+export const CreatorDetailsForm = ({ onUpdate, onNext, onBack }: Props) => {
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
     resolver: zodResolver(CreatorDetailsSchema),
     defaultValues: {
-      ...defaultData
+      bio: "",
+      jobTitle: "",
+      companyName: "",
+      companyCountry: "",
+      companyWebsite: ""
     }
   });
 
   const onSubmit = (values: z.infer<typeof CreatorDetailsSchema>) => {
-    setUserData({
-      ...userData,
+    onUpdate({
       creatorDetails: {
         ...values
         // cover
       }
     });
-    moveStepForward();
+    onNext();
   };
 
   const onBackClicked = () => {
-    setUserData({
-      ...userData,
-      creatorDetails: {
-        ...form.getValues()
-        // cover
-      }
+    onUpdate({
+      creatorDetails: form.getValues()
     });
-    moveStepBackward();
+    onBack();
   };
 
   return (
-    <div className="w-full flex flex-col gap-y-6">
-      <p className="text-xl text-green-700">
+    <div className="w-full">
+      <p className="mb-6 text-xl text-green-700">
         3. Please provide your KRE8TOR details.
       </p>
       <Form {...form}>
         <form
+          className="w-full space-y-6"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full flex flex-col gap-y-6"
         >
-          {/* <div className="flex flex-col gap-y-4">
-            <FormLabel>Cover Image</FormLabel>
-            <Avatar className="w-full h-28 rounded-sm">
-              <AvatarImage src={coverImagePath} className="object-cover" />
-              <AvatarFallback className="bg-sky-400 rounded-sm">
-                <div className="w-full h-full bg-inherit"></div>
-              </AvatarFallback>
-            </Avatar>
-            <Button
-              type="button"
-              variant={"outline"}
-              size={"sm"}
-              className="w-32 rounded-none"
-              onClick={() => hiddenCoverFileInput.current?.click()}
-            >
-              Upload New
-            </Button>
-            <Input
-              className="hidden"
-              type="file"
-              accept="image/*"
-              ref={hiddenCoverFileInput}
-              onChange={onCoverChanged}
-            />
-          </div> */}
           <div className="w-full">
             <FormField
               control={form.control}
