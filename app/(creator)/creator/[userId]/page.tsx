@@ -94,7 +94,9 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
         <GradientParagraph className="text-xl font-bold">
           @{userData?.userId}
         </GradientParagraph>
-        <p className="text-xl font-bold text-rose-700">★ ★ ★ ★ ★</p>
+        <GradientParagraph className="text-xl font-bold text-rose-700">
+          ★ ★ ★ ★ ★
+        </GradientParagraph>
         <p className="text-lg font-semibold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</p>
         <div className="flex gap-x-6">
           <GradientButton
@@ -121,12 +123,6 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
             <TabsTrigger value="About">
               <p className="text-base">About</p>
             </TabsTrigger>
-            <TabsTrigger value="Announcements">
-              <p className="text-base">Announcements</p>
-            </TabsTrigger>
-            <TabsTrigger value="Reviews">
-              <p className="text-base">Reviews</p>
-            </TabsTrigger>
           </TabsList>
           <TabsContent value="Collection">
             <UserCollection products={products} userId={userId} />
@@ -134,8 +130,6 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
           <TabsContent value="About">
             <AboutCreator userData={userData} />
           </TabsContent>
-          <TabsContent value="Announcements"></TabsContent>
-          <TabsContent value="Reviews"></TabsContent>
         </Tabs>
       </div>
     </div>
