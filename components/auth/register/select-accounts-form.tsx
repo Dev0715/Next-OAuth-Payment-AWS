@@ -116,16 +116,17 @@ export function SelectAccountsForm({ onUpdate }: Props) {
               </FormItem>
             )}
           />
+
+          {isErr ? (
+            <FormError message="Please select at least one account type to create!" />
+          ) : null}
+
           <div className="!mt-8 text-center">
             <GradientButton type="submit" className="gap-x-4">
               Next
               <FaArrowRight />
             </GradientButton>
           </div>
-
-          {isErr ? (
-            <FormError message="Please select at least one account type to create!" />
-          ) : null}
         </form>
       </Form>
     </div>
