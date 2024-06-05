@@ -65,7 +65,7 @@ export const PasswordChangeForm = () => {
   };
 
   return (
-    <Card className="w-full h-fit rounded-none font-firs">
+    <Card className="w-full h-fit rounded-3xl font-firs">
       <CardHeader>
         <CardTitle>Change Password</CardTitle>
         <CardDescription>
