@@ -141,7 +141,8 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
       }
     } as Product;
     updateProduct(updatedProduct).then((res) => {
-      setSuccess(res.success || "");
+      const successMessage = `Product ${action} successfully`;
+      setSuccess(res.success ? successMessage : "");
       setError(res.error || "");
 
       if (res.success) {

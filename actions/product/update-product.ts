@@ -30,5 +30,5 @@ export const updateProduct = async (product: Product) => {
   //   return { error: "Failed to remove original product from creator" };
   // }
 
-  return { success: "Product updated successfully" };
+  return { success: "successful" };
 };
