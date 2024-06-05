@@ -22,11 +22,10 @@ import { SelectAccountsSchema } from "@/schemas/auth/register";
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
-  setUserData: (data: Partial<SignedUpData>) => void;
-  moveStepForward: () => void;
+  onUpdate: (data: Partial<SignedUpData>) => void;
 };
 
-export function SelectAccountsForm({ setUserData, moveStepForward }: Props) {
+export function SelectAccountsForm({ onUpdate }: Props) {
   const [isErr, setErr] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof SelectAccountsSchema>>({
@@ -42,8 +41,7 @@ export function SelectAccountsForm({ setUserData, moveStepForward }: Props) {
     if (!values.creator && !values.user && !values.affiliate) {
       setErr(true);
     } else {
-      setUserData({ selectedAccounts: values });
-      moveStepForward();
+      onUpdate({ selectedAccounts: values });
     }
   };
 

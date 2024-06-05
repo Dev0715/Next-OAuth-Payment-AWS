@@ -41,10 +41,6 @@ const OnboardingPage = () => {
 
   const [step, setStep] = useState<number>(0);
 
-  const moveStepForward = () => {
-    setStep(step + 1);
-  };
-
   // const moveStepBackward = () => {
   //   setStep(step - 1);
   // };
@@ -98,15 +94,13 @@ const OnboardingPage = () => {
 
   const handleUpdateUserData = (data: Partial<SignedUpData>) => {
     setUserData((prev) => ({ ...prev, ...data }));
+    setStep((prev) => prev + 1);
   };
 
   return (
     <div className="mt-16 w-[640px]">
       <TransitionInOut condition={step === 0}>
-        <SelectAccountsForm
-          setUserData={handleUpdateUserData}
-          moveStepForward={moveStepForward}
-        />
+        <SelectAccountsForm onUpdate={handleUpdateUserData} />
       </TransitionInOut>
     </div>
   );
