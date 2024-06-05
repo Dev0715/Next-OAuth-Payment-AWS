@@ -43,7 +43,7 @@ export const SelectMatchingForm = ({
   return (
     <div className="w-full flex flex-col gap-y-6">
       <p className="text-xl text-green-700">
-        4. Please confirm your accounts on other creative markets.
+        3. Please confirm your accounts on other creative markets.
       </p>
       <Evanto
         value={matchings.env}
