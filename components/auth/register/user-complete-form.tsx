@@ -13,14 +13,14 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   userData: SignedUpData;
-  moveStepForward: () => void;
-  moveStepBackward: () => void;
+  handleNext: () => void;
+  handleBack: () => void;
 };
 
 export const UserCompleteForm = ({
   userData,
-  moveStepForward,
-  moveStepBackward
+  handleNext,
+  handleBack
 }: Props) => {
   const [isDisabled, setDisabled] = useState<boolean>(false);
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
@@ -71,7 +71,7 @@ export const UserCompleteForm = ({
     }
   };
 
-  const onBack = () => {
+  const OnBack = () => {
     if (userData.selectedAccounts.creator) {
       setConfirmOpen(true);
       setConfirmTitle("Warning");
@@ -79,14 +79,14 @@ export const UserCompleteForm = ({
         "You can't go backward since you already registered a creator!"
       );
     } else {
-      moveStepBackward();
+      handleBack();
     }
   };
 
   const onConfirmed = () => {
     setConfirmOpen(false);
     if (confirmTitle === "Success") {
-      moveStepForward();
+      handleNext();
     }
   };
 
@@ -99,7 +99,7 @@ export const UserCompleteForm = ({
         onOK={onConfirmed}
       />
       <p className="text-xl text-green-700">
-        Complete registration for a user.
+        2. Complete registration for a user.
       </p>
       <div className="flex flex-col">
         <p>Congratulations!</p>
@@ -122,7 +122,7 @@ export const UserCompleteForm = ({
           disabled={isDisabled}
           variant={"outline"}
           className="w-64 flex gap-x-4 border-red-700"
-          onClick={onBack}
+          onClick={OnBack}
         >
           <FaArrowLeft />
           Back

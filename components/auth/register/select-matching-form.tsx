@@ -16,15 +16,15 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 type Props = {
   userData: SignedUpData;
   setUserData: Dispatch<SetStateAction<SignedUpData>>;
-  moveStepForward: () => void;
-  moveStepBackward: () => void;
+  handleNext: () => void;
+  handleBack: () => void;
 };
 
 export const SelectMatchingForm = ({
   userData,
   setUserData,
-  moveStepForward,
-  moveStepBackward
+  handleNext,
+  handleBack
 }: Props) => {
   const [matchings, setMatchings] = useState<SignedUpData["creatorMatchings"]>({
     ...userData.creatorMatchings
@@ -32,12 +32,12 @@ export const SelectMatchingForm = ({
 
   const onContinueClicked = () => {
     setUserData({ ...userData, creatorMatchings: matchings });
-    moveStepForward();
+    handleNext();
   };
 
   const onBackClicked = () => {
     setUserData({ ...userData, creatorMatchings: matchings });
-    moveStepBackward();
+    handleBack();
   };
 
   return (

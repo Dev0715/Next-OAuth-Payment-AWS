@@ -30,12 +30,16 @@ import { JOB_TITLES } from "@/shared/constants/user.constant";
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
-  onUpdate: (data: Partial<SignedUpData>) => void;
-  onNext: () => void;
-  onBack: () => void;
+  handleUpdate: (data: Partial<SignedUpData>) => void;
+  handleNext: () => void;
+  handleBack: () => void;
 };
 
-export const CreatorDetailsForm = ({ onUpdate, onNext, onBack }: Props) => {
+export const CreatorDetailsForm = ({
+  handleUpdate,
+  handleNext,
+  handleBack
+}: Props) => {
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
     resolver: zodResolver(CreatorDetailsSchema),
     defaultValues: {
@@ -48,26 +52,25 @@ export const CreatorDetailsForm = ({ onUpdate, onNext, onBack }: Props) => {
   });
 
   const onSubmit = (values: z.infer<typeof CreatorDetailsSchema>) => {
-    onUpdate({
+    handleUpdate({
       creatorDetails: {
         ...values
         // cover
       }
     });
-    onNext();
   };
 
-  const onBackClicked = () => {
-    onUpdate({
+  const handleBackClicked = () => {
+    handleUpdate({
       creatorDetails: form.getValues()
     });
-    onBack();
+    handleBack();
   };
 
   return (
-    <div className="w-full">
-      <p className="mb-6 text-xl text-green-700">
-        Please provide your KRE8TOR details.
+    <div className="w-full flex flex-col gap-y-6">
+      <p className="text-xl text-green-700">
+        2. Please provide your KRE8TOR details.
       </p>
       <Form {...form}>
         <form
@@ -157,7 +160,7 @@ export const CreatorDetailsForm = ({ onUpdate, onNext, onBack }: Props) => {
             <GradientButton
               variant="destructive"
               className="flex gap-x-4 border-red-700"
-              onClick={onBackClicked}
+              onClick={handleBackClicked}
             >
               <FaArrowLeft />
               Back

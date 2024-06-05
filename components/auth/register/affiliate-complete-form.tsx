@@ -14,15 +14,15 @@ type Props = {
   step: number;
   userData: SignedUpData;
   setUserData: Dispatch<SetStateAction<SignedUpData>>;
-  moveStepForward: () => void;
-  moveStepBackward: () => void;
+  handleNext: () => void;
+  handleBack: () => void;
 };
 
 export const AffiliateCompleteForm = ({
   step,
   userData,
-  moveStepForward,
-  moveStepBackward
+  handleNext,
+  handleBack
 }: Props) => {
   const [isDisabled, setDisabled] = useState<boolean>(false);
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
@@ -74,14 +74,14 @@ export const AffiliateCompleteForm = ({
         "You can't go backward since you are already registered!"
       );
     } else {
-      moveStepBackward();
+      handleBack();
     }
   };
 
   const onConfirmed = () => {
     setConfirmOpen(false);
     if (confirmTitle === "Success") {
-      moveStepForward();
+      handleNext();
     }
   };
 

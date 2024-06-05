@@ -5,10 +5,14 @@ import { FaKey } from "react-icons/fa";
 
 import { GradientButton } from "@/components/utils/gradient-button";
 
-export const RegisterCompleteForm = () => {
+type Props = {
+  step: number;
+};
+
+export const RegisterCompleteForm = ({ step }: Props) => {
   return (
     <div className="w-[480px] m-auto space-y-6">
-      <p className="text-xl text-green-700">Complete Onboarding</p>
+      <p className="text-xl text-green-700">{step + 1}. Complete Onboarding</p>
       <div className="flex flex-col">
         <p>Congratulations!</p>
         <p className="text-base text-gray-500">

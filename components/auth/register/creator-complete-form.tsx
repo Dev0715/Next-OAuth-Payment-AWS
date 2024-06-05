@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
@@ -13,15 +13,14 @@ import { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   userData: SignedUpData;
-  setUserData: Dispatch<SetStateAction<SignedUpData>>;
-  moveStepForward: () => void;
-  moveStepBackward: () => void;
+  handleNext: () => void;
+  handleBack: () => void;
 };
 
 export const CreatorCompleteForm = ({
   userData,
-  moveStepForward,
-  moveStepBackward
+  handleNext,
+  handleBack
 }: Props) => {
   const [isDisabled, setDisabled] = useState<boolean>(false);
   const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false);
@@ -103,12 +102,12 @@ export const CreatorCompleteForm = ({
   const onConfirmed = () => {
     setConfirmOpen(false);
     if (confirmTitle === "Success") {
-      moveStepForward();
+      handleNext();
     }
   };
 
   const onBack = () => {
-    moveStepBackward();
+    handleBack();
   };
 
   return (
@@ -120,7 +119,7 @@ export const CreatorCompleteForm = ({
         onOK={onConfirmed}
       />
       <p className="text-xl text-green-700">
-        5. Complete registration for a creator.
+        4. Complete registration for a creator.
       </p>
       <div className="flex flex-col">
         <p>Congratulations!</p>
