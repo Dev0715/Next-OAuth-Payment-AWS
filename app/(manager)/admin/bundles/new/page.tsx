@@ -62,7 +62,7 @@ const NewBundlePage = () => {
         onOK={() => setServerError(false)}
       />
       <Navbar title="New Bundle" content="Create a new bundle" />
-      <div className="flex flex-col gap-y-4">
+      <div className="flex flex-col gap-y-4 font-firs">
         <div className="flex flex-col gap-y-2">
           <p className="text-xl">Title for bundle</p>
           <Input

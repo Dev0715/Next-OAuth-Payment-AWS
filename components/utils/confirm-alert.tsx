@@ -34,7 +34,7 @@ export const ConfirmAlert = ({
       {/* <AlertDialogTrigger disabled={!onOK} asChild={asChild}>
         {children}
       </AlertDialogTrigger> */}
-      <AlertDialogContent>
+      <AlertDialogContent className="rounded-3xl">
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{message}</AlertDialogDescription>
