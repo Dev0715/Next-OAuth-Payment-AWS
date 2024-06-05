@@ -165,7 +165,7 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
   };
 
   return (
-    <Card className="w-full p-6 flex flex-col items-end gap-y-4 rounded-none">
+    <Card className="w-full p-6 flex flex-col items-end gap-y-4 rounded-3xl">
       <div className="flex gap-x-6 items-end">
         <GradientButton
           disabled={isPending}

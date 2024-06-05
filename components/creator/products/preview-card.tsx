@@ -50,7 +50,7 @@ export const PreviewCard = ({
   };
 
   return (
-    <Card className="w-full rounded-none font-firs">
+    <Card className="w-full rounded-3xl font-firs">
       {/** Preview is not working with images whose width < height  */}
       <PreviewDialog
         isPreviewing={isPreviewing}
