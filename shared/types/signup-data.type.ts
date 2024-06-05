@@ -1,9 +1,10 @@
+import { z } from "zod";
+
 import {
   CreatorDetailsSchema,
   GeneralDetailsSchema,
   SelectAccountsSchema
 } from "@/schemas/auth/register";
-import { z } from "zod";
 
 export type SignedUpData = {
   generalDetails: z.infer<typeof GeneralDetailsSchema>;

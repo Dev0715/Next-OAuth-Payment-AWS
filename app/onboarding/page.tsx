@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
+import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
-import { SignedUpData } from "@/shared/types/signup-data.type";
 
-import { SelectAccountsForm } from "./form/select-accounts-form";
+import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 const OnboardingPage = () => {
   // affiliate, creator, user forms
