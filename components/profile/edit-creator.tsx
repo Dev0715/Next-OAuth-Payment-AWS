@@ -207,10 +207,10 @@ export default function EditCreator({
             <div className="w-full flex flex-col gap-y-6">
               <div className="flex flex-col gap-y-4">
                 <FormLabel>Cover Image & Avatar</FormLabel>
-                <Avatar className="w-full h-28 rounded-none">
+                <Avatar className="w-full h-28 rounded-3xl">
                   <AvatarImage src={coverImagePath} className="object-cover" />
                   <AvatarFallback className="bg-sky-500">
-                    <div className="w-full h-full bg-inherit"></div>
+                    <div className="w-full h-full rounded-3xl bg-inherit"></div>
                   </AvatarFallback>
                 </Avatar>
                 <GradientButton

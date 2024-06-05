@@ -88,7 +88,7 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
   };
 
   return (
-    <Card className="w-[480px]">
+    <Card className="w-[480px] rounded-3xl">
       <CardHeader>
         <CardTitle>Payment</CardTitle>
         <CardDescription>Select the payment method you prefer</CardDescription>
@@ -163,7 +163,7 @@ export const PaymentForm = ({ onCancel }: { onCancel?: () => void }) => {
             disabled={isPending}
             onClick={onCancel}
             variant="destructive"
-            className="flex gap-x-2 rounded-full font-firs"
+            className="h-fit flex gap-x-2 rounded-full border-[2px] border-white shadow-md font-firs"
           >
             <MdCancel /> Cancel {/** Not Working Now */}
           </Button>
