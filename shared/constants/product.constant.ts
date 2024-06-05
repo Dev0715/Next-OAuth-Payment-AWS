@@ -1,5 +1,5 @@
-import type { BadgeVariant } from "@/components/ui/badge";
 import type { ProductState, ProductType } from "../types/product.type";
+import type { BadgeVariant } from "@/components/ui/badge";
 
 export const PRODUCT_TYPE_DISPLAY_TEXT: Record<ProductType, string> = {
   "ui-kits": "UI Kits",

@@ -1,5 +1,5 @@
-import { axiosClient, axiosConfig } from "@/lib/axios";
 import { BucketType } from "@/actions/s3/upload-file";
+import { axiosClient, axiosConfig } from "@/lib/axios";
 
 export const uploadImage = async (file: File, keyName: string) => {
   try {

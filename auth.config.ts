@@ -1,12 +1,13 @@
-import Credentials from "next-auth/providers/credentials";
-import Github from "next-auth/providers/github";
-import Discord from "next-auth/providers/discord";
-import Apple from "next-auth/providers/apple";
 import crypto from "crypto-js";
+import Apple from "next-auth/providers/apple";
+import Credentials from "next-auth/providers/credentials";
+import Discord from "next-auth/providers/discord";
+import Github from "next-auth/providers/github";
 
-import type { NextAuthConfig } from "next-auth";
 import { getUserByEmail } from "./data/user";
 import { AUTH_CONFIG } from "./shared/constants/server.constant";
+
+import type { NextAuthConfig } from "next-auth";
 
 export default {
   secret: AUTH_CONFIG.SECRET,

@@ -1,4 +1,5 @@
 import NextAuth, { type DefaultSession } from "next-auth";
+
 import type { User } from "./shared/types/user.type";
 
 export type ExtendedUser = DefaultSession["user"] &

@@ -5,8 +5,8 @@ import {
   GetCommand,
   PutCommand,
   ScanCommand,
-  UpdateCommand,
-  type ScanCommandInput
+  type ScanCommandInput,
+  UpdateCommand
 } from "@aws-sdk/lib-dynamodb";
 
 import db from "@/lib/db";

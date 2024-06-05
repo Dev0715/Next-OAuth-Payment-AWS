@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+
 import { currentRole } from "./lib/auth";
 
 export const middleware = async (request: NextRequest) => {

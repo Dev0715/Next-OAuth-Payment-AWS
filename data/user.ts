@@ -5,16 +5,16 @@ import {
   GetCommand,
   PutCommand,
   ScanCommand,
-  UpdateCommand,
-  type ScanCommandInput
+  type ScanCommandInput,
+  UpdateCommand
 } from "@aws-sdk/lib-dynamodb";
 
 import db from "@/lib/db";
 import { generateVerificationToken } from "@/lib/tokens";
 import { AWS_DYNAMO_TABLES } from "@/shared/constants/server.constant";
 
-import type { CreatorData, ManagerData, User } from "@/shared/types/user.type";
 import type { ProductLink } from "@/shared/types/product.type";
+import type { CreatorData, ManagerData, User } from "@/shared/types/user.type";
 
 export const getAllUsers = async (
   limit?: number,

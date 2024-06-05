@@ -1,7 +1,8 @@
+import { useAtom } from "jotai";
+
 import { getLinkFromS3Server } from "@/actions/s3/link-from-s3-server";
 import { BucketType } from "@/actions/s3/upload-file";
 import { s3LinkAtom } from "@/store/s3-link";
-import { useAtom } from "jotai";
 
 export const useLinkFromS3 = () => {
   const [s3Link, setS3Link] = useAtom(s3LinkAtom);
