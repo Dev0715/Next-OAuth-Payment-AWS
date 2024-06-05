@@ -24,8 +24,8 @@ export const newVerification = async (token: string) => {
     return { error: "Invalid Token!" };
   }
 
-  const updatedUser = await updateUserVerification(userId);
-  if (!updatedUser) {
+  const res_update = await updateUserVerification(userId);
+  if (res_update.error) {
     return { error: "Server error!" };
   }
 

@@ -223,12 +223,14 @@ export const updateUserVerification = async (userId: string) => {
   });
 
   try {
-    const response = await db.send(command);
-    console.log("__updateUserVerification__UpdateCommand__RESPONSE", response);
-    return response.Attributes;
+    await db.send(command);
+    return {
+      success: true
+    };
   } catch (error) {
-    console.log("__updateUserVerification__UpdateCommand__ERROR", error);
-    return null;
+    return {
+      error: true
+    };
   }
 };
 
