@@ -102,7 +102,7 @@ const OnboardingPage = () => {
 
   return (
     <div className="w-[640px]">
-      <TransitionInOut condition={step === 1}>
+      <TransitionInOut condition={step === 0}>
         <SelectAccountsForm
           setUserData={handleUpdateUserData}
           moveStepForward={moveStepForward}
