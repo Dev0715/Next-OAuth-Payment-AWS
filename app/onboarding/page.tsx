@@ -3,9 +3,39 @@
 import { useState } from "react";
 
 import { TransitionInOut } from "@/components/utils/transition-in-out";
+import { SignedUpData } from "@/shared/types/signup-data.type";
 
 const OnboardingPage = () => {
   // affiliate, creator, user forms
+
+  const [userData, setUserData] = useState<SignedUpData>({
+    generalDetails: {
+      username: "",
+      email: "",
+      password: "",
+      firstname: "",
+      lastname: ""
+    },
+    selectedAccounts: {
+      creator: false,
+      user: false,
+      affiliate: false
+    },
+    creatorDetails: {
+      bio: "",
+      jobTitle: "",
+      companyName: "",
+      companyCountry: "",
+      companyWebsite: ""
+    },
+    creatorMatchings: {
+      env: false,
+      beh: false,
+      art: false,
+      drb: false,
+      cmk: false
+    }
+  });
 
   const [step, setStep] = useState<number>(0);
 
@@ -66,7 +96,14 @@ const OnboardingPage = () => {
 
   return (
     <div className="w-[640px]">
-      <TransitionInOut condition>Hello</TransitionInOut>
+      <TransitionInOut condition={step === 1}>
+        <SelectAccountsForm
+          userData={userData}
+          setUserData={setUserData}
+          moveStepForward={moveStepForward}
+          moveStepBackward={moveStepBackward}
+        />
+      </TransitionInOut>
     </div>
   );
 };
