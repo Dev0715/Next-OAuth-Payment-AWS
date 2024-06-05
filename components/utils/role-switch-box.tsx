@@ -7,7 +7,7 @@ type Props = {
 
 export const RoleSwitchBox = ({ title, isChecked }: Props) => {
   return (
-    <div className="w-full flex items-center justify-between rounded-lg border p-4">
+    <div className="w-full flex items-center justify-between rounded-3xl border p-4">
       <div className="space-y-0.5">
         <p className="text-black font-medium text-base">{title}</p>
       </div>

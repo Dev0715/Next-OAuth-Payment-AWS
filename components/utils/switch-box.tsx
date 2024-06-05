@@ -23,7 +23,7 @@ export const SwitchBox = ({
   alertMessage
 }: ParamsType) => {
   return (
-    <div className="w-full flex items-center justify-between rounded-lg border p-4 font-firs">
+    <div className="w-full flex items-center justify-between rounded-3xl border p-4 font-firs">
       <div className="space-y-0.5">
         <GradientParagraph className={`text-black font-medium text-xl`}>
           {title}
