@@ -48,7 +48,7 @@ export function SelectAccountsForm({ onUpdate }: Props) {
   return (
     <div className="w-[480px] m-auto">
       <p className="mb-6 text-xl text-green-700">
-        1. Please select accounts you want to create.
+        Please select accounts you want to create.
       </p>
       <Form {...form}>
         <form

@@ -66,115 +66,103 @@ export const CreatorDetailsForm = ({ onUpdate, onNext, onBack }: Props) => {
   return (
     <div className="w-full">
       <p className="mb-6 text-xl text-green-700">
-        3. Please provide your KRE8TOR details.
+        Please provide your KRE8TOR details.
       </p>
       <Form {...form}>
         <form
-          className="w-full space-y-6"
+          className="w-full grid grid-cols-2 gap-6"
           onSubmit={form.handleSubmit(onSubmit)}
         >
-          <div className="w-full">
-            <FormField
-              control={form.control}
-              name="jobTitle"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Type of user*</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a type of user" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {JOB_TITLES.map((type) => (
-                        <SelectItem key={type} value={type}>
-                          {type}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="w-full">
-            <FormField
-              control={form.control}
-              name="bio"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Bio</FormLabel>
+          <FormField
+            control={form.control}
+            name="jobTitle"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Type of user*</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
-                    <Textarea {...field} placeholder="Description" />
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a type of user" />
+                    </SelectTrigger>
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="w-full flex gap-x-6">
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="companyName"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Company Name</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Your company" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="w-1/2">
-              <FormField
-                control={form.control}
-                name="companyCountry"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Location</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Country" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <div className="w-1/2 pr-3">
-            <FormField
-              control={form.control}
-              name="companyWebsite"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Company Website</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Website URL" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="w-full flex items-center justify-between mt-4">
+                  <SelectContent>
+                    {JOB_TITLES.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="bio"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Bio</FormLabel>
+                <FormControl>
+                  <Textarea {...field} placeholder="Description" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="companyName"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Company Name</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Your company" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="companyCountry"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Location</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Country" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="companyWebsite"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Company Website</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Website URL" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="w-full col-span-2 flex items-center justify-between mt-4">
             <Button
               type="button"
-              variant={"outline"}
-              className="w-64 flex gap-x-4 border-red-700"
+              variant="outline"
+              className="flex gap-x-4 border-red-700"
               onClick={onBackClicked}
             >
               <FaArrowLeft />
               Back
             </Button>
-            <Button type="submit" className="w-64 flex gap-x-4">
+            <Button type="submit" className="flex gap-x-4">
               <FaArrowRight />
               Next
             </Button>

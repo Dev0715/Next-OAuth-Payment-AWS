@@ -40,7 +40,7 @@ const OnboardingPage = () => {
   };
 
   const handleBack = () => {
-    setStep((step) => step - 1);
+    setStep(step - 1);
   };
 
   // const isCreatorStep = () => {
@@ -92,7 +92,7 @@ const OnboardingPage = () => {
 
   const handleUpdateUserData = (data: Partial<SignedUpData>) => {
     setUserData((prev) => ({ ...prev, ...data }));
-    setStep((prev) => prev + 1);
+    handleNext();
   };
 
   return (
