@@ -3,13 +3,13 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-import { Button } from "@/components/ui/button";
+import { ArtStation } from "@/components/auth/register/matching-sites/artstation";
+import { Behance } from "@/components/auth/register/matching-sites/behance";
+import { CreativeMarket } from "@/components/auth/register/matching-sites/creative-market";
+import { Dribble } from "@/components/auth/register/matching-sites/dribble";
+import { Evanto } from "@/components/auth/register/matching-sites/evanto";
 
-import { ArtStation } from "./matching-sites/artstation";
-import { Behance } from "./matching-sites/behance";
-import { CreativeMarket } from "./matching-sites/creative-market";
-import { Dribble } from "./matching-sites/dribble";
-import { Evanto } from "./matching-sites/evanto";
+import { Button } from "@/components/ui/button";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
