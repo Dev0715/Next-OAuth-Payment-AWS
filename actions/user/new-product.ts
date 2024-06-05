@@ -22,7 +22,7 @@ export const addNewProduct = async (userId: string, product: ProductLink) => {
     creator: creatorData
   });
 
-  if (response) {
+  if (response.success) {
     return { success: "New product was registered successfully" };
   } else {
     return { error: "Internal server error" };

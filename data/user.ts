@@ -22,6 +22,11 @@ type UserUpdateToken = {
   expires: Date;
 };
 
+type CreatorUpdateProduct = {
+  userId: string;
+  creator: CreatorData;
+};
+
 export const getAllUsers = async (
   limit?: number,
   exclusiveStartKey?: string
@@ -265,11 +270,6 @@ export const updateGeneralProfile = async (userId: string, userData: User) => {
   }
 };
 
-type CreatorUpdateProduct = {
-  userId: string;
-  creator: CreatorData;
-};
-
 export const updateUserProducts = async (data: CreatorUpdateProduct) => {
   const command = new UpdateCommand({
     TableName: AWS_DYNAMO_TABLES.USER,
@@ -283,9 +283,14 @@ export const updateUserProducts = async (data: CreatorUpdateProduct) => {
 
   try {
     const response = await db.send(command);
-    return response.Attributes;
+    return {
+      success: true,
+      updatedUser: response.Attributes
+    };
   } catch (error) {
-    return null;
+    return {
+      success: false
+    };
   }
 };
 

@@ -26,7 +26,7 @@ export const deleteProductFromCreator = async (
     creator: creatorData
   });
 
-  if (response) {
+  if (response.success) {
     return { success: "New product was registered successfully" };
   } else {
     return { error: "Internal server error" };
