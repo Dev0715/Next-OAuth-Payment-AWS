@@ -1,6 +1,7 @@
 "use client";
 
 import { Separator } from "@/components/ui/separator";
+import { GradientParagraph } from "@/components/utils/gradient-paragraph";
 
 interface PropsParams {
   title: string;
@@ -9,11 +10,11 @@ interface PropsParams {
 
 export const Navbar = ({ title, content }: PropsParams) => {
   return (
-    <nav className="w-full flex flex-col gap-y-6 top-28">
-      <div className="flex flex-col gap-y-2">
-        <p className="text-2xl text-black font-medium drop-shadow-md">
+    <nav className="w-full flex flex-col gap-y-6">
+      <div className="flex flex-col gap-y-2 font-firs">
+        <GradientParagraph className="text-2xl text-black font-firs font-medium drop-shadow-md">
           {title}
-        </p>
+        </GradientParagraph>
         <p className="text-md text-gray-600">{content}</p>
       </div>
       <Separator className="h-[1px]" />
