@@ -2,14 +2,14 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
-import Link from "next/link";
+// import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -26,7 +26,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
+// import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
@@ -193,12 +193,12 @@ export default function EditCreator({
   return (
     <main className="w-full flex justify-between">
       <div className="w-[640px] flex flex-col gap-y-6">
-        <div className="flex items-center gap-x-4">
+        {/* <div className="flex items-center gap-x-4">
           <Button asChild variant="link" className="px-0">
             <Link href="/">Accept our standard Legal Agreements</Link>
           </Button>
           <Switch disabled={isDisabled} />
-        </div>
+        </div> */}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
