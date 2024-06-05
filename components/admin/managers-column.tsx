@@ -1,8 +1,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+
+import { GradientButton } from "../utils/gradient-button";
 
 import type { User } from "@/shared/types/user.type";
 
@@ -87,13 +88,13 @@ export const getColumnsForMangersTable = ({
       id: "delete",
       header: () => "Delete",
       cell: ({ row }) => (
-        <Button
+        <GradientButton
           variant={"destructive"}
-          className="h-6 rounded-none"
+          className="h-8 rounded-none"
           onClick={() => onDelete(row.index)}
         >
           Delete
-        </Button>
+        </GradientButton>
       )
     }
   ];

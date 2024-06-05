@@ -13,7 +13,7 @@ export const GradientButton = ({ className, children, ...props }: Props) => {
 
   return (
     <Button
-      className={`${className} h-fit px-5 border-[2px] border-white rounded-full font-firs text-white transition-all duration-300 ease-in-out shadow-md cursor-pointer ${bgClassName}`}
+      className={`h-fit ${className} px-5 border-[2px] border-white rounded-full font-firs text-white transition-all duration-300 ease-in-out shadow-md cursor-pointer ${bgClassName}`}
       {...props}
     >
       {children}
