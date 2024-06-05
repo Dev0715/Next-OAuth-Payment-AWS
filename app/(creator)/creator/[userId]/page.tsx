@@ -74,7 +74,7 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
   return (
     <div className="w-5/6 flex flex-col items-center gap-y-2 pt-6 pb-24">
       <div className="relative w-full flex flex-col items-center mb-12">
-        <Avatar className="w-full h-56 rounded-none">
+        <Avatar className="w-full h-56 rounded-3xl">
           <AvatarImage src={coverPath} className="object-cover" />
           <AvatarFallback className="bg-sky-500">
             <div className="w-full h-full bg-inherit"></div>

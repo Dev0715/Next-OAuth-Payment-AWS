@@ -24,7 +24,7 @@ export const UserCollection = ({ products, userId }: Props) => {
   const [user] = useAtom(userAtom);
 
   return (
-    <Card className="border-0 rounded-none">
+    <Card className="border-0 rounded-3xl">
       <CardHeader className="flex flex-row items-center justify-between">
         <GradientParagraph className="text-xl font-bold">
           Your Collections
