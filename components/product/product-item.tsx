@@ -54,7 +54,7 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
       href={`${_url ? _url : "/products"}/${product.productType}/${product.productId}`}
       className="w-full"
     >
-      <Card className="relative w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100 hover:translate-x-[-1px] hover:translate-y-[-1px]">
+      <Card className="relative w-full flex flex-col items-center px-0 rounded-3xl overflow-hidden shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100 hover:translate-x-[-1px] hover:translate-y-[-1px]">
         {!noBadge && (
           <div className="absolute top-2 right-2 z-10">
             <p

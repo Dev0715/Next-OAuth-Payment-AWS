@@ -240,7 +240,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
             {error && <FormError message={error} />}
           </div>
 
-          <Card className="w-full p-6 flex flex-col gap-y-4">
+          <Card className="w-full rounded-3xl p-6 flex flex-col gap-y-4">
             <p className="text-xl font-semibold">Product Approval Status</p>
             <ProductHistory history={product.approval.history} />
           </Card>
