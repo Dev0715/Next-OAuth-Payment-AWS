@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -24,19 +24,18 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 type Props = {
   setUserData: (data: Partial<SignedUpData>) => void;
   moveStepForward: () => void;
-  moveStepBackward: () => void;
 };
 
-export function SelectAccountsForm({
-  setUserData,
-  moveStepForward,
-  moveStepBackward
-}: Props) {
+export function SelectAccountsForm({ setUserData, moveStepForward }: Props) {
   const [isErr, setErr] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof SelectAccountsSchema>>({
     resolver: zodResolver(SelectAccountsSchema),
-    defaultValues: {}
+    defaultValues: {
+      creator: false,
+      user: false,
+      affiliate: false
+    }
   });
 
   const onSubmit = (values: z.infer<typeof SelectAccountsSchema>) => {
@@ -46,11 +45,6 @@ export function SelectAccountsForm({
       setUserData({ selectedAccounts: values });
       moveStepForward();
     }
-  };
-
-  const onBackClicked = () => {
-    setUserData({ selectedAccounts: form.getValues() });
-    moveStepBackward();
   };
 
   return (
@@ -123,16 +117,7 @@ export function SelectAccountsForm({
               </FormItem>
             )}
           />
-          <div className="!mt-8 flex justify-between items-center">
-            <Button
-              type="button"
-              className="gap-x-4 border-red-700"
-              variant="outline"
-              onClick={onBackClicked}
-            >
-              <FaArrowLeft />
-              Back
-            </Button>
+          <div className="!mt-8 text-center">
             <Button type="submit" className="gap-x-4">
               Next
               <FaArrowRight />

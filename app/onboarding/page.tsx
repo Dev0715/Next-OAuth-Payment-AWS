@@ -45,9 +45,9 @@ const OnboardingPage = () => {
     setStep(step + 1);
   };
 
-  const moveStepBackward = () => {
-    setStep(step - 1);
-  };
+  // const moveStepBackward = () => {
+  //   setStep(step - 1);
+  // };
 
   // const isCreatorStep = () => {
   //   return userData.selectedAccounts.creator && step === 2;
@@ -101,12 +101,11 @@ const OnboardingPage = () => {
   };
 
   return (
-    <div className="w-[640px]">
+    <div className="mt-16 w-[640px]">
       <TransitionInOut condition={step === 0}>
         <SelectAccountsForm
           setUserData={handleUpdateUserData}
           moveStepForward={moveStepForward}
-          moveStepBackward={moveStepBackward}
         />
       </TransitionInOut>
     </div>
