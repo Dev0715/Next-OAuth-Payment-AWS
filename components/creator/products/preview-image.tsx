@@ -37,11 +37,11 @@ export const ImagePreview = ({
 
   return (
     <div
-      className="relative h-fit cursor-pointer"
+      className="relative h-fit rounded-3xl overflow-hidden cursor-pointer"
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
     >
-      <Avatar className="w-auto h-28 rounded-none">
+      <Avatar className="w-auto rounded-none h-28">
         <AvatarImage src={imageURL} className="object-fill aspect-ratio" />
       </Avatar>
 
