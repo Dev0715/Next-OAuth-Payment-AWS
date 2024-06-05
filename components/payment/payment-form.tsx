@@ -7,7 +7,6 @@ import { MdCancel } from "react-icons/md";
 
 import { createOrder as createPaypalOrder } from "@/actions/paypal/create-order";
 import { createOrder as createStripeOrder } from "@/actions/stripe/create-order";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
