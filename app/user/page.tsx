@@ -140,7 +140,7 @@ export default function Profile() {
       user?.userId as string,
       userData
     );
-    if (response) {
+    if (response.success) {
       setSuccess("Profile updated successfully");
       return userData;
     } else {
