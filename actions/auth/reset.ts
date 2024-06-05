@@ -6,6 +6,7 @@ import { ResetSchema } from "@/schemas/auth/auth";
 import { sendPasswordResetEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
 import { getUserByEmail, updateUserToken } from "@/data/user";
+import { User } from "@/shared/types/user.type";
 
 export const reset = async (values: z.infer<typeof ResetSchema>) => {
   const validatedFields = ResetSchema.safeParse(values);
@@ -22,20 +23,22 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
 
   const verificationToken = generateVerificationToken(existingUser.userId);
 
-  const updatedUser = await updateUserToken({
+  const res_update = await updateUserToken({
     userId: existingUser.userId,
     verificationToken,
     expires: new Date(new Date().getTime() + 3600 * 1000)
   });
 
-  if (!updatedUser) {
+  if (!res_update.error) {
     return { error: "Server Error" };
   }
+
+  const updatedUser = res_update.updatedUser as unknown as User;
 
   // const passwordResetToken = await generatePasswordResetToken(email);
   const response = await sendPasswordResetEmail(
     updatedUser.email,
-    updatedUser.verificationToken
+    updatedUser.verificationToken as string
   );
 
   if (response.error) {

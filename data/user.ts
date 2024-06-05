@@ -16,6 +16,12 @@ import { AWS_DYNAMO_TABLES } from "@/shared/constants/server.constant";
 import type { ProductLink } from "@/shared/types/product.type";
 import type { CreatorData, ManagerData, User } from "@/shared/types/user.type";
 
+type UserUpdateToken = {
+  userId: string;
+  verificationToken: string;
+  expires: Date;
+};
+
 export const getAllUsers = async (
   limit?: number,
   exclusiveStartKey?: string
@@ -145,7 +151,6 @@ export const getUserById = async (userId: string) => {
     const response = await db.send(command);
     return response.Item as User;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
@@ -180,13 +185,7 @@ export const createUser = async (data: any) => {
   }
 };
 
-type UserSetToken = {
-  userId: string;
-  verificationToken: string;
-  expires: Date;
-};
-
-export const updateUserToken = async (data: UserSetToken) => {
+export const updateUserToken = async (data: UserUpdateToken) => {
   const command = new UpdateCommand({
     TableName: AWS_DYNAMO_TABLES.USER,
     Key: { userId: data.userId },
@@ -201,9 +200,14 @@ export const updateUserToken = async (data: UserSetToken) => {
 
   try {
     const response = await db.send(command);
-    return response.Attributes;
+    return {
+      success: true,
+      updatedUser: response.Attributes
+    };
   } catch (error) {
-    return null;
+    return {
+      error: true
+    };
   }
 };
 

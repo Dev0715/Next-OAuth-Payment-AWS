@@ -4,7 +4,7 @@ import { GradientButton } from "../utils/gradient-button";
 import { GradientParagraph } from "../utils/gradient-paragraph";
 
 export const MemberSignUp = () => (
-  <div className="w-full p-[6px] grid grid-cols-1 xl:grid-cols-2 gap-3 rounded-3xl md:rounded-[54px] bg-white">
+  <div className="w-full p-[6px] grid grid-cols-1 xl:grid-cols-2 gap-3 rounded-3xl lg:rounded-[54px] bg-white">
     <div className="p-4 space-y-4 sm:space-y-0 md:px-14 md:py-6">
       <div className="space-y-4 text-center md:text-left">
         <GradientParagraph className="text-xl md:text-3xl leading-8 font-firs font-semibold">
