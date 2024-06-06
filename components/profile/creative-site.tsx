@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,6 +6,8 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+
+import { GradientButton } from "../utils/gradient-button";
 
 interface Params {
   href?: string;
@@ -54,20 +55,16 @@ export const CreativeSite = ({
       <CardFooter
         className={`flex gap-x-6 ${showButton === false && "hidden"}`}
       >
-        <Button
+        <GradientButton
           disabled={disabled}
-          variant="outline"
+          variant="destructive"
           className="border-green-700"
         >
           Confirm
-        </Button>
-        <Button
-          disabled={disabled}
-          variant="outline"
-          className="border-red-700"
-        >
+        </GradientButton>
+        <GradientButton disabled={disabled} className="border-red-700">
           Discard
-        </Button>
+        </GradientButton>
       </CardFooter>
     </Card>
   );
