@@ -62,13 +62,7 @@ const OnboardingPage = () => {
   const isRegisterCompleteStep = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
-      _step += 3;
-    }
-    if (userData.selectedAccounts.user) {
-      _step += 1;
-    }
-    if (userData.selectedAccounts.affiliate) {
-      _step += 1;
+      _step += 2;
     }
     return step === _step;
   };
@@ -110,7 +104,7 @@ const OnboardingPage = () => {
         />
       </TransitionInOut>
       <TransitionInOut condition={isRegisterCompleteStep()}>
-        <RegisterCompleteForm step={step} />
+        <RegisterCompleteForm />
       </TransitionInOut>
     </div>
   );

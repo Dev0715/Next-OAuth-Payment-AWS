@@ -1,8 +1,9 @@
 "use server";
 
-import { getAllUsernames, getUserByEmail, createUser } from "@/data/user";
-import { sendVerificationEmail } from "@/lib/mail";
 import crypto from "crypto-js";
+
+import { createUser, getAllUsernames, getUserByEmail } from "@/data/user";
+import { sendVerificationEmail } from "@/lib/mail";
 
 export const register = async (values: any) => {
   // Check whether username selected is available
