@@ -432,10 +432,14 @@ export const updateCreatorData = async ({
 
   try {
     const response = await db.send(command);
-    return response.Attributes;
+    return {
+      success: true,
+      updatedUser: response.Attributes
+    };
   } catch (error) {
-    console.error(error);
-    return null;
+    return {
+      error: true
+    };
   }
 };
 

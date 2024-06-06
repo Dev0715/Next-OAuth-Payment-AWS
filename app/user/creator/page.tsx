@@ -39,7 +39,7 @@ const CreatorSettings = () => {
         userId: user?.userId as string,
         creatorData
       }).then((res) => {
-        if (res) {
+        if (res.success) {
           setIsChecked(newState);
           setUser({
             ...user,

@@ -163,7 +163,7 @@ export default function EditCreator({
       creatorData
     });
 
-    if (response) {
+    if (response.success) {
       setSuccess("Profile updated successfully");
       return creatorData;
     } else {
