@@ -27,6 +27,12 @@ type CreatorUpdateProduct = {
   creator: CreatorData;
 };
 
+type UserSetPassword = {
+  userId: string;
+  password: string;
+  emailVerified: Date;
+};
+
 export const getAllUsers = async (
   limit?: number,
   exclusiveStartKey?: string
@@ -324,12 +330,6 @@ export const updateUserPurchased = async ({
   }
 };
 
-type UserSetPassword = {
-  userId: string;
-  password: string;
-  emailVerified: Date;
-};
-
 export const updateUserPassword = async (data: UserSetPassword) => {
   const command = new UpdateCommand({
     TableName: AWS_DYNAMO_TABLES.USER,
@@ -345,11 +345,14 @@ export const updateUserPassword = async (data: UserSetPassword) => {
 
   try {
     const response = await db.send(command);
-    console.log("__updateUserPassword__UpdateCommand__RESPONSE", response);
-    return response.Attributes;
+    return {
+      success: true,
+      updatedUser: response.Attributes
+    };
   } catch (error) {
-    console.log("__updateUserPassword__UpdateCommand__ERROR", error);
-    return null;
+    return {
+      error: true
+    };
   }
 };
 

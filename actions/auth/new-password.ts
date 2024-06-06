@@ -39,13 +39,13 @@ export const newPassword = async (
 
   const { password } = validatedFields.data;
   const hashedPassword = crypto.SHA256(password).toString();
-  const updatedUser = await updateUserPassword({
+  const res_update = await updateUserPassword({
     userId,
     password: hashedPassword,
     emailVerified: new Date()
   });
 
-  if (!updatedUser) {
+  if (res_update.error) {
     return {
       error: "Server error!"
     };
