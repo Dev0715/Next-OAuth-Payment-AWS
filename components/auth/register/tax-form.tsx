@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
 import { GradientButton } from "@/components/utils/gradient-button";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
@@ -44,8 +42,7 @@ export const TaxForm = ({ onUpdate, onBack }: Props) => {
           no withholding of taxes on any of your Kre8tive income. If you do not
           submit a valid Form W-9, Kre8tive will be required to deduct 24%
           withholding tax from sales proceeds and remit these directly to the
-          Internal Revenue Service. If you have any questions, please check our
-          W-9 articles.
+          Internal Revenue Service.
         </p>
 
         <strong>If you are not a U.S. Person</strong>
@@ -55,11 +52,10 @@ export const TaxForm = ({ onUpdate, onBack }: Props) => {
           or zero withholding rate that is specified in your country`s tax
           treaty. If you are a resident of a country that does not have a tax
           treaty with the U.S., then your U.S. source income from Kre8tive will
-          be subject to a 30% withholding tax. If you have any questions, please
-          check our W-8 articles.
+          be subject to a 30% withholding tax.
         </p>
 
-        <p className="">
+        <p>
           While Kre8tive cannot give tax and/or legal advice, we will do our
           best to provide you with the information you need to make your own
           decision about how to comply with applicable U.S. tax laws. If you
@@ -67,10 +63,6 @@ export const TaxForm = ({ onUpdate, onBack }: Props) => {
           IRS, please contact your legal and/or tax advisor.
         </p>
 
-        <p className="">
-          Please indicate whether you are a US Person and we will direct you to
-          the correct Forms.
-        </p>
         <ul className="mt-4 ml-4 list-disc">
           <li>
             An individual who is a US citizen or US resident alien, or who
@@ -84,34 +76,29 @@ export const TaxForm = ({ onUpdate, onBack }: Props) => {
           <li>An estate (other than a foreign estate), or</li>
           <li>A domestic trust (as defined in US tax regulations).</li>
         </ul>
+
+        <p className="mt-4">
+          Please indicate whether you are a US Person and we will direct you to
+          the correct Forms.
+        </p>
       </div>
 
-      <RadioGroup
-        defaultValue={usPerson}
-        onValueChange={setUsPerson}
-        className="w-full flex flex-col"
-      >
+      <RadioGroup defaultValue={usPerson} onValueChange={setUsPerson}>
         <div className="flex items-center gap-x-4 cursor-pointer">
-          <RadioGroupItem value={"us"} id={"us"} />
-          <Label
-            htmlFor={"I am a US person"}
-            className="flex items-center gap-x-4 text-5xl cursor-pointer"
-          >
-            <p className="text-lg">I am a US person</p>
+          <RadioGroupItem value="us" id="us" />
+          <Label htmlFor="us" className="cursor-pointer">
+            I am a US person
           </Label>
         </div>
         <div className="flex items-center gap-x-4 cursor-pointer">
-          <RadioGroupItem value={"notUs"} id={"notUs"} />
-          <Label
-            htmlFor={"I am not a US person"}
-            className="flex items-center gap-x-4 text-5xl cursor-pointer"
-          >
-            <p className="text-lg">I am not a US person</p>
+          <RadioGroupItem value="notUs" id="notUs" />
+          <Label htmlFor="notUs" className="cursor-pointer">
+            I am not a US person
           </Label>
         </div>
       </RadioGroup>
 
-      <div className="w-full col-span-2 flex items-center justify-between mt-4">
+      <div className="w-full flex items-center justify-between mt-4">
         <GradientButton
           variant="destructive"
           className="flex gap-x-4 border-red-700"

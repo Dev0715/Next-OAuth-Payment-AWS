@@ -96,7 +96,7 @@ const OnboardingPage = () => {
   };
 
   return (
-    <div className="mt-16 w-[640px]">
+    <div className="mt-16 mb-8 w-[640px]">
       <TransitionInOut
         title="Accounts you want to create"
         condition={step === 0}

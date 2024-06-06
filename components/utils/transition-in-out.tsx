@@ -19,7 +19,7 @@ export const TransitionInOut = ({ title, children, condition }: Props) => {
       leaveFrom="opacity-100 scale-100"
       leaveTo="opacity-0 scale-95"
     >
-      <GradientParagraph className="mb-12 font-firs font-semibold text-3xl text-center">
+      <GradientParagraph className="mb-8 font-firs font-semibold text-3xl text-center">
         {title}
       </GradientParagraph>
       {children}
