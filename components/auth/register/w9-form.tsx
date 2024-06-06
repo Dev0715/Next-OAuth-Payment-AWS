@@ -257,7 +257,7 @@ export const W9Form = ({ onUpdate, onBack }: Props) => {
             name="taxIdType"
             render={({ field }) => (
               <FormItem className="col-span-2">
-                <FormLabel>List account numbers here</FormLabel>
+                <FormLabel>Tax ID Type*</FormLabel>
                 <FormControl>
                   <RadioGroup
                     defaultValue={field.value}
