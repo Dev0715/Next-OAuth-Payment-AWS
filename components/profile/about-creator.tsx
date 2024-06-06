@@ -57,16 +57,20 @@ export const AboutCreator = ({ userData }: PropsParams) => {
             </div>
             <div className="flex flex-col gap-y-4">
               <div className="flex gap-x-4 items-center">
-                <p className="font-semibold">
+                <GradientParagraph className="font-bold">
                   {`${userData?.firstname || ""} ${userData?.lastname || ""}`}
-                </p>
-                <Separator orientation={"vertical"} />
+                </GradientParagraph>
+                {creator?.jobTitle ? (
+                  <Separator orientation={"vertical"} />
+                ) : null}
                 <p className="font-semibold">{creator?.jobTitle}</p>
               </div>
               <p className="text-gray-700">{creator?.bio}</p>
             </div>
             <div className="flex flex-col gap-y-4">
-              <p className="text-xl text-green-700 font-semibold">Contact</p>
+              <GradientParagraph className="text-xl font-semibold">
+                Contact
+              </GradientParagraph>
               <div className="flex flex-col gap-y-4">
                 <CompanyShow company={creator?.company} />
                 <AddressShow address={userData?.address} />
@@ -107,11 +111,11 @@ const AddressShow = ({ address }: { address: Address | undefined }) => {
     <div className="flex gap-x-2">
       <p>Address:</p>
       <div className="flex gap-x-2 font-semibold">
-        <p>{`${address.address1},`}</p>
-        <p>{`${address.address2},`}</p>
-        <p>{`${address.city},`}</p>
-        <p>{`${address.postal},`}</p>
-        <p>{address.country}</p>
+        <p>{`${address.address1 ? address.address1 + "," : ""}`}</p>
+        <p>{`${address.address2 ? address.address2 + "," : ""}`}</p>
+        <p>{`${address.city ? address.city + "," : ""}`}</p>
+        <p>{`${address.postal ? address.postal + "," : ""}`}</p>
+        <p>{address.country || ""}</p>
       </div>
     </div>
   );
