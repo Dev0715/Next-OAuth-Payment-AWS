@@ -29,7 +29,6 @@ export const captureOrder = async (params: OrderType) => {
     };
   } catch (error) {
     return {
-      success: false,
       error
     };
   }

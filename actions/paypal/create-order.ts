@@ -31,13 +31,18 @@ export const createOrder = async (params: OrderType) => {
     const response = await PaypalClient.execute(request);
 
     if (response.statusCode !== 201) {
-      return { success: false };
+      return { error: true };
     }
 
     // Some code related to saving the order in the database
 
-    return { success: true, result: response.result };
+    return {
+      success: true,
+      result: response.result
+    };
   } catch (error) {
-    return { success: false };
+    return {
+      error
+    };
   }
 };
