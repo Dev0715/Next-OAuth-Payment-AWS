@@ -77,8 +77,7 @@ const OnboardingPage = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
       _step += 3;
-    }
-    if (userData.selectedAccounts.affiliate) {
+    } else if (userData.selectedAccounts.affiliate) {
       _step += 1;
     }
 
@@ -89,8 +88,7 @@ const OnboardingPage = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
       _step += 4;
-    }
-    if (userData.selectedAccounts.affiliate) {
+    } else if (userData.selectedAccounts.affiliate) {
       _step += 2;
     }
     return step === _step;
