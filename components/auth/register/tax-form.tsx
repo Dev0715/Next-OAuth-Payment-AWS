@@ -12,17 +12,23 @@ import { GradientButton } from "@/components/utils/gradient-button";
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
-  handleUpdate: (data: Partial<SignedUpData>) => void;
-  handleBack: () => void;
+  onUpdate: (data: Partial<SignedUpData>) => void;
+  onNext: () => void;
+  onBack: () => void;
 };
 
-export const TaxForm = ({ handleBack, handleUpdate }: Props) => {
+export const TaxForm = ({ onUpdate, onNext, onBack }: Props) => {
   const [usPerson, setUsPerson] = useState("");
 
-  const onNext = () => {
-    handleUpdate({
+  const onNextClicked = () => {
+    onUpdate({
       usPerson: usPerson
     });
+    onNext();
+  };
+
+  const onBackClicked = () => {
+    onBack();
   };
 
   return (
@@ -140,12 +146,12 @@ export const TaxForm = ({ handleBack, handleUpdate }: Props) => {
         <GradientButton
           variant="destructive"
           className="flex gap-x-4 border-red-700"
-          onClick={handleBack}
+          onClick={onBackClicked}
         >
           <FaArrowLeft />
           Back
         </GradientButton>
-        <GradientButton onClick={onNext} className="flex gap-x-4">
+        <GradientButton onClick={onNextClicked} className="flex gap-x-4">
           <FaArrowRight />
           Next
         </GradientButton>

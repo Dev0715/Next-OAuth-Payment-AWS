@@ -6,6 +6,7 @@ import { CreatorDetailsForm } from "@/components/auth/register/creator-details-f
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
 import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
 import { SelectMatchingForm } from "@/components/auth/register/select-matching-form";
+import { TaxForm } from "@/components/auth/register/tax-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
@@ -48,17 +49,17 @@ const OnboardingPage = () => {
     return userData.selectedAccounts.creator && step === 2;
   };
 
-  // const isTaxStep = () => {
-  //   let _step = 1;
-  //   if (userData.selectedAccounts.creator) {
-  //     _step += 4;
-  //   }
-  //   if (userData.selectedAccounts.affiliate) {
-  //     _step += 1;
-  //   }
+  const isTaxStep = () => {
+    let _step = 1;
+    if (userData.selectedAccounts.creator) {
+      _step += 3;
+    }
+    if (userData.selectedAccounts.affiliate) {
+      _step += 1;
+    }
 
-  //   return step === _step;
-  // };
+    return step === _step;
+  };
 
   const isRegisterCompleteStep = () => {
     let _step = 1;
@@ -108,6 +109,16 @@ const OnboardingPage = () => {
       >
         <SelectMatchingForm
           data={userData.creatorMatchings}
+          onUpdate={handleUpdateUserData}
+          onNext={handleNext}
+          onBack={handleBack}
+        />
+      </TransitionInOut>
+      <TransitionInOut
+        title="Please confirm your accounts on other creative markets"
+        condition={isTaxStep()}
+      >
+        <TaxForm
           onUpdate={handleUpdateUserData}
           onNext={handleNext}
           onBack={handleBack}
