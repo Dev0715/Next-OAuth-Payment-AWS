@@ -13,10 +13,10 @@ import { addProductToPurchased } from "@/actions/user/add-product-to-purchased";
 import { PaymentButton } from "@/components/payment/payment-button";
 import { Thumbnail } from "@/components/product/thumbnail";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { GradientButton } from "@/components/utils/gradient-button";
+
 import { QuestionAlert } from "@/components/utils/question-alert";
-import { WrappedButton } from "@/components/utils/wrapped-button";
 import { getProductById } from "@/data/product";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
@@ -271,34 +271,32 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
               </div>
             </div>
             <div className="flex flex-col gap-y-4">
-              <Button
+              <GradientButton
                 disabled={isPending}
                 asChild
-                variant="outline"
                 className="border-green-700 gap-x-2"
               >
                 <Link href={`/creator/${product?.ownerId}`}>
                   <FaRegUser className="text-green-700" />
                   {`Go to Creator's Profile`}
                 </Link>
-              </Button>
+              </GradientButton>
               <QuestionAlert
                 title="Confirmation"
                 message="Are you sure to move this product to your cart?"
                 onContinue={onConfirmCart}
                 onCancel={() => {}}
               >
-                <Button
+                <GradientButton
                   disabled={isPending}
-                  variant="outline"
                   className="w-full border-green-700 gap-x-2"
                 >
                   <FaCartArrowDown className="text-green-700" />
                   Add to cart
-                </Button>
+                </GradientButton>
               </QuestionAlert>
               <PaymentButton disabled={isPending} mode="modal">
-                <WrappedButton
+                <GradientButton
                   onClick={() => {
                     setOrderList(product ? [product] : []);
                   }}
@@ -307,9 +305,9 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
                 >
                   <AiFillCreditCard />
                   Purchase
-                </WrappedButton>
+                </GradientButton>
               </PaymentButton>
-              <Button
+              <GradientButton
                 disabled={isPending}
                 onClick={onDownloadCreativeFiles}
                 variant="outline"
@@ -317,7 +315,7 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
               >
                 <FaDownload className="text-green-700" />
                 Download
-              </Button>
+              </GradientButton>
             </div>
           </div>
         </div>
