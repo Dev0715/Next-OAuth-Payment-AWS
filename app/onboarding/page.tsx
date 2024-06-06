@@ -80,6 +80,18 @@ const OnboardingPage = () => {
     return userData.selectedAccounts.affiliate && step === _step;
   };
 
+  const isTaxStep = () => {
+    let _step = 1;
+    if (userData.selectedAccounts.creator) {
+      _step += 4;
+    }
+    if (userData.selectedAccounts.affiliate) {
+      _step += 1;
+    }
+
+    return step === _step;
+  };
+
   const isRegisterCompleteStep = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
