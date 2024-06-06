@@ -32,10 +32,16 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 type Props = {
   data: SignedUpData["creatorDetails"];
   onUpdate: (data: Partial<SignedUpData>) => void;
+  onNext: () => void;
   onBack: () => void;
 };
 
-export const CreatorDetailsForm = ({ data, onUpdate, onBack }: Props) => {
+export const CreatorDetailsForm = ({
+  data,
+  onUpdate,
+  onNext,
+  onBack
+}: Props) => {
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
     resolver: zodResolver(CreatorDetailsSchema),
     defaultValues: data
@@ -48,6 +54,7 @@ export const CreatorDetailsForm = ({ data, onUpdate, onBack }: Props) => {
         // cover
       }
     });
+    onNext();
   };
 
   const handleBackClicked = () => {

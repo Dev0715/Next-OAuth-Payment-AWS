@@ -27,9 +27,10 @@ type SelectedAccounts = SignedUpData["selectedAccounts"];
 type Props = {
   data: SelectedAccounts;
   onUpdate: (data: Partial<SignedUpData>) => void;
+  onNext: () => void;
 };
 
-export function SelectAccountsForm({ data, onUpdate }: Props) {
+export function SelectAccountsForm({ data, onUpdate, onNext }: Props) {
   const [isErr, setErr] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof SelectAccountsSchema>>({
@@ -42,6 +43,7 @@ export function SelectAccountsForm({ data, onUpdate }: Props) {
       setErr(true);
     } else {
       onUpdate({ selectedAccounts: values });
+      onNext();
     }
   };
 

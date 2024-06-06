@@ -65,16 +65,19 @@ const OnboardingPage = () => {
       _step += 2;
     }
 
-    return step === _step;
+    return (
+      step === _step &&
+      (userData.selectedAccounts.creator || userData.selectedAccounts.affiliate)
+    );
   };
 
   const isW9Step = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
-      _step += 4;
+      _step += 3;
     }
     if (userData.selectedAccounts.affiliate) {
-      _step += 2;
+      _step += 1;
     }
 
     return step === _step && userData.usPerson === "us";
@@ -83,10 +86,10 @@ const OnboardingPage = () => {
   const isCompleteStep = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
-      _step += 5;
+      _step += 4;
     }
     if (userData.selectedAccounts.affiliate) {
-      _step += 1;
+      _step += 2;
     }
     return step === _step;
   };
@@ -101,7 +104,6 @@ const OnboardingPage = () => {
 
   const handleUpdateUserData = (data: Partial<SignedUpData>) => {
     setUserData((prev) => ({ ...prev, ...data }));
-    handleNext();
   };
 
   return (
@@ -113,12 +115,14 @@ const OnboardingPage = () => {
         <SelectAccountsForm
           data={userData.selectedAccounts}
           onUpdate={handleUpdateUserData}
+          onNext={handleNext}
         />
       </TransitionInOut>
       <TransitionInOut title="Your KRE8TOR details" condition={isCreatorStep}>
         <CreatorDetailsForm
           data={userData.creatorDetails}
           onUpdate={handleUpdateUserData}
+          onNext={handleNext}
           onBack={handleBack}
         />
       </TransitionInOut>
@@ -134,7 +138,11 @@ const OnboardingPage = () => {
         />
       </TransitionInOut>
       <TransitionInOut title="Your tax information" condition={isTaxStep()}>
-        <TaxForm onUpdate={handleUpdateUserData} onBack={handleBack} />
+        <TaxForm
+          onUpdate={handleUpdateUserData}
+          onNext={handleNext}
+          onBack={handleBack}
+        />
       </TransitionInOut>
       <TransitionInOut title="Your tax information" condition={isW9Step()}>
         <W9Form onBack={handleBack} onNext={handleNext} />
