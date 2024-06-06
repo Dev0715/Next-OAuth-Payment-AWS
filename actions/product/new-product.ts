@@ -6,7 +6,7 @@ import { addNewProduct } from "../user/new-product";
 
 export const newProduct = async (product: Product) => {
   const res_create = await createProduct(product);
-  if (!res_create.success) {
+  if (res_create.error) {
     return { error: "Failed to create product" };
   }
 

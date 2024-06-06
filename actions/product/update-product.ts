@@ -10,7 +10,7 @@ export const updateProduct = async (product: Product) => {
   }
 
   const res_create = await createProduct(product);
-  if (!res_create.success) {
+  if (res_create.error) {
     return { error: "Failed to update product" };
   }
 

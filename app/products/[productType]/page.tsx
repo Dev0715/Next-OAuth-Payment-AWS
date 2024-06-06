@@ -30,9 +30,9 @@ export default function Products({ params }: ParamsType) {
 
   useEffect(() => {
     getProductsCountByType(params.productType).then((res) => {
-      if (res.cnt) {
-        setProductCnt(res.cnt);
-        setStepCnt(Math.ceil(res.cnt / cntPerPage));
+      if (res.success) {
+        setProductCnt(res.cnt as number);
+        setStepCnt(Math.ceil((res.cnt as number) / cntPerPage));
         setSelectedIndex(1);
       }
     });

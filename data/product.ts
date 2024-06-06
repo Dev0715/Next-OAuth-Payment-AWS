@@ -93,13 +93,11 @@ export const getSubmittedProducts = async (
 
   try {
     const response = await db.send(command);
-    console.log(response);
     return {
       items: response.Items as Product[],
       lastEvaluatedKey: response.LastEvaluatedKey
     };
   } catch (error) {
-    console.log("Error", error);
     return {
       items: []
     };
@@ -136,13 +134,11 @@ export const getProductsByState = async (
 
   try {
     const response = await db.send(command);
-    console.log(response);
     return {
       items: response.Items as Product[],
       lastEvaluatedKey: response.LastEvaluatedKey
     };
   } catch (error) {
-    console.error("Error", error);
     return {
       items: []
     };
@@ -197,6 +193,7 @@ export const getProductsCountByType = async (productType: string) => {
   try {
     const response = await db.send(command);
     return {
+      success: true,
       cnt: response.Count
     };
   } catch (error) {
@@ -236,9 +233,13 @@ export const createProduct = async (data: Product) => {
     });
 
     await db.send(command);
-    return { success: true };
+    return {
+      success: true
+    };
   } catch (error) {
-    return { success: false };
+    return {
+      error: true
+    };
   }
 };
 
