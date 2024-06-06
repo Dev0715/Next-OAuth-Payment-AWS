@@ -62,3 +62,40 @@ export const CreatorDetailsSchema = z.object({
 export const TaxInfoSchema = z.object({
   usPerson: z.boolean()
 });
+
+export const w9DetailSchema = z.object({
+  firstName: z
+    .string()
+    .min(1, "First name is required")
+    .max(72, "First name must be a maximum of 72 characters"),
+  lastName: z.string().optional(),
+  businessName: z
+    .string()
+    .min(1, "First name is required")
+    .max(72, "First name must be a maximum of 72 characters")
+    .optional(),
+  taxClassification: z.string().min(1, "Tax Classification is required"),
+  country: z
+    .string()
+    .min(1, "Country is required")
+    .max(72, "Country must be a maximum of 72 characters"),
+  address: z
+    .string()
+    .min(1, "Address is required")
+    .max(72, "Address must be a maximum of 72 characters"),
+  city: z
+    .string()
+    .min(1, "City is required")
+    .max(72, "City must be a maximum of 72 characters"),
+  state: z
+    .string()
+    .min(1, "State is required")
+    .max(72, "State must be a maximum of 72 characters"),
+  zip: z
+    .string()
+    .min(1, "State is required")
+    .max(72, "State must be a maximum of 72 characters"),
+  accountNumbers: z.string().optional(),
+  taxIdType: z.string().min(1, "Tax ID Type is required"),
+  taxIdNumber: z.string().min(1, "Tax ID Number is required")
+});

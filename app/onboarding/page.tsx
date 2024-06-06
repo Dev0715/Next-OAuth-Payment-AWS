@@ -49,6 +49,20 @@ const OnboardingPage = () => {
     },
     taxInformation: {
       usPerson: false
+    },
+    w9Detail: {
+      firstName: "",
+      lastName: "",
+      businessName: "",
+      taxClassification: "",
+      country: "",
+      address: "",
+      city: "",
+      state: "",
+      zip: "",
+      accountNumbers: "",
+      taxIdType: "",
+      taxIdNumber: ""
     }
   });
 
@@ -145,7 +159,7 @@ const OnboardingPage = () => {
         />
       </TransitionInOut>
       <TransitionInOut title="Your tax information" condition={isW9Step()}>
-        <W9Form onBack={handleBack} onNext={handleNext} />
+        <W9Form onBack={handleBack} onUpdate={handleUpdateUserData} />
       </TransitionInOut>
       <TransitionInOut title="Congratulations!" condition={isCompleteStep()}>
         <RegisterCompleteForm />
