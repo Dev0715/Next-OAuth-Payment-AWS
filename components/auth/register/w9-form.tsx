@@ -19,8 +19,7 @@ export const W9Form = ({ onNext, onBack }: Props) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-y-6">
-      <p className="text-xl text-green-700">Tax Information.</p>
+    <div className="w-full">
       <p className="t-body -size-m">
         We can only accept letters, numbers and special characters &amp; - , / #
         ( ) . Please use the English equivalent of accented characters, eg. a

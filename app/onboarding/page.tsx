@@ -74,7 +74,7 @@ const OnboardingPage = () => {
   const isCompleteStep = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
-      _step += 3;
+      _step += 5;
     }
     if (userData.selectedAccounts.affiliate) {
       _step += 1;
