@@ -33,7 +33,7 @@ export const TaxForm = ({ onUpdate, onNext, onBack }: Props) => {
 
   return (
     <div className="w-full flex flex-col gap-y-6">
-      <p className="text-xl text-green-700">4. Tax Information.</p>
+      <p className="text-xl text-green-700">Tax Information.</p>
       <div>
         <p className="t-body -size-m">
           US federal tax law requires Envato to collect US Author tax
@@ -151,7 +151,11 @@ export const TaxForm = ({ onUpdate, onNext, onBack }: Props) => {
           <FaArrowLeft />
           Back
         </GradientButton>
-        <GradientButton onClick={onNextClicked} className="flex gap-x-4">
+        <GradientButton
+          onClick={onNextClicked}
+          disabled={usPerson === ""}
+          className="flex gap-x-4"
+        >
           <FaArrowRight />
           Next
         </GradientButton>

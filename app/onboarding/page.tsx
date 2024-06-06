@@ -115,7 +115,7 @@ const OnboardingPage = () => {
         />
       </TransitionInOut>
       <TransitionInOut
-        title="Please confirm your accounts on other creative markets"
+        title="Please confirm you tax information"
         condition={isTaxStep()}
       >
         <TaxForm
