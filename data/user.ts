@@ -402,9 +402,14 @@ export const updateUserCart = async ({
 
   try {
     const response = await db.send(command);
-    return response.Attributes;
+    return {
+      success: true,
+      updatedUser: response.Attributes
+    };
   } catch (error) {
-    return null;
+    return {
+      error: true
+    };
   }
 };
 

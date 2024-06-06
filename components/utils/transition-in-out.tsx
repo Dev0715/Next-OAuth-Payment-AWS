@@ -3,7 +3,7 @@ import { Transition } from "@headlessui/react";
 import { GradientParagraph } from "./gradient-paragraph";
 
 type Props = {
-  title: React.ReactNode;
+  title?: React.ReactNode;
   children: React.ReactNode;
   condition: boolean;
 };

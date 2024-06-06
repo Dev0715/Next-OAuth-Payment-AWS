@@ -44,7 +44,7 @@ export const addProductToCart = async ({ userId, product }: ParamsType) => {
     newCart: [...cart, product]
   });
 
-  if (response) {
+  if (response.success) {
     return { success: "New product was added to your cart successfully" };
   } else {
     return { error: "Internal server error" };
