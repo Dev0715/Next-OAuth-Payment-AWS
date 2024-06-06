@@ -32,88 +32,60 @@ export const TaxForm = ({ onUpdate, onBack }: Props) => {
   return (
     <div className="w-full space-y-6">
       <div>
-        <p className="t-body -size-m">
-          US federal tax law requires Envato to collect US Author tax
+        <p className="mb-4">
+          US federal tax law requires Kre8tive to collect US Author tax
           information through an IRS Form W-9 and report on income paid.
-          <br />
-          <br />
         </p>
 
         <strong>If you are a U.S. Person</strong>
-        <p className="t-body -size-m">
-          No matter where you are worldwide you can submit a Form W-9 to Envato
-          to satisfy your filing requirement. Typically there will be no
-          withholding of taxes on any of your Envato income. If you do not
-          submit a valid Form W-9, Envato will be required to deduct 24%
+        <p className="mb-4">
+          No matter where you are worldwide you can submit a Form W-9 to
+          Kre8tive to satisfy your filing requirement. Typically there will be
+          no withholding of taxes on any of your Kre8tive income. If you do not
+          submit a valid Form W-9, Kre8tive will be required to deduct 24%
           withholding tax from sales proceeds and remit these directly to the
           Internal Revenue Service. If you have any questions, please check our
-          help center for{" "}
-          <a
-            target="_blank"
-            href="https://help.author.envato.com/hc/en-us/articles/360000471263"
-          >
-            W-9 articles
-          </a>
-          .
-          <br />
-          <br />
+          W-9 articles.
         </p>
 
         <strong>If you are not a U.S. Person</strong>
-        <p className="t-body -size-m">
+        <p className="mb-4">
           You will need to submit a Form W-8. If you are a resident of a country
           that has a tax treaty with the U.S., you will benefit from the reduced
           or zero withholding rate that is specified in your country`s tax
           treaty. If you are a resident of a country that does not have a tax
-          treaty with the U.S., then your U.S. source income from Envato will be
-          subject to a 30% withholding tax. If you have any questions, please
-          check our help center for{" "}
-          <a
-            target="_blank"
-            href="https://help.author.envato.com/hc/en-us/articles/360000471243"
-          >
-            W-8 articles
-          </a>
-          .
+          treaty with the U.S., then your U.S. source income from Kre8tive will
+          be subject to a 30% withholding tax. If you have any questions, please
+          check our W-8 articles.
         </p>
 
-        <p className="t-body -size-m">
-          While Envato cannot give tax and/or legal advice, we will do our best
-          to provide you with the information you need to make your own decision
-          about how to comply with applicable U.S. tax laws. If you still have
-          questions after reviewing the information provided by the IRS, please
-          contact your legal and/or tax advisor.
+        <p className="">
+          While Kre8tive cannot give tax and/or legal advice, we will do our
+          best to provide you with the information you need to make your own
+          decision about how to comply with applicable U.S. tax laws. If you
+          still have questions after reviewing the information provided by the
+          IRS, please contact your legal and/or tax advisor.
         </p>
 
-        <p className="t-body -size-m">
+        <p className="">
           Please indicate whether you are a US Person and we will direct you to
-          the correct Forms.{" "}
-          <span
-            data-view="tooltipAlpha"
-            data-sticky="true"
-            className="tooltip-alpha -size-s"
-          >
-            <span className="e-icon -icon-question-mark -size-small">
-              <span className="e-icon__alt">More information</span>
-            </span>
-            <span className="js-tooltip-alpha__body tooltip-alpha__body">
-              <span className="js-tooltip-alpha__triangle tooltip-alpha__triangle"></span>
-              - An individual who is a US citizen or US resident alien, or who
-              satisfies the substantial presence test.
-              <br />
-              <br />
-              - A partnership, corporation, company, or association created or
-              organized in the United States or under the laws of the United
-              States.
-              <br />
-              <br />
-              - An estate (other than a foreign estate), or
-              <br />
-              <br />- A domestic trust (as defined in US tax regulations).
-            </span>
-          </span>
+          the correct Forms.
         </p>
+        <ul className="mt-4 ml-4 list-disc">
+          <li>
+            An individual who is a US citizen or US resident alien, or who
+            satisfies the substantial presence test.
+          </li>
+          <li>
+            A partnership, corporation, company, or association created or
+            organized in the United States or under the laws of the United
+            States.
+          </li>
+          <li>An estate (other than a foreign estate), or</li>
+          <li>A domestic trust (as defined in US tax regulations).</li>
+        </ul>
       </div>
+
       <RadioGroup
         defaultValue={usPerson}
         onValueChange={setUsPerson}
