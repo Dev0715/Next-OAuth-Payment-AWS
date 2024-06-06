@@ -97,21 +97,12 @@ export default function CreatorProfile({ params: { userId } }: PropsParams) {
         <GradientParagraph className="text-xl font-bold text-rose-700">
           ★ ★ ★ ★ ★
         </GradientParagraph>
-        <p className="text-lg font-semibold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</p>
+        <GradientParagraph className="text-lg font-bold">{`${userData?.firstname || ""} ${userData?.lastname || ""}`}</GradientParagraph>
         <div className="flex gap-x-6">
-          <GradientButton
-            variant="default"
-            className="w-24 rounded-none"
-            onClick={onFollow}
-          >
+          <GradientButton variant="default" className="w-24" onClick={onFollow}>
             Follow
           </GradientButton>
-          <GradientButton
-            variant="outline"
-            className="w-24 border-green-700 rounded-none"
-          >
-            Message
-          </GradientButton>
+          <GradientButton className="w-24">Message</GradientButton>
         </div>
       </div>
       <div className="w-full flex flex-col items-center pt-6">
