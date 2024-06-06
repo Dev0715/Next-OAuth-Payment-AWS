@@ -22,7 +22,7 @@ export const addProductToPurchased = async ({ userId, products }: Params) => {
     newPurchasedProducts: [...purchasedProducts, ...products]
   });
 
-  if (response) {
+  if (response.success) {
     return { success: "New product was added to your cart successfully" };
   } else {
     return { error: "Internal server error" };

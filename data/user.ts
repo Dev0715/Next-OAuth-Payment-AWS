@@ -313,11 +313,14 @@ export const updateUserPurchased = async ({
 
   try {
     const response = await db.send(command);
-    console.log("__updateUserPurchased__UpdateCommand__RESPONSE", response);
-    return response.Attributes;
+    return {
+      success: true,
+      updatedUser: response.Attributes
+    };
   } catch (error) {
-    console.log("__updateUserPurchased__UpdateCommand__ERROR", error);
-    return null;
+    return {
+      error: true
+    };
   }
 };
 
