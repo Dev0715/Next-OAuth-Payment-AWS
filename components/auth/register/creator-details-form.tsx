@@ -31,15 +31,10 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   handleUpdate: (data: Partial<SignedUpData>) => void;
-  handleNext: () => void;
   handleBack: () => void;
 };
 
-export const CreatorDetailsForm = ({
-  handleUpdate,
-  handleNext,
-  handleBack
-}: Props) => {
+export const CreatorDetailsForm = ({ handleUpdate, handleBack }: Props) => {
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
     resolver: zodResolver(CreatorDetailsSchema),
     defaultValues: {
