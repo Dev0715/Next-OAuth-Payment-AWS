@@ -9,6 +9,8 @@ import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 
 import { STATE_DISPLAY_TEXT } from "@/shared/constants/product.constant";
 
+import { GradientParagraph } from "../utils/gradient-paragraph";
+
 import type { Product, ProductState } from "@/shared/types/product.type";
 
 const ClassName_Text: Record<ProductState, string> = {
@@ -73,8 +75,12 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
           </Avatar>
           <div className="flex flex-col px-4 pb-4 font-firs">
             <div className="flex items-center justify-between font-medium">
-              <p className="truncate">{product.title}</p>
-              <p className="text-base text-black">${product.price}</p>
+              <GradientParagraph className="truncate">
+                {product.title}
+              </GradientParagraph>
+              <GradientParagraph className="text-base text-black">
+                ${product.price}
+              </GradientParagraph>
             </div>
             <p className="text-base text-gray-700 truncate drop-shadow-md">
               {product.description}
