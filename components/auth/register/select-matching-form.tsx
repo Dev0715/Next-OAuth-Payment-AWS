@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
@@ -15,35 +15,35 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   userData: SignedUpData;
-  setUserData: Dispatch<SetStateAction<SignedUpData>>;
-  handleNext: () => void;
-  handleBack: () => void;
+  onUpdate: (data: Partial<SignedUpData>) => void;
+  onNext: () => void;
+  onBack: () => void;
 };
 
 export const SelectMatchingForm = ({
   userData,
-  setUserData,
-  handleNext,
-  handleBack
+  onUpdate,
+  onNext,
+  onBack
 }: Props) => {
-  const [matchings, setMatchings] = useState<SignedUpData["creatorMatchings"]>({
-    ...userData.creatorMatchings
-  });
+  const [matchings, setMatchings] = useState<SignedUpData["creatorMatchings"]>(
+    userData.creatorMatchings
+  );
 
   const onContinueClicked = () => {
-    setUserData({ ...userData, creatorMatchings: matchings });
-    handleNext();
+    onUpdate({ creatorMatchings: matchings });
+    onNext();
   };
 
   const onBackClicked = () => {
-    setUserData({ ...userData, creatorMatchings: matchings });
-    handleBack();
+    onUpdate({ creatorMatchings: matchings });
+    onBack();
   };
 
   return (
     <div className="w-full flex flex-col gap-y-6">
       <p className="text-xl text-green-700">
-        3. Please confirm your accounts on other creative markets.
+        Please confirm your accounts on other creative markets.
       </p>
       <Evanto
         value={matchings.env}

@@ -133,9 +133,9 @@ const OnboardingPage = () => {
       <TransitionInOut condition={isMatchingStep()}>
         <SelectMatchingForm
           userData={userData}
-          setUserData={setUserData}
-          handleNext={handleNext}
-          handleBack={handleBack}
+          onUpdate={handleUpdateUserData}
+          onNext={handleNext}
+          onBack={handleBack}
         />
       </TransitionInOut>
       <TransitionInOut condition={isCreatorCompleteStep()}>

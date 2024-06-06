@@ -119,7 +119,7 @@ export const CreatorCompleteForm = ({
         onOK={onConfirmed}
       />
       <p className="text-xl text-green-700">
-        4. Complete registration for a creator.
+        Complete registration for a creator.
       </p>
       <div className="flex flex-col">
         <p>Congratulations!</p>
