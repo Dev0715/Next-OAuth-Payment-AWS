@@ -22,20 +22,19 @@ import { SelectAccountsSchema } from "@/schemas/auth/register";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
+type SelectedAccounts = SignedUpData["selectedAccounts"];
+
 type Props = {
+  data: SelectedAccounts;
   onUpdate: (data: Partial<SignedUpData>) => void;
 };
 
-export function SelectAccountsForm({ onUpdate }: Props) {
+export function SelectAccountsForm({ data, onUpdate }: Props) {
   const [isErr, setErr] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof SelectAccountsSchema>>({
     resolver: zodResolver(SelectAccountsSchema),
-    defaultValues: {
-      creator: false,
-      user: false,
-      affiliate: false
-    }
+    defaultValues: data
   });
 
   const onSubmit = (values: z.infer<typeof SelectAccountsSchema>) => {

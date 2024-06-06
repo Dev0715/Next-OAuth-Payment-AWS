@@ -89,7 +89,10 @@ const OnboardingPage = () => {
   return (
     <div className="mt-16 w-[640px]">
       <TransitionInOut condition={step === 0}>
-        <SelectAccountsForm onUpdate={handleUpdateUserData} />
+        <SelectAccountsForm
+          data={userData.selectedAccounts}
+          onUpdate={handleUpdateUserData}
+        />
       </TransitionInOut>
       <TransitionInOut condition={isCreatorStep()}>
         <CreatorDetailsForm
