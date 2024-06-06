@@ -14,21 +14,20 @@ import { Evanto } from "./matching-sites/evanto";
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
-  userData: SignedUpData;
+  data: SignedUpData["creatorMatchings"];
   onUpdate: (data: Partial<SignedUpData>) => void;
   onNext: () => void;
   onBack: () => void;
 };
 
 export const SelectMatchingForm = ({
-  userData,
+  data,
   onUpdate,
   onNext,
   onBack
 }: Props) => {
-  const [matchings, setMatchings] = useState<SignedUpData["creatorMatchings"]>(
-    userData.creatorMatchings
-  );
+  const [matchings, setMatchings] =
+    useState<SignedUpData["creatorMatchings"]>(data);
 
   const onContinueClicked = () => {
     onUpdate({ creatorMatchings: matchings });
