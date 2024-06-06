@@ -104,7 +104,7 @@ const OnboardingPage = () => {
         />
       </TransitionInOut>
       <TransitionInOut
-        title="Please confirm your accounts on other creative markets"
+        title="Please confirm your accounts on other markets"
         condition={isMatchingStep()}
       >
         <SelectMatchingForm
