@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-import { Button } from "@/components/ui/button";
+import { GradientButton } from "@/components/utils/gradient-button";
 
 import { ArtStation } from "./matching-sites/artstation";
 import { Behance } from "./matching-sites/behance";
@@ -62,18 +62,14 @@ export const SelectMatchingForm = ({
         setValue={(value) => setMatchings({ ...matchings, cmk: value })}
       />
       <div className="w-full flex items-center justify-between mt-4">
-        <Button
-          variant="outline"
-          className="flex gap-x-4 border-red-700"
-          onClick={onBackClicked}
-        >
+        <GradientButton variant="destructive" onClick={onBackClicked}>
           <FaArrowLeft />
           Back
-        </Button>
-        <Button className="flex gap-x-4" onClick={onContinueClicked}>
+        </GradientButton>
+        <GradientButton className="flex gap-x-4" onClick={onContinueClicked}>
           <FaArrowRight />
           Next
-        </Button>
+        </GradientButton>
       </div>
     </div>
   );
