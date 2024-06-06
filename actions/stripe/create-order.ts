@@ -58,7 +58,6 @@ export const createOrder = async (params: OrderType) => {
     };
   } catch (error) {
     return {
-      success: false,
       error
     };
   }

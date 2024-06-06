@@ -24,7 +24,7 @@ export const getLinkFromS3Server = async (
     };
   } catch (error) {
     return {
-      error: false
+      error: true
     };
   }
 };

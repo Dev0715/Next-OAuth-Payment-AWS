@@ -28,7 +28,6 @@ export const uploadFileToS3 = async (
       response
     };
   } catch (error) {
-    console.error(error);
     return {
       error
     };
