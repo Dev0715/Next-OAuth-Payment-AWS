@@ -40,10 +40,7 @@ export const SelectMatchingForm = ({
   };
 
   return (
-    <div className="w-full flex flex-col gap-y-6">
-      <p className="text-xl text-green-700">
-        Please confirm your accounts on other creative markets.
-      </p>
+    <div className="w-full space-y-6">
       <Evanto
         value={matchings.env}
         setValue={(value) => setMatchings({ ...matchings, env: value })}
@@ -66,14 +63,14 @@ export const SelectMatchingForm = ({
       />
       <div className="w-full flex items-center justify-between mt-4">
         <Button
-          variant={"outline"}
-          className="w-64 flex gap-x-4 border-red-700"
+          variant="outline"
+          className="flex gap-x-4 border-red-700"
           onClick={onBackClicked}
         >
           <FaArrowLeft />
           Back
         </Button>
-        <Button className="w-64 flex gap-x-4" onClick={onContinueClicked}>
+        <Button className="flex gap-x-4" onClick={onContinueClicked}>
           <FaArrowRight />
           Next
         </Button>

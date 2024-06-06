@@ -59,9 +59,6 @@ export const CreatorDetailsForm = ({ data, onUpdate, onBack }: Props) => {
 
   return (
     <div className="w-full">
-      <p className="mb-6 text-xl text-green-700">
-        Please provide your KRE8TOR details.
-      </p>
       <Form {...form}>
         <form
           className="w-full grid grid-cols-2 gap-6"

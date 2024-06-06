@@ -3,11 +3,12 @@ import { Transition } from "@headlessui/react";
 import { GradientParagraph } from "./gradient-paragraph";
 
 type Props = {
+  title: React.ReactNode;
   children: React.ReactNode;
   condition: boolean;
 };
 
-export const TransitionInOut = ({ children, condition }: Props) => {
+export const TransitionInOut = ({ title, children, condition }: Props) => {
   return (
     <Transition
       show={condition}
@@ -18,7 +19,9 @@ export const TransitionInOut = ({ children, condition }: Props) => {
       leaveFrom="opacity-100 scale-100"
       leaveTo="opacity-0 scale-95"
     >
-      <GradientParagraph className="mb-12 font-firs font-semibold text-3xl text-center">{`Let's get you started`}</GradientParagraph>
+      <GradientParagraph className="mb-12 font-firs font-semibold text-3xl text-center">
+        {title}
+      </GradientParagraph>
       {children}
     </Transition>
   );

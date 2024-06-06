@@ -82,20 +82,29 @@ const OnboardingPage = () => {
 
   return (
     <div className="mt-16 w-[640px]">
-      <TransitionInOut condition={step === 0}>
+      <TransitionInOut
+        title="Please select accounts you want to create"
+        condition={step === 0}
+      >
         <SelectAccountsForm
           data={userData.selectedAccounts}
           onUpdate={handleUpdateUserData}
         />
       </TransitionInOut>
-      <TransitionInOut condition={isCreatorStep()}>
+      <TransitionInOut
+        title="Please provide your KRE8TOR details"
+        condition={isCreatorStep()}
+      >
         <CreatorDetailsForm
           data={userData.creatorDetails}
           onUpdate={handleUpdateUserData}
           onBack={handleBack}
         />
       </TransitionInOut>
-      <TransitionInOut condition={isMatchingStep()}>
+      <TransitionInOut
+        title="Please confirm your accounts on other creative markets"
+        condition={isMatchingStep()}
+      >
         <SelectMatchingForm
           data={userData.creatorMatchings}
           onUpdate={handleUpdateUserData}
@@ -103,7 +112,10 @@ const OnboardingPage = () => {
           onBack={handleBack}
         />
       </TransitionInOut>
-      <TransitionInOut condition={isRegisterCompleteStep()}>
+      <TransitionInOut
+        title="Congratulations!"
+        condition={isRegisterCompleteStep()}
+      >
         <RegisterCompleteForm />
       </TransitionInOut>
     </div>
