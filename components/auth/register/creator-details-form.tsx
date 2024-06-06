@@ -30,24 +30,19 @@ import { JOB_TITLES } from "@/shared/constants/user.constant";
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
-  handleUpdate: (data: Partial<SignedUpData>) => void;
-  handleBack: () => void;
+  data: SignedUpData["creatorDetails"];
+  onUpdate: (data: Partial<SignedUpData>) => void;
+  onBack: () => void;
 };
 
-export const CreatorDetailsForm = ({ handleUpdate, handleBack }: Props) => {
+export const CreatorDetailsForm = ({ data, onUpdate, onBack }: Props) => {
   const form = useForm<z.infer<typeof CreatorDetailsSchema>>({
     resolver: zodResolver(CreatorDetailsSchema),
-    defaultValues: {
-      bio: "",
-      jobTitle: "",
-      companyName: "",
-      companyCountry: "",
-      companyWebsite: ""
-    }
+    defaultValues: data
   });
 
   const onSubmit = (values: z.infer<typeof CreatorDetailsSchema>) => {
-    handleUpdate({
+    onUpdate({
       creatorDetails: {
         ...values
         // cover
@@ -56,16 +51,16 @@ export const CreatorDetailsForm = ({ handleUpdate, handleBack }: Props) => {
   };
 
   const handleBackClicked = () => {
-    handleUpdate({
+    onUpdate({
       creatorDetails: form.getValues()
     });
-    handleBack();
+    onBack();
   };
 
   return (
-    <div className="w-full flex flex-col gap-y-6">
-      <p className="text-xl text-green-700">
-        2. Please provide your KRE8TOR details.
+    <div className="w-full">
+      <p className="mb-6 text-xl text-green-700">
+        Please provide your KRE8TOR details.
       </p>
       <Form {...form}>
         <form
