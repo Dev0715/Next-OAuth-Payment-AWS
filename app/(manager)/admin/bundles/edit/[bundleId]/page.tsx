@@ -77,7 +77,7 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
           productId: product.productId
         }))
       } as Bundle).then((res) => {
-        if (res) {
+        if (res.success) {
           history.push("/admin/bundles");
         } else {
           setServerError(true);

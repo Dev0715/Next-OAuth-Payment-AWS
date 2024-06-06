@@ -77,13 +77,11 @@ export const getAllBundlesByState = async (
 
   try {
     const response = await db.send(command);
-    console.log(response);
     return {
       items: response.Items as Bundle[],
       lastEvaluatedKey: response.LastEvaluatedKey
     };
   } catch (error) {
-    console.error(error);
     return {
       items: []
     };
@@ -116,7 +114,7 @@ export const createBundle = async (data: Bundle) => {
     await db.send(command);
     return { success: true };
   } catch (error) {
-    return { success: false, error };
+    return { error: true };
   }
 };
 
@@ -132,7 +130,7 @@ export const deleteBundle = async (bundleId: string) => {
     await db.send(command);
     return { success: true };
   } catch (error) {
-    return null;
+    return { error: true };
   }
 };
 
@@ -156,9 +154,13 @@ export const updateBundle = async (bundle: Bundle) => {
 
   try {
     const response = await db.send(command);
-    return response.Attributes;
+    return {
+      success: true,
+      updatedBundle: response.Attributes
+    };
   } catch (error) {
-    console.error(error);
-    return null;
+    return {
+      error: true
+    };
   }
 };

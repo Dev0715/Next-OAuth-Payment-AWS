@@ -59,7 +59,7 @@ const ManagementBundles = () => {
   const onDeleteBundle = (bundleId: string) => {
     startTransition(() => {
       deleteBundle(bundleId).then((res) => {
-        if (res?.success) {
+        if (res.success) {
           setBundles(bundles.filter((bundle) => bundle.bundleId !== bundleId));
         } else {
           toast({ title: "Failed to delete bundle.", variant: "destructive" });
