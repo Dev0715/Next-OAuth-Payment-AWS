@@ -21,6 +21,12 @@ import type {
   ProductState
 } from "@/shared/types/product.type";
 
+type ProductUpdateState = {
+  productType: string;
+  productId: string;
+  approval: { state: ProductState; history: ProductEvent[] };
+};
+
 export const getAllProducts = async (
   limit?: number,
   exclusiveStartKey?: ProductLink
@@ -243,17 +249,11 @@ export const createProduct = async (data: Product) => {
   }
 };
 
-type ParamsType = {
-  productType: string;
-  productId: string;
-  approval: { state: ProductState; history: ProductEvent[] };
-};
-
 export const updateProductState = async ({
   productType,
   productId,
   approval
-}: ParamsType) => {
+}: ProductUpdateState) => {
   const command = new UpdateCommand({
     TableName: AWS_DYNAMO_TABLES.PRODUCT,
     Key: { productType, productId },
@@ -291,7 +291,8 @@ export const deleteProduct = async (product: Product) => {
       success: true
     };
   } catch (error) {
-    console.error(error);
-    return { error: true };
+    return {
+      error: true
+    };
   }
 };
