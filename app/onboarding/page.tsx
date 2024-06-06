@@ -28,7 +28,6 @@ const OnboardingPage = () => {
   const [userData, setUserData] = useState<
     Omit<SignedUpData, "generalDetails">
   >({
-    usPerson: "",
     selectedAccounts: {
       creator: false,
       user: false,
@@ -47,6 +46,9 @@ const OnboardingPage = () => {
       art: false,
       drb: false,
       cmk: false
+    },
+    taxInformation: {
+      usPerson: false
     }
   });
 
@@ -80,7 +82,7 @@ const OnboardingPage = () => {
       _step += 1;
     }
 
-    return step === _step && userData.usPerson === "us";
+    return step === _step && userData.taxInformation.usPerson;
   };
 
   const isCompleteStep = () => {

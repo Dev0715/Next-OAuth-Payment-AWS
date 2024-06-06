@@ -3,7 +3,8 @@ import { z } from "zod";
 import {
   CreatorDetailsSchema,
   GeneralDetailsSchema,
-  SelectAccountsSchema
+  SelectAccountsSchema,
+  TaxInfoSchema
 } from "@/schemas/auth/register";
 
 export type SignedUpData = {
@@ -17,5 +18,5 @@ export type SignedUpData = {
     drb: boolean;
     cmk: boolean;
   };
-  usPerson: string;
+  taxInformation: z.infer<typeof TaxInfoSchema>;
 };

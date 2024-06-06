@@ -20,7 +20,7 @@ export const TaxForm = ({ onUpdate, onNext, onBack }: Props) => {
 
   const onNextClicked = () => {
     onUpdate({
-      usPerson: usPerson
+      taxInformation: { usPerson: usPerson === "true" }
     });
     onNext();
   };
@@ -87,13 +87,13 @@ export const TaxForm = ({ onUpdate, onNext, onBack }: Props) => {
 
       <RadioGroup defaultValue={usPerson} onValueChange={setUsPerson}>
         <div className="flex items-center gap-x-4 cursor-pointer">
-          <RadioGroupItem value="us" id="us" />
+          <RadioGroupItem value="true" id="us" />
           <Label htmlFor="us" className="cursor-pointer">
             I am a US person
           </Label>
         </div>
         <div className="flex items-center gap-x-4 cursor-pointer">
-          <RadioGroupItem value="notUs" id="notUs" />
+          <RadioGroupItem value="false" id="notUs" />
           <Label htmlFor="notUs" className="cursor-pointer">
             I am not a US person
           </Label>

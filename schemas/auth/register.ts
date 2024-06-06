@@ -58,3 +58,7 @@ export const CreatorDetailsSchema = z.object({
   // website4: z.string().optional(),
   // website5: z.string().optional()
 });
+
+export const TaxInfoSchema = z.object({
+  usPerson: z.boolean()
+});
