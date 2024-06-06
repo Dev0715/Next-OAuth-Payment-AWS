@@ -7,6 +7,7 @@ import { RegisterCompleteForm } from "@/components/auth/register/register-comple
 import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
 import { SelectMatchingForm } from "@/components/auth/register/select-matching-form";
 import { TaxForm } from "@/components/auth/register/tax-form";
+import { W9Form } from "@/components/auth/register/w9-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
@@ -56,6 +57,18 @@ const OnboardingPage = () => {
     }
 
     return step === _step;
+  };
+
+  const isW9Step = () => {
+    let _step = 1;
+    if (userData.selectedAccounts.creator) {
+      _step += 4;
+    }
+    if (userData.selectedAccounts.affiliate) {
+      _step += 2;
+    }
+
+    return step === _step && userData.usPerson === "us";
   };
 
   const isCompleteStep = () => {
@@ -113,6 +126,9 @@ const OnboardingPage = () => {
       </TransitionInOut>
       <TransitionInOut title="Your tax information" condition={isTaxStep()}>
         <TaxForm onUpdate={handleUpdateUserData} onBack={handleBack} />
+      </TransitionInOut>
+      <TransitionInOut title="Your tax information" condition={isW9Step()}>
+        <W9Form onBack={handleBack} onNext={handleNext} />
       </TransitionInOut>
       <TransitionInOut title="Congratulations!" condition={isCompleteStep()}>
         <RegisterCompleteForm />
