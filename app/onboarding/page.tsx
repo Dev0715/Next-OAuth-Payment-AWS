@@ -12,6 +12,16 @@ import { TransitionInOut } from "@/components/utils/transition-in-out";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
+enum STEPS {
+  INITIAL,
+  KRE8TOR,
+  MATCH,
+  TAX,
+  W9,
+  W8,
+  COMPLETE
+}
+
 const OnboardingPage = () => {
   // affiliate, creator, user forms
 
@@ -40,20 +50,19 @@ const OnboardingPage = () => {
     }
   });
 
-  const [step, setStep] = useState<number>(0);
+  const [step, setStep] = useState(STEPS.INITIAL);
+  console.log(step);
 
-  const isCreatorStep = () => {
-    return userData.selectedAccounts.creator && step === 1;
-  };
+  const isCreatorStep =
+    userData.selectedAccounts.creator && step === STEPS.KRE8TOR;
 
-  const isMatchingStep = () => {
-    return userData.selectedAccounts.creator && step === 2;
-  };
+  const isMatchingStep =
+    userData.selectedAccounts.creator && step === STEPS.MATCH;
 
   const isTaxStep = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
-      _step += 3;
+      _step += 2;
     }
 
     return step === _step;
@@ -99,14 +108,14 @@ const OnboardingPage = () => {
     <div className="mt-16 mb-8 w-[640px]">
       <TransitionInOut
         title="Accounts you want to create"
-        condition={step === 0}
+        condition={step === STEPS.INITIAL}
       >
         <SelectAccountsForm
           data={userData.selectedAccounts}
           onUpdate={handleUpdateUserData}
         />
       </TransitionInOut>
-      <TransitionInOut title="Your KRE8TOR details" condition={isCreatorStep()}>
+      <TransitionInOut title="Your KRE8TOR details" condition={isCreatorStep}>
         <CreatorDetailsForm
           data={userData.creatorDetails}
           onUpdate={handleUpdateUserData}
@@ -115,7 +124,7 @@ const OnboardingPage = () => {
       </TransitionInOut>
       <TransitionInOut
         title="Your accounts on other markets"
-        condition={isMatchingStep()}
+        condition={isMatchingStep}
       >
         <SelectMatchingForm
           data={userData.creatorMatchings}
