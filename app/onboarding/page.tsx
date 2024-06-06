@@ -54,17 +54,17 @@ const OnboardingPage = () => {
     if (userData.selectedAccounts.creator) {
       _step += 3;
     }
-    if (userData.selectedAccounts.affiliate) {
-      _step += 1;
-    }
 
     return step === _step;
   };
 
-  const isRegisterCompleteStep = () => {
+  const isCompleteStep = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
-      _step += 2;
+      _step += 3;
+    }
+    if (userData.selectedAccounts.affiliate) {
+      _step += 1;
     }
     return step === _step;
   };
@@ -85,7 +85,7 @@ const OnboardingPage = () => {
   return (
     <div className="mt-16 w-[640px]">
       <TransitionInOut
-        title="Please select accounts you want to create"
+        title="Accounts you want to create"
         condition={step === 0}
       >
         <SelectAccountsForm
@@ -93,10 +93,7 @@ const OnboardingPage = () => {
           onUpdate={handleUpdateUserData}
         />
       </TransitionInOut>
-      <TransitionInOut
-        title="Please provide your KRE8TOR details"
-        condition={isCreatorStep()}
-      >
+      <TransitionInOut title="Your KRE8TOR details" condition={isCreatorStep()}>
         <CreatorDetailsForm
           data={userData.creatorDetails}
           onUpdate={handleUpdateUserData}
@@ -104,7 +101,7 @@ const OnboardingPage = () => {
         />
       </TransitionInOut>
       <TransitionInOut
-        title="Please confirm your accounts on other markets"
+        title="Your accounts on other markets"
         condition={isMatchingStep()}
       >
         <SelectMatchingForm
@@ -114,20 +111,10 @@ const OnboardingPage = () => {
           onBack={handleBack}
         />
       </TransitionInOut>
-      <TransitionInOut
-        title="Please confirm you tax information"
-        condition={isTaxStep()}
-      >
-        <TaxForm
-          onUpdate={handleUpdateUserData}
-          onNext={handleNext}
-          onBack={handleBack}
-        />
+      <TransitionInOut title="Your tax information" condition={isTaxStep()}>
+        <TaxForm onUpdate={handleUpdateUserData} onBack={handleBack} />
       </TransitionInOut>
-      <TransitionInOut
-        title="Congratulations!"
-        condition={isRegisterCompleteStep()}
-      >
+      <TransitionInOut title="Congratulations!" condition={isCompleteStep()}>
         <RegisterCompleteForm />
       </TransitionInOut>
     </div>

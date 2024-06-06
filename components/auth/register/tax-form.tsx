@@ -13,18 +13,16 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   onUpdate: (data: Partial<SignedUpData>) => void;
-  onNext: () => void;
   onBack: () => void;
 };
 
-export const TaxForm = ({ onUpdate, onNext, onBack }: Props) => {
+export const TaxForm = ({ onUpdate, onBack }: Props) => {
   const [usPerson, setUsPerson] = useState("");
 
   const onNextClicked = () => {
     onUpdate({
       usPerson: usPerson
     });
-    onNext();
   };
 
   const onBackClicked = () => {
@@ -32,8 +30,7 @@ export const TaxForm = ({ onUpdate, onNext, onBack }: Props) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-y-6">
-      <p className="text-xl text-green-700">Tax Information.</p>
+    <div className="w-full space-y-6">
       <div>
         <p className="t-body -size-m">
           US federal tax law requires Envato to collect US Author tax
