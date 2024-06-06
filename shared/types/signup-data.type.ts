@@ -17,4 +17,5 @@ export type SignedUpData = {
     drb: boolean;
     cmk: boolean;
   };
+  usPerson: string;
 };

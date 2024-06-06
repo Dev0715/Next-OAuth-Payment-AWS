@@ -16,6 +16,7 @@ const OnboardingPage = () => {
   const [userData, setUserData] = useState<
     Omit<SignedUpData, "generalDetails">
   >({
+    usPerson: "",
     selectedAccounts: {
       creator: false,
       user: false,
