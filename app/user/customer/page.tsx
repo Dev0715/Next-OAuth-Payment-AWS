@@ -39,7 +39,7 @@ const CustomerSettings = () => {
         userId: user?.userId as string,
         customerData
       }).then((res) => {
-        if (res) {
+        if (res.success) {
           setIsChecked(newState);
           setUser({
             ...user,
