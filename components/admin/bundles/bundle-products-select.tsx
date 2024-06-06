@@ -15,7 +15,6 @@ import { useEffect, useState } from "react";
 
 import { FaPlus } from "react-icons/fa";
 
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -24,6 +23,8 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+
+import { GradientButton } from "@/components/utils/gradient-button";
 
 import { getAllProducts } from "@/data/product";
 
@@ -128,30 +129,26 @@ export const BundleProductSelect = ({ onAddNewProducts }: Props) => {
         </Table>
       </div>
       <div className="flex items-center justify-between space-x-2">
-        <Button
+        <GradientButton
           className="h-8 flex gap-x-2 rounded-none"
           onClick={onAddProducts}
         >
           <FaPlus />
           Add Products
-        </Button>
+        </GradientButton>
         <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
+          <GradientButton
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
             Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
+          </GradientButton>
+          <GradientButton
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
             Next
-          </Button>
+          </GradientButton>
         </div>
       </div>
     </div>
