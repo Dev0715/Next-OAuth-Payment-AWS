@@ -5,8 +5,9 @@ import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
 import { register } from "@/actions/auth/register/register";
-import { Button } from "@/components/ui/button";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { GradientButton } from "@/components/utils/gradient-button";
+
 import { getUserFromGeneralDetails } from "@/shared/functions/user-from-signup";
 import { SignedUpData } from "@/shared/types/signup-data.type";
 
@@ -119,23 +120,23 @@ export const AffiliateCompleteForm = ({
         establish individual product links.
       </p>
       <div className="w-full flex items-center justify-between mt-4">
-        <Button
+        <GradientButton
           disabled={isDisabled}
-          variant={"outline"}
+          variant={"destructive"}
           className="w-64 flex gap-x-4 border-red-700"
           onClick={onBack}
         >
           <FaArrowLeft />
           Back
-        </Button>
-        <Button
+        </GradientButton>
+        <GradientButton
           disabled={isDisabled}
           className="w-64 flex gap-x-4"
           onClick={onContinue}
         >
           <FaUser />
           Complete
-        </Button>
+        </GradientButton>
       </div>
     </div>
   );
