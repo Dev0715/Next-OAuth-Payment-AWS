@@ -63,10 +63,10 @@ export const TaxForm = ({ onUpdate, onNext, onBack }: Props) => {
         </p>
 
         <strong>If you are not a U.S. Person</strong>
-        {/* <p className="t-body -size-m">
+        <p className="t-body -size-m">
           You will need to submit a Form W-8. If you are a resident of a country
           that has a tax treaty with the U.S., you will benefit from the reduced
-          or zero withholding rate that is specified in your country's tax
+          or zero withholding rate that is specified in your country`s tax
           treaty. If you are a resident of a country that does not have a tax
           treaty with the U.S., then your U.S. source income from Envato will be
           subject to a 30% withholding tax. If you have any questions, please
@@ -78,7 +78,7 @@ export const TaxForm = ({ onUpdate, onNext, onBack }: Props) => {
             W-8 articles
           </a>
           .
-        </p> */}
+        </p>
 
         <p className="t-body -size-m">
           While Envato cannot give tax and/or legal advice, we will do our best
