@@ -127,7 +127,7 @@ export default function BundleEditPage({ params: { bundleId } }: Props) {
         )}
         <GradientButton
           disabled={isPending}
-          className="w-64 flex items-center gap-x-2 rounded-none"
+          className="w-64 flex items-center gap-x-2"
           onClick={onSave}
         >
           <FaSave />

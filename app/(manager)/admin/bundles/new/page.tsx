@@ -80,7 +80,7 @@ const NewBundlePage = () => {
         </div>
         <GradientButton
           disabled={isPending}
-          className="w-48 flex gap-x-2 rounded-none"
+          className="w-48 flex gap-x-2"
           onClick={onCreateBundle}
         >
           <FaArrowRight />

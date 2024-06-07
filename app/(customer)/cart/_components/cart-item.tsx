@@ -40,7 +40,7 @@ export const CartItem = ({
   }, [product.previewList, getLinkFromS3]);
 
   return (
-    <Card className="w-full flex flex-col items-center px-0 rounded-none shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100">
+    <Card className="w-full flex flex-col items-center px-0 rounded-3xl shadow-md cursor-pointer hover:drop-shadow-lg hover:bg-gray-100">
       <CardContent className="w-full p-0 flex gap-y-4">
         <Avatar className="w-72 h-48 rounded-none">
           <AvatarImage src={imagePath} className="object-fill aspect-auto" />
