@@ -5,7 +5,6 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -24,6 +23,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { DonatePrefSchema } from "@/schemas/user";
+
+import { GradientButton } from "../utils/gradient-button";
 
 export const DonatePrefForm = () => {
   const [, setError] = useState<string | undefined>("");
@@ -237,7 +238,7 @@ export const DonatePrefForm = () => {
         </form>
       </Form>
       <CardFooter className="self-end">
-        <Button className="w-64 flex gap-x-2">Update</Button>
+        <GradientButton className="w-64 flex gap-x-2">Update</GradientButton>
       </CardFooter>
     </Card>
   );
