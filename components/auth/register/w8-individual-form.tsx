@@ -44,7 +44,7 @@ export const W8IndividualForm = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-8">
       <p className="t-body -size-m mb-8">
         We can only accept letters, numbers and special characters &amp; - , / #
         ( ) . Please use the English equivalent of accented characters, eg. a

@@ -17,20 +17,27 @@ export const W8Form = () => {
         the Form W-8 below which will be stored securely.
       </p>
 
-      <RadioGroup defaultValue={registerType} onValueChange={setRegisterType}>
-        <div className="flex items-center gap-x-4 cursor-pointer">
-          <RadioGroupItem value="true" id="us" />
-          <Label htmlFor="individual" className="cursor-pointer">
-            An individual
-          </Label>
-        </div>
-        <div className="flex items-center gap-x-4 cursor-pointer">
-          <RadioGroupItem value="false" id="notUs" />
-          <Label htmlFor="corporation" className="cursor-pointer">
-            A Corporation
-          </Label>
-        </div>
-      </RadioGroup>
+      <div className="w-full flex">
+        <p className="mb-2 mr-4">Registered as:</p>
+        <RadioGroup
+          className="mt-1"
+          defaultValue={registerType}
+          onValueChange={setRegisterType}
+        >
+          <div className="flex items-center gap-x-4 cursor-pointer">
+            <RadioGroupItem value="individual" id="us" />
+            <Label htmlFor="individual" className="cursor-pointer">
+              An individual
+            </Label>
+          </div>
+          <div className="flex items-center gap-x-4 cursor-pointer">
+            <RadioGroupItem value="corporation" id="notUs" />
+            <Label htmlFor="corporation" className="cursor-pointer">
+              A Corporation
+            </Label>
+          </div>
+        </RadioGroup>
+      </div>
 
       {registerType === "individual" && <W8IndividualForm />}
     </div>
