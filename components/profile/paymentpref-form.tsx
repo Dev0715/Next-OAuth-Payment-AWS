@@ -54,7 +54,7 @@ export const PaymentPrefForm = () => {
   };
 
   return (
-    <Card className="w-full h-fit flex flex-col rounded-none">
+    <Card className="w-full h-fit flex flex-col">
       <CardHeader>
         <CardTitle>Payment Pref</CardTitle>
         <CardDescription>

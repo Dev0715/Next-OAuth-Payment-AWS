@@ -56,7 +56,7 @@ export const CryptoPrefForm = () => {
   };
 
   return (
-    <Card className="w-full h-fit flex flex-col rounded-none">
+    <Card className="w-full h-fit flex flex-col">
       <CardHeader>
         <CardTitle>Crypto Pref</CardTitle>
         <CardDescription>You can select your crypto preference</CardDescription>

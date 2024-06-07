@@ -67,7 +67,7 @@ export const ProductItem = ({ product, _url, noBadge }: PropsParams) => {
           </div>
         )}
         <CardContent className="w-full p-0 flex flex-col gap-y-4">
-          <Avatar className="w-full h-auto rounded-none">
+          <Avatar className="w-full h-auto">
             <AvatarImage src={imagePath} className="object-fill aspect-auto" />
             <AvatarFallback className="bg-transparent">
               <div className="w-full h-full bg-transparent"></div>

@@ -58,7 +58,7 @@ export const DonatePrefForm = () => {
   };
 
   return (
-    <Card className="w-full h-fit flex flex-col rounded-none">
+    <Card className="w-full h-fit flex flex-col">
       <CardHeader>
         <CardTitle>Donate Pref</CardTitle>
         <CardDescription>You can select your Donate preference</CardDescription>

@@ -28,7 +28,7 @@ export const AboutCreator = ({ userData }: PropsParams) => {
   const creator = userData?.creator;
 
   return (
-    <Card className="border-0 rounded-none">
+    <Card className="border-0">
       <CardHeader className="flex flex-row items-end justify-between">
         <GradientParagraph className="text-xl font-bold">
           About the Creator
