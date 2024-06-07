@@ -96,6 +96,17 @@ const OnboardingPage = () => {
     return step === _step && userData.taxInformation.usPerson;
   };
 
+  const isW8Step = () => {
+    let _step = 1;
+    if (userData.selectedAccounts.creator) {
+      _step += 3;
+    } else if (userData.selectedAccounts.affiliate) {
+      _step += 1;
+    }
+
+    return step === _step && !userData.taxInformation.usPerson;
+  };
+
   const isCompleteStep = () => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
@@ -157,6 +168,9 @@ const OnboardingPage = () => {
         />
       </TransitionInOut>
       <TransitionInOut title="Your tax information" condition={isW9Step()}>
+        <W9Form onBack={handleBack} onUpdate={handleUpdateUserData} />
+      </TransitionInOut>
+      <TransitionInOut title="Your tax information" condition={isW8Step()}>
         <W9Form onBack={handleBack} onUpdate={handleUpdateUserData} />
       </TransitionInOut>
       <TransitionInOut title="Congratulations!" condition={isCompleteStep()}>
