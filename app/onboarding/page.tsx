@@ -31,6 +31,7 @@ const OnboardingPage = () => {
   const user = useAtomValue(userAtom);
   // affiliate, creator, user forms
 
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<
     Omit<SignedUpData, "generalDetails">
   >({
@@ -124,14 +125,8 @@ const OnboardingPage = () => {
   }, [userData, step]);
 
   useEffect(() => {
-    if (!isCompleteStep || !user) return;
     // TODO: handle update user profile
-    if (userData.selectedAccounts.user) {
-      updateCustomerData({
-        userId: user.userId,
-        customerData: { isCustomer: true, customerId: uuid() }
-      });
-    }
+    handleUpdateData();
   }, [isCompleteStep]);
 
   const handleNext = () => {
@@ -144,6 +139,22 @@ const OnboardingPage = () => {
 
   const handleUpdateUserData = (data: Partial<SignedUpData>) => {
     setUserData((prev) => ({ ...prev, ...data }));
+  };
+
+  const handleUpdateData = async () => {
+    if (!isCompleteStep || !user) return;
+
+    try {
+      setLoading(true);
+      if (userData.selectedAccounts.user) {
+        await updateCustomerData({
+          userId: user.userId,
+          customerData: { isCustomer: true, customerId: uuid() }
+        });
+      }
+    } catch (error) {
+      // TODO: handle error
+    }
   };
 
   return (
@@ -191,7 +202,7 @@ const OnboardingPage = () => {
         <W8Form />
       </TransitionInOut>
       <TransitionInOut title="Congratulations!" condition={isCompleteStep}>
-        <RegisterCompleteForm />
+        <RegisterCompleteForm loading={loading} />
       </TransitionInOut>
     </div>
   );
