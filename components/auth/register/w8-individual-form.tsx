@@ -15,9 +15,18 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 
 import { GradientButton } from "@/components/utils/gradient-button";
 import { W8IndividualDetailsSchema } from "@/schemas/auth/register";
+
+import { COUNTRIES } from "@/shared/constants/user.constant";
 
 export const W8IndividualForm = () => {
   const form = useForm<z.infer<typeof W8IndividualDetailsSchema>>({
@@ -74,6 +83,63 @@ export const W8IndividualForm = () => {
           <p className="col-span-2 text-center" style={{ color: "grey" }}>
             Must match name as shown on your income tax return
           </p>
+
+          <FormField
+            control={form.control}
+            name="countryCitizenship"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Country of Citizenship*</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a country" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {COUNTRIES.map((item) => (
+                      <SelectItem key={item} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="countryResidence"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Country of Residence*</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a country" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {COUNTRIES.map((item) => (
+                      <SelectItem key={item} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <div className="w-full col-span-2 flex items-center justify-between mt-4">
             <GradientButton
               variant="destructive"

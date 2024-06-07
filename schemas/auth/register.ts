@@ -102,7 +102,7 @@ export const W8IndividualDetailsSchema = z.object({
     .min(1, "First name is required")
     .max(72, "First name must be a maximum of 72 characters"),
   lastName: z.string().optional(),
-  countryCitizenShip: z
+  countryCitizenship: z
     .string()
     .min(1, "Country of CitizenShip is required")
     .max(72, "Country of Citizenship must be a maximum of 72 characters"),
