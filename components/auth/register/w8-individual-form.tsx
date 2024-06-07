@@ -140,6 +140,62 @@ export const W8IndividualForm = () => {
             )}
           />
 
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Address*</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Address" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>City / Town*</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="City / Town" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="state"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>State / Province</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="State / Province" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="zip"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>ZIP / Post Code</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="ZIP / Post Code" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <div className="w-full col-span-2 flex items-center justify-between mt-4">
             <GradientButton
               variant="destructive"

@@ -158,6 +158,7 @@ export const W9Form = ({ onUpdate, onBack }: Props) => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="city"
