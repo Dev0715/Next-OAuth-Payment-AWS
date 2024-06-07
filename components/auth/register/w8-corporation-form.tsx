@@ -275,10 +275,85 @@ export const W8CorporationForm = ({ onNext, onBack }: Props) => {
                 onCheckedChange={(value: boolean) => setMailing(value)}
               />
             </FormControl>
-            <FormLabel>
-              Tax ID Type* Mailing address is the same as above
-            </FormLabel>
+            <FormLabel>Mailing address is the same as above</FormLabel>
           </FormItem>
+
+          {!mailing ? (
+            <>
+              <FormField
+                control={form.control}
+                name="mailingAddress"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>Permanent Residence Address*</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Permanent Residence Address"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="mailingCity"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>City / Town*</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="City / Town" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="mailingZip"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>ZIP / Post Code</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="ZIP / Post Code" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="mailingCountry"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>Country of Residence*</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a country" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {COUNTRIES.map((item) => (
+                          <SelectItem key={item} value={item}>
+                            {item}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </>
+          ) : null}
 
           <FormField
             control={form.control}
