@@ -74,7 +74,7 @@ export const W8CorporationForm = ({ onNext, onBack }: Props) => {
                   Name of Organization that is the Beneficial Owner*
                 </FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Address" />
+                  <Input {...field} placeholder="Organization Name" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
