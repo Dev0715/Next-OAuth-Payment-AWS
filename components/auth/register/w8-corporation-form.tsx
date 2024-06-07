@@ -1,11 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
 
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -31,6 +33,8 @@ import { W8CorporationDetailsSchema } from "@/schemas/auth/register";
 import { CHAPTER3STATUS, COUNTRIES } from "@/shared/constants/user.constant";
 
 export const W8CorporationForm = () => {
+  const [mailing, setMailing] = useState(true);
+
   const form = useForm<z.infer<typeof W8CorporationDetailsSchema>>({
     resolver: zodResolver(W8CorporationDetailsSchema)
   });
@@ -227,6 +231,45 @@ export const W8CorporationForm = () => {
               </FormItem>
             )}
           />
+
+          <FormField
+            control={form.control}
+            name="countryResidence"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Country of Residence*</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a country" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {COUNTRIES.map((item) => (
+                      <SelectItem key={item} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div>
+            <Checkbox
+              id="c1"
+              checked={mailing}
+              onCheckedChange={(value: boolean) => setMailing(value)}
+            />
+            <label className="Label ml-2" htmlFor="c1">
+              Mailing address is the same as above
+            </label>
+          </div>
 
           <FormField
             control={form.control}
