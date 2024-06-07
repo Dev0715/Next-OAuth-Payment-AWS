@@ -8,7 +8,15 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { W8CorporationForm } from "./w8-corporation-form";
 import { W8IndividualForm } from "./w8-individual-form";
 
-export const W8Form = () => {
+import type { SignedUpData } from "@/shared/types/signup-data.type";
+
+type Props = {
+  onUpdate: (data: Partial<SignedUpData>) => void;
+  onNext: () => void;
+  onBack: () => void;
+};
+
+export const W8Form = (props: Props) => {
   const [registerType, setRegisterType] = useState("");
 
   return (
@@ -40,8 +48,8 @@ export const W8Form = () => {
         </RadioGroup>
       </div>
 
-      {registerType === "individual" && <W8IndividualForm />}
-      {registerType === "corporation" && <W8CorporationForm />}
+      {registerType === "individual" && <W8IndividualForm {...props} />}
+      {registerType === "corporation" && <W8CorporationForm {...props} />}
     </div>
   );
 };

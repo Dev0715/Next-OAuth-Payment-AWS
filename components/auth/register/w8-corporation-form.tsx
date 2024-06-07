@@ -29,7 +29,15 @@ import { GradientButton } from "@/components/utils/gradient-button";
 import { W8CorporationDetailsSchema } from "@/schemas/auth/register";
 import { CHAPTER3STATUS, COUNTRIES } from "@/shared/constants/user.constant";
 
-export const W8CorporationForm = () => {
+import type { SignedUpData } from "@/shared/types/signup-data.type";
+
+type Props = {
+  onUpdate: (data: Partial<SignedUpData>) => void;
+  onNext: () => void;
+  onBack: () => void;
+};
+
+export const W8CorporationForm = ({ onNext, onBack }: Props) => {
   const [mailing, setMailing] = useState(true);
 
   const form = useForm<z.infer<typeof W8CorporationDetailsSchema>>({
@@ -38,10 +46,11 @@ export const W8CorporationForm = () => {
 
   const onSubmit = (values: z.infer<typeof W8CorporationDetailsSchema>) => {
     console.log(values);
+    onNext();
   };
 
   const handleBackClicked = () => {
-    // onBack();
+    onBack();
   };
 
   return (

@@ -28,17 +28,26 @@ import { GradientButton } from "@/components/utils/gradient-button";
 import { W8IndividualDetailsSchema } from "@/schemas/auth/register";
 import { COUNTRIES } from "@/shared/constants/user.constant";
 
-export const W8IndividualForm = () => {
+import type { SignedUpData } from "@/shared/types/signup-data.type";
+
+type Props = {
+  onUpdate: (data: Partial<SignedUpData>) => void;
+  onNext: () => void;
+  onBack: () => void;
+};
+
+export const W8IndividualForm = ({ onNext, onBack }: Props) => {
   const form = useForm<z.infer<typeof W8IndividualDetailsSchema>>({
     resolver: zodResolver(W8IndividualDetailsSchema)
   });
 
   const onSubmit = (values: z.infer<typeof W8IndividualDetailsSchema>) => {
     console.log(values);
+    onNext();
   };
 
   const handleBackClicked = () => {
-    // onBack();
+    onBack();
   };
 
   return (

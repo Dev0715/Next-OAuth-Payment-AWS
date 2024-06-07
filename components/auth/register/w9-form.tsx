@@ -35,22 +35,18 @@ import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
   onUpdate: (data: Partial<SignedUpData>) => void;
+  onNext: () => void;
   onBack: () => void;
 };
 
-export const W9Form = ({ onUpdate, onBack }: Props) => {
+export const W9Form = ({ onUpdate, onNext, onBack }: Props) => {
   const form = useForm<z.infer<typeof w9DetailsSchema>>({
     resolver: zodResolver(w9DetailsSchema)
   });
 
   const onSubmit = (values: z.infer<typeof w9DetailsSchema>) => {
-    console.log(values);
-    onUpdate({
-      w9Details: {
-        ...values
-        // cover
-      }
-    });
+    onUpdate({ w9Details: values });
+    onNext();
   };
 
   const handleBackClicked = () => {

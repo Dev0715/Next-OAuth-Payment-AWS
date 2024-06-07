@@ -222,10 +222,18 @@ const OnboardingPage = () => {
         />
       </TransitionInOut>
       <TransitionInOut title="Your tax information" condition={isW9Step()}>
-        <W9Form onBack={handleBack} onUpdate={handleUpdateUserData} />
+        <W9Form
+          onUpdate={handleUpdateUserData}
+          onNext={handleNext}
+          onBack={handleBack}
+        />
       </TransitionInOut>
       <TransitionInOut title="Your tax information" condition={isW8Step()}>
-        <W8Form />
+        <W8Form
+          onUpdate={handleUpdateUserData}
+          onNext={handleNext}
+          onBack={handleBack}
+        />
       </TransitionInOut>
       <TransitionInOut title="Congratulations!" condition={isCompleteStep}>
         <RegisterCompleteForm loading={loading} />
