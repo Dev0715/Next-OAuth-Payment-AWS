@@ -1,9 +1,11 @@
 "use client";
 
+import { useAtom } from "jotai";
 import { useState } from "react";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { userAtom } from "@/store/user";
 
 import { W8CorporationForm } from "./w8-corporation-form";
 import { W8IndividualForm } from "./w8-individual-form";
@@ -17,6 +19,10 @@ type Props = {
 };
 
 export const W8Form = (props: Props) => {
+  const [user] = useAtom(userAtom);
+
+  console.log(user);
+
   const [registerType, setRegisterType] = useState("");
 
   return (
