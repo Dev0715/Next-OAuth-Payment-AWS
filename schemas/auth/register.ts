@@ -49,9 +49,11 @@ export const CreatorDetailsSchema = z.object({
   // .min(6, "Bio should be at least 6 characters long")
   // .max(1024, "Bio must be a maximum of 1024 characters"),
   jobTitle: z.string().min(1, "Type of user is required"),
-  companyName: z.string().optional(),
-  companyCountry: z.string().optional(),
-  companyWebsite: z.string().optional()
+  company: z.object({
+    name: z.string().optional(),
+    country: z.string().optional(),
+    website: z.string().optional()
+  })
   // website1: z.string().optional(),
   // website2: z.string().optional(),
   // website3: z.string().optional(),

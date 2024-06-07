@@ -113,7 +113,7 @@ export const CreatorDetailsForm = ({
           />
           <FormField
             control={form.control}
-            name="companyName"
+            name="company.name"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Company Name</FormLabel>
@@ -126,7 +126,7 @@ export const CreatorDetailsForm = ({
           />
           <FormField
             control={form.control}
-            name="companyCountry"
+            name="company.country"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Location</FormLabel>
@@ -139,7 +139,7 @@ export const CreatorDetailsForm = ({
           />
           <FormField
             control={form.control}
-            name="companyWebsite"
+            name="company.website"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Company Website</FormLabel>
