@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
+import { W8CorporationForm } from "./w8-corporation-form";
 import { W8IndividualForm } from "./w8-individual-form";
 
 export const W8Form = () => {
@@ -40,6 +41,7 @@ export const W8Form = () => {
       </div>
 
       {registerType === "individual" && <W8IndividualForm />}
+      {registerType === "corporation" && <W8CorporationForm />}
     </div>
   );
 };
