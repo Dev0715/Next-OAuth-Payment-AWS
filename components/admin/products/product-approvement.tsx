@@ -1,9 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
 import { Card } from "@/components/ui/card";
-
 import { Textarea } from "@/components/ui/textarea";
+
 import { GradientButton } from "@/components/utils/gradient-button";
+import { GradientParagraph } from "@/components/utils/gradient-paragraph";
+
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { ProductState } from "@/shared/types/product.type";
 
@@ -22,10 +24,12 @@ export const ProductApprovement = ({
 }: Props) => {
   return (
     <Card className="w-full p-6 flex flex-col gap-y-4">
-      <p className="text-2xl font-semibold">Product Approvement</p>
+      <GradientParagraph className="text-2xl font-semibold">
+        Product Approvement
+      </GradientParagraph>
       <div className="w-full flex items-end justify-between gap-x-8">
         <div className="w-full flex flex-col gap-y-1">
-          <p>Your Comment</p>
+          <p className="font-firs">Your Comment</p>
           <Textarea
             disabled={isPending}
             value={comment}
@@ -38,7 +42,7 @@ export const ProductApprovement = ({
             message="Are you sure to approve this product?"
             onContinue={() => onCommentProduct("approved")}
           >
-            <GradientButton disabled={isPending} className="w-32 rounded-none">
+            <GradientButton disabled={isPending} className="w-32">
               Approve
             </GradientButton>
           </QuestionAlert>
@@ -47,7 +51,11 @@ export const ProductApprovement = ({
             message="Are you sure to reject this product?"
             onContinue={() => onCommentProduct("rejected")}
           >
-            <GradientButton disabled={isPending} className="w-32 rounded-none">
+            <GradientButton
+              disabled={isPending}
+              variant={"destructive"}
+              className="w-32"
+            >
               Reject
             </GradientButton>
           </QuestionAlert>
