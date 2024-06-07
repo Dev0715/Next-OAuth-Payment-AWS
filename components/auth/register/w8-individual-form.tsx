@@ -8,6 +8,7 @@ import * as z from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -42,7 +43,7 @@ export const W8IndividualForm = () => {
 
   return (
     <div className="w-full mt-8">
-      <p className="t-body -size-m mb-8">
+      <p className="mb-8">
         We can only accept letters, numbers and special characters &amp; - , / #
         ( ) . Please use the English equivalent of accented characters, eg. a
         for à.
@@ -63,6 +64,9 @@ export const W8IndividualForm = () => {
                   <Input {...field} placeholder="First Name" />
                 </FormControl>
                 <FormMessage />
+                <FormDescription className="col-span-2">
+                  Must match name as shown on your income tax return
+                </FormDescription>
               </FormItem>
             )}
           />
@@ -79,9 +83,6 @@ export const W8IndividualForm = () => {
               </FormItem>
             )}
           />
-          <p className="col-span-2 text-center" style={{ color: "grey" }}>
-            Must match name as shown on your income tax return
-          </p>
 
           <FormField
             control={form.control}
@@ -205,48 +206,29 @@ export const W8IndividualForm = () => {
                   <RadioGroup
                     defaultValue={field.value}
                     onValueChange={field.onChange}
-                    className="w-full flex flex-col"
                   >
                     <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"SSN"} id={"SSN"} />
-                      <Label
-                        htmlFor={"SSN"}
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">
-                          U.S. Social Security Number (SSN)
-                        </p>
+                      <RadioGroupItem value="ssn" id="ssn" />
+                      <Label htmlFor="ssn" className="cursor-pointer">
+                        U.S. Social Security Number (SSN)
                       </Label>
                     </div>
                     <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"ITIN"} id={"ITIN"} />
-                      <Label
-                        htmlFor={"ITIN"}
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">
-                          Individual Taxpayer Identification Number (ITIN)
-                        </p>
+                      <RadioGroupItem value="itin" id="itin" />
+                      <Label htmlFor="itin" className="cursor-pointer">
+                        Individual Taxpayer Identification Number (ITIN)
                       </Label>
                     </div>
                     <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"FOREIGN"} id={"FOREIGN"} />
-                      <Label
-                        htmlFor={"FOREIGN"}
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">Foreign Tax ID Number</p>
+                      <RadioGroupItem value="foreign" id="foreign" />
+                      <Label htmlFor="foreign" className="cursor-pointer">
+                        Foreign Tax ID Number
                       </Label>
                     </div>
                     <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"NOT"} id={"NOT"} />
-                      <Label
-                        htmlFor={"NOT"}
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">
-                          I will not or am unable to provide a Tax ID Number
-                        </p>
+                      <RadioGroupItem value="not" id="not" />
+                      <Label htmlFor="not" className="cursor-pointer">
+                        I will not or am unable to provide a Tax ID Number
                       </Label>
                     </div>
                   </RadioGroup>
@@ -301,13 +283,13 @@ export const W8IndividualForm = () => {
           <div className="w-full col-span-2 flex items-center justify-between mt-4">
             <GradientButton
               variant="destructive"
-              className="flex gap-x-4 border-red-700"
+              className="gap-x-4"
               onClick={handleBackClicked}
             >
               <FaArrowLeft />
               Back
             </GradientButton>
-            <GradientButton type="submit" className="flex gap-x-4">
+            <GradientButton type="submit" className="gap-x-4">
               <FaArrowRight />
               Next
             </GradientButton>

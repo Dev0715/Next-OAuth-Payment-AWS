@@ -46,7 +46,7 @@ export const W8CorporationForm = () => {
 
   return (
     <div className="w-full mt-8">
-      <p className="-size-m mb-8">
+      <p className="mb-8">
         We can only accept letters, numbers and special characters &amp; - , / #
         ( ) . Please use the English equivalent of accented characters, eg. a
         for à.
@@ -114,6 +114,7 @@ export const W8CorporationForm = () => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="lastName"
@@ -128,7 +129,7 @@ export const W8CorporationForm = () => {
             )}
           />
 
-          <p className="col-span-2 text-center" style={{ color: "grey" }}>
+          <p className="col-span-2" style={{ color: "grey" }}>
             Must match name as shown on your income tax return
           </p>
 
@@ -258,16 +259,17 @@ export const W8CorporationForm = () => {
             )}
           />
 
-          <div>
-            <Checkbox
-              id="c1"
-              checked={mailing}
-              onCheckedChange={(value: boolean) => setMailing(value)}
-            />
-            <label className="Label ml-2" htmlFor="c1">
-              Mailing address is the same as above
-            </label>
-          </div>
+          <FormItem className="col-span-2 flex flex-row items-start space-x-3 space-y-0">
+            <FormControl>
+              <Checkbox
+                checked={mailing}
+                onCheckedChange={(value: boolean) => setMailing(value)}
+              />
+            </FormControl>
+            <FormLabel>
+              Tax ID Type* Mailing address is the same as above
+            </FormLabel>
+          </FormItem>
 
           <FormField
             control={form.control}

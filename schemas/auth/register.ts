@@ -70,7 +70,7 @@ export const w9DetailsSchema = z.object({
     .string()
     .min(1, "First name is required")
     .max(72, "First name must be a maximum of 72 characters"),
-  lastName: z.string().optional(),
+  lastName: z.string().min(1, "Last name is required"),
   businessName: z
     .string()
     .min(1, "Business name is required")
@@ -103,7 +103,7 @@ export const W8IndividualDetailsSchema = z.object({
     .string()
     .min(1, "First name is required")
     .max(72, "First name must be a maximum of 72 characters"),
-  lastName: z.string().optional(),
+  lastName: z.string().min(1, "Last name is required"),
   countryCitizenship: z
     .string()
     .min(1, "Country of CitizenShip is required")
@@ -147,7 +147,7 @@ export const W8CorporationDetailsSchema = z.object({
     .string()
     .min(1, "First name is required")
     .max(72, "First name must be a maximum of 72 characters"),
-  lastName: z.string().optional(),
+  lastName: z.string().min(1, "Last name is required"),
   entityName: z.string().optional(),
   chapter3Status: z
     .string()
