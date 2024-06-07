@@ -26,16 +26,16 @@ import {
 } from "@/components/ui/select";
 
 import { GradientButton } from "@/components/utils/gradient-button";
-import { W8IndividualDetailsSchema } from "@/schemas/auth/register";
+import { W8CorporationDetailsSchema } from "@/schemas/auth/register";
 
 import { COUNTRIES } from "@/shared/constants/user.constant";
 
 export const W8CorporationForm = () => {
-  const form = useForm<z.infer<typeof W8IndividualDetailsSchema>>({
-    resolver: zodResolver(W8IndividualDetailsSchema)
+  const form = useForm<z.infer<typeof W8CorporationDetailsSchema>>({
+    resolver: zodResolver(W8CorporationDetailsSchema)
   });
 
-  const onSubmit = (values: z.infer<typeof W8IndividualDetailsSchema>) => {
+  const onSubmit = (values: z.infer<typeof W8CorporationDetailsSchema>) => {
     console.log(values);
   };
 
@@ -56,6 +56,50 @@ export const W8CorporationForm = () => {
           className="w-full grid grid-cols-2 gap-6"
           onSubmit={form.handleSubmit(onSubmit)}
         >
+          <FormField
+            control={form.control}
+            name="organizationName"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>
+                  Name of Organization that is the Beneficial Owner*
+                </FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Address" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="countryIncorporation"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Country of Incorporation*</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a country" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {COUNTRIES.map((item) => (
+                      <SelectItem key={item} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name="firstName"
@@ -85,118 +129,6 @@ export const W8CorporationForm = () => {
           <p className="col-span-2 text-center" style={{ color: "grey" }}>
             Must match name as shown on your income tax return
           </p>
-
-          <FormField
-            control={form.control}
-            name="countryCitizenship"
-            render={({ field }) => (
-              <FormItem className="col-span-2">
-                <FormLabel>Country of Citizenship*</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a country" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {COUNTRIES.map((item) => (
-                      <SelectItem key={item} value={item}>
-                        {item}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="countryResidence"
-            render={({ field }) => (
-              <FormItem className="col-span-2">
-                <FormLabel>Country of Residence*</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a country" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {COUNTRIES.map((item) => (
-                      <SelectItem key={item} value={item}>
-                        {item}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem className="col-span-2">
-                <FormLabel>Address*</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Address" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="city"
-            render={({ field }) => (
-              <FormItem className="col-span-2">
-                <FormLabel>City / Town*</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="City / Town" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="state"
-            render={({ field }) => (
-              <FormItem className="col-span-2">
-                <FormLabel>State / Province</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="State / Province" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="zip"
-            render={({ field }) => (
-              <FormItem className="col-span-2">
-                <FormLabel>ZIP / Post Code</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="ZIP / Post Code" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
           <FormField
             control={form.control}
@@ -271,34 +203,6 @@ export const W8CorporationForm = () => {
                 <FormLabel>Tax ID Number*</FormLabel>
                 <FormControl>
                   <Input {...field} placeholder="Tax ID Number*" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="referenceNumber"
-            render={({ field }) => (
-              <FormItem className="col-span-2">
-                <FormLabel>Reference number(s)*</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Reference number(s)*" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="dateOfBirth"
-            render={({ field }) => (
-              <FormItem className="col-span-2">
-                <FormLabel>Date of Birth*</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Date of Birth*" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
