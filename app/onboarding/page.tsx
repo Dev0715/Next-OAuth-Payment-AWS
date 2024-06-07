@@ -1,6 +1,8 @@
 "use client";
 
+import { useAtomValue } from "jotai";
 import { useEffect, useMemo, useState } from "react";
+import { v4 as uuid } from "uuid";
 
 import { CreatorDetailsForm } from "@/components/auth/register/creator-details-form";
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
@@ -10,6 +12,8 @@ import { TaxForm } from "@/components/auth/register/tax-form";
 import { W8Form } from "@/components/auth/register/w8-form";
 import { W9Form } from "@/components/auth/register/w9-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
+import { updateCustomerData } from "@/data/user";
+import { userAtom } from "@/store/user";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
@@ -24,6 +28,7 @@ enum STEPS {
 }
 
 const OnboardingPage = () => {
+  const user = useAtomValue(userAtom);
   // affiliate, creator, user forms
 
   const [userData, setUserData] = useState<
@@ -119,8 +124,14 @@ const OnboardingPage = () => {
   }, [userData, step]);
 
   useEffect(() => {
-    if (!isCompleteStep) return;
+    if (!isCompleteStep || !user) return;
     // TODO: handle update user profile
+    if (userData.selectedAccounts.user) {
+      updateCustomerData({
+        userId: user.userId,
+        customerData: { isCustomer: true, customerId: uuid() }
+      });
+    }
   }, [isCompleteStep]);
 
   const handleNext = () => {
@@ -128,7 +139,7 @@ const OnboardingPage = () => {
   };
 
   const handleBack = () => {
-    setStep(step - 1);
+    setStep((step) => step - 1);
   };
 
   const handleUpdateUserData = (data: Partial<SignedUpData>) => {
