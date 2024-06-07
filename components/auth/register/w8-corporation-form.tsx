@@ -28,7 +28,7 @@ import {
 import { GradientButton } from "@/components/utils/gradient-button";
 import { W8CorporationDetailsSchema } from "@/schemas/auth/register";
 
-import { COUNTRIES } from "@/shared/constants/user.constant";
+import { CHAPTER3STATUS, COUNTRIES } from "@/shared/constants/user.constant";
 
 export const W8CorporationForm = () => {
   const form = useForm<z.infer<typeof W8CorporationDetailsSchema>>({
@@ -138,6 +138,90 @@ export const W8CorporationForm = () => {
                 <FormLabel>Name of Disregarded Entity</FormLabel>
                 <FormControl>
                   <Input {...field} placeholder="Name of Disregarded Entity" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="chapter3Status"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Chatper 3 Status*</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a chapter 3 status" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {CHAPTER3STATUS.map((item) => (
+                      <SelectItem key={item} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="residenceAddress"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Permanent Residence Address*</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Permanent Residence Address" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>City / Town*</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="City / Town" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="state"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>State / Province</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="State / Province" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="zip"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>ZIP / Post Code</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="ZIP / Post Code" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

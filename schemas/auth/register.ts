@@ -161,7 +161,7 @@ export const W8CorporationDetailsSchema = z.object({
     .max(72, "City must be a maximum of 72 characters"),
   state: z.string().optional(),
   zip: z.string().optional(),
-  countryOfResidence: z
+  countryResidence: z
     .string()
     .min(1, "Country of Residence is required")
     .max(72, "Country of Residence must be a maximum of 72 characters"),
