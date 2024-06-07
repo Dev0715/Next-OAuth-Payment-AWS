@@ -4,12 +4,14 @@ import { FaDownload, FaRegUser } from "react-icons/fa";
 
 import { Thumbnail } from "@/components/product/thumbnail";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { getProductById } from "@/data/product";
 import { useLinkFromS3 } from "@/hooks/use-link-from-s3";
 import { axiosClient, blobConfig } from "@/lib/axios";
+
 import { Product } from "@/shared/types/product.type";
+
+import { GradientButton } from "../utils/gradient-button";
 
 const Bold = ({ children }: { children: React.ReactNode }) => {
   return <span className="font-bold text-xl">{children}</span>;
@@ -117,24 +119,22 @@ export const ProductInfo = ({ product, isPending }: Props) => {
         </div>
         <div className="flex flex-col gap-y-4">
           <Link href={`/creator/${product?.ownerId}`}>
-            <Button
+            <GradientButton
               disabled={isPending}
-              variant="outline"
               className="w-full border-green-700 gap-x-2"
             >
               <FaRegUser className="text-green-700" />
               {`Go to Creator's Profile`}
-            </Button>
+            </GradientButton>
           </Link>
-          <Button
+          <GradientButton
             disabled={isPending}
             onClick={onDownloadCreativeFiles}
-            variant="outline"
             className="w-full border-green-700 gap-x-2"
           >
             <FaDownload className="text-green-700" />
             Download Creative Files
-          </Button>
+          </GradientButton>
         </div>
       </div>
     </div>
