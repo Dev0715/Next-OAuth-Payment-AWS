@@ -269,7 +269,7 @@ export const W8IndividualForm = ({ onNext, onBack }: Props) => {
               <FormItem className="col-span-2">
                 <FormLabel>Tax ID Number*</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Tax ID Number*" />
+                  <Input {...field} placeholder="Tax ID Number" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -283,7 +283,7 @@ export const W8IndividualForm = ({ onNext, onBack }: Props) => {
               <FormItem className="col-span-2">
                 <FormLabel>Reference number(s)*</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Reference number(s)*" />
+                  <Input {...field} placeholder="Reference number(s)" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -297,7 +297,7 @@ export const W8IndividualForm = ({ onNext, onBack }: Props) => {
               <FormItem className="col-span-2">
                 <FormLabel>Date of Birth*</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Date of Birth*" />
+                  <Input {...field} placeholder="Date of Birth" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
