@@ -131,3 +131,44 @@ export const W8IndividualDetailsSchema = z.object({
     .min(1, "Date of Birth is required")
     .max(72, "Date of Birth must be a maximum of 72 characters")
 });
+
+export const W8CorporationDetailsSchema = z.object({
+  organizationName: z
+    .string()
+    .min(1, "Organization name is required")
+    .max(72, "Organization name must be a maximum of 72 characters"),
+  countryIncorporation: z
+    .string()
+    .min(1, "Country of Incorporation is required")
+    .max(72, "Country of Incorporation must be a maximum of 72 characters"),
+  firstName: z
+    .string()
+    .min(1, "First name is required")
+    .max(72, "First name must be a maximum of 72 characters"),
+  lastName: z.string().optional(),
+  entityName: z.string().optional(),
+  chapter3Status: z
+    .string()
+    .min(1, "Chapter 3 Status is required")
+    .max(72, "Chapter 3 Status must be a maximum of 72 characters"),
+  residenceAddress: z
+    .string()
+    .min(1, "Permanent Residence Address is required")
+    .max(72, "Permanent Residence Address must be a maximum of 72 characters"),
+  city: z
+    .string()
+    .min(1, "City is required")
+    .max(72, "City must be a maximum of 72 characters"),
+  state: z.string().optional(),
+  zip: z.string().optional(),
+  countryOfResidence: z
+    .string()
+    .min(1, "Country of Residence is required")
+    .max(72, "Country of Residence must be a maximum of 72 characters"),
+  taxIdType: z.string().min(1, "Tax ID Type is required"),
+  taxIdNumber: z.string().min(1, "Tax ID Number is required"),
+  mailingAddress: z.string().optional(),
+  mailingCity: z.string().optional(),
+  mailingZip: z.string().optional(),
+  mailingCountry: z.string().optional()
+});
