@@ -263,6 +263,48 @@ export const W8IndividualForm = () => {
             )}
           />
 
+          <FormField
+            control={form.control}
+            name="taxIdNumber"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Tax ID Number*</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Tax ID Number*" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="referenceNumber"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Reference number(s)*</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Reference number(s)*" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="dateOfBirth"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Date of Birth*</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Date of Birth*" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <div className="w-full col-span-2 flex items-center justify-between mt-4">
             <GradientButton
               variant="destructive"

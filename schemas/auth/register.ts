@@ -126,7 +126,7 @@ export const W8IndividualDetailsSchema = z.object({
     .string()
     .min(1, "Reference Number is required")
     .max(72, "Reference Number must be a maximum of 72 characters"),
-  dateOfBirthday: z
+  dateOfBirth: z
     .string()
     .min(1, "Date of Birth is required")
     .max(72, "Date of Birth must be a maximum of 72 characters")
