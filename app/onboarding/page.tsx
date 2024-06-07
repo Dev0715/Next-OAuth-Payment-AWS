@@ -12,7 +12,7 @@ import { TaxForm } from "@/components/auth/register/tax-form";
 import { W8Form } from "@/components/auth/register/w8-form";
 import { W9Form } from "@/components/auth/register/w9-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
-import { updateCustomerData } from "@/data/user";
+import { updateAffiliateData, updateCustomerData } from "@/data/user";
 import { userAtom } from "@/store/user";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
@@ -144,17 +144,25 @@ const OnboardingPage = () => {
   const handleUpdateData = async () => {
     if (!isCompleteStep || !user) return;
 
+    setLoading(true);
     try {
-      setLoading(true);
       if (userData.selectedAccounts.user) {
         await updateCustomerData({
           userId: user.userId,
           customerData: { isCustomer: true, customerId: uuid() }
         });
       }
+
+      if (userData.selectedAccounts.affiliate) {
+        await updateAffiliateData({
+          userId: user.userId,
+          affiliateData: { isAffiliate: true, affiliateId: uuid() }
+        });
+      }
     } catch (error) {
       // TODO: handle error
     }
+    setLoading(false);
   };
 
   return (
