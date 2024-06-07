@@ -417,7 +417,7 @@ export const W8CorporationForm = ({ onNext, onBack }: Props) => {
               <FormItem className="col-span-2">
                 <FormLabel>Tax ID Number*</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Tax ID Number*" />
+                  <Input {...field} placeholder="Tax ID Number" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
