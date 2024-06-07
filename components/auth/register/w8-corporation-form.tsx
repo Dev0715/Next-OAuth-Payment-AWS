@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -27,6 +28,7 @@ import {
 import { GradientButton } from "@/components/utils/gradient-button";
 import { W8CorporationDetailsSchema } from "@/schemas/auth/register";
 import { CHAPTER3STATUS, COUNTRIES } from "@/shared/constants/user.constant";
+import { userAtom } from "@/store/user";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
@@ -37,10 +39,16 @@ type Props = {
 };
 
 export const W8CorporationForm = ({ onNext, onBack }: Props) => {
+  const [user] = useAtom(userAtom);
+
   const [mailing, setMailing] = useState(true);
 
   const form = useForm<z.infer<typeof W8CorporationDetailsSchema>>({
-    resolver: zodResolver(W8CorporationDetailsSchema)
+    resolver: zodResolver(W8CorporationDetailsSchema),
+    defaultValues: {
+      firstName: user?.firstname,
+      lastName: user?.lastname
+    }
   });
 
   const onSubmit = (values: z.infer<typeof W8CorporationDetailsSchema>) => {

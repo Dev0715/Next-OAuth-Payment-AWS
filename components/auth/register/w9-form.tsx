@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAtom } from "jotai";
 
 import { useForm } from "react-hook-form";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -30,6 +31,8 @@ import {
   US_STATES
 } from "@/shared/constants/user.constant";
 
+import { userAtom } from "@/store/user";
+
 import type { SignedUpData } from "@/shared/types/signup-data.type";
 
 type Props = {
@@ -39,8 +42,14 @@ type Props = {
 };
 
 export const W9Form = ({ onUpdate, onNext, onBack }: Props) => {
+  const [user] = useAtom(userAtom);
+
   const form = useForm<z.infer<typeof w9DetailsSchema>>({
-    resolver: zodResolver(w9DetailsSchema)
+    resolver: zodResolver(w9DetailsSchema),
+    defaultValues: {
+      firstName: user?.firstname,
+      lastName: user?.lastname
+    }
   });
 
   const onSubmit = (values: z.infer<typeof w9DetailsSchema>) => {
