@@ -7,6 +7,7 @@ import { RegisterCompleteForm } from "@/components/auth/register/register-comple
 import { SelectAccountsForm } from "@/components/auth/register/select-accounts-form";
 import { SelectMatchingForm } from "@/components/auth/register/select-matching-form";
 import { TaxForm } from "@/components/auth/register/tax-form";
+import { W8Form } from "@/components/auth/register/w8-form";
 import { W9Form } from "@/components/auth/register/w9-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
 
@@ -171,7 +172,7 @@ const OnboardingPage = () => {
         <W9Form onBack={handleBack} onUpdate={handleUpdateUserData} />
       </TransitionInOut>
       <TransitionInOut title="Your tax information" condition={isW8Step()}>
-        <W9Form onBack={handleBack} onUpdate={handleUpdateUserData} />
+        <W8Form />
       </TransitionInOut>
       <TransitionInOut title="Congratulations!" condition={isCompleteStep()}>
         <RegisterCompleteForm />

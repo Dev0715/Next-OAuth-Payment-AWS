@@ -1,9 +1,27 @@
 "use client";
 
+import { useState } from "react";
+
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export const W8Form = () => {
+  const [registerType, setRegisterType] = useState("");
+
+  // const onSubmit = (values: z.infer<typeof W8D>) => {
+  //   console.log(values);
+  //   onUpdate({
+  //     w9Details: {
+  //       ...values
+  //       // cover
+  //     }
+  //   });
+  // };
+
+  // const handleBackClicked = () => {
+  //   onBack();
+  // };
+
   return (
     <div className="w-full">
       <p className="t-body -size-m mb-8">
@@ -11,7 +29,7 @@ export const W8Form = () => {
         the Form W-8 below which will be stored securely.
       </p>
 
-      <RadioGroup>
+      <RadioGroup defaultValue={registerType} onValueChange={setRegisterType}>
         <div className="flex items-center gap-x-4 cursor-pointer">
           <RadioGroupItem value="true" id="us" />
           <Label htmlFor="individual" className="cursor-pointer">
