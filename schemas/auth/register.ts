@@ -71,8 +71,8 @@ export const w9DetailsSchema = z.object({
   lastName: z.string().optional(),
   businessName: z
     .string()
-    .min(1, "First name is required")
-    .max(72, "First name must be a maximum of 72 characters")
+    .min(1, "Business name is required")
+    .max(72, "Business name must be a maximum of 72 characters")
     .optional(),
   taxClassification: z.string().min(1, "Tax Classification is required"),
   address: z
@@ -81,17 +81,53 @@ export const w9DetailsSchema = z.object({
     .max(72, "Address must be a maximum of 72 characters"),
   city: z
     .string()
-    .min(1, "City is required")
-    .max(72, "City must be a maximum of 72 characters"),
+    .min(1, "City / Town is required")
+    .max(72, "City / Town must be a maximum of 72 characters"),
   state: z
     .string()
-    .min(1, "State is required")
-    .max(72, "State must be a maximum of 72 characters"),
+    .min(1, "State / Province is required")
+    .max(72, "State / Province must be a maximum of 72 characters"),
   zip: z
     .string()
-    .min(1, "State is required")
-    .max(72, "State must be a maximum of 72 characters"),
+    .min(1, "ZIP / Post Code is required")
+    .max(72, "ZIP / Post Code must be a maximum of 72 characters"),
   accountNumbers: z.string().optional(),
   taxIdType: z.string().min(1, "Tax ID Type is required"),
   taxIdNumber: z.string().min(1, "Tax ID Number is required")
+});
+
+export const W8IndividualDetailsSchema = z.object({
+  firstName: z
+    .string()
+    .min(1, "First name is required")
+    .max(72, "First name must be a maximum of 72 characters"),
+  lastName: z.string().optional(),
+  countryCitizenShip: z
+    .string()
+    .min(1, "Country of CitizenShip is required")
+    .max(72, "Country of Citizenship must be a maximum of 72 characters"),
+  countryResidence: z
+    .string()
+    .min(1, "Country of Residence is required")
+    .max(72, "Country of Residence must be a maximum of 72 characters"),
+  address: z
+    .string()
+    .min(1, "Address is required")
+    .max(72, "Address must be a maximum of 72 characters"),
+  city: z
+    .string()
+    .min(1, "City is required")
+    .max(72, "City must be a maximum of 72 characters"),
+  state: z.string().optional(),
+  zip: z.string().optional(),
+  taxIdType: z.string().min(1, "Tax ID Type is required"),
+  taxIdNumber: z.string().min(1, "Tax ID Number is required"),
+  referenceNumber: z
+    .string()
+    .min(1, "Reference Number is required")
+    .max(72, "Reference Number must be a maximum of 72 characters"),
+  dateOfBirthday: z
+    .string()
+    .min(1, "Date of Birth is required")
+    .max(72, "Date of Birth must be a maximum of 72 characters")
 });
