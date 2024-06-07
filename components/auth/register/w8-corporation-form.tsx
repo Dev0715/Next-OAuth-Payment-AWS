@@ -132,6 +132,20 @@ export const W8CorporationForm = () => {
 
           <FormField
             control={form.control}
+            name="entityName"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Name of Disregarded Entity</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Name of Disregarded Entity" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="taxIdType"
             render={({ field }) => (
               <FormItem className="col-span-2">
