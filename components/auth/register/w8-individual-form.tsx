@@ -15,6 +15,8 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -190,6 +192,71 @@ export const W8IndividualForm = () => {
                 <FormLabel>ZIP / Post Code</FormLabel>
                 <FormControl>
                   <Input {...field} placeholder="ZIP / Post Code" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="taxIdType"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Tax ID Type*</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    defaultValue={field.value}
+                    onValueChange={field.onChange}
+                    className="w-full flex flex-col"
+                  >
+                    <div className="flex items-center gap-x-4 cursor-pointer">
+                      <RadioGroupItem value={"SSN"} id={"SSN"} />
+                      <Label
+                        htmlFor={"U.S. Social Security Number (SSN)"}
+                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
+                      >
+                        <p className="text-lg">
+                          U.S. Social Security Number (SSN)
+                        </p>
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-x-4 cursor-pointer">
+                      <RadioGroupItem value={"EIN"} id={"EIN"} />
+                      <Label
+                        htmlFor={
+                          "Individual Taxpayer Identification Number (ITIN)"
+                        }
+                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
+                      >
+                        <p className="text-lg">
+                          Individual Taxpayer Identification Number (ITIN)
+                        </p>
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-x-4 cursor-pointer">
+                      <RadioGroupItem value={"FOREIGN"} id={"FOREIGN"} />
+                      <Label
+                        htmlFor={"Foreign Tax ID Number"}
+                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
+                      >
+                        <p className="text-lg">Foreign Tax ID Number</p>
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-x-4 cursor-pointer">
+                      <RadioGroupItem value={"NOT"} id={"NOT"} />
+                      <Label
+                        htmlFor={
+                          "I will not or am unable to provide a Tax ID Number"
+                        }
+                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
+                      >
+                        <p className="text-lg">
+                          I will not or am unable to provide a Tax ID Number
+                        </p>
+                      </Label>
+                    </div>
+                  </RadioGroup>
                 </FormControl>
                 <FormMessage />
               </FormItem>
