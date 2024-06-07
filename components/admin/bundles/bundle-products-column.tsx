@@ -2,7 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { GradientButton } from "@/components/utils/gradient-button";
 
 import type { Product } from "@/shared/types/product.type";
 
@@ -84,13 +84,13 @@ export const getColumnsForBundleProductsTable = ({
         const product = row.original;
         return (
           <div className="flex justify-center">
-            <Button
+            <GradientButton
               variant={"destructive"}
-              className="h-6 text-sm rounded-none"
+              className="h-6 text-sm"
               onClick={() => onProductDelete(product.productId)}
             >
               Remove
-            </Button>
+            </GradientButton>
           </div>
         );
       }

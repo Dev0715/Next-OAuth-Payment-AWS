@@ -90,7 +90,7 @@ export const getColumnsForMangersTable = ({
       cell: ({ row }) => (
         <GradientButton
           variant={"destructive"}
-          className="h-8 rounded-none"
+          className="h-8"
           onClick={() => onDelete(row.index)}
         >
           Delete
