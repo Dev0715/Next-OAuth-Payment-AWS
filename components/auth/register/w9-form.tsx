@@ -24,7 +24,6 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-
 import { GradientButton } from "@/components/utils/gradient-button";
 import { w9DetailsSchema } from "@/schemas/auth/register";
 import {

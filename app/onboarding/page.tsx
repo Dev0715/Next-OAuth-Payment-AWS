@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { CreatorDetailsForm } from "@/components/auth/register/creator-details-form";
 import { RegisterCompleteForm } from "@/components/auth/register/register-complete-form";
@@ -108,7 +108,7 @@ const OnboardingPage = () => {
     return step === _step && !userData.taxInformation.usPerson;
   };
 
-  const isCompleteStep = () => {
+  const isCompleteStep = useMemo(() => {
     let _step = 1;
     if (userData.selectedAccounts.creator) {
       _step += 4;
@@ -116,7 +116,12 @@ const OnboardingPage = () => {
       _step += 2;
     }
     return step === _step;
-  };
+  }, [userData, step]);
+
+  useEffect(() => {
+    if (!isCompleteStep) return;
+    // TODO: handle update user profile
+  }, [isCompleteStep]);
 
   const handleNext = () => {
     setStep((step) => step + 1);
@@ -174,7 +179,7 @@ const OnboardingPage = () => {
       <TransitionInOut title="Your tax information" condition={isW8Step()}>
         <W8Form />
       </TransitionInOut>
-      <TransitionInOut title="Congratulations!" condition={isCompleteStep()}>
+      <TransitionInOut title="Congratulations!" condition={isCompleteStep}>
         <RegisterCompleteForm />
       </TransitionInOut>
     </div>
