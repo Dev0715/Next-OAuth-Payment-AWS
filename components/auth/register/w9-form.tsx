@@ -15,7 +15,6 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
@@ -235,28 +234,22 @@ export const W9Form = ({ onUpdate, onNext, onBack }: Props) => {
                     onValueChange={field.onChange}
                     className="w-full flex flex-col"
                   >
-                    <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"SSN"} id={"SSN"} />
-                      <Label
-                        htmlFor={"SSN"}
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">
-                          U.S. Social Security Number (SSN)
-                        </p>
-                      </Label>
-                    </div>
-                    <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"EIN"} id={"EIN"} />
-                      <Label
-                        htmlFor={"EIN"}
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">
-                          U.S. Employer Identification Number (EIN)
-                        </p>
-                      </Label>
-                    </div>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="ssn" />
+                      </FormControl>
+                      <FormLabel className="cursor-pointer">
+                        U.S. Social Security Number (SSN)
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="ein" />
+                      </FormControl>
+                      <FormLabel className="cursor-pointer">
+                        U.S. Employer Identification Number (EIN)
+                      </FormLabel>
+                    </FormItem>
                   </RadioGroup>
                 </FormControl>
                 <FormMessage />

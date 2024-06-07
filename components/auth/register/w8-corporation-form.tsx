@@ -16,7 +16,6 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
@@ -367,30 +366,38 @@ export const W8CorporationForm = ({ onNext, onBack }: Props) => {
                     onValueChange={field.onChange}
                     className="w-full flex flex-col"
                   >
-                    <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value="tin" id="tin" />
-                      <Label htmlFor="tin" className="cursor-pointer">
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="ein" />
+                      </FormControl>
+                      <FormLabel className="cursor-pointer">
                         TIN (US Taxpayer Identification Number)
-                      </Label>
-                    </div>
-                    <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value="giin" id="giin" />
-                      <Label htmlFor="giin" className="cursor-pointer">
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="giin" />
+                      </FormControl>
+                      <FormLabel className="cursor-pointer">
                         GIIN (Global Intermediary Identification Number)
-                      </Label>
-                    </div>
-                    <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value="FOREIGN" id="FOREIGN" />
-                      <Label htmlFor="FOREIGN" className="cursor-pointer">
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="ftin" />
+                      </FormControl>
+                      <FormLabel className="cursor-pointer">
                         Foreign Tax ID Number
-                      </Label>
-                    </div>
-                    <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value="NOT" id="NOT" />
-                      <Label htmlFor="NOT" className="cursor-pointer">
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="na" />
+                      </FormControl>
+                      <FormLabel className="cursor-pointer">
                         I will not or am unable to provide a Tax ID Number
-                      </Label>
-                    </div>
+                      </FormLabel>
+                    </FormItem>
                   </RadioGroup>
                 </FormControl>
                 <FormMessage />
