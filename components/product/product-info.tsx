@@ -123,7 +123,7 @@ export const ProductInfo = ({ product, isPending }: Props) => {
               disabled={isPending}
               className="w-full border-green-700 gap-x-2"
             >
-              <FaRegUser className="text-green-700" />
+              <FaRegUser className="text-white" />
               {`Go to Creator's Profile`}
             </GradientButton>
           </Link>
@@ -132,7 +132,7 @@ export const ProductInfo = ({ product, isPending }: Props) => {
             onClick={onDownloadCreativeFiles}
             className="w-full border-green-700 gap-x-2"
           >
-            <FaDownload className="text-green-700" />
+            <FaDownload className="text-white" />
             Download Creative Files
           </GradientButton>
         </div>

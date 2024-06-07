@@ -118,9 +118,7 @@ export const CreatorCompleteForm = ({
         message={confirmMessage}
         onOK={onConfirmed}
       />
-      <p className="text-xl text-green-700">
-        Complete registration for a creator.
-      </p>
+      <p className="text-xl text-white">Complete registration for a creator.</p>
       <div className="flex flex-col">
         <p>Congratulations!</p>
         <p className="text-base text-gray-500">

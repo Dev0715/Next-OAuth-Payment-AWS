@@ -94,7 +94,7 @@ export const AffiliateCompleteForm = ({
         message={confirmMessage}
         onOK={onConfirmed}
       />
-      <p className="text-xl text-green-700">
+      <p className="text-xl text-white">
         {step + 1}. Complete registration for an affiliate.
       </p>
       <div className="flex flex-col">
