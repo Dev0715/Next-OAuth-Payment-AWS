@@ -213,7 +213,7 @@ export const W8IndividualForm = () => {
                     <div className="flex items-center gap-x-4 cursor-pointer">
                       <RadioGroupItem value={"SSN"} id={"SSN"} />
                       <Label
-                        htmlFor={"U.S. Social Security Number (SSN)"}
+                        htmlFor={"SSN"}
                         className="flex items-center gap-x-4 text-5xl cursor-pointer"
                       >
                         <p className="text-lg">
@@ -222,11 +222,9 @@ export const W8IndividualForm = () => {
                       </Label>
                     </div>
                     <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"EIN"} id={"EIN"} />
+                      <RadioGroupItem value={"ITIN"} id={"ITIN"} />
                       <Label
-                        htmlFor={
-                          "Individual Taxpayer Identification Number (ITIN)"
-                        }
+                        htmlFor={"ITIN"}
                         className="flex items-center gap-x-4 text-5xl cursor-pointer"
                       >
                         <p className="text-lg">
@@ -237,7 +235,7 @@ export const W8IndividualForm = () => {
                     <div className="flex items-center gap-x-4 cursor-pointer">
                       <RadioGroupItem value={"FOREIGN"} id={"FOREIGN"} />
                       <Label
-                        htmlFor={"Foreign Tax ID Number"}
+                        htmlFor={"FOREIGN"}
                         className="flex items-center gap-x-4 text-5xl cursor-pointer"
                       >
                         <p className="text-lg">Foreign Tax ID Number</p>
@@ -246,9 +244,7 @@ export const W8IndividualForm = () => {
                     <div className="flex items-center gap-x-4 cursor-pointer">
                       <RadioGroupItem value={"NOT"} id={"NOT"} />
                       <Label
-                        htmlFor={
-                          "I will not or am unable to provide a Tax ID Number"
-                        }
+                        htmlFor={"NOT"}
                         className="flex items-center gap-x-4 text-5xl cursor-pointer"
                       >
                         <p className="text-lg">
