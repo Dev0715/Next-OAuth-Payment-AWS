@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-
 import { useForm } from "react-hook-form";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
@@ -26,10 +25,8 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-
 import { GradientButton } from "@/components/utils/gradient-button";
 import { W8CorporationDetailsSchema } from "@/schemas/auth/register";
-
 import { CHAPTER3STATUS, COUNTRIES } from "@/shared/constants/user.constant";
 
 export const W8CorporationForm = () => {
@@ -49,7 +46,7 @@ export const W8CorporationForm = () => {
 
   return (
     <div className="w-full mt-8">
-      <p className="t-body -size-m mb-8">
+      <p className="-size-m mb-8">
         We can only accept letters, numbers and special characters &amp; - , / #
         ( ) . Please use the English equivalent of accented characters, eg. a
         for à.
@@ -130,6 +127,7 @@ export const W8CorporationForm = () => {
               </FormItem>
             )}
           />
+
           <p className="col-span-2 text-center" style={{ color: "grey" }}>
             Must match name as shown on your income tax return
           </p>
@@ -153,7 +151,7 @@ export const W8CorporationForm = () => {
             name="chapter3Status"
             render={({ field }) => (
               <FormItem className="col-span-2">
-                <FormLabel>Chatper 3 Status*</FormLabel>
+                <FormLabel>Chapter 3 Status*</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -284,49 +282,27 @@ export const W8CorporationForm = () => {
                     className="w-full flex flex-col"
                   >
                     <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"SSN"} id={"SSN"} />
-                      <Label
-                        htmlFor={"TIN (US Taxpayer Identification Number)"}
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">
-                          TIN (US Taxpayer Identification Number)
-                        </p>
+                      <RadioGroupItem value="tin" id="tin" />
+                      <Label htmlFor="tin" className="cursor-pointer">
+                        TIN (US Taxpayer Identification Number)
                       </Label>
                     </div>
                     <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"EIN"} id={"EIN"} />
-                      <Label
-                        htmlFor={
-                          "GIIN (Global Intermediary Identification Number)"
-                        }
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">
-                          GIIN (Global Intermediary Identification Number)
-                        </p>
+                      <RadioGroupItem value="giin" id="giin" />
+                      <Label htmlFor="giin" className="cursor-pointer">
+                        GIIN (Global Intermediary Identification Number)
                       </Label>
                     </div>
                     <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"FOREIGN"} id={"FOREIGN"} />
-                      <Label
-                        htmlFor={"Foreign Tax ID Number"}
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">Foreign Tax ID Number</p>
+                      <RadioGroupItem value="FOREIGN" id="FOREIGN" />
+                      <Label htmlFor="FOREIGN" className="cursor-pointer">
+                        Foreign Tax ID Number
                       </Label>
                     </div>
                     <div className="flex items-center gap-x-4 cursor-pointer">
-                      <RadioGroupItem value={"NOT"} id={"NOT"} />
-                      <Label
-                        htmlFor={
-                          "I will not or am unable to provide a Tax ID Number"
-                        }
-                        className="flex items-center gap-x-4 text-5xl cursor-pointer"
-                      >
-                        <p className="text-lg">
-                          I will not or am unable to provide a Tax ID Number
-                        </p>
+                      <RadioGroupItem value="NOT" id="NOT" />
+                      <Label htmlFor="NOT" className="cursor-pointer">
+                        I will not or am unable to provide a Tax ID Number
                       </Label>
                     </div>
                   </RadioGroup>

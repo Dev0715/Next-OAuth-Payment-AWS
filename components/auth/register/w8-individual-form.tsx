@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { useForm } from "react-hook-form";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
@@ -24,10 +23,8 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-
 import { GradientButton } from "@/components/utils/gradient-button";
 import { W8IndividualDetailsSchema } from "@/schemas/auth/register";
-
 import { COUNTRIES } from "@/shared/constants/user.constant";
 
 export const W8IndividualForm = () => {
