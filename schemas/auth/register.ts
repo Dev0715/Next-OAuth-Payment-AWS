@@ -63,7 +63,7 @@ export const TaxInfoSchema = z.object({
   usPerson: z.boolean()
 });
 
-export const w9DetailSchema = z.object({
+export const w9DetailsSchema = z.object({
   firstName: z
     .string()
     .min(1, "First name is required")
@@ -75,10 +75,6 @@ export const w9DetailSchema = z.object({
     .max(72, "First name must be a maximum of 72 characters")
     .optional(),
   taxClassification: z.string().min(1, "Tax Classification is required"),
-  country: z
-    .string()
-    .min(1, "Country is required")
-    .max(72, "Country must be a maximum of 72 characters"),
   address: z
     .string()
     .min(1, "Address is required")

@@ -5,7 +5,7 @@ import {
   GeneralDetailsSchema,
   SelectAccountsSchema,
   TaxInfoSchema,
-  w9DetailSchema
+  w9DetailsSchema
 } from "@/schemas/auth/register";
 
 export type SignedUpData = {
@@ -20,5 +20,5 @@ export type SignedUpData = {
     cmk: boolean;
   };
   taxInformation: z.infer<typeof TaxInfoSchema>;
-  w9Detail: z.infer<typeof w9DetailSchema>;
+  w9Details: z.infer<typeof w9DetailsSchema>;
 };

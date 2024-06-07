@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useForm } from "react-hook-form";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import * as z from "zod";
@@ -25,7 +26,7 @@ import {
 } from "@/components/ui/select";
 
 import { GradientButton } from "@/components/utils/gradient-button";
-import { w9DetailSchema } from "@/schemas/auth/register";
+import { w9DetailsSchema } from "@/schemas/auth/register";
 import {
   TAX_CLASSIFICATIONS,
   US_STATES
@@ -39,13 +40,14 @@ type Props = {
 };
 
 export const W9Form = ({ onUpdate, onBack }: Props) => {
-  const form = useForm<z.infer<typeof w9DetailSchema>>({
-    resolver: zodResolver(w9DetailSchema)
+  const form = useForm<z.infer<typeof w9DetailsSchema>>({
+    resolver: zodResolver(w9DetailsSchema)
   });
 
-  const onSubmit = (values: z.infer<typeof w9DetailSchema>) => {
+  const onSubmit = (values: z.infer<typeof w9DetailsSchema>) => {
+    console.log(values);
     onUpdate({
-      w9Detail: {
+      w9Details: {
         ...values
         // cover
       }
@@ -58,7 +60,7 @@ export const W9Form = ({ onUpdate, onBack }: Props) => {
 
   return (
     <div className="w-full">
-      <p className="t-body -size-m">
+      <p className="t-body -size-m mb-8">
         We can only accept letters, numbers and special characters &amp; - , / #
         ( ) . Please use the English equivalent of accented characters, eg. a
         for à.
@@ -145,33 +147,6 @@ export const W9Form = ({ onUpdate, onBack }: Props) => {
           />
           <FormField
             control={form.control}
-            name="country"
-            render={({ field }) => (
-              <FormItem className="col-span-2">
-                <FormLabel>Country*</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a country" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {TAX_CLASSIFICATIONS.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="address"
             render={({ field }) => (
               <FormItem className="col-span-2">
@@ -199,7 +174,7 @@ export const W9Form = ({ onUpdate, onBack }: Props) => {
 
           <FormField
             control={form.control}
-            name="taxClassification"
+            name="state"
             render={({ field }) => (
               <FormItem className="col-span-2">
                 <FormLabel>State / Province*</FormLabel>

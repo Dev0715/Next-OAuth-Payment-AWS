@@ -50,12 +50,11 @@ const OnboardingPage = () => {
     taxInformation: {
       usPerson: false
     },
-    w9Detail: {
+    w9Details: {
       firstName: "",
       lastName: "",
       businessName: "",
       taxClassification: "",
-      country: "",
       address: "",
       city: "",
       state: "",
@@ -67,7 +66,6 @@ const OnboardingPage = () => {
   });
 
   const [step, setStep] = useState(STEPS.INITIAL);
-  console.log(step);
 
   const isCreatorStep =
     userData.selectedAccounts.creator && step === STEPS.KRE8TOR;
