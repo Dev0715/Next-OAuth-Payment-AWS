@@ -26,13 +26,13 @@ export const W8Form = () => {
           onValueChange={setRegisterType}
         >
           <div className="flex items-center gap-x-4 cursor-pointer">
-            <RadioGroupItem value="individual" id="us" />
+            <RadioGroupItem value="individual" id="individual" />
             <Label htmlFor="individual" className="cursor-pointer">
               An individual
             </Label>
           </div>
           <div className="flex items-center gap-x-4 cursor-pointer">
-            <RadioGroupItem value="corporation" id="notUs" />
+            <RadioGroupItem value="corporation" id="corporation" />
             <Label htmlFor="corporation" className="cursor-pointer">
               A Corporation
             </Label>
