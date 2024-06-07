@@ -13,6 +13,8 @@ import { ProductInfo } from "@/components/product/product-info";
 import { Card, CardTitle } from "@/components/ui/card";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
+import { GradientParagraph } from "@/components/utils/gradient-paragraph";
+
 import { getProductById, updateProductState } from "@/data/product";
 import { userAtom } from "@/store/user";
 
@@ -135,9 +137,11 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
         </CardTitle>
       </div>
 
-      <Card className="p-6 rounded-none">
+      <Card className="p-6 rounded-3xl">
         <div className="w-full flex flex-col gap-y-4">
-          <p className="text-2xl font-semibold">Product State</p>
+          <GradientParagraph className="text-2xl font-semibold">
+            Product State
+          </GradientParagraph>
           <ProductHistory history={product?.approval.history || []} />
         </div>
       </Card>

@@ -23,7 +23,7 @@ export const ProductApprovement = ({
   onCommentProduct
 }: Props) => {
   return (
-    <Card className="w-full p-6 flex flex-col gap-y-4">
+    <Card className="w-full p-6 flex flex-col gap-y-4 rounded-3xl">
       <GradientParagraph className="text-2xl font-semibold">
         Product Approvement
       </GradientParagraph>
