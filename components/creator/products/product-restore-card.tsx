@@ -35,10 +35,7 @@ export const ProductRestoreCard = ({
 
       <div className="w-full flex justify-between">
         <div className="flex gap-x-4">
-          <GradientButton
-            className="w-64 flex gap-x-4 rounded-none"
-            onClick={onGoBack}
-          >
+          <GradientButton className="w-64 flex gap-x-4" onClick={onGoBack}>
             <FaArrowLeft />
             Go back
           </GradientButton>
@@ -47,10 +44,7 @@ export const ProductRestoreCard = ({
             message="Are you sure want to restore product from archived queue?"
             onContinue={onRestoreFromArchived}
           >
-            <GradientButton
-              variant={"outline"}
-              className="w-64 flex gap-x-4 border-green-700 rounded-none"
-            >
+            <GradientButton variant={"outline"} className="w-64 flex gap-x-4">
               Restore from archived
             </GradientButton>
           </QuestionAlert>
@@ -66,7 +60,7 @@ export const ProductRestoreCard = ({
       </div>
 
       {isPreview ? (
-        <Card className="p-6 rounded-none">
+        <Card className="p-6">
           <ProductInfo product={product} isPending={true} />
         </Card>
       ) : null}

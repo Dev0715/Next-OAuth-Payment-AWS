@@ -75,7 +75,7 @@ export const ProductInfo = ({ product, isPending }: Props) => {
   return (
     <div className="w-full flex gap-x-8">
       <div className="w-3/4 flex flex-col gap-y-4">
-        <Avatar className="w-full h-[480px] rounded-none">
+        <Avatar className="w-full h-[480px]">
           <AvatarImage
             src={imageList[selectedIndex]}
             className="object-cover"

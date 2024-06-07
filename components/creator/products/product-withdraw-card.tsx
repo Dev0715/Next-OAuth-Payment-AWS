@@ -36,7 +36,7 @@ export const ProductWithdrawCard = ({
 
       <div className="w-full flex justify-between">
         <div className="flex gap-x-4">
-          <Button className="w-64 flex gap-x-4 rounded-none" onClick={onGoBack}>
+          <Button className="w-64 flex gap-x-4" onClick={onGoBack}>
             <FaArrowLeft />
             Go back
           </Button>
@@ -45,10 +45,7 @@ export const ProductWithdrawCard = ({
             message="Are you sure want to withdraw product from applied queue?"
             onContinue={onWithdrawFromPublished}
           >
-            <Button
-              variant={"outline"}
-              className="w-64 flex gap-x-4 border-green-700 rounded-none"
-            >
+            <Button variant={"outline"} className="w-64 flex gap-x-4">
               Remove from Sale
             </Button>
           </QuestionAlert>
@@ -64,7 +61,7 @@ export const ProductWithdrawCard = ({
       </div>
 
       {isPreview ? (
-        <Card className="p-6 rounded-none">
+        <Card className="p-6">
           <ProductInfo product={product} isPending={true} />
         </Card>
       ) : null}

@@ -226,10 +226,7 @@ export const ProductUpdateForm = ({ product, setProduct }: Props) => {
             message="Are you sure want to delete this item?"
             onContinue={onDelete}
           >
-            <GradientButton
-              variant={"destructive"}
-              className="w-64 gap-x-4 rounded-none border-green-700"
-            >
+            <GradientButton variant={"destructive"} className="w-64 gap-x-4">
               <FaTrash />
               Delete Product
             </GradientButton>

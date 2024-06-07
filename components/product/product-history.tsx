@@ -25,7 +25,7 @@ export const ProductHistory = ({ history }: Props) => {
         <ProductEventCard event={_history[0]} />
         <GradientButton
           variant={"outline"}
-          className="h-8 border border-green-700 rounded-none font-firs"
+          className="h-8 border font-firs"
           onClick={onShowMore}
         >
           Show {showMore ? "Less" : "More"}
