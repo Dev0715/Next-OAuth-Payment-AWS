@@ -285,7 +285,7 @@ export const W8CorporationForm = ({ onNext, onBack }: Props) => {
                 name="mailingAddress"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <FormLabel>Permanent Residence Address*</FormLabel>
+                    <FormLabel>Mailing Address*</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -302,7 +302,7 @@ export const W8CorporationForm = ({ onNext, onBack }: Props) => {
                 name="mailingCity"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <FormLabel>City / Town*</FormLabel>
+                    <FormLabel>Mailing City / Town*</FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="City / Town" />
                     </FormControl>
@@ -316,7 +316,7 @@ export const W8CorporationForm = ({ onNext, onBack }: Props) => {
                 name="mailingZip"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <FormLabel>ZIP / Post Code</FormLabel>
+                    <FormLabel>Mailing ZIP / Post Code</FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="ZIP / Post Code" />
                     </FormControl>
@@ -330,7 +330,7 @@ export const W8CorporationForm = ({ onNext, onBack }: Props) => {
                 name="mailingCountry"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <FormLabel>Country of Residence*</FormLabel>
+                    <FormLabel>Mailing Country</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
