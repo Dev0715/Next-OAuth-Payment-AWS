@@ -286,11 +286,11 @@ export const W8CorporationForm = () => {
                     <div className="flex items-center gap-x-4 cursor-pointer">
                       <RadioGroupItem value={"SSN"} id={"SSN"} />
                       <Label
-                        htmlFor={"U.S. Social Security Number (SSN)"}
+                        htmlFor={"TIN (US Taxpayer Identification Number)"}
                         className="flex items-center gap-x-4 text-5xl cursor-pointer"
                       >
                         <p className="text-lg">
-                          U.S. Social Security Number (SSN)
+                          TIN (US Taxpayer Identification Number)
                         </p>
                       </Label>
                     </div>
@@ -298,12 +298,12 @@ export const W8CorporationForm = () => {
                       <RadioGroupItem value={"EIN"} id={"EIN"} />
                       <Label
                         htmlFor={
-                          "Individual Taxpayer Identification Number (ITIN)"
+                          "GIIN (Global Intermediary Identification Number)"
                         }
                         className="flex items-center gap-x-4 text-5xl cursor-pointer"
                       >
                         <p className="text-lg">
-                          Individual Taxpayer Identification Number (ITIN)
+                          GIIN (Global Intermediary Identification Number)
                         </p>
                       </Label>
                     </div>
