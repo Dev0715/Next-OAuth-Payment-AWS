@@ -12,7 +12,11 @@ import { TaxForm } from "@/components/auth/register/tax-form";
 import { W8Form } from "@/components/auth/register/w8-form";
 import { W9Form } from "@/components/auth/register/w9-form";
 import { TransitionInOut } from "@/components/utils/transition-in-out";
-import { updateAffiliateData, updateCustomerData } from "@/data/user";
+import {
+  updateAffiliateData,
+  updateCreatorData,
+  updateCustomerData
+} from "@/data/user";
 import { userAtom } from "@/store/user";
 
 import type { SignedUpData } from "@/shared/types/signup-data.type";
@@ -43,9 +47,11 @@ const OnboardingPage = () => {
     creatorDetails: {
       bio: "",
       jobTitle: "",
-      companyName: "",
-      companyCountry: "",
-      companyWebsite: ""
+      company: {
+        name: "",
+        country: "",
+        website: ""
+      }
     },
     creatorMatchings: {
       env: false,
@@ -157,6 +163,18 @@ const OnboardingPage = () => {
         await updateAffiliateData({
           userId: user.userId,
           affiliateData: { isAffiliate: true, affiliateId: uuid() }
+        });
+      }
+
+      if (userData.selectedAccounts.creator) {
+        await updateCreatorData({
+          userId: user.userId,
+          creatorData: {
+            isCreator: true,
+            creatorId: uuid(),
+            websites: [],
+            ...userData.creatorDetails
+          }
         });
       }
     } catch (error) {
