@@ -31,7 +31,7 @@ export const Navbar = ({
           disabled={isPending}
           onClick={onCheckout}
           variant="outline"
-          className="flex items-center gap-x-2 border-green-700"
+          className="flex items-center gap-x-2"
         >
           <FaArrowRight />
           Go to Checkout

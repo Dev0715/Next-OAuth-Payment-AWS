@@ -45,7 +45,7 @@ export const CartItem = ({
         <Avatar className="w-72 h-48 rounded-none">
           <AvatarImage src={imagePath} className="object-fill aspect-auto" />
           <AvatarFallback className="bg-sky-500">
-            <div className="w-full h-full bg-green-700"></div>
+            <div className="w-full h-full"></div>
           </AvatarFallback>
         </Avatar>
         <div className="w-full flex flex-col justify-between p-4">

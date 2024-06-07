@@ -271,13 +271,9 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
               </div>
             </div>
             <div className="flex flex-col gap-y-4">
-              <GradientButton
-                disabled={isPending}
-                asChild
-                className="border-green-700 gap-x-2"
-              >
+              <GradientButton disabled={isPending} asChild className="gap-x-2">
                 <Link href={`/creator/${product?.ownerId}`}>
-                  <FaRegUser className="text-green-700" />
+                  <FaRegUser className="text-white" />
                   {`Go to Creator's Profile`}
                 </Link>
               </GradientButton>
@@ -287,11 +283,8 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
                 onContinue={onConfirmCart}
                 onCancel={() => {}}
               >
-                <GradientButton
-                  disabled={isPending}
-                  className="w-full border-green-700 gap-x-2"
-                >
-                  <FaCartArrowDown className="text-green-700" />
+                <GradientButton disabled={isPending} className="w-full gap-x-2">
+                  <FaCartArrowDown className="text-white" />
                   Add to cart
                 </GradientButton>
               </QuestionAlert>
@@ -311,9 +304,9 @@ export default function ProductDetails({ params }: { params: ProductLink }) {
                 disabled={isPending}
                 onClick={onDownloadCreativeFiles}
                 variant="outline"
-                className="w-full border-green-700 gap-x-2"
+                className="w-full gap-x-2"
               >
-                <FaDownload className="text-green-700" />
+                <FaDownload className="text-white" />
                 Download
               </GradientButton>
             </div>
