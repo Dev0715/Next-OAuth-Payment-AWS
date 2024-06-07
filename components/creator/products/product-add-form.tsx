@@ -163,7 +163,7 @@ export const ProductAddForm = () => {
         <div className="flex gap-x-6 items-end">
           <GradientButton
             disabled={isPending}
-            className="w-64 gap-x-4 rounded-none border-green-700"
+            className="w-64 gap-x-4"
             onClick={form.handleSubmit(() => onSubmit("created"))}
           >
             <FaSave />
@@ -171,7 +171,7 @@ export const ProductAddForm = () => {
           </GradientButton>
           <GradientButton
             disabled={isPending}
-            className="w-64 gap-x-4 rounded-none"
+            className="w-64 gap-x-4"
             onClick={form.handleSubmit(() => onSubmit("submitted"))}
           >
             <FaUpload />

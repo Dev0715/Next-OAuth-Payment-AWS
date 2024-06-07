@@ -85,7 +85,7 @@ export const BundleProducts = ({ products, setProducts }: Props) => {
         <p className="text-lg font-medium">Products in this bundle</p>
         <Dialog open={isAddDlg} onOpenChange={(opened) => setAddDlg(opened)}>
           <DialogTrigger asChild>
-            <GradientButton className="h-8 flex gap-x-2 rounded-none">
+            <GradientButton className="h-8 flex gap-x-2">
               <FaPlus />
               Add New
             </GradientButton>

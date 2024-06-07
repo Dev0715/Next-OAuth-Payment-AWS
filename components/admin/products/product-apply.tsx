@@ -27,7 +27,7 @@ export const ProductApply = ({ isPending, onPublish }: Props) => {
             <GradientButton
               disabled={isPending}
               variant={"default"}
-              className="w-32 rounded-none"
+              className="w-32"
             >
               Publish
             </GradientButton>

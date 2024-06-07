@@ -51,7 +51,7 @@ export const ImagePreview = ({
         <div className="flex flex-col items-center gap-y-2">
           <Button
             variant="outline"
-            className="w-fit h-6 px-1 py-0 bg-transparent hover:bg-transparent rounded-none border-0 hover:border-b-2 border-green-400 text-sm text-white hover:text-white"
+            className="w-fit h-6 px-1 py-0 bg-transparent hover:bg-transparent border-0 hover:border-b-2 border-green-400 text-sm text-white hover:text-white"
             onClick={onPreview}
           >
             Preview
@@ -59,7 +59,7 @@ export const ImagePreview = ({
           <Button
             disabled={disabled}
             variant="outline"
-            className="w-fit h-6 px-1 py-0 bg-transparent hover:bg-transparent rounded-none border-0 hover:border-b-2 border-red-400 text-sm text-white hover:text-white"
+            className="w-fit h-6 px-1 py-0 bg-transparent hover:bg-transparent border-0 hover:border-b-2 border-red-400 text-sm text-white hover:text-white"
             onClick={onDelete}
           >
             Delete

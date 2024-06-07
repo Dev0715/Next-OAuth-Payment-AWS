@@ -129,10 +129,7 @@ export const BundleProductSelect = ({ onAddNewProducts }: Props) => {
         </Table>
       </div>
       <div className="flex items-center justify-between space-x-2">
-        <GradientButton
-          className="h-8 flex gap-x-2 rounded-none"
-          onClick={onAddProducts}
-        >
+        <GradientButton className="h-8 flex gap-x-2" onClick={onAddProducts}>
           <FaPlus />
           Add Products
         </GradientButton>
