@@ -13,7 +13,6 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 
 import { getColumnsForBundleProductsTable } from "@/components/admin/bundles/bundle-products-column";
-import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Table,
@@ -86,10 +85,10 @@ export const BundleProducts = ({ products, setProducts }: Props) => {
         <p className="text-lg font-medium">Products in this bundle</p>
         <Dialog open={isAddDlg} onOpenChange={(opened) => setAddDlg(opened)}>
           <DialogTrigger asChild>
-            <Button className="h-8 flex gap-x-2 rounded-none">
+            <GradientButton className="h-8 flex gap-x-2 rounded-none">
               <FaPlus />
               Add New
-            </Button>
+            </GradientButton>
           </DialogTrigger>
           <DialogContent className="max-w-full w-[960px]">
             <BundleProductSelect onAddNewProducts={onAddNewProducts} />
