@@ -4,9 +4,8 @@ export const W8Form = () => {
   return (
     <div className="w-full">
       <p className="t-body -size-m mb-8">
-        We can only accept letters, numbers and special characters &amp; - , / #
-        ( ) . Please use the English equivalent of accented characters, eg. a
-        for à.
+        As you have indicated that you are are not a US person, please complete
+        the Form W-8 below which will be stored securely.
       </p>
     </div>
   );
