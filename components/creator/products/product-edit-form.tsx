@@ -171,7 +171,7 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
         <GradientButton
           disabled={isPending}
           variant={"outline"}
-          className="w-64 gap-x-4 rounded-none border-green-700"
+          className="w-64 gap-x-4"
           onClick={form.handleSubmit(() => onSubmit("updated"))}
         >
           <FaSave />
@@ -180,7 +180,7 @@ export const ProductEditForm = ({ product, setProduct }: Props) => {
 
         <GradientButton
           disabled={isPending}
-          className="w-64 gap-x-4 rounded-none"
+          className="w-64 gap-x-4"
           onClick={form.handleSubmit(() =>
             onSubmit(isResubmitted ? "resubmitted" : "submitted")
           )}

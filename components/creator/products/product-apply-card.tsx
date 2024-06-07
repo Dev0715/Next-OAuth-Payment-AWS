@@ -42,7 +42,7 @@ export const ProductApplyCard = ({ product, onUpdateMore, onApply }: Props) => {
             message="Are you sure want to apply for publish?"
             onContinue={onApply}
           >
-            <GradientButton className="w-64 flex gap-x-4 rounded-none">
+            <GradientButton className="w-64 flex gap-x-4">
               Apply for publish
             </GradientButton>
           </QuestionAlert>
@@ -53,7 +53,7 @@ export const ProductApplyCard = ({ product, onUpdateMore, onApply }: Props) => {
           >
             <GradientButton
               variant={"outline"}
-              className="w-64 flex gap-x-4 border-green-700 rounded-none"
+              className="w-64 flex gap-x-4 border-green-700"
             >
               Update more
             </GradientButton>
@@ -70,7 +70,7 @@ export const ProductApplyCard = ({ product, onUpdateMore, onApply }: Props) => {
       </div>
 
       {isPreview ? (
-        <Card className="p-6 rounded-none">
+        <Card className="p-6">
           <ProductInfo product={product} isPending={false} />
         </Card>
       ) : null}

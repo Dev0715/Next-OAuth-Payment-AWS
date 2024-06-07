@@ -37,10 +37,7 @@ export const ProductPublishCard = ({
 
       <div className="w-full flex justify-between">
         <div className="flex gap-x-4">
-          <GradientButton
-            className="w-64 flex gap-x-4 rounded-none"
-            onClick={onGoBack}
-          >
+          <GradientButton className="w-64 flex gap-x-4" onClick={onGoBack}>
             <FaArrowLeft />
             Go back
           </GradientButton>
@@ -50,8 +47,8 @@ export const ProductPublishCard = ({
             onContinue={onWithdrawFromApplied}
           >
             <GradientButton
-              variant={"outline"}
-              className="w-64 flex gap-x-4 border-green-700 rounded-none"
+              variant={"destructive"}
+              className="w-64 flex gap-x-4"
             >
               Withdraw from Applied
             </GradientButton>
@@ -68,7 +65,7 @@ export const ProductPublishCard = ({
       </div>
 
       {isPreview ? (
-        <Card className="p-6 rounded-none">
+        <Card className="p-6">
           <ProductInfo product={product} isPending={true} />
         </Card>
       ) : null}
