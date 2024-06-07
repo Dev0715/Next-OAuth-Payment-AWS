@@ -242,7 +242,7 @@ export const W9Form = ({ onUpdate, onBack }: Props) => {
                     <div className="flex items-center gap-x-4 cursor-pointer">
                       <RadioGroupItem value={"SSN"} id={"SSN"} />
                       <Label
-                        htmlFor={"U.S. Social Security Number (SSN)"}
+                        htmlFor={"SSN"}
                         className="flex items-center gap-x-4 text-5xl cursor-pointer"
                       >
                         <p className="text-lg">
@@ -253,7 +253,7 @@ export const W9Form = ({ onUpdate, onBack }: Props) => {
                     <div className="flex items-center gap-x-4 cursor-pointer">
                       <RadioGroupItem value={"EIN"} id={"EIN"} />
                       <Label
-                        htmlFor={"U.S. Employer Identification Number (EIN)"}
+                        htmlFor={"EIN"}
                         className="flex items-center gap-x-4 text-5xl cursor-pointer"
                       >
                         <p className="text-lg">
