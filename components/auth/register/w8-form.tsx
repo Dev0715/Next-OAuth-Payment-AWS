@@ -5,22 +5,10 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
+import { W8IndividualForm } from "./w8-individual-form";
+
 export const W8Form = () => {
   const [registerType, setRegisterType] = useState("");
-
-  // const onSubmit = (values: z.infer<typeof W8D>) => {
-  //   console.log(values);
-  //   onUpdate({
-  //     w9Details: {
-  //       ...values
-  //       // cover
-  //     }
-  //   });
-  // };
-
-  // const handleBackClicked = () => {
-  //   onBack();
-  // };
 
   return (
     <div className="w-full">
@@ -43,6 +31,8 @@ export const W8Form = () => {
           </Label>
         </div>
       </RadioGroup>
+
+      {registerType === "individual" && <W8IndividualForm />}
     </div>
   );
 };
