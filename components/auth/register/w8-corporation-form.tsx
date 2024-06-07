@@ -286,10 +286,7 @@ export const W8CorporationForm = ({ onNext, onBack }: Props) => {
                   <FormItem className="col-span-2">
                     <FormLabel>Mailing Address*</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="Permanent Residence Address"
-                      />
+                      <Input {...field} placeholder="Address" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
