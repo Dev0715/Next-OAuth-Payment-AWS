@@ -269,3 +269,16 @@ export const COUNTRIES = [
   "Zambia",
   "Zimbabwe"
 ];
+
+export const CHAPTER3STATUS = [
+  "Corporation",
+  "Disregarded entity",
+  "Simple trust",
+  "Grantor trust",
+  "Complex trust",
+  "Estate",
+  "Government",
+  "Central Bank of Issue",
+  "Tax-exempt organization",
+  "Private foundation"
+];
