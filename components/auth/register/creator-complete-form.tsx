@@ -46,11 +46,11 @@ export const CreatorCompleteForm = ({
     //   }
     // }
 
-    if (user.creator && userData.creatorDetails.companyName) {
+    if (user.creator && userData.creatorDetails.company.name) {
       user.creator["company"] = {
-        name: userData.creatorDetails.companyName,
-        country: userData.creatorDetails.companyCountry,
-        website: userData.creatorDetails.companyWebsite
+        name: userData.creatorDetails.company.name,
+        country: userData.creatorDetails.company.country,
+        website: userData.creatorDetails.company.website
       };
     }
 
