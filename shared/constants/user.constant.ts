@@ -1,7 +1,9 @@
 export const JOB_TITLES = [
   "UI/UX Designer",
   "Web Designer",
-  "Project Manager"
+  "Project Manager",
+  "Graphic Designer",
+  "Product Designer"
 ] as const;
 
 export const TAX_CLASSIFICATIONS = [
