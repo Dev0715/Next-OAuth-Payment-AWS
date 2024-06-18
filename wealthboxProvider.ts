@@ -62,6 +62,6 @@ export default function WealthboxProvider<P extends WealthboxProfile>(
         email: profile.email
       };
     }
-    options: config
+    // options: config
   };
 }

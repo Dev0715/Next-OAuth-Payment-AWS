@@ -15,6 +15,7 @@ export default {
   secret: AUTH_CONFIG.SECRET,
   providers: [
     WealthboxProvider(),
+
     Github({
       clientId: AUTH_CONFIG.GITHUB.CLIENT_ID,
       clientSecret: AUTH_CONFIG.GITHUB.CLIENT_SECRET
