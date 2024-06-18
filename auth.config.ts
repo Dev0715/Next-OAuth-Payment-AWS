@@ -9,9 +9,12 @@ import { AUTH_CONFIG } from "./shared/constants/server.constant";
 
 import type { NextAuthConfig } from "next-auth";
 
+import WealthboxProvider from "./wealthboxProvider";
+
 export default {
   secret: AUTH_CONFIG.SECRET,
   providers: [
+    WealthboxProvider(),
     Github({
       clientId: AUTH_CONFIG.GITHUB.CLIENT_ID,
       clientSecret: AUTH_CONFIG.GITHUB.CLIENT_SECRET
@@ -40,47 +43,6 @@ export default {
         if (passwordMatch) return user;
         else return null; // You can also reject this callback for detailed error
       }
-    }),
-    {
-      id: "adobe",
-      name: "Adobe",
-      type: "oauth",
-      clientId: AUTH_CONFIG.ADOBE.CLIENT_ID,
-      clientSecret: AUTH_CONFIG.ADOBE.CLIENT_SECRET,
-      // authorization: { params: { scope: "openid email profile" } },
-      // You'll need to specify the correct URLs for Adobe's OAuth service.
-      token: `https://ims-na1.adobelogin.com/ims/token/v3?client_id=${AUTH_CONFIG.ADOBE.CLIENT_ID}`,
-      authorization:
-        "https://ims-na1.adobelogin.com/ims/authorize/v3?scope=openid+email+profile",
-      userinfo: "https://ims-na1.adobelogin.com/ims/userinfo/v3",
-      // A function that takes the token response and returns the profile
-      profile: (profile) => {
-        // You'll need to map the returned user profile to the profile object that NextAuth expects
-        return {
-          id: profile.sub,
-          name: profile.name,
-          email: profile.email
-        };
-      }
-    },
-    {
-      id: "epicgames",
-      name: "EpicGames",
-      type: "oauth",
-      clientId: AUTH_CONFIG.EPIC.CLIENT_ID,
-      clientSecret: AUTH_CONFIG.EPIC.CLIENT_SECRET,
-      token: `https://api.epicgames.dev/epic/oauth/v2/token?client_id=${AUTH_CONFIG.EPIC.CLIENT_ID}`,
-      authorization: `https://www.epicgames.com/id/authorize?client_id=${AUTH_CONFIG.EPIC.CLIENT_ID}&response_type=code&scope=basic_profile`,
-      userinfo: "https://api.epicgames.dev/epic/oauth/v2/userInfo",
-      // A function that takes the token response and returns the profile
-      profile: (profile) => {
-        // You'll need to map the returned user profile to the profile object that NextAuth expects
-        return {
-          id: profile.sub,
-          name: profile.name,
-          email: profile.email
-        };
-      }
-    }
+    })
   ]
 } satisfies NextAuthConfig;

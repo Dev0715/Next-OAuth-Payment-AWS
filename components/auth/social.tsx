@@ -13,7 +13,9 @@ export const Social = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
 
-  const onClick = (provider: "adobe" | "github" | "discord" | "epicgames") => {
+  const onClick = (
+    provider: "Wealthbox" | "github" | "discord" | "epicgames"
+  ) => {
     signIn(provider, {
       callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT
     });
@@ -26,10 +28,10 @@ export const Social = () => {
         className="w-full"
         variant="outline"
         onClick={() => {
-          onClick("adobe");
+          onClick("Wealthbox");
         }}
       >
-        <SiAdobe className="h-5 w-4" />
+        W
       </Button>
       <Button
         size="lg"
