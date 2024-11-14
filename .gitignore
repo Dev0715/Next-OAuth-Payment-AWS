@@ -99,8 +99,7 @@ dist-ssr
 .vercel
 
 # DB and environment
-.env*.local
-.env
+.env*
 
 # log garbage
 logs
