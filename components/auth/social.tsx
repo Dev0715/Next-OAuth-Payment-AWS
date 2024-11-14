@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { FaGithub } from "react-icons/fa";
-import { SiAdobe, SiDiscord, SiEpicgames } from "react-icons/si";
+import { SiDiscord, SiEpicgames } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
 
