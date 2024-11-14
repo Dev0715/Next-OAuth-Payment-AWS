@@ -24,7 +24,10 @@ const RegisterPage = () => {
       });
       history.push("/auth/login");
     } else {
-      toast({ title: "Error while sign up..", variant: "destructive" });
+      toast({
+        title: response.error ?? "Error while sign up..",
+        variant: "destructive"
+      });
     }
   };
 

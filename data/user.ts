@@ -192,6 +192,7 @@ export const createUser = async (data: any) => {
     await db.send(command);
     return { success: true, verificationToken };
   } catch (error) {
+    console.log(error);
     return { error: true };
   }
 };

@@ -9,13 +9,9 @@ import { AUTH_CONFIG } from "./shared/constants/server.constant";
 
 import type { NextAuthConfig } from "next-auth";
 
-import WealthboxProvider from "./wealthboxProvider";
-
 export default {
   secret: AUTH_CONFIG.SECRET,
   providers: [
-    WealthboxProvider(),
-
     Github({
       clientId: AUTH_CONFIG.GITHUB.CLIENT_ID,
       clientSecret: AUTH_CONFIG.GITHUB.CLIENT_SECRET

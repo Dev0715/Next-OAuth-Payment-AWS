@@ -18,7 +18,7 @@ export const register = async (values: any) => {
   }
 
   const { email, password } = values;
-  const hashedPassword = await crypto.SHA256(password).toString();
+  const hashedPassword = crypto.SHA256(password).toString();
   const existingUser = await getUserByEmail(email);
 
   if (existingUser) {
